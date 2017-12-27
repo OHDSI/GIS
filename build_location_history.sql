@@ -12,3 +12,6 @@ CREATE TABLE [dbo].[location_history](
 
 
 ALTER TABLE location_history ADD CONSTRAINT fpk_location_history_location FOREIGN KEY (location_id) REFERENCES location (location_id);
+
+
+
