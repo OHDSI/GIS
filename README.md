@@ -1,9 +1,3 @@
----
-output:
-  html_document: default
-  pdf_document: default
----
-
 # OHDSI GIS 1.0 [under development]
 
 ## Introduction
