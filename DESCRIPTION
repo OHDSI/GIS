@@ -1,0 +1,17 @@
+Package: Gaia
+Type: Package
+Title: GIS functionality for the OHDSI stack
+Version: 0.1.0
+Author: Robert Miller
+Maintainer: Robert Miller <RMiller1@tuftsmedicalcenter.org>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+Encoding: UTF-8
+LazyData: true
+Imports:
+  DatabaseConnector (>= 2.0.0),
+  SqlRender (>= 1.6.0),
+  rgdal,
+  httr,
+  config
+License: Apache License 2.0
