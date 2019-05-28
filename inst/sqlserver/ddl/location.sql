@@ -10,8 +10,9 @@ CREATE TABLE @gis_schema.[location](
 	[county] [varchar](50) NULL,
 	[latitude] [float] NULL,
 	[longitude] [float] NULL,
-	[datum] [varchar](50) NULL,
+	[epsg] [varchar](50) NULL,
 	[location_type_concept_id] [int] NULL,
+	[location_source_value] [varchar](100) NULL,
 	[data_source_id] [int] NULL,
-	[location_source_value] [varchar](100) NULL
+
 );
