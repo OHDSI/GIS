@@ -39,6 +39,81 @@ COMMENT ON EXTENSION postgis IS 'PostGIS geometry, geography, and raster spatial
 SET search_path = public, pg_catalog;
 
 --
+-- Name: attr_florida_tri_2018_record_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE attr_florida_tri_2018_record_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.attr_florida_tri_2018_record_id_seq OWNER TO postgres;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: attr_florida_tri_2018; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE attr_florida_tri_2018 (
+    attr_record_id integer DEFAULT nextval('attr_florida_tri_2018_record_id_seq'::regclass) NOT NULL,
+    geo_record_id integer,
+    attr_concept_id integer,
+    attr_start_date date,
+    attr_end_date date,
+    value_as_number double precision,
+    value_as_string character varying,
+    value_as_concept_id integer,
+    unit_concept_id integer,
+    unit_source_value character varying,
+    qualifier_concept_id integer,
+    qualifier_source_value character varying,
+    attr_source_concept_id integer,
+    attr_source_value character varying,
+    value_source_value character varying
+);
+
+
+ALTER TABLE public.attr_florida_tri_2018 OWNER TO postgres;
+
+--
+-- Name: attr_index_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE attr_index_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.attr_index_id_seq OWNER TO postgres;
+
+--
+-- Name: attr_index; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE attr_index (
+    attr_index_id integer DEFAULT nextval('attr_index_id_seq'::regclass) NOT NULL,
+    attr_type_concept_id integer,
+    attr_type_source_value character varying,
+    attr_of_geo_id integer,
+    schema character varying,
+    table_name character varying,
+    "desc" character varying,
+    data_source_id character varying
+);
+
+
+ALTER TABLE public.attr_index OWNER TO postgres;
+
+--
 -- Name: care_site_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -51,10 +126,6 @@ CREATE SEQUENCE care_site_id_seq
 
 
 ALTER TABLE public.care_site_id_seq OWNER TO postgres;
-
-SET default_tablespace = '';
-
-SET default_with_oids = false;
 
 --
 -- Name: care_site; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
@@ -89,7 +160,8 @@ CREATE TABLE data_source (
     timeframe_name character varying(255),
     timeframe_value integer,
     last_updated_date character varying(255),
-    data_source_epsg integer
+    data_source_epsg integer,
+    data_source_epsg_name character varying
 );
 
 
@@ -268,6 +340,116 @@ ALTER TABLE public.demographic_division_id_seq OWNER TO postgres;
 
 ALTER SEQUENCE demographic_division_id_seq OWNED BY demographic_division.id;
 
+
+--
+-- Name: geo_florida_tri_2018_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE geo_florida_tri_2018_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.geo_florida_tri_2018_id_seq OWNER TO postgres;
+
+--
+-- Name: geo_florida_tri_2018; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE geo_florida_tri_2018 (
+    geo_record_id integer DEFAULT nextval('geo_florida_tri_2018_id_seq'::regclass) NOT NULL,
+    name character varying,
+    source_id_coding character varying,
+    source_id_value character varying,
+    geom_wgs84 geometry(Point,4326),
+    geom_local geometry
+);
+
+
+ALTER TABLE public.geo_florida_tri_2018 OWNER TO postgres;
+
+--
+-- Name: geo_florida_tri_2018_record_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE geo_florida_tri_2018_record_id_seq
+    START WITH 686
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.geo_florida_tri_2018_record_id_seq OWNER TO postgres;
+
+--
+-- Name: geo_index_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE geo_index_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.geo_index_id_seq OWNER TO postgres;
+
+--
+-- Name: geo_index; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE geo_index (
+    geo_index_id integer DEFAULT nextval('geo_index_id_seq'::regclass) NOT NULL,
+    data_type_id integer,
+    data_type_name character varying,
+    geo_type_concept_id integer,
+    geo_type_source_value character varying,
+    geo_id integer,
+    schema character varying,
+    table_name character varying,
+    "desc" character varying,
+    data_source_id integer,
+    epsg_local integer,
+    epsg_local_name character varying
+);
+
+
+ALTER TABLE public.geo_index OWNER TO postgres;
+
+--
+-- Name: geo_miamidade_census_tract_2018_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE geo_miamidade_census_tract_2018_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.geo_miamidade_census_tract_2018_id_seq OWNER TO postgres;
+
+--
+-- Name: geo_miamidade_census_tract_2018; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE geo_miamidade_census_tract_2018 (
+    geo_record_id integer DEFAULT nextval('geo_miamidade_census_tract_2018_id_seq'::regclass) NOT NULL,
+    name character varying,
+    source_id_coding character varying,
+    source_id_value character varying(11),
+    geom_wgs84 geometry(Polygon,4326),
+    geom_local geometry
+);
+
+
+ALTER TABLE public.geo_miamidade_census_tract_2018 OWNER TO postgres;
 
 --
 -- Name: hz_point_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -589,6 +771,14 @@ ALTER TABLE ONLY demographic_division ALTER COLUMN id SET DEFAULT nextval('demog
 
 
 --
+-- Name: attr_index_id_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY attr_index
+    ADD CONSTRAINT attr_index_id_pkey PRIMARY KEY (attr_index_id);
+
+
+--
 -- Name: care_site_id_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -650,6 +840,38 @@ ALTER TABLE ONLY dd_type
 
 ALTER TABLE ONLY dd_att_unit
     ADD CONSTRAINT dd_unit_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: florida_tri_2018_attr_table_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY attr_florida_tri_2018
+    ADD CONSTRAINT florida_tri_2018_attr_table_pkey PRIMARY KEY (attr_record_id);
+
+
+--
+-- Name: geo_florida_tri_2018_record_id_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY geo_florida_tri_2018
+    ADD CONSTRAINT geo_florida_tri_2018_record_id_pkey PRIMARY KEY (geo_record_id);
+
+
+--
+-- Name: geo_index_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY geo_index
+    ADD CONSTRAINT geo_index_pkey PRIMARY KEY (geo_index_id);
+
+
+--
+-- Name: geo_miamidade_census_tracts_2018_record_id_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY geo_miamidade_census_tract_2018
+    ADD CONSTRAINT geo_miamidade_census_tracts_2018_record_id_pkey PRIMARY KEY (geo_record_id);
 
 
 --
@@ -757,10 +979,38 @@ ALTER TABLE ONLY utm_grid
 
 
 --
+-- Name: fki_attr_concept_id_fkey; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX fki_attr_concept_id_fkey ON attr_florida_tri_2018 USING btree (attr_concept_id);
+
+
+--
+-- Name: fki_attr_source_concept_id_fkey; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX fki_attr_source_concept_id_fkey ON attr_florida_tri_2018 USING btree (attr_source_concept_id);
+
+
+--
+-- Name: fki_attribute_of_geo_id_fkey; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX fki_attribute_of_geo_id_fkey ON attr_index USING btree (attr_of_geo_id);
+
+
+--
 -- Name: fki_care_site_fkey; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE INDEX fki_care_site_fkey ON site_history USING btree (entity_id);
+
+
+--
+-- Name: fki_data_source_id_fkey; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX fki_data_source_id_fkey ON geo_index USING btree (data_source_id);
 
 
 --
@@ -803,6 +1053,13 @@ CREATE INDEX fki_dd_unit_fkey ON dd_attribute USING btree (dd_unit_id);
 --
 
 CREATE INDEX fki_demographic_division_id_fkey ON dd_attribute USING btree (demographic_division_id);
+
+
+--
+-- Name: fki_geo_id_fkey; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX fki_geo_id_fkey ON attr_florida_tri_2018 USING btree (geo_record_id);
 
 
 --
@@ -876,6 +1133,13 @@ CREATE INDEX fki_person_fkey ON location_history USING btree (entity_id);
 
 
 --
+-- Name: fki_qualifier_concept_id_fkey; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX fki_qualifier_concept_id_fkey ON attr_florida_tri_2018 USING btree (qualifier_concept_id);
+
+
+--
 -- Name: fki_site_fkey; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -890,11 +1154,57 @@ CREATE INDEX fki_sites_geom_source_id_fkey ON sites USING btree (geom_source_id)
 
 
 --
+-- Name: fki_unit_concept_id_fkey; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX fki_unit_concept_id_fkey ON attr_florida_tri_2018 USING btree (unit_concept_id);
+
+
+--
+-- Name: fki_value_as_concept_id_fkey; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX fki_value_as_concept_id_fkey ON attr_florida_tri_2018 USING btree (value_as_concept_id);
+
+
+--
+-- Name: attr_concept_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY attr_florida_tri_2018
+    ADD CONSTRAINT attr_concept_id_fkey FOREIGN KEY (attr_concept_id) REFERENCES hz_att_name(id);
+
+
+--
+-- Name: attr_of_geo_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY attr_index
+    ADD CONSTRAINT attr_of_geo_id_fkey FOREIGN KEY (attr_of_geo_id) REFERENCES geo_index(geo_index_id);
+
+
+--
+-- Name: attr_source_concept_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY attr_florida_tri_2018
+    ADD CONSTRAINT attr_source_concept_id_fkey FOREIGN KEY (attr_source_concept_id) REFERENCES data_source(data_source_id);
+
+
+--
 -- Name: care_site_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY site_history
     ADD CONSTRAINT care_site_fkey FOREIGN KEY (entity_id) REFERENCES care_site(care_site_id);
+
+
+--
+-- Name: data_source_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY geo_index
+    ADD CONSTRAINT data_source_id_fkey FOREIGN KEY (data_source_id) REFERENCES data_source(data_source_id);
 
 
 --
@@ -951,6 +1261,14 @@ ALTER TABLE ONLY demographic_division
 
 ALTER TABLE ONLY dd_attribute
     ADD CONSTRAINT demographic_division_id_fkey FOREIGN KEY (demographic_division_id) REFERENCES demographic_division(id);
+
+
+--
+-- Name: geo_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY attr_florida_tri_2018
+    ADD CONSTRAINT geo_id_fkey FOREIGN KEY (geo_record_id) REFERENCES geo_florida_tri_2018(geo_record_id);
 
 
 --
@@ -1042,6 +1360,14 @@ ALTER TABLE ONLY location_history
 
 
 --
+-- Name: qualifier_concept_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY attr_florida_tri_2018
+    ADD CONSTRAINT qualifier_concept_id_fkey FOREIGN KEY (qualifier_concept_id) REFERENCES hz_att_category(id);
+
+
+--
 -- Name: site_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1055,6 +1381,22 @@ ALTER TABLE ONLY site_history
 
 ALTER TABLE ONLY sites
     ADD CONSTRAINT sites_geom_source_id_fkey FOREIGN KEY (geom_source_id) REFERENCES data_source(data_source_id);
+
+
+--
+-- Name: unit_concept_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY attr_florida_tri_2018
+    ADD CONSTRAINT unit_concept_id_fkey FOREIGN KEY (unit_concept_id) REFERENCES hz_att_unit(id);
+
+
+--
+-- Name: value_as_concept_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY attr_florida_tri_2018
+    ADD CONSTRAINT value_as_concept_id_fkey FOREIGN KEY (value_as_concept_id) REFERENCES hz_type(id);
 
 
 --
