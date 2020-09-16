@@ -1,0 +1,3 @@
+.ipynb_checkpoints
+db/env/*
+!db/env/db_conf.txt

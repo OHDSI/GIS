@@ -1,0 +1,2 @@
+host database user pass
+any.host.domain db_name db_user db_pass
