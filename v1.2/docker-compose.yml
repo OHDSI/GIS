@@ -2,7 +2,7 @@ version: "3.9"
 services:
   postgis:
     container_name: gis_postgis
-    build: ./
+    build: ./postgis
     image: gis_postgis
     #restart: always
     environment:
@@ -12,12 +12,27 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - 5432:5432
+
+  shiny:
+    container_name: gis_shiny
+    build: ./shiny
+    image: gis_shiny
+    #restart: always
+    volumes:
+      - shiny_logs:/var/log/shiny-server
+    # TODO: update user to non-root after figuring out s6 permissions issue:
+    #   https://github.com/rocker-org/rocker-versioned2/issues/105
+    #user: shiny
+    ports:
+      - 80:3838
 
 secrets:
   postgres-passwd:
-    file: ./postgres-passwd
+    file: ./postgis/postgres-passwd
 
 volumes:
   pgdata:
     name: gis_pgdata
+  shiny_logs:
+    name: gis_shiny_logs
