@@ -21,11 +21,17 @@ services:
     #restart: always
     volumes:
       - shiny_logs:/var/log/shiny-server
+      # TODO: package app apropriatly for non-development
+      - ./shiny/apps/:/home/rstudio/apps
     # TODO: update user to non-root after figuring out s6 permissions issue:
     #   https://github.com/rocker-org/rocker-versioned2/issues/105
     #user: shiny
     ports:
       - 80:3838
+      - 8787:8787
+    # TODO: make password more secure for actual release
+    environment:
+      - PASSWORD=${RSTUDIO_PASSWD:?set RSTUDIO_PASSWD in .env}
 
 secrets:
   postgres-passwd:

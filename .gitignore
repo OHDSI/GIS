@@ -1,3 +1,6 @@
 .DS_Store
 *passwd
 *.tar
+*.env
+.Rproj.user/
+.Rhistory
