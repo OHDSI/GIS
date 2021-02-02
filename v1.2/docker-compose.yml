@@ -12,9 +12,10 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
-      - 5432:5432
+      - ${POSTGIS_PORT:?set POSTGIS_PORT in .env}:5432
 
   shiny:
+    profiles: ["dev"]
     container_name: gis_shiny
     build: ./shiny
     image: gis_shiny
