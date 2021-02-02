@@ -4,3 +4,4 @@
 *.env
 .Rproj.user/
 .Rhistory
+renv/
