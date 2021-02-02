@@ -8,12 +8,21 @@
 #
 
 library(shiny)
+library(RPostgres)
+library(DBI)
+
+con <- dbConnect(RPostgres::Postgres()
+                 , host='gis_postgis'
+                 , port = '5432'
+                 , dbname='postgres'
+                 , user='postgres'
+                 , password='badpassword')
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
 
     # Application title
-    titlePanel("Old Faithful Geyser Data"),
+    titlePanel(toString(dbListTables(con))),
 
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
