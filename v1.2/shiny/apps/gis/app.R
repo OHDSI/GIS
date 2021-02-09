@@ -11,12 +11,7 @@ library(shiny)
 library(RPostgres)
 library(DBI)
 
-con <- dbConnect(RPostgres::Postgres()
-                 , host='gis_postgis'
-                 , port = '5432'
-                 , dbname='postgres'
-                 , user='postgres'
-                 , password='badpassword')
+con <- dbConnect(RPostgres::Postgres(), service='gis_postgis')
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
