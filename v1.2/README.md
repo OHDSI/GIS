@@ -5,7 +5,7 @@ To get this running:
 the text of the password you would like to set
 3. Create a file `.env` in the root directory of the project to set `RSTUDIO_PASSWD` and `POSTGRES_PORT`
 4. Build the loader image
-  - `docker run -it --rm -v <absolute path to working directory>/loader/:/src lnl7/nix sh -c 'nix-build /src && cp result /src/'`
+  - `docker run --privileged -it --rm -v <absolute path to working directory>/loader/:/src lnl7/nix sh -c 'nix-build /src && cp result /src/'`
   - `docker load < loader/result`
 5. `docker-compose up`
 
