@@ -17,6 +17,7 @@ services:
       - postgres-passwd
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - ./DDL:/DDL
     ports:
       - ${POSTGRES_PORT:-5432}:5432
 
