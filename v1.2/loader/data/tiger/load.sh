@@ -122,6 +122,8 @@ PGPASSWORD=$(cat $POSTGRES_PASSWORD_FILE) psql -v ON_ERROR_STOP=1 -U "$POSTGRES_
 
 chmod +x /tmp/state_script_load.sh
 
+sh /tmp/state_script_load.sh
+
 PGPASSWORD=$(cat $POSTGRES_PASSWORD_FILE) psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" --dbname "$POSTGRES_DB" -h gis_postgis -tA <<-EOSQL
   SELECT install_missing_indexes();
   vacuum (analyze, verbose) tiger.addr;
