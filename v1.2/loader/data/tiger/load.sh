@@ -1,6 +1,6 @@
 set -e
 mkdir -p /gisdata/temp
-mkdir -p /tmp
+mkdir -p /tmp/gisdata/temp
 
 # zcta510 can be set to false, others are needed for loading state data and geocoder
 PGPASSWORD=$(cat $POSTGRES_PASSWORD_FILE) psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" --dbname "$POSTGRES_DB" -h gis_postgis -tA <<-EOSQL
@@ -116,9 +116,9 @@ PGPASSWORD=$(cat $POSTGRES_PASSWORD_FILE) psql -v ON_ERROR_STOP=1 -U "$POSTGRES_
   WHERE table_name IN('tract', 'tabblock10', 'bg', 'place', 'cousub', 'faces', 'featnames', 'edges', 'addr');
 EOSQL
 
-#PGPASSWORD=$(cat $POSTGRES_PASSWORD_FILE) psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" --dbname "$POSTGRES_DB" -h gis_postgis -tA -c "SELECT Loader_Generate_Script( ARRAY(SELECT DISTINCT stusps FROM tiger.state), 'gis_loader');" > /tmp/state_script_load.sh
+PGPASSWORD=$(cat $POSTGRES_PASSWORD_FILE) psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" --dbname "$POSTGRES_DB" -h gis_postgis -tA -c "SELECT Loader_Generate_Script( ARRAY(SELECT DISTINCT stusps FROM tiger.state), 'gis_loader');" > /tmp/state_script_load.sh
 
-PGPASSWORD=$(cat $POSTGRES_PASSWORD_FILE) psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" --dbname "$POSTGRES_DB" -h gis_postgis -tA -c "SELECT Loader_Generate_Script( ARRAY['MA'], 'gis_loader');" > /tmp/state_script_load.sh
+#PGPASSWORD=$(cat $POSTGRES_PASSWORD_FILE) psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" --dbname "$POSTGRES_DB" -h gis_postgis -tA -c "SELECT Loader_Generate_Script( ARRAY['MA'], 'gis_loader');" > /tmp/state_script_load.sh
 
 chmod +x /tmp/state_script_load.sh
 
