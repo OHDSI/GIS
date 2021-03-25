@@ -26,6 +26,9 @@ the text of the password you would like to set
 `docker exec -it -w /data/cdc-social-vulnerability-index-svi gis_loader sh load.sh`
 
 ## Geocoding
-1. Load tiger data (this takes a long time ~12 hrs and requires ~100 GB) `docker exec -it -w /data/tiger gis_loader sh load.sh`
-2. Load OMOP location table into postgis `docker exec -it -w /data/omop gis_loader R --vanilla -f load_location.R`
-3. Geocode (This runs at about 700 records per minute after 3 minute startup time on a powerful laptop) `docker exec -it -w /data/omop gis_loader sh geocode.sh`
+1. Load tiger data (this takes a long time ~12 hrs and requires ~100 GB)
+  - `docker exec -it -w /data/tiger gis_loader sh load.sh`
+2. Load OMOP location table into postgis
+  - `docker exec -it -w /data/omop gis_loader R --vanilla -f load_location.R`
+3. Geocode (This runs at about 700 records per minute after 3 minute startup time on a powerful laptop)
+  - `docker exec -it -w /data/omop gis_loader sh geocode.sh`
