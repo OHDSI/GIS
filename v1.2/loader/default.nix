@@ -15,6 +15,12 @@ pkgs.dockerTools.buildImage {
     pkgs.postgresql_13
     pkgs.unzip
     pkgs.wget
+    (pkgs.rWrapper.override{
+      packages = with pkgs.rPackages; [
+        DatabaseConnector
+        readr
+      ];
+    })
   ];
 
   config = {
