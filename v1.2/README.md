@@ -3,7 +3,14 @@ To get this running:
 1. Install/update latest [Docker](https://www.docker.com/get-started) and [docker-compose](https://docs.docker.com/compose/install/)
 2. Create a file `postgres-passwd` (no extension) in the `postgis` directory of the project which contains
 the text of the password you would like to set
-3. Create a file `.env` in the root directory of the project to set `RSTUDIO_PASSWD` and `POSTGRES_PORT`
+3. Create a file `.env` in the root directory of the project to set `RSTUDIO_PASSWD`, `POSTGRES_PORT`, `OMOP_DBMS`, and `OMOP_JDBC_CONNECTION_STRING`
+  - example `.env`
+    ```
+    RSTUDIO_PASSWD=password
+    POSTGRES_PORT=5432
+    OMOP_DBMS='sql server'
+    OMOP_JDBC_CONNECTION_STRING='jdbc:sqlserver://localhost:1433;database=OMOP;user=omop_gis_etl;password=password'
+    ```
 4. Build the loader image
   - `docker run --privileged -it --rm -v <absolute path to working directory>/loader/:/src lnl7/nix sh -c 'nix-build /src && cp result /src/'`
   - `docker load < loader/result`
