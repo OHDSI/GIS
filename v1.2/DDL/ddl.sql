@@ -1,3 +1,79 @@
+-- OMOP Location table https://github.com/OHDSI/CommonDataModel
+
+--HINT DISTRIBUTE ON RANDOM
+CREATE TABLE location
+(
+  location_id			BIGINT			NOT NULL ,
+  address_1				VARCHAR(50)		NULL ,
+  address_2				VARCHAR(50)		NULL ,
+  city					VARCHAR(50)		NULL ,
+  state					VARCHAR(2)		NULL ,
+  zip					VARCHAR(9)		NULL ,
+  county				VARCHAR(20)		NULL ,
+  country				VARCHAR(100)	NULL ,
+  location_source_value VARCHAR(50)		NULL ,
+  latitude				NUMERIC			NULL ,
+  longitude				NUMERIC			NULL
+)
+;
+ALTER TABLE location ADD CONSTRAINT xpk_location PRIMARY KEY ( location_id ) ;
+
+create or replace procedure geocode(batch_size int)
+language plpgsql
+as $$
+begin
+
+  drop table if exists addresses_to_geocode;
+
+  create table addresses_to_geocode (
+    location_id BIGINT primary key,
+    address norm_addy,
+    lon numeric,
+    lat numeric,
+    new_address norm_addy,
+    rating integer
+  );
+
+  insert into addresses_to_geocode (location_id, address)
+    select
+      location_id,
+      pagc_normalize_address(CONCAT(address_1, ' ' || address_2, ', ', city, ', ', state, ' ', zip, ' ', county)) as address
+    from location
+  ;
+
+  commit;
+
+  call resume_geocode(batch_size);
+
+end;$$
+
+create or replace procedure resume_geocode(batch_size int)
+language plpgsql
+as $$
+begin
+
+  loop
+    exit when (select count(*) from addresses_to_geocode where rating is null) = 0;
+
+    update addresses_to_geocode
+      set (rating, new_address, lon, lat)
+        = ( coalesce(g.rating,-1), g.addy,
+            ST_X(g.geomout)::numeric(8,5), ST_Y(g.geomout)::numeric(8,5) )
+    from (
+      select location_id, address
+      from addresses_to_geocode
+      where rating is null
+      order by location_id
+      limit batch_size
+    ) as a
+      left join lateral geocode(a.address,1) as g on true
+    where a.location_id = addresses_to_geocode.location_id;
+
+    commit;
+  end loop;
+
+end;$$
+
 -- Table: public.data_source
 
 -- DROP TABLE public.data_source;
@@ -71,7 +147,7 @@ TABLESPACE pg_default;
 
 ALTER TABLE public.attr_index
     OWNER to postgres;
-	
+
 -- Table: public.geo_us_states
 
 -- DROP TABLE public.geo_us_states;
