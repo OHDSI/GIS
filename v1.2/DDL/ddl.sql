@@ -28,8 +28,7 @@ begin
   create table addresses_to_geocode (
     location_id BIGINT primary key,
     address norm_addy,
-    lon numeric,
-    lat numeric,
+    the_geom geometry,
     new_address norm_addy,
     rating integer
   );
@@ -56,9 +55,9 @@ begin
     exit when (select count(*) from addresses_to_geocode where rating is null) = 0;
 
     update addresses_to_geocode
-      set (rating, new_address, lon, lat)
+      set (rating, new_address, the_geom)
         = ( coalesce(g.rating,-1), g.addy,
-            ST_X(g.geomout)::numeric(8,5), ST_Y(g.geomout)::numeric(8,5) )
+            g.geomout )
     from (
       select location_id, address
       from addresses_to_geocode

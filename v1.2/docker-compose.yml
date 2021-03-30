@@ -32,7 +32,7 @@ services:
       - postgres-passwd
     volumes:
       - ./loader/data:/data
-    command: tail -F /dev/null
+    command: bash -c 'mkdir /tmp && tail -F /dev/null'
 
   shiny:
     profiles: ["dev"]
