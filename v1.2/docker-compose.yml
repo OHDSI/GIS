@@ -17,7 +17,7 @@ services:
       - ${POSTGRES_PORT:-5432}:5432
 
   shiny:
-    profiles: ["dev"]
+    # profiles: ["dev"]
     container_name: gis_shiny
     build: ./shiny
     image: gis_shiny
@@ -30,7 +30,7 @@ services:
     #   https://github.com/rocker-org/rocker-versioned2/issues/105
     #user: shiny
     ports:
-      - 80:3838
+      - 3838:3838
       - 8787:8787
     # TODO: make password more secure for actual release
     environment:
