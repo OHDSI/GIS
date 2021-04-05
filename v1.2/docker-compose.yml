@@ -35,7 +35,7 @@ services:
     command: bash -c 'mkdir /tmp && tail -F /dev/null'
 
   shiny:
-    # profiles: ["dev"]
+    profiles: ["dev"]
     container_name: gis_shiny
     build: ./shiny
     image: gis_shiny
