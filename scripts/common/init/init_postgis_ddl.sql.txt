@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS public.attr_index
     attr_type_concept_id integer,
     attr_type_source_value character varying COLLATE pg_catalog."default",
     attr_of_geom_index_id integer,
-    geom_source_coding varying COLLATE pg_catalog."default",
+    geom_source_coding character varying COLLATE pg_catalog."default",
     schema character varying COLLATE pg_catalog."default",
     table_name character varying COLLATE pg_catalog."default",
     table_desc character varying COLLATE pg_catalog."default",
