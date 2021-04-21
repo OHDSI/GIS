@@ -40,4 +40,4 @@ secrets:
 
 volumes:
   pgdata:
-    name: gis_pgdata2
+    name: gis_pgdata
