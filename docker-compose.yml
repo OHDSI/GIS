@@ -1,0 +1,43 @@
+version: "3.9"
+
+x-posgis_environment: &postgis_environment
+  POSTGRES_DB: ${POSTGRES_DB:-postgres}
+  POSTGRES_USER: ${POSTGRES_USER:-postgres}
+  POSTGRES_PASSWORD_FILE: /run/secrets/postgres-passwd
+
+services:
+  postgis:
+    container_name: gis_postgis
+    build: ./docker/postgis
+    image: gis_postgis
+    #restart: always
+    environment:
+      <<: *postgis_environment
+    secrets:
+      - postgres-passwd
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./src/DDL:/DDL
+    ports:
+      - ${POSTGRES_PORT:-5432}:5432
+
+  loader:
+    container_name: gis_loader
+    image: gis_loader:latest
+    environment:
+      <<: *postgis_environment
+      OMOP_DBMS: ${OMOP_DBMS:?set OMOP_DBMS in .env}
+      OMOP_JDBC_CONNECTION_STRING: ${OMOP_JDBC_CONNECTION_STRING:?set OMOP_JDBC_CONNECTION_STRING in .env}
+    secrets:
+      - postgres-passwd
+    volumes:
+      - ./src:/src
+    command: bash -c 'mkdir /tmp && tail -F /dev/null'
+
+secrets:
+  postgres-passwd:
+    file: ./docker/postgis/postgres-passwd
+
+volumes:
+  pgdata:
+    name: gis_pgdata
