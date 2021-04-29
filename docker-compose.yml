@@ -26,8 +26,8 @@ services:
     image: gis_loader:latest
     environment:
       <<: *postgis_environment
-      OMOP_DBMS: ${OMOP_DBMS:?set OMOP_DBMS in .env}
-      OMOP_JDBC_CONNECTION_STRING: ${OMOP_JDBC_CONNECTION_STRING:?set OMOP_JDBC_CONNECTION_STRING in .env}
+      OMOP_DBMS: ${OMOP_DBMS?set OMOP_DBMS in .env (set to empty string if this is not relevant)}
+      OMOP_JDBC_CONNECTION_STRING: ${OMOP_JDBC_CONNECTION_STRING?set OMOP_JDBC_CONNECTION_STRING in .env (set to empty string if this is not relevant)}
     secrets:
       - postgres-passwd
     volumes:
