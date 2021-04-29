@@ -10,6 +10,12 @@ the text of the password you would like to set
     OMOP_DBMS='sql server'
     OMOP_JDBC_CONNECTION_STRING='jdbc:sqlserver://localhost:1433;database=OMOP;user=omop_gis_etl;password=password'
     ```
+  - example `.env` without connecting to an OMOP instance
+    ```
+    POSTGRES_PORT=5432
+    OMOP_DBMS=''
+    OMOP_JDBC_CONNECTION_STRING=''
+    ```
 4. Build the loader image
   - `docker run --privileged -it --rm -v <absolute path to working directory>/docker/loader/:/src lnl7/nix sh -c 'nix-build /src && cp result /src/'`
   - `docker load < docker/loader/result`
