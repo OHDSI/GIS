@@ -5,3 +5,4 @@
 .Rproj.user/
 .Rhistory
 renv/
+.ipynb_checkpoints
