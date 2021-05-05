@@ -32,7 +32,7 @@ services:
       - postgres-passwd
     volumes:
       - ./src:/src
-    command: bash -c 'mkdir /tmp && tail -F /dev/null'
+    command: bash -c 'mkdir -p /tmp && tail -F /dev/null'
 
 secrets:
   postgres-passwd:
