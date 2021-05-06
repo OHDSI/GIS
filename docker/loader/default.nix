@@ -19,6 +19,10 @@ pkgs.dockerTools.buildImage {
       packages = with pkgs.rPackages; [
         DatabaseConnector
         readr
+        DBI
+        RPostgreSQL
+        jsonlite
+        httr
       ];
     })
   ];
