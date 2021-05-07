@@ -1,36 +1,31 @@
+require(DBI)
+require(RPostgreSQL)
+
 # make db connection
+# TODO: verify that we want to use the default 'postgres' maintenance database
 db_con <- function() {
-    # realy only need Sys.getenv, reletive path is for development in jupyter
-    pwfile <- ifelse(
-        Sys.getenv('POSTGRES_PASSWORD_FILE')=='',
-        '../../docker/postgis/postgres-passwd', 
-        Sys.getenv('POSTGRES_PASSWORD_FILE')
-    )
-    pg_passwd <- pg_passwd <- readLines( pwfile, warn=FALSE )
-    con <- dbConnect(RPostgres::Postgres(),
-        dbname = 'postgres',
-        host = 'localhost',
-        port = 5433,
-        user = 'postgres',
-        password = pg_passwd$V1
+    con <- dbConnect(RPostgreSQL::PostgreSQL(),
+        dbname = Sys.getenv("POSTGRES_DB"),
+        host = Sys.getenv("POSTGRES_HOST"),
+        port = Sys.getenv("POSTGRES_PORT"),
+        user = Sys.getenv("POSTGRES_USER"),
+        password = readLines(Sys.getenv("POSTGRES_PASSWORD_FILE"), warn=FALSE)
     )
     return(con)
 }
 
-# create geom and attr table with id sequences and contraints
-# TODO: geom_index, attr_index, and data_source
-instantiate_geom <- function(con,geom_tablename,geom_type,attr_tablename) {
+# create geom table with id sequences and constraints
+# TODO: geom_index and data_source
+instantiate_geom <- function(con,geom_tablename,geom_type,local_epsg=NULL) {
     
     # create id sequence and geom table
-    instantiate_table(con,geom_tablename,paste0("geom_",geom_type))
-    
-    # geom table add keys and relations
-    sql_altergeom <- paste0(
-        "ALTER TABLE ",geom_tablename,
-        " ADD CONSTRAINT ",geom_tablename,"_id_pkey PRIMARY KEY (geom_record_id), 
-        ALTER COLUMN geom_record_id SET DEFAULT nextval('",geom_tablename,"_id_seq'::regclass)")
-    req <- dbSendQuery(con,sql_altergeom)
-    dbClearResult(req)
+    instantiate_table(con,geom_tablename,"geom",geom_type,local_epsg)
+
+}
+
+# create attr table with id sequences and constraints
+# TODO: geom_index and data_source
+instantiate_attr <- function(con,attr_tablename,geom_tablename) {
     
     # create id sequence and attr table
     instantiate_table(con,attr_tablename,"attr")
@@ -38,9 +33,7 @@ instantiate_geom <- function(con,geom_tablename,geom_type,attr_tablename) {
     #attr table add keys and relations
     sql_alterattr <- paste0(
         "ALTER TABLE ",attr_tablename,
-        " ADD CONSTRAINT ",attr_tablename,"_id_pkey PRIMARY KEY (attr_record_id),
-        ALTER COLUMN attr_record_id SET DEFAULT nextval('",attr_tablename,"_id_seq","'::regclass), 
-        ADD CONSTRAINT ",attr_tablename,"_geo_record_id_fkey FOREIGN KEY (geom_record_id)
+        " ADD CONSTRAINT ",attr_tablename,"_geo_record_id_fkey FOREIGN KEY (geom_record_id)
         REFERENCES ",geom_tablename," (geom_record_id) MATCH SIMPLE
         ON UPDATE NO ACTION ON DELETE NO ACTION"
     )
@@ -49,22 +42,36 @@ instantiate_geom <- function(con,geom_tablename,geom_type,attr_tablename) {
     
 }
 
-instantiate_table <- function(con,tablename,table_template) {
-    
-    # table id sequence
-    sql_createidseq <- paste0(
-        "CREATE SEQUENCE ",tablename,"_id_seq 
-         INCREMENT 1 START 1 
-         MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1"
-    )
-    req <- dbSendQuery(con,sql_createidseq)
+# instantiate generic table
+instantiate_table <- function(con,tablename,table_template,geom_type=NULL,local_epsg=NULL) {
+
+    # create table as clone with no data
+    sql_createtable <- paste0(
+        "CREATE TABLE ",tablename," ()
+         INHERITS (",table_template,")")
+    req <- dbSendQuery(con,sql_createtable)
     dbClearResult(req)
 
-    # table as clone
-    sql_createtable <- paste0(
-        "CREATE TABLE ",tablename," AS 
-         SELECT * FROM ",table_template," WITH NO DATA")
-    req <- dbSendQuery(con,sql_createtable)
+    # set pkey constraint
+    sql_altertable <- paste0(
+        "ALTER TABLE ",tablename,
+        " ADD CONSTRAINT ",tablename,"_id_pkey PRIMARY KEY (",table_template,"_record_id)"
+    )
+
+    # add geom constraints
+    if (!is.null(geom_type)) 
+        sql_altertable <- paste0(sql_altertable,
+	    ", ADD CONSTRAINT enforce_geotype_geom_wgs84 CHECK
+	      (geometrytype(geom_wgs84) = '",geom_type,"'::text)
+	     , ADD CONSTRAINT enforce_geotype_geom_local CHECK
+	      (geometrytype(geom_local) = '",geom_type,"'::text)")
+
+    if (!is.null(local_epsg)) 
+        sql_altertable <- paste0(sql_altertable,
+	    ", ADD CONSTRAINT enforce_srid_geom_local CHECK
+	      (st_srid(geom_local) = ",local_epsg,")")
+        
+    req <- dbSendQuery(con,sql_altertable)
     dbClearResult(req)
     
 }
