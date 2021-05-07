@@ -3,7 +3,7 @@ version: "3.9"
 x-posgis_environment: &postgis_environment
   POSTGRES_DB: ${POSTGRES_DB:-postgres}
   POSTGRES_USER: ${POSTGRES_USER:-postgres}
-  POSTGRES_HOST: ${POSTGRES_HOST:-gis_postgis}
+  POSTGRES_HOST: gis_postgis
   POSTGRES_PASSWORD_FILE: /run/secrets/postgres-passwd
 
 services:

@@ -17,8 +17,10 @@ pkgs.dockerTools.buildImage {
     pkgs.wget
     (pkgs.rWrapper.override{
       packages = with pkgs.rPackages; [
+        # Additions for OMOP
         DatabaseConnector
         readr
+        # Additions for EPA
         DBI
         RPostgreSQL
         jsonlite
