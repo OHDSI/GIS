@@ -9,6 +9,7 @@ pkgs.dockerTools.buildImage {
     pkgs.bashInteractive
     pkgs.cacert
     pkgs.coreutils
+    pkgs.curl
     pkgs.gdal
     pkgs.gnused
     pkgs.postgis
