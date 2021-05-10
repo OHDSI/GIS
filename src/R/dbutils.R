@@ -44,39 +44,32 @@ instantiate_attr <- function(con,attr_tablename,geom_tablename) {
 
 # instantiate generic table
 instantiate_table <- function(con,tablename,table_template,geom_type=NULL,local_epsg=NULL) {
-    
-    # table id sequence
-    sql_createidseq <- paste0(
-        "CREATE SEQUENCE ",tablename,"_id_seq 
-         INCREMENT 1 START 1 
-         MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1"
-    )
-    req <- dbSendQuery(con,sql_createidseq)
-    dbClearResult(req)
 
     # create table as clone with no data
-    # TODO: verify that we want inheritance
-    # alternative as CREATE INHERITS
-    # sql_createtable <- paste0("CREATE TABLE ",tablename," () INHERITS (",table_template,")")
-    # this fails below on alter geometry column ...
     sql_createtable <- paste0(
-        "CREATE TABLE ",tablename," AS 
-         SELECT * FROM ",table_template," WITH NO DATA")
+        "CREATE TABLE ",tablename," ()
+         INHERITS (",table_template,")")
     req <- dbSendQuery(con,sql_createtable)
     dbClearResult(req)
 
-    # set pkey constraint and default values
+    # set pkey constraint
     sql_altertable <- paste0(
         "ALTER TABLE ",tablename,
-        " ADD CONSTRAINT ",tablename,"_id_pkey PRIMARY KEY (",table_template,"_record_id),
-        ALTER COLUMN ",table_template,"_record_id SET DEFAULT nextval('",tablename,"_id_seq","'::regclass)"
+        " ADD CONSTRAINT ",tablename,"_id_pkey PRIMARY KEY (",table_template,"_record_id)"
     )
 
-    # alter geometry columns if needed
+    # add geom constraints
     if (!is.null(geom_type)) 
-        sql_altertable <- paste0(sql_altertable,", ALTER COLUMN geom_wgs84 type geometry(",geom_type,",4326)")
+        sql_altertable <- paste0(sql_altertable,
+	    ", ADD CONSTRAINT enforce_geotype_geom_wgs84 CHECK
+	      (geometrytype(geom_wgs84) = '",geom_type,"'::text)
+	     , ADD CONSTRAINT enforce_geotype_geom_local CHECK
+	      (geometrytype(geom_local) = '",geom_type,"'::text)")
+
     if (!is.null(local_epsg)) 
-        sql_altertable <- paste0(sql_altertable,", ALTER COLUMN geom_local type geometry(",geom_type,",",local_epsg,")")
+        sql_altertable <- paste0(sql_altertable,
+	    ", ADD CONSTRAINT enforce_srid_geom_local CHECK
+	      (st_srid(geom_local) = ",local_epsg,")")
         
     req <- dbSendQuery(con,sql_altertable)
     dbClearResult(req)

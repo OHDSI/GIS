@@ -9,6 +9,7 @@ pkgs.dockerTools.buildImage {
     pkgs.bashInteractive
     pkgs.cacert
     pkgs.coreutils
+    pkgs.curl
     pkgs.gdal
     pkgs.gnused
     pkgs.postgis
@@ -17,8 +18,10 @@ pkgs.dockerTools.buildImage {
     pkgs.wget
     (pkgs.rWrapper.override{
       packages = with pkgs.rPackages; [
+        # Additions for OMOP
         DatabaseConnector
         readr
+        # Additions for EPA
         DBI
         RPostgreSQL
         jsonlite

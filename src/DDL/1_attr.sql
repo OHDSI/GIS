@@ -1,7 +1,7 @@
 CREATE TABLE attr
 (
-	    attr_record_id integer primary key,
-	    geom_record_id integer,
+	    attr_record_id serial primary key,
+	    geom_record_id integer REFERENCES geom(geom_record_id),
 	    attr_concept_id integer,
 	    attr_start_date date,
 	    attr_end_date date,
