@@ -9,7 +9,7 @@ in
 pkgs.stdenv.mkDerivation {
   name = "ohdis_gis_docs";
 
-  src = ./.;
+  src = pkgs.lib.cleanSource ./.;
 
   buildPhase = ''
     make html
