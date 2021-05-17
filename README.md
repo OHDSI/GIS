@@ -35,3 +35,6 @@ the text of the password you would like to set
   - `docker exec -it -w /src/OMOP gis_loader R --vanilla -f load_location.R`
 3. Geocode (This runs at about 700 records per minute after 3 minute startup time on a powerful laptop)
   - `docker exec -it -w /src/OMOP gis_loader sh geocode.sh`
+
+## Loading EPA AQS data
+`docker exec -it -w /src/EPA gis_loader Rscript load.R`
