@@ -14,3 +14,5 @@ renv/
 
 .ipynb_checkpoints
 *.ipynb
+
+result
