@@ -4,8 +4,8 @@ require(jsonlite)
 # load OMOP dbutils.R
 source('../R/dbutils.R')
 
-# retrieve EPA precalculated file
-fetch_EPA_precalculated <- function(options) {
+# retrieve EPA static precalculated file
+fetch_EPA_AQS_static <- function(options) {
 
     temp <- tempfile()
     download_url <- paste(options$base_download_url,options$file_download,sep="")
@@ -21,7 +21,8 @@ fetch_EPA_precalculated <- function(options) {
 }
 
 # load sites into database
-load_EPA_sites <- function(con,sites,geom_tablename) {
+# TODO: data driven column names
+load_EPA_AQS_sites <- function(con,sites,geom_tablename) {
     
     dbWriteTable(con, "temp_epa_sites", sites, is.temp=TRUE)
     sql_updategeom <- paste0(
@@ -31,7 +32,7 @@ load_EPA_sites <- function(con,sites,geom_tablename) {
         'SS-CCC-NNNN' as geom_source_coding,
          CONCAT(\"State.Code\"::varchar,'-',LPAD(\"County.Code\"::varchar,3,'0'),'-',LPAD(\"Site.Number\"::varchar,4,'0')) as geom_source_value,
          ST_SetSRID(ST_MakePoint(\"Longitude\",\"Latitude\"),4326) as geom_wgs84
-         FROM temp_EPA_sites")
+         FROM temp_epa_sites")
 
     res <- dbSendQuery(con,sql_updategeom)
     dbClearResult(res)
@@ -42,11 +43,52 @@ load_EPA_sites <- function(con,sites,geom_tablename) {
     
 }
 
+# load EPA AQS attribute into database from static file dataframe
+# TODO: data driven column names
+# TODO populate extra foreign key for monitor metadata
+load_EPA_AQS_static_attr <- function(con,attrs,geom_tablename,attr_tablename) {
+    
+    dbWriteTable(con, "temp_epa_attrs", attrs, is.temp=TRUE)
+    sql_updateattrs <- paste0(
+        "INSERT INTO ",attr_tablename," (
+            attr_start_date,
+            attr_end_date,
+            value_as_number,
+            unit_source_value,
+            attr_source_value,
+            geom_source_value
+         )
+         SELECT 
+            to_date(\"Date.Local\", 'yyyy-mm-dd') as attr_start_date,
+            to_date(\"Date.Local\", 'yyyy-mm-dd') as attr_end_date,
+            \"Arithmetic.Mean\" as value_as_number,
+            \"Units.of.Measure\" as unit_source_value,
+            \"Parameter.Name\" as attr_source_value,
+            CONCAT(\"State.Code\"::varchar,'-',LPAD(\"County.Code\"::varchar,3,'0'),'-',LPAD(\"Site.Num\"::varchar,4,'0')) as geom_source_value
+         FROM temp_epa_attrs")
+
+    res <- dbSendQuery(con,sql_updateattrs)
+    dbClearResult(res)
+
+    sql_updategeomsourceid <- paste0(
+        "UPDATE ",attr_tablename,"
+         SET geom_record_id = ",geom_tablename,".geom_record_id 
+         FROM ",geom_tablename,"  
+         WHERE ",geom_tablename,".geom_source_value = ",attr_tablename,".geom_source_value")
+    res <- dbSendQuery(con,sql_updategeomsourceid)
+    dbClearResult(res)
+    
+    sql_drop <- "DROP TABLE temp_epa_attrs"
+    res <- dbSendQuery(con,sql_drop)
+    dbClearResult(res)
+    
+}
+
 # retrieve EPA AQS data through their API
 # TODO: create institutional email and credentials for API key
 # NOTE: this could also be done through file download: 
 #.      file_download <- "annual_conc_by_monitor_2020.zip"
-fetch_EPA_AQS_from_api <- function(options) {
+fetch_EPA_AQS_api <- function(options) {
 
     base_api_url <- "https://aqs.epa.gov/data/api/annualData/"
 
@@ -78,10 +120,10 @@ fetch_EPA_AQS_from_api <- function(options) {
     
 }
 
-# place attribute data for sites in attr table
+# place attribute data in dataframe from API for sites in attr table
 # TODO: map attr_data columns to attr table columns
 # TODO: use temp table and join for load
-load_EPA_attr <- function(con,attr_data,geom_tablename,attr_tablename) {
+load_EPA_AQS_api_attr <- function(con,attr_data,geom_tablename,attr_tablename) {
     
     sites = unique(attr_data$site_ID)
     for (site in sites) {
