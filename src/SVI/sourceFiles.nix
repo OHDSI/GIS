@@ -1,6 +1,222 @@
 # Do not modify manually, generate with `sh generateSourceFiles.sh > sourceFiles.nix`
 [
   {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/SVI2014_US.zip";
+    sha256 = "0f373nz9ccgiq0aj3h1cipn15ag8654jj8600y2fi0254h3a072x";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/PuertoRico.zip";
+    sha256 = "006bl98sy5mhyrxap9lr3ggq4xryybanxy84hch5j6r0zw0y5k7w";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Alabama.zip";
+    sha256 = "1w7ph2zj2av24748qhgzi8q2wijmnphnr1cd0nxlp7fl9ns6k4sg";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Alaska.zip";
+    sha256 = "0gw7nznarjzxqa2307s83qq49wr3i20zzfxfkabbzwzczzzr663w";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Arizona.zip";
+    sha256 = "1mfaarqjm1pdri9yhwyniiyb3bc7n0qbx3f73hqxiplvbgnmpvpz";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Arkansas.zip";
+    sha256 = "147n07l56q8n8k5djlix4jqhj1npc8nna86ry421z8ckc2fa2n5j";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/California.zip";
+    sha256 = "0wxgx8phqs0bnwzb1grslp496iy8l34flyy4r0rggh3kfb07l14x";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Colorado.zip";
+    sha256 = "0y5qwyiv9i7qzpqcfk18lk1w0l7m65hildbzrkrqqnbpwd9y4w4k";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Connecticut.zip";
+    sha256 = "1rdz6gidnfjk2wpdw8132k0yjn3wzm3g8f753ra4fcl6hss9cfp7";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Delaware.zip";
+    sha256 = "00d5zd442knw7wvs6rf7kzw7bvab3rcr38a31fbia1ccmjkzdgpk";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/DistrictofColumbia.zip";
+    sha256 = "0x6kkg1zrrwfizkvpwvvaqj13r9yjy8bh6g4s47bw6a5gr1qfhx6";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Florida.zip";
+    sha256 = "1m33n877703x6m5zbq8cpp8b37da0b22ynkccr286si0az8n4ccd";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Georgia.zip";
+    sha256 = "09g57c751nbz7rzy7vm3m94yigwag8238nccf1fhj90yba6jgbi7";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Hawaii.zip";
+    sha256 = "15d4a2bj0v9bxcax056mcdm9dmyybslv0pyj19xsn94scgpaj6br";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Idaho.zip";
+    sha256 = "1vgcxxynv0xv6ccnxdva9cgc322mg45fid1yqjlrbwa4c7g89mpl";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Illinois.zip";
+    sha256 = "16qqgm0lmy7a1ccrhhvk6aycxf7n45z4bir6as0rcnidjl0jw7m8";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Indiana.zip";
+    sha256 = "00v4ybipz56rpf93igm5hlr9yhfa1k6lfyjh8s5jd8sfsff703pf";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Iowa.zip";
+    sha256 = "0459rjdhj4qcjnl05j280j0a7x243pkvc8m6063j3dfac7gymysh";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Kansas.zip";
+    sha256 = "045flz0ic41dz3yjcysxdjng0pdbji88p8rykdrhbi7pfzwiwjr2";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Kentucky.zip";
+    sha256 = "1scjj8hfd40flqczyrhd6bimyxj7qa3y7f57nh2g1c5grkvm2skw";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Louisiana.zip";
+    sha256 = "1hvyys5zmphdylzsc221h29myyp26vf2f9sjrkwi8gjrmd4r3l8k";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Maine.zip";
+    sha256 = "17l36qxjq8n69i2d978lsl3jd8x1vav4aqb13q7nzjnk96qfr7k7";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Maryland.zip";
+    sha256 = "0kia4mlzidzxpwi0bsx3gxm0ibyvv386ysfd8ibxzgwflc6ry5m8";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Massachusetts.zip";
+    sha256 = "02bz7a2h9fp7wsc6wchzqmrvl0m5hg7sj9jaskwz874s8dzjsys7";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Michigan.zip";
+    sha256 = "1flv99yj9y9458w0lamm8s8mccwfp3s5bkkxbbircrg41i1ivjn6";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Minnesota.zip";
+    sha256 = "00fddmfx5x91sxhknyivrbhpv6f6xn9a4h72kacmiii0v4l8a5n5";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Mississippi.zip";
+    sha256 = "0abk3jzxz2vi3vdgx201gqfg0ffnj07h80hvdi4n77mba3kspas3";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Missouri.zip";
+    sha256 = "1n7kjr46kh7wjx2vkmpfjzlpf6z2dsxcp8j8cjl22d7lcixvdpm0";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Montana.zip";
+    sha256 = "0apsjhidxxxdhx05647h4g1xdsxmlrcmkl6qjfvmd81pv86dn20q";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Nebraska.zip";
+    sha256 = "0xmab72jsfgl7lc6kdpqwj62r7ag6g8r2i7i7rjgncwc8jcqn75z";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Nevada.zip";
+    sha256 = "19zjripdg0685l7rkhhy9nm0dmlr24afynig8i4ac1zvyajhmz71";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/NewHampshire.zip";
+    sha256 = "1gmggs5slmq0q9i0mdllhbcj3rm46yvgpg36c1kg0nh4sw3iv9nv";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/NewJersey.zip";
+    sha256 = "12gy4gqcjlc5aiyx6z8kkl7151xvgcccz55xsbfncb6ppidpl08w";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/NewMexico.zip";
+    sha256 = "0k0pcwbsq9vllil30x0n5b03gmsbj6cn6h1f5gg60qx8j9zgq2pq";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/NewYork.zip";
+    sha256 = "199cld6zvq0hmdx6pjq97sl4kar4rdkxldq533bhwygjqqgx2wim";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/NorthCarolina.zip";
+    sha256 = "020v7kndxv0lq9d30xqrhbd2qp28qiv1mfy6r71lkdfqf0dsln4n";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/NorthDakota.zip";
+    sha256 = "05kxfpdbzmsd8hincf3i0jjyaqv43pzcwrmy9qx36x093wdr0m59";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Ohio.zip";
+    sha256 = "137hn22b7wlascj42z1lfrf0zbllys212hcji412x0qyzwwf0144";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Oklahoma.zip";
+    sha256 = "17z7ni4zpxbyy9mhgjiw6mbb842h6p2dvl71z41vg2bk09d737l7";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Oregon.zip";
+    sha256 = "0ajgklyaqkdpdy121ykw50vwq3zrzbs2i8yk5mbqklyxyzix2id8";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Pennsylvania.zip";
+    sha256 = "17sv91n6ky29lrjxh3yz5wfm6d3f79k7b9xh42k0dfb1gdl56wcw";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/RhodeIsland.zip";
+    sha256 = "03c12yap7i6mk9ajp1g8hxw3haf08vhfkmyhar3ryygbmkz6jsba";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/SouthCarolina.zip";
+    sha256 = "1r9p3b6azvhkcy27yvfwiql5l8f4yghlqr62fpnxa9rygi0lhmq6";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/SouthDakota.zip";
+    sha256 = "149qnvm9lnjy2rklq43awz0hkhvx5sygwxw017dld84a5ag10kry";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Tennessee.zip";
+    sha256 = "0v42nyawdiq1mpwp8rxz922431ydgsn6s1lbhcnvjq3v4dhab242";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Texas.zip";
+    sha256 = "1hnzm570gsbz0gdydcpbj83ykwgkwhhxbpjxis8d66fypjacp4in";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Tribal_Tracts.zip";
+    sha256 = "02bqin0sn9gcal5hzy63sibgs6arbilkl5qi4myla6c8knf4rvmv";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Utah.zip";
+    sha256 = "1v7b9j9wkirwhx4qs9hk84y706jz86dn0pmm1a6kzwida2dpjpi0";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Vermont.zip";
+    sha256 = "1f7y0q9jq2i1zlz3q9k498aw78sn6fsk6jqg99x6llcjsn83mgrk";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Virginia.zip";
+    sha256 = "0w5p9h75zaqsak04cs0rmzzwilnyysg6fqs71d10v5bswbva6c68";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Washington.zip";
+    sha256 = "0zlj92dgy6xzdzpwppcq4b4i8a1dmcqayq8da9ax6h6d0dybgldf";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/WestVirginia.zip";
+    sha256 = "1kvrkwgna95gqaz1li5s4mr6fb34lsnwnvsralmaszk573j8qnc0";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Wisconsin.zip";
+    sha256 = "0mask08dkjjpz85qsmdgx9dmr1fq7ccg2adk2m4zbkrvdwwm65f2";
+  }
+  {
+    url = "https://svi.cdc.gov/Documents/Data/2014_SVI_DATA/States/Wyoming.zip";
+    sha256 = "1j8qr0jrks7w93h85h7xjdr7fvmzp2gqy8c5r1ygbrps4c75mzl9";
+  }
+  {
     url = "https://svi.cdc.gov/Documents/Data/2016_SVI_DATA/SVI2016_US.zip";
     sha256 = "0vr1cda64lzvjxhx1kv2ny18v5653b0fwxji674rb9sj1x04b2vd";
   }

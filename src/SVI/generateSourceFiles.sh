@@ -4,7 +4,7 @@ set -e
 
 states=$(cat states)
 
-years='2016 2018'
+years='2014 2016 2018'
 
 function write_source() {
   echo '  {'
