@@ -19,11 +19,20 @@ echo [
 
 for year in $years
 do
-  write_source https://svi.cdc.gov/Documents/Data/${year}_SVI_DATA/SVI${year}_US.zip SVI_${year}_US
+  county_file_postfix=COUNTY
+  if [ $year == 2014 ]
+  then
+    county_file_postfix=CNTY
+  fi
+  write_source https://svi.cdc.gov/Documents/Data/${year}_SVI_DATA/SVI${year}_US.zip SVI_${year}_US_tract
+  write_source https://svi.cdc.gov/Documents/Data/${year}_SVI_Data/SVI${year}_US_${county_file_postfix}.zip SVI_${year}_US_county
   for state in $states
   do
-    write_source https://svi.cdc.gov/Documents/Data/${year}_SVI_DATA/States/${state}.zip SVI_${year}_${state}
+    write_source https://svi.cdc.gov/Documents/Data/${year}_SVI_DATA/States/${state}.zip SVI_${year}_${state}_tract
+    write_source https://svi.cdc.gov/Documents/Data/${year}_SVI_Data/States_Counties/${state}_${county_file_postfix}.zip SVI_${year}_${state}_county
   done
+  # no county source in tribal tracts
+  write_source https://svi.cdc.gov/Documents/Data/${year}_SVI_DATA/States/Tribal_Tracts.zip SVI_${year}_Tribal_Tracts_tract
 done
 
 echo ]
