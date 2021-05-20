@@ -9,8 +9,24 @@ pkgs.stdenv.mkDerivation {
 
   srcs = map pkgs.fetchzip (map ( source: source // {stripRoot = false;} ) sourceFiles);
 
+  # --------------------------------------------------------------------------
+  # this is kinda hacky, maybe just rewrite unpackPhase instead of doing this?
+  sourceRoot = "source";
+
+  preUnpack = ''
+    mkdir source
+    cd source
+    mkdir source
+  '';
+
+ postUnpack = ''
+   cd ../
+ '';
+ # --------------------------------------------------------------------------
+
   buildPhase = ''
-    echo hi
+    pwd
+    ls -laR ../
   '';
 
 }
