@@ -7,4 +7,6 @@
 renv/
 .ipynb_checkpoints
 *.ipynb
-result
+result*
+*.direnv
+*.envrc

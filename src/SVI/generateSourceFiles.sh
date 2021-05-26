@@ -5,17 +5,18 @@ set -e
 states=$(cat states)
 
 years='2014 2016 2018'
+#TODO: add 2000 and 2010, which are in a different format
 
+# takes two arguments, first is URL, second is name
 function write_source() {
-  echo '  {'
-  echo '    name = "'$2'";'
+  echo '  '$2' = {'
   echo '    url = "'$1'";'
   echo '    sha256 = "'$(nix-prefetch-url --unpack --name $2 $1)'";'
-  echo '  }'
+  echo '  };'
 }
 
 echo '# Do not modify manually, generate with `sh generateSourceFiles.sh > sourceFiles.nix`'
-echo [
+echo {
 
 for year in $years
 do
@@ -35,4 +36,4 @@ do
   write_source https://svi.cdc.gov/Documents/Data/${year}_SVI_DATA/States/Tribal_Tracts.zip SVI_${year}_Tribal_Tracts_tract
 done
 
-echo ]
+echo }

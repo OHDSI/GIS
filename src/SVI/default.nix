@@ -3,49 +3,43 @@
 
 let
   sourceFiles = import ./sourceFiles.nix;
+
+  mkShpDerivation = { name, src, schema_base_name }:
+    pkgs.stdenv.mkDerivation {
+      inherit name src;
+      nativeBuildInputs = [
+        pkgs.gdal
+        (pkgs.postgresql_13.withPackages (p: [p.postgis]))
+      ];
+
+      buildPhase = ''
+        EPSG=$(gdalsrsinfo -V -e -o epsg ./ | sed -n 's/.*EPSG:\(.*\)/\1/p')
+
+        SHAPEFILES=*.shp
+        mkdir build
+        for shapefile in $SHAPEFILES
+        do
+          shp2pgsql -s $EPSG -D -- $shapefile ${schema_base_name}_stage.${name} >> ./build/${name}.sql
+        done
+      '';
+
+      installPhase = ''
+        mv ./build $out
+      '';
+    };
+
+    mkSVIDerivation = name:
+    let
+      sourceFile = pkgs.lib.getAttrFromPath [name] sourceFiles;
+    in
+    mkShpDerivation {
+      inherit name;
+      schema_base_name = "svi";
+      src = pkgs.fetchzip {
+        inherit name;
+        url = sourceFile.url;
+        sha256 = sourceFile.sha256;
+      };
+    };
 in
-pkgs.stdenv.mkDerivation {
-  name = "SVI";
-
-  srcs = map pkgs.fetchzip (map ( source: source // {stripRoot = false;} ) sourceFiles);
-
-  # --------------------------------------------------------------------------
-  # this is kinda hacky, maybe just rewrite unpackPhase instead of doing this?
-  sourceRoot = "source";
-
-  preUnpack = ''
-    mkdir source
-    cd source
-    mkdir source
-  '';
-
-  postUnpack = ''
-    rmdir source
-    cd ../
-  '';
-  # --------------------------------------------------------------------------
-
-  nativeBuildInputs = [
-    pkgs.gdal
-    pkgs.postgis
-    pkgs.postgresql_13
-  ];
-
-  buildPhase = ''
-    mkdir -p $out
-    for dir in ./*
-    do
-      EPSG=$(gdalsrsinfo -V -e -o epsg $dir | sed -n 's/.*EPSG:\(.*\)/\1/p')
-      SHAPEFILES=$(echo $dir/*.shp | sed 's/\.shp//g')
-      for shapefile in $SHAPEFILES
-      do
-        shp2pgsql -s $EPSG -I $shapefile.shp > $out/$(basename $dir)_$(basename $shapefile)
-      done
-    done
-  '';
-
-  installPhase = ''
-    echo install
-  '';
-
-}
+(map mkSVIDerivation (pkgs.lib.attrNames sourceFiles))
