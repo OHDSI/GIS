@@ -68,7 +68,6 @@ dbWriteTable(con, "meta_epa_monitors", EPA_monitors$data, is.temp=TRUE)
 ##
 
 # get EPA AQS data from API
-# TODO: fetch from pre-calculated file
 options <- list(
     api_query_type = "byState",
     api_email = "test@aqs.api",
@@ -83,7 +82,6 @@ aqs_data = fetch_EPA_AQS_api(options)
 print('EPA AQS PM2.5 data for Florida downloaded')
 
 # create attribute table
-# TODO: incorporate query parameters into table metadata for index
 aqs_pm25_api_meta <- list(
   attr_type_concept_id = 0,
   attr_type_source_value = 'EPA AQS PM2.5',
@@ -109,6 +107,7 @@ print('Florida data uploaded to attr table')
 ##
 
 # fetch EPS AQS precomputed daily PM2.5 from static file
+# TODO: enable multi year downloads into one table
 year <- '2020'
 parameter_code <- '88101'
 filename <- paste0("daily_",parameter_code,"_",year)
@@ -121,7 +120,6 @@ EPA_daily <- fetch_EPA_AQS_static(options)
 print('daily downloaded')
 
 # create attribute table
-# TODO: incorporate query parameters into table metadata for index
 aqs_pm25_static_meta <- list(
   attr_type_concept_id = 0,
   attr_type_source_value = '2020 EPA Daily PM2.5',
