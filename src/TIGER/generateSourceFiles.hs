@@ -39,7 +39,13 @@ getNationSources year =
       , "county"
       , "metdiv"
       , "state"
-      ];
+      , "tbg"
+      , "ttract"
+      ]
+      ++
+      case year of
+        year | year > 2011 -> ["zcta5"]
+        _ -> []
    in
     mapM (\geom ->
       getZipSource
@@ -47,10 +53,14 @@ getNationSources year =
         ( "https://www2.census.gov/geo/tiger/TIGER"
           ++ (show year) ++ "/"
           ++ case (geom, year) of
-               (geom, year) | geom == "aitsn" && year <= 2014 -> "AITS"
+               ("aitsn", year) | year <= 2014 -> "AITS"
                _ -> (map toUpper geom)
           ++ "/"
-          ++ "tl_" ++ (show year) ++ "_us_" ++ geom ++ ".zip" )
+          ++ "tl_" ++ (show year) ++ "_us_"
+          ++ case geom of
+               "zcta5" -> "zcta510"
+               _ -> geom
+          ++ ".zip" )
       )
       nation_geoms
 
@@ -63,8 +73,6 @@ getStateSources year state =
     state_geoms =
       [ "bg"
       , "cousub"
-      , "sldl"
-      , "sldu"
       , "tabblock"
       , "tract"
       ]
