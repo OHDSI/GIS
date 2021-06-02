@@ -92,8 +92,8 @@ getStateSources year state =
         ( "https://www2.census.gov/geo/tiger/TIGER"
           ++ (show year) ++ "/" ++ (map toUpper geom) ++ "/"
           ++ "tl_" ++ (show year) ++ "_" ++ (statefp state) ++ "_"
-          ++ case geom of
-               "tabblock" -> "tabblock10"
+          ++ case (geom, year) of
+               ("tabblock", year) | year >=2014 -> "tabblock10"
                _ -> geom
           ++ ".zip"
         )
