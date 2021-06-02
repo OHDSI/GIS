@@ -77,9 +77,9 @@ getStateSources year state =
       , "tract"
       ]
       ++
-      case state of
-        State{States.name=_, statefp="02"} -> ["anrc"]
-        State{States.name=_, statefp="72"} -> ["subbarrio"]
+      case (year, state) of
+        (_, State{States.name=_, statefp="02"}) -> ["anrc"]
+        (year ,State{States.name=_, statefp="72"}) | year >= 2020 -> ["subbarrio"]
         _ -> []
       ++ case year of
         2020 -> ["tabblock20"]
