@@ -4,7 +4,6 @@
 pkgs.mkShell {
   nativeBuildInputs = [
     (pkgs.haskellPackages.ghcWithPackages (ps: [
-      ps.extra
     ]))
   ];
 }

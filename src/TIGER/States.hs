@@ -1,8 +1,11 @@
+{-# LANGUAGE OverloadedStrings #-}
 module States where
 
+import qualified Data.Text as T
+
 data State = State {
-  name :: String
-, statefp :: String
+  name :: T.Text
+, statefp :: T.Text
 }
 
 states =

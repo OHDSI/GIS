@@ -1,35 +1,40 @@
+{-# LANGUAGE OverloadedStrings #-}
 module Main where
 
 import States
 
 import System.Process
-import Control.Monad.Extra (concatMapM)
-import Data.Char (toUpper)
+import System.Exit
+import qualified Data.Text as T
 
 data SourceFile = SourceFile {
-  name :: String
-, url :: String
-, sha256 :: String
+  name :: T.Text
+, url :: T.Text
 }
 
-nixSourceFiles :: [SourceFile] -> [String]
-nixSourceFiles sourceFiles =
-  concatMap nixSourceFile sourceFiles
+showNixSource :: SourceFile -> IO [T.Text]
+showNixSource SourceFile{Main.name=n, url=u} = do
+  (exitcode, stdout, stderr) <- readProcessWithExitCode ("nix-prefetch-url") ["--unpack", "--name", T.unpack n, T.unpack u] ""
+  return
+    [ n <> " = {"
+    , "  url = \"" <> u <> "\";"
+    , "  sha256 = \""
+      <> case exitcode of
+           ExitSuccess -> (T.strip $ T.pack stdout)
+           _ -> "0000000000000000000000000000000000000000000000000000000000000000"
+      <> "\";"
+    , "};"
+    ]
 
-nixSourceFile SourceFile{Main.name=n, url=u, sha256=s} =
-  [ n ++ " = {"
-  , "  url = \"" ++ u ++ "\";"
-  , "  sha256 = \"" ++ s ++ "\";"
-  , "};"
-  ]
+sources =
+  concatMap
+    (\year ->
+      nationSources year
+      <> concatMap (stateSources year) states
+    )
+    [2011..2020]
 
-getSources :: Int -> IO [SourceFile]
-getSources year = do
-  nationSources <- getNationSources year
-  stateSources <- concatMapM (getStateSources year) states
-  return stateSources
-
-getNationSources year =
+nationSources year =
   let
     nation_geoms = 
       [ "aiannh"
@@ -42,74 +47,85 @@ getNationSources year =
       , "tbg"
       , "ttract"
       ]
-      ++
+      <>
       case year of
-        year | year > 2011 -> ["zcta5"]
+        year | year >= 2012 -> ["uac", "zcta5"]
         _ -> []
+    s_year = T.pack $ show year
+    nationUrl :: T.Text -> T.Text
+    nationUrl geom =
+      "https://www2.census.gov/geo/tiger/TIGER"
+      <> s_year <> "/"
+      <> case (geom, year) of
+           ("aitsn", year) | year <= 2014 -> "AITS"
+           _ -> (T.toUpper geom)
+      <> "/"
+      <> "tl_" <> s_year <> "_us_"
+      <> case geom of
+           geom | geom == "zcta5" || geom == "uac" -> geom <> "10"
+           _ -> geom
+      <> ".zip"
    in
-    mapM (\geom ->
-      getZipSource
-        ( "TIGER_" ++ (show year) ++ "_US_" ++ geom )
-        ( "https://www2.census.gov/geo/tiger/TIGER"
-          ++ (show year) ++ "/"
-          ++ case (geom, year) of
-               ("aitsn", year) | year <= 2014 -> "AITS"
-               _ -> (map toUpper geom)
-          ++ "/"
-          ++ "tl_" ++ (show year) ++ "_us_"
-          ++ case geom of
-               "zcta5" -> "zcta510"
-               _ -> geom
-          ++ ".zip" )
+    map (\geom ->
+      SourceFile {
+        Main.name =
+          "TIGER_" <> s_year <> "_US_" <> geom,
+        url =
+          nationUrl geom
+        }
       )
       nation_geoms
 
-sanatize :: Char -> Char
-sanatize ' ' = '_'
-sanatize c = c
+sanatize = T.replace " " "_"
 
-getStateSources year state = 
+stateSources year state = 
   let
+    state_geoms :: [T.Text]
     state_geoms =
       [ "bg"
       , "cousub"
       , "tabblock"
       , "tract"
       ]
-      ++
+      <>
       case (year, state) of
         (_, State{States.name=_, statefp="02"}) -> ["anrc"]
         (year ,State{States.name=_, statefp="72"}) | year >= 2020 -> ["subbarrio"]
         _ -> []
-      ++ case year of
+      <>
+      case year of
         2020 -> ["tabblock20"]
-        _ -> []
-    s_name = map sanatize (States.name state)
+        _ -> [];
+    s_name = sanatize $ States.name state
+    s_year = T.pack $ show year
+    stateName :: T.Text -> T.Text
+    stateName geom =
+      "TIGER_" <> s_year <> "_" <> s_name <> "_" <> geom
+    stateUrl :: T.Text -> T.Text
+    stateUrl geom =
+      "https://www2.census.gov/geo/tiger/TIGER"
+      <> s_year <> "/" <> (T.toUpper geom) <> "/"
+      <> "tl_" <> s_year <> "_" <> (statefp state) <> "_"
+      <> case (geom, year) of
+           ("tabblock", year) | year >=2014 -> "tabblock10"
+           _ -> geom
+      <> ".zip"     
+    stateSource :: T.Text -> SourceFile
+    stateSource geom =
+      SourceFile {
+        Main.name = stateName geom,
+        url = stateUrl geom
+      }
   in
-    mapM (\geom ->
-      getZipSource
-        ( "TIGER_" ++ (show year) ++ "_" ++ s_name ++ "_" ++ geom )
-        ( "https://www2.census.gov/geo/tiger/TIGER"
-          ++ (show year) ++ "/" ++ (map toUpper geom) ++ "/"
-          ++ "tl_" ++ (show year) ++ "_" ++ (statefp state) ++ "_"
-          ++ case (geom, year) of
-               ("tabblock", year) | year >=2014 -> "tabblock10"
-               _ -> geom
-          ++ ".zip"
-        )
-      )
-      state_geoms
-
-getZipSource n u = do
-  s <- readProcess ("nix-prefetch-url") ["--unpack", "--name", n, u] ""
-  return $ SourceFile {Main.name = n, url = u, sha256 = s}
-
-indent strings =
-  map (\string -> "  " ++ string) strings
+    map stateSource state_geoms
 
 main = do
-  sources <- concatMapM getSources [2011..2020]
   putStrLn "# Do not modify manually, auto generated with `generateSourceFiles.hs`"
   putStrLn "{"
-  putStr $ unlines $ indent $ nixSourceFiles sources
+  mapM
+    (\sourceFile -> do
+      nixSource <- showNixSource sourceFile
+      putStr $ T.unpack $ T.unlines $ map (\x -> "  " <> x) nixSource
+    )
+    sources
   putStrLn "}"
