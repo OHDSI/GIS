@@ -6618,7 +6618,7 @@
   };
   TIGER_2018_US_county = {
     url = "https://www2.census.gov/geo/tiger/TIGER2018/COUNTY/tl_2018_us_county.zip";
-    sha256 = "0000000000000000000000000000000000000000000000000000000000000000";
+    sha256 = "0sjjj9z1dhilhpc8pq4154czrb79z9cm044jvn75kxcjv6v5l2m5";
   };
   TIGER_2018_US_metdiv = {
     url = "https://www2.census.gov/geo/tiger/TIGER2018/METDIV/tl_2018_us_metdiv.zip";
