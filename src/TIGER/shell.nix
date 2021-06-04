@@ -5,5 +5,6 @@ pkgs.mkShell {
   nativeBuildInputs = [
     (pkgs.haskellPackages.ghcWithPackages (ps: [
     ]))
+    pkgs.unzip
   ];
 }
