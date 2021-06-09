@@ -14,7 +14,7 @@ pkgs.lib.mapAttrsToList
         year = pkgs.lib.toInt v.year;
         geom = v.geom;
       in
-        !(year <= 2014 && (geom == "aitsn" || geom == "cousub")
+        !(year <= 2014 && (geom == "aitsn" || geom == "cousub"))
     )
     sourceFiles
   )
