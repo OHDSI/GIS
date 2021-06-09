@@ -1,10 +1,11 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Main where
 
-import States as States
+import Regions as Regions
 import Utils as Utils
 
 import qualified Data.Text as T
+import qualified Data.Map as M
 
 main = Utils.showNixSourceFiles sources
 
@@ -12,7 +13,7 @@ sources =
   concatMap
     (\year ->
       nationSources year
-      <> concatMap (stateSources year) states
+      <> concatMap (stateSources year) us_states
     )
     [2011..2020]
 
@@ -53,7 +54,12 @@ nationSources year =
         Utils.name =
           "TIGER_" <> s_year <> "_US_" <> geom,
         url =
-          nationUrl geom
+          nationUrl geom,
+        extraAttrs = M.fromList
+          [ ("year", s_year)
+          , ("region", "US")
+          , ("geom", geom)
+          ]
         }
       )
       nation_geoms
@@ -71,14 +77,14 @@ stateSources year state =
       ]
       <>
       case (year, state) of
-        (_, State{States.name=_, statefp="02"}) -> ["anrc"]
-        (year ,State{States.name=_, statefp="72"}) | year >= 2020 -> ["subbarrio"]
+        (_, US_State{Regions.name=_, statefp="02"}) -> ["anrc"]
+        (year ,US_State{Regions.name=_, statefp="72"}) | year >= 2020 -> ["subbarrio"]
         _ -> []
       <>
       case year of
         2020 -> ["tabblock20"]
         _ -> [];
-    s_name = sanatize $ States.name state
+    s_name = sanatize $ Regions.name state
     s_year = T.pack $ show year
     stateName :: T.Text -> T.Text
     stateName geom =
@@ -96,7 +102,12 @@ stateSources year state =
     stateSource geom =
       SourceFile {
         Utils.name = stateName geom,
-        url = stateUrl geom
+        url = stateUrl geom,
+        extraAttrs = M.fromList
+          [ ("year", s_year)
+          , ("region", s_name)
+          , ("geom", geom)
+          ]
       }
   in
     map stateSource state_geoms

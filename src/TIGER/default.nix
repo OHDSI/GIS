@@ -11,12 +11,10 @@ pkgs.lib.mapAttrsToList
   (pkgs.lib.filterAttrs
     (n: v:
       let
-        #[_, year, state, geom]
-        nameSplit = pkgs.lib.splitString "_" n;
-        year = pkgs.lib.toInt (pkgs.lib.elemAt nameSplit 1);
-        geom = pkgs.lib.elemAt nameSplit 3;
+        year = pkgs.lib.toInt v.year;
+        geom = v.geom;
       in
-        !(year < 2015 && geom == "aitsn")
+        !(year <= 2014 && (geom == "aitsn" || geom == "cousub")
     )
     sourceFiles
   )
