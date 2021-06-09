@@ -1,30 +1,12 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Main where
 
-import States
+import States as States
+import Utils as Utils
 
-import System.Process
-import System.Exit
 import qualified Data.Text as T
 
-data SourceFile = SourceFile {
-  name :: T.Text
-, url :: T.Text
-}
-
-showNixSource :: SourceFile -> IO [T.Text]
-showNixSource SourceFile{Main.name=n, url=u} = do
-  (exitcode, stdout, stderr) <- readProcessWithExitCode ("nix-prefetch-url") ["--unpack", "--name", T.unpack n, T.unpack u] ""
-  return
-    [ n <> " = {"
-    , "  url = \"" <> u <> "\";"
-    , "  sha256 = \""
-      <> case exitcode of
-           ExitSuccess -> (T.strip $ T.pack stdout)
-           _ -> "0000000000000000000000000000000000000000000000000000000000000000"
-      <> "\";"
-    , "};"
-    ]
+main = Utils.showNixSourceFiles sources
 
 sources =
   concatMap
@@ -68,7 +50,7 @@ nationSources year =
    in
     map (\geom ->
       SourceFile {
-        Main.name =
+        Utils.name =
           "TIGER_" <> s_year <> "_US_" <> geom,
         url =
           nationUrl geom
@@ -113,19 +95,8 @@ stateSources year state =
     stateSource :: T.Text -> SourceFile
     stateSource geom =
       SourceFile {
-        Main.name = stateName geom,
+        Utils.name = stateName geom,
         url = stateUrl geom
       }
   in
     map stateSource state_geoms
-
-main = do
-  putStrLn "# Do not modify manually, auto generated with `generateSourceFiles.hs`"
-  putStrLn "{"
-  mapM
-    (\sourceFile -> do
-      nixSource <- showNixSource sourceFile
-      putStr $ T.unpack $ T.unlines $ map (\x -> "  " <> x) nixSource
-    )
-    sources
-  putStrLn "}"

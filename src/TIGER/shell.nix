@@ -6,5 +6,6 @@ pkgs.mkShell {
     (pkgs.haskellPackages.ghcWithPackages (ps: [
     ]))
     pkgs.unzip
+    (pkgs.postgresql_13.withPackages (p: [p.postgis]))
   ];
 }
