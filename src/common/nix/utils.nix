@@ -1,7 +1,7 @@
 { sources ? import ../../../nix/sources.nix
 , pkgs ? import sources.nixpkgs {} } : rec {
 
-mkShpDerivation = { name, src, schema_base_name }:
+mkShpDerivation = { name, src, schema_base_name, encoding ? "" }:
   pkgs.stdenv.mkDerivation {
     inherit name src;
     nativeBuildInputs = [
@@ -11,12 +11,20 @@ mkShpDerivation = { name, src, schema_base_name }:
 
     buildPhase = ''
       EPSG=$(gdalsrsinfo -V -e -o epsg ./ | sed -n 's/.*EPSG:\(.*\)/\1/p')
+      if [${encoding} == ""]
+      then
+        ENCODING=$(cat *.cpg)
+      fi
+      if [$ENCODING == ""] 
+      then
+        ENCODING="UTF-8"
+      fi
 
       SHAPEFILES=*.shp
       mkdir build
       for shapefile in $SHAPEFILES
       do
-        shp2pgsql -s $EPSG -D -- $shapefile ${schema_base_name}_stage.${name} >> ./build/${name}.sql
+        shp2pgsql -s $EPSG -D -W $ENCODING -- $shapefile ${schema_base_name}_stage.${name} >> ./build/${name}.sql
       done
     '';
 
