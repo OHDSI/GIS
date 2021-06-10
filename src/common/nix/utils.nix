@@ -11,11 +11,12 @@ mkShpDerivation = { name, src, schema_base_name, encoding ? "" }:
 
     buildPhase = ''
       EPSG=$(gdalsrsinfo -V -e -o epsg ./ | sed -n 's/.*EPSG:\(.*\)/\1/p')
-      if [${encoding} == ""]
+      ENCODING=${encoding}
+      if [ "$ENCODING" == "" ]
       then
         ENCODING=$(cat *.cpg)
       fi
-      if [$ENCODING == ""] 
+      if [ "$ENCODING" == "" ]
       then
         ENCODING="UTF-8"
       fi

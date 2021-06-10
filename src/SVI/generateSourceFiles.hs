@@ -25,7 +25,7 @@ sources =
       nationSources year
       <> concatMap (stateSources year) states
     )
-    [2014,2016..2020]
+    [2014,2016..2018]
 
 nationSources year =
   let
