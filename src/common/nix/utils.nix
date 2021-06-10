@@ -34,9 +34,9 @@ mkShpDerivation = { name, src, schema_base_name, encoding ? "" }:
     '';
   };
 
-mkSourceFileDerivation = schema_base_name: name: sourceFile:
+mkSourceFileDerivation = {schema_base_name, name, sourceFile, encoding ? ""}:
   mkShpDerivation {
-    inherit name schema_base_name;
+    inherit name schema_base_name encoding;
     src = pkgs.fetchzip {
       inherit name;
       stripRoot = false;

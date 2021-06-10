@@ -5,4 +5,10 @@ let
   utils = import ../common/nix/utils.nix {};
   sourceFiles = import ./sourceFiles.nix;
 in
-pkgs.lib.mapAttrsToList (utils.mkSourceFileDerivation "svi") sourceFiles
+pkgs.lib.mapAttrsToList
+  (name: sourceFile:
+    utils.mkSourceFileDerivation {
+      inherit name sourceFile;
+      schema_base_name = "svi";
+  })
+  sourceFiles
