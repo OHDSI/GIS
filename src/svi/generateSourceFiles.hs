@@ -29,7 +29,7 @@ sources =
 
 nationSources year =
   let
-    nation_geoms = 
+    nation_geoms =
       [ "county"
       , "tract"
       , "ttract"
@@ -49,13 +49,15 @@ nationSources year =
     map (\geom ->
       SourceFile {
         Utils.name =
-          "SVI_" <> s_year <> "_US_" <> geom,
+          "us-" <> geom <> "-" <> s_year,
         url =
           nationUrl geom,
         extraAttrs = M.fromList
           [ ("year", s_year)
-          , ("region", "US")
+          , ("extent", "US")
           , ("geom", geom)
+          , ("pname", "us-" <> geom)
+          , ("version", s_year)
           ]
         }
       )
@@ -63,7 +65,7 @@ nationSources year =
 
 sanatize = T.replace " " "_"
 
-stateSources year state = 
+stateSources year state =
   let
     state_geoms :: [T.Text]
     state_geoms =
@@ -75,7 +77,7 @@ stateSources year state =
     s_year = T.pack $ show year
     stateName :: T.Text -> T.Text
     stateName geom =
-      "TIGER_" <> s_year <> "_" <> s_name <> "_" <> geom
+      (T.toLower s_name) <> "-" <> geom <> "-" <> s_year
     stateUrl :: T.Text -> T.Text
     stateUrl geom =
       "https://svi.cdc.gov/Documents/Data/"
@@ -92,8 +94,10 @@ stateSources year state =
         url = stateUrl geom,
         extraAttrs = M.fromList
           [ ("year", s_year)
-          , ("region", s_name)
+          , ("extent", s_name)
           , ("geom", geom)
+          , ("pname", (T.toLower s_name) <> "-" <> geom)
+          , ("version", s_year)
           ]
       }
   in

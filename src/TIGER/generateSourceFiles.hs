@@ -52,13 +52,15 @@ nationSources year =
     map (\geom ->
       SourceFile {
         Utils.name =
-          "TIGER_" <> s_year <> "_US_" <> geom,
+          "us-" <> geom <> "-" <> s_year,
         url =
           nationUrl geom,
         extraAttrs = M.fromList
           [ ("year", s_year)
-          , ("region", "US")
+          , ("extent", "US")
           , ("geom", geom)
+          , ("pname", "us-" <> geom)
+          , ("version", s_year)
           ]
         }
       )
@@ -86,10 +88,8 @@ stateSources year state =
         _ -> [];
     s_name = sanatize $ Regions.name state
     s_year = T.pack $ show year
-    stateName :: T.Text -> T.Text
     stateName geom =
-      "TIGER_" <> s_year <> "_" <> s_name <> "_" <> geom
-    stateUrl :: T.Text -> T.Text
+      (T.toLower s_name) <> "-" <> geom <> "-" <> s_year
     stateUrl geom =
       "https://www2.census.gov/geo/tiger/TIGER"
       <> s_year <> "/" <> (T.toUpper geom) <> "/"
@@ -105,8 +105,10 @@ stateSources year state =
         url = stateUrl geom,
         extraAttrs = M.fromList
           [ ("year", s_year)
-          , ("region", s_name)
+          , ("extent", s_name)
           , ("geom", geom)
+          , ("pname", (T.toLower s_name) <> "-" <> geom)
+          , ("version", s_year)
           ]
       }
   in
