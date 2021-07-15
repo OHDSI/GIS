@@ -21,5 +21,4 @@ rec {
 
   svi = callPackage ./src/svi { };
   tiger = callPackage ./src/TIGER { };
-  hi = callPackage ./src/svi/hi { tiger = tiger; };
 }
