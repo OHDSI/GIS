@@ -18,7 +18,7 @@ let
   drvs = builtins.mapAttrs (name: fetchSourceFile) sourceFiles;
 in
 (linkFarmFromDrvs
-   "tiger"
+   "tiger-0.1"
    (builtins.attrValues drvs)
 ).overrideAttrs (oldAttrs: {
   meta = with lib; {

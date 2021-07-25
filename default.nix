@@ -6,7 +6,7 @@
 # commands such as:
 #     nix-build -A mypackage
 let
-  sources = import ./nix/sources.nix;
+  sources = import ./niv/sources.nix;
 in
 { pkgs ? import sources.nixpkgs { } }:
 
@@ -20,5 +20,7 @@ rec {
   #overlays = import ./src/common/nix/overlays; # nixpkgs overlays
 
   svi = callPackage ./src/svi { };
-  tiger = callPackage ./src/TIGER { };
+  svi-pg = callPackage ./src/svi/pg.nix { svi = svi; };
+  tiger = callPackage ./src/tiger { };
+  tiger-pg = callPackage ./src/tiger/pg.nix { tiger = tiger; };
 }

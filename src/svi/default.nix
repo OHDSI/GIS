@@ -16,7 +16,7 @@ let
   drvs = builtins.mapAttrs (name: fetchSourceFile) sourceFiles;
 in
 (linkFarmFromDrvs
-   "svi"
+   "svi-0.1"
    (builtins.attrValues drvs)
 ).overrideAttrs (oldAttrs: {
   meta = with lib; {
