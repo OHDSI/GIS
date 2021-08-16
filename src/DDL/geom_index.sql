@@ -1,6 +1,6 @@
 CREATE TABLE geom_index
 (
-    geom_index_id integer primary key,
+    geom_index_id serial primary key,
     -- point, polygon...
     data_type_id integer,
     data_type_name varchar,

@@ -1,6 +1,6 @@
 CREATE TABLE attr_index
 (
-    attr_index_id integer primary key,
+    attr_index_id serial primary key,
     attr_type_concept_id integer,
     attr_type_source_value varchar,
     attr_of_geom_index_id integer,

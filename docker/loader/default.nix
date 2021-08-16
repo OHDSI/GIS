@@ -1,4 +1,4 @@
-{ sources ? import ../../niv/sources.nix
+{ sources ? import ../../nix/sources.nix
 , pkgs ? import sources.nixpkgs {} }:
 
 pkgs.dockerTools.buildImage {
@@ -9,6 +9,7 @@ pkgs.dockerTools.buildImage {
     pkgs.bashInteractive
     pkgs.cacert
     pkgs.coreutils
+    pkgs.curl
     pkgs.gdal
     pkgs.gnused
     pkgs.postgis
