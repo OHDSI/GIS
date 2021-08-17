@@ -1,4 +1,4 @@
-{ sources ? import ../../nix/sources.nix
+{ sources ? import ../../niv/sources.nix
 , pkgs ? import sources.nixpkgs {} }:
 
 pkgs.dockerTools.buildImage {
