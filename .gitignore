@@ -15,4 +15,10 @@ renv/
 .ipynb_checkpoints
 *.ipynb
 
+result*
+*.direnv
+*.envrc
+
+
 result
+
