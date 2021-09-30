@@ -62,46 +62,43 @@ print('monitors downloaded')
 # write monitors to temp(?) table
 dbWriteTable(con, "meta_epa_monitors", EPA_monitors$data, is.temp=TRUE)
 
-
 ##
 # get EPA AQS PM25 data from API, instantiate attribute table, and load
 ##
 
 # get EPA AQS data from API
-# TODO: fetch from pre-calculated file
-options <- list(
-    api_query_type = "byState",
-    api_email = "test@aqs.api",
-    api_key = "test",
-    api_param = "88101,88502",  # PM2.5 88101,88502; NO2 42602
-                                # https://aqs.epa.gov/aqsweb/documents/codetables/methods_all.html
-    api_bdate = "20180115",     # begin date
-    api_edate = "20180115",     # end date: set to same as bdate for whole year
-    api_state = "12"            # Florida
-)
-aqs_data = fetch_EPA_AQS_api(options)
-print('EPA AQS PM2.5 data for Florida downloaded')
+#options <- list(
+#    api_query_type = "byState",
+#    api_email = "test@aqs.api",
+#    api_key = "test",
+#    api_param = "88101,88502",  # PM2.5 88101,88502; NO2 42602
+#                                # https://aqs.epa.gov/aqsweb/documents/codetables/methods_all.html
+#    api_bdate = "20180115",     # begin date
+#    api_edate = "20180115",     # end date: set to same as bdate for whole year
+#    api_state = "12"            # Florida
+#)
+#aqs_data = fetch_EPA_AQS_api(options)
+#print('EPA AQS PM2.5 data for Florida downloaded')
 
 # create attribute table
-# TODO: incorporate query parameters into table metadata for index
-aqs_pm25_api_meta <- list(
-  attr_type_concept_id = 0,
-  attr_type_source_value = 'EPA AQS PM2.5',
-  attr_of_geom_index_id = index_id_geom_epa_aqs_sites,
-  geom_source_coding = 'State FIPS - County FIPS - EPA Site Number AS SS-CCC-NNNN',
-  schema = 'public',
-  table_name = 'attr_fl_epa_pm25_2018_api',
-  table_desc = paste0('Sourced from EPA API ',
-                      aqs_data$api_query,
-                      '. See https://aqs.epa.gov/aqsweb/documents/codetables/methods_all.html for documentation.'),
-  data_source_id = 0
-)
-instantiate_attr(con,aqs_pm25_api_meta,aqs_sites_meta$table_name)
-print('attr table created')
+#aqs_pm25_api_meta <- list(
+#  attr_type_concept_id = 0,
+#  attr_type_source_value = 'EPA AQS PM2.5',
+#  attr_of_geom_index_id = index_id_geom_epa_aqs_sites,
+#  geom_source_coding = 'State FIPS - County FIPS - EPA Site Number AS SS-CCC-NNNN',
+#  schema = 'public',
+#  table_name = 'attr_fl_epa_pm25_2018_api',
+#  table_desc = paste0('Sourced from EPA API ',
+#                      aqs_data$api_query,
+#                      '. See https://aqs.epa.gov/aqsweb/documents/codetables/methods_all.html for documentation.'),
+#  data_source_id = 0
+#)
+#instantiate_attr(con,aqs_pm25_api_meta,aqs_sites_meta$table_name)
+#print('attr table created')
 
 # load AQS data from API into attr table
-load_EPA_AQS_api_attr(con,aqs_data$data,aqs_sites_meta$table_name,aqs_pm25_api_meta$table_name)
-print('Florida data uploaded to attr table')
+#load_EPA_AQS_api_attr(con,aqs_data$data,aqs_sites_meta$table_name,aqs_pm25_api_meta$table_name)
+#print('Florida data uploaded to attr table')
 
 
 ##
@@ -109,6 +106,7 @@ print('Florida data uploaded to attr table')
 ##
 
 # fetch EPS AQS precomputed daily PM2.5 from static file
+# TODO: enable multi year downloads into one table
 year <- '2020'
 parameter_code <- '88101'
 filename <- paste0("daily_",parameter_code,"_",year)
@@ -121,7 +119,6 @@ EPA_daily <- fetch_EPA_AQS_static(options)
 print('daily downloaded')
 
 # create attribute table
-# TODO: incorporate query parameters into table metadata for index
 aqs_pm25_static_meta <- list(
   attr_type_concept_id = 0,
   attr_type_source_value = '2020 EPA Daily PM2.5',

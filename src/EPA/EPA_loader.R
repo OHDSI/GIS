@@ -64,12 +64,17 @@ load_EPA_AQS_static_attr <- function(con,attrs,geom_tablename,attr_tablename) {
             \"Arithmetic.Mean\" as value_as_number,
             \"Units.of.Measure\" as unit_source_value,
             \"Parameter.Name\" as attr_source_value,
-            CONCAT(\"State.Code\"::varchar,'-',LPAD(\"County.Code\"::varchar,3,'0'),'-',LPAD(\"Site.Num\"::varchar,4,'0')) as geom_source_value
+            CONCAT(
+                LPAD(\"State.Code\"::varchar,2,0),'-',
+                LPAD(\"County.Code\"::varchar,3,'0'),'-',
+                LPAD(\"Site.Num\"::varchar,4,'0')
+            ) as geom_source_value
          FROM temp_epa_attrs")
 
     res <- dbSendQuery(con,sql_updateattrs)
     dbClearResult(res)
 
+    # join to geom table, TODO set up foreign key to geom correctly
     sql_updategeomsourceid <- paste0(
         "UPDATE ",attr_tablename,"
          SET geom_record_id = ",geom_tablename,".geom_record_id 
