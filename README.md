@@ -17,7 +17,8 @@ the text of the password you would like to set
     OMOP_JDBC_CONNECTION_STRING=''
     ```
 4. Build the loader image
-  Before this step, make sure all users have write permissions to the GIS repo directory. If you get errors in this step, reach out and the most recent image can be provided through dockerhub.
+  
+  *Before this step, make sure all users have write permissions to the GIS repo directory. If you get errors in this step, reach out and the most recent image can be provided through dockerhub.*
   - `docker run --privileged -it --rm -v <absolute path to GIS repo>/:/src lnl7/nix sh -c 'nix-build /src/docker/loader && cp result /src/docker/loader/'`
   - `docker load < docker/loader/result`
 5. `docker-compose up`
