@@ -3,6 +3,8 @@
 pkgs.mkShell {
   nativeBuildInputs = [
     (pkgs.haskellPackages.ghcWithPackages (ps: [
+      ps.aeson
+      ps.aeson-pretty
     ]))
     pkgs.unzip
     pkgs.nix-prefetch
