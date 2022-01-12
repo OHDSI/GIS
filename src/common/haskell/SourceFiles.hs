@@ -27,6 +27,17 @@ show = P.encodePretty' P.Config {
 , P.confTrailingNewline = False
 }
 
+showSingle :: SourceFile -> B.ByteString
+showSingle = P.encodePretty' P.Config {
+  P.confIndent = P.Spaces 2
+, P.confCompare = P.keyOrder [
+    "name", "hash", "extraAttrs"
+  , "pname", "version", "extent", "geom", "year", "url"
+  ]
+, P.confNumFormat = P.Generic
+, P.confTrailingNewline = False
+}
+
 fromListText :: T.Text -> [(T.Text, T.Text)] -> SourceFile
 fromListText name extraAttrs =
   SourceFile {
@@ -35,30 +46,12 @@ fromListText name extraAttrs =
   , extraAttrs = Just $ M.map A.String $ M.fromList extraAttrs
   }
 
+updateHash sourceFile h =
+  SourceFile {
+    name = name sourceFile
+  , hash = Just h
+  , extraAttrs = extraAttrs sourceFile
+  }
+
 instance A.ToJSON SourceFile
 instance A.FromJSON SourceFile
-
---showSourceFile :: SourceFile -> [T.Text]
---showSourceFile SourceFile{name=n, url=u, extraAttrs=a} =
---  [ "\"" <> n <> "\": {"
---  , "  \"url\": \"" <> u <> "\""
---  , ", \"sha256\": \"0000000000000000000000000000000000000000000000000000000000000000\""
---  ]
---  ++
---  (map (\(k, v) -> ", \"" <> k <> "\": \"" <> v <> "\"") (M.toList a))
---  ++
---  [ "}" ]
---
---showSourceFiles :: [SourceFile] -> [T.Text]
---showSourceFiles sourceFiles =
---  [ "{" ]
---  ++
---  (map (\x -> "  " <> x) (showSourceFile (head sourceFiles)))
---  ++
---  (concatMap (\x -> [ ", " <> (head x) ] ++ (map (\y -> "  " <> y) (tail x)) ) (map showSourceFile (tail sourceFiles)))
---  ++
---  [ "}" ]
---
---print :: [SourceFile] -> IO ()
---print sourceFiles = do
---  putStr $ T.unpack $ T.unlines $ showSourceFiles sourceFiles

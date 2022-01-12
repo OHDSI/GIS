@@ -6,15 +6,15 @@ let
   sourceFiles = builtins.fromJSON (builtins.readFile ./source-files.json);
   fetchSourceFile = sourceFile:
     fetchzip {
-      name = "${sourceFile.pname}-${sourceFile.version}";
+      name = sourceFile.name;
       stripRoot = false;
-      url = sourceFile.url;
-      sha256 = sourceFile.sha256;
+      url = sourceFile.extraAttrs.url;
+      hash = sourceFile.hash;
       extension = "zip";
 
-      passthru = removeAttrs sourceFile ["url" "sha256"];
+      passthru = sourceFile;
 
-      netrcImpureEnvVars = [ "ADI_EMAIL" "ADI_PASSWORD" ];
+      netrcImpureEnvVars = [ "ADI_EMAIL" "ADI_PASSWORD"];
       netrcPhase = ''
         if [[ -z "$ADI_EMAIL" || -z "$ADI_PASSWORD" ]]
         then
@@ -22,31 +22,32 @@ let
           exit 1
         fi
 
-        echo "getting login csrf"
+        echo "getting login CSRF"
 
         CSRF=$(curl -sS --insecure -b cookies -c cookies https://www.neighborhoodatlas.medicine.wisc.edu/login |
           grep -m 1 csrf |
           sed -nr 's/(.*value.*")(.*)(".*)/\2/p')
 
         echo "peforming UW ADI site login"
+        echo '_csrf='$CSRF'&email='$ADI_EMAIL'&password='$ADI_PASSWORD
 
-        curl -sS --insecure -b cookies -c cookies -X POST -d '_csrf='$CSRF'&email='$ADI_EMAIL'&password='$ADI_PASSWORD https://www.neighborhoodatlas.medicine.wisc.edu/login
+        curl --insecure -b cookies -c cookies -X POST -d '_csrf='$CSRF'&email='$ADI_EMAIL'&password='$ADI_PASSWORD https://www.neighborhoodatlas.medicine.wisc.edu/login
 
         echo "getting download csrf"
         CSRF=$(curl -sS --insecure -b cookies -c cookies https://www.neighborhoodatlas.medicine.wisc.edu/download |
           grep -m 1 csrf |
           sed -nr 's/(.*value.*")(.*)(".*)/\2/p')
 
-        curlOpts='-b cookies -c cookies -X POST -d state-type=${sourceFile.state-type}&_csrf='$CSRF'&scale-group=${sourceFile.scale-group}&state-name=${sourceFile.state-name}&version-group=${sourceFile.version-group}';
+        curlOpts='-b cookies -c cookies -X POST -d state-type=${sourceFile.extraAttrs.state-type}&_csrf='$CSRF'&scale-group=${sourceFile.extraAttrs.scale-group}&state-name=${sourceFile.extraAttrs.state-name}&version-group=${sourceFile.extraAttrs.version-group}';
 
         #curl --output - --insecure -b cookies -c cookies -X POST -d '_csrf='$CSRF'&scale-group=national&state-name=AL&version-group=19' https://www.neighborhoodatlas.medicine.wisc.edu/adi-download
       '';
     };
-  drvs = builtins.mapAttrs (name: fetchSourceFile) sourceFiles;
+  drvs = map fetchSourceFile sourceFiles;
 in
 (linkFarmFromDrvs
   "adi-0.1"
-  (builtins.attrValues drvs)
+  drvs
 ).overrideAttrs (oldAttrs: {
   meta = with lib; {
     description = "Area Deprivation Index";
@@ -65,5 +66,5 @@ in
     homepage = "https://www.neighborhoodatlas.medicine.wisc.edu/";
     platforms = platforms.all;
   };
-  passthru = drvs;
+  passthru = builtins.listToAttrs (map (drv: {name = drv.name; value = drv;}) drvs);
 })

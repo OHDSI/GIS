@@ -5,6 +5,7 @@ pkgs.mkShell {
     (pkgs.haskellPackages.ghcWithPackages (ps: [
       ps.aeson
       ps.aeson-pretty
+      ps.lens
     ]))
     pkgs.unzip
     pkgs.nix-prefetch
