@@ -1,0 +1,3854 @@
+[
+  {
+    "name": "us-county-2014",
+    "hash": "sha256-NU0o8/C3YLv5/+cIEt5uUUCY2OO32TeO5JpXOlN4ARU=",
+    "extraAttrs": {
+      "pname": "us-county",
+      "version": "2014",
+      "extent": "US",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/SVI2014_US_cnty.zip"
+    }
+  },
+  {
+    "name": "us-tract-2014",
+    "hash": "sha256-XRygBiRFgOiEB8AgKUkx6KkS7I0swCEVwPExlr4dZzg=",
+    "extraAttrs": {
+      "pname": "us-tract",
+      "version": "2014",
+      "extent": "US",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/SVI2014_US.zip"
+    }
+  },
+  {
+    "name": "us-ttract-2014",
+    "hash": "sha256-u+5MnJ2IGUV9JREXOmlcWRn9VtTD+A8LVewlq4GNeAk=",
+    "extraAttrs": {
+      "pname": "us-ttract",
+      "version": "2014",
+      "extent": "US",
+      "geom": "ttract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Tribal_Tracts.zip"
+    }
+  },
+  {
+    "name": "district_of_columbia-county-2014",
+    "hash": "sha256-CXtxETP6OhoSW4Z5/j+VQLOjiTYY1+PimQV17MlV+x4=",
+    "extraAttrs": {
+      "pname": "district_of_columbia-county",
+      "version": "2014",
+      "extent": "District_of_Columbia",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/DistrictofColumbia_cnty.zip"
+    }
+  },
+  {
+    "name": "district_of_columbia-tract-2014",
+    "hash": "sha256-pkOHQ35FGb4O0eQZuJCXPuURJFZ787vnj47n/MOb03Q=",
+    "extraAttrs": {
+      "pname": "district_of_columbia-tract",
+      "version": "2014",
+      "extent": "District_of_Columbia",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/DistrictofColumbia.zip"
+    }
+  },
+  {
+    "name": "puerto_rico-county-2014",
+    "hash": "sha256-xwqr4YDgSjKwOirge1LFgyQ39LmdrskAyrt4XTPgOXI=",
+    "extraAttrs": {
+      "pname": "puerto_rico-county",
+      "version": "2014",
+      "extent": "Puerto_Rico",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/PuertoRico_cnty.zip"
+    }
+  },
+  {
+    "name": "puerto_rico-tract-2014",
+    "hash": "sha256-/MziAf8gG1kggwT5btXyPneC3xuZpqt69rAWr1GiywA=",
+    "extraAttrs": {
+      "pname": "puerto_rico-tract",
+      "version": "2014",
+      "extent": "Puerto_Rico",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/PuertoRico.zip"
+    }
+  },
+  {
+    "name": "alabama-county-2014",
+    "hash": "sha256-RJhpoUTVNx7tiwkhExKzLHyTYhtv7YBQCa721k/+7v8=",
+    "extraAttrs": {
+      "pname": "alabama-county",
+      "version": "2014",
+      "extent": "Alabama",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Alabama_cnty.zip"
+    }
+  },
+  {
+    "name": "alabama-tract-2014",
+    "hash": "sha256-T5NptE3UnUu7BY2FbOG1VUYuMIr/QYzIIWIrIb+A9/A=",
+    "extraAttrs": {
+      "pname": "alabama-tract",
+      "version": "2014",
+      "extent": "Alabama",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Alabama.zip"
+    }
+  },
+  {
+    "name": "alaska-county-2014",
+    "hash": "sha256-H8ftwx0szGyrvDZBUF9gmbbo4RnbB3t15ppGKbHAnkE=",
+    "extraAttrs": {
+      "pname": "alaska-county",
+      "version": "2014",
+      "extent": "Alaska",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Alaska_cnty.zip"
+    }
+  },
+  {
+    "name": "alaska-tract-2014",
+    "hash": "sha256-fBiT///s87+Wmq67/4GII/NEMB5IHzCEwv3LrOy3hz8=",
+    "extraAttrs": {
+      "pname": "alaska-tract",
+      "version": "2014",
+      "extent": "Alaska",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Alaska.zip"
+    }
+  },
+  {
+    "name": "arizona-county-2014",
+    "hash": "sha256-juvvgscw4G5pFoU2yBW4zxGJhX1y1eNfWRwaz9GuH4k=",
+    "extraAttrs": {
+      "pname": "arizona-county",
+      "version": "2014",
+      "extent": "Arizona",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Arizona_cnty.zip"
+    }
+  },
+  {
+    "name": "arizona-tract-2014",
+    "hash": "sha256-/+5b7Vub3tgxHMeNvjCwh62xfIzWc+hTzO2GKnFWytU=",
+    "extraAttrs": {
+      "pname": "arizona-tract",
+      "version": "2014",
+      "extent": "Arizona",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Arizona.zip"
+    }
+  },
+  {
+    "name": "arkansas-county-2014",
+    "hash": "sha256-8onRPdfEod06Dqa0E73kBg0mxAiN3fc86okQ25y0TK8=",
+    "extraAttrs": {
+      "pname": "arkansas-county",
+      "version": "2014",
+      "extent": "Arkansas",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Arkansas_cnty.zip"
+    }
+  },
+  {
+    "name": "arkansas-tract-2014",
+    "hash": "sha256-slihnGCToR8E8dkgZS1i1wYJsSQ9UtnKRBZhU+gB9pA=",
+    "extraAttrs": {
+      "pname": "arkansas-tract",
+      "version": "2014",
+      "extent": "Arkansas",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Arkansas.zip"
+    }
+  },
+  {
+    "name": "california-county-2014",
+    "hash": "sha256-Z+DbqNoTR/ORNLooovitrl+a/uLHsmxn2XAcoZgLe4A=",
+    "extraAttrs": {
+      "pname": "california-county",
+      "version": "2014",
+      "extent": "California",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/California_cnty.zip"
+    }
+  },
+  {
+    "name": "california-tract-2014",
+    "hash": "sha256-nQR6wHJzwPcyyMR76sigyEeTyKU6v7A+twtoDC/qr3M=",
+    "extraAttrs": {
+      "pname": "california-tract",
+      "version": "2014",
+      "extent": "California",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/California.zip"
+    }
+  },
+  {
+    "name": "colorado-county-2014",
+    "hash": "sha256-0f8irO4oKmt5PRmjDBwmllYcagscTpwQqhQSq9OuLyY=",
+    "extraAttrs": {
+      "pname": "colorado-county",
+      "version": "2014",
+      "extent": "Colorado",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Colorado_cnty.zip"
+    }
+  },
+  {
+    "name": "colorado-tract-2014",
+    "hash": "sha256-k3DiU+N3WYzzzH81GmEx9VDAw6QoTMfw/fjEtKPnuHg=",
+    "extraAttrs": {
+      "pname": "colorado-tract",
+      "version": "2014",
+      "extent": "Colorado",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Colorado.zip"
+    }
+  },
+  {
+    "name": "connecticut-county-2014",
+    "hash": "sha256-RB+5YYcBk0UF5rmE9vpLq5P/viw1TsO1k34BTIv2fTk=",
+    "extraAttrs": {
+      "pname": "connecticut-county",
+      "version": "2014",
+      "extent": "Connecticut",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Connecticut_cnty.zip"
+    }
+  },
+  {
+    "name": "connecticut-tract-2014",
+    "hash": "sha256-5zqWtIaGMkdUHuU49Eb9fFjpwRQjIN4uF1M62+Izv+U=",
+    "extraAttrs": {
+      "pname": "connecticut-tract",
+      "version": "2014",
+      "extent": "Connecticut",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Connecticut.zip"
+    }
+  },
+  {
+    "name": "delaware-county-2014",
+    "hash": "sha256-4RYiFQ/6yaFSMbaJ59h6SQIIpBst0BRkqeRQOidk2GU=",
+    "extraAttrs": {
+      "pname": "delaware-county",
+      "version": "2014",
+      "extent": "Delaware",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Delaware_cnty.zip"
+    }
+  },
+  {
+    "name": "delaware-tract-2014",
+    "hash": "sha256-8772p6yMBRWXC0OhkVkeS+11+J/HZaM3P9xOQUj7pQE=",
+    "extraAttrs": {
+      "pname": "delaware-tract",
+      "version": "2014",
+      "extent": "Delaware",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Delaware.zip"
+    }
+  },
+  {
+    "name": "florida-county-2014",
+    "hash": "sha256-cRX0NWYgZ2//VgVXVHh2wPIN3IlqzL+73zalna5bNUg=",
+    "extraAttrs": {
+      "pname": "florida-county",
+      "version": "2014",
+      "extent": "Florida",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Florida_cnty.zip"
+    }
+  },
+  {
+    "name": "florida-tract-2014",
+    "hash": "sha256-jTFi0VcgaoNEZmxaL8QCqp2x0L0M4fVLNX2Acw6yY9Q=",
+    "extraAttrs": {
+      "pname": "florida-tract",
+      "version": "2014",
+      "extent": "Florida",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Florida.zip"
+    }
+  },
+  {
+    "name": "georgia-county-2014",
+    "hash": "sha256-nygqvQh6dLAfjcpdePvQ5xYkQ89XBPlNAWhiplB+4FI=",
+    "extraAttrs": {
+      "pname": "georgia-county",
+      "version": "2014",
+      "extent": "Georgia",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Georgia_cnty.zip"
+    }
+  },
+  {
+    "name": "georgia-tract-2014",
+    "hash": "sha256-J64njVoeJAldcIxZNAR6ir/oSaqj7uN/Pn/ZUA475SU=",
+    "extraAttrs": {
+      "pname": "georgia-tract",
+      "version": "2014",
+      "extent": "Georgia",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Georgia.zip"
+    }
+  },
+  {
+    "name": "hawaii-county-2014",
+    "hash": "sha256-NQh3VUDgAkWrbHEoq7c0k46gzmWrJqHefab2plfsD04=",
+    "extraAttrs": {
+      "pname": "hawaii-county",
+      "version": "2014",
+      "extent": "Hawaii",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Hawaii_cnty.zip"
+    }
+  },
+  {
+    "name": "hawaii-tract-2014",
+    "hash": "sha256-eRmp7mOaJKt7CtJfsKle3teWamPVFNAV6yttIJdQpJU=",
+    "extraAttrs": {
+      "pname": "hawaii-tract",
+      "version": "2014",
+      "extent": "Hawaii",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Hawaii.zip"
+    }
+  },
+  {
+    "name": "idaho-county-2014",
+    "hash": "sha256-bJbU4lrHgnINd3W1YaaURfVCf1fQhfEGtE586CVU2uw=",
+    "extraAttrs": {
+      "pname": "idaho-county",
+      "version": "2014",
+      "extent": "Idaho",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Idaho_cnty.zip"
+    }
+  },
+  {
+    "name": "idaho-tract-2014",
+    "hash": "sha256-9NaE3mFE8ZWpxD606Ap5VYjBHktqt24ZM7uDbX3v7O0=",
+    "extraAttrs": {
+      "pname": "idaho-tract",
+      "version": "2014",
+      "extent": "Idaho",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Idaho.zip"
+    }
+  },
+  {
+    "name": "illinois-county-2014",
+    "hash": "sha256-IAUIkjQsMTGHfOHWxqRjKzzJC8O9aSt/aGXSs7GVr7o=",
+    "extraAttrs": {
+      "pname": "illinois-county",
+      "version": "2014",
+      "extent": "Illinois",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Illinois_cnty.zip"
+    }
+  },
+  {
+    "name": "illinois-tract-2014",
+    "hash": "sha256-qB4uAZUtWpaBVibHRX4h9rjOvDJzQ5gZC+r4SkF9GJs=",
+    "extraAttrs": {
+      "pname": "illinois-tract",
+      "version": "2014",
+      "extent": "Illinois",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Illinois.zip"
+    }
+  },
+  {
+    "name": "indiana-county-2014",
+    "hash": "sha256-fPzsKjNoXhpx++UeMc9r/xzJfRPaaPHlqWEqJwoh1II=",
+    "extraAttrs": {
+      "pname": "indiana-county",
+      "version": "2014",
+      "extent": "Indiana",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Indiana_cnty.zip"
+    }
+  },
+  {
+    "name": "indiana-tract-2014",
+    "hash": "sha256-7g5wnNNOoyaLRlB6R80MykGfMoWlvjiSu9mUf+PyZAM=",
+    "extraAttrs": {
+      "pname": "indiana-tract",
+      "version": "2014",
+      "extent": "Indiana",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Indiana.zip"
+    }
+  },
+  {
+    "name": "iowa-county-2014",
+    "hash": "sha256-5aG0HXzSzd+jB7h3ss5E61RfjNJfLMgle12Tv9/gt6M=",
+    "extraAttrs": {
+      "pname": "iowa-county",
+      "version": "2014",
+      "extent": "Iowa",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Iowa_cnty.zip"
+    }
+  },
+  {
+    "name": "iowa-tract-2014",
+    "hash": "sha256-UPvq32HKtSGHAaYitucdRPSjgARIyAKolQwTCZvMqRA=",
+    "extraAttrs": {
+      "pname": "iowa-tract",
+      "version": "2014",
+      "extent": "Iowa",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Iowa.zip"
+    }
+  },
+  {
+    "name": "kansas-county-2014",
+    "hash": "sha256-xZscfGum0MwJr8It95Yf0V91aYB5H3lwtb6d6sTD2Ak=",
+    "extraAttrs": {
+      "pname": "kansas-county",
+      "version": "2014",
+      "extent": "Kansas",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Kansas_cnty.zip"
+    }
+  },
+  {
+    "name": "kansas-tract-2014",
+    "hash": "sha256-Ikse+Xf3xAVzmz6ji1CUq13wrGxdeyb9+C0QFsGnrhA=",
+    "extraAttrs": {
+      "pname": "kansas-tract",
+      "version": "2014",
+      "extent": "Kansas",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Kansas.zip"
+    }
+  },
+  {
+    "name": "kentucky-county-2014",
+    "hash": "sha256-RX9KWu7ZcPyLMtC8/exhUrUaazMlMywZelnvws2ZNYI=",
+    "extraAttrs": {
+      "pname": "kentucky-county",
+      "version": "2014",
+      "extent": "Kentucky",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Kentucky_cnty.zip"
+    }
+  },
+  {
+    "name": "kentucky-tract-2014",
+    "hash": "sha256-fGpR98yvsPAEtKe444fCR3Zf4zINZv8Zpg6Q5iCSkuk=",
+    "extraAttrs": {
+      "pname": "kentucky-tract",
+      "version": "2014",
+      "extent": "Kentucky",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Kentucky.zip"
+    }
+  },
+  {
+    "name": "louisiana-county-2014",
+    "hash": "sha256-DhYeWmZSsHlaSrhEZZ07zF9DtCphJ2lmvFAo/5jeGKc=",
+    "extraAttrs": {
+      "pname": "louisiana-county",
+      "version": "2014",
+      "extent": "Louisiana",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Louisiana_cnty.zip"
+    }
+  },
+  {
+    "name": "louisiana-tract-2014",
+    "hash": "sha256-E9GRSatZPhT5zFInJ9w24npfk4BBCKY/9Q3e+ov2fsM=",
+    "extraAttrs": {
+      "pname": "louisiana-tract",
+      "version": "2014",
+      "extent": "Louisiana",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Louisiana.zip"
+    }
+  },
+  {
+    "name": "maine-county-2014",
+    "hash": "sha256-36AQU+DlNCwTx0LTs6sbYiK92Tb89QpzKhOpb/1xCMQ=",
+    "extraAttrs": {
+      "pname": "maine-county",
+      "version": "2014",
+      "extent": "Maine",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Maine_cnty.zip"
+    }
+  },
+  {
+    "name": "maine-tract-2014",
+    "hash": "sha256-Z57ssEnTym8PHmFhRbbaoaMmB9UUndRETMYiLDs2g54=",
+    "extraAttrs": {
+      "pname": "maine-tract",
+      "version": "2014",
+      "extent": "Maine",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Maine.zip"
+    }
+  },
+  {
+    "name": "maryland-county-2014",
+    "hash": "sha256-htDIoLvypBdKm9yuPUyVoE0nZeiYbWPNva78ig3qovs=",
+    "extraAttrs": {
+      "pname": "maryland-county",
+      "version": "2014",
+      "extent": "Maryland",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Maryland_cnty.zip"
+    }
+  },
+  {
+    "name": "maryland-tract-2014",
+    "hash": "sha256-qBafDaOOv99XRM1pb9DY268Ian+j6wUiv/23+GklKk4=",
+    "extraAttrs": {
+      "pname": "maryland-tract",
+      "version": "2014",
+      "extent": "Maryland",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Maryland.zip"
+    }
+  },
+  {
+    "name": "massachusetts-county-2014",
+    "hash": "sha256-cTvDvRCsG0MCoYJJ7IbH6DBP7xrtRpMGolomj505fKc=",
+    "extraAttrs": {
+      "pname": "massachusetts-county",
+      "version": "2014",
+      "extent": "Massachusetts",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Massachusetts_cnty.zip"
+    }
+  },
+  {
+    "name": "massachusetts-tract-2014",
+    "hash": "sha256-R3stf0OaHPT51Eomqc+DpQK6c8UfMm6Y5ue6BIU6fwk=",
+    "extraAttrs": {
+      "pname": "massachusetts-tract",
+      "version": "2014",
+      "extent": "Massachusetts",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Massachusetts.zip"
+    }
+  },
+  {
+    "name": "michigan-county-2014",
+    "hash": "sha256-yIFbBhuAXLK3DLo0D+23hPJx0vseN1IoAbcx0azGeLI=",
+    "extraAttrs": {
+      "pname": "michigan-county",
+      "version": "2014",
+      "extent": "Michigan",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Michigan_cnty.zip"
+    }
+  },
+  {
+    "name": "michigan-tract-2014",
+    "hash": "sha256-xsodQwzkZZbjWn3OVfS4jjNWkUa1Kgo4KiT5JH1Km7o=",
+    "extraAttrs": {
+      "pname": "michigan-tract",
+      "version": "2014",
+      "extent": "Michigan",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Michigan.zip"
+    }
+  },
+  {
+    "name": "minnesota-county-2014",
+    "hash": "sha256-H/K06UD0Rn8gZqkWpIPm0ie/7CT5Ab7NGcTtpg6hNrk=",
+    "extraAttrs": {
+      "pname": "minnesota-county",
+      "version": "2014",
+      "extent": "Minnesota",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Minnesota_cnty.zip"
+    }
+  },
+  {
+    "name": "minnesota-tract-2014",
+    "hash": "sha256-xRaFKNkgxliZmuJAopLtxpl94co7ejth1yH10l1tzQE=",
+    "extraAttrs": {
+      "pname": "minnesota-tract",
+      "version": "2014",
+      "extent": "Minnesota",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Minnesota.zip"
+    }
+  },
+  {
+    "name": "mississippi-county-2014",
+    "hash": "sha256-B52yPCEmhTJ80I25h2G+xHPVuX5tXOdoHIv2G6kGCjE=",
+    "extraAttrs": {
+      "pname": "mississippi-county",
+      "version": "2014",
+      "extent": "Mississippi",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Mississippi_cnty.zip"
+    }
+  },
+  {
+    "name": "mississippi-tract-2014",
+    "hash": "sha256-Q6ur51CrnmNJbBsCBA+Q1jnwHH4BiP7aHnGL378ccyk=",
+    "extraAttrs": {
+      "pname": "mississippi-tract",
+      "version": "2014",
+      "extent": "Mississippi",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Mississippi.zip"
+    }
+  },
+  {
+    "name": "missouri-county-2014",
+    "hash": "sha256-JMfSF2yKqTISNH7ueBhC+JynhI8oPwwoPFm37adJvec=",
+    "extraAttrs": {
+      "pname": "missouri-county",
+      "version": "2014",
+      "extent": "Missouri",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Missouri_cnty.zip"
+    }
+  },
+  {
+    "name": "missouri-tract-2014",
+    "hash": "sha256-oN62e2T0NCGoZEiiy7pu4ht36Zfu1rlFl/zAaUiW89g=",
+    "extraAttrs": {
+      "pname": "missouri-tract",
+      "version": "2014",
+      "extent": "Missouri",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Missouri.zip"
+    }
+  },
+  {
+    "name": "montana-county-2014",
+    "hash": "sha256-IM3EAI4UXdmBT4FhVR2B7l0x/VLSkYFS9pofzhZ7GJk=",
+    "extraAttrs": {
+      "pname": "montana-county",
+      "version": "2014",
+      "extent": "Montana",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Montana_cnty.zip"
+    }
+  },
+  {
+    "name": "montana-tract-2014",
+    "hash": "sha256-GAjbDNo3oFa3k9jQWVmmtevWwyPwEFNAh6333iKU+io=",
+    "extraAttrs": {
+      "pname": "montana-tract",
+      "version": "2014",
+      "extent": "Montana",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Montana.zip"
+    }
+  },
+  {
+    "name": "nebraska-county-2014",
+    "hash": "sha256-iLJuP2+6wvg7p4svovTQvKnR8Gt66oxGmAgxV9ivum0=",
+    "extraAttrs": {
+      "pname": "nebraska-county",
+      "version": "2014",
+      "extent": "Nebraska",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Nebraska_cnty.zip"
+    }
+  },
+  {
+    "name": "nebraska-tract-2014",
+    "hash": "sha256-vxyLmUSMM/tkPvFEkdEzT50sjOT4tmkYPfQ5LcVZqnY=",
+    "extraAttrs": {
+      "pname": "nebraska-tract",
+      "version": "2014",
+      "extent": "Nebraska",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Nebraska.zip"
+    }
+  },
+  {
+    "name": "nevada-county-2014",
+    "hash": "sha256-rjGKz6nV1hnF/1UZcSfwb55x+signdij0rS3PE7o1r4=",
+    "extraAttrs": {
+      "pname": "nevada-county",
+      "version": "2014",
+      "extent": "Nevada",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Nevada_cnty.zip"
+    }
+  },
+  {
+    "name": "nevada-tract-2014",
+    "hash": "sha256-4fwKpfL7B6ZIRC9a7xQRmdYGqk0ewpkPLciA127M8qc=",
+    "extraAttrs": {
+      "pname": "nevada-tract",
+      "version": "2014",
+      "extent": "Nevada",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Nevada.zip"
+    }
+  },
+  {
+    "name": "new_hampshire-county-2014",
+    "hash": "sha256-GdjT80TT3u2DiQN4SEDCzXemVHuZfaQZdT8XL3Ad3/I=",
+    "extraAttrs": {
+      "pname": "new_hampshire-county",
+      "version": "2014",
+      "extent": "New_Hampshire",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/NewHampshire_cnty.zip"
+    }
+  },
+  {
+    "name": "new_hampshire-tract-2014",
+    "hash": "sha256-26YdB9cEWvBmYGa8+7Y3pOYh2YKUtgpiwgBXqot+r74=",
+    "extraAttrs": {
+      "pname": "new_hampshire-tract",
+      "version": "2014",
+      "extent": "New_Hampshire",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/NewHampshire.zip"
+    }
+  },
+  {
+    "name": "new_jersey-county-2014",
+    "hash": "sha256-uYUyule2K62Hd9vwRSULe7hOmVp0Ij3W6QiZSWMNdzU=",
+    "extraAttrs": {
+      "pname": "new_jersey-county",
+      "version": "2014",
+      "extent": "New_Jersey",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/NewJersey_cnty.zip"
+    }
+  },
+  {
+    "name": "new_jersey-tract-2014",
+    "hash": "sha256-HAF6W7zXLGbd0r2Uzxh7u4cSDp0TfdN9VIVRyfAj/ok=",
+    "extraAttrs": {
+      "pname": "new_jersey-tract",
+      "version": "2014",
+      "extent": "New_Jersey",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/NewJersey.zip"
+    }
+  },
+  {
+    "name": "new_mexico-county-2014",
+    "hash": "sha256-7VDVGECgS4mAcXTBe06hiHIhAHQzivENqiq3pjdTduw=",
+    "extraAttrs": {
+      "pname": "new_mexico-county",
+      "version": "2014",
+      "extent": "New_Mexico",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/NewMexico_cnty.zip"
+    }
+  },
+  {
+    "name": "new_mexico-tract-2014",
+    "hash": "sha256-+Ar8fpKoY2DeKy5AY5mRS9c3wCoWdDBopHQnrBdnF0w=",
+    "extraAttrs": {
+      "pname": "new_mexico-tract",
+      "version": "2014",
+      "extent": "New_Mexico",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/NewMexico.zip"
+    }
+  },
+  {
+    "name": "new_york-county-2014",
+    "hash": "sha256-q4rAaBBYYYsB2YmRjEO0iGGass3hNsk/BzwEzZMIpv4=",
+    "extraAttrs": {
+      "pname": "new_york-county",
+      "version": "2014",
+      "extent": "New_York",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/NewYork_cnty.zip"
+    }
+  },
+  {
+    "name": "new_york-tract-2014",
+    "hash": "sha256-NXLRH8byeQ7XGAU32mfLJKtJqD4Jy2t6qxDg/U2jLKU=",
+    "extraAttrs": {
+      "pname": "new_york-tract",
+      "version": "2014",
+      "extent": "New_York",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/NewYork.zip"
+    }
+  },
+  {
+    "name": "north_carolina-county-2014",
+    "hash": "sha256-dRMZn5cOvmI5aOr7H6pTNwlvi/sbNgSx0IECRwfw/24=",
+    "extraAttrs": {
+      "pname": "north_carolina-county",
+      "version": "2014",
+      "extent": "North_Carolina",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/NorthCarolina_cnty.zip"
+    }
+  },
+  {
+    "name": "north_carolina-tract-2014",
+    "hash": "sha256-lliqG3DYtUnDyca7GnbESFws2oIZdzBawhTs3uw8Gwg=",
+    "extraAttrs": {
+      "pname": "north_carolina-tract",
+      "version": "2014",
+      "extent": "North_Carolina",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/NorthCarolina.zip"
+    }
+  },
+  {
+    "name": "north_dakota-county-2014",
+    "hash": "sha256-Lgsf3uYrXVrp50AbkR2w3aECsqjHDRpi44fmK5rutWo=",
+    "extraAttrs": {
+      "pname": "north_dakota-county",
+      "version": "2014",
+      "extent": "North_Dakota",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/NorthDakota_cnty.zip"
+    }
+  },
+  {
+    "name": "north_dakota-tract-2014",
+    "hash": "sha256-qVSQGx8JdDM6Tr5mzv4dZGPlpQRxOGYjRE3Xv9p1fRY=",
+    "extraAttrs": {
+      "pname": "north_dakota-tract",
+      "version": "2014",
+      "extent": "North_Dakota",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/NorthDakota.zip"
+    }
+  },
+  {
+    "name": "ohio-county-2014",
+    "hash": "sha256-H79utZp53JUa/XlgdPg+Zz9WBhRbl7cNn4yaLxyYCYY=",
+    "extraAttrs": {
+      "pname": "ohio-county",
+      "version": "2014",
+      "extent": "Ohio",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Ohio_cnty.zip"
+    }
+  },
+  {
+    "name": "ohio-tract-2014",
+    "hash": "sha256-hATgOP8egy4CiZJBEYT2lK4PXHY0fEEk04rys4Sw8Iw=",
+    "extraAttrs": {
+      "pname": "ohio-tract",
+      "version": "2014",
+      "extent": "Ohio",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Ohio.zip"
+    }
+  },
+  {
+    "name": "oklahoma-county-2014",
+    "hash": "sha256-ndvl8oz6HIq24cPdWQMUYCGJ6E1A0Gy7pqAZQVfk8xg=",
+    "extraAttrs": {
+      "pname": "oklahoma-county",
+      "version": "2014",
+      "extent": "Oklahoma",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Oklahoma_cnty.zip"
+    }
+  },
+  {
+    "name": "oklahoma-tract-2014",
+    "hash": "sha256-h55xWgJzibcD+eHQ3cQ1UBC0VjU8ygdr8n71+0m0558=",
+    "extraAttrs": {
+      "pname": "oklahoma-tract",
+      "version": "2014",
+      "extent": "Oklahoma",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Oklahoma.zip"
+    }
+  },
+  {
+    "name": "oregon-county-2014",
+    "hash": "sha256-jTRkA2KQ5wBXCQn2AAXXUnS4pmhKezMVIGiJQPtoDRk=",
+    "extraAttrs": {
+      "pname": "oregon-county",
+      "version": "2014",
+      "extent": "Oregon",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Oregon_cnty.zip"
+    }
+  },
+  {
+    "name": "oregon-tract-2014",
+    "hash": "sha256-qEXR4/fd04lXLdOjKPT6+Q/MNyh8+iCCb7dNrDydTyo=",
+    "extraAttrs": {
+      "pname": "oregon-tract",
+      "version": "2014",
+      "extent": "Oregon",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Oregon.zip"
+    }
+  },
+  {
+    "name": "pennsylvania-county-2014",
+    "hash": "sha256-d2g6S9/3HBMkF6N/KQrVdIrUpX2DHtUXFOmAXrGqoSA=",
+    "extraAttrs": {
+      "pname": "pennsylvania-county",
+      "version": "2014",
+      "extent": "Pennsylvania",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Pennsylvania_cnty.zip"
+    }
+  },
+  {
+    "name": "pennsylvania-tract-2014",
+    "hash": "sha256-nHFTaHthuQamILCndWY6bjRTHS/fD9hlpkn4aWxIW58=",
+    "extraAttrs": {
+      "pname": "pennsylvania-tract",
+      "version": "2014",
+      "extent": "Pennsylvania",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Pennsylvania.zip"
+    }
+  },
+  {
+    "name": "rhode_island-county-2014",
+    "hash": "sha256-9qNaHLoffO4Fm45+N5Wprz73pwlIQQb/C210h1y3gCs=",
+    "extraAttrs": {
+      "pname": "rhode_island-county",
+      "version": "2014",
+      "extent": "Rhode_Island",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/RhodeIsland_cnty.zip"
+    }
+  },
+  {
+    "name": "rhode_island-tract-2014",
+    "hash": "sha256-amlp/qzreZ9HVtDX6eBGwCk4eIfohStVmtXEc5UXgQ0=",
+    "extraAttrs": {
+      "pname": "rhode_island-tract",
+      "version": "2014",
+      "extent": "Rhode_Island",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/RhodeIsland.zip"
+    }
+  },
+  {
+    "name": "south_carolina-county-2014",
+    "hash": "sha256-2ljQUcgXC2tRtU/cLK0ynJhYrO59VISYdwNnk/k1KyQ=",
+    "extraAttrs": {
+      "pname": "south_carolina-county",
+      "version": "2014",
+      "extent": "South_Carolina",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/SouthCarolina_cnty.zip"
+    }
+  },
+  {
+    "name": "south_carolina-tract-2014",
+    "hash": "sha256-BldIQXw+J9XtdcJkTOHzxCFaKI7cbX+EZxPur8waN+U=",
+    "extraAttrs": {
+      "pname": "south_carolina-tract",
+      "version": "2014",
+      "extent": "South_Carolina",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/SouthCarolina.zip"
+    }
+  },
+  {
+    "name": "south_dakota-county-2014",
+    "hash": "sha256-fxeFhQbgDrdpmNOHTsJtPGT2+q061hT2J7ZAM6lc/Qk=",
+    "extraAttrs": {
+      "pname": "south_dakota-county",
+      "version": "2014",
+      "extent": "South_Dakota",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/SouthDakota_cnty.zip"
+    }
+  },
+  {
+    "name": "south_dakota-tract-2014",
+    "hash": "sha256-Pk8QniqKoEbbCYB3/rwufcMJwedqEExnFl5amuq2OJE=",
+    "extraAttrs": {
+      "pname": "south_dakota-tract",
+      "version": "2014",
+      "extent": "South_Dakota",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/SouthDakota.zip"
+    }
+  },
+  {
+    "name": "tennessee-county-2014",
+    "hash": "sha256-6fIMGFsEotpQx8UUlkTFWEy1QejFpCIOnPwCib3Shzk=",
+    "extraAttrs": {
+      "pname": "tennessee-county",
+      "version": "2014",
+      "extent": "Tennessee",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Tennessee_cnty.zip"
+    }
+  },
+  {
+    "name": "tennessee-tract-2014",
+    "hash": "sha256-goilYCN7YLktg4sGbax+zYdBhEi/Z3T5rQHHxpW3gmw=",
+    "extraAttrs": {
+      "pname": "tennessee-tract",
+      "version": "2014",
+      "extent": "Tennessee",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Tennessee.zip"
+    }
+  },
+  {
+    "name": "texas-county-2014",
+    "hash": "sha256-9GXlpkAwSGvKhbQvgtpoB3XFNhl6y/xIb10H+dquK9A=",
+    "extraAttrs": {
+      "pname": "texas-county",
+      "version": "2014",
+      "extent": "Texas",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Texas_cnty.zip"
+    }
+  },
+  {
+    "name": "texas-tract-2014",
+    "hash": "sha256-NpLLlLzeGdOQjl3e1SHk8/HpB5LrsubbA3/pB06p38I=",
+    "extraAttrs": {
+      "pname": "texas-tract",
+      "version": "2014",
+      "extent": "Texas",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Texas.zip"
+    }
+  },
+  {
+    "name": "utah-county-2014",
+    "hash": "sha256-/BdjOnRKN85sJglcZCkfvTLrPee6MOTth9HcAA675G4=",
+    "extraAttrs": {
+      "pname": "utah-county",
+      "version": "2014",
+      "extent": "Utah",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Utah_cnty.zip"
+    }
+  },
+  {
+    "name": "utah-tract-2014",
+    "hash": "sha256-IF55m1At8j+NCrVeYJtBXxpwPEETJo1JhzzHyZNM6+w=",
+    "extraAttrs": {
+      "pname": "utah-tract",
+      "version": "2014",
+      "extent": "Utah",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Utah.zip"
+    }
+  },
+  {
+    "name": "vermont-county-2014",
+    "hash": "sha256-26bVsSMTRv+tbX8dO/jiPx5y5UQfeateYlvHpk16AYk=",
+    "extraAttrs": {
+      "pname": "vermont-county",
+      "version": "2014",
+      "extent": "Vermont",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Vermont_cnty.zip"
+    }
+  },
+  {
+    "name": "vermont-tract-2014",
+    "hash": "sha256-M786kNWSUWp6Sg9LM7UzVqPDFUpkJjw+/SEKLBMG/rg=",
+    "extraAttrs": {
+      "pname": "vermont-tract",
+      "version": "2014",
+      "extent": "Vermont",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Vermont.zip"
+    }
+  },
+  {
+    "name": "virginia-county-2014",
+    "hash": "sha256-LYFdA7Pa+ztAWFOZMDJ6KrPUyLEefGPLzta/F2Txq4s=",
+    "extraAttrs": {
+      "pname": "virginia-county",
+      "version": "2014",
+      "extent": "Virginia",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Virginia_cnty.zip"
+    }
+  },
+  {
+    "name": "virginia-tract-2014",
+    "hash": "sha256-yDCj9uJ6lQ1CC0djZ5723tLI/68ZaEbAVBqrXw5Mt3A=",
+    "extraAttrs": {
+      "pname": "virginia-tract",
+      "version": "2014",
+      "extent": "Virginia",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Virginia.zip"
+    }
+  },
+  {
+    "name": "washington-county-2014",
+    "hash": "sha256-ot4IahWl5kbRuNiDSIrzovCSEM9CiW6KGY7fprW1HTk=",
+    "extraAttrs": {
+      "pname": "washington-county",
+      "version": "2014",
+      "extent": "Washington",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Washington_cnty.zip"
+    }
+  },
+  {
+    "name": "washington-tract-2014",
+    "hash": "sha256-rtG3fAPNQNNVUg1hrzCrLSgUySKY3cvvb78b/5pIkn4=",
+    "extraAttrs": {
+      "pname": "washington-tract",
+      "version": "2014",
+      "extent": "Washington",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Washington.zip"
+    }
+  },
+  {
+    "name": "west_virginia-county-2014",
+    "hash": "sha256-+BeqF4HvWeeGmo8GxrwL4cfFGy5KLCltINZIvIaJAC4=",
+    "extraAttrs": {
+      "pname": "west_virginia-county",
+      "version": "2014",
+      "extent": "West_Virginia",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/WestVirginia_cnty.zip"
+    }
+  },
+  {
+    "name": "west_virginia-tract-2014",
+    "hash": "sha256-gFmM5Dhlfq0qVVlvy62mZCxnciW6RBq+wq8kZR+fec8=",
+    "extraAttrs": {
+      "pname": "west_virginia-tract",
+      "version": "2014",
+      "extent": "West_Virginia",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/WestVirginia.zip"
+    }
+  },
+  {
+    "name": "wisconsin-county-2014",
+    "hash": "sha256-i1BF5J/QoYx00SPjcwT4ENXH9PL2eAQv7d0yEd0wMXY=",
+    "extraAttrs": {
+      "pname": "wisconsin-county",
+      "version": "2014",
+      "extent": "Wisconsin",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Wisconsin_cnty.zip"
+    }
+  },
+  {
+    "name": "wisconsin-tract-2014",
+    "hash": "sha256-whVTOW87z/VJFbMp8Rg72IVcW+qvVY0L+lfK2RCYWlU=",
+    "extraAttrs": {
+      "pname": "wisconsin-tract",
+      "version": "2014",
+      "extent": "Wisconsin",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Wisconsin.zip"
+    }
+  },
+  {
+    "name": "wyoming-county-2014",
+    "hash": "sha256-hKzs3pVeITz72fFdfuTpdW0vLjQS6Dg3d7yHt1zm2KU=",
+    "extraAttrs": {
+      "pname": "wyoming-county",
+      "version": "2014",
+      "extent": "Wyoming",
+      "geom": "county",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States_Counties/Wyoming_cnty.zip"
+    }
+  },
+  {
+    "name": "wyoming-tract-2014",
+    "hash": "sha256-if5aDiP65vV8yIUhj5+4v253cpP9wILgSPzomSXIGMk=",
+    "extraAttrs": {
+      "pname": "wyoming-tract",
+      "version": "2014",
+      "extent": "Wyoming",
+      "geom": "tract",
+      "year": "2014",
+      "url": "https://svi.cdc.gov/Documents/Data/2014_SVI_Data/States/Wyoming.zip"
+    }
+  },
+  {
+    "name": "us-county-2016",
+    "hash": "sha256-tus7VUVVQpBaYZS1U9AO4in9O/FcP/pyqMl24H1syrA=",
+    "extraAttrs": {
+      "pname": "us-county",
+      "version": "2016",
+      "extent": "US",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/SVI2016_US_county.zip"
+    }
+  },
+  {
+    "name": "us-tract-2016",
+    "hash": "sha256-bYtFQA9Sp5XJMVF27sAaxZSNgrdiz9Bhl/tTYlRjIW8=",
+    "extraAttrs": {
+      "pname": "us-tract",
+      "version": "2016",
+      "extent": "US",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/SVI2016_US.zip"
+    }
+  },
+  {
+    "name": "us-ttract-2016",
+    "hash": "sha256-r6RdUMGAp4xbHsQel0QrsipRK6PPeAUjoSbiBC0N9Mc=",
+    "extraAttrs": {
+      "pname": "us-ttract",
+      "version": "2016",
+      "extent": "US",
+      "geom": "ttract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Tribal_Tracts.zip"
+    }
+  },
+  {
+    "name": "district_of_columbia-county-2016",
+    "hash": "sha256-ND0LAWpig4ZqH+CL6LNW7Cv11QyVkEoaR3WOTMiWHAg=",
+    "extraAttrs": {
+      "pname": "district_of_columbia-county",
+      "version": "2016",
+      "extent": "District_of_Columbia",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/DistrictofColumbia_county.zip"
+    }
+  },
+  {
+    "name": "district_of_columbia-tract-2016",
+    "hash": "sha256-arVm/b8lexg1IhP62wqjV4/Wfn0MToyVbVv2t1h1gzo=",
+    "extraAttrs": {
+      "pname": "district_of_columbia-tract",
+      "version": "2016",
+      "extent": "District_of_Columbia",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/DistrictofColumbia.zip"
+    }
+  },
+  {
+    "name": "puerto_rico-county-2016",
+    "hash": "sha256-EJYSevMiXRS6vVUt7zoAPZOX15l9yzarUR3W7XuR180=",
+    "extraAttrs": {
+      "pname": "puerto_rico-county",
+      "version": "2016",
+      "extent": "Puerto_Rico",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/PuertoRico_county.zip"
+    }
+  },
+  {
+    "name": "puerto_rico-tract-2016",
+    "hash": "sha256-ikVq0vGTQ2zX1oiIYwAK3O7yuIL3LTti2yYOcBBvJg0=",
+    "extraAttrs": {
+      "pname": "puerto_rico-tract",
+      "version": "2016",
+      "extent": "Puerto_Rico",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/PuertoRico.zip"
+    }
+  },
+  {
+    "name": "alabama-county-2016",
+    "hash": "sha256-D95nr5ISdkVmnYTBDBdk2/9RK1W5rRK2bv/PWQzg8q0=",
+    "extraAttrs": {
+      "pname": "alabama-county",
+      "version": "2016",
+      "extent": "Alabama",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Alabama_county.zip"
+    }
+  },
+  {
+    "name": "alabama-tract-2016",
+    "hash": "sha256-dSprO4I20OEBfczePkPgm6RqbQeEsQd3wx7AmvRdQFw=",
+    "extraAttrs": {
+      "pname": "alabama-tract",
+      "version": "2016",
+      "extent": "Alabama",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Alabama.zip"
+    }
+  },
+  {
+    "name": "alaska-county-2016",
+    "hash": "sha256-NjRyvoLrv2s+mqXD+P+qsTBymjK7mirGtjKlWxWiVuY=",
+    "extraAttrs": {
+      "pname": "alaska-county",
+      "version": "2016",
+      "extent": "Alaska",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Alaska_county.zip"
+    }
+  },
+  {
+    "name": "alaska-tract-2016",
+    "hash": "sha256-3YudYKPT2IhzuYv0zz6WU+HMitAGgmfTn8p/iO2m84A=",
+    "extraAttrs": {
+      "pname": "alaska-tract",
+      "version": "2016",
+      "extent": "Alaska",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Alaska.zip"
+    }
+  },
+  {
+    "name": "arizona-county-2016",
+    "hash": "sha256-2/1+eLD8Jez977bwVLYLis62aKUQ/dh/Eg87ltqycwE=",
+    "extraAttrs": {
+      "pname": "arizona-county",
+      "version": "2016",
+      "extent": "Arizona",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Arizona_county.zip"
+    }
+  },
+  {
+    "name": "arizona-tract-2016",
+    "hash": "sha256-X2GW5hVAEhRGKdJAnZMa5FWVZZaqxvlARczFu38K89o=",
+    "extraAttrs": {
+      "pname": "arizona-tract",
+      "version": "2016",
+      "extent": "Arizona",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Arizona.zip"
+    }
+  },
+  {
+    "name": "arkansas-county-2016",
+    "hash": "sha256-mBne4KJCKrkNqET1LFPDWJGvYOVtaAE7FY4Z597ezr8=",
+    "extraAttrs": {
+      "pname": "arkansas-county",
+      "version": "2016",
+      "extent": "Arkansas",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Arkansas_county.zip"
+    }
+  },
+  {
+    "name": "arkansas-tract-2016",
+    "hash": "sha256-wEEaYVyFono7ZSXKf5yEBpd8BKwhTdsFiAcdTK0u1mg=",
+    "extraAttrs": {
+      "pname": "arkansas-tract",
+      "version": "2016",
+      "extent": "Arkansas",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Arkansas.zip"
+    }
+  },
+  {
+    "name": "california-county-2016",
+    "hash": "sha256-HrZaQhEu8rMG5E8GgHWNA0kfLInPCPhjM66EzzFXd0M=",
+    "extraAttrs": {
+      "pname": "california-county",
+      "version": "2016",
+      "extent": "California",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/California_county.zip"
+    }
+  },
+  {
+    "name": "california-tract-2016",
+    "hash": "sha256-mOAFGAunAMz5LfkhrYEwuToc7Aj/lnU3Y0dt6KB2wTs=",
+    "extraAttrs": {
+      "pname": "california-tract",
+      "version": "2016",
+      "extent": "California",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/California.zip"
+    }
+  },
+  {
+    "name": "colorado-county-2016",
+    "hash": "sha256-OxQbVpIyqUo2iBd3Lo2KGV0zedYisqL3Hd3FqTvWoYs=",
+    "extraAttrs": {
+      "pname": "colorado-county",
+      "version": "2016",
+      "extent": "Colorado",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Colorado_county.zip"
+    }
+  },
+  {
+    "name": "colorado-tract-2016",
+    "hash": "sha256-SUhuHNaRtEutkd06+ERoggh8gMdjKmbyqSgKZDniNCc=",
+    "extraAttrs": {
+      "pname": "colorado-tract",
+      "version": "2016",
+      "extent": "Colorado",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Colorado.zip"
+    }
+  },
+  {
+    "name": "connecticut-county-2016",
+    "hash": "sha256-ynyqBigAkjTYyOvYAByoCXQ+F0Z7gqHoPP1tQpCbaEg=",
+    "extraAttrs": {
+      "pname": "connecticut-county",
+      "version": "2016",
+      "extent": "Connecticut",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Connecticut_county.zip"
+    }
+  },
+  {
+    "name": "connecticut-tract-2016",
+    "hash": "sha256-b56dR6TcSQBASIqlrGjHaorgnoRK7Ke4uMVJwWOgWL0=",
+    "extraAttrs": {
+      "pname": "connecticut-tract",
+      "version": "2016",
+      "extent": "Connecticut",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Connecticut.zip"
+    }
+  },
+  {
+    "name": "delaware-county-2016",
+    "hash": "sha256-lH5TI+zDa2PKtbTDBKmRwKwLHyM2z3CjzcVIjfY6ETw=",
+    "extraAttrs": {
+      "pname": "delaware-county",
+      "version": "2016",
+      "extent": "Delaware",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Delaware_county.zip"
+    }
+  },
+  {
+    "name": "delaware-tract-2016",
+    "hash": "sha256-kNcGiCJjnLjnBBvEkKUpR3CzGQzeUkkwmL1GZy5KiSo=",
+    "extraAttrs": {
+      "pname": "delaware-tract",
+      "version": "2016",
+      "extent": "Delaware",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Delaware.zip"
+    }
+  },
+  {
+    "name": "florida-county-2016",
+    "hash": "sha256-Sof28j4yIzKVQc//6PkGaP97sGw0toadv0ZTjqafEHs=",
+    "extraAttrs": {
+      "pname": "florida-county",
+      "version": "2016",
+      "extent": "Florida",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Florida_county.zip"
+    }
+  },
+  {
+    "name": "florida-tract-2016",
+    "hash": "sha256-iwoqJe9kajJ/MXeIxjNhLFDTRCAUSbtHO54KeXrLyvE=",
+    "extraAttrs": {
+      "pname": "florida-tract",
+      "version": "2016",
+      "extent": "Florida",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Florida.zip"
+    }
+  },
+  {
+    "name": "georgia-county-2016",
+    "hash": "sha256-M0isv+QFYkwrlxZggWZchGjbg2W9k8ufQjpPMNLS4sY=",
+    "extraAttrs": {
+      "pname": "georgia-county",
+      "version": "2016",
+      "extent": "Georgia",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Georgia_county.zip"
+    }
+  },
+  {
+    "name": "georgia-tract-2016",
+    "hash": "sha256-F69ewBo26QIrv0VwoTy2ifWEeM/u+BJYzAwGob55rTg=",
+    "extraAttrs": {
+      "pname": "georgia-tract",
+      "version": "2016",
+      "extent": "Georgia",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Georgia.zip"
+    }
+  },
+  {
+    "name": "hawaii-county-2016",
+    "hash": "sha256-e1gGbLo7ShglVgFphuHOD9oQP/UHQj7oCc5biyaTL/Q=",
+    "extraAttrs": {
+      "pname": "hawaii-county",
+      "version": "2016",
+      "extent": "Hawaii",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Hawaii_county.zip"
+    }
+  },
+  {
+    "name": "hawaii-tract-2016",
+    "hash": "sha256-tZ1VNE7A+x5iAnsNlUTH3mzEr7h3Yu8zaXhrbRY64rE=",
+    "extraAttrs": {
+      "pname": "hawaii-tract",
+      "version": "2016",
+      "extent": "Hawaii",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Hawaii.zip"
+    }
+  },
+  {
+    "name": "idaho-county-2016",
+    "hash": "sha256-qAeGCglNOgZIKAMnhkOZTtrPYMSEjeeHeoqt5nvXUyE=",
+    "extraAttrs": {
+      "pname": "idaho-county",
+      "version": "2016",
+      "extent": "Idaho",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Idaho_county.zip"
+    }
+  },
+  {
+    "name": "idaho-tract-2016",
+    "hash": "sha256-Vozs+ZzNe4YVhZhC8s6IFYmtIQXJZgs1VuwmFtUDEKw=",
+    "extraAttrs": {
+      "pname": "idaho-tract",
+      "version": "2016",
+      "extent": "Idaho",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Idaho.zip"
+    }
+  },
+  {
+    "name": "illinois-county-2016",
+    "hash": "sha256-i0lLictl73mIrXdjoagble7MegSVIsy4JVSmCXiDuYQ=",
+    "extraAttrs": {
+      "pname": "illinois-county",
+      "version": "2016",
+      "extent": "Illinois",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Illinois_county.zip"
+    }
+  },
+  {
+    "name": "illinois-tract-2016",
+    "hash": "sha256-UE92BZfbMVJ0SlCjcuGp7wY7AB8gHGZNIIcxUDklHqE=",
+    "extraAttrs": {
+      "pname": "illinois-tract",
+      "version": "2016",
+      "extent": "Illinois",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Illinois.zip"
+    }
+  },
+  {
+    "name": "indiana-county-2016",
+    "hash": "sha256-pI54E2z5rgv9QyY2c3us8K1lkQXM7L3yVz4RkNl5W/o=",
+    "extraAttrs": {
+      "pname": "indiana-county",
+      "version": "2016",
+      "extent": "Indiana",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Indiana_county.zip"
+    }
+  },
+  {
+    "name": "indiana-tract-2016",
+    "hash": "sha256-MVH9krXQ+O/POEL+SeLtqrCFh277WJL0cXDF1+CewBM=",
+    "extraAttrs": {
+      "pname": "indiana-tract",
+      "version": "2016",
+      "extent": "Indiana",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Indiana.zip"
+    }
+  },
+  {
+    "name": "iowa-county-2016",
+    "hash": "sha256-fgA7ycf+0aV3zlgiO2Kvc899UPE4TgC0uILgANdH6I4=",
+    "extraAttrs": {
+      "pname": "iowa-county",
+      "version": "2016",
+      "extent": "Iowa",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Iowa_county.zip"
+    }
+  },
+  {
+    "name": "iowa-tract-2016",
+    "hash": "sha256-0N1v6vnSMz+PaUe8SYOU6Qtsqjw/mpDSWaqTma0JKCQ=",
+    "extraAttrs": {
+      "pname": "iowa-tract",
+      "version": "2016",
+      "extent": "Iowa",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Iowa.zip"
+    }
+  },
+  {
+    "name": "kansas-county-2016",
+    "hash": "sha256-eOgKejdrlXvb6rXQ2bEZIvEXKQ6jzmq79VYtxyl9sHQ=",
+    "extraAttrs": {
+      "pname": "kansas-county",
+      "version": "2016",
+      "extent": "Kansas",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Kansas_county.zip"
+    }
+  },
+  {
+    "name": "kansas-tract-2016",
+    "hash": "sha256-5fbIgpFoSL7Yy8ZKGMg66Tch4Gzm2OHEFpifFfi2BKQ=",
+    "extraAttrs": {
+      "pname": "kansas-tract",
+      "version": "2016",
+      "extent": "Kansas",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Kansas.zip"
+    }
+  },
+  {
+    "name": "kentucky-county-2016",
+    "hash": "sha256-01fb7uIQbq/Cj4E2MXlH+vTS3oFeUc4jYsv709OSjKE=",
+    "extraAttrs": {
+      "pname": "kentucky-county",
+      "version": "2016",
+      "extent": "Kentucky",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Kentucky_county.zip"
+    }
+  },
+  {
+    "name": "kentucky-tract-2016",
+    "hash": "sha256-B41y7t81peq1/s9Ax4U215IetMhaYZMeUqMUvRF+8LQ=",
+    "extraAttrs": {
+      "pname": "kentucky-tract",
+      "version": "2016",
+      "extent": "Kentucky",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Kentucky.zip"
+    }
+  },
+  {
+    "name": "louisiana-county-2016",
+    "hash": "sha256-RBGO05UnOdoBzi50+7NF2LFovW57P6hG/NENDedgJc0=",
+    "extraAttrs": {
+      "pname": "louisiana-county",
+      "version": "2016",
+      "extent": "Louisiana",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Louisiana_county.zip"
+    }
+  },
+  {
+    "name": "louisiana-tract-2016",
+    "hash": "sha256-v2NuOiIyyMjbaLnFfWQkVyVJVPLFI/0ZVHzIq1RQjlc=",
+    "extraAttrs": {
+      "pname": "louisiana-tract",
+      "version": "2016",
+      "extent": "Louisiana",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Louisiana.zip"
+    }
+  },
+  {
+    "name": "maine-county-2016",
+    "hash": "sha256-YZRRoM8LzuXEzN01DTyTUlSphxYssQRHbmAcsOLTs+Q=",
+    "extraAttrs": {
+      "pname": "maine-county",
+      "version": "2016",
+      "extent": "Maine",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Maine_county.zip"
+    }
+  },
+  {
+    "name": "maine-tract-2016",
+    "hash": "sha256-YOFRFLu8ZIGlw7OHYmCfPhDZiA1+Fa2rt1RNknk4wN0=",
+    "extraAttrs": {
+      "pname": "maine-tract",
+      "version": "2016",
+      "extent": "Maine",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Maine.zip"
+    }
+  },
+  {
+    "name": "maryland-county-2016",
+    "hash": "sha256-Rqu5vtZQGXPcjmIpZvquGNy71UKXxnJUCI9T5FjiFgE=",
+    "extraAttrs": {
+      "pname": "maryland-county",
+      "version": "2016",
+      "extent": "Maryland",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Maryland_county.zip"
+    }
+  },
+  {
+    "name": "maryland-tract-2016",
+    "hash": "sha256-6fED6M/0UyHoYszZLYGT5J29BS+TLMIof5CrGJlGfrw=",
+    "extraAttrs": {
+      "pname": "maryland-tract",
+      "version": "2016",
+      "extent": "Maryland",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Maryland.zip"
+    }
+  },
+  {
+    "name": "massachusetts-county-2016",
+    "hash": "sha256-8S8GEY4QM+2vLGZBiXjxXccPNNDR+6vDtpVb+2nWFdw=",
+    "extraAttrs": {
+      "pname": "massachusetts-county",
+      "version": "2016",
+      "extent": "Massachusetts",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Massachusetts_county.zip"
+    }
+  },
+  {
+    "name": "massachusetts-tract-2016",
+    "hash": "sha256-3tApLLj0vJ9oQjaFAy1RH/FzUbT90xyZRMciJFbiprM=",
+    "extraAttrs": {
+      "pname": "massachusetts-tract",
+      "version": "2016",
+      "extent": "Massachusetts",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Massachusetts.zip"
+    }
+  },
+  {
+    "name": "michigan-county-2016",
+    "hash": "sha256-Ip0l9QbCDtKdZcw5blp/J310Szgb1lthylEuGw0eXL0=",
+    "extraAttrs": {
+      "pname": "michigan-county",
+      "version": "2016",
+      "extent": "Michigan",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Michigan_county.zip"
+    }
+  },
+  {
+    "name": "michigan-tract-2016",
+    "hash": "sha256-iydUJXf/ycybizjYrLQZlL29Wk0Nal7RRfi2JTEDRik=",
+    "extraAttrs": {
+      "pname": "michigan-tract",
+      "version": "2016",
+      "extent": "Michigan",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Michigan.zip"
+    }
+  },
+  {
+    "name": "minnesota-county-2016",
+    "hash": "sha256-v6Aob6sBGwSTwHR8JNIU/jNr+qpRXm0X5Jpgdafozb4=",
+    "extraAttrs": {
+      "pname": "minnesota-county",
+      "version": "2016",
+      "extent": "Minnesota",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Minnesota_county.zip"
+    }
+  },
+  {
+    "name": "minnesota-tract-2016",
+    "hash": "sha256-wmxidIZNM91Hk19pHlRHa59GNfOr3JYnl6uExovAriI=",
+    "extraAttrs": {
+      "pname": "minnesota-tract",
+      "version": "2016",
+      "extent": "Minnesota",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Minnesota.zip"
+    }
+  },
+  {
+    "name": "mississippi-county-2016",
+    "hash": "sha256-BoE2lb7W6MbjbnY5sm/9/2ILGpnPRa9VIED0VBjSSaM=",
+    "extraAttrs": {
+      "pname": "mississippi-county",
+      "version": "2016",
+      "extent": "Mississippi",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Mississippi_county.zip"
+    }
+  },
+  {
+    "name": "mississippi-tract-2016",
+    "hash": "sha256-93TXhyRKDhlc4JIz1olfsYvzAv3UQW1HMwaBe7+0EJw=",
+    "extraAttrs": {
+      "pname": "mississippi-tract",
+      "version": "2016",
+      "extent": "Mississippi",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Mississippi.zip"
+    }
+  },
+  {
+    "name": "missouri-county-2016",
+    "hash": "sha256-ALj+3SRhMGNR2VZvOo0yWnbth6zJHBWnJLhlYl3rcgo=",
+    "extraAttrs": {
+      "pname": "missouri-county",
+      "version": "2016",
+      "extent": "Missouri",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Missouri_county.zip"
+    }
+  },
+  {
+    "name": "missouri-tract-2016",
+    "hash": "sha256-LRbAAF9ea3oEXZR2gHo3KsqrEO5VdsK1yY2zZGjHw9Y=",
+    "extraAttrs": {
+      "pname": "missouri-tract",
+      "version": "2016",
+      "extent": "Missouri",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Missouri.zip"
+    }
+  },
+  {
+    "name": "montana-county-2016",
+    "hash": "sha256-28CNBFpjo1qafp+hzzU5I8j0Gpkt4X4reX7pmvXRIMM=",
+    "extraAttrs": {
+      "pname": "montana-county",
+      "version": "2016",
+      "extent": "Montana",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Montana_county.zip"
+    }
+  },
+  {
+    "name": "montana-tract-2016",
+    "hash": "sha256-R9qWNRP/GlWZbz0bZsglb6nNQ0nOl78oRVC5CdYt940=",
+    "extraAttrs": {
+      "pname": "montana-tract",
+      "version": "2016",
+      "extent": "Montana",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Montana.zip"
+    }
+  },
+  {
+    "name": "nebraska-county-2016",
+    "hash": "sha256-xBAchcR3IjB1AecuKpHEyCrdh53sS9/boS3nThbOizA=",
+    "extraAttrs": {
+      "pname": "nebraska-county",
+      "version": "2016",
+      "extent": "Nebraska",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Nebraska_county.zip"
+    }
+  },
+  {
+    "name": "nebraska-tract-2016",
+    "hash": "sha256-ty8xCOP5IkuQx0Jc963QsNtHPgC6de82Mkc96K1Al3Q=",
+    "extraAttrs": {
+      "pname": "nebraska-tract",
+      "version": "2016",
+      "extent": "Nebraska",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Nebraska.zip"
+    }
+  },
+  {
+    "name": "nevada-county-2016",
+    "hash": "sha256-nE84dqzVOidm2hoya//AWv/Xzi1MZcWLM+bBNqxN6/o=",
+    "extraAttrs": {
+      "pname": "nevada-county",
+      "version": "2016",
+      "extent": "Nevada",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Nevada_county.zip"
+    }
+  },
+  {
+    "name": "nevada-tract-2016",
+    "hash": "sha256-lRc6qDJdHDZk9Fw2I1+H7F17+lC4wlUzCM4TMafWKKo=",
+    "extraAttrs": {
+      "pname": "nevada-tract",
+      "version": "2016",
+      "extent": "Nevada",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Nevada.zip"
+    }
+  },
+  {
+    "name": "new_hampshire-county-2016",
+    "hash": "sha256-eKO1cKubzpNidcBjvRIKgHMUnV9M7nVKuVWFMhWjS10=",
+    "extraAttrs": {
+      "pname": "new_hampshire-county",
+      "version": "2016",
+      "extent": "New_Hampshire",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/NewHampshire_county.zip"
+    }
+  },
+  {
+    "name": "new_hampshire-tract-2016",
+    "hash": "sha256-lVg9D8hs8iN3MNf25y55Xb+0t7BQ22I+jmpYtlNGw6I=",
+    "extraAttrs": {
+      "pname": "new_hampshire-tract",
+      "version": "2016",
+      "extent": "New_Hampshire",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/NewHampshire.zip"
+    }
+  },
+  {
+    "name": "new_jersey-county-2016",
+    "hash": "sha256-e0qS3sLLK/OB8POUnJrHfnKehTjL1e+n4h7IqkwNJD4=",
+    "extraAttrs": {
+      "pname": "new_jersey-county",
+      "version": "2016",
+      "extent": "New_Jersey",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/NewJersey_county.zip"
+    }
+  },
+  {
+    "name": "new_jersey-tract-2016",
+    "hash": "sha256-klu3aXGSW4t0jEOxg4dtTrhW+1skwPxmAiDuRZp50nQ=",
+    "extraAttrs": {
+      "pname": "new_jersey-tract",
+      "version": "2016",
+      "extent": "New_Jersey",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/NewJersey.zip"
+    }
+  },
+  {
+    "name": "new_mexico-county-2016",
+    "hash": "sha256-xmuWa0PxHvv3CGbPUyGQaS9fadl4F8wZKY13dWN2ZDQ=",
+    "extraAttrs": {
+      "pname": "new_mexico-county",
+      "version": "2016",
+      "extent": "New_Mexico",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/NewMexico_county.zip"
+    }
+  },
+  {
+    "name": "new_mexico-tract-2016",
+    "hash": "sha256-J/jcrnt0p7rkWUJEJilXpnQ97bqPb+bQBftAoApGM1k=",
+    "extraAttrs": {
+      "pname": "new_mexico-tract",
+      "version": "2016",
+      "extent": "New_Mexico",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/NewMexico.zip"
+    }
+  },
+  {
+    "name": "new_york-county-2016",
+    "hash": "sha256-SnCxA/IFjm0zkxf52ZSIhQqhdGXrNEAgs1XUo1jJDaY=",
+    "extraAttrs": {
+      "pname": "new_york-county",
+      "version": "2016",
+      "extent": "New_York",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/NewYork_county.zip"
+    }
+  },
+  {
+    "name": "new_york-tract-2016",
+    "hash": "sha256-b1bPxN1n1zFVUs/ejigMawzmU3izuHv5BrRdC6EjZa0=",
+    "extraAttrs": {
+      "pname": "new_york-tract",
+      "version": "2016",
+      "extent": "New_York",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/NewYork.zip"
+    }
+  },
+  {
+    "name": "north_carolina-county-2016",
+    "hash": "sha256-mJwp2zLijLUewResFxWsn+9kybn9F50SoLLwe7tUqo0=",
+    "extraAttrs": {
+      "pname": "north_carolina-county",
+      "version": "2016",
+      "extent": "North_Carolina",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/NorthCarolina_county.zip"
+    }
+  },
+  {
+    "name": "north_carolina-tract-2016",
+    "hash": "sha256-lLnRPHab1uBYzvjSI3ulvBfvSYwzYna9OyYZBtc+Qn4=",
+    "extraAttrs": {
+      "pname": "north_carolina-tract",
+      "version": "2016",
+      "extent": "North_Carolina",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/NorthCarolina.zip"
+    }
+  },
+  {
+    "name": "north_dakota-county-2016",
+    "hash": "sha256-x0vcBsjC2/6V2BryxBS2AKxIZDUV9rh+8eRuvZ0U27Y=",
+    "extraAttrs": {
+      "pname": "north_dakota-county",
+      "version": "2016",
+      "extent": "North_Dakota",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/NorthDakota_county.zip"
+    }
+  },
+  {
+    "name": "north_dakota-tract-2016",
+    "hash": "sha256-NZsYmK1S5I7L9I+niqIoJO2xSnJlmIsyc5X2gte8NDk=",
+    "extraAttrs": {
+      "pname": "north_dakota-tract",
+      "version": "2016",
+      "extent": "North_Dakota",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/NorthDakota.zip"
+    }
+  },
+  {
+    "name": "ohio-county-2016",
+    "hash": "sha256-XuFfmp5Z4jYjZJFJpNEhSyoErjWXMJEAe3sPOs3Va1I=",
+    "extraAttrs": {
+      "pname": "ohio-county",
+      "version": "2016",
+      "extent": "Ohio",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Ohio_county.zip"
+    }
+  },
+  {
+    "name": "ohio-tract-2016",
+    "hash": "sha256-zCYGWgqpWpgwdrxzIcEyXmyxUqWqlNWYT5BMjzop6ng=",
+    "extraAttrs": {
+      "pname": "ohio-tract",
+      "version": "2016",
+      "extent": "Ohio",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Ohio.zip"
+    }
+  },
+  {
+    "name": "oklahoma-county-2016",
+    "hash": "sha256-pcXRiBahnZfCFcHnuSQnLuNeUyZwrtO/c9atjfpS3nU=",
+    "extraAttrs": {
+      "pname": "oklahoma-county",
+      "version": "2016",
+      "extent": "Oklahoma",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Oklahoma_county.zip"
+    }
+  },
+  {
+    "name": "oklahoma-tract-2016",
+    "hash": "sha256-76sssSFEFO4FxNOxS4R/7EOkemuu30YVnB2fTh8cs78=",
+    "extraAttrs": {
+      "pname": "oklahoma-tract",
+      "version": "2016",
+      "extent": "Oklahoma",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Oklahoma.zip"
+    }
+  },
+  {
+    "name": "oregon-county-2016",
+    "hash": "sha256-a41+P4Op/kxVW9a/l7gIJfHO6Lp58Z0NsAe2HJFmLlU=",
+    "extraAttrs": {
+      "pname": "oregon-county",
+      "version": "2016",
+      "extent": "Oregon",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Oregon_county.zip"
+    }
+  },
+  {
+    "name": "oregon-tract-2016",
+    "hash": "sha256-MR6UqL3DDl9I11ju4Lknwy0ZBQQig0+plL338mIWvZA=",
+    "extraAttrs": {
+      "pname": "oregon-tract",
+      "version": "2016",
+      "extent": "Oregon",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Oregon.zip"
+    }
+  },
+  {
+    "name": "pennsylvania-county-2016",
+    "hash": "sha256-3Zs5f2gR7qbr6OjRGxmiTuyTLSaaRWlG7N7lhUeIFT4=",
+    "extraAttrs": {
+      "pname": "pennsylvania-county",
+      "version": "2016",
+      "extent": "Pennsylvania",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Pennsylvania_county.zip"
+    }
+  },
+  {
+    "name": "pennsylvania-tract-2016",
+    "hash": "sha256-RIIsczpaWdYbiCk/UJ2JZ766vTSdBFcxB7lxTdH7XtE=",
+    "extraAttrs": {
+      "pname": "pennsylvania-tract",
+      "version": "2016",
+      "extent": "Pennsylvania",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Pennsylvania.zip"
+    }
+  },
+  {
+    "name": "rhode_island-county-2016",
+    "hash": "sha256-jjDc1rG8Xl7ALusbt0+3i1/nx6UBZiE+3NUqH1OOdss=",
+    "extraAttrs": {
+      "pname": "rhode_island-county",
+      "version": "2016",
+      "extent": "Rhode_Island",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/RhodeIsland_county.zip"
+    }
+  },
+  {
+    "name": "rhode_island-tract-2016",
+    "hash": "sha256-cHuIyZKkA7Ok8VCuwyt21Ko/FYVsUS8nHY+cf5c3uM4=",
+    "extraAttrs": {
+      "pname": "rhode_island-tract",
+      "version": "2016",
+      "extent": "Rhode_Island",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/RhodeIsland.zip"
+    }
+  },
+  {
+    "name": "south_carolina-county-2016",
+    "hash": "sha256-BbjGqwYf+oONjIvHZI8s4ZXACJQ9BmZpwxPAB039Wmg=",
+    "extraAttrs": {
+      "pname": "south_carolina-county",
+      "version": "2016",
+      "extent": "South_Carolina",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/SouthCarolina_county.zip"
+    }
+  },
+  {
+    "name": "south_carolina-tract-2016",
+    "hash": "sha256-rK38bjZHiYoE3QhzyA5f+vBek7oVQsjfkvgW8iTMK1o=",
+    "extraAttrs": {
+      "pname": "south_carolina-tract",
+      "version": "2016",
+      "extent": "South_Carolina",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/SouthCarolina.zip"
+    }
+  },
+  {
+    "name": "south_dakota-county-2016",
+    "hash": "sha256-vHLfEW5ZUgS/10Y5TtFCAstcnfTfgEnkHKKzS2KnVB0=",
+    "extraAttrs": {
+      "pname": "south_dakota-county",
+      "version": "2016",
+      "extent": "South_Dakota",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/SouthDakota_county.zip"
+    }
+  },
+  {
+    "name": "south_dakota-tract-2016",
+    "hash": "sha256-O1UToWK8Dh/1V4LAEOVPzhqRb6udnSiZ0dmGJRo5ghM=",
+    "extraAttrs": {
+      "pname": "south_dakota-tract",
+      "version": "2016",
+      "extent": "South_Dakota",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/SouthDakota.zip"
+    }
+  },
+  {
+    "name": "tennessee-county-2016",
+    "hash": "sha256-3mcsdzMe8q394IIJG4IHWagm3wWL0k2SlJzNaYCPXg4=",
+    "extraAttrs": {
+      "pname": "tennessee-county",
+      "version": "2016",
+      "extent": "Tennessee",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Tennessee_county.zip"
+    }
+  },
+  {
+    "name": "tennessee-tract-2016",
+    "hash": "sha256-hvDwakQi9IvTtksh3cGyh30ak3BqIvHLu4Gwn274YwA=",
+    "extraAttrs": {
+      "pname": "tennessee-tract",
+      "version": "2016",
+      "extent": "Tennessee",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Tennessee.zip"
+    }
+  },
+  {
+    "name": "texas-county-2016",
+    "hash": "sha256-lRhuSzji8t5WR9zyHKR7T2cA6Z5rfL7INxEt41ACeHQ=",
+    "extraAttrs": {
+      "pname": "texas-county",
+      "version": "2016",
+      "extent": "Texas",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Texas_county.zip"
+    }
+  },
+  {
+    "name": "texas-tract-2016",
+    "hash": "sha256-ya95JGbRXpqlk58LklKDagfpVbMLwu6UOJZ0Kv/QGQ0=",
+    "extraAttrs": {
+      "pname": "texas-tract",
+      "version": "2016",
+      "extent": "Texas",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Texas.zip"
+    }
+  },
+  {
+    "name": "utah-county-2016",
+    "hash": "sha256-RQivPFGvKXnIsP2AHFMweKfeIRCDXKYgXtWDa+nzlYE=",
+    "extraAttrs": {
+      "pname": "utah-county",
+      "version": "2016",
+      "extent": "Utah",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Utah_county.zip"
+    }
+  },
+  {
+    "name": "utah-tract-2016",
+    "hash": "sha256-OjS6WIRTgVmsllD0BlcqpS6p8+LjU971iWG9ufhNBz0=",
+    "extraAttrs": {
+      "pname": "utah-tract",
+      "version": "2016",
+      "extent": "Utah",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Utah.zip"
+    }
+  },
+  {
+    "name": "vermont-county-2016",
+    "hash": "sha256-hKPvOIf4VqdB13lCYaBRKWtWwVbZQ9g22UvHYppZDUA=",
+    "extraAttrs": {
+      "pname": "vermont-county",
+      "version": "2016",
+      "extent": "Vermont",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Vermont_county.zip"
+    }
+  },
+  {
+    "name": "vermont-tract-2016",
+    "hash": "sha256-kQMZ4TJN2XasiTfVtwqguQa9aogfBs5dCmutdLtaYfw=",
+    "extraAttrs": {
+      "pname": "vermont-tract",
+      "version": "2016",
+      "extent": "Vermont",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Vermont.zip"
+    }
+  },
+  {
+    "name": "virginia-county-2016",
+    "hash": "sha256-yoJbXJGKYteptTOuspVVOAaBMgphqagNXBAQRGqGzDU=",
+    "extraAttrs": {
+      "pname": "virginia-county",
+      "version": "2016",
+      "extent": "Virginia",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Virginia_county.zip"
+    }
+  },
+  {
+    "name": "virginia-tract-2016",
+    "hash": "sha256-RzRSSf6Sx5EMdOgs1GK0uymuqMPtQkn2t2MnGePlN5A=",
+    "extraAttrs": {
+      "pname": "virginia-tract",
+      "version": "2016",
+      "extent": "Virginia",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Virginia.zip"
+    }
+  },
+  {
+    "name": "washington-county-2016",
+    "hash": "sha256-9Cd5Oj1/n99Fima6ayMy24CCeI5UIbk9XurRWwcClXA=",
+    "extraAttrs": {
+      "pname": "washington-county",
+      "version": "2016",
+      "extent": "Washington",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Washington_county.zip"
+    }
+  },
+  {
+    "name": "washington-tract-2016",
+    "hash": "sha256-8mgFUA1u2vorrHWLZK1+mbaotD6iE7BtBqOam+6WCPs=",
+    "extraAttrs": {
+      "pname": "washington-tract",
+      "version": "2016",
+      "extent": "Washington",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Washington.zip"
+    }
+  },
+  {
+    "name": "west_virginia-county-2016",
+    "hash": "sha256-9yccK5Cj61cucBpXnAw2kOWIfZ4kBDWHw3Rhv0jR1+s=",
+    "extraAttrs": {
+      "pname": "west_virginia-county",
+      "version": "2016",
+      "extent": "West_Virginia",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/WestVirginia_county.zip"
+    }
+  },
+  {
+    "name": "west_virginia-tract-2016",
+    "hash": "sha256-LDdEMd/JzAM8BsRPdxEQMjzItX5gmkisiFzzJJUbh9Q=",
+    "extraAttrs": {
+      "pname": "west_virginia-tract",
+      "version": "2016",
+      "extent": "West_Virginia",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/WestVirginia.zip"
+    }
+  },
+  {
+    "name": "wisconsin-county-2016",
+    "hash": "sha256-EvUdLZZ2aPv/0FWa6Zt/3PBezeuAttDTyxvGPhHnQB8=",
+    "extraAttrs": {
+      "pname": "wisconsin-county",
+      "version": "2016",
+      "extent": "Wisconsin",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Wisconsin_county.zip"
+    }
+  },
+  {
+    "name": "wisconsin-tract-2016",
+    "hash": "sha256-sx65jE5tBroQxAcZJuyOHEMU8NCqhQVpJOe+HRdQx4A=",
+    "extraAttrs": {
+      "pname": "wisconsin-tract",
+      "version": "2016",
+      "extent": "Wisconsin",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Wisconsin.zip"
+    }
+  },
+  {
+    "name": "wyoming-county-2016",
+    "hash": "sha256-U1tcGd6LZezMkfJAevN0k1qt0qk6bH55XFHhqnhXfto=",
+    "extraAttrs": {
+      "pname": "wyoming-county",
+      "version": "2016",
+      "extent": "Wyoming",
+      "geom": "county",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States_Counties/Wyoming_county.zip"
+    }
+  },
+  {
+    "name": "wyoming-tract-2016",
+    "hash": "sha256-Sc52IdpMhQYcnoxmzZ/HjbCQ2dhVbcseli2tnpSKFfk=",
+    "extraAttrs": {
+      "pname": "wyoming-tract",
+      "version": "2016",
+      "extent": "Wyoming",
+      "geom": "tract",
+      "year": "2016",
+      "url": "https://svi.cdc.gov/Documents/Data/2016_SVI_Data/States/Wyoming.zip"
+    }
+  },
+  {
+    "name": "us-county-2018",
+    "hash": "sha256-lph6MZSKY8GUoI/yzrd9Ls3rkq21nsttxm5dfLKwxbg=",
+    "extraAttrs": {
+      "pname": "us-county",
+      "version": "2018",
+      "extent": "US",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/SVI2018_US_county.zip"
+    }
+  },
+  {
+    "name": "us-tract-2018",
+    "hash": "sha256-iXibKc+zHr2UCO7VJuYRfAA8O11su9Bime1tvl12ukc=",
+    "extraAttrs": {
+      "pname": "us-tract",
+      "version": "2018",
+      "extent": "US",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/SVI2018_US.zip"
+    }
+  },
+  {
+    "name": "us-ttract-2018",
+    "hash": "sha256-bhFMl9e607aR4pF5iNEeAauTz0riWSkvOVDmTgEOy/U=",
+    "extraAttrs": {
+      "pname": "us-ttract",
+      "version": "2018",
+      "extent": "US",
+      "geom": "ttract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Tribal_Tracts.zip"
+    }
+  },
+  {
+    "name": "district_of_columbia-county-2018",
+    "hash": "sha256-gf1vmDG6tmqsvJY6IHlRcLfOBwSv6JdpNnF6KZ9VTsg=",
+    "extraAttrs": {
+      "pname": "district_of_columbia-county",
+      "version": "2018",
+      "extent": "District_of_Columbia",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/DistrictofColumbia_county.zip"
+    }
+  },
+  {
+    "name": "district_of_columbia-tract-2018",
+    "hash": "sha256-umYa7QUqZQ3XkLHI5H3tXHUMx9Ieg8QBS141kzqK0Hg=",
+    "extraAttrs": {
+      "pname": "district_of_columbia-tract",
+      "version": "2018",
+      "extent": "District_of_Columbia",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/DistrictofColumbia.zip"
+    }
+  },
+  {
+    "name": "puerto_rico-county-2018",
+    "hash": "sha256-+83xMarpbz/RO2wylFXbj3d6gFPGniV6uQjq1EjHpsY=",
+    "extraAttrs": {
+      "pname": "puerto_rico-county",
+      "version": "2018",
+      "extent": "Puerto_Rico",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/PuertoRico_county.zip"
+    }
+  },
+  {
+    "name": "puerto_rico-tract-2018",
+    "hash": "sha256-7cW69qaZJ54qfatM9+D5mH1t23YsGgB+4IM7b4gsDYk=",
+    "extraAttrs": {
+      "pname": "puerto_rico-tract",
+      "version": "2018",
+      "extent": "Puerto_Rico",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/PuertoRico.zip"
+    }
+  },
+  {
+    "name": "alabama-county-2018",
+    "hash": "sha256-E/Cqlfxxec0fNa/QDF1v4JLMjMq1tPpN4sqVj6CNcZg=",
+    "extraAttrs": {
+      "pname": "alabama-county",
+      "version": "2018",
+      "extent": "Alabama",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Alabama_county.zip"
+    }
+  },
+  {
+    "name": "alabama-tract-2018",
+    "hash": "sha256-ekQU9HrRe3svNE2WLoETN4Fa4z2kvqXtEP6w7obJdqQ=",
+    "extraAttrs": {
+      "pname": "alabama-tract",
+      "version": "2018",
+      "extent": "Alabama",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Alabama.zip"
+    }
+  },
+  {
+    "name": "alaska-county-2018",
+    "hash": "sha256-cCoBjyEmjNlId+zE5TceZce299gWiDXibx5Jl6wLOSY=",
+    "extraAttrs": {
+      "pname": "alaska-county",
+      "version": "2018",
+      "extent": "Alaska",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Alaska_county.zip"
+    }
+  },
+  {
+    "name": "alaska-tract-2018",
+    "hash": "sha256-Jjh1T2A9IOnGXU5pm69I2XdAF3ABD92ZKmznLKu/Eic=",
+    "extraAttrs": {
+      "pname": "alaska-tract",
+      "version": "2018",
+      "extent": "Alaska",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Alaska.zip"
+    }
+  },
+  {
+    "name": "arizona-county-2018",
+    "hash": "sha256-xL9I4C1jzGohwySJETLMrA7Qk4Y9HJmRU/3vgEqaq9A=",
+    "extraAttrs": {
+      "pname": "arizona-county",
+      "version": "2018",
+      "extent": "Arizona",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Arizona_county.zip"
+    }
+  },
+  {
+    "name": "arizona-tract-2018",
+    "hash": "sha256-Yp+zo/MA4WEcAEy3PZCHj4yxD7+1fnCFC2I+ZcjYXZk=",
+    "extraAttrs": {
+      "pname": "arizona-tract",
+      "version": "2018",
+      "extent": "Arizona",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Arizona.zip"
+    }
+  },
+  {
+    "name": "arkansas-county-2018",
+    "hash": "sha256-3BtJ++fhP9wY7yFUkRpQ+F5GuF5XCTb7cSUGWWykXu0=",
+    "extraAttrs": {
+      "pname": "arkansas-county",
+      "version": "2018",
+      "extent": "Arkansas",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Arkansas_county.zip"
+    }
+  },
+  {
+    "name": "arkansas-tract-2018",
+    "hash": "sha256-sdn98fSM7iLoaYh5F6ewIu06FgkYRHq41r64exT/uKE=",
+    "extraAttrs": {
+      "pname": "arkansas-tract",
+      "version": "2018",
+      "extent": "Arkansas",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Arkansas.zip"
+    }
+  },
+  {
+    "name": "california-county-2018",
+    "hash": "sha256-XlspV4nwEQ6uPYZwuRHpwOfQIKpFgdkTXVKlqNj9vso=",
+    "extraAttrs": {
+      "pname": "california-county",
+      "version": "2018",
+      "extent": "California",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/California_county.zip"
+    }
+  },
+  {
+    "name": "california-tract-2018",
+    "hash": "sha256-spcklEpSNHv8VXubU6QV+cCYU+jLz7kBJAjJHXK08Pc=",
+    "extraAttrs": {
+      "pname": "california-tract",
+      "version": "2018",
+      "extent": "California",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/California.zip"
+    }
+  },
+  {
+    "name": "colorado-county-2018",
+    "hash": "sha256-9KKR+EJJcmrsm5eehvB008E1G1g6boor14PUt+NfAMI=",
+    "extraAttrs": {
+      "pname": "colorado-county",
+      "version": "2018",
+      "extent": "Colorado",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Colorado_county.zip"
+    }
+  },
+  {
+    "name": "colorado-tract-2018",
+    "hash": "sha256-hXFgPLhdCBQpExMdTzPodvlwa5d0DXf5WyGjfci9ONc=",
+    "extraAttrs": {
+      "pname": "colorado-tract",
+      "version": "2018",
+      "extent": "Colorado",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Colorado.zip"
+    }
+  },
+  {
+    "name": "connecticut-county-2018",
+    "hash": "sha256-K4RIG9pzwhwaFt7MPBhuAB6V/ImRkgIdL7cpyMwTnJI=",
+    "extraAttrs": {
+      "pname": "connecticut-county",
+      "version": "2018",
+      "extent": "Connecticut",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Connecticut_county.zip"
+    }
+  },
+  {
+    "name": "connecticut-tract-2018",
+    "hash": "sha256-PXDVttZbem/g6kTwoPyw8zz2WR4SuCewAIbRcwRok8Y=",
+    "extraAttrs": {
+      "pname": "connecticut-tract",
+      "version": "2018",
+      "extent": "Connecticut",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Connecticut.zip"
+    }
+  },
+  {
+    "name": "delaware-county-2018",
+    "hash": "sha256-mapqQKapajIPdf0cKqzgXXRRSoy6xJb5qTGsVf0Kzk0=",
+    "extraAttrs": {
+      "pname": "delaware-county",
+      "version": "2018",
+      "extent": "Delaware",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Delaware_county.zip"
+    }
+  },
+  {
+    "name": "delaware-tract-2018",
+    "hash": "sha256-JtGN1ex0fIuAXFKeR4CKhxKBs+eXr2bJEtIbxbmFVjQ=",
+    "extraAttrs": {
+      "pname": "delaware-tract",
+      "version": "2018",
+      "extent": "Delaware",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Delaware.zip"
+    }
+  },
+  {
+    "name": "florida-county-2018",
+    "hash": "sha256-lLPS+RSW7KKht85bW5oufwlvPTNucJf/0CkyBp7h0LM=",
+    "extraAttrs": {
+      "pname": "florida-county",
+      "version": "2018",
+      "extent": "Florida",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Florida_county.zip"
+    }
+  },
+  {
+    "name": "florida-tract-2018",
+    "hash": "sha256-Ij8H79kJ0rl7WI5jx5LowBhC7ugPgojvdNB9xS5Uqtw=",
+    "extraAttrs": {
+      "pname": "florida-tract",
+      "version": "2018",
+      "extent": "Florida",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Florida.zip"
+    }
+  },
+  {
+    "name": "georgia-county-2018",
+    "hash": "sha256-1dOKPHxDVUKa5nLhB3DLRv/veX8fPfERHbF8QS8LFPw=",
+    "extraAttrs": {
+      "pname": "georgia-county",
+      "version": "2018",
+      "extent": "Georgia",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Georgia_county.zip"
+    }
+  },
+  {
+    "name": "georgia-tract-2018",
+    "hash": "sha256-On2OyCZdccVMf36aqedbcX/LPeDO2ifvou9c52bEXxk=",
+    "extraAttrs": {
+      "pname": "georgia-tract",
+      "version": "2018",
+      "extent": "Georgia",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Georgia.zip"
+    }
+  },
+  {
+    "name": "hawaii-county-2018",
+    "hash": "sha256-GrJKrFZRNwadmaiaVAUh7cmNnqj0YRA0vqaAjfxpMHQ=",
+    "extraAttrs": {
+      "pname": "hawaii-county",
+      "version": "2018",
+      "extent": "Hawaii",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Hawaii_county.zip"
+    }
+  },
+  {
+    "name": "hawaii-tract-2018",
+    "hash": "sha256-VIi+EFhqkj8oMXwpKRdXkHg7v6VXkopOUm0I989e1Wo=",
+    "extraAttrs": {
+      "pname": "hawaii-tract",
+      "version": "2018",
+      "extent": "Hawaii",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Hawaii.zip"
+    }
+  },
+  {
+    "name": "idaho-county-2018",
+    "hash": "sha256-Mlna1zEWpIJpPGuqMeZhE7HsfduaC6L04G4U4fRBB+8=",
+    "extraAttrs": {
+      "pname": "idaho-county",
+      "version": "2018",
+      "extent": "Idaho",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Idaho_county.zip"
+    }
+  },
+  {
+    "name": "idaho-tract-2018",
+    "hash": "sha256-sSL4P7fpOCsnF/iOt1eEFANLR0jc2oiv1F8oRXIDu1s=",
+    "extraAttrs": {
+      "pname": "idaho-tract",
+      "version": "2018",
+      "extent": "Idaho",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Idaho.zip"
+    }
+  },
+  {
+    "name": "illinois-county-2018",
+    "hash": "sha256-1fgHC1GhOhpa9T22j2SacQ6FCEVzr/kCAgFYx3Cset4=",
+    "extraAttrs": {
+      "pname": "illinois-county",
+      "version": "2018",
+      "extent": "Illinois",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Illinois_county.zip"
+    }
+  },
+  {
+    "name": "illinois-tract-2018",
+    "hash": "sha256-6xXEx6JBe7AqJCYTX4+Pzcb3z4Z1M4sVaKWWoSOT6Tk=",
+    "extraAttrs": {
+      "pname": "illinois-tract",
+      "version": "2018",
+      "extent": "Illinois",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Illinois.zip"
+    }
+  },
+  {
+    "name": "indiana-county-2018",
+    "hash": "sha256-oPO81LN0N6kq9DQTF5BDBb25eGpMpwXGMoQHT9+2zto=",
+    "extraAttrs": {
+      "pname": "indiana-county",
+      "version": "2018",
+      "extent": "Indiana",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Indiana_county.zip"
+    }
+  },
+  {
+    "name": "indiana-tract-2018",
+    "hash": "sha256-cvz4ezk02QQ2jJi5qE3PzR7GVIxsWsR5o2UqXnrzFJQ=",
+    "extraAttrs": {
+      "pname": "indiana-tract",
+      "version": "2018",
+      "extent": "Indiana",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Indiana.zip"
+    }
+  },
+  {
+    "name": "iowa-county-2018",
+    "hash": "sha256-rEgjpVJiV6tDt8Sglnm+/eUVwo9tHYbJFTnlBubGLTo=",
+    "extraAttrs": {
+      "pname": "iowa-county",
+      "version": "2018",
+      "extent": "Iowa",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Iowa_county.zip"
+    }
+  },
+  {
+    "name": "iowa-tract-2018",
+    "hash": "sha256-cbAijzbjDXag/tVLViuqHDqPwwoeSIv9JphJ8m2JNuU=",
+    "extraAttrs": {
+      "pname": "iowa-tract",
+      "version": "2018",
+      "extent": "Iowa",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Iowa.zip"
+    }
+  },
+  {
+    "name": "kansas-county-2018",
+    "hash": "sha256-WAZB2RvRLnfpzcQSqbpkcEDuVAXcHiedB5FZjZIZJIA=",
+    "extraAttrs": {
+      "pname": "kansas-county",
+      "version": "2018",
+      "extent": "Kansas",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Kansas_county.zip"
+    }
+  },
+  {
+    "name": "kansas-tract-2018",
+    "hash": "sha256-G4K3bSxpRlo7WCZ9XwBm4l2+HIvE7i0NSGDrtHkswjI=",
+    "extraAttrs": {
+      "pname": "kansas-tract",
+      "version": "2018",
+      "extent": "Kansas",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Kansas.zip"
+    }
+  },
+  {
+    "name": "kentucky-county-2018",
+    "hash": "sha256-esi5IBGN3Nk+PRDkRCh+nxJ9m0HWK1m36i266wCblqc=",
+    "extraAttrs": {
+      "pname": "kentucky-county",
+      "version": "2018",
+      "extent": "Kentucky",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Kentucky_county.zip"
+    }
+  },
+  {
+    "name": "kentucky-tract-2018",
+    "hash": "sha256-Gr7wrohqyrmk8HTh7JOJJmPUdnCdVTvfeTQyFbD7/Qs=",
+    "extraAttrs": {
+      "pname": "kentucky-tract",
+      "version": "2018",
+      "extent": "Kentucky",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Kentucky.zip"
+    }
+  },
+  {
+    "name": "louisiana-county-2018",
+    "hash": "sha256-wDst2KhofZ/TBCmiBYw9LGWIPodJd2h2A3zyyX+9DeU=",
+    "extraAttrs": {
+      "pname": "louisiana-county",
+      "version": "2018",
+      "extent": "Louisiana",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Louisiana_county.zip"
+    }
+  },
+  {
+    "name": "louisiana-tract-2018",
+    "hash": "sha256-BXqYcWLZmpaOKIy+mJyeQ12yUw5rxgc4AdBp+hnrMH8=",
+    "extraAttrs": {
+      "pname": "louisiana-tract",
+      "version": "2018",
+      "extent": "Louisiana",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Louisiana.zip"
+    }
+  },
+  {
+    "name": "maine-county-2018",
+    "hash": "sha256-sCqxDqM72WEgTvK8WSR63rwXSzUxMX8VVCvRUvK7tbw=",
+    "extraAttrs": {
+      "pname": "maine-county",
+      "version": "2018",
+      "extent": "Maine",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Maine_county.zip"
+    }
+  },
+  {
+    "name": "maine-tract-2018",
+    "hash": "sha256-vYj+WjMlCad9vDZ6U9n333eqRNvCnS8/eeGiJ1Fdigw=",
+    "extraAttrs": {
+      "pname": "maine-tract",
+      "version": "2018",
+      "extent": "Maine",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Maine.zip"
+    }
+  },
+  {
+    "name": "maryland-county-2018",
+    "hash": "sha256-+60T9fO6T2FWYocMo00qx6PcJ77a08XRLQYb6Jef2V0=",
+    "extraAttrs": {
+      "pname": "maryland-county",
+      "version": "2018",
+      "extent": "Maryland",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Maryland_county.zip"
+    }
+  },
+  {
+    "name": "maryland-tract-2018",
+    "hash": "sha256-PVbDSMD4Q2TdrhuUjDsg2pwuktpYGSQUdeXA0XY8Z/4=",
+    "extraAttrs": {
+      "pname": "maryland-tract",
+      "version": "2018",
+      "extent": "Maryland",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Maryland.zip"
+    }
+  },
+  {
+    "name": "massachusetts-county-2018",
+    "hash": "sha256-8D/5YOUqJN7a0tHWnjlEddbhHbMTudduBEuU1PklceI=",
+    "extraAttrs": {
+      "pname": "massachusetts-county",
+      "version": "2018",
+      "extent": "Massachusetts",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Massachusetts_county.zip"
+    }
+  },
+  {
+    "name": "massachusetts-tract-2018",
+    "hash": "sha256-HTtvfenl5EgQudx+6mgKZipq5kFyHhFj0zHMfn038w4=",
+    "extraAttrs": {
+      "pname": "massachusetts-tract",
+      "version": "2018",
+      "extent": "Massachusetts",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Massachusetts.zip"
+    }
+  },
+  {
+    "name": "michigan-county-2018",
+    "hash": "sha256-U2nFePbCunizRZft48nYpBi3YC95terWB1ft8in0neQ=",
+    "extraAttrs": {
+      "pname": "michigan-county",
+      "version": "2018",
+      "extent": "Michigan",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Michigan_county.zip"
+    }
+  },
+  {
+    "name": "michigan-tract-2018",
+    "hash": "sha256-+P8hVseF+LuY5ndjODuy1I1i5I/S0K1Szn3gO4h6jLM=",
+    "extraAttrs": {
+      "pname": "michigan-tract",
+      "version": "2018",
+      "extent": "Michigan",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Michigan.zip"
+    }
+  },
+  {
+    "name": "minnesota-county-2018",
+    "hash": "sha256-ruzIJ7l7Vry8MC32JkxzfQkja2+YJSfUtcyn40jT8AU=",
+    "extraAttrs": {
+      "pname": "minnesota-county",
+      "version": "2018",
+      "extent": "Minnesota",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Minnesota_county.zip"
+    }
+  },
+  {
+    "name": "minnesota-tract-2018",
+    "hash": "sha256-KdE7gJPSTnOrnxAqbFqSlbaLLsT0gcz6mxd6DLeneKI=",
+    "extraAttrs": {
+      "pname": "minnesota-tract",
+      "version": "2018",
+      "extent": "Minnesota",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Minnesota.zip"
+    }
+  },
+  {
+    "name": "mississippi-county-2018",
+    "hash": "sha256-3tC08x6G//+Mg029qxZiN3cc/hi2X2eTvteOdNydMgE=",
+    "extraAttrs": {
+      "pname": "mississippi-county",
+      "version": "2018",
+      "extent": "Mississippi",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Mississippi_county.zip"
+    }
+  },
+  {
+    "name": "mississippi-tract-2018",
+    "hash": "sha256-zHaVotcVHDg8v+Nsk2yO8y0X5eO7K4c7HtHZBSm+Sk8=",
+    "extraAttrs": {
+      "pname": "mississippi-tract",
+      "version": "2018",
+      "extent": "Mississippi",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Mississippi.zip"
+    }
+  },
+  {
+    "name": "missouri-county-2018",
+    "hash": "sha256-B9Cm2PtDamHLzHKtSmmL04/en3S7A0gGrdzbo+F6Ttk=",
+    "extraAttrs": {
+      "pname": "missouri-county",
+      "version": "2018",
+      "extent": "Missouri",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Missouri_county.zip"
+    }
+  },
+  {
+    "name": "missouri-tract-2018",
+    "hash": "sha256-u3XhU50Lz/+xQDwtBDdhtE9cKe+hImNUObSkkT4/CVY=",
+    "extraAttrs": {
+      "pname": "missouri-tract",
+      "version": "2018",
+      "extent": "Missouri",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Missouri.zip"
+    }
+  },
+  {
+    "name": "montana-county-2018",
+    "hash": "sha256-NdN3ri5F14d13UPqLmJ5DcOtqw42qLh7vG7Wzf+wj6U=",
+    "extraAttrs": {
+      "pname": "montana-county",
+      "version": "2018",
+      "extent": "Montana",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Montana_county.zip"
+    }
+  },
+  {
+    "name": "montana-tract-2018",
+    "hash": "sha256-q7sgvzqnfs3rwGZN2ac0LjE5PUd6ZEQZ+OHwxqsO6rY=",
+    "extraAttrs": {
+      "pname": "montana-tract",
+      "version": "2018",
+      "extent": "Montana",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Montana.zip"
+    }
+  },
+  {
+    "name": "nebraska-county-2018",
+    "hash": "sha256-NIpRPgMSgIXKdJb2GpVjQk5uW3ANfmdUPa3djQJvwa4=",
+    "extraAttrs": {
+      "pname": "nebraska-county",
+      "version": "2018",
+      "extent": "Nebraska",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Nebraska_county.zip"
+    }
+  },
+  {
+    "name": "nebraska-tract-2018",
+    "hash": "sha256-oc8PvPY6apy8XWpswEB013Opjx6nO+wduFw865I+pkA=",
+    "extraAttrs": {
+      "pname": "nebraska-tract",
+      "version": "2018",
+      "extent": "Nebraska",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Nebraska.zip"
+    }
+  },
+  {
+    "name": "nevada-county-2018",
+    "hash": "sha256-uy0+YST29a42B4ybMbsTaU9ATWO14C4K3n0wqnZgq9s=",
+    "extraAttrs": {
+      "pname": "nevada-county",
+      "version": "2018",
+      "extent": "Nevada",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Nevada_county.zip"
+    }
+  },
+  {
+    "name": "nevada-tract-2018",
+    "hash": "sha256-tOADRHoi92XEzwp1O5KBVOSt4276mB9YHlsEGEFLkUw=",
+    "extraAttrs": {
+      "pname": "nevada-tract",
+      "version": "2018",
+      "extent": "Nevada",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Nevada.zip"
+    }
+  },
+  {
+    "name": "new_hampshire-county-2018",
+    "hash": "sha256-bchTZyWgFhaXjitvfHoX9CeYz/5f7WEOV/ntmvRwths=",
+    "extraAttrs": {
+      "pname": "new_hampshire-county",
+      "version": "2018",
+      "extent": "New_Hampshire",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/NewHampshire_county.zip"
+    }
+  },
+  {
+    "name": "new_hampshire-tract-2018",
+    "hash": "sha256-JSGKcysKKs0hEeeZ5BMi7IDZpVh2XvDCauWi8Jd+LKA=",
+    "extraAttrs": {
+      "pname": "new_hampshire-tract",
+      "version": "2018",
+      "extent": "New_Hampshire",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/NewHampshire.zip"
+    }
+  },
+  {
+    "name": "new_jersey-county-2018",
+    "hash": "sha256-kOQi3y50U1cq5tmTqvCdGOGVUksyQNuuD87EmFiHRa8=",
+    "extraAttrs": {
+      "pname": "new_jersey-county",
+      "version": "2018",
+      "extent": "New_Jersey",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/NewJersey_county.zip"
+    }
+  },
+  {
+    "name": "new_jersey-tract-2018",
+    "hash": "sha256-YgxTcxuatfO7S5dBvDvSPJDT/+hys992n7Ci/bChQ+g=",
+    "extraAttrs": {
+      "pname": "new_jersey-tract",
+      "version": "2018",
+      "extent": "New_Jersey",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/NewJersey.zip"
+    }
+  },
+  {
+    "name": "new_mexico-county-2018",
+    "hash": "sha256-JvZk3hxOdTCVYD9QmL9zbDDKsopil4DARidhLBwUYbM=",
+    "extraAttrs": {
+      "pname": "new_mexico-county",
+      "version": "2018",
+      "extent": "New_Mexico",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/NewMexico_county.zip"
+    }
+  },
+  {
+    "name": "new_mexico-tract-2018",
+    "hash": "sha256-FLdAYRxRjy1pkaHpxvGosrCUOASdCVAzYr53eppPkqk=",
+    "extraAttrs": {
+      "pname": "new_mexico-tract",
+      "version": "2018",
+      "extent": "New_Mexico",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/NewMexico.zip"
+    }
+  },
+  {
+    "name": "new_york-county-2018",
+    "hash": "sha256-QRH9pFPvpX1ALMYaq8q9fi/0hXu3CUDGpChqwoIFO6s=",
+    "extraAttrs": {
+      "pname": "new_york-county",
+      "version": "2018",
+      "extent": "New_York",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/NewYork_county.zip"
+    }
+  },
+  {
+    "name": "new_york-tract-2018",
+    "hash": "sha256-r+YiQcIfSJiLk+eDwLcujlK54aOVE/8w0HjyzVjXnGI=",
+    "extraAttrs": {
+      "pname": "new_york-tract",
+      "version": "2018",
+      "extent": "New_York",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/NewYork.zip"
+    }
+  },
+  {
+    "name": "north_carolina-county-2018",
+    "hash": "sha256-t2WEdGbgm0JyqFeg+/mJbflmyzVJS/+JID9BWP5iPfo=",
+    "extraAttrs": {
+      "pname": "north_carolina-county",
+      "version": "2018",
+      "extent": "North_Carolina",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/NorthCarolina_county.zip"
+    }
+  },
+  {
+    "name": "north_carolina-tract-2018",
+    "hash": "sha256-86KQU4dJBhSpmXDgg/Mk4ZCOj9J6hNqJxa3VZd3/MMo=",
+    "extraAttrs": {
+      "pname": "north_carolina-tract",
+      "version": "2018",
+      "extent": "North_Carolina",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/NorthCarolina.zip"
+    }
+  },
+  {
+    "name": "north_dakota-county-2018",
+    "hash": "sha256-XTbuZR4GvMLuUxKZ6g4YeheJNevFeIDddsQ/LmMf02U=",
+    "extraAttrs": {
+      "pname": "north_dakota-county",
+      "version": "2018",
+      "extent": "North_Dakota",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/NorthDakota_county.zip"
+    }
+  },
+  {
+    "name": "north_dakota-tract-2018",
+    "hash": "sha256-GvB9bYp0fFE8uo7elo7oT9JKPLsX2xx2s5SlA4ADHJw=",
+    "extraAttrs": {
+      "pname": "north_dakota-tract",
+      "version": "2018",
+      "extent": "North_Dakota",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/NorthDakota.zip"
+    }
+  },
+  {
+    "name": "ohio-county-2018",
+    "hash": "sha256-rtxgNQNoIpp0LtnifZKyKbewqFXlZiCSpKdMwWdlypk=",
+    "extraAttrs": {
+      "pname": "ohio-county",
+      "version": "2018",
+      "extent": "Ohio",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Ohio_county.zip"
+    }
+  },
+  {
+    "name": "ohio-tract-2018",
+    "hash": "sha256-p02rOidr1wJn40559RVj6h/yy+nASVVS7ZYAu6mhAXc=",
+    "extraAttrs": {
+      "pname": "ohio-tract",
+      "version": "2018",
+      "extent": "Ohio",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Ohio.zip"
+    }
+  },
+  {
+    "name": "oklahoma-county-2018",
+    "hash": "sha256-m9OYVOv8gDAgL74YqbF+Aw0DXwdJfEj4ofbgZFcpqQg=",
+    "extraAttrs": {
+      "pname": "oklahoma-county",
+      "version": "2018",
+      "extent": "Oklahoma",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Oklahoma_county.zip"
+    }
+  },
+  {
+    "name": "oklahoma-tract-2018",
+    "hash": "sha256-GgpTb1+z9i1thURQAo+u4u8m3glas9S4fJR7WLHvSjY=",
+    "extraAttrs": {
+      "pname": "oklahoma-tract",
+      "version": "2018",
+      "extent": "Oklahoma",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Oklahoma.zip"
+    }
+  },
+  {
+    "name": "oregon-county-2018",
+    "hash": "sha256-A4lgxJmAQnkhNm1PznmReCsPvfUlGnfiMHVn7fakklU=",
+    "extraAttrs": {
+      "pname": "oregon-county",
+      "version": "2018",
+      "extent": "Oregon",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Oregon_county.zip"
+    }
+  },
+  {
+    "name": "oregon-tract-2018",
+    "hash": "sha256-92qGMHdG0QarqFqdNUAAdIVfDE67wE5xUueiu7PvfdE=",
+    "extraAttrs": {
+      "pname": "oregon-tract",
+      "version": "2018",
+      "extent": "Oregon",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Oregon.zip"
+    }
+  },
+  {
+    "name": "pennsylvania-county-2018",
+    "hash": "sha256-gKw4iYAlcKIjk6RnDbeCWS2f6oRahrph3+eoCHVUqlE=",
+    "extraAttrs": {
+      "pname": "pennsylvania-county",
+      "version": "2018",
+      "extent": "Pennsylvania",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Pennsylvania_county.zip"
+    }
+  },
+  {
+    "name": "pennsylvania-tract-2018",
+    "hash": "sha256-GGaBFrWAtLnFag9ha0XW0kjT1O7muGsSSSK657FsH/o=",
+    "extraAttrs": {
+      "pname": "pennsylvania-tract",
+      "version": "2018",
+      "extent": "Pennsylvania",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Pennsylvania.zip"
+    }
+  },
+  {
+    "name": "rhode_island-county-2018",
+    "hash": "sha256-eGe2XiqczoqjXCEUCXGeTkvnM+ixwcAKFOEgLnJLylI=",
+    "extraAttrs": {
+      "pname": "rhode_island-county",
+      "version": "2018",
+      "extent": "Rhode_Island",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/RhodeIsland_county.zip"
+    }
+  },
+  {
+    "name": "rhode_island-tract-2018",
+    "hash": "sha256-KWVkRSd2av5N/baTQju0F1cvMxGjMFy43tuGpHspwdY=",
+    "extraAttrs": {
+      "pname": "rhode_island-tract",
+      "version": "2018",
+      "extent": "Rhode_Island",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/RhodeIsland.zip"
+    }
+  },
+  {
+    "name": "south_carolina-county-2018",
+    "hash": "sha256-GfWh73JBll9I7JMAFrlecbjMRKI141PWUUi5MCtySC4=",
+    "extraAttrs": {
+      "pname": "south_carolina-county",
+      "version": "2018",
+      "extent": "South_Carolina",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/SouthCarolina_county.zip"
+    }
+  },
+  {
+    "name": "south_carolina-tract-2018",
+    "hash": "sha256-ZOGix83cLwq3dCdvu8ZH1HNtZ9ZW0M7Pxw3xb2EzI6o=",
+    "extraAttrs": {
+      "pname": "south_carolina-tract",
+      "version": "2018",
+      "extent": "South_Carolina",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/SouthCarolina.zip"
+    }
+  },
+  {
+    "name": "south_dakota-county-2018",
+    "hash": "sha256-v/inRY+yUe7GY84PDvwXHARhs0x184okH3eipxreRCA=",
+    "extraAttrs": {
+      "pname": "south_dakota-county",
+      "version": "2018",
+      "extent": "South_Dakota",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/SouthDakota_county.zip"
+    }
+  },
+  {
+    "name": "south_dakota-tract-2018",
+    "hash": "sha256-vOR3myf0oGbAj3WmMKaszWbtZTEAcLCOu/MbTpV7Zyc=",
+    "extraAttrs": {
+      "pname": "south_dakota-tract",
+      "version": "2018",
+      "extent": "South_Dakota",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/SouthDakota.zip"
+    }
+  },
+  {
+    "name": "tennessee-county-2018",
+    "hash": "sha256-H2eTHR4GQypAIGp07phUt/Lj/PFRVRSEcAEZKOcbYSk=",
+    "extraAttrs": {
+      "pname": "tennessee-county",
+      "version": "2018",
+      "extent": "Tennessee",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Tennessee_county.zip"
+    }
+  },
+  {
+    "name": "tennessee-tract-2018",
+    "hash": "sha256-RKKXjWa2LUUxv3VMQMY5WzrAa3xNTsLYO9brns10+pk=",
+    "extraAttrs": {
+      "pname": "tennessee-tract",
+      "version": "2018",
+      "extent": "Tennessee",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Tennessee.zip"
+    }
+  },
+  {
+    "name": "texas-county-2018",
+    "hash": "sha256-hf6+BtbsDFTXBdrOLBzqxuXEbRJhYhnSgMpSrNEsZCQ=",
+    "extraAttrs": {
+      "pname": "texas-county",
+      "version": "2018",
+      "extent": "Texas",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Texas_county.zip"
+    }
+  },
+  {
+    "name": "texas-tract-2018",
+    "hash": "sha256-iuN5iZA9/hPmAVHX2fqJ0N4a7xgXnZkNYicrbTF1XLo=",
+    "extraAttrs": {
+      "pname": "texas-tract",
+      "version": "2018",
+      "extent": "Texas",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Texas.zip"
+    }
+  },
+  {
+    "name": "utah-county-2018",
+    "hash": "sha256-dtN77XA6PxiLVGohdbCq/fmI3ejVQ6IvZRtA720ET+4=",
+    "extraAttrs": {
+      "pname": "utah-county",
+      "version": "2018",
+      "extent": "Utah",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Utah_county.zip"
+    }
+  },
+  {
+    "name": "utah-tract-2018",
+    "hash": "sha256-gTHaCBEY/6rljfxxWMmn00kvb+i1H8CC+pfc3qvOUJk=",
+    "extraAttrs": {
+      "pname": "utah-tract",
+      "version": "2018",
+      "extent": "Utah",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Utah.zip"
+    }
+  },
+  {
+    "name": "vermont-county-2018",
+    "hash": "sha256-9MInL9Ga1yk9XPLeY5O9kNs3RDyYyKwc0Q/+fRou6tw=",
+    "extraAttrs": {
+      "pname": "vermont-county",
+      "version": "2018",
+      "extent": "Vermont",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Vermont_county.zip"
+    }
+  },
+  {
+    "name": "vermont-tract-2018",
+    "hash": "sha256-/b7fS3rpQSciEa/4eYgdG8lo78UBTCmNCK5y+MG8vrI=",
+    "extraAttrs": {
+      "pname": "vermont-tract",
+      "version": "2018",
+      "extent": "Vermont",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Vermont.zip"
+    }
+  },
+  {
+    "name": "virginia-county-2018",
+    "hash": "sha256-3i4XdIguA7BFvZCz8yq4dlOykz4j7wnZ/utpTvDQ/MQ=",
+    "extraAttrs": {
+      "pname": "virginia-county",
+      "version": "2018",
+      "extent": "Virginia",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Virginia_county.zip"
+    }
+  },
+  {
+    "name": "virginia-tract-2018",
+    "hash": "sha256-v3soPtF4tf9+rx2KmfaugW0/3hcDy9ElO45FxMhWtPU=",
+    "extraAttrs": {
+      "pname": "virginia-tract",
+      "version": "2018",
+      "extent": "Virginia",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Virginia.zip"
+    }
+  },
+  {
+    "name": "washington-county-2018",
+    "hash": "sha256-5umpX4aApLXgISoXM9pFU+azIFnoIeQYqfRzvHJdQh0=",
+    "extraAttrs": {
+      "pname": "washington-county",
+      "version": "2018",
+      "extent": "Washington",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Washington_county.zip"
+    }
+  },
+  {
+    "name": "washington-tract-2018",
+    "hash": "sha256-RxkcgomfbLn3BiioVTR7X68/xEPJKvy/Xgq/RcbnM24=",
+    "extraAttrs": {
+      "pname": "washington-tract",
+      "version": "2018",
+      "extent": "Washington",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Washington.zip"
+    }
+  },
+  {
+    "name": "west_virginia-county-2018",
+    "hash": "sha256-kquipge1MkH5A+fPGLevUqiWD4UmZqM14EfwWBhxMt4=",
+    "extraAttrs": {
+      "pname": "west_virginia-county",
+      "version": "2018",
+      "extent": "West_Virginia",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/WestVirginia_county.zip"
+    }
+  },
+  {
+    "name": "west_virginia-tract-2018",
+    "hash": "sha256-4u6UsvCXlcKNQ0lYhL6ZdQj8O6JAyscShd0JUQbuUFw=",
+    "extraAttrs": {
+      "pname": "west_virginia-tract",
+      "version": "2018",
+      "extent": "West_Virginia",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/WestVirginia.zip"
+    }
+  },
+  {
+    "name": "wisconsin-county-2018",
+    "hash": "sha256-OlqH84tL5NhEN7Yb6MqvbrAiLNv6lldkNDrTS98UUoY=",
+    "extraAttrs": {
+      "pname": "wisconsin-county",
+      "version": "2018",
+      "extent": "Wisconsin",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Wisconsin_county.zip"
+    }
+  },
+  {
+    "name": "wisconsin-tract-2018",
+    "hash": "sha256-a7NFwOL9gTSVeOcwk0EarMIaT27VLA8RyExxwmERj/Y=",
+    "extraAttrs": {
+      "pname": "wisconsin-tract",
+      "version": "2018",
+      "extent": "Wisconsin",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Wisconsin.zip"
+    }
+  },
+  {
+    "name": "wyoming-county-2018",
+    "hash": "sha256-BaAfm9xHftQNQ/OvBdXMybRji+JX8FHyAOc6raUNRWs=",
+    "extraAttrs": {
+      "pname": "wyoming-county",
+      "version": "2018",
+      "extent": "Wyoming",
+      "geom": "county",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States_Counties/Wyoming_county.zip"
+    }
+  },
+  {
+    "name": "wyoming-tract-2018",
+    "hash": "sha256-cYZW0FuInAjF0WeVNTwms/nJyP3RafmUqIjRzq2xmv4=",
+    "extraAttrs": {
+      "pname": "wyoming-tract",
+      "version": "2018",
+      "extent": "Wyoming",
+      "geom": "tract",
+      "year": "2018",
+      "url": "https://svi.cdc.gov/Documents/Data/2018_SVI_Data/States/Wyoming.zip"
+    }
+  }
+]

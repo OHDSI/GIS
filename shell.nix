@@ -1,13 +1,14 @@
-{ sources ? import ../../niv/sources.nix
+{ sources ? import ./niv/sources.nix
 , pkgs ? import sources.nixpkgs {} } :
 pkgs.mkShell {
   nativeBuildInputs = [
     (pkgs.haskellPackages.ghcWithPackages (ps: [
       ps.aeson
       ps.aeson-pretty
-      ps.lens
+      ps.http-conduit
     ]))
-    pkgs.unzip
+    pkgs.niv
     pkgs.nix-prefetch
+    pkgs.unzip
   ];
 }

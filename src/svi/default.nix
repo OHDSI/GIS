@@ -3,21 +3,21 @@
 , linkFarmFromDrvs
 }:
 let
-  sourceFiles = import ./source-files.nix;
+  sourceFiles = builtins.fromJSON (builtins.readFile ./source-files.json);
   fetchSourceFile = sourceFile:
     fetchzip {
-      name = "${sourceFile.pname}-${sourceFile.version}";
+      name = sourceFile.name;
       stripRoot = false;
-      url = sourceFile.url;
-      sha256 = sourceFile.sha256;
+      url = sourceFile.extraAttrs.url;
+      hash = sourceFile.hash;
 
-      passthru = removeAttrs sourceFile ["pname" "version" "url" "sha256"];
+      passthru = sourceFile;
     };
-  drvs = builtins.mapAttrs (name: fetchSourceFile) sourceFiles;
+  drvs = map fetchSourceFile sourceFiles;
 in
 (linkFarmFromDrvs
    "svi-0.1"
-   (builtins.attrValues drvs)
+   drvs
 ).overrideAttrs (oldAttrs: {
   meta = with lib; {
     description = "CDC/ATSDR Social Vulnerability Index";
@@ -34,5 +34,5 @@ in
     license = licenses.publicDomain;
     platforms = platforms.all;
   };
-  passthru = drvs;
+  passthru = builtins.listToAttrs (map (drv: {name = drv.name; value = drv;}) drvs);
 })
