@@ -20,8 +20,8 @@ calculateHash sourceFile = do
     ("nix-prefetch") ["(callPackage (import ./.) {}).\"" ++ (T.unpack $ S.name sourceFile) ++ "\""] ""
   return $
     case exitcode of
-      _ -> S.updateHash sourceFile $ (T.strip . T.pack) stdout
-
+      ExitSuccess -> S.updateHash sourceFile $ (T.strip . T.pack) stdout
+      _ -> sourceFile
 main = do
   args <- getArgs
   x <- B.readFile $ head args

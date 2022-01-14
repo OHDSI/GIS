@@ -1,13 +1,14 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Main where
 
-import Utils as Utils
+import qualified SourceFiles as S
 
 import Network.HTTP.Simple
 import Data.Text.Encoding (decodeUtf8)
 
 import qualified Data.Text as T
 import qualified Data.Map as M
+import qualified Data.ByteString.Lazy.Char8 as B
 
 getFileList = do
   response <- httpBS "https://aqs.epa.gov/aqsweb/airdata/file_list.csv"
@@ -21,12 +22,11 @@ main :: IO ()
 main = do
   fileList <- getFileList
 
-  Utils.showNixSourceFiles $
+  B.putStrLn $ S.show $
     map (\file ->
-      SourceFile {
-        Utils.name = head $ T.splitOn "." file,
-        url = "https://aqs.epa.gov/aqsweb/airdata/" <> file,
-        extraAttrs = M.empty
-      }
+      S.fromListText
+        (head $ T.splitOn "." file)
+        [("url", "https://aqs.epa.gov/aqsweb/airdata/" <> file)
+        ]
     )
     fileList

@@ -2,12 +2,13 @@
 module Main where
 
 import Regions as Regions
-import Utils as Utils
+import qualified SourceFiles as S
 
 import qualified Data.Text as T
 import qualified Data.Map as M
+import qualified Data.ByteString.Lazy.Char8 as B
 
-main = Utils.showNixSourceFiles sources
+main = B.putStrLn $ S.show sources
 
 sources =
   concatMap
@@ -15,7 +16,7 @@ sources =
       nationSources year
       <> concatMap (stateSources year) us_states
     )
-    [2011..2020]
+    [2011..2021]
 
 nationSources year =
   let
@@ -35,34 +36,33 @@ nationSources year =
         year | year >= 2012 -> ["uac", "zcta5"]
         _ -> []
     s_year = T.pack $ show year
+    s_decade = (T.take 1 (T.takeEnd 2 s_year)) <> "0"
     nationUrl :: T.Text -> T.Text
     nationUrl geom =
       "https://www2.census.gov/geo/tiger/TIGER"
       <> s_year <> "/"
       <> case (geom, year) of
            ("aitsn", year) | year <= 2014 -> "AITS"
+           ("zcta5", year) | year >= 2020 -> "ZCTA5" <> s_decade
            _ -> (T.toUpper geom)
       <> "/"
       <> "tl_" <> s_year <> "_us_"
-      <> case geom of
-           geom | geom == "zcta5" || geom == "uac" -> geom <> "10"
+      <> case (geom, year) of
+           ("zcta5", year) -> "zcta5" <> s_decade
+           ("uac", year) -> "uac10"
            _ -> geom
       <> ".zip"
    in
     map (\geom ->
-      SourceFile {
-        Utils.name =
-          "us-" <> geom <> "-" <> s_year,
-        url =
-          nationUrl geom,
-        extraAttrs = M.fromList
-          [ ("year", s_year)
-          , ("extent", "US")
-          , ("geom", geom)
-          , ("pname", "us-" <> geom)
-          , ("version", s_year)
-          ]
-        }
+      S.fromListText
+        ("us-" <> geom <> "-" <> s_year)
+        [ ("url", nationUrl geom)
+        , ("year", s_year)
+        , ("extent", "US")
+        , ("geom", geom)
+        , ("pname", "us-" <> geom)
+        , ("version", s_year)
+        ]
       )
       nation_geoms
 
@@ -82,34 +82,33 @@ stateSources year state =
         (_, US_State{Regions.name=_, statefp="02"}) -> ["anrc"]
         (year ,US_State{Regions.name=_, statefp="72"}) | year >= 2020 -> ["subbarrio"]
         _ -> []
-      <>
-      case year of
-        2020 -> ["tabblock20"]
-        _ -> [];
     s_name = sanatize $ Regions.name state
     s_year = T.pack $ show year
+    s_decade = (T.take 1 (T.takeEnd 2 s_year)) <> "0"
     stateName geom =
       (T.toLower s_name) <> "-" <> geom <> "-" <> s_year
     stateUrl geom =
       "https://www2.census.gov/geo/tiger/TIGER"
-      <> s_year <> "/" <> (T.toUpper geom) <> "/"
+      <> s_year <> "/"
+      <> case (geom, year) of
+           ("tabblock", year) | year >= 2020 -> "TABBLOCK" <> s_decade
+           _ -> (T.toUpper geom)
+      <> "/"
       <> "tl_" <> s_year <> "_" <> (statefp state) <> "_"
       <> case (geom, year) of
-           ("tabblock", year) | year >=2014 -> "tabblock10"
+           ("tabblock", year) | year >= 2014 -> "tabblock" <> s_decade
            _ -> geom
       <> ".zip"     
-    stateSource :: T.Text -> SourceFile
+    stateSource :: T.Text -> S.SourceFile
     stateSource geom =
-      SourceFile {
-        Utils.name = stateName geom,
-        url = stateUrl geom,
-        extraAttrs = M.fromList
-          [ ("year", s_year)
-          , ("extent", s_name)
-          , ("geom", geom)
-          , ("pname", (T.toLower s_name) <> "-" <> geom)
-          , ("version", s_year)
-          ]
-      }
+      S.fromListText
+        (stateName geom)
+        [ ("url", stateUrl geom)
+        , ("year", s_year)
+        , ("extent", s_name)
+        , ("geom", geom)
+        , ("pname", (T.toLower s_name) <> "-" <> geom)
+        , ("version", s_year)
+        ]
   in
     map stateSource state_geoms

@@ -3,23 +3,23 @@
 , linkFarmFromDrvs
 } :
 let
-  sourceFiles = import ./source-files.nix;
+  sourceFiles = builtins.fromJSON (builtins.readFile ./source-files.json);
   fetchSourceFile = sourceFile:
     fetchzip {
-      name = "${sourceFile.pname}-${sourceFile.version}";
+      name = sourceFile.name;
       stripRoot = false;
-      url = sourceFile.url;
-      sha256 = sourceFile.sha256;
+      url = sourceFile.extraAttrs.url;
+      hash = sourceFile.hash;
 
       passthru =
-        if lib.toInt sourceFile.year <= 2014 then {encoding = "LATIN1";} else {} //
-        (removeAttrs sourceFile ["pname" "version" "url" "sha256"]);
+        if lib.toInt sourceFile.extraAttrs.year <= 2014 then {encoding = "LATIN1";} else {} //
+        sourceFile;
     };
-  drvs = builtins.mapAttrs (name: fetchSourceFile) sourceFiles;
+  drvs = map fetchSourceFile sourceFiles;
 in
 (linkFarmFromDrvs
    "tiger-0.1"
-   (builtins.attrValues drvs)
+   drvs
 ).overrideAttrs (oldAttrs: {
   meta = with lib; {
     description = "Mapping files from the US Census Bureau Geography program";
@@ -43,5 +43,5 @@ in
       license = licenses.publicDomain;
       platforms = platforms.all;
   };
-  passthru = drvs;
+  passthru = builtins.listToAttrs (map (drv: {name = drv.name; value = drv;}) drvs);
 })
