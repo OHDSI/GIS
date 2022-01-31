@@ -1,6 +1,6 @@
-{ fetchzip
-, lib
-, linkFarmFromDrvs
+{ fetchzip ? (import (import ../../niv/sources.nix).nixpkgs { }).fetchzip
+, lib ? (import (import ../../niv/sources.nix).nixpkgs { }).lib
+, linkFarmFromDrvs ? (import (import ../../niv/sources.nix).nixpkgs { }).linkFarmFromDrvs
 }:
 let
   sourceFiles = builtins.fromJSON (builtins.readFile ./source-files.json);
