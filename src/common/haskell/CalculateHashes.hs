@@ -17,7 +17,7 @@ import System.Exit
 
 calculateHash sourceFile = do
   (exitcode, stdout, stderr) <- readProcessWithExitCode
-    ("nix-prefetch") ["(callPackage (import ./.) {}).\"" ++ (T.unpack $ S.name sourceFile) ++ "\""] ""
+    ("nix-prefetch") ["((import ./.) {}).\"" ++ (T.unpack $ S.name sourceFile) ++ "\""] ""
   return $
     case exitcode of
       ExitSuccess -> S.updateHash sourceFile $ (T.strip . T.pack) stdout

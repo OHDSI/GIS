@@ -80,7 +80,11 @@ stateSources year state =
       <>
       case (year, state) of
         (_, US_State{Regions.name=_, statefp="02"}) -> ["anrc"]
-        (year ,US_State{Regions.name=_, statefp="72"}) | year >= 2020 -> ["subbarrio"]
+        (year, US_State{Regions.name=_, statefp="72"}) | year >= 2020 -> ["subbarrio"]
+        _ -> []
+      <>
+      case (year, state) of
+        (year, state) | year >= 2012 && (statefp state) /= "60" && (statefp state) /= "69" -> ["puma"]
         _ -> []
     s_name = sanatize $ Regions.name state
     s_year = T.pack $ show year
@@ -97,6 +101,7 @@ stateSources year state =
       <> "tl_" <> s_year <> "_" <> (statefp state) <> "_"
       <> case (geom, year) of
            ("tabblock", year) | year >= 2014 -> "tabblock" <> s_decade
+           ("puma", _) -> "puma10"
            _ -> geom
       <> ".zip"     
     stateSource :: T.Text -> S.SourceFile
