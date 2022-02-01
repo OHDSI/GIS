@@ -24,4 +24,5 @@ rec {
   tiger = callPackage ./src/tiger { };
   tiger-pg = callPackage ./src/tiger/pg.nix { tiger = tiger; };
   adi = callPackage ./src/adi { };
+  aqs = callPackage ./src/aqs { };
 }
