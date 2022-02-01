@@ -46,7 +46,7 @@ let
   drvs = map fetchSourceFile sourceFiles;
 in
 (linkFarmFromDrvs
-  "adi-0.1"
+  "adi-3.1"
   drvs
 ).overrideAttrs (oldAttrs: {
   meta = with lib; {
