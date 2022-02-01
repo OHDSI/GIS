@@ -17,7 +17,7 @@
   },
   {
     "name": "district_of_columbia-bg-2015",
-    "hash": "sha256-Z8cgsY0uK1bECydbJcS3ccFSPB8jFxUzPXmaBNNQG3k=",
+    "hash": "sha256-htql/wjH1rjPqO5im6jFFtipD2QxvwEHupM7dJ9fLMc=",
     "extraAttrs": {
       "pname": "district_of_columbia-bg",
       "version": "2015",
@@ -49,7 +49,7 @@
   },
   {
     "name": "puerto_rico-bg-2015",
-    "hash": "sha256-iDTPOkhNBgUD3lwutMKVAwZoICIszuUlbLtBOxHTMig=",
+    "hash": "sha256-fdH36GbDmFoOQxX3oZizjOP3SAGlVhfWAg7kPsvnFQE=",
     "extraAttrs": {
       "pname": "puerto_rico-bg",
       "version": "2015",
@@ -81,7 +81,7 @@
   },
   {
     "name": "alabama-bg-2015",
-    "hash": "sha256-ycgBUSgCl8opwS6bjd1x7wXiXoxisFBfeoz9NFU/TzE=",
+    "hash": "sha256-1RIQii/huWf62/J4jimMD2Z48rfJGTBdTQCuOKlmqN8=",
     "extraAttrs": {
       "pname": "alabama-bg",
       "version": "2015",
@@ -113,7 +113,7 @@
   },
   {
     "name": "alaska-bg-2015",
-    "hash": "sha256-kiM5fxAJovgAaxnCgux1SdXEFCsXn60B/vqRqugspxM=",
+    "hash": "sha256-955M+IUxCwkJgQ463Hrd8WWwOVBWSwxoGYdXcxt6Blw=",
     "extraAttrs": {
       "pname": "alaska-bg",
       "version": "2015",
@@ -145,7 +145,7 @@
   },
   {
     "name": "arizona-bg-2015",
-    "hash": "sha256-TZktiwg28+Fxx7sflK7V2+raOHID65lICdLfNjSpP6k=",
+    "hash": "sha256-NOw0SBeLEjitqgKGHJV3NdX3DgHtBGUtd3KQdcDcZgk=",
     "extraAttrs": {
       "pname": "arizona-bg",
       "version": "2015",
@@ -177,7 +177,7 @@
   },
   {
     "name": "arkansas-bg-2015",
-    "hash": "sha256-0Yy6oUgh87pulhXKfMaiyG2pYSzeyM7yW68h11SXzcI=",
+    "hash": "sha256-EQ9b+j/5guB01Q1fBe8qJL9pf1d7Pj3ht+Xae6bsPTk=",
     "extraAttrs": {
       "pname": "arkansas-bg",
       "version": "2015",
@@ -209,7 +209,7 @@
   },
   {
     "name": "california-bg-2015",
-    "hash": "sha256-JCd8VOvRVdvbQP91248D1c8KpqonrxnwY3UPWYQNZ+M=",
+    "hash": "sha256-DV4etq/ATVGyddGP+ZicNlzcW/2/ccEekfCxwuTXut8=",
     "extraAttrs": {
       "pname": "california-bg",
       "version": "2015",
@@ -241,7 +241,7 @@
   },
   {
     "name": "colorado-bg-2015",
-    "hash": "sha256-7RY+w7JwBFrJ+FA6n8eaXk6Q7lYiVI8wXVl1v7oS6NA=",
+    "hash": "sha256-zTWTAsPDcb2qR4YLwYSsyqpojMaqdc7s4OVigaDD6yc=",
     "extraAttrs": {
       "pname": "colorado-bg",
       "version": "2015",
@@ -273,7 +273,7 @@
   },
   {
     "name": "connecticut-bg-2015",
-    "hash": "sha256-MYDmT7pe8gSk0NfY8RC2AU7VqC72a571h6GpeZsDZwg=",
+    "hash": "sha256-6XwrccDpE6M393OHItyyg2DHJCqrz+ZkHqapN/5+d3Q=",
     "extraAttrs": {
       "pname": "connecticut-bg",
       "version": "2015",
@@ -305,7 +305,7 @@
   },
   {
     "name": "delaware-bg-2015",
-    "hash": "sha256-10b4tQF2Np/xUXSbPeXLeaBNbp0gCgBElRUdGImrw3A=",
+    "hash": "sha256-yTDyoGfKMTTbqpvxm3GOrAE+CoAHuka/3b0vrpdu45s=",
     "extraAttrs": {
       "pname": "delaware-bg",
       "version": "2015",
@@ -337,7 +337,7 @@
   },
   {
     "name": "florida-bg-2015",
-    "hash": "sha256-eQA+R5KfAXqEZrDL8o9LW2MUCLS3tSt3vM2RQTzIsZ8=",
+    "hash": "sha256-hgVY49QZ/lvHixQS7DcpwIrK08SfzFbT3D3ufQn/uao=",
     "extraAttrs": {
       "pname": "florida-bg",
       "version": "2015",
@@ -369,7 +369,7 @@
   },
   {
     "name": "georgia-bg-2015",
-    "hash": "sha256-zR2gemkIGRqrOQddsaMe5phwogl0wFV/ace0vlsWsAs=",
+    "hash": "sha256-asceHcjXkSGpiw5rZ9iwkZVReoNjaRxunwqiH9VgsGE=",
     "extraAttrs": {
       "pname": "georgia-bg",
       "version": "2015",
@@ -401,7 +401,7 @@
   },
   {
     "name": "hawaii-bg-2015",
-    "hash": "sha256-KidgPfEV9SXcWpKU+wgvjVNByGserYfIKQ9NWRHyzAE=",
+    "hash": "sha256-sncSADR0KaM4/TbyzHmJo53pPoDHd5RHubuF/sIN5vc=",
     "extraAttrs": {
       "pname": "hawaii-bg",
       "version": "2015",
@@ -433,7 +433,7 @@
   },
   {
     "name": "idaho-bg-2015",
-    "hash": "sha256-C8sslcIaFgMJqpj/o/OxhHR0JXOM2yD86To3mWgV8Do=",
+    "hash": "sha256-yNRtrd25R1jHJjbOT9WXb10+pKGgKOYCItdRkJreZq8=",
     "extraAttrs": {
       "pname": "idaho-bg",
       "version": "2015",
@@ -465,7 +465,7 @@
   },
   {
     "name": "illinois-bg-2015",
-    "hash": "sha256-omU21jHOAC1hpd8GcCCbEOd0/cmwMqGEZW0BJDYxKD4=",
+    "hash": "sha256-V7TnEOfVrilctSxcfCHaAxkzRt2NPD2NFCXzrjb3DM4=",
     "extraAttrs": {
       "pname": "illinois-bg",
       "version": "2015",
@@ -497,7 +497,7 @@
   },
   {
     "name": "indiana-bg-2015",
-    "hash": "sha256-4i7pZMbSTnHYgjWgLREc0Wf0m6QsSaqRJlgGblH1iDQ=",
+    "hash": "sha256-Zr1G1+a7WKjXISGE+TJn+OmeuFxi5Xv3WdgBRn6IBsg=",
     "extraAttrs": {
       "pname": "indiana-bg",
       "version": "2015",
@@ -529,7 +529,7 @@
   },
   {
     "name": "iowa-bg-2015",
-    "hash": "sha256-4jfULqhibTwAO0oN7Cd7vseQuoVaX6Yja68CJVZly3U=",
+    "hash": "sha256-pYY+7N/67OEccSOrRNFdSE2oitpDT1gqqWsEPwuhKn8=",
     "extraAttrs": {
       "pname": "iowa-bg",
       "version": "2015",
@@ -561,7 +561,7 @@
   },
   {
     "name": "kansas-bg-2015",
-    "hash": "sha256-6dJ2UehQelH79mAis4y2QhiCZ5tTZQ5J4TRApHXxe0Q=",
+    "hash": "sha256-n82laPYpe3zOQagwyOEN7i558OBZooOeI4QEWu2F4Os=",
     "extraAttrs": {
       "pname": "kansas-bg",
       "version": "2015",
@@ -593,7 +593,7 @@
   },
   {
     "name": "kentucky-bg-2015",
-    "hash": "sha256-YmD03JqD4Tnd/5WqYVEd7OASsD0wet350W6XiYcbvbc=",
+    "hash": "sha256-EUmVq0ktP/weH2zAdxq2pyhUyziFG0KiZZefbAwK50A=",
     "extraAttrs": {
       "pname": "kentucky-bg",
       "version": "2015",
@@ -625,7 +625,7 @@
   },
   {
     "name": "louisiana-bg-2015",
-    "hash": "sha256-HiWbsmnrbx8CwP/roBasZoXPkh/mZepY46prigRgyVM=",
+    "hash": "sha256-JZceSD59AIINgQRaBfo+xKeuBf2YtnwSr+FU+vVi7Lw=",
     "extraAttrs": {
       "pname": "louisiana-bg",
       "version": "2015",
@@ -657,7 +657,7 @@
   },
   {
     "name": "maine-bg-2015",
-    "hash": "sha256-2Xl954rqrcFTpcafRbWemhXSmh7Pt54qqghyrShP2OE=",
+    "hash": "sha256-B+SF5/8RbWJv58URPIylRvDR9a1xuG99Z01idlp963M=",
     "extraAttrs": {
       "pname": "maine-bg",
       "version": "2015",
@@ -689,7 +689,7 @@
   },
   {
     "name": "maryland-bg-2015",
-    "hash": "sha256-Ka/Vqk7zlfmEMBCbsApWKVa6bzzHIBXqkUBtxZ/+vk8=",
+    "hash": "sha256-etA1gWwJQ3MFktQSdpZ/ZyY1b8302i8ZaGMxifFXNDY=",
     "extraAttrs": {
       "pname": "maryland-bg",
       "version": "2015",
@@ -721,7 +721,7 @@
   },
   {
     "name": "massachusetts-bg-2015",
-    "hash": "sha256-3xurZ5SE5sJ12IJx0RwLROsG9krWisANMBKKDe1HdFk=",
+    "hash": "sha256-+MrP//brqyC20Nd/5QIpPFCTjBTMrptIUSCgMwt+39s=",
     "extraAttrs": {
       "pname": "massachusetts-bg",
       "version": "2015",
@@ -753,7 +753,7 @@
   },
   {
     "name": "michigan-bg-2015",
-    "hash": "sha256-46YH2OwgrZZIw5hYJz4x0XyILZB7QvD1maX8WLMaNF0=",
+    "hash": "sha256-yuwgykp+Upbllk562iQzqLrkxNxwrX1xG1DoJb7ZQxc=",
     "extraAttrs": {
       "pname": "michigan-bg",
       "version": "2015",
@@ -785,7 +785,7 @@
   },
   {
     "name": "minnesota-bg-2015",
-    "hash": "sha256-z6MZhmzEjRVyUJpvkKvDqlNh9UeeEFajZ8w1LG/+RAA=",
+    "hash": "sha256-BubnWICabuPTpJcwRxNdTec3svPlJjdR18x4jgv3fiQ=",
     "extraAttrs": {
       "pname": "minnesota-bg",
       "version": "2015",
@@ -817,7 +817,7 @@
   },
   {
     "name": "mississippi-bg-2015",
-    "hash": "sha256-5m8sbSBQfB+NWAZRiDkOm6HpBY3zNQ/lypSvjkfe4+o=",
+    "hash": "sha256-cTVFKj46l2J4UX1oDXPX0QpIsp3HRNue9a26ADieAz4=",
     "extraAttrs": {
       "pname": "mississippi-bg",
       "version": "2015",
@@ -849,7 +849,7 @@
   },
   {
     "name": "missouri-bg-2015",
-    "hash": "sha256-6WtkEQfQYa0NNXXrz2myIih9cvzOO04IN0xV25VrvoE=",
+    "hash": "sha256-bUdG1Txv6wz4g9IaduFSi/z5cUt2avcNxh5zszVj1Q4=",
     "extraAttrs": {
       "pname": "missouri-bg",
       "version": "2015",
@@ -881,7 +881,7 @@
   },
   {
     "name": "montana-bg-2015",
-    "hash": "sha256-Sbsg+uThEAb4srcUDb4hWvtZMTjeEjtJwvw+i1L+3t4=",
+    "hash": "sha256-3OmyMGBwnA6VGqIjvkNQXLyuasBBtjIOv0DKUSOc5n8=",
     "extraAttrs": {
       "pname": "montana-bg",
       "version": "2015",
@@ -913,7 +913,7 @@
   },
   {
     "name": "nebraska-bg-2015",
-    "hash": "sha256-Jnn4V9k1z9P/sFjZNg3gS/dXvbdZsKUQhK7fV7Znruk=",
+    "hash": "sha256-XYZl/pKqV99DZlUF/DWgTKyr6q+anjMDhPercf9DNcU=",
     "extraAttrs": {
       "pname": "nebraska-bg",
       "version": "2015",
@@ -945,7 +945,7 @@
   },
   {
     "name": "nevada-bg-2015",
-    "hash": "sha256-d7AxJJ1AxSZaav0pR96Qo8hGRYzeay5qQXOfTEMNKQM=",
+    "hash": "sha256-igk27hwo6h52/BwXsywJPQrNWAN4N3tCjt7maVECKC0=",
     "extraAttrs": {
       "pname": "nevada-bg",
       "version": "2015",
@@ -977,7 +977,7 @@
   },
   {
     "name": "new_hampshire-bg-2015",
-    "hash": "sha256-vLV6z7tDBLAlFk1o/h6rALbTWUn/XmMRs6p5CDYm4i8=",
+    "hash": "sha256-Mwf2djZVhVr8GdxazC2a/NgyXCAgHpOTzblwXcuRW3Q=",
     "extraAttrs": {
       "pname": "new_hampshire-bg",
       "version": "2015",
@@ -1009,7 +1009,7 @@
   },
   {
     "name": "new_jersey-bg-2015",
-    "hash": "sha256-pNo4AJf++73LdKjfTPbuswwSZKHaF31ntYelPFIzmOg=",
+    "hash": "sha256-MMyX2awqvzTT/C/9eIGJPSnBiqvQ0ty5A39SyUwBb2o=",
     "extraAttrs": {
       "pname": "new_jersey-bg",
       "version": "2015",
@@ -1041,7 +1041,7 @@
   },
   {
     "name": "new_mexico-bg-2015",
-    "hash": "sha256-DDTnKqrQFekWT5x38KYtUKtvArI2zQm9M6LvQUCxg2w=",
+    "hash": "sha256-HY9uXlxcGKbmpzCPWZu0CrFidkVd4xq/piIekyp9sr4=",
     "extraAttrs": {
       "pname": "new_mexico-bg",
       "version": "2015",
@@ -1073,7 +1073,7 @@
   },
   {
     "name": "new_york-bg-2015",
-    "hash": "sha256-hS1PRonXw0GptkD33KumD5e1eptjR+I24lDSmOblu/8=",
+    "hash": "sha256-2rT5KgmvH59il4ECWUoKaH3gOz9BFE1LFYlU6TNbzls=",
     "extraAttrs": {
       "pname": "new_york-bg",
       "version": "2015",
@@ -1105,7 +1105,7 @@
   },
   {
     "name": "north_carolina-bg-2015",
-    "hash": "sha256-YbAqyeqRwIDcqX933O4eIVJRKmLjWEEiacfUvjsBSC4=",
+    "hash": "sha256-NAFhZnAOLuWNvC8xNJWJYx+LKJFlRdwT6QykOkWzCYU=",
     "extraAttrs": {
       "pname": "north_carolina-bg",
       "version": "2015",
@@ -1137,7 +1137,7 @@
   },
   {
     "name": "north_dakota-bg-2015",
-    "hash": "sha256-uEfofiDWnyw5IsUdoOknd+m60VDCvdMm+PA4qQn3BIQ=",
+    "hash": "sha256-ox5R6TKJfGzPRKOd7YM2VyR3416WjVdDxjPE0j46KNU=",
     "extraAttrs": {
       "pname": "north_dakota-bg",
       "version": "2015",
@@ -1169,7 +1169,7 @@
   },
   {
     "name": "ohio-bg-2015",
-    "hash": "sha256-LjgsWvwvuphl1096nqkiIZJTQf+TVj675sDfLKh9EKI=",
+    "hash": "sha256-MetCCkV9KFEARXaCL/6tnJrYeJsYwnchIAYFmVCMzkY=",
     "extraAttrs": {
       "pname": "ohio-bg",
       "version": "2015",
@@ -1201,7 +1201,7 @@
   },
   {
     "name": "oklahoma-bg-2015",
-    "hash": "sha256-VwpR5HrgqpQTmA2R014wJIT2l6YZo+If2m3hpmlfEBI=",
+    "hash": "sha256-YRWkyY7n6s6/VerVErPdgTyo+9a3aYbfXxgymPKCaMA=",
     "extraAttrs": {
       "pname": "oklahoma-bg",
       "version": "2015",
@@ -1233,7 +1233,7 @@
   },
   {
     "name": "oregon-bg-2015",
-    "hash": "sha256-3ut9VljOjcTPQXoeE1MdkYS4YwtSZ9EXezVF+fCpf3U=",
+    "hash": "sha256-V0rGT13xfXhFARX5A2lth09X0nCv4cTdl1na85oysBg=",
     "extraAttrs": {
       "pname": "oregon-bg",
       "version": "2015",
@@ -1265,7 +1265,7 @@
   },
   {
     "name": "pennsylvania-bg-2015",
-    "hash": "sha256-1ck3oyljjcPhL5n0XKYQqHJYMVyLaD4WUwq6I5Hlb0k=",
+    "hash": "sha256-a8VwlOFVvVhg3hayOdMDr2Xe+51E8k0xYWDF0q9u/dg=",
     "extraAttrs": {
       "pname": "pennsylvania-bg",
       "version": "2015",
@@ -1297,7 +1297,7 @@
   },
   {
     "name": "rhode_island-bg-2015",
-    "hash": "sha256-UAK/fIa265a4UDgAhiId5k4UdHJIoS1ZwJBFEldkIEE=",
+    "hash": "sha256-hEXNMnUWVNH/avb6WrLE25PJuX/aBQ4PP4t1XNdRfig=",
     "extraAttrs": {
       "pname": "rhode_island-bg",
       "version": "2015",
@@ -1329,7 +1329,7 @@
   },
   {
     "name": "south_carolina-bg-2015",
-    "hash": "sha256-JXR3Oos74MgPqnagUbdN3+Xs1p7QFU4OlzzBjNVOK/M=",
+    "hash": "sha256-1tFpo4vYOQgOy2Za1x4SlmWkOsWSzmuJo7QBeaqEjso=",
     "extraAttrs": {
       "pname": "south_carolina-bg",
       "version": "2015",
@@ -1361,7 +1361,7 @@
   },
   {
     "name": "south_dakota-bg-2015",
-    "hash": "sha256-cXZdyiutPG9J+tgVocuyzsOzZduMO87Lf3YFcS+YZA4=",
+    "hash": "sha256-NnyH7nMTf1aNSzvO9U3bhE58zkeyKJLEHEpks5S2oX0=",
     "extraAttrs": {
       "pname": "south_dakota-bg",
       "version": "2015",
@@ -1393,7 +1393,7 @@
   },
   {
     "name": "tennessee-bg-2015",
-    "hash": "sha256-v8rf0OXFjB4cBUr/pnl2owrjgQ1+GfSvV2yppBL366k=",
+    "hash": "sha256-PINpWdFn6vkxhI9U2HDByp8pMF8m6V+inR8RaLagVZo=",
     "extraAttrs": {
       "pname": "tennessee-bg",
       "version": "2015",
@@ -1425,7 +1425,7 @@
   },
   {
     "name": "texas-bg-2015",
-    "hash": "sha256-1Q9HigSp1lsocSvac/sL5nh1oos9ei+nOrOnJq7YI9M=",
+    "hash": "sha256-FL3w3ga2Z+Pd9OP/JhbaKAgAseQiuWV3Zw9ECDDXDMU=",
     "extraAttrs": {
       "pname": "texas-bg",
       "version": "2015",
@@ -1457,7 +1457,7 @@
   },
   {
     "name": "utah-bg-2015",
-    "hash": "sha256-R3TDwnYE5M//MpeEtzTTRNFvhiC5vVujLT5FO+67iZA=",
+    "hash": "sha256-uMgbBh9xNFpOCWtN+Nnge1mjVtD2p+ePVxDPg+0ATpk=",
     "extraAttrs": {
       "pname": "utah-bg",
       "version": "2015",
@@ -1489,7 +1489,7 @@
   },
   {
     "name": "vermont-bg-2015",
-    "hash": "sha256-fqn5qFG/J+xzM0jdhfZSt0TWnrX2iOwhsb95nG0iUzg=",
+    "hash": "sha256-W12CaAECjvYdS9GcRvj+0NA5nspimrrQu+2ks+TXsLk=",
     "extraAttrs": {
       "pname": "vermont-bg",
       "version": "2015",
@@ -1521,7 +1521,7 @@
   },
   {
     "name": "virginia-bg-2015",
-    "hash": "sha256-xpopL+drytKEdnp/JOR/rllilOEkps/mjlETUs6MZ5k=",
+    "hash": "sha256-c7mlugTPCHkq+/c1ZxEe8GkNiOu97AukzkvzfDi+iyg=",
     "extraAttrs": {
       "pname": "virginia-bg",
       "version": "2015",
@@ -1553,7 +1553,7 @@
   },
   {
     "name": "washington-bg-2015",
-    "hash": "sha256-68U2yB+ACXxe2M0UnUYIXnq6En8/Tx/ypBO/6++qJzA=",
+    "hash": "sha256-mGIKOY5bCEkbaYC/eHXeUVhaYZUgO2/0eMed1p+HNmM=",
     "extraAttrs": {
       "pname": "washington-bg",
       "version": "2015",
@@ -1585,7 +1585,7 @@
   },
   {
     "name": "west_virginia-bg-2015",
-    "hash": "sha256-dzYQssjS2JAQp2yQv6jD7i9ugWiscVOkfVBMG+RVykw=",
+    "hash": "sha256-s2W+9wLKyCMyA6/HNsNQbpTD9YbecDMaLbqNmHJERFE=",
     "extraAttrs": {
       "pname": "west_virginia-bg",
       "version": "2015",
@@ -1617,7 +1617,7 @@
   },
   {
     "name": "wisconsin-bg-2015",
-    "hash": "sha256-Ls8cFl4mc+JysNGGb2nIpyilblqzQibob+P1EKZOazs=",
+    "hash": "sha256-Bx5r3UBelcOoX6+RoXUOEaGV3obc3YwyqDoLUc8y98s=",
     "extraAttrs": {
       "pname": "wisconsin-bg",
       "version": "2015",
@@ -1649,7 +1649,7 @@
   },
   {
     "name": "wyoming-bg-2015",
-    "hash": "sha256-RNLcNcd5E4TDnzRJopUmMBdPg/hDn84QR1xNCynap8U=",
+    "hash": "sha256-dOKYrdDJieIq3eBOhetfDbYwz3h1d6907jdgLRc416E=",
     "extraAttrs": {
       "pname": "wyoming-bg",
       "version": "2015",
@@ -1697,7 +1697,7 @@
   },
   {
     "name": "district_of_columbia-bg-2019",
-    "hash": "sha256-qx2LBzmx+xtj50R7owBp0HgixsyVnnDRosC1nmJtMPk=",
+    "hash": "sha256-HeeIInRyYrIMX1rIZfiGUkTMl0pME56QlTi2CupFVdg=",
     "extraAttrs": {
       "pname": "district_of_columbia-bg",
       "version": "2019",
@@ -1729,7 +1729,7 @@
   },
   {
     "name": "puerto_rico-bg-2019",
-    "hash": "sha256-DFLV8RVoVrWJwqaEOWkdRaFbFueIbo2q1koR1zWJBx4=",
+    "hash": "sha256-Mok4pRhn9lrAU0Alz2MKVr5TvY7aipPdzy3/D0ViJHM=",
     "extraAttrs": {
       "pname": "puerto_rico-bg",
       "version": "2019",
@@ -1761,7 +1761,7 @@
   },
   {
     "name": "alabama-bg-2019",
-    "hash": "sha256-41KU8MIsIxj9siKPzRW4UldqnBpthygyc0YFjPqEbeI=",
+    "hash": "sha256-GyK/HN+w7F9KszzxW4d2RYD7HA3lAsNPYAuPZOaeOaE=",
     "extraAttrs": {
       "pname": "alabama-bg",
       "version": "2019",
@@ -1793,7 +1793,7 @@
   },
   {
     "name": "alaska-bg-2019",
-    "hash": "sha256-5D2ZzsG5KmjdLNuAQBxzzJneVXfxq8m/kpxtTTdoZfQ=",
+    "hash": "sha256-aatx2Fx+/IvwheVr4PX+nrU59p3ehJlbTA2pQrz7oi0=",
     "extraAttrs": {
       "pname": "alaska-bg",
       "version": "2019",
@@ -1825,7 +1825,7 @@
   },
   {
     "name": "arizona-bg-2019",
-    "hash": "sha256-XBS0hb77nV5jKGitgfPlmz0tc8WNsGSLmVW8NbGT1vU=",
+    "hash": "sha256-MAhbka4E0iQYCEp1tQ9PhVd3CUdfgfcPUWoHO94sYxc=",
     "extraAttrs": {
       "pname": "arizona-bg",
       "version": "2019",
@@ -1857,7 +1857,7 @@
   },
   {
     "name": "arkansas-bg-2019",
-    "hash": "sha256-c+VdiMDTU36QewSVAxK5zukVOnYtSYhUkHzsYzp8IGU=",
+    "hash": "sha256-snJ++6KQEEP4mB1WrqFojOfc7anHkaAztBmAEfgEkeA=",
     "extraAttrs": {
       "pname": "arkansas-bg",
       "version": "2019",
@@ -1889,7 +1889,7 @@
   },
   {
     "name": "california-bg-2019",
-    "hash": "sha256-H2L9nEj/La34lG4pRXc4FxVqUpFVpWwdryEFh2/gLRM=",
+    "hash": "sha256-UnHNCnAgdF1t5zKCFy9RXrbqrlhgN5PfwghfNRDQ97Q=",
     "extraAttrs": {
       "pname": "california-bg",
       "version": "2019",
@@ -1921,7 +1921,7 @@
   },
   {
     "name": "colorado-bg-2019",
-    "hash": "sha256-80MMU6c3XVYHM/RVohHfPBbYoQCeCtBhTwYTRvQeJU8=",
+    "hash": "sha256-WLuZkg20YyQYIH/4ln0/vfhFG1KM0PHnds9IwmxRCRM=",
     "extraAttrs": {
       "pname": "colorado-bg",
       "version": "2019",
@@ -1953,7 +1953,7 @@
   },
   {
     "name": "connecticut-bg-2019",
-    "hash": "sha256-Bk7uByE8ovI3/XN3wAS0+bzo4pU2CAr5YvHiBj5tVG8=",
+    "hash": "sha256-NKgKtD1QHvufqWRWeWffMJY0nLSgzGM7tOFXPOoYYMc=",
     "extraAttrs": {
       "pname": "connecticut-bg",
       "version": "2019",
@@ -1985,7 +1985,7 @@
   },
   {
     "name": "delaware-bg-2019",
-    "hash": "sha256-08Zaxg7cL8PKD5THr+Xw22igMDiBGeDVUQJE9mL1z8E=",
+    "hash": "sha256-LbJSohUDpgioDoU3wDZTfUkhfIBCwPAh39Tk3UOIIDY=",
     "extraAttrs": {
       "pname": "delaware-bg",
       "version": "2019",
@@ -2017,7 +2017,7 @@
   },
   {
     "name": "florida-bg-2019",
-    "hash": "sha256-0ReQdpfLbR+pvWP23cbof+kvjsF9ss8NW0QnRj+p+qU=",
+    "hash": "sha256-RVYSD3FwvqX8F5vMqXUeyJARW+/sQvfzrpt60AN0vFE=",
     "extraAttrs": {
       "pname": "florida-bg",
       "version": "2019",
@@ -2049,7 +2049,7 @@
   },
   {
     "name": "georgia-bg-2019",
-    "hash": "sha256-r10QsSdpcTbxTwTijZS7xK9yAYPgnoQDKdRXT0OQYTA=",
+    "hash": "sha256-wG75FPoKSW+uTkblMA9/0UWjclMLd1WpPHjdwhnWitc=",
     "extraAttrs": {
       "pname": "georgia-bg",
       "version": "2019",
@@ -2081,7 +2081,7 @@
   },
   {
     "name": "hawaii-bg-2019",
-    "hash": "sha256-a5QntBw2/p1ejZF3qhUVjr+CWZU5PmmsmUTRKdz5/J4=",
+    "hash": "sha256-XqK9+J2U4Z8T1MjaDkED3f2QgcXUP1ZowFmk2aL5iu8=",
     "extraAttrs": {
       "pname": "hawaii-bg",
       "version": "2019",
@@ -2113,7 +2113,7 @@
   },
   {
     "name": "idaho-bg-2019",
-    "hash": "sha256-bCUKQdNhfrodHG5pHptYXApAOMSDy+xwJYpFyIO6hJI=",
+    "hash": "sha256-L2oQdFN/ZkdaDN005yu12YgE8eZZbI59IObz85rKNjc=",
     "extraAttrs": {
       "pname": "idaho-bg",
       "version": "2019",
@@ -2145,7 +2145,7 @@
   },
   {
     "name": "illinois-bg-2019",
-    "hash": "sha256-0n/CtoevF8qUPv7ABXuO5Ima7GoMF3iPtQPWTaLJ34A=",
+    "hash": "sha256-RiRq0h7xD1JY7oda7Jecj5Q8KPF7FBnYoVd+OO/kZV8=",
     "extraAttrs": {
       "pname": "illinois-bg",
       "version": "2019",
@@ -2177,7 +2177,7 @@
   },
   {
     "name": "indiana-bg-2019",
-    "hash": "sha256-zVG85AGXM0fBrsxriD835bpj++CSDx2UKAn0e5HNhSc=",
+    "hash": "sha256-rjE3r0eAF0BoE9MquFPZi3FqfOvgAY3txAQbxsJaU6w=",
     "extraAttrs": {
       "pname": "indiana-bg",
       "version": "2019",
@@ -2209,7 +2209,7 @@
   },
   {
     "name": "iowa-bg-2019",
-    "hash": "sha256-sTIgC6zkvNUEfXsaikOzj+SROsGmQjuj8ti1vESwlao=",
+    "hash": "sha256-KeeNSDEGo/fDo9EdiOxRmok1wXms51c5rM5An1fmL24=",
     "extraAttrs": {
       "pname": "iowa-bg",
       "version": "2019",
@@ -2241,7 +2241,7 @@
   },
   {
     "name": "kansas-bg-2019",
-    "hash": "sha256-JaCu/FCTONW9TKLq+V5NekZCvzAXP6nA+bDIJTONnUU=",
+    "hash": "sha256-srefcL3HAWYPInxg9OZ0ZpFbyo823Rsnx7m6EZC08Rs=",
     "extraAttrs": {
       "pname": "kansas-bg",
       "version": "2019",
@@ -2273,7 +2273,7 @@
   },
   {
     "name": "kentucky-bg-2019",
-    "hash": "sha256-qUJ9ikUubT+9Lrgr1IcVtOxQWRJMyZYhqUjJnbI47RI=",
+    "hash": "sha256-iv7PHYh6iqpxPzhOs5gW5sxGsBJsMntnGEFa2qoIE+s=",
     "extraAttrs": {
       "pname": "kentucky-bg",
       "version": "2019",
@@ -2305,7 +2305,7 @@
   },
   {
     "name": "louisiana-bg-2019",
-    "hash": "sha256-UlBAcC5FL4pXQw+lC4FOs0wzR3k7fLdLc59zKcnqSok=",
+    "hash": "sha256-OrX0x21FcsOJjAvilrOz34PvGAzCG2Dm89cqZnZUf1c=",
     "extraAttrs": {
       "pname": "louisiana-bg",
       "version": "2019",
@@ -2337,7 +2337,7 @@
   },
   {
     "name": "maine-bg-2019",
-    "hash": "sha256-9PfsVvEYTzIvLQ7Fs1K26ImYR0wTk/Vtm/N2BlFLNeg=",
+    "hash": "sha256-NXxTsBPSqJNLtTicsEJQ5d9t23Rt9LLwtl7GdK9wITs=",
     "extraAttrs": {
       "pname": "maine-bg",
       "version": "2019",
@@ -2369,7 +2369,7 @@
   },
   {
     "name": "maryland-bg-2019",
-    "hash": "sha256-PnJ/f7NbnOLI2/B4KPpOb1sDNJzN0RWlEHXlFg464AE=",
+    "hash": "sha256-PaWLcK5JKGbO3Str1A62c5yMagVu3mryH6WMD3UkcQ0=",
     "extraAttrs": {
       "pname": "maryland-bg",
       "version": "2019",
@@ -2401,7 +2401,7 @@
   },
   {
     "name": "massachusetts-bg-2019",
-    "hash": "sha256-dLb3Fhzqq4lY7QKP/nlevYZcYUmamPlvQvIVB5jVCrs=",
+    "hash": "sha256-u1xkekVXSKOYvOtdXLXNPmOK9ZTiAgFImcb9Cvu+4GA=",
     "extraAttrs": {
       "pname": "massachusetts-bg",
       "version": "2019",
@@ -2433,7 +2433,7 @@
   },
   {
     "name": "michigan-bg-2019",
-    "hash": "sha256-CtnSeEjS/ckCT2L0OoQsYlCxABwZuApDxPxqn2WE5ao=",
+    "hash": "sha256-GdweDDw+JNHJ2janJmvipgo1A2vKgilxK/Kkoxchr+c=",
     "extraAttrs": {
       "pname": "michigan-bg",
       "version": "2019",
@@ -2465,7 +2465,7 @@
   },
   {
     "name": "minnesota-bg-2019",
-    "hash": "sha256-SIwXX1k/RaR7M06b8jhuAyvpBVhwH6J6SYYhq+W7R6I=",
+    "hash": "sha256-++vwwhNpQJig+o0mKHRPN3SVGxrYMC05ad9U/LkZ6nU=",
     "extraAttrs": {
       "pname": "minnesota-bg",
       "version": "2019",
@@ -2497,7 +2497,7 @@
   },
   {
     "name": "mississippi-bg-2019",
-    "hash": "sha256-4cQeRELXRHCspwBQWqw2Qx9zTNn6PSSn3IZaChXXCDU=",
+    "hash": "sha256-LKRRl1TRCPgu/AFVXYxOtj62F6N9Cz+0dGMHlzLh4S4=",
     "extraAttrs": {
       "pname": "mississippi-bg",
       "version": "2019",
@@ -2529,7 +2529,7 @@
   },
   {
     "name": "missouri-bg-2019",
-    "hash": "sha256-/KBkHiRt+tfAjldoVh4TR5xlUWPX1EHjbQQPbM+0idg=",
+    "hash": "sha256-0541hIrHPP3LzZYGtRg8ZfPiDqWbq0wRN8A6yAafT9s=",
     "extraAttrs": {
       "pname": "missouri-bg",
       "version": "2019",
@@ -2561,7 +2561,7 @@
   },
   {
     "name": "montana-bg-2019",
-    "hash": "sha256-9ogYvuyepdrtWmjUiMbeR150HsEK7CkUcoJuRJssTzE=",
+    "hash": "sha256-vj8WGtXk/Ax9TcL9AdmPMFGsOvbSX0i56Fvn/dWuM5M=",
     "extraAttrs": {
       "pname": "montana-bg",
       "version": "2019",
@@ -2593,7 +2593,7 @@
   },
   {
     "name": "nebraska-bg-2019",
-    "hash": "sha256-AqD6ty751aFIGLDbBYKSiQnsJlTPR95K5j7orE8DS38=",
+    "hash": "sha256-hLUPV61fzAjVwm4fV4EWHqHVM4J7/qHSTCLWEmSKyMs=",
     "extraAttrs": {
       "pname": "nebraska-bg",
       "version": "2019",
@@ -2625,7 +2625,7 @@
   },
   {
     "name": "nevada-bg-2019",
-    "hash": "sha256-ccixkf2axxv/vP4L5oSaJKbQokeY04YgAkLb4ZvNk2c=",
+    "hash": "sha256-MQFkiyUi0mGP/03u27k2/eDJuidT3dIsfHh92S2k5AU=",
     "extraAttrs": {
       "pname": "nevada-bg",
       "version": "2019",
@@ -2657,7 +2657,7 @@
   },
   {
     "name": "new_hampshire-bg-2019",
-    "hash": "sha256-gBrYfBpG9jrxLVCuiGisjoDRjQqUbiDRblkd1OiB6Yk=",
+    "hash": "sha256-aq0BfYWhcMZaOJAEk95JVP9s/FnwfTxR6sHLj3aqEQo=",
     "extraAttrs": {
       "pname": "new_hampshire-bg",
       "version": "2019",
@@ -2689,7 +2689,7 @@
   },
   {
     "name": "new_jersey-bg-2019",
-    "hash": "sha256-LO1Uo0doEya1FcKpkIQYJkQAFd5VHUwVrGNCnn9IXu4=",
+    "hash": "sha256-ig65wFMxHDVrdEnUeUFsZua21JQkdIGIeQijcgy5Mkk=",
     "extraAttrs": {
       "pname": "new_jersey-bg",
       "version": "2019",
@@ -2721,7 +2721,7 @@
   },
   {
     "name": "new_mexico-bg-2019",
-    "hash": "sha256-pqHPYoQ6DvyVayGBfqR0eTusPAals1T3UVjlFyeBQAk=",
+    "hash": "sha256-wIF0YxkwRogiZ3zayXwL2wcgtd1tx63kU0zhY/MvTf0=",
     "extraAttrs": {
       "pname": "new_mexico-bg",
       "version": "2019",
@@ -2753,7 +2753,7 @@
   },
   {
     "name": "new_york-bg-2019",
-    "hash": "sha256-FxSM/85El+t3fSxEwICxBthLXqSRmreYGoKMiQZljh4=",
+    "hash": "sha256-eLWqbn04KORWc+TWeQyxhtRfLrBKoRJpU73z5zJfXTY=",
     "extraAttrs": {
       "pname": "new_york-bg",
       "version": "2019",
@@ -2785,7 +2785,7 @@
   },
   {
     "name": "north_carolina-bg-2019",
-    "hash": "sha256-1PFsnM6wlXSYF4doARyiAGHG+cL1rm5BvrPSC46p38A=",
+    "hash": "sha256-yOmrz8+6bhmFRZRspDmGI4PRNXtsvzQzRWfhmax5eGs=",
     "extraAttrs": {
       "pname": "north_carolina-bg",
       "version": "2019",
@@ -2817,7 +2817,7 @@
   },
   {
     "name": "north_dakota-bg-2019",
-    "hash": "sha256-7x1t7LN550RH734Zsv3OgoHw1mSnMvtRJbBfiMSi61Y=",
+    "hash": "sha256-1IGslqXeOVJmrlVMAHbUGimEFZZs1AmyHmRQXMHdsb4=",
     "extraAttrs": {
       "pname": "north_dakota-bg",
       "version": "2019",
@@ -2849,7 +2849,7 @@
   },
   {
     "name": "ohio-bg-2019",
-    "hash": "sha256-ZaXgpwKmIyW01mRrZMMWXu8z+/d7ZwrC1C4pSmAhs0c=",
+    "hash": "sha256-q8gpxWYSbRBp3b78ABGRu3E+h/ip3j6gVKJ9NbdjTNk=",
     "extraAttrs": {
       "pname": "ohio-bg",
       "version": "2019",
@@ -2881,7 +2881,7 @@
   },
   {
     "name": "oklahoma-bg-2019",
-    "hash": "sha256-CfSjFqD8zl9APSjBcSAY5yZNggqOyg13mwChNO/ZICo=",
+    "hash": "sha256-fcq17w+ISFSql6Qc0JgnSC28E5HU50/NlPFa3wH7USo=",
     "extraAttrs": {
       "pname": "oklahoma-bg",
       "version": "2019",
@@ -2913,7 +2913,7 @@
   },
   {
     "name": "oregon-bg-2019",
-    "hash": "sha256-89gVjHBqsWe4Q/7mrQLytPcR8niOvGahR1c/aBNv6yQ=",
+    "hash": "sha256-NHsqgRx0AqSQIjDqOFmjqnLsBrdPPQvupGbGUrjjDHs=",
     "extraAttrs": {
       "pname": "oregon-bg",
       "version": "2019",
@@ -2945,7 +2945,7 @@
   },
   {
     "name": "pennsylvania-bg-2019",
-    "hash": "sha256-JRIf7pG0/cjw6hK7IaAcYhTXMCbEVlwOLTAvFfunrBw=",
+    "hash": "sha256-CmBtWdvJn2afFi5c8teMNT+Y8bDlOx9gwlmrIipDI1w=",
     "extraAttrs": {
       "pname": "pennsylvania-bg",
       "version": "2019",
@@ -2977,7 +2977,7 @@
   },
   {
     "name": "rhode_island-bg-2019",
-    "hash": "sha256-EdRPjObit0aLkZ7/zDtFUwLxQk3aaH1YSlEcZP830rM=",
+    "hash": "sha256-q3v4I1NjlOfixh+zQsOby6p6esVL+F8ZY8epiE3W2Kw=",
     "extraAttrs": {
       "pname": "rhode_island-bg",
       "version": "2019",
@@ -3009,7 +3009,7 @@
   },
   {
     "name": "south_carolina-bg-2019",
-    "hash": "sha256-VDHuLl4lxJsItGa2wr07X+FeCxBj7D2MEfa5j210kIU=",
+    "hash": "sha256-TQRCzj4u+4X4Q9iybs/POm66VX3D9Y/I6rzeTnP3IjY=",
     "extraAttrs": {
       "pname": "south_carolina-bg",
       "version": "2019",
@@ -3041,7 +3041,7 @@
   },
   {
     "name": "south_dakota-bg-2019",
-    "hash": "sha256-me5pNfOdrY/fwF6VoIanmf7AmEtG9WjeVXja19zhN64=",
+    "hash": "sha256-f6OnFnFmMkYFkZgVrQl6j3QG04yrlVrhM3q+LjxOVLc=",
     "extraAttrs": {
       "pname": "south_dakota-bg",
       "version": "2019",
@@ -3073,7 +3073,7 @@
   },
   {
     "name": "tennessee-bg-2019",
-    "hash": "sha256-v2yXA/sAQHGL5BadZhwdltKXlr/DQSoBe5JaQPOwwGY=",
+    "hash": "sha256-5zas99VPgSAyFU6owTrT0QSL2V2mwCyMn+OaGyzGa6w=",
     "extraAttrs": {
       "pname": "tennessee-bg",
       "version": "2019",
@@ -3105,7 +3105,7 @@
   },
   {
     "name": "texas-bg-2019",
-    "hash": "sha256-sZ1u/5cYCyYsPEvs0nW7bC3CVCrJTFhJ9yGzFaB2q3Y=",
+    "hash": "sha256-BltB/GoMD9vUqWTHcBaqgkiHXxLjCu3Wj5W04+PNfP0=",
     "extraAttrs": {
       "pname": "texas-bg",
       "version": "2019",
@@ -3137,7 +3137,7 @@
   },
   {
     "name": "utah-bg-2019",
-    "hash": "sha256-KaeHq0uZRVURqA8ETY7CixbEPXc2Zfjoyl9fzPLQRbI=",
+    "hash": "sha256-HzAN/QPqlFksvJosdz7m3jasRT19AXVrNGd5b+Ybphk=",
     "extraAttrs": {
       "pname": "utah-bg",
       "version": "2019",
@@ -3169,7 +3169,7 @@
   },
   {
     "name": "vermont-bg-2019",
-    "hash": "sha256-sDvrnQzYq9safz29PoECUrNxB1cXMEkLhHELdEKbzIQ=",
+    "hash": "sha256-4zbJCEmMUSNAfDBiwZh+CrhxKIW1DgXz4W+sc3iT0a8=",
     "extraAttrs": {
       "pname": "vermont-bg",
       "version": "2019",
@@ -3201,7 +3201,7 @@
   },
   {
     "name": "virginia-bg-2019",
-    "hash": "sha256-bwmM4vZT/+AtUKFJQVq9YFcrHe2y4SlA9QWY9FRYN4c=",
+    "hash": "sha256-e9jPWwJoIP4zaCA7/fFllnXk2Vb+3D2B067dOAKunYM=",
     "extraAttrs": {
       "pname": "virginia-bg",
       "version": "2019",
@@ -3233,7 +3233,7 @@
   },
   {
     "name": "washington-bg-2019",
-    "hash": "sha256-SUcIwf8O0B0n4SL/YPqHrTjEY8ssFKTAixejGwiHqu4=",
+    "hash": "sha256-L+IpARpIAxrM8hmriYT2lfK+qqp1p9I1R1W7wC2+5Rk=",
     "extraAttrs": {
       "pname": "washington-bg",
       "version": "2019",
@@ -3265,7 +3265,7 @@
   },
   {
     "name": "west_virginia-bg-2019",
-    "hash": "sha256-lkuHnVmoUPvWQ0h/qqKRI0BSi3EFbx1DpWmgonJ4eUU=",
+    "hash": "sha256-YwvuNQGxpX50F985E9iGsvehMsUN3t3h/XLbF3beU8c=",
     "extraAttrs": {
       "pname": "west_virginia-bg",
       "version": "2019",
@@ -3297,7 +3297,7 @@
   },
   {
     "name": "wisconsin-bg-2019",
-    "hash": "sha256-Ar3Jr0W8PQJNu5/x5Cgk8c3OHN2JJ+eUubMqPi+pbGA=",
+    "hash": "sha256-eYvq+7ELSE67dq27cAd5dKEl2JylfWtJg1CxHPVRSm8=",
     "extraAttrs": {
       "pname": "wisconsin-bg",
       "version": "2019",
@@ -3329,7 +3329,7 @@
   },
   {
     "name": "wyoming-bg-2019",
-    "hash": "sha256-1aHTZzoTOWDD9S15PE+1z45XJ7mM3P8hWdDiN6bPybY=",
+    "hash": "sha256-0YWijXsjLVOt28NmJ/vqrQcSGtr/05lkjLrFK3y37gE=",
     "extraAttrs": {
       "pname": "wyoming-bg",
       "version": "2019",
