@@ -2,12 +2,13 @@
 module Main where
 
 import Regions as Regions
-import Utils as Utils
 
+import qualified SourceFiles as S
 import qualified Data.Text as T
 import qualified Data.Map as M
+import qualified Data.ByteString.Lazy.Char8 as B
 
-main = Utils.showNixSourceFiles sources
+main = B.putStrLn $ S.show sources
 
 sources =
   let
@@ -47,19 +48,15 @@ nationSources year =
       <> ".zip"
    in
     map (\geom ->
-      SourceFile {
-        Utils.name =
-          "us-" <> geom <> "-" <> s_year,
-        url =
-          nationUrl geom,
-        extraAttrs = M.fromList
-          [ ("year", s_year)
-          , ("extent", "US")
-          , ("geom", geom)
-          , ("pname", "us-" <> geom)
-          , ("version", s_year)
-          ]
-        }
+      S.fromListText
+        ("us-" <> geom <> "-" <> s_year)
+        [ ("url", nationUrl geom)
+        , ("year", s_year)
+        , ("extent", "US")
+        , ("geom", geom)
+        , ("pname", "us-" <> geom)
+        , ("version", s_year)
+        ]
       )
       nation_geoms
 
@@ -87,18 +84,15 @@ stateSources year state =
            ("county", year) | year == 2014 -> "States_Counties/" <> u_name <> "_cnty"
            ("county", _) -> "States_Counties/" <> u_name <> "_county"
       <> ".zip"
-    stateSource :: T.Text -> SourceFile
     stateSource geom =
-      SourceFile {
-        Utils.name = stateName geom,
-        url = stateUrl geom,
-        extraAttrs = M.fromList
-          [ ("year", s_year)
-          , ("extent", s_name)
-          , ("geom", geom)
-          , ("pname", (T.toLower s_name) <> "-" <> geom)
-          , ("version", s_year)
-          ]
-      }
+      S.fromListText
+        (stateName geom)
+        [ ("url", stateUrl geom)
+        , ("year", s_year)
+        , ("extent", s_name)
+        , ("geom", geom)
+        , ("pname", (T.toLower s_name) <> "-" <> geom)
+        , ("version", s_year)
+        ]
   in
     map stateSource state_geoms

@@ -1,0 +1,3362 @@
+[
+  {
+    "name": "us-bg-2015",
+    "hash": "sha256-1JjNvSByFPpL5ynkTY9USXI16ZKGEl26QWJfEjf+FL8=",
+    "extraAttrs": {
+      "pname": "us-bg",
+      "version": "2015",
+      "extent": "US",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "AL",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "national"
+    }
+  },
+  {
+    "name": "district_of_columbia-bg-2015",
+    "hash": "sha256-htql/wjH1rjPqO5im6jFFtipD2QxvwEHupM7dJ9fLMc=",
+    "extraAttrs": {
+      "pname": "district_of_columbia-bg",
+      "version": "2015",
+      "extent": "District_of_Columbia",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "DC",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "district_of_columbia-zip+4-2015",
+    "hash": "sha256-m73WelXTnsvtuSA8DPXEIv6ztFsrek3sO8oZAeibTk4=",
+    "extraAttrs": {
+      "pname": "district_of_columbia-zip+4",
+      "version": "2015",
+      "extent": "District_of_Columbia",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "DC",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "puerto_rico-bg-2015",
+    "hash": "sha256-fdH36GbDmFoOQxX3oZizjOP3SAGlVhfWAg7kPsvnFQE=",
+    "extraAttrs": {
+      "pname": "puerto_rico-bg",
+      "version": "2015",
+      "extent": "Puerto_Rico",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "PR",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "puerto_rico-zip+4-2015",
+    "hash": "sha256-KpAFOkl39Gns94mAWpsbrQ9XCSiKESzPp4VQL/YZVVY=",
+    "extraAttrs": {
+      "pname": "puerto_rico-zip+4",
+      "version": "2015",
+      "extent": "Puerto_Rico",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "PR",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "alabama-bg-2015",
+    "hash": "sha256-1RIQii/huWf62/J4jimMD2Z48rfJGTBdTQCuOKlmqN8=",
+    "extraAttrs": {
+      "pname": "alabama-bg",
+      "version": "2015",
+      "extent": "Alabama",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "AL",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "alabama-zip+4-2015",
+    "hash": "sha256-LQe3zluu7eMFg0zod7H6Il66FwiLq1DzXIgzDw43eZ8=",
+    "extraAttrs": {
+      "pname": "alabama-zip+4",
+      "version": "2015",
+      "extent": "Alabama",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "AL",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "alaska-bg-2015",
+    "hash": "sha256-955M+IUxCwkJgQ463Hrd8WWwOVBWSwxoGYdXcxt6Blw=",
+    "extraAttrs": {
+      "pname": "alaska-bg",
+      "version": "2015",
+      "extent": "Alaska",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "AK",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "alaska-zip+4-2015",
+    "hash": "sha256-p+JS8AFvESFVBPLgzUchtktiXYnyP21MuNLuIrf07lk=",
+    "extraAttrs": {
+      "pname": "alaska-zip+4",
+      "version": "2015",
+      "extent": "Alaska",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "AK",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "arizona-bg-2015",
+    "hash": "sha256-NOw0SBeLEjitqgKGHJV3NdX3DgHtBGUtd3KQdcDcZgk=",
+    "extraAttrs": {
+      "pname": "arizona-bg",
+      "version": "2015",
+      "extent": "Arizona",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "AZ",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "arizona-zip+4-2015",
+    "hash": "sha256-SZbR6KQFdo40seYfX9oyQ3B+dpvxz4i9okROiofgwCs=",
+    "extraAttrs": {
+      "pname": "arizona-zip+4",
+      "version": "2015",
+      "extent": "Arizona",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "AZ",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "arkansas-bg-2015",
+    "hash": "sha256-EQ9b+j/5guB01Q1fBe8qJL9pf1d7Pj3ht+Xae6bsPTk=",
+    "extraAttrs": {
+      "pname": "arkansas-bg",
+      "version": "2015",
+      "extent": "Arkansas",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "AR",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "arkansas-zip+4-2015",
+    "hash": "sha256-WaRFCoqNnmKmd6lsyU7O+xMtvGWK0hCrrSXkEeE8rjk=",
+    "extraAttrs": {
+      "pname": "arkansas-zip+4",
+      "version": "2015",
+      "extent": "Arkansas",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "AR",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "california-bg-2015",
+    "hash": "sha256-DV4etq/ATVGyddGP+ZicNlzcW/2/ccEekfCxwuTXut8=",
+    "extraAttrs": {
+      "pname": "california-bg",
+      "version": "2015",
+      "extent": "California",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "CA",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "california-zip+4-2015",
+    "hash": "sha256-aUF1lJj8qQtHlb6VX6RV5IQdGYU6HoptNmsyokvVQew=",
+    "extraAttrs": {
+      "pname": "california-zip+4",
+      "version": "2015",
+      "extent": "California",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "CA",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "colorado-bg-2015",
+    "hash": "sha256-zTWTAsPDcb2qR4YLwYSsyqpojMaqdc7s4OVigaDD6yc=",
+    "extraAttrs": {
+      "pname": "colorado-bg",
+      "version": "2015",
+      "extent": "Colorado",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "CO",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "colorado-zip+4-2015",
+    "hash": "sha256-hDp3wFjhQTPny/Gp5qupZXxjktPZVOhPLFODuZuP/yU=",
+    "extraAttrs": {
+      "pname": "colorado-zip+4",
+      "version": "2015",
+      "extent": "Colorado",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "CO",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "connecticut-bg-2015",
+    "hash": "sha256-6XwrccDpE6M393OHItyyg2DHJCqrz+ZkHqapN/5+d3Q=",
+    "extraAttrs": {
+      "pname": "connecticut-bg",
+      "version": "2015",
+      "extent": "Connecticut",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "CT",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "connecticut-zip+4-2015",
+    "hash": "sha256-tbK1hAXW4Ae0LxoUVXYGbcDTOsBum78XelN17jNJ1dw=",
+    "extraAttrs": {
+      "pname": "connecticut-zip+4",
+      "version": "2015",
+      "extent": "Connecticut",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "CT",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "delaware-bg-2015",
+    "hash": "sha256-yTDyoGfKMTTbqpvxm3GOrAE+CoAHuka/3b0vrpdu45s=",
+    "extraAttrs": {
+      "pname": "delaware-bg",
+      "version": "2015",
+      "extent": "Delaware",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "DE",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "delaware-zip+4-2015",
+    "hash": "sha256-DRkfmu9Oi01uIJT5otSNM6ndn0h7elR+vHhk4PoFdrU=",
+    "extraAttrs": {
+      "pname": "delaware-zip+4",
+      "version": "2015",
+      "extent": "Delaware",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "DE",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "florida-bg-2015",
+    "hash": "sha256-hgVY49QZ/lvHixQS7DcpwIrK08SfzFbT3D3ufQn/uao=",
+    "extraAttrs": {
+      "pname": "florida-bg",
+      "version": "2015",
+      "extent": "Florida",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "FL",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "florida-zip+4-2015",
+    "hash": "sha256-hVG6LTdtEOGUS818VM8GI4y/biMvt+GKBdW6IsXAc64=",
+    "extraAttrs": {
+      "pname": "florida-zip+4",
+      "version": "2015",
+      "extent": "Florida",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "FL",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "georgia-bg-2015",
+    "hash": "sha256-asceHcjXkSGpiw5rZ9iwkZVReoNjaRxunwqiH9VgsGE=",
+    "extraAttrs": {
+      "pname": "georgia-bg",
+      "version": "2015",
+      "extent": "Georgia",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "GA",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "georgia-zip+4-2015",
+    "hash": "sha256-BCNJmcF9wJnyhTibwxg/uLeP6YvynHNrDBFgpbQh/YI=",
+    "extraAttrs": {
+      "pname": "georgia-zip+4",
+      "version": "2015",
+      "extent": "Georgia",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "GA",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "hawaii-bg-2015",
+    "hash": "sha256-sncSADR0KaM4/TbyzHmJo53pPoDHd5RHubuF/sIN5vc=",
+    "extraAttrs": {
+      "pname": "hawaii-bg",
+      "version": "2015",
+      "extent": "Hawaii",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "HI",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "hawaii-zip+4-2015",
+    "hash": "sha256-77Gq3RyYY/g3Tn/KpcCgxM9nIQmse/H0Kq9CXGEmpcM=",
+    "extraAttrs": {
+      "pname": "hawaii-zip+4",
+      "version": "2015",
+      "extent": "Hawaii",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "HI",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "idaho-bg-2015",
+    "hash": "sha256-yNRtrd25R1jHJjbOT9WXb10+pKGgKOYCItdRkJreZq8=",
+    "extraAttrs": {
+      "pname": "idaho-bg",
+      "version": "2015",
+      "extent": "Idaho",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "ID",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "idaho-zip+4-2015",
+    "hash": "sha256-mE02daPYW/ssG99390v+YBJaVdl0Ogzg78M4F7W+5pM=",
+    "extraAttrs": {
+      "pname": "idaho-zip+4",
+      "version": "2015",
+      "extent": "Idaho",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "ID",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "illinois-bg-2015",
+    "hash": "sha256-V7TnEOfVrilctSxcfCHaAxkzRt2NPD2NFCXzrjb3DM4=",
+    "extraAttrs": {
+      "pname": "illinois-bg",
+      "version": "2015",
+      "extent": "Illinois",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "IL",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "illinois-zip+4-2015",
+    "hash": "sha256-ARS2Q9HTJs9J3X0SENUAcq7uq7M8638x8uqdc18IPFk=",
+    "extraAttrs": {
+      "pname": "illinois-zip+4",
+      "version": "2015",
+      "extent": "Illinois",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "IL",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "indiana-bg-2015",
+    "hash": "sha256-Zr1G1+a7WKjXISGE+TJn+OmeuFxi5Xv3WdgBRn6IBsg=",
+    "extraAttrs": {
+      "pname": "indiana-bg",
+      "version": "2015",
+      "extent": "Indiana",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "IN",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "indiana-zip+4-2015",
+    "hash": "sha256-wjnXKvELmGA7Ry58xSGZg2jUMgmk4cuOo3rQ9FRAIfU=",
+    "extraAttrs": {
+      "pname": "indiana-zip+4",
+      "version": "2015",
+      "extent": "Indiana",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "IN",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "iowa-bg-2015",
+    "hash": "sha256-pYY+7N/67OEccSOrRNFdSE2oitpDT1gqqWsEPwuhKn8=",
+    "extraAttrs": {
+      "pname": "iowa-bg",
+      "version": "2015",
+      "extent": "Iowa",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "IA",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "iowa-zip+4-2015",
+    "hash": "sha256-yabt4/pPJULpihS8dmyEHKi0itXT8VTzOPjHx3/8eRE=",
+    "extraAttrs": {
+      "pname": "iowa-zip+4",
+      "version": "2015",
+      "extent": "Iowa",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "IA",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "kansas-bg-2015",
+    "hash": "sha256-n82laPYpe3zOQagwyOEN7i558OBZooOeI4QEWu2F4Os=",
+    "extraAttrs": {
+      "pname": "kansas-bg",
+      "version": "2015",
+      "extent": "Kansas",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "KS",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "kansas-zip+4-2015",
+    "hash": "sha256-PWhVnNsLm+RXy7bCrA9LWiKAkonBay3x5DW6c6eZ9oE=",
+    "extraAttrs": {
+      "pname": "kansas-zip+4",
+      "version": "2015",
+      "extent": "Kansas",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "KS",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "kentucky-bg-2015",
+    "hash": "sha256-EUmVq0ktP/weH2zAdxq2pyhUyziFG0KiZZefbAwK50A=",
+    "extraAttrs": {
+      "pname": "kentucky-bg",
+      "version": "2015",
+      "extent": "Kentucky",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "KY",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "kentucky-zip+4-2015",
+    "hash": "sha256-AJpOKb5/zb2RfqYAMOfKP0TXLSEigoFqY+fK55PgDWI=",
+    "extraAttrs": {
+      "pname": "kentucky-zip+4",
+      "version": "2015",
+      "extent": "Kentucky",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "KY",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "louisiana-bg-2015",
+    "hash": "sha256-JZceSD59AIINgQRaBfo+xKeuBf2YtnwSr+FU+vVi7Lw=",
+    "extraAttrs": {
+      "pname": "louisiana-bg",
+      "version": "2015",
+      "extent": "Louisiana",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "LA",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "louisiana-zip+4-2015",
+    "hash": "sha256-NAOt2UZks2A8Wp47AkCv7Fhd7pggJFRWAhNNElY3X44=",
+    "extraAttrs": {
+      "pname": "louisiana-zip+4",
+      "version": "2015",
+      "extent": "Louisiana",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "LA",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "maine-bg-2015",
+    "hash": "sha256-B+SF5/8RbWJv58URPIylRvDR9a1xuG99Z01idlp963M=",
+    "extraAttrs": {
+      "pname": "maine-bg",
+      "version": "2015",
+      "extent": "Maine",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "ME",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "maine-zip+4-2015",
+    "hash": "sha256-+G3DQ/ooLwH5hYgTY1xI+kEg4lnItp7WMQbZ/fp96CA=",
+    "extraAttrs": {
+      "pname": "maine-zip+4",
+      "version": "2015",
+      "extent": "Maine",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "ME",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "maryland-bg-2015",
+    "hash": "sha256-etA1gWwJQ3MFktQSdpZ/ZyY1b8302i8ZaGMxifFXNDY=",
+    "extraAttrs": {
+      "pname": "maryland-bg",
+      "version": "2015",
+      "extent": "Maryland",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MD",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "maryland-zip+4-2015",
+    "hash": "sha256-bZE+/M0YD7MAqHHOVAS5G5VQwYJSBYqjW7vr/r8Ui3Q=",
+    "extraAttrs": {
+      "pname": "maryland-zip+4",
+      "version": "2015",
+      "extent": "Maryland",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MD",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "massachusetts-bg-2015",
+    "hash": "sha256-+MrP//brqyC20Nd/5QIpPFCTjBTMrptIUSCgMwt+39s=",
+    "extraAttrs": {
+      "pname": "massachusetts-bg",
+      "version": "2015",
+      "extent": "Massachusetts",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MA",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "massachusetts-zip+4-2015",
+    "hash": "sha256-hp1gSUIFLMdeas42EJoEtk3hYdCd3BaxZrnVCfoH4Gw=",
+    "extraAttrs": {
+      "pname": "massachusetts-zip+4",
+      "version": "2015",
+      "extent": "Massachusetts",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MA",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "michigan-bg-2015",
+    "hash": "sha256-yuwgykp+Upbllk562iQzqLrkxNxwrX1xG1DoJb7ZQxc=",
+    "extraAttrs": {
+      "pname": "michigan-bg",
+      "version": "2015",
+      "extent": "Michigan",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MI",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "michigan-zip+4-2015",
+    "hash": "sha256-PVxzX9Idw2bvWdtm76NbTeUuCgxo+T9Uq3arHjUACdA=",
+    "extraAttrs": {
+      "pname": "michigan-zip+4",
+      "version": "2015",
+      "extent": "Michigan",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MI",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "minnesota-bg-2015",
+    "hash": "sha256-BubnWICabuPTpJcwRxNdTec3svPlJjdR18x4jgv3fiQ=",
+    "extraAttrs": {
+      "pname": "minnesota-bg",
+      "version": "2015",
+      "extent": "Minnesota",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MN",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "minnesota-zip+4-2015",
+    "hash": "sha256-UALqbSXStqGGNVpxFTd1a9vdEHPmt3CVFpUKdKkRD4Y=",
+    "extraAttrs": {
+      "pname": "minnesota-zip+4",
+      "version": "2015",
+      "extent": "Minnesota",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MN",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "mississippi-bg-2015",
+    "hash": "sha256-cTVFKj46l2J4UX1oDXPX0QpIsp3HRNue9a26ADieAz4=",
+    "extraAttrs": {
+      "pname": "mississippi-bg",
+      "version": "2015",
+      "extent": "Mississippi",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MS",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "mississippi-zip+4-2015",
+    "hash": "sha256-NGNxGixcKUBYrHwZnbOZDSsSjBczvhTchoPKvyOU2So=",
+    "extraAttrs": {
+      "pname": "mississippi-zip+4",
+      "version": "2015",
+      "extent": "Mississippi",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MS",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "missouri-bg-2015",
+    "hash": "sha256-bUdG1Txv6wz4g9IaduFSi/z5cUt2avcNxh5zszVj1Q4=",
+    "extraAttrs": {
+      "pname": "missouri-bg",
+      "version": "2015",
+      "extent": "Missouri",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MO",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "missouri-zip+4-2015",
+    "hash": "sha256-Hwum0MCDHZxtROQ6Em9RXohocjEeOBZg1qoWpbdyqf4=",
+    "extraAttrs": {
+      "pname": "missouri-zip+4",
+      "version": "2015",
+      "extent": "Missouri",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MO",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "montana-bg-2015",
+    "hash": "sha256-3OmyMGBwnA6VGqIjvkNQXLyuasBBtjIOv0DKUSOc5n8=",
+    "extraAttrs": {
+      "pname": "montana-bg",
+      "version": "2015",
+      "extent": "Montana",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MT",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "montana-zip+4-2015",
+    "hash": "sha256-hFhCP21r604yJwRRStlBwT8S830H0nTA+5btjVuzsaw=",
+    "extraAttrs": {
+      "pname": "montana-zip+4",
+      "version": "2015",
+      "extent": "Montana",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MT",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "nebraska-bg-2015",
+    "hash": "sha256-XYZl/pKqV99DZlUF/DWgTKyr6q+anjMDhPercf9DNcU=",
+    "extraAttrs": {
+      "pname": "nebraska-bg",
+      "version": "2015",
+      "extent": "Nebraska",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NE",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "nebraska-zip+4-2015",
+    "hash": "sha256-pOz61W7CbjP1+twdpXDdqSAD+4CI6igz3rTy88WfGhw=",
+    "extraAttrs": {
+      "pname": "nebraska-zip+4",
+      "version": "2015",
+      "extent": "Nebraska",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NE",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "nevada-bg-2015",
+    "hash": "sha256-igk27hwo6h52/BwXsywJPQrNWAN4N3tCjt7maVECKC0=",
+    "extraAttrs": {
+      "pname": "nevada-bg",
+      "version": "2015",
+      "extent": "Nevada",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NV",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "nevada-zip+4-2015",
+    "hash": "sha256-7k6ENKDt12MGI+Cuff1HNMv+N6oKXr7KnPQHImelIlI=",
+    "extraAttrs": {
+      "pname": "nevada-zip+4",
+      "version": "2015",
+      "extent": "Nevada",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NV",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "new_hampshire-bg-2015",
+    "hash": "sha256-Mwf2djZVhVr8GdxazC2a/NgyXCAgHpOTzblwXcuRW3Q=",
+    "extraAttrs": {
+      "pname": "new_hampshire-bg",
+      "version": "2015",
+      "extent": "New_Hampshire",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NH",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "new_hampshire-zip+4-2015",
+    "hash": "sha256-WOhi2RIb8bj4IMLgyN/RkcOxIxBVvDP0pi2bb71SqFE=",
+    "extraAttrs": {
+      "pname": "new_hampshire-zip+4",
+      "version": "2015",
+      "extent": "New_Hampshire",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NH",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "new_jersey-bg-2015",
+    "hash": "sha256-MMyX2awqvzTT/C/9eIGJPSnBiqvQ0ty5A39SyUwBb2o=",
+    "extraAttrs": {
+      "pname": "new_jersey-bg",
+      "version": "2015",
+      "extent": "New_Jersey",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NJ",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "new_jersey-zip+4-2015",
+    "hash": "sha256-AXkv0p64D1P7S7U0y1m7CbPxVNEib1OWpYJrWnR0Sjg=",
+    "extraAttrs": {
+      "pname": "new_jersey-zip+4",
+      "version": "2015",
+      "extent": "New_Jersey",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NJ",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "new_mexico-bg-2015",
+    "hash": "sha256-HY9uXlxcGKbmpzCPWZu0CrFidkVd4xq/piIekyp9sr4=",
+    "extraAttrs": {
+      "pname": "new_mexico-bg",
+      "version": "2015",
+      "extent": "New_Mexico",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NM",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "new_mexico-zip+4-2015",
+    "hash": "sha256-YlRrhl/R75YDEuNxA/bnf7sVOEEUq+9TxvglxGj+VXw=",
+    "extraAttrs": {
+      "pname": "new_mexico-zip+4",
+      "version": "2015",
+      "extent": "New_Mexico",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NM",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "new_york-bg-2015",
+    "hash": "sha256-2rT5KgmvH59il4ECWUoKaH3gOz9BFE1LFYlU6TNbzls=",
+    "extraAttrs": {
+      "pname": "new_york-bg",
+      "version": "2015",
+      "extent": "New_York",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NY",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "new_york-zip+4-2015",
+    "hash": "sha256-cLQZNFyWVZwlF/LAYuShZ3qfDT24KE+4V6PeVvaA3S4=",
+    "extraAttrs": {
+      "pname": "new_york-zip+4",
+      "version": "2015",
+      "extent": "New_York",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NY",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "north_carolina-bg-2015",
+    "hash": "sha256-NAFhZnAOLuWNvC8xNJWJYx+LKJFlRdwT6QykOkWzCYU=",
+    "extraAttrs": {
+      "pname": "north_carolina-bg",
+      "version": "2015",
+      "extent": "North_Carolina",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NC",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "north_carolina-zip+4-2015",
+    "hash": "sha256-aVdFk+KVLc93JaFY819KEWzzlDVn27i2com98FxxFYI=",
+    "extraAttrs": {
+      "pname": "north_carolina-zip+4",
+      "version": "2015",
+      "extent": "North_Carolina",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NC",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "north_dakota-bg-2015",
+    "hash": "sha256-ox5R6TKJfGzPRKOd7YM2VyR3416WjVdDxjPE0j46KNU=",
+    "extraAttrs": {
+      "pname": "north_dakota-bg",
+      "version": "2015",
+      "extent": "North_Dakota",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "ND",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "north_dakota-zip+4-2015",
+    "hash": "sha256-SJbRMkxCFMHn91jDdf/lQdMsAj+XgdxmQvtO1bIrBvM=",
+    "extraAttrs": {
+      "pname": "north_dakota-zip+4",
+      "version": "2015",
+      "extent": "North_Dakota",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "ND",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "ohio-bg-2015",
+    "hash": "sha256-MetCCkV9KFEARXaCL/6tnJrYeJsYwnchIAYFmVCMzkY=",
+    "extraAttrs": {
+      "pname": "ohio-bg",
+      "version": "2015",
+      "extent": "Ohio",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "OH",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "ohio-zip+4-2015",
+    "hash": "sha256-aCBLnbvxRVeNTm4q8crgQkALa+tRydJrzLVLckPUwqs=",
+    "extraAttrs": {
+      "pname": "ohio-zip+4",
+      "version": "2015",
+      "extent": "Ohio",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "OH",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "oklahoma-bg-2015",
+    "hash": "sha256-YRWkyY7n6s6/VerVErPdgTyo+9a3aYbfXxgymPKCaMA=",
+    "extraAttrs": {
+      "pname": "oklahoma-bg",
+      "version": "2015",
+      "extent": "Oklahoma",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "OK",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "oklahoma-zip+4-2015",
+    "hash": "sha256-Y27y6ived/D437YS5Q/4Tl9xgiwhwptwIynlf5U0B1s=",
+    "extraAttrs": {
+      "pname": "oklahoma-zip+4",
+      "version": "2015",
+      "extent": "Oklahoma",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "OK",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "oregon-bg-2015",
+    "hash": "sha256-V0rGT13xfXhFARX5A2lth09X0nCv4cTdl1na85oysBg=",
+    "extraAttrs": {
+      "pname": "oregon-bg",
+      "version": "2015",
+      "extent": "Oregon",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "OR",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "oregon-zip+4-2015",
+    "hash": "sha256-ZqjG0nCVVmoENx0iQAyVLiRc2sih5VGCWscOkhj+h/4=",
+    "extraAttrs": {
+      "pname": "oregon-zip+4",
+      "version": "2015",
+      "extent": "Oregon",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "OR",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "pennsylvania-bg-2015",
+    "hash": "sha256-a8VwlOFVvVhg3hayOdMDr2Xe+51E8k0xYWDF0q9u/dg=",
+    "extraAttrs": {
+      "pname": "pennsylvania-bg",
+      "version": "2015",
+      "extent": "Pennsylvania",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "PA",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "pennsylvania-zip+4-2015",
+    "hash": "sha256-18xYGFA9pVt0pGRmAIyvOQlBzWt/SsoVGnJ06wRCTR4=",
+    "extraAttrs": {
+      "pname": "pennsylvania-zip+4",
+      "version": "2015",
+      "extent": "Pennsylvania",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "PA",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "rhode_island-bg-2015",
+    "hash": "sha256-hEXNMnUWVNH/avb6WrLE25PJuX/aBQ4PP4t1XNdRfig=",
+    "extraAttrs": {
+      "pname": "rhode_island-bg",
+      "version": "2015",
+      "extent": "Rhode_Island",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "RI",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "rhode_island-zip+4-2015",
+    "hash": "sha256-HKHBqPhVxc0wP/P0SL1OxnOfZpTMBm+KztK5YjZhtdU=",
+    "extraAttrs": {
+      "pname": "rhode_island-zip+4",
+      "version": "2015",
+      "extent": "Rhode_Island",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "RI",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "south_carolina-bg-2015",
+    "hash": "sha256-1tFpo4vYOQgOy2Za1x4SlmWkOsWSzmuJo7QBeaqEjso=",
+    "extraAttrs": {
+      "pname": "south_carolina-bg",
+      "version": "2015",
+      "extent": "South_Carolina",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "SC",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "south_carolina-zip+4-2015",
+    "hash": "sha256-MP2lBz0UkvABP5lMYMSros/8E7a0dkzzVJzF1/AA8Gk=",
+    "extraAttrs": {
+      "pname": "south_carolina-zip+4",
+      "version": "2015",
+      "extent": "South_Carolina",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "SC",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "south_dakota-bg-2015",
+    "hash": "sha256-NnyH7nMTf1aNSzvO9U3bhE58zkeyKJLEHEpks5S2oX0=",
+    "extraAttrs": {
+      "pname": "south_dakota-bg",
+      "version": "2015",
+      "extent": "South_Dakota",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "SD",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "south_dakota-zip+4-2015",
+    "hash": "sha256-A9j5Wpx3eHvJ/7LzNQxdJ6TIZhwO/FyNIlx7HL0VmFI=",
+    "extraAttrs": {
+      "pname": "south_dakota-zip+4",
+      "version": "2015",
+      "extent": "South_Dakota",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "SD",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "tennessee-bg-2015",
+    "hash": "sha256-PINpWdFn6vkxhI9U2HDByp8pMF8m6V+inR8RaLagVZo=",
+    "extraAttrs": {
+      "pname": "tennessee-bg",
+      "version": "2015",
+      "extent": "Tennessee",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "TN",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "tennessee-zip+4-2015",
+    "hash": "sha256-Vw6JOSDWAIKXRpj8eIf9abUxn5R98SKM5byG1dlvBwQ=",
+    "extraAttrs": {
+      "pname": "tennessee-zip+4",
+      "version": "2015",
+      "extent": "Tennessee",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "TN",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "texas-bg-2015",
+    "hash": "sha256-FL3w3ga2Z+Pd9OP/JhbaKAgAseQiuWV3Zw9ECDDXDMU=",
+    "extraAttrs": {
+      "pname": "texas-bg",
+      "version": "2015",
+      "extent": "Texas",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "TX",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "texas-zip+4-2015",
+    "hash": "sha256-89zcd62WW0Zt6CG/QrJ2ftS6E/34EGTIGjOw6O/CtfI=",
+    "extraAttrs": {
+      "pname": "texas-zip+4",
+      "version": "2015",
+      "extent": "Texas",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "TX",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "utah-bg-2015",
+    "hash": "sha256-uMgbBh9xNFpOCWtN+Nnge1mjVtD2p+ePVxDPg+0ATpk=",
+    "extraAttrs": {
+      "pname": "utah-bg",
+      "version": "2015",
+      "extent": "Utah",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "UT",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "utah-zip+4-2015",
+    "hash": "sha256-RQXo7hmeLttUs2TLRLFpq6L9dDPRVpHhmpZXSh5Szt8=",
+    "extraAttrs": {
+      "pname": "utah-zip+4",
+      "version": "2015",
+      "extent": "Utah",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "UT",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "vermont-bg-2015",
+    "hash": "sha256-W12CaAECjvYdS9GcRvj+0NA5nspimrrQu+2ks+TXsLk=",
+    "extraAttrs": {
+      "pname": "vermont-bg",
+      "version": "2015",
+      "extent": "Vermont",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "VT",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "vermont-zip+4-2015",
+    "hash": "sha256-2zHlKLMegs6gUfcgclLRFDjLPSEYBAr0q3hDH0V1V80=",
+    "extraAttrs": {
+      "pname": "vermont-zip+4",
+      "version": "2015",
+      "extent": "Vermont",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "VT",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "virginia-bg-2015",
+    "hash": "sha256-c7mlugTPCHkq+/c1ZxEe8GkNiOu97AukzkvzfDi+iyg=",
+    "extraAttrs": {
+      "pname": "virginia-bg",
+      "version": "2015",
+      "extent": "Virginia",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "VA",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "virginia-zip+4-2015",
+    "hash": "sha256-20YNyrd/NYxa8QCWYnq0rCIXl9qgfq0vGHO/C07bmI0=",
+    "extraAttrs": {
+      "pname": "virginia-zip+4",
+      "version": "2015",
+      "extent": "Virginia",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "VA",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "washington-bg-2015",
+    "hash": "sha256-mGIKOY5bCEkbaYC/eHXeUVhaYZUgO2/0eMed1p+HNmM=",
+    "extraAttrs": {
+      "pname": "washington-bg",
+      "version": "2015",
+      "extent": "Washington",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "WA",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "washington-zip+4-2015",
+    "hash": "sha256-hmrakfuJdq4oCJ1D2ET7zA0a8dkplKw6RJWUiL2FkDY=",
+    "extraAttrs": {
+      "pname": "washington-zip+4",
+      "version": "2015",
+      "extent": "Washington",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "WA",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "west_virginia-bg-2015",
+    "hash": "sha256-s2W+9wLKyCMyA6/HNsNQbpTD9YbecDMaLbqNmHJERFE=",
+    "extraAttrs": {
+      "pname": "west_virginia-bg",
+      "version": "2015",
+      "extent": "West_Virginia",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "WV",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "west_virginia-zip+4-2015",
+    "hash": "sha256-jPfXXe6LNB2G66Vevyyo4PWUmBHO0wyk2KDSxkp0/qU=",
+    "extraAttrs": {
+      "pname": "west_virginia-zip+4",
+      "version": "2015",
+      "extent": "West_Virginia",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "WV",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "wisconsin-bg-2015",
+    "hash": "sha256-Bx5r3UBelcOoX6+RoXUOEaGV3obc3YwyqDoLUc8y98s=",
+    "extraAttrs": {
+      "pname": "wisconsin-bg",
+      "version": "2015",
+      "extent": "Wisconsin",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "WI",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "wisconsin-zip+4-2015",
+    "hash": "sha256-7mhiO3COK520nD0E1EEWe7VJCIxeLKUq+WmCBTi0nKg=",
+    "extraAttrs": {
+      "pname": "wisconsin-zip+4",
+      "version": "2015",
+      "extent": "Wisconsin",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "WI",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "wyoming-bg-2015",
+    "hash": "sha256-dOKYrdDJieIq3eBOhetfDbYwz3h1d6907jdgLRc416E=",
+    "extraAttrs": {
+      "pname": "wyoming-bg",
+      "version": "2015",
+      "extent": "Wyoming",
+      "geom": "bg",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "WY",
+      "version-group": "15",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "wyoming-zip+4-2015",
+    "hash": "sha256-TuaRzNoDOsDtlikqX+Bqng/7EkqyynE9jG/nA3GAq6c=",
+    "extraAttrs": {
+      "pname": "wyoming-zip+4",
+      "version": "2015",
+      "extent": "Wyoming",
+      "geom": "zip+4",
+      "year": "2015",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "WY",
+      "version-group": "15",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "us-bg-2019",
+    "hash": "sha256-5+YfuAURMok32ychpp+wWFWFxgLPHh93SR9BMTwNdPw=",
+    "extraAttrs": {
+      "pname": "us-bg",
+      "version": "2019",
+      "extent": "US",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "AL",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "national"
+    }
+  },
+  {
+    "name": "district_of_columbia-bg-2019",
+    "hash": "sha256-HeeIInRyYrIMX1rIZfiGUkTMl0pME56QlTi2CupFVdg=",
+    "extraAttrs": {
+      "pname": "district_of_columbia-bg",
+      "version": "2019",
+      "extent": "District_of_Columbia",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "DC",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "district_of_columbia-zip+4-2019",
+    "hash": "sha256-kPJTtSV5CWsiDzGf/F8pxaJOfakRNi9o1ni9xn0u08E=",
+    "extraAttrs": {
+      "pname": "district_of_columbia-zip+4",
+      "version": "2019",
+      "extent": "District_of_Columbia",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "DC",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "puerto_rico-bg-2019",
+    "hash": "sha256-Mok4pRhn9lrAU0Alz2MKVr5TvY7aipPdzy3/D0ViJHM=",
+    "extraAttrs": {
+      "pname": "puerto_rico-bg",
+      "version": "2019",
+      "extent": "Puerto_Rico",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "PR",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "puerto_rico-zip+4-2019",
+    "hash": "sha256-k5h5TBu1IawcP6FvQ3dqx08DHNfE4p1xzjghDlAaylE=",
+    "extraAttrs": {
+      "pname": "puerto_rico-zip+4",
+      "version": "2019",
+      "extent": "Puerto_Rico",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "PR",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "alabama-bg-2019",
+    "hash": "sha256-GyK/HN+w7F9KszzxW4d2RYD7HA3lAsNPYAuPZOaeOaE=",
+    "extraAttrs": {
+      "pname": "alabama-bg",
+      "version": "2019",
+      "extent": "Alabama",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "AL",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "alabama-zip+4-2019",
+    "hash": "sha256-Oawr5uIN81ZM0QVl3bfAbGHJW67k2Vfo3UfwM1XCaoM=",
+    "extraAttrs": {
+      "pname": "alabama-zip+4",
+      "version": "2019",
+      "extent": "Alabama",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "AL",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "alaska-bg-2019",
+    "hash": "sha256-aatx2Fx+/IvwheVr4PX+nrU59p3ehJlbTA2pQrz7oi0=",
+    "extraAttrs": {
+      "pname": "alaska-bg",
+      "version": "2019",
+      "extent": "Alaska",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "AK",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "alaska-zip+4-2019",
+    "hash": "sha256-dnmpS5oeqbCQkdIcxbZ5HWiWYxoXXUMndEyKFYK5/go=",
+    "extraAttrs": {
+      "pname": "alaska-zip+4",
+      "version": "2019",
+      "extent": "Alaska",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "AK",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "arizona-bg-2019",
+    "hash": "sha256-MAhbka4E0iQYCEp1tQ9PhVd3CUdfgfcPUWoHO94sYxc=",
+    "extraAttrs": {
+      "pname": "arizona-bg",
+      "version": "2019",
+      "extent": "Arizona",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "AZ",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "arizona-zip+4-2019",
+    "hash": "sha256-RY8/kBzHaTxz6Fo/SwyKVnWNeU8ypbOZk6ezgcDXvpQ=",
+    "extraAttrs": {
+      "pname": "arizona-zip+4",
+      "version": "2019",
+      "extent": "Arizona",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "AZ",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "arkansas-bg-2019",
+    "hash": "sha256-snJ++6KQEEP4mB1WrqFojOfc7anHkaAztBmAEfgEkeA=",
+    "extraAttrs": {
+      "pname": "arkansas-bg",
+      "version": "2019",
+      "extent": "Arkansas",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "AR",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "arkansas-zip+4-2019",
+    "hash": "sha256-sJWHmXa2Y22dZgD0lR/+o0BZhbpAoUC/uc8CnVve0Ts=",
+    "extraAttrs": {
+      "pname": "arkansas-zip+4",
+      "version": "2019",
+      "extent": "Arkansas",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "AR",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "california-bg-2019",
+    "hash": "sha256-UnHNCnAgdF1t5zKCFy9RXrbqrlhgN5PfwghfNRDQ97Q=",
+    "extraAttrs": {
+      "pname": "california-bg",
+      "version": "2019",
+      "extent": "California",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "CA",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "california-zip+4-2019",
+    "hash": "sha256-ut4fHJh8o4E/ZNiPnXJnNXoC8sslLuxRUZX+Wn6GIbk=",
+    "extraAttrs": {
+      "pname": "california-zip+4",
+      "version": "2019",
+      "extent": "California",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "CA",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "colorado-bg-2019",
+    "hash": "sha256-WLuZkg20YyQYIH/4ln0/vfhFG1KM0PHnds9IwmxRCRM=",
+    "extraAttrs": {
+      "pname": "colorado-bg",
+      "version": "2019",
+      "extent": "Colorado",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "CO",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "colorado-zip+4-2019",
+    "hash": "sha256-MlwqLB66rlUeQIfWlO3lXlqx43vdwBBOczDVyGsK/8w=",
+    "extraAttrs": {
+      "pname": "colorado-zip+4",
+      "version": "2019",
+      "extent": "Colorado",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "CO",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "connecticut-bg-2019",
+    "hash": "sha256-NKgKtD1QHvufqWRWeWffMJY0nLSgzGM7tOFXPOoYYMc=",
+    "extraAttrs": {
+      "pname": "connecticut-bg",
+      "version": "2019",
+      "extent": "Connecticut",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "CT",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "connecticut-zip+4-2019",
+    "hash": "sha256-w+Lr1oZHBoGH50N+ACj3RE9Iww0fz0gGvSFbjf6g5EE=",
+    "extraAttrs": {
+      "pname": "connecticut-zip+4",
+      "version": "2019",
+      "extent": "Connecticut",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "CT",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "delaware-bg-2019",
+    "hash": "sha256-LbJSohUDpgioDoU3wDZTfUkhfIBCwPAh39Tk3UOIIDY=",
+    "extraAttrs": {
+      "pname": "delaware-bg",
+      "version": "2019",
+      "extent": "Delaware",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "DE",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "delaware-zip+4-2019",
+    "hash": "sha256-Kx1RmjafPEhJByt7L1hgegDg8RTu8TuXl2azWS8D1Rs=",
+    "extraAttrs": {
+      "pname": "delaware-zip+4",
+      "version": "2019",
+      "extent": "Delaware",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "DE",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "florida-bg-2019",
+    "hash": "sha256-RVYSD3FwvqX8F5vMqXUeyJARW+/sQvfzrpt60AN0vFE=",
+    "extraAttrs": {
+      "pname": "florida-bg",
+      "version": "2019",
+      "extent": "Florida",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "FL",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "florida-zip+4-2019",
+    "hash": "sha256-W9ouvgwzYaSgDW9wE8fYBxQMLz/QvI7A9seKqFO8Il4=",
+    "extraAttrs": {
+      "pname": "florida-zip+4",
+      "version": "2019",
+      "extent": "Florida",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "FL",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "georgia-bg-2019",
+    "hash": "sha256-wG75FPoKSW+uTkblMA9/0UWjclMLd1WpPHjdwhnWitc=",
+    "extraAttrs": {
+      "pname": "georgia-bg",
+      "version": "2019",
+      "extent": "Georgia",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "GA",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "georgia-zip+4-2019",
+    "hash": "sha256-yaMVquyPJc2DmgB2xrPUuckyi/S42y1HG553FrgLREo=",
+    "extraAttrs": {
+      "pname": "georgia-zip+4",
+      "version": "2019",
+      "extent": "Georgia",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "GA",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "hawaii-bg-2019",
+    "hash": "sha256-XqK9+J2U4Z8T1MjaDkED3f2QgcXUP1ZowFmk2aL5iu8=",
+    "extraAttrs": {
+      "pname": "hawaii-bg",
+      "version": "2019",
+      "extent": "Hawaii",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "HI",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "hawaii-zip+4-2019",
+    "hash": "sha256-V+GZV1KGxu3b/w6d+xogkVB9bmWusrIsdcOmvFj+MHw=",
+    "extraAttrs": {
+      "pname": "hawaii-zip+4",
+      "version": "2019",
+      "extent": "Hawaii",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "HI",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "idaho-bg-2019",
+    "hash": "sha256-L2oQdFN/ZkdaDN005yu12YgE8eZZbI59IObz85rKNjc=",
+    "extraAttrs": {
+      "pname": "idaho-bg",
+      "version": "2019",
+      "extent": "Idaho",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "ID",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "idaho-zip+4-2019",
+    "hash": "sha256-q4LRCsTzeprzF4GWqYbceKIDqbPzVnILPJ6WRMsI3kE=",
+    "extraAttrs": {
+      "pname": "idaho-zip+4",
+      "version": "2019",
+      "extent": "Idaho",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "ID",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "illinois-bg-2019",
+    "hash": "sha256-RiRq0h7xD1JY7oda7Jecj5Q8KPF7FBnYoVd+OO/kZV8=",
+    "extraAttrs": {
+      "pname": "illinois-bg",
+      "version": "2019",
+      "extent": "Illinois",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "IL",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "illinois-zip+4-2019",
+    "hash": "sha256-S7hT49fM1LzqEVGLzVcc+e/2gomZoM5r91GwHE6II2M=",
+    "extraAttrs": {
+      "pname": "illinois-zip+4",
+      "version": "2019",
+      "extent": "Illinois",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "IL",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "indiana-bg-2019",
+    "hash": "sha256-rjE3r0eAF0BoE9MquFPZi3FqfOvgAY3txAQbxsJaU6w=",
+    "extraAttrs": {
+      "pname": "indiana-bg",
+      "version": "2019",
+      "extent": "Indiana",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "IN",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "indiana-zip+4-2019",
+    "hash": "sha256-DypHfsCTtKA1SINMIXnBNKxxM38BtDs4sVsCiFCJCnI=",
+    "extraAttrs": {
+      "pname": "indiana-zip+4",
+      "version": "2019",
+      "extent": "Indiana",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "IN",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "iowa-bg-2019",
+    "hash": "sha256-KeeNSDEGo/fDo9EdiOxRmok1wXms51c5rM5An1fmL24=",
+    "extraAttrs": {
+      "pname": "iowa-bg",
+      "version": "2019",
+      "extent": "Iowa",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "IA",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "iowa-zip+4-2019",
+    "hash": "sha256-L3RCVs9GmGzaX4eh6RL+MOn9jjh0DAsNBm3RsozPbrQ=",
+    "extraAttrs": {
+      "pname": "iowa-zip+4",
+      "version": "2019",
+      "extent": "Iowa",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "IA",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "kansas-bg-2019",
+    "hash": "sha256-srefcL3HAWYPInxg9OZ0ZpFbyo823Rsnx7m6EZC08Rs=",
+    "extraAttrs": {
+      "pname": "kansas-bg",
+      "version": "2019",
+      "extent": "Kansas",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "KS",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "kansas-zip+4-2019",
+    "hash": "sha256-JH8jbuxdq0YTuJ1UMsG19Yhx4aL0popGEaqtBIxka1c=",
+    "extraAttrs": {
+      "pname": "kansas-zip+4",
+      "version": "2019",
+      "extent": "Kansas",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "KS",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "kentucky-bg-2019",
+    "hash": "sha256-iv7PHYh6iqpxPzhOs5gW5sxGsBJsMntnGEFa2qoIE+s=",
+    "extraAttrs": {
+      "pname": "kentucky-bg",
+      "version": "2019",
+      "extent": "Kentucky",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "KY",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "kentucky-zip+4-2019",
+    "hash": "sha256-tB6RT0uVJpp4HZbOYLACLUH3B+dWUPZWodUfO4jmVic=",
+    "extraAttrs": {
+      "pname": "kentucky-zip+4",
+      "version": "2019",
+      "extent": "Kentucky",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "KY",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "louisiana-bg-2019",
+    "hash": "sha256-OrX0x21FcsOJjAvilrOz34PvGAzCG2Dm89cqZnZUf1c=",
+    "extraAttrs": {
+      "pname": "louisiana-bg",
+      "version": "2019",
+      "extent": "Louisiana",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "LA",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "louisiana-zip+4-2019",
+    "hash": "sha256-Qi6duS0XEXHktx4q53g7n6XIJBLDgYyqTd4arKff8+8=",
+    "extraAttrs": {
+      "pname": "louisiana-zip+4",
+      "version": "2019",
+      "extent": "Louisiana",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "LA",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "maine-bg-2019",
+    "hash": "sha256-NXxTsBPSqJNLtTicsEJQ5d9t23Rt9LLwtl7GdK9wITs=",
+    "extraAttrs": {
+      "pname": "maine-bg",
+      "version": "2019",
+      "extent": "Maine",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "ME",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "maine-zip+4-2019",
+    "hash": "sha256-V3TuiNiS3WmIS/IcdnAU48/A1HmHGHYB8FVys1xTNUE=",
+    "extraAttrs": {
+      "pname": "maine-zip+4",
+      "version": "2019",
+      "extent": "Maine",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "ME",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "maryland-bg-2019",
+    "hash": "sha256-PaWLcK5JKGbO3Str1A62c5yMagVu3mryH6WMD3UkcQ0=",
+    "extraAttrs": {
+      "pname": "maryland-bg",
+      "version": "2019",
+      "extent": "Maryland",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MD",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "maryland-zip+4-2019",
+    "hash": "sha256-H4pSOaHqo058cS2/YWdkSzxrZalvKOoDdLI6M6ES2vs=",
+    "extraAttrs": {
+      "pname": "maryland-zip+4",
+      "version": "2019",
+      "extent": "Maryland",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MD",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "massachusetts-bg-2019",
+    "hash": "sha256-u1xkekVXSKOYvOtdXLXNPmOK9ZTiAgFImcb9Cvu+4GA=",
+    "extraAttrs": {
+      "pname": "massachusetts-bg",
+      "version": "2019",
+      "extent": "Massachusetts",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MA",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "massachusetts-zip+4-2019",
+    "hash": "sha256-ARUWl0GTtY5V7oA1t9PaM+aFOscdoE/koLPqrOqYE0o=",
+    "extraAttrs": {
+      "pname": "massachusetts-zip+4",
+      "version": "2019",
+      "extent": "Massachusetts",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MA",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "michigan-bg-2019",
+    "hash": "sha256-GdweDDw+JNHJ2janJmvipgo1A2vKgilxK/Kkoxchr+c=",
+    "extraAttrs": {
+      "pname": "michigan-bg",
+      "version": "2019",
+      "extent": "Michigan",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MI",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "michigan-zip+4-2019",
+    "hash": "sha256-2k3vE8YbvWTvZRDjJazvtmgbZ9J96lkAnmK2SvTTeLY=",
+    "extraAttrs": {
+      "pname": "michigan-zip+4",
+      "version": "2019",
+      "extent": "Michigan",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MI",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "minnesota-bg-2019",
+    "hash": "sha256-++vwwhNpQJig+o0mKHRPN3SVGxrYMC05ad9U/LkZ6nU=",
+    "extraAttrs": {
+      "pname": "minnesota-bg",
+      "version": "2019",
+      "extent": "Minnesota",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MN",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "minnesota-zip+4-2019",
+    "hash": "sha256-DbUoPqDW4Nlx3QI7tQVOemQtJdfCbZAB+x8RaMNujoo=",
+    "extraAttrs": {
+      "pname": "minnesota-zip+4",
+      "version": "2019",
+      "extent": "Minnesota",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MN",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "mississippi-bg-2019",
+    "hash": "sha256-LKRRl1TRCPgu/AFVXYxOtj62F6N9Cz+0dGMHlzLh4S4=",
+    "extraAttrs": {
+      "pname": "mississippi-bg",
+      "version": "2019",
+      "extent": "Mississippi",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MS",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "mississippi-zip+4-2019",
+    "hash": "sha256-9dV04MB96c5xxMcu/bQBE8vLb6o1MMLm6TDr2tMbV5o=",
+    "extraAttrs": {
+      "pname": "mississippi-zip+4",
+      "version": "2019",
+      "extent": "Mississippi",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MS",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "missouri-bg-2019",
+    "hash": "sha256-0541hIrHPP3LzZYGtRg8ZfPiDqWbq0wRN8A6yAafT9s=",
+    "extraAttrs": {
+      "pname": "missouri-bg",
+      "version": "2019",
+      "extent": "Missouri",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MO",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "missouri-zip+4-2019",
+    "hash": "sha256-9yCwHErT5MXt1GdS4E66s7apemJRyC0adZPrYyKlNX0=",
+    "extraAttrs": {
+      "pname": "missouri-zip+4",
+      "version": "2019",
+      "extent": "Missouri",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MO",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "montana-bg-2019",
+    "hash": "sha256-vj8WGtXk/Ax9TcL9AdmPMFGsOvbSX0i56Fvn/dWuM5M=",
+    "extraAttrs": {
+      "pname": "montana-bg",
+      "version": "2019",
+      "extent": "Montana",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MT",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "montana-zip+4-2019",
+    "hash": "sha256-bTg0xjq1YCcV5/Pg4JxGKioSg72SMHXj4rBy7SOb1HM=",
+    "extraAttrs": {
+      "pname": "montana-zip+4",
+      "version": "2019",
+      "extent": "Montana",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "MT",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "nebraska-bg-2019",
+    "hash": "sha256-hLUPV61fzAjVwm4fV4EWHqHVM4J7/qHSTCLWEmSKyMs=",
+    "extraAttrs": {
+      "pname": "nebraska-bg",
+      "version": "2019",
+      "extent": "Nebraska",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NE",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "nebraska-zip+4-2019",
+    "hash": "sha256-tjpUGN3Wn6L0UqQwbseXV5khsQmkldlCuk0aTe/YPTk=",
+    "extraAttrs": {
+      "pname": "nebraska-zip+4",
+      "version": "2019",
+      "extent": "Nebraska",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NE",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "nevada-bg-2019",
+    "hash": "sha256-MQFkiyUi0mGP/03u27k2/eDJuidT3dIsfHh92S2k5AU=",
+    "extraAttrs": {
+      "pname": "nevada-bg",
+      "version": "2019",
+      "extent": "Nevada",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NV",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "nevada-zip+4-2019",
+    "hash": "sha256-XndJ0+AjHlFC3cWkRNJL01l3OLU5YsWBY+x2FEv2t0w=",
+    "extraAttrs": {
+      "pname": "nevada-zip+4",
+      "version": "2019",
+      "extent": "Nevada",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NV",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "new_hampshire-bg-2019",
+    "hash": "sha256-aq0BfYWhcMZaOJAEk95JVP9s/FnwfTxR6sHLj3aqEQo=",
+    "extraAttrs": {
+      "pname": "new_hampshire-bg",
+      "version": "2019",
+      "extent": "New_Hampshire",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NH",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "new_hampshire-zip+4-2019",
+    "hash": "sha256-l/HP0waHI6I127fOI6nlSsaLCpqDfAoqP06ftl8fi4A=",
+    "extraAttrs": {
+      "pname": "new_hampshire-zip+4",
+      "version": "2019",
+      "extent": "New_Hampshire",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NH",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "new_jersey-bg-2019",
+    "hash": "sha256-ig65wFMxHDVrdEnUeUFsZua21JQkdIGIeQijcgy5Mkk=",
+    "extraAttrs": {
+      "pname": "new_jersey-bg",
+      "version": "2019",
+      "extent": "New_Jersey",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NJ",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "new_jersey-zip+4-2019",
+    "hash": "sha256-YnpsMNlo0ZZ58sS/itvv3JVvIbAiIVYALboaia2tLF0=",
+    "extraAttrs": {
+      "pname": "new_jersey-zip+4",
+      "version": "2019",
+      "extent": "New_Jersey",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NJ",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "new_mexico-bg-2019",
+    "hash": "sha256-wIF0YxkwRogiZ3zayXwL2wcgtd1tx63kU0zhY/MvTf0=",
+    "extraAttrs": {
+      "pname": "new_mexico-bg",
+      "version": "2019",
+      "extent": "New_Mexico",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NM",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "new_mexico-zip+4-2019",
+    "hash": "sha256-jNmSPg+AiLBTt3iEU2QrR2/QDxeU/wwVIC3HZ/bZpF0=",
+    "extraAttrs": {
+      "pname": "new_mexico-zip+4",
+      "version": "2019",
+      "extent": "New_Mexico",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NM",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "new_york-bg-2019",
+    "hash": "sha256-eLWqbn04KORWc+TWeQyxhtRfLrBKoRJpU73z5zJfXTY=",
+    "extraAttrs": {
+      "pname": "new_york-bg",
+      "version": "2019",
+      "extent": "New_York",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NY",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "new_york-zip+4-2019",
+    "hash": "sha256-Pe2zC1lpXHkPkESzrjIxCW9Uk4GnrEXvLBpH0HTlyCM=",
+    "extraAttrs": {
+      "pname": "new_york-zip+4",
+      "version": "2019",
+      "extent": "New_York",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NY",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "north_carolina-bg-2019",
+    "hash": "sha256-yOmrz8+6bhmFRZRspDmGI4PRNXtsvzQzRWfhmax5eGs=",
+    "extraAttrs": {
+      "pname": "north_carolina-bg",
+      "version": "2019",
+      "extent": "North_Carolina",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NC",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "north_carolina-zip+4-2019",
+    "hash": "sha256-ZK2D4Pkz5KaJ6P7SFCEYCMtE1y/Rfr2IjL0Sw4tLGYU=",
+    "extraAttrs": {
+      "pname": "north_carolina-zip+4",
+      "version": "2019",
+      "extent": "North_Carolina",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "NC",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "north_dakota-bg-2019",
+    "hash": "sha256-1IGslqXeOVJmrlVMAHbUGimEFZZs1AmyHmRQXMHdsb4=",
+    "extraAttrs": {
+      "pname": "north_dakota-bg",
+      "version": "2019",
+      "extent": "North_Dakota",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "ND",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "north_dakota-zip+4-2019",
+    "hash": "sha256-SpiMD1nQv0rBSuo0eceB8sJb5+lbRTn9M2tnHVbYta0=",
+    "extraAttrs": {
+      "pname": "north_dakota-zip+4",
+      "version": "2019",
+      "extent": "North_Dakota",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "ND",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "ohio-bg-2019",
+    "hash": "sha256-q8gpxWYSbRBp3b78ABGRu3E+h/ip3j6gVKJ9NbdjTNk=",
+    "extraAttrs": {
+      "pname": "ohio-bg",
+      "version": "2019",
+      "extent": "Ohio",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "OH",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "ohio-zip+4-2019",
+    "hash": "sha256-mexzgwhsiTi/mZG4HA7ZYJ8Hiti2t7TrSqhuFMFCWKk=",
+    "extraAttrs": {
+      "pname": "ohio-zip+4",
+      "version": "2019",
+      "extent": "Ohio",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "OH",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "oklahoma-bg-2019",
+    "hash": "sha256-fcq17w+ISFSql6Qc0JgnSC28E5HU50/NlPFa3wH7USo=",
+    "extraAttrs": {
+      "pname": "oklahoma-bg",
+      "version": "2019",
+      "extent": "Oklahoma",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "OK",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "oklahoma-zip+4-2019",
+    "hash": "sha256-FXPac0o0q2J0z9enY99Jfv0L8mKscy+DusSu704c4F0=",
+    "extraAttrs": {
+      "pname": "oklahoma-zip+4",
+      "version": "2019",
+      "extent": "Oklahoma",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "OK",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "oregon-bg-2019",
+    "hash": "sha256-NHsqgRx0AqSQIjDqOFmjqnLsBrdPPQvupGbGUrjjDHs=",
+    "extraAttrs": {
+      "pname": "oregon-bg",
+      "version": "2019",
+      "extent": "Oregon",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "OR",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "oregon-zip+4-2019",
+    "hash": "sha256-QJBSx1piIEmIP8D65M6UXOUqDqeEPYkpmpC+B6t23U4=",
+    "extraAttrs": {
+      "pname": "oregon-zip+4",
+      "version": "2019",
+      "extent": "Oregon",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "OR",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "pennsylvania-bg-2019",
+    "hash": "sha256-CmBtWdvJn2afFi5c8teMNT+Y8bDlOx9gwlmrIipDI1w=",
+    "extraAttrs": {
+      "pname": "pennsylvania-bg",
+      "version": "2019",
+      "extent": "Pennsylvania",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "PA",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "pennsylvania-zip+4-2019",
+    "hash": "sha256-ohc15tm4iECNdppi6nStyfkJZ4QcH9AJTr3n8SuZHjU=",
+    "extraAttrs": {
+      "pname": "pennsylvania-zip+4",
+      "version": "2019",
+      "extent": "Pennsylvania",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "PA",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "rhode_island-bg-2019",
+    "hash": "sha256-q3v4I1NjlOfixh+zQsOby6p6esVL+F8ZY8epiE3W2Kw=",
+    "extraAttrs": {
+      "pname": "rhode_island-bg",
+      "version": "2019",
+      "extent": "Rhode_Island",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "RI",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "rhode_island-zip+4-2019",
+    "hash": "sha256-lhWZmPunYtIcM5NFdzSxVEABuF8BIXevFRbroNJs2CI=",
+    "extraAttrs": {
+      "pname": "rhode_island-zip+4",
+      "version": "2019",
+      "extent": "Rhode_Island",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "RI",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "south_carolina-bg-2019",
+    "hash": "sha256-TQRCzj4u+4X4Q9iybs/POm66VX3D9Y/I6rzeTnP3IjY=",
+    "extraAttrs": {
+      "pname": "south_carolina-bg",
+      "version": "2019",
+      "extent": "South_Carolina",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "SC",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "south_carolina-zip+4-2019",
+    "hash": "sha256-Xw1rZgNV0tXG6v5sTEfgkNdG6jTrA5PloXwIGUZJA4M=",
+    "extraAttrs": {
+      "pname": "south_carolina-zip+4",
+      "version": "2019",
+      "extent": "South_Carolina",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "SC",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "south_dakota-bg-2019",
+    "hash": "sha256-f6OnFnFmMkYFkZgVrQl6j3QG04yrlVrhM3q+LjxOVLc=",
+    "extraAttrs": {
+      "pname": "south_dakota-bg",
+      "version": "2019",
+      "extent": "South_Dakota",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "SD",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "south_dakota-zip+4-2019",
+    "hash": "sha256-75POQXcKVK7D99Mlqo9Q28UYPOTbMMKIcREIuz2Ibfg=",
+    "extraAttrs": {
+      "pname": "south_dakota-zip+4",
+      "version": "2019",
+      "extent": "South_Dakota",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "SD",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "tennessee-bg-2019",
+    "hash": "sha256-5zas99VPgSAyFU6owTrT0QSL2V2mwCyMn+OaGyzGa6w=",
+    "extraAttrs": {
+      "pname": "tennessee-bg",
+      "version": "2019",
+      "extent": "Tennessee",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "TN",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "tennessee-zip+4-2019",
+    "hash": "sha256-2thTEs+sLlnW4GZx20sRegKaE8jqd+fOLvkJvQbpY9w=",
+    "extraAttrs": {
+      "pname": "tennessee-zip+4",
+      "version": "2019",
+      "extent": "Tennessee",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "TN",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "texas-bg-2019",
+    "hash": "sha256-BltB/GoMD9vUqWTHcBaqgkiHXxLjCu3Wj5W04+PNfP0=",
+    "extraAttrs": {
+      "pname": "texas-bg",
+      "version": "2019",
+      "extent": "Texas",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "TX",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "texas-zip+4-2019",
+    "hash": "sha256-tGuzBzSZ5BfoE7EzKlcM8MpBoB23K84oFOmNT+waGf0=",
+    "extraAttrs": {
+      "pname": "texas-zip+4",
+      "version": "2019",
+      "extent": "Texas",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "TX",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "utah-bg-2019",
+    "hash": "sha256-HzAN/QPqlFksvJosdz7m3jasRT19AXVrNGd5b+Ybphk=",
+    "extraAttrs": {
+      "pname": "utah-bg",
+      "version": "2019",
+      "extent": "Utah",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "UT",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "utah-zip+4-2019",
+    "hash": "sha256-4SU+YuakhPkZ5F1v9VDDlauZPpHZwnqUItSZI9G/clY=",
+    "extraAttrs": {
+      "pname": "utah-zip+4",
+      "version": "2019",
+      "extent": "Utah",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "UT",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "vermont-bg-2019",
+    "hash": "sha256-4zbJCEmMUSNAfDBiwZh+CrhxKIW1DgXz4W+sc3iT0a8=",
+    "extraAttrs": {
+      "pname": "vermont-bg",
+      "version": "2019",
+      "extent": "Vermont",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "VT",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "vermont-zip+4-2019",
+    "hash": "sha256-nbnKdyUL6ZweoTpF8pbp0e4/ii4/nMszuD+ete6n2u0=",
+    "extraAttrs": {
+      "pname": "vermont-zip+4",
+      "version": "2019",
+      "extent": "Vermont",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "VT",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "virginia-bg-2019",
+    "hash": "sha256-e9jPWwJoIP4zaCA7/fFllnXk2Vb+3D2B067dOAKunYM=",
+    "extraAttrs": {
+      "pname": "virginia-bg",
+      "version": "2019",
+      "extent": "Virginia",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "VA",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "virginia-zip+4-2019",
+    "hash": "sha256-33NsRMEoui/V8+W8BFPMVMRwHWgZqUYGxhwZQ07J6/8=",
+    "extraAttrs": {
+      "pname": "virginia-zip+4",
+      "version": "2019",
+      "extent": "Virginia",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "VA",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "washington-bg-2019",
+    "hash": "sha256-L+IpARpIAxrM8hmriYT2lfK+qqp1p9I1R1W7wC2+5Rk=",
+    "extraAttrs": {
+      "pname": "washington-bg",
+      "version": "2019",
+      "extent": "Washington",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "WA",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "washington-zip+4-2019",
+    "hash": "sha256-rYKo/D2C+7zU8X561TxPQoPbU/fVzzhK7/qGL5fS8FU=",
+    "extraAttrs": {
+      "pname": "washington-zip+4",
+      "version": "2019",
+      "extent": "Washington",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "WA",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "west_virginia-bg-2019",
+    "hash": "sha256-YwvuNQGxpX50F985E9iGsvehMsUN3t3h/XLbF3beU8c=",
+    "extraAttrs": {
+      "pname": "west_virginia-bg",
+      "version": "2019",
+      "extent": "West_Virginia",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "WV",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "west_virginia-zip+4-2019",
+    "hash": "sha256-kuVwqAtYdz+8Oij9uQUc7pbf3S6rY8GOkqeri6HGqB4=",
+    "extraAttrs": {
+      "pname": "west_virginia-zip+4",
+      "version": "2019",
+      "extent": "West_Virginia",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "WV",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "wisconsin-bg-2019",
+    "hash": "sha256-eYvq+7ELSE67dq27cAd5dKEl2JylfWtJg1CxHPVRSm8=",
+    "extraAttrs": {
+      "pname": "wisconsin-bg",
+      "version": "2019",
+      "extent": "Wisconsin",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "WI",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "wisconsin-zip+4-2019",
+    "hash": "sha256-L0l3AmooX+cidEIP0AId4AGiX4d2P/XVZxVisk4XH04=",
+    "extraAttrs": {
+      "pname": "wisconsin-zip+4",
+      "version": "2019",
+      "extent": "Wisconsin",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "WI",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "wyoming-bg-2019",
+    "hash": "sha256-0YWijXsjLVOt28NmJ/vqrQcSGtr/05lkjLrFK3y37gE=",
+    "extraAttrs": {
+      "pname": "wyoming-bg",
+      "version": "2019",
+      "extent": "Wyoming",
+      "geom": "bg",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "WY",
+      "version-group": "19",
+      "state-type": "blockgroup",
+      "scale-group": "state"
+    }
+  },
+  {
+    "name": "wyoming-zip+4-2019",
+    "hash": "sha256-RFLJ0eI+McPqEr4zA6UYHI6nF81FIL3LBa1eB2vBMzw=",
+    "extraAttrs": {
+      "pname": "wyoming-zip+4",
+      "version": "2019",
+      "extent": "Wyoming",
+      "geom": "zip+4",
+      "year": "2019",
+      "url": "https://www.neighborhoodatlas.medicine.wisc.edu/adi-download",
+      "state-name": "WY",
+      "version-group": "19",
+      "state-type": "zipcode",
+      "scale-group": "state"
+    }
+  }
+]
