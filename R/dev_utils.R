@@ -187,7 +187,8 @@ get_uuids <- function() {
   data_source <- DatabaseConnector::dbReadTable(conn, "backbone.data_source")
   disconnect(conn)
   return(data_source$data_source_uuid)
-																																				 
+}
+	
 get_geom_template <- function(connectionDetails){
   conn <- connect(connectionDetails)
   geom_template <- DatabaseConnector::dbReadTable(conn, "backbone.geom_template")											 
