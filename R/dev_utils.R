@@ -1,26 +1,8 @@
-# CREATE THE SCHEMA STRING
-create_schema_string <- function(rec) {
-  paste0(rec$org_id, "_", rec$org_set_id) %>% 
-    tolower() %>% 
-    stringr::str_replace_all("\\W", "_") %>% 
-    stringr::str_remove_all("^_+|_+$|_(?=_)")
-}
-
-create_name_string <- function(name) {
-  name %>% 
-    tolower() %>% 
-    stringr::str_replace_all("\\W", "_") %>% 
-    stringr::str_remove_all("^_+|_+$|_(?=_)")
-}
-
-# GET FOREIGN KEY FOR ATTR_OF_GEOM_INDEX_ID
-get_foreign_key_gid <- function(uuid) {
-  geom_index <- DatabaseConnector::dbReadTable(conn, "backbone.geom_index")
-  geom_index[geom_index$data_source_id == uuid,]$geom_index_id
-}
+# Backbone/ outside of main workflow ------------------------------------------------
 
 # CREATE GEOM INDEX TABLE
-create_geom_index_table <- function(schema) {
+# TODO this could possibly be deleted as it is in the example_execution backbone_ddl
+create_geom_index_table <- function(conn, schema) {
   DatabaseConnector::dbExecute(conn, paste0("CREATE SCHEMA IF NOT EXISTS backbone;"))
   DatabaseConnector::dbExecute(conn, paste0("CREATE TABLE IF NOT EXISTS ",
                                             "backbone.geom_index (",
@@ -38,7 +20,7 @@ create_geom_index_table <- function(schema) {
 
 
 # CREATE GEOM_INDEX RECORD
-create_geom_index_record <- function(rec) {
+create_geom_index_record <- function(conn, rec) {
   
   index_record <- tibble::tibble(
     data_type_id = "NULL",
@@ -62,9 +44,9 @@ create_geom_index_record <- function(rec) {
 }
 
 # CREATE ATTR_INDEX RECORD
-create_attr_index_record <- function(rec) {
+create_attr_index_record <- function(conn, rec) {
   index_record <- tibble::tibble(
-    attr_of_geom_index_id = get_foreign_key_gid(rec$geom_dependency_uuid),
+    attr_of_geom_index_id = get_foreign_key_gid(conn, rec$geom_dependency_uuid),
     table_schema = create_schema_string(rec),
     table_name = rec$dataset_name,
     data_source_id = rec$data_source_uuid)
@@ -79,11 +61,25 @@ create_attr_index_record <- function(rec) {
   DatabaseConnector::executeSql(conn, insert_logic)
 }
 
+
+# TODO get_uuids serves one purpose: a helper to create_indices for when you 
+# want to index every entry in the datascoure table. Instead consider:
+# TODO delete get_uuids
+# TODO allow create_indices to take argument "all" to uuids (or bool arg)
+# to signify all uuids should be indexed
+
+get_uuids <- function() {
+  conn <- connect(connectionDetails)
+  data_source <- DatabaseConnector::dbReadTable(conn, "backbone.data_source")
+  disconnect(conn)
+  return(data_source$data_source_uuid)
+}
+
 # CREATE GEOM AND ATTR INDICES FROM DATA SOURCES
-create_indices <-  function(uuids) {
-  
+create_indices <-  function(connectionDetails, uuids) {
+  conn <- DatabaseConnector::connect(connectionDetails)
   lapply(uuids, function(id) {
-    record <- get_data_source_record(id)
+    record <- get_data_source_record(conn, id)
     
     #GET GEOM AND ATTR INDEX (SCHEMA SPECIFIC)
     geom_index <- DatabaseConnector::dbReadTable(conn, "backbone.geom_index")
@@ -94,21 +90,50 @@ create_indices <-  function(uuids) {
     
     # IF record type geom AND not in gidsid then create geom index record
     if (record$geom_type != "" & !id %in% geom_index_data_source_ids) {
-      gi_record <- create_geom_index_record(record)
+      gi_record <- create_geom_index_record(conn, record)
     }
     # IF attr AND not in aidsid check dependency
     if (record$has_attributes == 1 & !id %in% attr_index_data_source_ids) {
-
-    ## IF geom dependency AND dependency not in gidsid then create geom index record AND insert into db 
+      
+      ## IF geom dependency AND dependency not in gidsid then create geom index record AND insert into db 
       if (!is.na(record$geom_dependency_uuid) & !record$geom_dependency_uuid %in% geom_index_data_source_ids) {
-        gi_dependency <- create_geom_index_record(get_data_source_record(record$geom_dependency_uuid))
+        gi_dependency <- create_geom_index_record(get_data_source_record(conn, record$geom_dependency_uuid))
         # insert into db
       }
-    # create attr index record
-      attr_record <- create_attr_index_record(record)
-      
+      # create attr index record
+      attr_record <- create_attr_index_record(conn, record)
+      disconnect(conn)
     }
   })
+}
+
+
+# Helpers -----------------------------------------------------------------
+
+# CREATE THE SCHEMA STRING
+create_schema_string <- function(rec) {
+  paste0(rec$org_id, "_", rec$org_set_id) %>% 
+    tolower() %>% 
+    stringr::str_replace_all("\\W", "_") %>% 
+    stringr::str_remove_all("^_+|_+$|_(?=_)")
+}
+
+create_name_string <- function(name) {
+  name %>% 
+    tolower() %>% 
+    stringr::str_replace_all("\\W", "_") %>% 
+    stringr::str_remove_all("^_+|_+$|_(?=_)")
+}
+
+# GET FOREIGN KEY FOR ATTR_OF_GEOM_INDEX_ID
+get_foreign_key_gid <- function(conn, uuid) {
+  geom_index <- DatabaseConnector::dbReadTable(conn, "backbone.geom_index")
+  geom_index[geom_index$data_source_id == uuid,]$geom_index_id
+}
+
+# GET DATA SOURCE RECORD
+get_data_source_record <- function(conn, ds_uuid){
+  DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.data_source WHERE data_source_uuid = ", ds_uuid))
 }
 
 # CREATE GEOM SPEC TABLE
@@ -142,17 +167,10 @@ standardize_staged_data <- function(stage_data, spec_table) {
   return(result_df)
 }
 
-# GET DATA SOURCE RECORD
-get_data_source_record <- function(ds_uuid){
-  conn <- connect(connectionDetails)
-  return_df <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.data_source WHERE data_source_uuid = ", ds_uuid))
-  disconnect(conn)
-  return(return_df)
-}
-
 # GET STAGING DATA
 get_stage_data <- function(rec) {
   # ONLY HANDLES FILES (NO API YET)
+  # TODO there has to be a different way to change timeout without changing options
   base_timeout <- getOption('timeout')
   options(timeout = 600)
   if (rec$download_method == "file") {
@@ -172,8 +190,7 @@ get_stage_data <- function(rec) {
 }
 
 # CREATE GEOM INSTANCE TABLE
-create_geom_instance_table <- function(connectionDetails, schema, name) {
-  conn <- connect(connectionDetails)
+create_geom_instance_table <- function(conn, schema, name) {
   DatabaseConnector::dbExecute(conn, paste0("CREATE SCHEMA IF NOT EXISTS ", schema, ";"))
   DatabaseConnector::dbExecute(conn, paste0("CREATE TABLE IF NOT EXISTS ", schema,
                                             ".\"geom_", name, "\" (",
@@ -186,11 +203,9 @@ create_geom_instance_table <- function(connectionDetails, schema, name) {
                                             "geom_local_value ", "public.geometry NULL, ",
                                             "CONSTRAINT geom_record_", create_name_string(name),
                                             "_pkey PRIMARY KEY (geom_record_id));"))
-  disconnect(conn)
 }
 
-create_attr_instance_table <- function(connectionDetails, schema, name) {
-  conn <- connect(connectionDetails)
+create_attr_instance_table <- function(conn, schema, name) {
   DatabaseConnector::dbExecute(conn, paste0("CREATE SCHEMA IF NOT EXISTS ", schema, ";"))
   DatabaseConnector::dbExecute(conn, paste0("CREATE TABLE IF NOT EXISTS ", schema,
                                             ".\"attr_", name, "\" (",
@@ -211,55 +226,27 @@ create_attr_instance_table <- function(connectionDetails, schema, name) {
                                             "value_source_value varchar NULL, ",
                                             "CONSTRAINT attr_record_", create_name_string(name),
                                             "_pkey PRIMARY KEY (attr_record_id));"))
-  disconnect(conn)
 }
 
-get_uuids <- function() {
-  
-  conn <- connect(connectionDetails)
-  data_source <- DatabaseConnector::dbReadTable(conn, "backbone.data_source")
-  disconnect(conn)
-  return(data_source$data_source_uuid)
-}
 
-get_geom_template <- function(connectionDetails){
-  conn <- connect(connectionDetails)
-  geom_template <- DatabaseConnector::dbReadTable(conn, "backbone.geom_template")											 
-  disconnect(conn)
-  return(geom_template)
+get_geom_template <- function(conn){
+  DatabaseConnector::dbReadTable(conn, "backbone.geom_template")											 
 }
 																		
-get_geom_index_by_ds_uuid <- function(ds_uuid){
-  conn <- connect(connectionDetails)
-  return_df <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.geom_index WHERE data_source_id = ", ds_uuid))
-  disconnect(conn)
-  return(return_df)
+get_geom_index_by_ds_uuid <- function(conn, ds_uuid){
+  DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.geom_index WHERE data_source_id = ", ds_uuid))
 }
 
-import_geom_table <- function(stage_data, geom_index){
-  
-  conn <- connect(connectionDetails)
-  DatabaseConnector::dbAppendTable(conn , paste0(geom_index$table_schema, ".", geom_index$table_name), value = stage_data)
-  disconnect(conn)
+
+get_geom_template <- function(conn){
+  DatabaseConnector::dbReadTable(conn, "backbone.geom_template")
 }
 
-get_geom_template <- function(connectionDetails){
-  conn <- connect(connectionDetails)
-  geom_template <- DatabaseConnector::dbReadTable(conn, "backbone.geom_template")
-  disconnect(conn)
-  return(geom_template)
+get_attr_template <- function(conn){
+  DatabaseConnector::dbReadTable(conn, "backbone.attr_template")
 }
 
-get_attr_template <- function(connectionDetails){
-  conn <- connect(connectionDetails)
-  geom_template <- DatabaseConnector::dbReadTable(conn, "backbone.attr_template")
-  disconnect(conn)
-  return(geom_template)
-}
-
-get_geom_id_map <- function(connectionDetails, geom_index_id){
-  
-  conn <- connect(connectionDetails)
+get_geom_id_map <- function(conn, geom_index_id){
   geom_index_df <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.geom_index WHERE geom_index_id = ", geom_index_id,";"))
   
   sql_query <- paste0(
@@ -269,17 +256,12 @@ get_geom_id_map <- function(connectionDetails, geom_index_id){
     , geom_index_df$table_name
     ,'\";'
   )
-  geom_id_map <- DatabaseConnector::dbGetQuery(conn, sql_query)
-  
-  disconnect(conn)
-  
-  return(geom_id_map)
-  
+  DatabaseConnector::dbGetQuery(conn, sql_query)
 }
 
-assign_geom_id_to_attr <- function(connectionDetails, result_df, geom_index_id){
+assign_geom_id_to_attr <- function(conn, result_df, geom_index_id){
   
-  geom_id_map <- get_geom_id_map(connectionDetails, geom_index_id)
+  geom_id_map <- get_geom_id_map(conn, geom_index_id)
   
   tmp <- merge(x = result_df, y= geom_id_map, by.x = "geom_join_column", by.y = "geom_source_value")
   
@@ -289,7 +271,7 @@ assign_geom_id_to_attr <- function(connectionDetails, result_df, geom_index_id){
   
 }
 
-import_geom_table <- function(connectionDetails, stage_data, geom_index){
+import_geom_table <- function(conn, stage_data, geom_index){
   
   data_size_gb <- object.size(stage_data) / 1000000000
   
@@ -297,8 +279,8 @@ import_geom_table <- function(connectionDetails, stage_data, geom_index){
   
   if(data_size_gb > 1) {
     print("divide and conquer")
-    import_geom_table_recr(connectionDetails, stage_data = stage_data[1:floor(nrow(stage_data)*.5),], geom_index)
-    import_geom_table_recr(connectionDetails, stage_data = stage_data[floor(nrow(stage_data)*.5)+1:nrow(stage_data),], geom_index)
+    import_geom_table(conn, stage_data = stage_data[1:floor(nrow(stage_data)*.5),], geom_index)
+    import_geom_table(conn, stage_data = stage_data[floor(nrow(stage_data)*.5)+1:nrow(stage_data),], geom_index)
   } else {
     
     # TODO could this be simpler if rewritten as sf::st_write? Did I already try that?
@@ -327,9 +309,7 @@ import_geom_table <- function(connectionDetails, stage_data, geom_index){
 }
 
 
-import_attr_table <- function(connectionDetails, df, attr_index_df){
-  conn <- connect(connectionDetails)
-  
+import_attr_table <- function(conn, df, attr_index_df){
   insert_table_name <- paste0("\"", attr_index_df$table_schema, "\"", "." ,"\"attr_", attr_index_df$table_name, ".\"")
   
   df <- subset(df, select = -c(attr_record_id))
@@ -341,16 +321,14 @@ import_attr_table <- function(connectionDetails, df, attr_index_df){
                                  dropTableIfExists = FALSE,
                                  createTable = FALSE
                                  )
-  
-  disconnect(conn)
-  
+
 }
 
 # TODO try and make load_geom_table and load_feature as symmetrical as possible
 
-load_geom_table <- function(ds_uuid) {
+load_geom_table <- function(conn, ds_uuid) {
   
-  ds_rec <- get_data_source_record(ds_uuid)
+  ds_rec <- get_data_source_record(conn, ds_uuid)
   
   stage_data <- get_stage_data(ds_rec)
   
@@ -358,7 +336,7 @@ load_geom_table <- function(ds_uuid) {
   
   result_df <- standardize_staged_data(stage_data, spec_df)
   
-  geom_index <- get_geom_index_by_ds_uuid(ds_rec$data_source_uuid)
+  geom_index <- get_geom_index_by_ds_uuid(conn, ds_rec$data_source_uuid)
   
   
   # format for insert
@@ -366,7 +344,7 @@ load_geom_table <- function(ds_uuid) {
     result_df$geom_local_value <- sf::st_as_binary(result_df$geom_local_value, EWKB = TRUE, hex = TRUE)
   }
   
-  geom_template <- get_geom_template(connectionDetails)
+  geom_template <- get_geom_template(conn)
   
   res <- plyr::rbind.fill(geom_template, result_df)
   
@@ -374,17 +352,15 @@ load_geom_table <- function(ds_uuid) {
   
   res$geom_name <- iconv(res$geom_name, "latin1")
   
-  create_geom_instance_table(connectionDetails, schema =  geom_index$table_schema, name = geom_index$table_name)
+  create_geom_instance_table(conn, schema =  geom_index$table_schema, name = geom_index$table_name)
   
   # insert into geom table
-  import_geom_table(connectionDetails, res, geom_index)
+  import_geom_table(conn, res, geom_index)
 }
 
 			   
-load_feature <- function(connectionDetails, feature_index_id){
-  # connect db
-  conn <- connect(connectionDetails)
-  
+load_feature <- function(conn, feature_index_id){
+
   # get feature
   feature_df <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.feature_index WHERE feature_index_id = ", feature_index_id))
   
@@ -392,9 +368,9 @@ load_feature <- function(connectionDetails, feature_index_id){
   attr_index_df <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.attr_index WHERE data_source_id = ", feature_df$data_source_uuid,";"))
   
   # get data_source_record
-  ds_rec <- get_data_source_record(feature_df$data_source_uuid)
+  ds_rec <- get_data_source_record(conn, feature_df$data_source_uuid)
   
-  geom_index_df <- get_geom_index_by_ds_uuid(ds_rec$geom_dependency_uuid)
+  geom_index_df <- get_geom_index_by_ds_uuid(conn, ds_rec$geom_dependency_uuid)
   
   # get stage data
   stage_data <- get_stage_data(ds_rec)
@@ -414,50 +390,60 @@ load_feature <- function(connectionDetails, feature_index_id){
   # prepare for insert
   
   # Load geom_dependency if necessary
-  print(paste0("schema: ", geom_index_df$table_schema))
-  print(paste0("name: ", geom_index_df$table_name))
   if (!existsTable(conn, geom_index_df$table_schema, paste0("geom_",geom_index_df$table_name))) {
     message("Loading geom table dependency")
-    load_geom_table(ds_rec$geom_dependency_uuid)
+    load_geom_table(conn, ds_rec$geom_dependency_uuid)
   }
   
   # get mapping values from geom table
-  result_df <- assign_geom_id_to_attr(connectionDetails, result_df, attr_index_df$attr_of_geom_index_id)
+  result_df <- assign_geom_id_to_attr(conn, result_df, attr_index_df$attr_of_geom_index_id)
   
   # result_df <- tmp
   # get attr template
-  attr_template <- get_attr_template(connectionDetails)
+  attr_template <- get_attr_template(conn)
   
   # append staging data to template format
   attr_to_ingest <- plyr::rbind.fill(attr_template, result_df)
   
-  create_attr_instance_table(connectionDetails, schema = attr_index_df$table_schema, name = attr_index_df$table_name)
+  create_attr_instance_table(conn, schema = attr_index_df$table_schema, name = attr_index_df$table_name)
   
   # import
-  import_attr_table(connectionDetails, attr_to_ingest, attr_index_df)
+  import_attr_table(conn, attr_to_ingest, attr_index_df)
   
-  disconnect(conn)
 }
 
 
 
 import_sf <- function(connectionDetails, feature_index_id) {
   
-  conn = DatabaseConnector::connect(connectionDetails)
+  conn <-  DatabaseConnector::connect(connectionDetails)
   
   feature_df <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.feature_index WHERE feature_index_id = ", feature_index_id))
-  ds_rec <- get_data_source_record(feature_df$data_source_uuid)
+  ds_rec <- get_data_source_record(conn, feature_df$data_source_uuid)
   attr_index_df <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.attr_index WHERE data_source_id = ", feature_df$data_source_uuid,";"))
-  geom_index_df <- get_geom_index_by_ds_uuid(ds_rec$geom_dependency_uuid)
-  
-  if (!existsTable(conn, attr_index_df$table_schema, paste0("attr_", attr_index_df$table_name))) {
-    message("Loading attr table dependency")
-    load_feature(connectionDetails, feature_index_id)
-  }
-  
+  geom_index_df <- get_geom_index_by_ds_uuid(conn, ds_rec$geom_dependency_uuid)
   attr_table_string <- paste0(attr_index_df$table_schema, ".\"attr_", attr_index_df$table_name, "\"")
   geom_table_string <- paste0(geom_index_df$table_schema, ".\"geom_", geom_index_df$table_name, "\"")
   feature <- feature_df$feature_name
+  
+  table_exists <- DatabaseConnector::existsTable(conn,
+                                                 attr_index_df$table_schema,
+                                                 paste0("attr_", attr_index_df$table_name))
+  
+  if (!table_exists) {
+    message("Loading attr table dependency")
+    load_feature(conn, feature_index_id)
+  }
+  
+  feature_exists_query <- paste0("select count(*) from ", attr_table_string, 
+                                 " where attr_source_value = '", feature,"'")
+  
+  feature_exists_result <- DatabaseConnector::querySql(conn, feature_exists_query)
+  
+  if (!feature_exists_result > 0) {
+    message("Loading attr table dependency")
+    load_feature(conn, feature_index_id)
+  }
   
   base_query <- paste0("select * from ", attr_table_string, 
                        " join ", geom_table_string, 
