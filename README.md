@@ -1,3 +1,6 @@
+*This branch contains all of the work done on GIS before July 1 2022*
+*Work after this takes a fairly different approach, but much of what is here is valuable and may need to be reincorporated to the main branch*
+
 To get this running:
 
 1. Install/update latest [Docker](https://www.docker.com/get-started) and [docker-compose](https://docs.docker.com/compose/install/)
