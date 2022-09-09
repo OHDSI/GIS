@@ -24,7 +24,7 @@ library(plyr)
 library(tibble)
 ```
 
-```{r}
+```{r, eval=FALSE}
 connectionDetails <- DatabaseConnector::createConnectionDetails(
   dbms = "postgresql",  # options: oracle, postgressql, redshift, sql server, pdw, netezza, bigquery, sqlite
   server = "", # name of the server

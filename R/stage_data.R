@@ -30,12 +30,12 @@ get_stage_data <- function(rec) {
   if (rec$download_method == "file") {
     if (rec$download_subtype == "zip") {
       tempzip <- paste0(tempfile(), ".zip")
-      download.file(rec$download_url, tempzip)
-      unzip(tempzip, exdir = tempdir())
+      utils::download.file(rec$download_url, tempzip)
+      utils::unzip(tempzip, exdir = tempdir())
       if (rec$download_data_standard == 'shp') {
         return(sf::st_read(file.path(tempdir(), rec$download_filename)))
       } else if (rec$download_data_standard == 'csv') {
-        return(read.csv(file.path(tempdir(), rec$download_filename)))
+        return(utils::read.csv(file.path(tempdir(), rec$download_filename)))
       }
 
     }
@@ -48,7 +48,7 @@ get_stage_data <- function(rec) {
 # CREATE GEOM SPEC TABLE
 create_spec_table <- function(json_string_spec) {
   json_spec <- rjson::fromJSON(json_string_spec)
-  tibble::tibble("t_name"=names(json_spec),
+  dplyr::tibble("t_name"=names(json_spec),
                  "t_type"=unlist(lapply(t_name, function(x) json_spec[[x]]$type)),
                  "t_value"=unlist(lapply(t_name, function(x) json_spec[[x]]$value)))
 }

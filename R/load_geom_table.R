@@ -1,4 +1,4 @@
-load_geom_table <- function(conn, ds_uuid) {
+load_geom_table <- function(conn, connectionDetails, ds_uuid) {
 
   ds_rec <- get_data_source_record(conn, ds_uuid)
 
@@ -27,23 +27,23 @@ load_geom_table <- function(conn, ds_uuid) {
   create_geom_instance_table(conn, schema =  geom_index$table_schema, name = geom_index$table_name)
 
   # insert into geom table
-  import_geom_table(conn, res, geom_index)
+  import_geom_table(connectionDetails, res, geom_index)
 }
 
 
 
 
 
-import_geom_table <- function(conn, stage_data, geom_index){
+import_geom_table <- function(connectionDetails, stage_data, geom_index){
 
-  data_size_gb <- object.size(stage_data) / 1000000000
+  data_size_gb <- utils::object.size(stage_data) / 1000000000
 
   message(paste0("Expect ", ceiling(2*2**floor(log(data_size_gb)/log(2))), " database inserts."))
 
   if(data_size_gb > 1) {
     print("divide and conquer")
-    import_geom_table(conn, stage_data = stage_data[1:floor(nrow(stage_data)*.5),], geom_index)
-    import_geom_table(conn, stage_data = stage_data[floor(nrow(stage_data)*.5)+1:nrow(stage_data),], geom_index)
+    import_geom_table(connectionDetails, stage_data = stage_data[1:floor(nrow(stage_data)*.5),], geom_index)
+    import_geom_table(connectionDetails, stage_data = stage_data[floor(nrow(stage_data)*.5)+1:nrow(stage_data),], geom_index)
   } else {
 
     # TODO could this be simpler if rewritten as sf::st_write? Did I already try that?
@@ -66,7 +66,7 @@ import_geom_table <- function(conn, stage_data, geom_index){
 
 
 
-    dbDisconnect(postgis_con)
+    RPostgreSQL::dbDisconnect(postgis_con)
   }
 
 }
