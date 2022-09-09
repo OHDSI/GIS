@@ -26,7 +26,7 @@ create_indices <-  function(connectionDetails, uuids) {
       }
       # create attr index record
       attr_record <- create_attr_index_record(conn, record)
-      disconnect(conn)
+      DatabaseConnector::disconnect(conn)
     }
   })
 }
@@ -34,7 +34,7 @@ create_indices <-  function(connectionDetails, uuids) {
 # CREATE GEOM_INDEX RECORD
 create_geom_index_record <- function(conn, rec) {
 
-  index_record <- tibble::tibble(
+  index_record <- dplyr::tibble(
     data_type_id = "NULL",
     data_type_name = rec$geom_type,
     geom_type_concept_id = "NULL",
@@ -48,7 +48,7 @@ create_geom_index_record <- function(conn, rec) {
                          "(data_type_id, data_type_name, geom_type_concept_id, ",
                          "geom_type_source_value, table_schema, table_name, table_desc, ",
                          "data_source_id) VALUES ('",
-                         paste(index_record %>% slice(1) %>% unlist(., use.names = FALSE), collapse = "', '"),
+                         paste(index_record %>% dplyr::slice(1) %>% unlist(., use.names = FALSE), collapse = "', '"),
                          "');") %>%
     stringr::str_replace_all("'NULL'", "NULL")
 
@@ -57,7 +57,7 @@ create_geom_index_record <- function(conn, rec) {
 
 # CREATE ATTR_INDEX RECORD
 create_attr_index_record <- function(conn, rec) {
-  index_record <- tibble::tibble(
+  index_record <- dplyr::tibble(
     attr_of_geom_index_id = get_foreign_key_gid(conn, rec$geom_dependency_uuid),
     table_schema = create_schema_string(rec),
     table_name = rec$dataset_name,
