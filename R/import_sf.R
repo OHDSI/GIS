@@ -16,7 +16,7 @@ import_sf <- function(connectionDetails, feature_index_id) {
 
   if (!table_exists) {
     message("Loading attr table dependency")
-    load_feature(conn, feature_index_id)
+    load_feature(conn, connectionDetails, feature_index_id)
   }
 
   feature_exists_query <- paste0("select count(*) from ", attr_table_string,
@@ -53,7 +53,7 @@ import_sf <- function(connectionDetails, feature_index_id) {
       sf_base <- rbind(sf_base, sf::st_read(dsn = conn, query = iter_query))
     }
   }
-  disconnect(conn)
+  DatabaseConnector::disconnect(conn)
 
   return(sf_base)
 }

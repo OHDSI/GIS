@@ -1,4 +1,4 @@
-load_feature <- function(conn, feature_index_id){
+load_feature <- function(conn, connectionDetails, feature_index_id){
 
   # get feature
   feature_df <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.feature_index WHERE feature_index_id = ", feature_index_id))
@@ -29,9 +29,9 @@ load_feature <- function(conn, feature_index_id){
   # prepare for insert
 
   # Load geom_dependency if necessary
-  if (!existsTable(conn, geom_index_df$table_schema, paste0("geom_",geom_index_df$table_name))) {
+  if (!DatabaseConnector::existsTable(conn, geom_index_df$table_schema, paste0("geom_",geom_index_df$table_name))) {
     message("Loading geom table dependency")
-    load_geom_table(conn, ds_rec$geom_dependency_uuid)
+    load_geom_table(conn, connectionDetails, ds_rec$geom_dependency_uuid)
   }
 
   # get mapping values from geom table
@@ -56,7 +56,7 @@ load_feature <- function(conn, feature_index_id){
 import_attr_table <- function(conn, df, attr_index_df){
   insert_table_name <- paste0("\"", attr_index_df$table_schema, "\"", "." ,"\"attr_", attr_index_df$table_name, ".\"")
 
-  df <- subset(df, select = -c(attr_record_id))
+  df <- dplyr::select(df, -"attr_record_id")
 
   DatabaseConnector::insertTable(conn,
                                  databaseSchema = paste0("\"",attr_index_df$table_schema,"\""),
@@ -112,7 +112,7 @@ assign_geom_id_to_attr <- function(conn, result_df, geom_index_id){
 
   tmp <- merge(x = result_df, y= geom_id_map, by.x = "geom_join_column", by.y = "geom_source_value")
 
-  tmp <- subset(tmp, select = -c(geom_join_column))
+  tmp <- dplyr::select(tmp, -"geom_join_column")
 
   return(tmp)
 
