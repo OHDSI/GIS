@@ -1,67 +1,69 @@
-load_feature <- function(conn, connectionDetails, feature_index_id){
+loadFeature <- function(conn, connectionDetails, featureIndexId){
 
   # get feature
-  feature_df <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.feature_index WHERE feature_index_id = ", feature_index_id))
+  featureTable <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.feature_index WHERE feature_index_id = ", featureIndexId))
 
   # get attr_index
-  attr_index_df <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.attr_index WHERE data_source_id = ", feature_df$data_source_uuid,";"))
+  attrIndex <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.attr_index WHERE data_source_id = ", featureTable$data_source_uuid,";"))
 
   # get data_source_record
-  ds_rec <- get_data_source_record(conn, feature_df$data_source_uuid)
+  dataSourceRecord <- getDataSourceRecord(conn, featureTable$data_source_uuid)
 
-  geom_index_df <- get_geom_index_by_ds_uuid(conn, ds_rec$geom_dependency_uuid)
+  geomIndex <- getGeomIndexByDataSourceUuid(conn, dataSourceRecord$geom_dependency_uuid)
 
   # get stage data
-  stage_data <- get_stage_data(ds_rec)
+  staged <- getStaged(dataSourceRecord)
 
   # for attr, remove geom
-  if ("sf" %in% class(stage_data)) {
-    stage_data <- sf::st_drop_geometry(stage_data)
+  if ("sf" %in% class(staged)) {
+    staged <- sf::st_drop_geometry(staged)
   }
 
   ## format table for insert ----
 
   # create spec table
-  spec_df <- create_spec_table(feature_df$attr_spec)
+  specTable <- createSpecTable(featureTable$attr_spec)
 
-  result_df <- standardize_staged_data(stage_data, spec_df)
+  stagedResult <- standardizeStaged(staged, specTable)
 
   # prepare for insert
 
   # Load geom_dependency if necessary
-  if (!DatabaseConnector::existsTable(conn, geom_index_df$table_schema, paste0("geom_",geom_index_df$table_name))) {
+  if (!DatabaseConnector::existsTable(conn, geomIndex$table_schema, paste0("geom_",geomIndex$table_name))) {
     message("Loading geom table dependency")
-    load_geom_table(conn, connectionDetails, ds_rec$geom_dependency_uuid)
+    loadGeomTable(conn, connectionDetails, dataSourceRecord$geom_dependency_uuid)
   }
 
   # get mapping values from geom table
-  result_df <- assign_geom_id_to_attr(conn, result_df, attr_index_df$attr_of_geom_index_id)
+  stagedResult <- assignGeomIdToAttr(conn, stagedResult, attrIndex$attr_of_geom_index_id)
 
-  # result_df <- tmp
+  # stagedResult <- tmp
   # get attr template
-  attr_template <- get_attr_template(conn)
+  attrTemplate <- getAttrTemplate(conn)
 
   # append staging data to template format
-  attr_to_ingest <- plyr::rbind.fill(attr_template, result_df)
+  attrToIngest <- plyr::rbind.fill(attrTemplate, stagedResult)
 
-  create_attr_instance_table(conn, schema = attr_index_df$table_schema, name = attr_index_df$table_name)
+  createAttrInstanceTable(conn, schema = attrIndex$table_schema, name = attrIndex$table_name)
 
   # import
-  import_attr_table(conn, attr_to_ingest, attr_index_df)
+  importAttrTable(conn, attrToIngest, attrIndex)
 
 }
 
 
 
-import_attr_table <- function(conn, df, attr_index_df){
-  insert_table_name <- paste0("\"", attr_index_df$table_schema, "\"", "." ,"\"attr_", attr_index_df$table_name, ".\"")
+importAttrTable <- function(conn, attribute, attrIndex){
 
-  df <- dplyr::select(df, -"attr_record_id")
+  #TODO is this insertTableName doing anything?
+  insertTableName <- paste0("\"", attrIndex$table_schema, "\"", "." ,"\"attr_", attrIndex$table_name, ".\"")
+
+  attribute <- dplyr::select(attribute, -"attr_record_id")
 
   DatabaseConnector::insertTable(conn,
-                                 databaseSchema = paste0("\"",attr_index_df$table_schema,"\""),
-                                 tableName = paste0("\"attr_",attr_index_df$table_name,"\""),
-                                 data = df,
+                                 databaseSchema = paste0("\"",attrIndex$table_schema,"\""),
+                                 tableName = paste0("\"attr_",attrIndex$table_name,"\""),
+                                 data = attribute,
                                  dropTableIfExists = FALSE,
                                  createTable = FALSE
   )
@@ -69,7 +71,7 @@ import_attr_table <- function(conn, df, attr_index_df){
 }
 
 
-create_attr_instance_table <- function(conn, schema, name) {
+createAttrInstanceTable <- function(conn, schema, name) {
   DatabaseConnector::dbExecute(conn, paste0("CREATE SCHEMA IF NOT EXISTS ", schema, ";"))
   DatabaseConnector::dbExecute(conn, paste0("CREATE TABLE IF NOT EXISTS ", schema,
                                             ".\"attr_", name, "\" (",
@@ -88,29 +90,29 @@ create_attr_instance_table <- function(conn, schema, name) {
                                             "attr_source_concept_id int4 NULL, ",
                                             "attr_source_value varchar NULL, ",
                                             "value_source_value varchar NULL, ",
-                                            "CONSTRAINT attr_record_", create_name_string(name),
+                                            "CONSTRAINT attr_record_", createNameString(name),
                                             "_pkey PRIMARY KEY (attr_record_id));"))
 }
 
 
-get_geom_id_map <- function(conn, geom_index_id){
-  geom_index_df <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.geom_index WHERE geom_index_id = ", geom_index_id,";"))
+getGeomIdMap <- function(conn, geomIndex){
+  geomIndex <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.geom_index WHERE geom_index_id = ", geomIndex,";"))
 
-  sql_query <- paste0(
+sqlQuery <- paste0(
     "SELECT geom_record_id, geom_source_value FROM "
-    , geom_index_df$table_schema
+    , geomIndex$table_schema
     ,".\"geom_"
-    , geom_index_df$table_name
+    , geomIndex$table_name
     ,'\";'
   )
-  DatabaseConnector::dbGetQuery(conn, sql_query)
+  DatabaseConnector::dbGetQuery(conn, sqlQuery)
 }
 
-assign_geom_id_to_attr <- function(conn, result_df, geom_index_id){
+assignGeomIdToAttr <- function(conn, stagedResult, geomIndex){
 
-  geom_id_map <- get_geom_id_map(conn, geom_index_id)
+  geomIdMap <- getGeomIdMap(conn, geomIndex)
 
-  tmp <- merge(x = result_df, y= geom_id_map, by.x = "geom_join_column", by.y = "geom_source_value")
+  tmp <- merge(x = stagedResult, y= geomIdMap, by.x = "geom_join_column", by.y = "geom_source_value")
 
   tmp <- dplyr::select(tmp, -"geom_join_column")
 

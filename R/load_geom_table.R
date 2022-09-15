@@ -1,55 +1,54 @@
-load_geom_table <- function(conn, connectionDetails, ds_uuid) {
+loadGeomTable <- function(conn, connectionDetails, dataSourceUuid) {
 
-  ds_rec <- get_data_source_record(conn, ds_uuid)
+  dataSourceRecord <- getDataSourceRecord(conn, dataSourceUuid)
 
-  stage_data <- get_stage_data(ds_rec)
+  staged <- getStaged(dataSourceRecord)
 
-  spec_df <- create_spec_table(ds_rec$geom_spec)
+  specTable <- createSpecTable(dataSourceRecord$geom_spec)
 
-  result_df <- standardize_staged_data(stage_data, spec_df)
+  stagedResult <- standardizeStaged(staged, specTable)
 
-  geom_index <- get_geom_index_by_ds_uuid(conn, ds_rec$data_source_uuid)
+  geomIndex <- getGeomIndexByDataSourceUuid(conn, dataSourceRecord$data_source_uuid)
 
 
   # format for insert
-  if (!"character" %in% class(result_df$geom_local_value)) {
-    result_df$geom_local_value <- sf::st_as_binary(result_df$geom_local_value, EWKB = TRUE, hex = TRUE)
+  if (!"character" %in% class(stagedResult$geom_local_value)) {
+    stagedResult$geom_local_value <- sf::st_as_binary(stagedResult$geom_local_value, EWKB = TRUE, hex = TRUE)
   }
 
-  geom_template <- get_geom_template(conn)
+  geomTemplate <- getGeomTemplate(conn)
 
-  res <- plyr::rbind.fill(geom_template, result_df)
+  res <- plyr::rbind.fill(geomTemplate, stagedResult)
 
   res <- res[-1]
 
   res$geom_name <- iconv(res$geom_name, "latin1")
 
-  create_geom_instance_table(conn, schema =  geom_index$table_schema, name = geom_index$table_name)
+  createGeomInstanceTable(conn, schema =  geomIndex$table_schema, name = geomIndex$table_name)
 
   # insert into geom table
-  import_geom_table(connectionDetails, res, geom_index)
+  importGeomTable(connectionDetails, res, geomIndex)
 }
 
 
 
 
 
-import_geom_table <- function(connectionDetails, stage_data, geom_index){
+importGeomTable <- function(connectionDetails, staged, geomIndex){
 
-  data_size_gb <- utils::object.size(stage_data) / 1000000000
+  dataSizeGb <- utils::object.size(staged) / 1000000000
 
-  message(paste0("Expect ", ceiling(2*2**floor(log(data_size_gb)/log(2))), " database inserts."))
+  message(paste0("Expect ", ceiling(2*2**floor(log(dataSizeGb)/log(2))), " database inserts."))
 
-  if(data_size_gb > 1) {
-    print("divide and conquer")
-    import_geom_table(connectionDetails, stage_data = stage_data[1:floor(nrow(stage_data)*.5),], geom_index)
-    import_geom_table(connectionDetails, stage_data = stage_data[floor(nrow(stage_data)*.5)+1:nrow(stage_data),], geom_index)
+  if(dataSizeGb > 1) {
+    importGeomTable(connectionDetails, staged = staged[1:floor(nrow(staged)*.5),], geomIndex)
+    importGeomTable(connectionDetails, staged = staged[floor(nrow(staged)*.5)+1:nrow(staged),], geomIndex)
   } else {
 
     # TODO could this be simpler if rewritten as sf::st_write? Did I already try that?
     serv <- strsplit(connectionDetails$server(), "/")[[1]]
 
-    postgis_con <- RPostgreSQL::dbConnect("PostgreSQL",
+    postgisConnection <- RPostgreSQL::dbConnect("PostgreSQL",
                                           host = serv[1], dbname = serv[2],
                                           user = connectionDetails$user(),
                                           password = connectionDetails$password(),
@@ -57,22 +56,22 @@ import_geom_table <- function(connectionDetails, stage_data, geom_index){
     )
 
 
-    rpostgis::pgInsert(postgis_con,
-                       name = c(geom_index$table_schema, paste0("geom_", geom_index$table_name)),
+    rpostgis::pgInsert(postgisConnection,
+                       name = c(geomIndex$table_schema, paste0("geom_", geomIndex$table_name)),
                        geom = "geom_local_value",
-                       data.obj = stage_data)
+                       data.obj = staged)
 
 
 
 
 
-    RPostgreSQL::dbDisconnect(postgis_con)
+    RPostgreSQL::dbDisconnect(postgisConnection)
   }
 
 }
 
 # CREATE GEOM INSTANCE TABLE
-create_geom_instance_table <- function(conn, schema, name) {
+createGeomInstanceTable <- function(conn, schema, name) {
   DatabaseConnector::dbExecute(conn, paste0("CREATE SCHEMA IF NOT EXISTS ", schema, ";"))
   DatabaseConnector::dbExecute(conn, paste0("CREATE TABLE IF NOT EXISTS ", schema,
                                             ".\"geom_", name, "\" (",
@@ -83,6 +82,6 @@ create_geom_instance_table <- function(conn, schema, name) {
                                             "geom_wgs84 ", "public.geometry NULL, ",
                                             "geom_local_epsg int4 NULL, ",
                                             "geom_local_value ", "public.geometry NULL, ",
-                                            "CONSTRAINT geom_record_", create_name_string(name),
+                                            "CONSTRAINT geom_record_", createNameString(name),
                                             "_pkey PRIMARY KEY (geom_record_id));"))
 }

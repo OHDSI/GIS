@@ -38,15 +38,15 @@ conn <- DatabaseConnector::connect(connectionDetails)
 DatabaseConnector::executeSql(conn, sql = readr::read_file('inst/backbone_ddl.sql'))
 
 # Import data_source and feature_index contents from CSV
-data_source_df <- read.csv('inst/data_source.csv')
-feature_index_df <- read.csv('inst/feature_index.csv')
-DatabaseConnector::dbWriteTable(conn, "backbone.data_source", data_source_df, row.names = FALSE, append = TRUE)
-DatabaseConnector::dbWriteTable(conn, "backbone.feature_index", feature_index_df, row.names = FALSE, append = TRUE)
+dataSource <- read.csv('inst/data_source.csv')
+featureIndex <- read.csv('inst/feature_index.csv')
+DatabaseConnector::dbWriteTable(conn, "backbone.data_source", dataSource, row.names = FALSE, append = TRUE)
+DatabaseConnector::dbWriteTable(conn, "backbone.feature_index", featureIndex, row.names = FALSE, append = TRUE)
 
 
 # Populate the geom_index and attr_index
-create_indices(get_uuids())
+createIndices(get_uuids())
 
-imported_sf <- import_sf(connectionDetails, feature_index_id = 157)
+importedShapeFile <- importShapeFile(connectionDetails, featureIndex = 157)
 disconnect(conn)
 ```

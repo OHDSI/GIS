@@ -3,9 +3,9 @@ import_sf <- function(connectionDetails, feature_index_id) {
   conn <-  DatabaseConnector::connect(connectionDetails)
 
   feature_df <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.feature_index WHERE feature_index_id = ", feature_index_id))
-  ds_rec <- get_data_source_record(conn, feature_df$data_source_uuid)
+  ds_rec <- getDataSourceRecord(conn, feature_df$data_source_uuid)
   attr_index_df <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.attr_index WHERE data_source_id = ", feature_df$data_source_uuid,";"))
-  geom_index_df <- get_geom_index_by_ds_uuid(conn, ds_rec$geom_dependency_uuid)
+  geom_index_df <- getGeomIndexByDataSourceUuid(conn, ds_rec$geom_dependency_uuid)
   attr_table_string <- paste0(attr_index_df$table_schema, ".\"attr_", attr_index_df$table_name, "\"")
   geom_table_string <- paste0(geom_index_df$table_schema, ".\"geom_", geom_index_df$table_name, "\"")
   feature <- feature_df$feature_name
@@ -16,7 +16,7 @@ import_sf <- function(connectionDetails, feature_index_id) {
 
   if (!table_exists) {
     message("Loading attr table dependency")
-    load_feature(conn, connectionDetails, feature_index_id)
+    loadFeature(conn, connectionDetails, feature_index_id)
   }
 
   feature_exists_query <- paste0("select count(*) from ", attr_table_string,
@@ -26,7 +26,7 @@ import_sf <- function(connectionDetails, feature_index_id) {
 
   if (!feature_exists_result > 0) {
     message("Loading attr table dependency")
-    load_feature(conn, feature_index_id)
+    loadFeature(conn, feature_index_id)
   }
 
   base_query <- paste0("select * from ", attr_table_string,
