@@ -1,13 +1,13 @@
-loadFeature <- function(conn, connectionDetails, featureIndexId){
+loadVariable <- function(conn, connectionDetails, variableSourceId){
 
-  # get feature
-  featureTable <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.feature_index WHERE feature_index_id = ", featureIndexId))
+  # get variable
+  variableTable <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.variable_source WHERE variable_source_id = ", variableSourceId))
 
   # get attr_index
-  attrIndex <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.attr_index WHERE data_source_id = ", featureTable$data_source_uuid,";"))
+  attrIndex <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.attr_index WHERE data_source_id = ", variableTable$data_source_uuid,";"))
 
   # get data_source_record
-  dataSourceRecord <- getDataSourceRecord(conn, featureTable$data_source_uuid)
+  dataSourceRecord <- getDataSourceRecord(conn, variableTable$data_source_uuid)
 
   geomIndex <- getGeomIndexByDataSourceUuid(conn, dataSourceRecord$geom_dependency_uuid)
 
@@ -22,7 +22,7 @@ loadFeature <- function(conn, connectionDetails, featureIndexId){
   ## format table for insert ----
 
   # create spec table
-  specTable <- createSpecTable(featureTable$attr_spec)
+  specTable <- createSpecTable(variableTable$attr_spec)
 
   stagedResult <- standardizeStaged(staged, specTable)
 
