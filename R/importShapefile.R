@@ -22,7 +22,7 @@ importShapefile <- function(connectionDetails, featureIndexId) {
   featureExistsQuery <- paste0("select count(*) from ", attrTableString,
                                  " where attr_source_value = '", feature,"'")
 
-  featureExistsResult <- DatabaseConnector::querySql(conn, featureExistsResultQuery)
+  featureExistsResult <- DatabaseConnector::querySql(conn, featureExistsQuery)
 
   if (!featureExistsResult > 0) {
     message("Loading attr table dependency")
