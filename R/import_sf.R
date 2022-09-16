@@ -1,59 +1,59 @@
-import_sf <- function(connectionDetails, feature_index_id) {
+importShapefile <- function(connectionDetails, featureIndexId) {
 
   conn <-  DatabaseConnector::connect(connectionDetails)
 
-  feature_df <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.feature_index WHERE feature_index_id = ", feature_index_id))
-  ds_rec <- getDataSourceRecord(conn, feature_df$data_source_uuid)
-  attr_index_df <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.attr_index WHERE data_source_id = ", feature_df$data_source_uuid,";"))
-  geom_index_df <- getGeomIndexByDataSourceUuid(conn, ds_rec$geom_dependency_uuid)
-  attr_table_string <- paste0(attr_index_df$table_schema, ".\"attr_", attr_index_df$table_name, "\"")
-  geom_table_string <- paste0(geom_index_df$table_schema, ".\"geom_", geom_index_df$table_name, "\"")
-  feature <- feature_df$feature_name
+  featureTable <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.feature_index WHERE feature_index_id = ", featureIndexId))
+  dataSourceRecord <- getDataSourceRecord(conn, featureTable$data_source_uuid)
+  attrIndex <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.attr_index WHERE data_source_id = ", featureTable$data_source_uuid,";"))
+  geomIndex <- getGeomIndexByDataSourceUuid(conn, dataSourceRecord$geom_dependency_uuid)
+  attrTableString <- paste0(attrIndex$table_schema, ".\"attr_", attrIndex$table_name, "\"")
+  geomTableString <- paste0(geomIndex$table_schema, ".\"geom_", geomIndex$table_name, "\"")
+  feature <- featureTable$feature_name
 
-  table_exists <- DatabaseConnector::existsTable(conn,
-                                                 attr_index_df$table_schema,
-                                                 paste0("attr_", attr_index_df$table_name))
+  tableExists <- DatabaseConnector::existsTable(conn,
+                                                 attrIndex$table_schema,
+                                                 paste0("attr_", attrIndex$table_name))
 
-  if (!table_exists) {
+  if (!tableExists) {
     message("Loading attr table dependency")
-    loadFeature(conn, connectionDetails, feature_index_id)
+    loadFeature(conn, connectionDetails, featureIndexId)
   }
 
-  feature_exists_query <- paste0("select count(*) from ", attr_table_string,
+  featureExistsQuery <- paste0("select count(*) from ", attrTableString,
                                  " where attr_source_value = '", feature,"'")
 
-  feature_exists_result <- DatabaseConnector::querySql(conn, feature_exists_query)
+  featureExistsResult <- DatabaseConnector::querySql(conn, featureExistsResultQuery)
 
-  if (!feature_exists_result > 0) {
+  if (!featureExistsResult > 0) {
     message("Loading attr table dependency")
-    loadFeature(conn, feature_index_id)
+    loadFeature(conn, featureIndexId)
   }
 
-  base_query <- paste0("select * from ", attr_table_string,
-                       " join ", geom_table_string,
-                       " on ", attr_table_string, ".geom_record_id=", geom_table_string, ".geom_record_id",
-                       " where ", attr_table_string, ".attr_source_value = '", feature,"'")
+  baseQuery <- paste0("select * from ", attrTableString,
+                       " join ", geomTableString,
+                       " on ", attrTableString, ".geom_record_id=", geomTableString, ".geom_record_id",
+                       " where ", attrTableString, ".attr_source_value = '", feature,"'")
 
-  num_records_query <- paste0("select count(*) from ", attr_table_string,
-                              " join ", geom_table_string,
-                              " on ", attr_table_string, ".geom_record_id=", geom_table_string, ".geom_record_id",
-                              " where ", attr_table_string, ".attr_source_value = '", feature,"'")
+  numberRecordsQuery <- paste0("select count(*) from ", attrTableString,
+                              " join ", geomTableString,
+                              " on ", attrTableString, ".geom_record_id=", geomTableString, ".geom_record_id",
+                              " where ", attrTableString, ".attr_source_value = '", feature,"'")
 
-  query_count_result <- DatabaseConnector::querySql(conn, num_records_query)
-  row_count <- query_count_result$COUNT
+  queryCountResult <- DatabaseConnector::querySql(conn, numberRecordsQuery)
+  rowCount <- queryCountResult$COUNT
 
-  if (row_count <= 1001) {
-    x <- sf::st_read(dsn = conn, query = base_query)
+  if (rowCount <= 1001) {
+    x <- sf::st_read(dsn = conn, query = baseQuery)
   } else {
-    sf_base_query <- paste0(base_query, " limit 1")
-    sf_base <- sf::st_read(dsn = conn, query = sf_base_query)
-    for (i in 0:(row_count%/%1000)) {
+    shapefileBaseQuery <- paste0(baseQuery, " limit 1")
+    shapefileBase <- sf::st_read(dsn = conn, query = shapefileBaseQuery)
+    for (i in 0:(rowCount%/%1000)) {
       print(i)
-      iter_query <- paste0(base_query, " limit 1000 offset ", i * 1000 + 1)
-      sf_base <- rbind(sf_base, sf::st_read(dsn = conn, query = iter_query))
+      iterativeQuery <- paste0(baseQuery, " limit 1000 offset ", i * 1000 + 1)
+      shapefileBase <- rbind(shapefileBase, sf::st_read(dsn = conn, query = iterativeQuery))
     }
   }
   DatabaseConnector::disconnect(conn)
 
-  return(sf_base)
+  return(shapefileBase)
 }

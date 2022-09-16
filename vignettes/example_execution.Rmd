@@ -47,6 +47,6 @@ DatabaseConnector::dbWriteTable(conn, "backbone.feature_index", featureIndex, ro
 # Populate the geom_index and attr_index
 createIndices(get_uuids())
 
-importedShapeFile <- importShapeFile(connectionDetails, featureIndex = 157)
+importedShapeFile <- importShapefile(connectionDetails, featureIndex = 157)
 disconnect(conn)
 ```
