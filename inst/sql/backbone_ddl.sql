@@ -20,9 +20,9 @@ CREATE SEQUENCE IF NOT EXISTS backbone.attr_template_attr_record_id_seq
 	START 1
 	CACHE 1
 	NO CYCLE;
--- DROP SEQUENCE backbone.feature_index_feature_index_id_seq;
+-- DROP SEQUENCE backbone.variable_source_variable_source_id_seq;
 
-CREATE SEQUENCE IF NOT EXISTS backbone.feature_index_feature_index_id_seq
+CREATE SEQUENCE IF NOT EXISTS backbone.variable_source_variable_source_id_seq
 	INCREMENT BY 1
 	MINVALUE 1
 	MAXVALUE 2147483647
@@ -114,16 +114,16 @@ CREATE TABLE IF NOT EXISTS backbone.data_source (
 );
 
 
--- backbone.feature_index definition
+-- backbone.variable_source definition
 
 -- Drop table
 
--- DROP TABLE backbone.feature_index;
+-- DROP TABLE backbone.variable_source;
 
-CREATE TABLE IF NOT EXISTS backbone.feature_index (
-	feature_index_id serial4 NOT NULL,
-	feature_name varchar NOT NULL,
-	feature_desc text NULL,
+CREATE TABLE IF NOT EXISTS backbone.variable_source (
+	variable_source_id serial4 NOT NULL,
+	variable_name varchar NOT NULL,
+	variable_desc text NULL,
 	data_source_uuid int4 NOT NULL,
 	attr_spec text NULL
 );

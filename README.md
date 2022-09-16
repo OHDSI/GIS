@@ -26,7 +26,7 @@ OHDSI GIS is an R package, RShiny app, and a Postgres/PostGIS database.
     devtools::install_github("OHDSI/GIS")
     ```
 
-3.  See the example_execution vignette for information on creating a backbone schema, loading data source and feature information, and creating indices in a Postgres/PostGIS instance.
+3.  See the example_execution vignette for information on creating a backbone schema, loading data source and variable information, and creating indices in a Postgres/PostGIS instance.
 
 # User Documentation
 
