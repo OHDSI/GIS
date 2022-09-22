@@ -35,11 +35,11 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(
 # Run the backbone_ddl.sql file
 
 conn <- DatabaseConnector::connect(connectionDetails)
-DatabaseConnector::executeSql(conn, sql = readr::read_file('inst/backbone_ddl.sql'))
+DatabaseConnector::executeSql(conn, sql = readr::read_file(system.file("sql", "backbone_ddl.sql", package="GIS")))
 
 # Import data_source and variable_source contents from CSV
-dataSource <- read.csv('inst/data_source.csv')
-variableSource <- read.csv('inst/variable_source.csv')
+dataSource <- read.csv(system.file("extdata", "data_source.csv", package="GIS"))
+variableSource <- read.csv(system.file("extdata", "variable_source.csv", package="GIS"))
 DatabaseConnector::dbWriteTable(conn, "backbone.data_source", dataSource, row.names = FALSE, append = TRUE)
 DatabaseConnector::dbWriteTable(conn, "backbone.variable_source", variableSource, row.names = FALSE, append = TRUE)
 
