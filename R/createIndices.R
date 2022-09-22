@@ -1,21 +1,26 @@
 #' Create and populate backbone.geom_index and backbone.attr_index from registered sources in backbone.data_source
 #'
 #' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
-#' @param uuids (list) A list of UUIDs for the data sources that are registered in the backbone.data_source table
+#' @param uuids (list) A list of UUIDs for the data sources that are registered in the backbone.data_source table. If uuids = NULL, resorts to creating indices from the entire data_source catalog (default behavior)
 #'
 #' @return Two tables (backbone.geom_index and backbone.attr_index) in PostGIS
 #'
 #' @examples
 #' \dontrun{
-#' createIndices(connectionDetails = connectionDetails, uuids = get_uuids())
+#' createIndices(connectionDetails = connectionDetails, uuids = NULL)
 #' }
 #'
 #' @export
 #'
 
-createIndices <-  function(connectionDetails, uuids) {
-#TODO is uuids is null, run get_uids and create_indices for all
+createIndices <-  function(connectionDetails, uuids = NULL) {
   conn <- DatabaseConnector::connect(connectionDetails)
+
+  if (is.null(uuids)) {
+    data_source <- DatabaseConnector::dbReadTable(conn, "backbone.data_source")
+    uuids <- data_source$data_source_uuid
+  }
+
   lapply(uuids, function(id) {
     record <- getDataSourceRecord(conn, id)
 
@@ -44,9 +49,9 @@ createIndices <-  function(connectionDetails, uuids) {
       # create attr index record
       # TODO does this need to assign a variable?
       attrRecord <- createAttrIndexRecord(conn, record)
-      DatabaseConnector::disconnect(conn)
     }
   })
+  DatabaseConnector::disconnect(conn)
 }
 
 
@@ -124,21 +129,3 @@ createAttrIndexRecord <- function(conn, rec) {
   DatabaseConnector::executeSql(conn, insertLogic)
 }
 
-
-# TODO get_uuids serves one purpose: a helper to create_indices for when you
-# want to index every entry in the datascoure table. Instead consider:
-# TODO delete get_uuids
-# TODO allow create_indices to take argument "all" to uuids (or bool arg)
-# to signify all uuids should be indexed
-
-#' Get all UUIDs from backbone.data_source
-#'
-#' @return (list) All UUIDs from backbone.data_source
-#'
-
-get_uuids <- function() {
-  conn <- connect(connectionDetails)
-  data_source <- DatabaseConnector::dbReadTable(conn, "backbone.data_source")
-  disconnect(conn)
-  return(data_source$data_source_uuid)
-}
