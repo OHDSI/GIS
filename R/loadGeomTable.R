@@ -1,3 +1,31 @@
+#' Loads a geometry from a registered source into PostGIS as geom_X
+#'
+#' @param conn (DatabaseConnectorJdbcConnection) A database connection object created with \code{DatabaseConnector::connect} function
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#' @param dataSourceUuid (UUID) The UUID for the data source that is registered in the backbone.data_source table
+#'
+#' @return A table (geom_X) in PostGIS
+#'
+#' @examples
+#' \dontrun{
+#'
+#' variableSourceId <- 157
+#'
+#' variableTable <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.variable_source WHERE variable_source_id = ", variableSourceId))
+#'
+#' dataSourceRecord <- getDataSourceRecord(conn, variableTable$data_source_uuid)
+#'
+#' geomIndex <- getGeomIndexByDataSourceUuid(conn, dataSourceRecord$geom_dependency_uuid)
+#'
+#' if (!DatabaseConnector::existsTable(conn, geomIndex$table_schema, paste0("geom_",geomIndex$table_name))) {
+#'   message("Loading geom table dependency")
+#'   loadGeomTable(conn, connectionDetails, dataSourceRecord$geom_dependency_uuid)
+#' }
+#' }
+#'
+#' @export
+#'
+
 loadGeomTable <- function(conn, connectionDetails, dataSourceUuid) {
 
   dataSourceRecord <- getDataSourceRecord(conn, dataSourceUuid)
@@ -30,9 +58,14 @@ loadGeomTable <- function(conn, connectionDetails, dataSourceUuid) {
   importGeomTable(connectionDetails, res, geomIndex)
 }
 
-
-
-
+#' Import a well-formatted geometry table into an empty instance of geom_X in PostGIS
+#'
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#' @param staged (data.frame) A well-formatted geometry table. Created by appending staging data table to an geom_template
+#' @param geomIndex (data.frame) A full record (entire row) from the backbone.geom_index table corresponding to the registered geometry of interest
+#'
+#' @return A table (geom_X) in PostGIS
+#'
 
 importGeomTable <- function(connectionDetails, staged, geomIndex){
 
@@ -70,7 +103,29 @@ importGeomTable <- function(connectionDetails, staged, geomIndex){
 
 }
 
-# CREATE GEOM INSTANCE TABLE
+#' Create an empty instance of the geom_template in a given schema in PostGIS
+#'
+#' @param conn (DatabaseConnectorJdbcConnection) A database connection object created with \code{DatabaseConnector::connect} function
+#' @param schema (character) The name of the schema in PostGIS where the empty geom_X should be created
+#' @param name (character) The suffix for the table name to be created; will be appended to "geom_"
+#'
+#' @return An empty table (geom_X) in PostGIS
+#'
+#' @examples
+#' \dontrun{
+#'
+#' variableSourceId <- 157
+#'
+#' variableTable <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.variable_source WHERE variable_source_id = ", variableSourceId))
+#'
+#' dataSourceRecord <- getDataSourceRecord(conn, variableTable$data_source_uuid)
+#'
+#' geomIndex <- getGeomIndexByDataSourceUuid(conn, dataSourceRecord$geom_dependency_uuid)
+#'
+#' createGeomInstanceTable(conn = conn, schema =  geomIndex$table_schema, name = geomIndex$table_name)
+#' }
+#'
+
 createGeomInstanceTable <- function(conn, schema, name) {
   DatabaseConnector::dbExecute(conn, paste0("CREATE SCHEMA IF NOT EXISTS ", schema, ";"))
   DatabaseConnector::dbExecute(conn, paste0("CREATE TABLE IF NOT EXISTS ", schema,

@@ -1,4 +1,17 @@
-# STANDARDIZE STAGED DATA
+#' Create a standardized version of the staged data that was imported from source
+#'
+#' @param staged (data.frame) Table of either attributes or geometries that was imported from a source by \code{getStaged} function
+#' @param specTable (data.frame) Table representation of the JSON attr or geom spec that defines how the source data can be programmatically standardized
+#'
+#' @return (data.frame) A table standardized in the attr_ or geom_template mold
+#'
+#' @examples
+#'
+#' \dontrun{
+#' stagedResult <- standardizeStaged(staged = staged, specTable = specTable)
+#' }
+#'
+
 standardizeStaged <- function(staged, specTable) {
   selectRules <- specTable[specTable$t_type == "select",]
   stagedResult <- staged[,selectRules$t_value] %>% as.data.frame()
@@ -21,7 +34,19 @@ standardizeStaged <- function(staged, specTable) {
   return(stagedResult)
 }
 
-# GET STAGING DATA
+#' Download and import data from a web-hosted source
+#'
+#' @param rec (data.frame) A full record (entire row) from the backbone.data_source table corresponding to the data source of interest. Usually created using \code{getDataSourceRecord} function
+#'
+#' @return (data.frame) An untransformed version of the source data
+#'
+#' @examples
+#'
+#' \dontrun{
+#' staged <- getStaged(dataSourceRecord)
+#' }
+#'
+
 getStaged <- function(rec) {
   # ONLY HANDLES FILES (NO API YET)
   # TODO there has to be a different way to change timeout without changing options
@@ -43,9 +68,19 @@ getStaged <- function(rec) {
   options(timeout = baseTimeout)
 }
 
+#' Reformat the attr_ or geom_spec JSON as a table
+#'
+#' @param jsonStringSpec (JSON) The attr_ or geom_spec from the backbone.variable_source or backbone.data_source table.
+#'
+#' @return (data.frame) Table representation of the JSON attr or geom spec that defines how the source data can be programmatically standardized
+#'
+#' @examples
+#'
+#' \dontrun{
+#' specTable <- createSpecTable(dataSourceRecord$geom_spec)
+#' }
+#'
 
-
-# CREATE SPEC TABLE
 createSpecTable <- function(jsonStringSpec) {
   jsonSpec <- rjson::fromJSON(jsonStringSpec)
   dplyr::tibble("t_name"=names(jsonSpec),

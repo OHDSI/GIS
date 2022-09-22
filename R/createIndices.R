@@ -1,6 +1,20 @@
-# CREATE GEOM AND ATTR INDICES FROM DATA SOURCES
-#TODO is uuids is null, run get_uids and create_indices for all
+#' Create and populate backbone.geom_index and backbone.attr_index from registered sources in backbone.data_source
+#'
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#' @param uuids (list) A list of UUIDs for the data sources that are registered in the backbone.data_source table
+#'
+#' @return Two tables (backbone.geom_index and backbone.attr_index) in PostGIS
+#'
+#' @examples
+#' \dontrun{
+#' createIndices(connectionDetails = connectionDetails, uuids = get_uuids())
+#' }
+#'
+#' @export
+#'
+
 createIndices <-  function(connectionDetails, uuids) {
+#TODO is uuids is null, run get_uids and create_indices for all
   conn <- DatabaseConnector::connect(connectionDetails)
   lapply(uuids, function(id) {
     record <- getDataSourceRecord(conn, id)
@@ -23,6 +37,7 @@ createIndices <-  function(connectionDetails, uuids) {
       ## IF geom dependency AND dependency not in gidsid then create geom index record AND insert into db
       if (!is.na(record$geom_dependency_uuid) & !record$geom_dependency_uuid %in% geomIndexDataSourceIds) {
         # TODO does this need to assign a variable?
+        # TODO this NEEDS to receive conn as first arg or else won't work!!! Add it ASAP
         geomDependency <- createGeomIndexRecord(getDataSourceRecord(conn, record$geom_dependency_uuid))
         # insert into db
       }
@@ -34,8 +49,25 @@ createIndices <-  function(connectionDetails, uuids) {
   })
 }
 
-# CREATE GEOM_INDEX RECORD
+
+#' Create a single record in the backbone.geom_index table
+#'
+#' @param conn (DatabaseConnectorJdbcConnection) A database connection object created with \code{DatabaseConnector::connect} function
+#' @param rec (data.frame) A full record (entire row) from the backbone.data_source table
+#'
+#' @return A new record in the backbone.geom_index table
+#'
+#' @examples
+#' \dontrun{
+#'
+#' record <- getDataSourceRecord(conn = conn, dataSourceUuid = 1)
+#'
+#' createGeomIndexRecord(conn = conn, rec = record)
+#' }
+#'
+
 createGeomIndexRecord <- function(conn, rec) {
+  # TODO change
 
   indexRecord <- dplyr::tibble(
     data_type_id = "NULL",
@@ -58,7 +90,23 @@ createGeomIndexRecord <- function(conn, rec) {
   DatabaseConnector::executeSql(conn, insertLogic)
 }
 
-# CREATE ATTR_INDEX RECORD
+
+#' Create a single record in the backbone.attr_index table
+#'
+#' @param conn (DatabaseConnectorJdbcConnection) A database connection object created with \code{DatabaseConnector::connect} function
+#' @param rec (data.frame) A full record (entire row) from the backbone.data_source table
+#'
+#' @return A new record in the backbone.attr_index table
+#'
+#' @examples
+#' \dontrun{
+#'
+#' record <- getDataSourceRecord(conn = conn, dataSourceUuid = 9999)
+#'
+#' createAttrIndexRecord(conn = conn, rec = record)
+#' }
+#'
+
 createAttrIndexRecord <- function(conn, rec) {
   indexRecord <- dplyr::tibble(
     attr_of_geom_index_id = getForeignKeyGid(conn, rec$geom_dependency_uuid),
@@ -82,6 +130,11 @@ createAttrIndexRecord <- function(conn, rec) {
 # TODO delete get_uuids
 # TODO allow create_indices to take argument "all" to uuids (or bool arg)
 # to signify all uuids should be indexed
+
+#' Get all UUIDs from backbone.data_source
+#'
+#' @return (list) All UUIDs from backbone.data_source
+#'
 
 get_uuids <- function() {
   conn <- connect(connectionDetails)

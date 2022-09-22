@@ -1,3 +1,19 @@
+#' Import an attribute-geometry pair from PostGIS
+#'
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#' @param variableSourceId (integer) The identifier for the variable that is registered in the PostGIS variable_source table
+#'
+#' @return (sf, data.frame) An sf object consisting of a single attribute and geometry; the result of joining attr_X and geom_X from the PostGIS
+#'
+#' @examples
+#'
+#' \dontrun{
+#' shape <- importShapefile(connectionDetails = connectionDetails, variableSourceId = 157)
+#' }
+#'
+#' @export
+#'
+
 importShapefile <- function(connectionDetails, variableSourceId) {
 
   conn <-  DatabaseConnector::connect(connectionDetails)
