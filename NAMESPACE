@@ -2,5 +2,6 @@
 
 export("%>%")
 export(importShapefile)
+export(loadGeomTable)
 export(loadVariable)
 importFrom(magrittr,"%>%")
