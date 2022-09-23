@@ -4,12 +4,12 @@
 \alias{createIndices}
 \title{Create and populate backbone.geom_index and backbone.attr_index from registered sources in backbone.data_source}
 \usage{
-createIndices(connectionDetails, uuids)
+createIndices(connectionDetails, uuids = NULL)
 }
 \arguments{
 \item{connectionDetails}{(list) An object of class connectionDetails as created by the createConnectionDetails function}
 
-\item{uuids}{(list) A list of UUIDs for the data sources that are registered in the backbone.data_source table}
+\item{uuids}{(list) A list of UUIDs for the data sources that are registered in the backbone.data_source table. If uuids = NULL, resorts to creating indices from the entire data_source catalog (default behavior)}
 }
 \value{
 Two tables (backbone.geom_index and backbone.attr_index) in PostGIS
@@ -19,7 +19,7 @@ Create and populate backbone.geom_index and backbone.attr_index from registered 
 }
 \examples{
 \dontrun{
-createIndices(connectionDetails = connectionDetails, uuids = get_uuids())
+createIndices(connectionDetails = connectionDetails, uuids = NULL)
 }
 
 }
