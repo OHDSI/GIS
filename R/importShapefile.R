@@ -18,12 +18,14 @@ importShapefile <- function(connectionDetails, variableSourceId) {
 
   conn <-  DatabaseConnector::connect(connectionDetails)
 
+  #TODO rename variableTable to variableSourceRecord
   variableTable <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.variable_source WHERE variable_source_id = ", variableSourceId))
   dataSourceRecord <- getDataSourceRecord(conn, variableTable$data_source_uuid)
   attrIndex <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.attr_index WHERE data_source_id = ", variableTable$data_source_uuid,";"))
   geomIndex <- getGeomIndexByDataSourceUuid(conn, dataSourceRecord$geom_dependency_uuid)
   attrTableString <- paste0(attrIndex$table_schema, ".\"attr_", attrIndex$table_name, "\"")
   geomTableString <- paste0(geomIndex$table_schema, ".\"geom_", geomIndex$table_name, "\"")
+  # TODO rename to variableName
   variable <- variableTable$variable_name
 
   tableExists <- DatabaseConnector::existsTable(conn,
