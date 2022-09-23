@@ -92,9 +92,6 @@ loadVariable <- function(conn, connectionDetails, variableSourceId){
 
 importAttrTable <- function(conn, attribute, attrIndex){
 
-  #TODO is this insertTableName doing anything?
-  insertTableName <- paste0("\"", attrIndex$table_schema, "\"", "." ,"\"attr_", attrIndex$table_name, ".\"")
-
   attribute <- dplyr::select(attribute, -"attr_record_id")
 
   DatabaseConnector::insertTable(conn,
