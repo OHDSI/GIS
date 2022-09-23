@@ -34,6 +34,7 @@ loadVariable <- function(conn, connectionDetails, variableSourceId){
   variableTable <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.variable_source WHERE variable_source_id = ", variableSourceId))
 
   # get attr_index
+  # TODO rename to attrIndexRecord
   attrIndex <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.attr_index WHERE data_source_id = ", variableTable$data_source_uuid,";"))
 
   # get data_source_record

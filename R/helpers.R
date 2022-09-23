@@ -15,6 +15,28 @@ checkTableExists <- function(connectionDetails, databaseSchema, tableName) {
   tableExists <- DatabaseConnector::existsTable(conn, schema, name)
 }
 
+#' Check if a variable exists in an attr_X table
+#'
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#' @param databaseSchema (character) schema that contains the table containing the variable to be checked
+#' @param tableName (character) name of the table containing the variable to be checked
+#' @param variableName (character) name of the variable to be checked
+#'
+#' @return (boolean) A logical value indicating whether the variable exists
+#'
+#' @export
+#'
+
+checkVariableExists <- function(connectionDetails, databaseSchema, tableName, variableName) {
+  conn <-  DatabaseConnector::connect(connectionDetails)
+  on.exit(DatabaseConnector::disconnect(conn))
+  attrTableString <- paste0(databaseSchema, ".\"attr_", tableName, "\"")
+
+  variableExistsQuery <- paste0("select count(*) from ", attrTableString,
+                                " where attr_source_value = '", variableName,"'")
+
+  variableExistsResult <- DatabaseConnector::querySql(conn, variableExistsQuery)
+}
 
 #' Get a single record from the backbone.variable_source table
 #'

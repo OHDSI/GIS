@@ -2,6 +2,7 @@
 
 export("%>%")
 export(checkTableExists)
+export(checkVariableExists)
 export(createIndices)
 export(getAttrIndexRecord)
 export(getVariableSourceRecord)
