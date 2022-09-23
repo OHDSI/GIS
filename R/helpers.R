@@ -1,3 +1,22 @@
+#' Check if a table exists in a database
+#'
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#' @param databaseSchema (character) schema that contains the table to be checked
+#' @param tableName (character) name of the table to be checked
+#'
+#' @return (boolean) A logical value indicating whether the table exists
+#'
+#' @export
+#'
+
+checkTableExists <- function(connectionDetails, databaseSchema, tableName) {
+  conn <-  DatabaseConnector::connect(connectionDetails)
+  on.exit(DatabaseConnector::disconnect(conn))
+  tableExists <- DatabaseConnector::existsTable(conn, schema, name)
+}
+
+
+
 #' Create the schema and sanitize source values
 #'
 #' @param rec (data.frame) A full record (entire row) from the backbone.data_source table
