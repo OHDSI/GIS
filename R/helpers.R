@@ -31,6 +31,22 @@ getVariableSourceRecord <- function(connectionDetails, variableSourceId) {
   DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.variable_source WHERE variable_source_id = ", variableSourceId))
 }
 
+#' Get a single record from the backbone.attr_index table
+#'
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#' @param dataSourceUuid (UUID) The UUID for the data source that is registered in the backbone.attr_index table
+#'
+#' @return (data.frame) A full record (entire row) from the backbone.attr_index table
+#'
+#' @export
+#'
+
+getAttrIndexRecord <- function(connectionDetails, dataSourceUuid) {
+  conn <-  DatabaseConnector::connect(connectionDetails)
+  on.exit(DatabaseConnector::disconnect(conn))
+  attrIndex <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.attr_index WHERE data_source_id = ", dataSourceUuid,";"))
+}
+
 
 #' Create the schema and sanitize source values
 #'
