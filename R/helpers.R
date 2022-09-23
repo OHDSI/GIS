@@ -15,6 +15,7 @@ checkTableExists <- function(connectionDetails, databaseSchema, tableName) {
   tableExists <- DatabaseConnector::existsTable(conn, schema, name)
 }
 
+
 #' Get a single record from the backbone.variable_source table
 #'
 #' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
@@ -29,7 +30,6 @@ getVariableSourceRecord <- function(connectionDetails, variableSourceId) {
   on.exit(DatabaseConnector::disconnect(conn))
   DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.variable_source WHERE variable_source_id = ", variableSourceId))
 }
-
 
 
 #' Create the schema and sanitize source values
