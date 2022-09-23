@@ -3,6 +3,7 @@
 export("%>%")
 export(checkTableExists)
 export(createIndices)
+export(getAttrIndexRecord)
 export(getVariableSourceRecord)
 export(importShapefile)
 export(loadGeomTable)
