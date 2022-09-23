@@ -48,6 +48,21 @@ getAttrIndexRecord <- function(connectionDetails, dataSourceUuid) {
 }
 
 
+#' Get a record from the backbone.geom_index table from it's corresponding UUID in backbone.data_source table
+#'
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#' @param dataSourceUuid (UUID) The UUID for the data source that is registered in the backbone.data_source table
+#'
+#' @return (data.frame) A full record (entire row) from the backbone.geom_index table
+#'
+
+getGeomIndexRecord <- function(connectionDetails, dataSourceUuid){
+  conn <-  DatabaseConnector::connect(connectionDetails)
+  on.exit(DatabaseConnector::disconnect(conn))
+  DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.geom_index WHERE data_source_id = ", dataSourceUuid))
+}
+
+
 #' Create the schema and sanitize source values
 #'
 #' @param rec (data.frame) A full record (entire row) from the backbone.data_source table
@@ -115,19 +130,6 @@ getDataSourceRecord <- function(conn, dataSourceUuid){
 
 getGeomTemplate <- function(conn){
   DatabaseConnector::dbReadTable(conn, "backbone.geom_template")
-}
-
-
-#' Get a record from the backbone.geom_index table from it's corresponding UUID in backbone.data_source table
-#'
-#' @param conn (DatabaseConnectorJdbcConnection) A database connection object created with \code{DatabaseConnector::connect} function
-#' @param dataSourceUuid (UUID) The UUID for the data source that is registered in the backbone.data_source table
-#'
-#' @return (data.frame) A full record (entire row) from the backbone.geom_index table
-#'
-
-getGeomIndexByDataSourceUuid <- function(conn, dataSourceUuid){
-  DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.geom_index WHERE data_source_id = ", dataSourceUuid))
 }
 
 
