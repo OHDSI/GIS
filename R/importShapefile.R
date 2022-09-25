@@ -16,42 +16,50 @@
 
 importShapefile <- function(connectionDetails, variableSourceId) {
 
+  # TODO conn: don't make the connection here
   conn <-  DatabaseConnector::connect(connectionDetails)
 
   #TODO rename variableTable to variableSourceRecord
+  # TODO conn: replace with fun (once created)
   variableTable <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.variable_source WHERE variable_source_id = ", variableSourceId))
-  dataSourceRecord <- getDataSourceRecord(conn, variableTable$data_source_uuid)
-  attrIndex <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.attr_index WHERE data_source_id = ", variableTable$data_source_uuid,";"))
-  geomIndex <- getGeomIndexByDataSourceUuid(conn, dataSourceRecord$geom_dependency_uuid)
+  dataSourceRecord <- getDataSourceRecord(connectionDetails = connectionDetails,
+                                          dataSourceUuid = variableTable$data_source_uuid)
+  # TODO rename attrIndexRecord
+  attrIndex <- getAttrIndexRecord(connectionDetails = connectionDetails,
+                                        dataSourceUuid = variableTable$data_source_uuid)
+  # TODO rename geomIndexRecord
+  geomIndex <- getGeomIndexRecord(connectionDetails = connectionDetails,
+                                  dataSourceUuid = dataSourceRecord$geom_dependency_uuid)
   attrTableString <- paste0(attrIndex$table_schema, ".\"attr_", attrIndex$table_name, "\"")
   geomTableString <- paste0(geomIndex$table_schema, ".\"geom_", geomIndex$table_name, "\"")
   # TODO rename to variableName
   variable <- variableTable$variable_name
 
-  tableExists <- DatabaseConnector::existsTable(conn,
-                                                 attrIndex$table_schema,
-                                                 paste0("attr_", attrIndex$table_name))
+  tableExists <- checkTableExists(connectionDetails = connectionDetails,
+                                  databaseSchema = attrIndex$table_schema,
+                                  tableName = paste0("attr_", attrIndex$table_name))
 
   if (!tableExists) {
     message("Loading attr table dependency")
+    # TODO conn: replace conn with connectionDetails (once ready)
     loadVariable(conn, connectionDetails, variableSourceId)
   }
 
-  variableExistsQuery <- paste0("select count(*) from ", attrTableString,
-                                 " where attr_source_value = '", variable,"'")
+  variableExists <- checkVariableExists(connectionDetails = connectionDetails,
+                                        databaseSchema = attrIndex$table_schema,
+                                        tableName = attrIndex$table_name,
+                                        variableName = variable)
 
-  variableExistsResult <- DatabaseConnector::querySql(conn, variableExistsQuery)
-
-  if (!variableExistsResult > 0) {
+  if (!variableExists) {
     message("Loading attr table dependency")
-    loadVariable(conn, variableSourceId)
+    # TODO conn: remove conn as a arg (once variableSource fun created)
+    loadVariable(conn, connectionDetails = connectionDetails,
+                 variableSourceId = variableSourceId)
   }
 
-  baseQuery <- paste0("select * from ", attrTableString,
-                       " join ", geomTableString,
-                       " on ", attrTableString, ".geom_record_id=", geomTableString, ".geom_record_id",
-                       " where ", attrTableString, ".attr_source_value = '", variable,"'")
 
+  # TODO conn: replace with fun (once created)
+  # args: connectionDetails, attrTableString, geomTableString, variable/variableName
   numberRecordsQuery <- paste0("select count(*) from ", attrTableString,
                               " join ", geomTableString,
                               " on ", attrTableString, ".geom_record_id=", geomTableString, ".geom_record_id",
@@ -60,6 +68,11 @@ importShapefile <- function(connectionDetails, variableSourceId) {
   queryCountResult <- DatabaseConnector::querySql(conn, numberRecordsQuery)
   rowCount <- queryCountResult$COUNT
 
+
+  baseQuery <- paste0("select * from ", attrTableString,
+                       " join ", geomTableString,
+                       " on ", attrTableString, ".geom_record_id=", geomTableString, ".geom_record_id",
+                       " where ", attrTableString, ".attr_source_value = '", variable,"'")
   if (rowCount <= 1001) {
     x <- sf::st_read(dsn = conn, query = baseQuery)
   } else {
