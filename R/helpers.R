@@ -70,6 +70,22 @@ getGeomIndex <- function(connectionDetails) {
 }
 
 
+#' Get the backbone.attr_index table
+#'
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#'
+#' @return (data.frame) The entire backbone.attr_index table
+#'
+#' @export
+#'
+
+getAttrIndex <- function(connectionDetails) {
+  conn <-  DatabaseConnector::connect(connectionDetails)
+  on.exit(DatabaseConnector::disconnect(conn))
+  DatabaseConnector::dbReadTable(conn, "backbone.attr_index")
+}
+
+
 #' Get a single record from the backbone.attr_index table
 #'
 #' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function

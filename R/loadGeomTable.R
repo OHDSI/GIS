@@ -82,10 +82,10 @@ importGeomTable <- function(connectionDetails, staged, geomIndex){
     serv <- strsplit(connectionDetails$server(), "/")[[1]]
 
     postgisConnection <- RPostgreSQL::dbConnect("PostgreSQL",
-                                          host = serv[1], dbname = serv[2],
-                                          user = connectionDetails$user(),
-                                          password = connectionDetails$password(),
-                                          port = connectionDetails$port()
+                                                host = serv[1], dbname = serv[2],
+                                                user = connectionDetails$user(),
+                                                password = connectionDetails$password(),
+                                                port = connectionDetails$port()
     )
 
 
