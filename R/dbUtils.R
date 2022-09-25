@@ -55,6 +55,54 @@ getDataSourceTable <- function(connectionDetails) {
 }
 
 
+#' Get the backbone.variable_source table
+#'
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#'
+#' @return (data.frame) The entire backbone.variable_source table
+#'
+#' @export
+#'
+
+getVariableSourceTable <- function(connectionDetails) {
+  conn <-  DatabaseConnector::connect(connectionDetails)
+  on.exit(DatabaseConnector::disconnect(conn))
+  DatabaseConnector::dbReadTable(conn, "backbone.variable_source")
+}
+
+
+#' Get the backbone.geom_index table
+#'
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#'
+#' @return (data.frame) The entire backbone.geom_index table
+#'
+#' @export
+#'
+
+getGeomIndexTable <- function(connectionDetails) {
+  conn <-  DatabaseConnector::connect(connectionDetails)
+  on.exit(DatabaseConnector::disconnect(conn))
+  DatabaseConnector::dbReadTable(conn, "backbone.geom_index")
+}
+
+
+#' Get the backbone.attr_index table
+#'
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#'
+#' @return (data.frame) The entire backbone.attr_index table
+#'
+#' @export
+#'
+
+getAttrIndexTable <- function(connectionDetails) {
+  conn <-  DatabaseConnector::connect(connectionDetails)
+  on.exit(DatabaseConnector::disconnect(conn))
+  DatabaseConnector::dbReadTable(conn, "backbone.attr_index")
+}
+
+
 #' Get a single record from the backbone.data_source table
 #'
 #' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function

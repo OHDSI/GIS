@@ -26,3 +26,4 @@ createNameString <- function(name) {
     stringr::str_replace_all("\\W", "_") %>%
     stringr::str_remove_all("^_+|_+$|_(?=_)")
 }
+

@@ -55,20 +55,3 @@ createIndices <-  function(connectionDetails, uuids = NULL) {
     }
   })
 }
-
-
-#' Create a single record in the backbone.geom_index table
-#'
-#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
-#' @param dataSourceRecord (data.frame) A full record (entire row) from the backbone.data_source table
-#'
-#' @return A new record in the backbone.geom_index table
-#'
-#' @examples
-#' \dontrun{
-#'
-#' record <- getDataSourceRecord(connectionDetails = connectionDetails, dataSourceUuid = 1)
-#'
-#' createGeomIndexRecord(connectionDetails = connectionDetails, dataSourceRecord = record)
-#' }
-#'
