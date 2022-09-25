@@ -85,11 +85,11 @@ createGeomIndexRecord <- function(conn, rec) {
     data_source_id = rec$data_source_uuid)
 
   insertLogic <- paste0("INSERT INTO backbone.geom_index ",
-                         "(data_type_id, data_type_name, geom_type_concept_id, ",
-                         "geom_type_source_value, table_schema, table_name, table_desc, ",
-                         "data_source_id) VALUES ('",
-                         paste(indexRecord %>% dplyr::slice(1) %>% unlist(., use.names = FALSE), collapse = "', '"),
-                         "');") %>%
+                        "(data_type_id, data_type_name, geom_type_concept_id, ",
+                        "geom_type_source_value, table_schema, table_name, table_desc, ",
+                        "data_source_id) VALUES ('",
+                        paste(indexRecord %>% dplyr::slice(1) %>% unlist(., use.names = FALSE), collapse = "', '"),
+                        "');") %>%
     stringr::str_replace_all("'NULL'", "NULL")
 
   DatabaseConnector::executeSql(conn, insertLogic)
@@ -120,10 +120,10 @@ createAttrIndexRecord <- function(conn, rec) {
     data_source_id = rec$data_source_uuid)
 
   insertLogic <- paste0("INSERT INTO backbone.attr_index ",
-                         "(attr_of_geom_index_id, table_schema, table_name, data_source_id) ",
-                         "VALUES ('",
-                         paste(indexRecord %>% dplyr::slice(1) %>% unlist(., use.names = FALSE), collapse = "', '"),
-                         "');") %>%
+                        "(attr_of_geom_index_id, table_schema, table_name, data_source_id) ",
+                        "VALUES ('",
+                        paste(indexRecord %>% dplyr::slice(1) %>% unlist(., use.names = FALSE), collapse = "', '"),
+                        "');") %>%
     stringr::str_replace_all("'NULL'", "NULL")
 
   DatabaseConnector::executeSql(conn, insertLogic)
