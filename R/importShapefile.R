@@ -15,13 +15,9 @@
 #'
 
 importShapefile <- function(connectionDetails, variableSourceId) {
-
-  # TODO conn: don't make the connection here
-  conn <-  DatabaseConnector::connect(connectionDetails)
-
-  #TODO rename variableTable to variableSourceRecord
-  # TODO conn: replace with fun (once created)
-  variableTable <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.variable_source WHERE variable_source_id = ", variableSourceId))
+  # TODO rename as variableSourceRecord
+  variableTable <- getVariableSourceRecord(connectionDetails = connectionDetails,
+                                           variableSourceId = variableSourceId)
   dataSourceRecord <- getDataSourceRecord(connectionDetails = connectionDetails,
                                           dataSourceUuid = variableTable$data_source_uuid)
   # TODO rename attrIndexRecord
@@ -41,8 +37,8 @@ importShapefile <- function(connectionDetails, variableSourceId) {
 
   if (!tableExists) {
     message("Loading attr table dependency")
-    # TODO conn: replace conn with connectionDetails (once ready)
-    loadVariable(conn, connectionDetails, variableSourceId)
+    loadVariable(connectionDetails = connectionDetails,
+                 variableSourceId = variableSourceId)
   }
 
   variableExists <- checkVariableExists(connectionDetails = connectionDetails,
@@ -52,39 +48,13 @@ importShapefile <- function(connectionDetails, variableSourceId) {
 
   if (!variableExists) {
     message("Loading attr table dependency")
-    # TODO conn: remove conn as a arg (once variableSource fun created)
-    loadVariable(conn, connectionDetails = connectionDetails,
+    loadVariable(connectionDetails = connectionDetails,
                  variableSourceId = variableSourceId)
   }
 
 
-  # TODO conn: replace with fun (once created)
-  # args: connectionDetails, attrTableString, geomTableString, variable/variableName
-  numberRecordsQuery <- paste0("select count(*) from ", attrTableString,
-                              " join ", geomTableString,
-                              " on ", attrTableString, ".geom_record_id=", geomTableString, ".geom_record_id",
-                              " where ", attrTableString, ".attr_source_value = '", variable,"'")
-
-  queryCountResult <- DatabaseConnector::querySql(conn, numberRecordsQuery)
-  rowCount <- queryCountResult$COUNT
-
-
-  baseQuery <- paste0("select * from ", attrTableString,
-                       " join ", geomTableString,
-                       " on ", attrTableString, ".geom_record_id=", geomTableString, ".geom_record_id",
-                       " where ", attrTableString, ".attr_source_value = '", variable,"'")
-  if (rowCount <= 1001) {
-    x <- sf::st_read(dsn = conn, query = baseQuery)
-  } else {
-    shapefileBaseQuery <- paste0(baseQuery, " limit 1")
-    shapefileBase <- sf::st_read(dsn = conn, query = shapefileBaseQuery)
-    for (i in 0:(rowCount%/%1000)) {
-      print(i)
-      iterativeQuery <- paste0(baseQuery, " limit 1000 offset ", i * 1000 + 1)
-      shapefileBase <- rbind(shapefileBase, sf::st_read(dsn = conn, query = iterativeQuery))
-    }
-  }
-  DatabaseConnector::disconnect(conn)
-
-  return(shapefileBase)
+  handleShapefileImportJob(connectionDetails = connectionDetails,
+                           attrTableString = attrTableString,
+                           geomTableString = geomTableString,
+                           variable = variable)
 }

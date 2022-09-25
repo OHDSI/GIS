@@ -24,12 +24,12 @@ createIndices <-  function(connectionDetails, uuids = NULL) {
                                   dataSourceUuid = id)
 
     #GET GEOM AND ATTR INDEX (SCHEMA SPECIFIC)
-    # TODO conn: replace with fun (once created)
-    geomIndex <- DatabaseConnector::dbReadTable(conn, "backbone.geom_index")
+    # TODO rename geomIndex to geomIndexTable
+    geomIndex <- getGeomIndexTable(connectionDetails = connectionDetails)
     geomIndexDataSourceIds <- geomIndex$data_source_id
 
-    # TODO conn: replace with fun (once created)
-    attrIndex <- DatabaseConnector::dbReadTable(conn, "backbone.attr_index")
+    # TODO rename as attrIndexTable
+    attrIndex <- getAttrIndexTable(connectionDetails = connectionDetails)
     attrIndexDataSourceIds <- attrIndex$data_source_id
 
     # IF record type geom AND not in gidsid then create geom index record

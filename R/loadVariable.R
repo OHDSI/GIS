@@ -1,6 +1,5 @@
 #' Loads a variable from a registered source into PostGIS as attr_X
 #'
-#' @param conn (DatabaseConnectorJdbcConnection) A database connection object created with \code{DatabaseConnector::connect} function
 #' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
 #' @param variableSourceId (integer) The identifier for the variable that is registered in the PostGIS variable_source table
 #'
@@ -28,13 +27,12 @@
 #' @export
 #'
 
-# TODO conn: remove conn as a parameter (once variableSource fun created)
-loadVariable <- function(conn, connectionDetails, variableSourceId){
+loadVariable <- function(connectionDetails, variableSourceId){
 
   # get variable
-  # TODO conn: replace with fun (once created)
-  # TODO rename as variableSourceTable
-  variableTable <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.variable_source WHERE variable_source_id = ", variableSourceId))
+  # TODO rename as variableSourceRecord
+  variableTable <- getVariableSourceRecord(connectionDetails = connectionDetails,
+                                           variableSourceId = variableSourceId)
 
   # get attr_index
   attrIndexRecord <- getAttrIndexRecord(connectionDetails = connectionDetails,

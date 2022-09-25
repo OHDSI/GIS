@@ -473,3 +473,48 @@ assignGeomIdToAttr <- function(connectionDetails, stagedResult, geomIndex){
   return(tmp)
 
 }
+
+
+# Import Shapefile ---------------------------------------------------------
+
+#' Handle the joining of geometry and attribute, as well as the simple or iterative import of a shapefile
+#'
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#' @param attrTableString (character) Name of the attr_X table in databaseSchema.tableName format
+#' @param geomTableString (character) Name of the geom_X table in databaseSchema.tableName format
+#' @param variable (character) Name of the variable to be imported
+#'
+#' @return (sf, data.frame) An sf object consisting of a single attribute and geometry; the result of joining attr_X and geom_X from the PostGIS
+#'
+
+handleShapefileImportJob <- function(connectionDetails, attrTableString, geomTableString, variable) {
+  conn <-  DatabaseConnector::connect(connectionDetails)
+  on.exit(DatabaseConnector::disconnect(conn))
+  numberRecordsQuery <- paste0("select count(*) from ", attrTableString,
+                               " join ", geomTableString,
+                               " on ", attrTableString, ".geom_record_id=", geomTableString, ".geom_record_id",
+                               " where ", attrTableString, ".attr_source_value = '", variable,"'")
+
+  queryCountResult <- DatabaseConnector::querySql(conn, numberRecordsQuery)
+  rowCount <- queryCountResult$COUNT
+
+
+  baseQuery <- paste0("select * from ", attrTableString,
+                      " join ", geomTableString,
+                      " on ", attrTableString, ".geom_record_id=", geomTableString, ".geom_record_id",
+                      " where ", attrTableString, ".attr_source_value = '", variable,"'")
+  if (rowCount <= 1001) {
+    shapefile <- sf::st_read(dsn = conn, query = baseQuery)
+    return(shapefile)
+  } else {
+    shapefileBaseQuery <- paste0(baseQuery, " limit 1")
+    shapefileBase <- sf::st_read(dsn = conn, query = shapefileBaseQuery)
+    for (i in 0:(rowCount%/%1000)) {
+      print(i)
+      iterativeQuery <- paste0(baseQuery, " limit 1000 offset ", i * 1000 + 1)
+      shapefileBase <- rbind(shapefileBase, sf::st_read(dsn = conn, query = iterativeQuery))
+    }
+    return(shapefileBase)
+  }
+
+}
