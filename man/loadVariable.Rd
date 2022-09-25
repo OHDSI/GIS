@@ -4,11 +4,9 @@
 \alias{loadVariable}
 \title{Loads a variable from a registered source into PostGIS as attr_X}
 \usage{
-loadVariable(conn, connectionDetails, variableSourceId)
+loadVariable(connectionDetails, variableSourceId)
 }
 \arguments{
-\item{conn}{(DatabaseConnectorJdbcConnection) A database connection object created with \code{DatabaseConnector::connect} function}
-
 \item{connectionDetails}{(list) An object of class connectionDetails as created by the createConnectionDetails function}
 
 \item{variableSourceId}{(integer) The identifier for the variable that is registered in the PostGIS variable_source table}

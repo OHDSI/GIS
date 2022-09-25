@@ -1,139 +1,3 @@
-#' Check if a table exists in a database
-#'
-#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
-#' @param databaseSchema (character) schema that contains the table to be checked
-#' @param tableName (character) name of the table to be checked
-#'
-#' @return (boolean) A logical value indicating whether the table exists
-#'
-#' @export
-#'
-
-checkTableExists <- function(connectionDetails, databaseSchema, tableName) {
-  conn <-  DatabaseConnector::connect(connectionDetails)
-  on.exit(DatabaseConnector::disconnect(conn))
-  tableExists <- DatabaseConnector::existsTable(conn, schema, name)
-}
-
-#' Check if a variable exists in an attr_X table
-#'
-#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
-#' @param databaseSchema (character) schema that contains the table containing the variable to be checked
-#' @param tableName (character) name of the table containing the variable to be checked
-#' @param variableName (character) name of the variable to be checked
-#'
-#' @return (boolean) A logical value indicating whether the variable exists
-#'
-#' @export
-#'
-
-checkVariableExists <- function(connectionDetails, databaseSchema, tableName, variableName) {
-  conn <-  DatabaseConnector::connect(connectionDetails)
-  on.exit(DatabaseConnector::disconnect(conn))
-  attrTableString <- paste0(databaseSchema, ".\"attr_", tableName, "\"")
-
-  variableExistsQuery <- paste0("select count(*) from ", attrTableString,
-                                " where attr_source_value = '", variableName,"'")
-
-  variableExistsResult <- DatabaseConnector::querySql(conn, variableExistsQuery)
-}
-
-#' Get a single record from the backbone.variable_source table
-#'
-#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
-#' @param variableSourceId (integer) The identifier for the data source that is registered in the backbone.variable_source table
-#'
-#' @return (data.frame) A full record (entire row) from the backbone.variable_source table
-#'
-#' @export
-#'
-getVariableSourceRecord <- function(connectionDetails, variableSourceId) {
-  conn <-  DatabaseConnector::connect(connectionDetails)
-  on.exit(DatabaseConnector::disconnect(conn))
-  DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.variable_source WHERE variable_source_id = ", variableSourceId))
-}
-
-
-#' Get the backbone.geom_index table
-#'
-#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
-#'
-#' @return (data.frame) The entire backbone.geom_index table
-#'
-#' @export
-#'
-
-getGeomIndex <- function(connectionDetails) {
-  conn <-  DatabaseConnector::connect(connectionDetails)
-  on.exit(DatabaseConnector::disconnect(conn))
-  DatabaseConnector::dbReadTable(conn, "backbone.geom_index")
-}
-
-
-#' Get the backbone.attr_index table
-#'
-#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
-#'
-#' @return (data.frame) The entire backbone.attr_index table
-#'
-#' @export
-#'
-
-getAttrIndex <- function(connectionDetails) {
-  conn <-  DatabaseConnector::connect(connectionDetails)
-  on.exit(DatabaseConnector::disconnect(conn))
-  DatabaseConnector::dbReadTable(conn, "backbone.attr_index")
-}
-
-
-#' Get the backbone.variable_source table
-#'
-#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
-#'
-#' @return (data.frame) The entire backbone.variable_source table
-#'
-#' @export
-#'
-
-getVariableSource <- function(connectionDetails) {
-  conn <-  DatabaseConnector::connect(connectionDetails)
-  on.exit(DatabaseConnector::disconnect(conn))
-  DatabaseConnector::dbReadTable(conn, "backbone.variable_source")
-}
-
-
-#' Get a single record from the backbone.attr_index table
-#'
-#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
-#' @param dataSourceUuid (UUID) The UUID for the data source that is registered in the backbone.attr_index table
-#'
-#' @return (data.frame) A full record (entire row) from the backbone.attr_index table
-#'
-#' @export
-#'
-
-getAttrIndexRecord <- function(connectionDetails, dataSourceUuid) {
-  conn <-  DatabaseConnector::connect(connectionDetails)
-  on.exit(DatabaseConnector::disconnect(conn))
-  attrIndex <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.attr_index WHERE data_source_id = ", dataSourceUuid,";"))
-}
-
-
-#' Get a record from the backbone.geom_index table from it's corresponding UUID in backbone.data_source table
-#'
-#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
-#' @param dataSourceUuid (UUID) The UUID for the data source that is registered in the backbone.data_source table
-#'
-#' @return (data.frame) A full record (entire row) from the backbone.geom_index table
-#'
-
-getGeomIndexRecord <- function(connectionDetails, dataSourceUuid){
-  conn <-  DatabaseConnector::connect(connectionDetails)
-  on.exit(DatabaseConnector::disconnect(conn))
-  DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.geom_index WHERE data_source_id = ", dataSourceUuid))
-}
-
-
 #' Create the schema and sanitize source values
 #'
 #' @param rec (data.frame) A full record (entire row) from the backbone.data_source table
@@ -164,55 +28,39 @@ createNameString <- function(name) {
 }
 
 
+#' Join a column of geom_X record identifiers to a staged attr_X table
+#'
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#' @param stagedResult (data.frame) A table standardized in the attr_template or geom_template mold
+#' @param geomIndex (integer) Identifier of a record in the backbone.geom_index table. Usually sourced from the \code{attr_of_geom_index_id} entry of an attr_index record
+#'
+#' @return (data.frame) An updated \code{stagedResult} table with \code{geom_record_id}s corresponding to a geom_X table appended
+#'
+
+assignGeomIdToAttr <- function(connectionDetails, stagedResult, geomIndex){
+  #TODO change the argument geomIndex to geomIndexId, which is what it is
+  geomIdMap <- getGeomIdMap(connectionDetails = connectionDetails,
+                            geomIndex = geomIndex)
+
+  tmp <- merge(x = stagedResult, y= geomIdMap, by.x = "geom_join_column", by.y = "geom_source_value")
+
+  tmp <- dplyr::select(tmp, -"geom_join_column")
+
+  return(tmp)
+
+}
+
+
+
 #' Get foreign key for attr_of_geom_index_id
 #'
-#' @param conn (DatabaseConnectorJdbcConnection) A database connection object created with \code{DatabaseConnector::connect} function
-#' @param uuid (UUID) The UUID for the data source that is registered in the backbone.data_source table
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#' @param dataSourceUuid (UUID) The UUID for the data source that is registered in the backbone.data_source table
 #'
 #' @return (integer) Identifier for the corresponding backbone.geom_index entry
 #'
 
-getForeignKeyGid <- function(conn, uuid) {
-  #TODO change the argument name from uuid to dataSourceUuid to align with similar functions
-  geomIndex <- DatabaseConnector::dbReadTable(conn, "backbone.geom_index")
-  geomIndex[geomIndex$data_source_id == uuid,]$geom_index_id
+getAttrOfGeomIndexId <- function(connectionDetails, dataSourceUuid) {
+  geomIndex <- getGeomIndexTable(connectionDetails)
+  geomIndex[geomIndex$data_source_id == dataSourceUuid,]$geom_index_id
 }
-
-
-#' Get a single record from the backbone.data_source table
-#'
-#' @param conn (DatabaseConnectorJdbcConnection) A database connection object created with \code{DatabaseConnector::connect} function
-#' @param dataSourceUuid (UUID) The UUID for the data source that is registered in the backbone.data_source table
-#'
-#' @return (data.frame) A full record (entire row) from the backbone.data_source table
-#'
-
-getDataSourceRecord <- function(conn, dataSourceUuid){
-  DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.data_source WHERE data_source_uuid = ", dataSourceUuid))
-}
-
-
-#' Get the geom_template table
-#'
-#' @param conn (DatabaseConnectorJdbcConnection) A database connection object created with \code{DatabaseConnector::connect} function
-#'
-#' @return (data.frame) An empty geom_template table
-#'
-
-getGeomTemplate <- function(conn){
-  DatabaseConnector::dbReadTable(conn, "backbone.geom_template")
-}
-
-
-#' Get the attr_template table
-#'
-#' @param conn (DatabaseConnectorJdbcConnection) A database connection object created with \code{DatabaseConnector::connect} function
-#'
-#' @return (data.frame) An empty attr_template table
-#'
-
-getAttrTemplate <- function(conn){
-  DatabaseConnector::dbReadTable(conn, "backbone.attr_template")
-}
-
-
