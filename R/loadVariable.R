@@ -64,8 +64,8 @@ loadVariable <- function(connectionDetails, variableSourceId){
 
   # Load geom_dependency if necessary
   geomTableExists <- checkTableExists(connectionDetails = connectionDetails,
-                                      databaseSchema = geomIndex$table_schema,
-                                      tableName = paste0("geom_", geomIndex$table_name))
+                                      databaseSchema = geomIndexRecord$table_schema,
+                                      tableName = paste0("geom_", geomIndexRecord$table_name))
   if (!geomTableExists) {
     message("Loading geom table dependency")
     loadGeometry(connectionDetails = connectionDetails,
@@ -75,7 +75,7 @@ loadVariable <- function(connectionDetails, variableSourceId){
   # get mapping values from geom table
   stagedResult <- assignGeomIdToAttr(connectionDetails = connectionDetails,
                                      stagedResult = stagedResult,
-                                     geomIndex = attrIndex$attr_of_geom_index_id)
+                                     geomIndex = attrIndexRecord$attr_of_geom_index_id)
 
   # stagedResult <- tmp
   # get attr template
@@ -85,13 +85,13 @@ loadVariable <- function(connectionDetails, variableSourceId){
   attrToIngest <- plyr::rbind.fill(attrTemplate, stagedResult)
 
   createAttrInstanceTable(connectionDetails = connectionDetails,
-                          schema = attrIndex$table_schema,
-                          name = attrIndex$table_name)
+                          schema = attrIndexRecord$table_schema,
+                          name = attrIndexRecord$table_name)
 
   # import
   importAttrTable(connectionDetails = connectionDetails,
                   attribute = attrToIngest,
-                  attrIndex = attrIndex)
+                  attrIndex = attrIndexRecord)
 
 }
 

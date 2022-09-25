@@ -27,3 +27,40 @@ createNameString <- function(name) {
     stringr::str_remove_all("^_+|_+$|_(?=_)")
 }
 
+
+#' Join a column of geom_X record identifiers to a staged attr_X table
+#'
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#' @param stagedResult (data.frame) A table standardized in the attr_template or geom_template mold
+#' @param geomIndex (integer) Identifier of a record in the backbone.geom_index table. Usually sourced from the \code{attr_of_geom_index_id} entry of an attr_index record
+#'
+#' @return (data.frame) An updated \code{stagedResult} table with \code{geom_record_id}s corresponding to a geom_X table appended
+#'
+
+assignGeomIdToAttr <- function(connectionDetails, stagedResult, geomIndex){
+  #TODO change the argument geomIndex to geomIndexId, which is what it is
+  geomIdMap <- getGeomIdMap(connectionDetails = connectionDetails,
+                            geomIndex = geomIndex)
+
+  tmp <- merge(x = stagedResult, y= geomIdMap, by.x = "geom_join_column", by.y = "geom_source_value")
+
+  tmp <- dplyr::select(tmp, -"geom_join_column")
+
+  return(tmp)
+
+}
+
+
+
+#' Get foreign key for attr_of_geom_index_id
+#'
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#' @param dataSourceUuid (UUID) The UUID for the data source that is registered in the backbone.data_source table
+#'
+#' @return (integer) Identifier for the corresponding backbone.geom_index entry
+#'
+
+getAttrOfGeomIndexId <- function(connectionDetails, dataSourceUuid) {
+  geomIndex <- getGeomIndexTable(connectionDetails)
+  geomIndex[geomIndex$data_source_id == dataSourceUuid,]$geom_index_id
+}
