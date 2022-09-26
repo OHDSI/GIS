@@ -33,7 +33,7 @@ createIndices <-  function(connectionDetails, uuids = NULL) {
     attrIndexDataSourceIds <- attrIndex$data_source_id
 
     # IF record type geom AND not in gidsid then create geom index record
-    if (record$geom_type != "" & !id %in% geomIndexDataSourceIds) {
+    if (record$geom_type != "" & !is.na(record$geom_type) & !id %in% geomIndexDataSourceIds) {
       createGeomIndexRecord(connectionDetails = connectionDetails,
                             dataSourceRecord = record)
     }
