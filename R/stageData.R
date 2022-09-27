@@ -60,7 +60,8 @@ getStaged <- function(rec) {
       if (rec$download_data_standard == 'shp') {
         return(sf::st_read(file.path(tempdir(), rec$download_filename)))
       } else if (rec$download_data_standard == 'csv') {
-        return(utils::read.csv(file.path(tempdir(), rec$download_filename)))
+        return(utils::read.csv(file = file.path(tempdir(), rec$download_filename),
+                               check.names = FALSE))
       }
 
     }
