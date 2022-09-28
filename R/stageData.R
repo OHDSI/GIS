@@ -13,6 +13,12 @@
 #'
 
 standardizeStaged <- function(staged, specTable) {
+
+  if ('stage_transform' %in% specTable$t_name) {
+    staged <- eval(parse(text=specTable[specTable$t_name == 'stage_transform',]$t_value))
+    specTable <- specTable[!specTable$t_name == 'stage_transform',]
+  }
+
   selectRules <- specTable[specTable$t_type == "select",]
   stagedResult <- staged[,selectRules$t_value] %>% as.data.frame()
   names(stagedResult) <- selectRules$t_name
