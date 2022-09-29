@@ -1,18 +1,45 @@
 #' Create a standardized version of the staged data that was imported from source
 #'
-#' @param staged (data.frame) Table of either attributes or geometries that was imported from a source by \code{getStaged} function
-#' @param specTable (data.frame) Table representation of the JSON attr or geom spec that defines how the source data can be programmatically standardized
+#' @param staged (data.frame) Table of attributes that was imported from a source by \code{getStaged} function
+#' @param spec (JSON) The attr_spec from the backbone.variable_source table.
 #'
-#' @return (data.frame) A table standardized in the attr_ or geom_template mold
+#' @return (data.frame) A table standardized in the attr_template mold
 #'
 #' @examples
 #'
 #' \dontrun{
-#' stagedResult <- standardizeStaged(staged = staged, specTable = specTable)
+#' stagedResult <- standardizeStagedAttr(staged = staged, spec = variableTable$attr_spec)
+#' }
+#'
+standardizeStagedAttr <- function(staged, attrSpec) {
+  jsonSpec <- rjson::fromJSON(attrSpec)
+  transformCommands <-jsonSpec$stage_transform
+  for (cmd in transformCommands) {
+    stagedResult <- staged <- eval(parse(text=cmd))
+  }
+  return(stagedResult)
+}
+
+
+#' Create a standardized version of the staged data that was imported from source
+#'
+#' @param staged (data.frame) Table of either attributes or geometries that was imported from a source by \code{getStaged} function
+#' @param spec (JSON) The geom_spec from the backbone.data_source table.
+#'
+#' @return (data.frame) A table standardized in the geom_template mold
+#'
+#' @examples
+#'
+#' \dontrun{
+#' stagedResult <- standardizeStagedGeom(staged = staged, spec = dataSourceRecord$geom_spec)
 #' }
 #'
 
-standardizeStaged <- function(staged, specTable) {
+standardizeStagedGeom <- function(staged, geomSpec) {
+  jsonSpec <- rjson::fromJSON(geomSpec)
+  specTable <- dplyr::tibble("t_name"=names(jsonSpec),
+                "t_type"=unlist(lapply(t_name, function(x) jsonSpec[[x]]$type)),
+                "t_value"=unlist(lapply(t_name, function(x) jsonSpec[[x]]$value)))
 
   if ('stage_transform' %in% specTable$t_name) {
     staged <- eval(parse(text=specTable[specTable$t_name == 'stage_transform',]$t_value))
@@ -73,24 +100,4 @@ getStaged <- function(rec) {
     }
   }
   options(timeout = baseTimeout)
-}
-
-#' Reformat the attr_ or geom_spec JSON as a table
-#'
-#' @param jsonStringSpec (JSON) The attr_ or geom_spec from the backbone.variable_source or backbone.data_source table.
-#'
-#' @return (data.frame) Table representation of the JSON attr or geom spec that defines how the source data can be programmatically standardized
-#'
-#' @examples
-#'
-#' \dontrun{
-#' specTable <- createSpecTable(dataSourceRecord$geom_spec)
-#' }
-#'
-
-createSpecTable <- function(jsonStringSpec) {
-  jsonSpec <- rjson::fromJSON(jsonStringSpec)
-  dplyr::tibble("t_name"=names(jsonSpec),
-                 "t_type"=unlist(lapply(t_name, function(x) jsonSpec[[x]]$type)),
-                 "t_value"=unlist(lapply(t_name, function(x) jsonSpec[[x]]$value)))
 }

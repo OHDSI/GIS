@@ -32,9 +32,7 @@ loadGeometry <- function(connectionDetails, dataSourceUuid) {
 
   staged <- getStaged(dataSourceRecord)
 
-  specTable <- createSpecTable(dataSourceRecord$geom_spec)
-
-  stagedResult <- standardizeStaged(staged, specTable)
+  stagedResult <- standardizeStagedGeom(staged = staged, geomSpec = dataSourceRecord$geom_spec)
 
   geomIndex <- getGeomIndexRecord(connectionDetails = connectionDetails,
                                   dataSourceUuid = dataSourceRecord$data_source_uuid)

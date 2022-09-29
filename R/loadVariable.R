@@ -53,12 +53,9 @@ loadVariable <- function(connectionDetails, variableSourceId){
     staged <- sf::st_drop_geometry(staged)
   }
 
-  ## format table for insert ----
+  # format table for insert
 
-  # create spec table
-  specTable <- createSpecTable(variableTable$attr_spec)
-
-  stagedResult <- standardizeStaged(staged, specTable)
+  stagedResult <- standardizeStagedAttr(staged = staged, attrSpec = variableTable$attr_spec)
 
   # prepare for insert
 
@@ -80,6 +77,8 @@ loadVariable <- function(connectionDetails, variableSourceId){
   # stagedResult <- tmp
   # get attr template
   attrTemplate <- getAttrTemplate(connectionDetails = connectionDetails)
+
+  stagedResult <- dplyr::select(stagedResult, names(attrTemplate)[names(attrTemplate) %in% names(stagedResult)])
 
   # append staging data to template format
   attrToIngest <- plyr::rbind.fill(attrTemplate, stagedResult)
