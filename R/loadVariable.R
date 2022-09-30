@@ -57,6 +57,8 @@ loadVariable <- function(connectionDetails, variableSourceId){
 
   stagedResult <- standardizeStagedAttr(staged = staged, attrSpec = variableTable$attr_spec)
 
+  stagedResult$variable_source_record_id <- variableTable$variable_source_id
+
   # prepare for insert
 
   # Load geom_dependency if necessary
