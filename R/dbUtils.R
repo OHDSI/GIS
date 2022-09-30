@@ -49,6 +49,7 @@ getCurrentLoad <- function(connectionDetails) {
                      tableName = paste0("attr_", attrIndex[i,]$table_name))
 
     if(attrTableExists) {
+      # TODO get all unique variable_source_id
 
     }
   })
