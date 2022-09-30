@@ -71,6 +71,7 @@ CREATE TABLE IF NOT EXISTS backbone.attr_index (
 CREATE TABLE IF NOT EXISTS backbone.attr_template (
 	attr_record_id serial4 NOT NULL,
 	geom_record_id int4 NULL,
+	variable_source_record_id int4 NOT NULL,
 	attr_concept_id int4 NULL,
 	attr_start_date date NULL,
 	attr_end_date date NULL,
