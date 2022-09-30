@@ -40,6 +40,19 @@ checkVariableExists <- function(connectionDetails, databaseSchema, tableName, va
   variableExists <- variableExistsResult > 0
 }
 
+getCurrentLoad <- function(connectionDetails) {
+  attrIndex <- getAttrIndexTable(connectionDetails)
+  variableSource <- getVariableSourceTable(connectionDetails)
+  lapply(1:nrow(attrIndex), function(i) {
+    attrTableExists <- checkTableExists(connectionDetails = connectionDetails,
+                     databaseSchema = attrIndex[i,]$table_schema,
+                     tableName = paste0("attr_", attrIndex[i,]$table_name))
+
+    if(attrTableExists) {
+
+    }
+  })
+}
 
 # Get Backbone Tables -----------------------------------------------------
 
