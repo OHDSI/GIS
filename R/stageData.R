@@ -1,21 +1,23 @@
 #' Create a standardized version of the staged data that was imported from source
 #'
 #' @param staged (data.frame) Table of attributes that was imported from a source by \code{getStaged} function
-#' @param spec (JSON) The attr_spec from the backbone.variable_source table.
+#' @param spec (JSON) The attr_spec from the backbone.variable_source table or the geom_spec from backbone.data_source.
 #'
-#' @return (data.frame) A table standardized in the attr_template mold
+#' @return (data.frame) A table standardized in the attr_template or geom_template mold
 #'
 #' @examples
 #'
 #' \dontrun{
-#' stagedResult <- standardizeStagedAttr(staged = staged, spec = variableTable$attr_spec)
+#' stagedResult <- standardizeStaged(staged = staged, spec = variableTable$attr_spec)
 #' }
 #'
+
 standardizeStaged <- function(staged, spec) {
   jsonSpec <- rjson::fromJSON(spec)
   transformCommands <-jsonSpec$stage_transform
   for (cmd in transformCommands) {
     staged <- eval(parse(text=cmd))
+
   }
   return(staged)
 }
