@@ -32,9 +32,7 @@ loadGeometry <- function(connectionDetails, dataSourceUuid) {
 
   staged <- getStaged(dataSourceRecord)
 
-  specTable <- createSpecTable(dataSourceRecord$geom_spec)
-
-  stagedResult <- standardizeStaged(staged, specTable)
+  stagedResult <- standardizeStaged(staged = staged, spec = dataSourceRecord$geom_spec)
 
   geomIndex <- getGeomIndexRecord(connectionDetails = connectionDetails,
                                   dataSourceUuid = dataSourceRecord$data_source_uuid)
@@ -47,9 +45,14 @@ loadGeometry <- function(connectionDetails, dataSourceUuid) {
 
   geomTemplate <- getGeomTemplate(connectionDetails = connectionDetails)
 
+  stagedResult <- dplyr::select(stagedResult,
+                                names(geomTemplate)[names(geomTemplate) %in% names(stagedResult)])
+
   res <- plyr::rbind.fill(geomTemplate, stagedResult)
 
-  res <- res[-1]
+  res <- dplyr::select(res,
+                       -geom_record_id,
+                       -geometry)
 
   res$geom_name <- iconv(res$geom_name, "latin1")
 
