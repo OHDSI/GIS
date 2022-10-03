@@ -21,52 +21,6 @@ standardizeStaged <- function(staged, spec) {
 }
 
 
-#' Create a standardized version of the staged data that was imported from source
-#'
-#' @param staged (data.frame) Table of either attributes or geometries that was imported from a source by \code{getStaged} function
-#' @param spec (JSON) The geom_spec from the backbone.data_source table.
-#'
-#' @return (data.frame) A table standardized in the geom_template mold
-#'
-#' @examples
-#'
-#' \dontrun{
-#' stagedResult <- standardizeStagedGeom(staged = staged, spec = dataSourceRecord$geom_spec)
-#' }
-#'
-
-standardizeStagedGeom <- function(staged, geomSpec) {
-  jsonSpec <- rjson::fromJSON(geomSpec)
-  specTable <- dplyr::tibble("t_name"=names(jsonSpec),
-                "t_type"=unlist(lapply(t_name, function(x) jsonSpec[[x]]$type)),
-                "t_value"=unlist(lapply(t_name, function(x) jsonSpec[[x]]$value)))
-
-  if ('stage_transform' %in% specTable$t_name) {
-    staged <- eval(parse(text=specTable[specTable$t_name == 'stage_transform',]$t_value))
-    specTable <- specTable[!specTable$t_name == 'stage_transform',]
-  }
-
-  selectRules <- specTable[specTable$t_type == "select",]
-  stagedResult <- staged[,selectRules$t_value] %>% as.data.frame()
-  names(stagedResult) <- selectRules$t_name
-
-  hardcodeRules <- specTable[specTable$t_type == "hardcode",]
-  if (nrow(hardcodeRules) > 0){
-    for(i in 1:nrow(hardcodeRules)){
-      stagedResult[hardcodeRules$t_name[i]] <- hardcodeRules$t_value[i]
-    }
-  }
-
-  rCodeRules <- specTable[specTable$t_type == "code",]
-  if (nrow(rCodeRules) > 0){
-    for(i in 1:nrow(rCodeRules)){
-      stagedResult[rCodeRules$t_name[i]] <- eval(parse(text=rCodeRules$t_value[i]))
-    }
-  }
-
-  return(stagedResult)
-}
-
 #' Download and import data from a web-hosted source
 #'
 #' @param rec (data.frame) A full record (entire row) from the backbone.data_source table corresponding to the data source of interest. Usually created using \code{getDataSourceRecord} function
