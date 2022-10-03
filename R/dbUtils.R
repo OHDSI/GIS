@@ -40,20 +40,6 @@ checkVariableExists <- function(connectionDetails, databaseSchema, tableName, va
   variableExists <- variableExistsResult > 0
 }
 
-getCurrentLoad <- function(connectionDetails) {
-  attrIndex <- getAttrIndexTable(connectionDetails)
-  variableSource <- getVariableSourceTable(connectionDetails)
-  lapply(1:nrow(attrIndex), function(i) {
-    attrTableExists <- checkTableExists(connectionDetails = connectionDetails,
-                     databaseSchema = attrIndex[i,]$table_schema,
-                     tableName = paste0("attr_", attrIndex[i,]$table_name))
-
-    if(attrTableExists) {
-      # TODO get all unique variable_source_id
-
-    }
-  })
-}
 
 # Get Backbone Tables -----------------------------------------------------
 
@@ -449,6 +435,52 @@ getGeomIdMap <- function(connectionDetails, geomIndex){
     ,'\";'
   )
   DatabaseConnector::dbGetQuery(conn, sqlQuery)
+}
+
+
+# Get Current Load --------------------------------------------------------
+
+#' Get list of unique variable IDs in attr_X
+#'
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#' @param databaseSchema (character) schema that contains an attr_X table
+#' @param tableName (character) name of an attr_X table
+#'
+#' @return (vector) a character vector of all loaded variable source IDs
+#'
+
+getUniqueVariablesInAttrX <- function(connectionDetails, databaseSchema, tableName) {
+  conn <-  DatabaseConnector::connect(connectionDetails)
+  on.exit(DatabaseConnector::disconnect(conn))
+  uniqueVarQuery <- paste0("select distinct variable_source_record_id from ",
+                           databaseSchema,".", tableName)
+  uniqueVarResult <- DatabaseConnector::querySql(conn, uniqueVarQuery)
+  uniqueVarResult$VARIABLE_SOURCE_RECORD_ID
+}
+
+
+#' Get a summary table of select variable source records by ID
+#'
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#' @param loadedVariables (vector) a character vector of all loaded variable source IDs
+#'
+#' @return (data.frame) A table of select variable source records
+#'
+
+getVariableSourceSummaryTable <- function(connectionDetails, variableSourceIds) {
+  conn <-  DatabaseConnector::connect(connectionDetails)
+  on.exit(DatabaseConnector::disconnect(conn))
+  getVariableSourceSummaryQuery <- paste0(
+    "select vs.variable_source_id, vs.variable_name, vs.variable_desc, ",
+    "ds.dataset_name, ds.dataset_version, ds.boundary_type, ",
+    "ds2.dataset_name as \"geom dependency\", ds2.geom_type ",
+    "from backbone.variable_source vs ",
+    "join backbone.data_source ds ",
+    "on vs.data_source_uuid=ds.data_source_uuid ",
+    "join backbone.data_source ds2 ",
+    "on ds.geom_dependency_uuid = ds2.data_source_uuid ",
+    "where variable_source_id in (", paste(variableSourceIds, collapse = ","), ")")
+  DatabaseConnector::querySql(conn, getVariableSourceSummaryQuery)
 }
 
 
