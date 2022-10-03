@@ -55,7 +55,7 @@ loadVariable <- function(connectionDetails, variableSourceId){
 
   # format table for insert
 
-  stagedResult <- standardizeStagedAttr(staged = staged, attrSpec = variableTable$attr_spec)
+  stagedResult <- standardizeStaged(staged = staged, spec = variableTable$attr_spec)
 
   stagedResult$variable_source_record_id <- variableTable$variable_source_id
 
@@ -80,7 +80,7 @@ loadVariable <- function(connectionDetails, variableSourceId){
   # get attr template
   attrTemplate <- getAttrTemplate(connectionDetails = connectionDetails)
 
-  stagedResult <- dplyr::select(stagedResult, names(attrTemplate)[names(attrTemplate) %in% names(stagedResult)])
+  stagedResult <- dplyr::select(stagedResult, which(names(stagedResult) %in% names(attrTemplate)))
 
   # append staging data to template format
   attrToIngest <- plyr::rbind.fill(attrTemplate, stagedResult)

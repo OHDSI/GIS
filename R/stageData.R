@@ -11,13 +11,13 @@
 #' stagedResult <- standardizeStagedAttr(staged = staged, spec = variableTable$attr_spec)
 #' }
 #'
-standardizeStagedAttr <- function(staged, attrSpec) {
-  jsonSpec <- rjson::fromJSON(attrSpec)
+standardizeStaged <- function(staged, spec) {
+  jsonSpec <- rjson::fromJSON(spec)
   transformCommands <-jsonSpec$stage_transform
   for (cmd in transformCommands) {
-    stagedResult <- staged <- eval(parse(text=cmd))
+    staged <- eval(parse(text=cmd))
   }
-  return(stagedResult)
+  return(staged)
 }
 
 
