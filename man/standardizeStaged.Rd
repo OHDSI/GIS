@@ -4,15 +4,15 @@
 \alias{standardizeStaged}
 \title{Create a standardized version of the staged data that was imported from source}
 \usage{
-standardizeStaged(staged, specTable)
+standardizeStaged(staged, spec)
 }
 \arguments{
-\item{staged}{(data.frame) Table of either attributes or geometries that was imported from a source by \code{getStaged} function}
+\item{staged}{(data.frame) Table of attributes that was imported from a source by \code{getStaged} function}
 
-\item{specTable}{(data.frame) Table representation of the JSON attr or geom spec that defines how the source data can be programmatically standardized}
+\item{spec}{(JSON) The attr_spec from the backbone.variable_source table or the geom_spec from backbone.data_source.}
 }
 \value{
-(data.frame) A table standardized in the attr_ or geom_template mold
+(data.frame) A table standardized in the attr_template or geom_template mold
 }
 \description{
 Create a standardized version of the staged data that was imported from source
@@ -20,7 +20,7 @@ Create a standardized version of the staged data that was imported from source
 \examples{
 
 \dontrun{
-stagedResult <- standardizeStaged(staged = staged, specTable = specTable)
+stagedResult <- standardizeStaged(staged = staged, spec = variableTable$attr_spec)
 }
 
 }
