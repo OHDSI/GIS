@@ -51,8 +51,12 @@ loadGeometry <- function(connectionDetails, dataSourceUuid) {
   res <- plyr::rbind.fill(geomTemplate, stagedResult)
 
   res <- dplyr::select(res,
-                       -geom_record_id,
-                       -geometry)
+                       -geom_record_id)
+
+  if ("geometry" %in% names(res)) {
+    res <- dplyr::select(res,
+                         -geometry)
+  }
 
   res$geom_name <- iconv(res$geom_name, "latin1")
 
