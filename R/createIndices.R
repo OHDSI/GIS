@@ -41,7 +41,9 @@ createIndices <-  function(connectionDetails, uuids = NULL) {
     if (record$has_attributes == 1 & !id %in% attrIndexDataSourceIds) {
 
       ## IF geom dependency AND dependency not in gidsid then create geom index record AND insert into db
-      if (!is.na(record$geom_dependency_uuid) & !record$geom_dependency_uuid %in% geomIndexDataSourceIds) {
+      if (!is.na(record$geom_dependency_uuid) &
+          !record$geom_dependency_uuid %in% geomIndexDataSourceIds &
+          record$geom_dependency_uuid != record$data_source_uuid) {
         geomDependencyDataSourceRecord <- getDataSourceRecord(
           connectionDetails = connectionDetails,
           dataSourceUuid = record$geom_dependency_uuid)
