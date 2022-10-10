@@ -410,7 +410,7 @@ getAttrTemplate <- function(connectionDetails){
 #' Create a mapping table between identifiers and values for a given geom_X
 #'
 #' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
-#' @param geomIndex (integer) Identifier of a record in the backbone.geom_index table. Usually sourced from the \code{attr_of_geom_index_id} entry of an attr_index record
+#' @param geomIndexId (integer) Identifier of a record in the backbone.geom_index table. Usually sourced from the \code{attr_of_geom_index_id} entry of an attr_index record
 #'
 #' @return (data.frame) A mapping table between geom_record_id for a given geom_X and that record's source value
 #'
@@ -420,18 +420,15 @@ getAttrTemplate <- function(connectionDetails){
 #' }
 #'
 
-getGeomIdMap <- function(connectionDetails, geomIndex){
+getGeomIdMap <- function(connectionDetails, geomIndexId){
   conn <-  DatabaseConnector::connect(connectionDetails)
   on.exit(DatabaseConnector::disconnect(conn))
-
-  #TODO rename the argument geomIndex to geomIndexId, which is what it is
-  geomIndex <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.geom_index WHERE geom_index_id = ", geomIndex,";"))
-
+  geomIndexRecord <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.geom_index WHERE geom_index_id = ", geomIndexId,";"))
   sqlQuery <- paste0(
     "SELECT geom_record_id, geom_source_value FROM "
-    , geomIndex$table_schema
+    , geomIndexRecord$table_schema
     ,".\"geom_"
-    , geomIndex$table_name
+    , geomIndexRecord$table_name
     ,'\";'
   )
   DatabaseConnector::dbGetQuery(conn, sqlQuery)
@@ -491,18 +488,18 @@ getVariableSourceSummaryTable <- function(connectionDetails, variableSourceIds) 
 #' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
 #' @param attrTableString (character) Name of the attr_X table in databaseSchema.tableName format
 #' @param geomTableString (character) Name of the geom_X table in databaseSchema.tableName format
-#' @param variable (character) Name of the variable to be imported
+#' @param variableName (character) Name of the variable to be imported
 #'
 #' @return (sf, data.frame) An sf object consisting of a single attribute and geometry; the result of joining attr_X and geom_X from the PostGIS
 #'
 
-handleShapefileImportJob <- function(connectionDetails, attrTableString, geomTableString, variable) {
+handleShapefileImportJob <- function(connectionDetails, attrTableString, geomTableString, variableName) {
   conn <-  DatabaseConnector::connect(connectionDetails)
   on.exit(DatabaseConnector::disconnect(conn))
   numberRecordsQuery <- paste0("select count(*) from ", attrTableString,
                                " join ", geomTableString,
                                " on ", attrTableString, ".geom_record_id=", geomTableString, ".geom_record_id",
-                               " where ", attrTableString, ".attr_source_value = '", variable,"'")
+                               " where ", attrTableString, ".attr_source_value = '", variableName,"'")
 
   queryCountResult <- DatabaseConnector::querySql(conn, numberRecordsQuery)
   rowCount <- queryCountResult$COUNT
@@ -511,7 +508,7 @@ handleShapefileImportJob <- function(connectionDetails, attrTableString, geomTab
   baseQuery <- paste0("select * from ", attrTableString,
                       " join ", geomTableString,
                       " on ", attrTableString, ".geom_record_id=", geomTableString, ".geom_record_id",
-                      " where ", attrTableString, ".attr_source_value = '", variable,"'")
+                      " where ", attrTableString, ".attr_source_value = '", variableName,"'")
   if (rowCount <= 1001) {
     shapefile <- sf::st_read(dsn = conn, query = baseQuery)
     return(shapefile)

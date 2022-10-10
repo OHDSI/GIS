@@ -22,9 +22,9 @@ Loads a variable from a registered source into PostGIS as attr_X
 
 variableSourceId <- 157
 
-variableTable <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.variable_source WHERE variable_source_id = ", variableSourceId))
+variableSourceRecord <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.variable_source WHERE variable_source_id = ", variableSourceId))
 
-attrIndex <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.attr_index WHERE data_source_id = ", variableTable$data_source_uuid,";"))
+attrIndex <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.attr_index WHERE data_source_id = ", variableSourceRecord$data_source_uuid,";"))
 
 tableExists <- DatabaseConnector::existsTable(conn,
                                               attrIndex$table_schema,

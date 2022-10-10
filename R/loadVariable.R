@@ -10,9 +10,9 @@
 #'
 #' variableSourceId <- 157
 #'
-#' variableTable <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.variable_source WHERE variable_source_id = ", variableSourceId))
+#' variableSourceRecord <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.variable_source WHERE variable_source_id = ", variableSourceId))
 #'
-#' attrIndex <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.attr_index WHERE data_source_id = ", variableTable$data_source_uuid,";"))
+#' attrIndex <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.attr_index WHERE data_source_id = ", variableSourceRecord$data_source_uuid,";"))
 #'
 #' tableExists <- DatabaseConnector::existsTable(conn,
 #'                                               attrIndex$table_schema,
@@ -30,17 +30,16 @@
 loadVariable <- function(connectionDetails, variableSourceId){
 
   # get variable
-  # TODO rename as variableSourceRecord
-  variableTable <- getVariableSourceRecord(connectionDetails = connectionDetails,
+  variableSourceRecord <- getVariableSourceRecord(connectionDetails = connectionDetails,
                                            variableSourceId = variableSourceId)
 
   # get attr_index
   attrIndexRecord <- getAttrIndexRecord(connectionDetails = connectionDetails,
-                                        dataSourceUuid = variableTable$data_source_uuid)
+                                        dataSourceUuid = variableSourceRecord$data_source_uuid)
 
   # get data_source_record
   dataSourceRecord <- getDataSourceRecord(connectionDetails = connectionDetails,
-                                          dataSourceUuid = variableTable$data_source_uuid)
+                                          dataSourceUuid = variableSourceRecord$data_source_uuid)
 
   geomIndexRecord <- getGeomIndexRecord(connectionDetails = connectionDetails,
                                         dataSourceUuid = dataSourceRecord$geom_dependency_uuid)
@@ -55,9 +54,9 @@ loadVariable <- function(connectionDetails, variableSourceId){
 
   # format table for insert
 
-  stagedResult <- standardizeStaged(staged = staged, spec = variableTable$attr_spec)
+  stagedResult <- standardizeStaged(staged = staged, spec = variableSourceRecord$attr_spec)
 
-  stagedResult$variable_source_record_id <- variableTable$variable_source_id
+  stagedResult$variable_source_record_id <- variableSourceRecord$variable_source_id
 
   # prepare for insert
 
@@ -74,7 +73,7 @@ loadVariable <- function(connectionDetails, variableSourceId){
   # get mapping values from geom table
   stagedResult <- assignGeomIdToAttr(connectionDetails = connectionDetails,
                                      stagedResult = stagedResult,
-                                     geomIndex = attrIndexRecord$attr_of_geom_index_id)
+                                     geomIndexId = attrIndexRecord$attr_of_geom_index_id)
 
   # stagedResult <- tmp
   # get attr template

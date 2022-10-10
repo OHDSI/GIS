@@ -4,14 +4,14 @@
 \alias{assignGeomIdToAttr}
 \title{Join a column of geom_X record identifiers to a staged attr_X table}
 \usage{
-assignGeomIdToAttr(connectionDetails, stagedResult, geomIndex)
+assignGeomIdToAttr(connectionDetails, stagedResult, geomIndexId)
 }
 \arguments{
 \item{connectionDetails}{(list) An object of class connectionDetails as created by the createConnectionDetails function}
 
 \item{stagedResult}{(data.frame) A table standardized in the attr_template or geom_template mold}
 
-\item{geomIndex}{(integer) Identifier of a record in the backbone.geom_index table. Usually sourced from the \code{attr_of_geom_index_id} entry of an attr_index record}
+\item{geomIndexId}{(integer) Identifier of a record in the backbone.geom_index table. Usually sourced from the \code{attr_of_geom_index_id} entry of an attr_index record}
 }
 \value{
 (data.frame) An updated \code{stagedResult} table with \code{geom_record_id}s corresponding to a geom_X table appended

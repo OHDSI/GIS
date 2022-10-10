@@ -24,13 +24,11 @@ createIndices <-  function(connectionDetails, uuids = NULL) {
                                   dataSourceUuid = id)
 
     #GET GEOM AND ATTR INDEX (SCHEMA SPECIFIC)
-    # TODO rename geomIndex to geomIndexTable
-    geomIndex <- getGeomIndexTable(connectionDetails = connectionDetails)
-    geomIndexDataSourceIds <- geomIndex$data_source_id
+    geomIndexTable <- getGeomIndexTable(connectionDetails = connectionDetails)
+    geomIndexDataSourceIds <- geomIndexTable$data_source_id
 
-    # TODO rename as attrIndexTable
-    attrIndex <- getAttrIndexTable(connectionDetails = connectionDetails)
-    attrIndexDataSourceIds <- attrIndex$data_source_id
+    attrIndexTable <- getAttrIndexTable(connectionDetails = connectionDetails)
+    attrIndexDataSourceIds <- attrIndexTable$data_source_id
 
     # IF record type geom AND not in gidsid then create geom index record
     if (record$geom_type != "" & !is.na(record$geom_type) & !id %in% geomIndexDataSourceIds) {

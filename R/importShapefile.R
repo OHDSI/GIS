@@ -15,25 +15,20 @@
 #'
 
 importShapefile <- function(connectionDetails, variableSourceId) {
-  # TODO rename as variableSourceRecord
-  variableTable <- getVariableSourceRecord(connectionDetails = connectionDetails,
+  variableSourceRecord <- getVariableSourceRecord(connectionDetails = connectionDetails,
                                            variableSourceId = variableSourceId)
   dataSourceRecord <- getDataSourceRecord(connectionDetails = connectionDetails,
-                                          dataSourceUuid = variableTable$data_source_uuid)
-  # TODO rename attrIndexRecord
-  attrIndex <- getAttrIndexRecord(connectionDetails = connectionDetails,
-                                        dataSourceUuid = variableTable$data_source_uuid)
-  # TODO rename geomIndexRecord
-  geomIndex <- getGeomIndexRecord(connectionDetails = connectionDetails,
+                                          dataSourceUuid = variableSourceRecord$data_source_uuid)
+  attrIndexRecord <- getAttrIndexRecord(connectionDetails = connectionDetails,
+                                        dataSourceUuid = variableSourceRecord$data_source_uuid)
+  geomIndexRecord <- getGeomIndexRecord(connectionDetails = connectionDetails,
                                   dataSourceUuid = dataSourceRecord$geom_dependency_uuid)
-  attrTableString <- paste0(attrIndex$table_schema, ".\"attr_", attrIndex$table_name, "\"")
-  geomTableString <- paste0(geomIndex$table_schema, ".\"geom_", geomIndex$table_name, "\"")
-  # TODO rename to variableName
-  variable <- variableTable$variable_name
-
+  attrTableString <- paste0(attrIndexRecord$table_schema, ".\"attr_", attrIndexRecord$table_name, "\"")
+  geomTableString <- paste0(geomIndexRecord$table_schema, ".\"geom_", geomIndexRecord$table_name, "\"")
+  variableName <- variableSourceRecord$variable_name
   tableExists <- checkTableExists(connectionDetails = connectionDetails,
-                                  databaseSchema = attrIndex$table_schema,
-                                  tableName = paste0("attr_", attrIndex$table_name))
+                                  databaseSchema = attrIndexRecord$table_schema,
+                                  tableName = paste0("attr_", attrIndexRecord$table_name))
 
   if (!tableExists) {
     message("Loading attr table dependency")
@@ -42,9 +37,9 @@ importShapefile <- function(connectionDetails, variableSourceId) {
   }
 
   variableExists <- checkVariableExists(connectionDetails = connectionDetails,
-                                        databaseSchema = attrIndex$table_schema,
-                                        tableName = attrIndex$table_name,
-                                        variableName = variable)
+                                        databaseSchema = attrIndexRecord$table_schema,
+                                        tableName = attrIndexRecord$table_name,
+                                        variableName = variableName)
 
   if (!variableExists) {
     message("Loading attr table dependency")
@@ -56,5 +51,5 @@ importShapefile <- function(connectionDetails, variableSourceId) {
   handleShapefileImportJob(connectionDetails = connectionDetails,
                            attrTableString = attrTableString,
                            geomTableString = geomTableString,
-                           variable = variable)
+                           variableName = variableName)
 }

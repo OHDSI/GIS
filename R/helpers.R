@@ -32,15 +32,14 @@ createNameString <- function(name) {
 #'
 #' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
 #' @param stagedResult (data.frame) A table standardized in the attr_template or geom_template mold
-#' @param geomIndex (integer) Identifier of a record in the backbone.geom_index table. Usually sourced from the \code{attr_of_geom_index_id} entry of an attr_index record
+#' @param geomIndexId (integer) Identifier of a record in the backbone.geom_index table. Usually sourced from the \code{attr_of_geom_index_id} entry of an attr_index record
 #'
 #' @return (data.frame) An updated \code{stagedResult} table with \code{geom_record_id}s corresponding to a geom_X table appended
 #'
 
-assignGeomIdToAttr <- function(connectionDetails, stagedResult, geomIndex){
-  #TODO change the argument geomIndex to geomIndexId, which is what it is
+assignGeomIdToAttr <- function(connectionDetails, stagedResult, geomIndexId){
   geomIdMap <- getGeomIdMap(connectionDetails = connectionDetails,
-                            geomIndex = geomIndex)
+                            geomIndexId = geomIndexId)
 
   tmp <- merge(x = stagedResult, y= geomIdMap, by.x = "geom_join_column", by.y = "geom_source_value")
 

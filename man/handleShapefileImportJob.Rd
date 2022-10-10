@@ -8,7 +8,7 @@ handleShapefileImportJob(
   connectionDetails,
   attrTableString,
   geomTableString,
-  variable
+  variableName
 )
 }
 \arguments{
@@ -18,7 +18,7 @@ handleShapefileImportJob(
 
 \item{geomTableString}{(character) Name of the geom_X table in databaseSchema.tableName format}
 
-\item{variable}{(character) Name of the variable to be imported}
+\item{variableName}{(character) Name of the variable to be imported}
 }
 \value{
 (sf, data.frame) An sf object consisting of a single attribute and geometry; the result of joining attr_X and geom_X from the PostGIS

@@ -4,12 +4,12 @@
 \alias{getGeomIdMap}
 \title{Create a mapping table between identifiers and values for a given geom_X}
 \usage{
-getGeomIdMap(connectionDetails, geomIndex)
+getGeomIdMap(connectionDetails, geomIndexId)
 }
 \arguments{
 \item{connectionDetails}{(list) An object of class connectionDetails as created by the createConnectionDetails function}
 
-\item{geomIndex}{(integer) Identifier of a record in the backbone.geom_index table. Usually sourced from the \code{attr_of_geom_index_id} entry of an attr_index record}
+\item{geomIndexId}{(integer) Identifier of a record in the backbone.geom_index table. Usually sourced from the \code{attr_of_geom_index_id} entry of an attr_index record}
 }
 \value{
 (data.frame) A mapping table between geom_record_id for a given geom_X and that record's source value
