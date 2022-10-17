@@ -55,7 +55,7 @@ CREATE SEQUENCE IF NOT EXISTS backbone.geom_template_geom_record_id_seq
 CREATE TABLE IF NOT EXISTS backbone.attr_index (
 	attr_index_id serial4 NOT NULL,
 	attr_of_geom_index_id int4 NULL,
-	table_schema varchar NULL,
+	database_schema varchar NULL,
 	table_name varchar NULL,
 	data_source_id int4 NULL,
 	CONSTRAINT attr_index_pkey PRIMARY KEY (attr_index_id)
@@ -142,7 +142,7 @@ CREATE TABLE IF NOT EXISTS backbone.geom_index (
 	data_type_name varchar NULL,
 	geom_type_concept_id int4 NULL,
 	geom_type_source_value varchar NULL,
-	table_schema varchar NULL,
+	database_schema varchar NULL,
 	table_name varchar NULL,
 	table_desc varchar NULL,
 	data_source_id int4 NULL,
