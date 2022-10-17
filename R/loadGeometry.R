@@ -16,7 +16,7 @@
 #'
 #' geomIndex <- getGeomIndexByDataSourceUuid(conn, dataSourceRecord$geom_dependency_uuid)
 #'
-#' if (!DatabaseConnector::existsTable(conn, geomIndex$table_schema, paste0("geom_",geomIndex$table_name))) {
+#' if (!DatabaseConnector::existsTable(conn, geomIndex$database_schema, paste0("geom_",geomIndex$table_name))) {
 #'   message("Loading geom table dependency")
 #'   loadGeomTable(conn, connectionDetails, dataSourceRecord$geom_dependency_uuid)
 #' }
@@ -61,7 +61,7 @@ loadGeometry <- function(connectionDetails, dataSourceUuid) {
   res$geom_name <- iconv(res$geom_name, "latin1")
 
   createGeomInstanceTable(connectionDetails = connectionDetails,
-                          schema =  geomIndex$table_schema,
+                          schema =  geomIndex$database_schema,
                           name = geomIndex$table_name)
 
   # insert into geom table
