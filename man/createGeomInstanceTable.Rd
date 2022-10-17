@@ -30,7 +30,7 @@ dataSourceRecord <- getDataSourceRecord(conn, variableTable$data_source_uuid)
 
 geomIndex <- getGeomIndexByDataSourceUuid(conn, dataSourceRecord$geom_dependency_uuid)
 
-createGeomInstanceTable(conn = conn, schema =  geomIndex$table_schema, name = geomIndex$table_name)
+createGeomInstanceTable(conn = conn, schema =  geomIndex$database_schema, name = geomIndex$table_name)
 }
 
 }

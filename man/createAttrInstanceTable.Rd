@@ -28,7 +28,7 @@ variableTable <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backb
 
 attrIndex <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.attr_index WHERE data_source_id = ", variableTable$data_source_uuid,";"))
 
-createAttrInstanceTable(conn, schema = attrIndex$table_schema, name = attrIndex$table_name)
+createAttrInstanceTable(conn, schema = attrIndex$database_schema, name = attrIndex$table_name)
 }
 
 }

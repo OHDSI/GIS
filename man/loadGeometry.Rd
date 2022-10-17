@@ -28,7 +28,7 @@ dataSourceRecord <- getDataSourceRecord(conn, variableTable$data_source_uuid)
 
 geomIndex <- getGeomIndexByDataSourceUuid(conn, dataSourceRecord$geom_dependency_uuid)
 
-if (!DatabaseConnector::existsTable(conn, geomIndex$table_schema, paste0("geom_",geomIndex$table_name))) {
+if (!DatabaseConnector::existsTable(conn, geomIndex$database_schema, paste0("geom_",geomIndex$table_name))) {
   message("Loading geom table dependency")
   loadGeomTable(conn, connectionDetails, dataSourceRecord$geom_dependency_uuid)
 }

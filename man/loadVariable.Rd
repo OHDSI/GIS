@@ -27,7 +27,7 @@ variableSourceRecord <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FRO
 attrIndex <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.attr_index WHERE data_source_id = ", variableSourceRecord$data_source_uuid,";"))
 
 tableExists <- DatabaseConnector::existsTable(conn,
-                                              attrIndex$table_schema,
+                                              attrIndex$database_schema,
                                               paste0("attr_", attrIndex$table_name))
 
 if (!tableExists) {
