@@ -183,13 +183,13 @@ createGeomIndexRecord <- function(connectionDetails, dataSourceRecord) {
     data_type_name = dataSourceRecord$geom_type,
     geom_type_concept_id = "NULL",
     geom_type_source_value = dataSourceRecord$boundary_type,
-    table_schema = createSchemaString(dataSourceRecord),
+    database_schema = createSchemaString(dataSourceRecord),
     table_name = dataSourceRecord$dataset_name,
     table_desc = paste(dataSourceRecord$org_id, dataSourceRecord$org_set_id, dataSourceRecord$dataset_name),
     data_source_id = dataSourceRecord$data_source_uuid)
   insertLogic <- paste0("INSERT INTO backbone.geom_index ",
                         "(data_type_id, data_type_name, geom_type_concept_id, ",
-                        "geom_type_source_value, table_schema, table_name, table_desc, ",
+                        "geom_type_source_value, database_schema, table_name, table_desc, ",
                         "data_source_id) VALUES ('",
                         paste(indexRecord %>% dplyr::slice(1) %>% unlist(., use.names = FALSE), collapse = "', '"),
                         "');") %>%
@@ -220,11 +220,11 @@ createAttrIndexRecord <- function(connectionDetails, dataSourceRecord) {
   indexRecord <- dplyr::tibble(
     attr_of_geom_index_id = getAttrOfGeomIndexId(connectionDetails = connectionDetails,
                                                  dataSourceUuid = dataSourceRecord$geom_dependency_uuid),
-    table_schema = createSchemaString(dataSourceRecord),
+    database_schema = createSchemaString(dataSourceRecord),
     table_name = dataSourceRecord$dataset_name,
     data_source_id = dataSourceRecord$data_source_uuid)
   insertLogic <- paste0("INSERT INTO backbone.attr_index ",
-                        "(attr_of_geom_index_id, table_schema, table_name, data_source_id) ",
+                        "(attr_of_geom_index_id, database_schema, table_name, data_source_id) ",
                         "VALUES ('",
                         paste(indexRecord %>% dplyr::slice(1) %>% unlist(., use.names = FALSE), collapse = "', '"),
                         "');") %>%
@@ -255,7 +255,7 @@ createAttrIndexRecord <- function(connectionDetails, dataSourceRecord) {
 #'
 #' geomIndex <- getGeomIndexByDataSourceUuid(conn, dataSourceRecord$geom_dependency_uuid)
 #'
-#' createGeomInstanceTable(conn = conn, schema =  geomIndex$table_schema, name = geomIndex$table_name)
+#' createGeomInstanceTable(conn = conn, schema =  geomIndex$database_schema, name = geomIndex$table_name)
 #' }
 #'
 
@@ -297,7 +297,7 @@ insertPostgisGeometry <- function(connectionDetails, staged, geomIndex) {
                                               port = connectionDetails$port())
   on.exit(RPostgreSQL::dbDisconnect(postgisConnection))
   rpostgis::pgInsert(postgisConnection,
-                     name = c(geomIndex$table_schema, paste0("geom_", geomIndex$table_name)),
+                     name = c(geomIndex$database_schema, paste0("geom_", geomIndex$table_name)),
                      geom = "geom_local_value",
                      data.obj = staged)
 
@@ -334,7 +334,7 @@ importAttrTable <- function(connectionDetails, attribute, attrIndex){
   on.exit(DatabaseConnector::disconnect(conn))
   attribute <- dplyr::select(attribute, -"attr_record_id")
   DatabaseConnector::insertTable(conn,
-                                 databaseSchema = paste0("\"",attrIndex$table_schema,"\""),
+                                 databaseSchema = paste0("\"",attrIndex$database_schema,"\""),
                                  tableName = paste0("\"attr_",attrIndex$table_name,"\""),
                                  data = attribute,
                                  dropTableIfExists = FALSE,
@@ -361,7 +361,7 @@ importAttrTable <- function(connectionDetails, attribute, attrIndex){
 #'
 #' attrIndex <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.attr_index WHERE data_source_id = ", variableTable$data_source_uuid,";"))
 #'
-#' createAttrInstanceTable(conn, schema = attrIndex$table_schema, name = attrIndex$table_name)
+#' createAttrInstanceTable(conn, schema = attrIndex$database_schema, name = attrIndex$table_name)
 #' }
 #'
 
@@ -426,7 +426,7 @@ getGeomIdMap <- function(connectionDetails, geomIndexId){
   geomIndexRecord <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.geom_index WHERE geom_index_id = ", geomIndexId,";"))
   sqlQuery <- paste0(
     "SELECT geom_record_id, geom_source_value FROM "
-    , geomIndexRecord$table_schema
+    , geomIndexRecord$database_schema
     ,".\"geom_"
     , geomIndexRecord$table_name
     ,'\";'
