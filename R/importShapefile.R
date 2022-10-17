@@ -23,11 +23,11 @@ importShapefile <- function(connectionDetails, variableSourceId) {
                                         dataSourceUuid = variableSourceRecord$data_source_uuid)
   geomIndexRecord <- getGeomIndexRecord(connectionDetails = connectionDetails,
                                   dataSourceUuid = dataSourceRecord$geom_dependency_uuid)
-  attrTableString <- paste0(attrIndexRecord$table_schema, ".\"attr_", attrIndexRecord$table_name, "\"")
-  geomTableString <- paste0(geomIndexRecord$table_schema, ".\"geom_", geomIndexRecord$table_name, "\"")
+  attrTableString <- paste0(attrIndexRecord$database_schema, ".\"attr_", attrIndexRecord$table_name, "\"")
+  geomTableString <- paste0(geomIndexRecord$database_schema, ".\"geom_", geomIndexRecord$table_name, "\"")
   variableName <- variableSourceRecord$variable_name
   tableExists <- checkTableExists(connectionDetails = connectionDetails,
-                                  databaseSchema = attrIndexRecord$table_schema,
+                                  databaseSchema = attrIndexRecord$database_schema,
                                   tableName = paste0("attr_", attrIndexRecord$table_name))
 
   if (!tableExists) {
@@ -37,7 +37,7 @@ importShapefile <- function(connectionDetails, variableSourceId) {
   }
 
   variableExists <- checkVariableExists(connectionDetails = connectionDetails,
-                                        databaseSchema = attrIndexRecord$table_schema,
+                                        databaseSchema = attrIndexRecord$database_schema,
                                         tableName = attrIndexRecord$table_name,
                                         variableName = variableName)
 
