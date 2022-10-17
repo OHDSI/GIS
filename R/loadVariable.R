@@ -15,7 +15,7 @@
 #' attrIndex <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.attr_index WHERE data_source_id = ", variableSourceRecord$data_source_uuid,";"))
 #'
 #' tableExists <- DatabaseConnector::existsTable(conn,
-#'                                               attrIndex$table_schema,
+#'                                               attrIndex$database_schema,
 #'                                               paste0("attr_", attrIndex$table_name))
 #'
 #' if (!tableExists) {
@@ -62,7 +62,7 @@ loadVariable <- function(connectionDetails, variableSourceId){
 
   # Load geom_dependency if necessary
   geomTableExists <- checkTableExists(connectionDetails = connectionDetails,
-                                      databaseSchema = geomIndexRecord$table_schema,
+                                      databaseSchema = geomIndexRecord$database_schema,
                                       tableName = paste0("geom_", geomIndexRecord$table_name))
   if (!geomTableExists) {
     message("Loading geom table dependency")
@@ -85,7 +85,7 @@ loadVariable <- function(connectionDetails, variableSourceId){
   attrToIngest <- plyr::rbind.fill(attrTemplate, stagedResult)
 
   createAttrInstanceTable(connectionDetails = connectionDetails,
-                          schema = attrIndexRecord$table_schema,
+                          schema = attrIndexRecord$database_schema,
                           name = attrIndexRecord$table_name)
 
   # import
