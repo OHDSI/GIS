@@ -16,12 +16,12 @@ getCurrentLoad <- function(connectionDetails) {
   variableSource <- getVariableSourceTable(connectionDetails = connectionDetails)
   loadedVariables <- lapply(1:nrow(attrIndex), function(i) {
     attrTableExists <- checkTableExists(connectionDetails = connectionDetails,
-                                        databaseSchema = attrIndex[i,]$table_schema,
+                                        databaseSchema = attrIndex[i,]$database_schema,
                                         tableName = paste0("attr_", attrIndex[i,]$table_name))
     if(attrTableExists) {
       getUniqueVariablesInAttrX(
         connectionDetails = connectionDetails,
-        databaseSchema = attrIndex[i,]$table_schema,
+        databaseSchema = attrIndex[i,]$database_schema,
         tableName = paste0("attr_", attrIndex[i,]$table_name))
     }
   })
