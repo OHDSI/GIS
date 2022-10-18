@@ -38,6 +38,7 @@ checkVariableExists <- function(connectionDetails, databaseSchema, tableName, va
                                 " where attr_source_value = '", variableName,"'")
   variableExistsResult <- DatabaseConnector::querySql(conn, variableExistsQuery)
   variableExists <- variableExistsResult > 0
+  variableExists[1]
 }
 
 
