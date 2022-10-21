@@ -185,7 +185,7 @@ createGeomIndexRecord <- function(connectionDetails, dataSourceRecord) {
     geom_type_concept_id = "NULL",
     geom_type_source_value = dataSourceRecord$boundary_type,
     database_schema = createSchemaString(dataSourceRecord),
-    table_name = dataSourceRecord$dataset_name,
+    table_name = createNameString(name = dataSourceRecord$dataset_name),
     table_desc = paste(dataSourceRecord$org_id, dataSourceRecord$org_set_id, dataSourceRecord$dataset_name),
     data_source_id = dataSourceRecord$data_source_uuid)
   insertLogic <- paste0("INSERT INTO backbone.geom_index ",
@@ -222,7 +222,7 @@ createAttrIndexRecord <- function(connectionDetails, dataSourceRecord) {
     attr_of_geom_index_id = getAttrOfGeomIndexId(connectionDetails = connectionDetails,
                                                  dataSourceUuid = dataSourceRecord$geom_dependency_uuid),
     database_schema = createSchemaString(dataSourceRecord),
-    table_name = dataSourceRecord$dataset_name,
+    table_name = createNameString(name = dataSourceRecord$dataset_name),
     data_source_id = dataSourceRecord$data_source_uuid)
   insertLogic <- paste0("INSERT INTO backbone.attr_index ",
                         "(attr_of_geom_index_id, database_schema, table_name, data_source_id) ",
