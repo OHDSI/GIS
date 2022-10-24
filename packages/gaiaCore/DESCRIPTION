@@ -1,0 +1,31 @@
+Package: GIS
+Title: Interface between an OMOP database and geospatial data in a standardized format
+Version: 0.0.0.9000
+Authors@R: 
+    person("Kyle", "Zollo-Venecek", , "kzollovenecek@tuftsmedicalcenter.org", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-1615-590X"))
+    person("Robert", "Miller", , "rmiller@minderoo.org", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-1787-2855"))
+Description: What the package does (one paragraph).
+License: Apache License (>= 2)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.1
+Depends: 
+    R (>= 2.10)
+LazyData: true
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+Imports: 
+    DatabaseConnector,
+    dplyr,
+    magrittr,
+    plyr,
+    rjson,
+    rpostgis,
+    RPostgreSQL,
+    sf,
+    stringr,
+    utils
