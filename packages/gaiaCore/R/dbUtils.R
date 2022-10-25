@@ -265,16 +265,11 @@ createGeomInstanceTable <- function(connectionDetails, schema, name) {
   on.exit(DatabaseConnector::disconnect(conn))
   DatabaseConnector::dbExecute(conn, paste0("CREATE SCHEMA IF NOT EXISTS ", schema, ";"))
   DatabaseConnector::dbExecute(conn, paste0("CREATE TABLE IF NOT EXISTS ", schema,
-                                                         ".\"geom_", name, "\" (",
-                                                         "geom_record_id serial4 NOT NULL, ",
-                                                         "geom_name varchar NULL, ",
-                                                         "geom_source_coding varchar NULL, ",
-                                                         "geom_source_value varchar NULL, ",
-                                                         "geom_wgs84 ", "public.geometry NULL, ",
-                                                         "geom_local_epsg int4 NULL, ",
-                                                         "geom_local_value ", "public.geometry NULL, ",
-                                                         "CONSTRAINT geom_record_", createNameString(name),
-                                                         "_pkey PRIMARY KEY (geom_record_id));"))
+                                            ".\"geom_", name, "\" (like backbone.geom_template);"))
+  DatabaseConnector::dbExecute(conn, paste0("create sequence ", schema, ".geom_", name, "_geom_record_id_seq;"))
+  DatabaseConnector::dbExecute(conn, paste0("ALTER TABLE ONLY ", schema, ".\"geom_", name,
+                                            "\" ALTER COLUMN geom_record_id SET DEFAULT ",
+                                            "nextval('", schema, ".geom_", name, "_geom_record_id_seq'::regclass);"))
 }
 
 
@@ -371,25 +366,11 @@ createAttrInstanceTable <- function(connectionDetails, schema, name) {
   on.exit(DatabaseConnector::disconnect(conn))
   DatabaseConnector::dbExecute(conn, paste0("CREATE SCHEMA IF NOT EXISTS ", schema, ";"))
   DatabaseConnector::dbExecute(conn, paste0("CREATE TABLE IF NOT EXISTS ", schema,
-                                            ".\"attr_", name, "\" (",
-                                            "attr_record_id serial4 NOT NULL, ",
-                                            "geom_record_id int4 NULL, ",
-                                            "variable_source_record_id int4 NOT NULL, ",
-                                            "attr_concept_id int4 NULL, ",
-                                            "attr_start_date date NULL, ",
-                                            "attr_end_date date NULL, ",
-                                            "value_as_number float8 NULL, ",
-                                            "value_as_string varchar NULL, ",
-                                            "value_as_concept_id int4 NULL, ",
-                                            "unit_concept_id int4 NULL, ",
-                                            "unit_source_value varchar NULL, ",
-                                            "qualifier_concept_id int4 NULL, ",
-                                            "qualifier_source_value varchar NULL, ",
-                                            "attr_source_concept_id int4 NULL, ",
-                                            "attr_source_value varchar NULL, ",
-                                            "value_source_value varchar NULL, ",
-                                            "CONSTRAINT attr_record_", createNameString(name),
-                                            "_pkey PRIMARY KEY (attr_record_id));"))
+                                            ".\"attr_", name, "\" (like backbone.attr_template);"))
+  DatabaseConnector::dbExecute(conn, paste0("create sequence ", schema, ".attr_", name, "_attr_record_id_seq;"))
+  DatabaseConnector::dbExecute(conn, paste0("ALTER TABLE ONLY ", schema, ".\"attr_", name,
+                                            "\" ALTER COLUMN attr_record_id SET DEFAULT ",
+                                            "nextval('", schema, ".attr_", name, "_attr_record_id_seq'::regclass);"))
 }
 
 
