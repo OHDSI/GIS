@@ -176,64 +176,45 @@ getAttrIndexRecord <- function(connectionDetails, dataSourceUuid) {
 
 # Create Indices ----------------------------------------------------------
 
-createGeomIndexRecord <- function(connectionDetails, dataSourceRecord) {
-  conn <-  DatabaseConnector::connect(connectionDetails)
-  on.exit(DatabaseConnector::disconnect(conn))
-  indexRecord <- dplyr::tibble(
-    data_type_id = "NULL",
-    data_type_name = dataSourceRecord$geom_type,
-    geom_type_concept_id = "NULL",
-    geom_type_source_value = dataSourceRecord$boundary_type,
-    database_schema = createSchemaString(dataSourceRecord),
-    table_name = createNameString(name = dataSourceRecord$dataset_name),
-    table_desc = paste(dataSourceRecord$org_id, dataSourceRecord$org_set_id, dataSourceRecord$dataset_name),
-    data_source_id = dataSourceRecord$data_source_uuid)
-  insertLogic <- paste0("INSERT INTO backbone.geom_index ",
-                        "(data_type_id, data_type_name, geom_type_concept_id, ",
-                        "geom_type_source_value, database_schema, table_name, table_desc, ",
-                        "data_source_id) VALUES ('",
-                        paste(indexRecord %>% dplyr::slice(1) %>% unlist(., use.names = FALSE), collapse = "', '"),
-                        "');") %>%
-    stringr::str_replace_all("'NULL'", "NULL")
-  DatabaseConnector::executeSql(conn, insertLogic)
-}
 
-
-#' Create a single record in the backbone.attr_index table
+#' Import the attr_index table to PostGIS
 #'
 #' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
-#' @param dataSourceRecord (data.frame) A full record (entire row) from the backbone.data_source table
+#' @param attrIndexTable (data.frame) The entire backbone.attr_index table
 #'
-#' @return A new record in the backbone.attr_index table
-#'
-#' @examples
-#' \dontrun{
-#'
-#' record <- getDataSourceRecord(connectionDetails = connectionDetails, dataSourceUuid = 9999)
-#'
-#' createAttrIndexRecord(connectionDetails = connectionDetails, dataSourceRecord = record)
-#' }
+#' @return A populated backbone.attr_index table in PostGIS
 #'
 
-createAttrIndexRecord <- function(connectionDetails, dataSourceRecord) {
+importAttrIndexTable <- function(connectionDetails, attrIndexTable) {
   conn <-  DatabaseConnector::connect(connectionDetails)
   on.exit(DatabaseConnector::disconnect(conn))
-  indexRecord <- dplyr::tibble(
-    attr_of_geom_index_id = getAttrOfGeomIndexId(connectionDetails = connectionDetails,
-                                                 dataSourceUuid = dataSourceRecord$geom_dependency_uuid),
-    database_schema = createSchemaString(dataSourceRecord),
-    table_name = createNameString(name = dataSourceRecord$dataset_name),
-    data_source_id = dataSourceRecord$data_source_uuid)
-  insertLogic <- paste0("INSERT INTO backbone.attr_index ",
-                        "(attr_of_geom_index_id, database_schema, table_name, data_source_id) ",
-                        "VALUES ('",
-                        paste(indexRecord %>% dplyr::slice(1) %>% unlist(., use.names = FALSE), collapse = "', '"),
-                        "');") %>%
-    stringr::str_replace_all("'NULL'", "NULL")
-  DatabaseConnector::executeSql(conn, insertLogic)
+  DatabaseConnector::insertTable(conn,
+                                 databaseSchema = "backbone",
+                                 tableName = "attr_index",
+                                 data = attrIndexTable,
+                                 dropTableIfExists = TRUE,
+                                 createTable = FALSE)
 }
 
 
+#' Import the geom_index table to PostGIS
+#'
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#' @param geomIndexTable (data.frame) The entire backbone.geom_index table
+#'
+#' @return A populated backbone.geom_index table in PostGIS
+#'
+
+importGeomIndexTable <- function(connectionDetails, geomIndexTable) {
+  conn <-  DatabaseConnector::connect(connectionDetails)
+  on.exit(DatabaseConnector::disconnect(conn))
+  DatabaseConnector::insertTable(conn,
+                                 databaseSchema = "backbone",
+                                 tableName = "geom_index",
+                                 data = geomIndexTable,
+                                 dropTableIfExists = TRUE,
+                                 createTable = FALSE)
+}
 
 # Load Geometry -----------------------------------------------------------
 
