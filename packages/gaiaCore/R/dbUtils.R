@@ -265,16 +265,11 @@ createGeomInstanceTable <- function(connectionDetails, schema, name) {
   on.exit(DatabaseConnector::disconnect(conn))
   DatabaseConnector::dbExecute(conn, paste0("CREATE SCHEMA IF NOT EXISTS ", schema, ";"))
   DatabaseConnector::dbExecute(conn, paste0("CREATE TABLE IF NOT EXISTS ", schema,
-                                                         ".\"geom_", name, "\" (",
-                                                         "geom_record_id serial4 NOT NULL, ",
-                                                         "geom_name varchar NULL, ",
-                                                         "geom_source_coding varchar NULL, ",
-                                                         "geom_source_value varchar NULL, ",
-                                                         "geom_wgs84 ", "public.geometry NULL, ",
-                                                         "geom_local_epsg int4 NULL, ",
-                                                         "geom_local_value ", "public.geometry NULL, ",
-                                                         "CONSTRAINT geom_record_", createNameString(name),
-                                                         "_pkey PRIMARY KEY (geom_record_id));"))
+                                            ".\"geom_", name, "\" (like backbone.geom_template);"))
+  DatabaseConnector::dbExecute(conn, paste0("create sequence ", schema, ".geom_", name, "_geom_record_id_seq;"))
+  DatabaseConnector::dbExecute(conn, paste0("ALTER TABLE ONLY ", schema, ".\"geom_", name,
+                                            "\" ALTER COLUMN geom_record_id SET DEFAULT ",
+                                            "nextval('", schema, ".geom_", name, "_geom_record_id_seq'::regclass);"))
 }
 
 
