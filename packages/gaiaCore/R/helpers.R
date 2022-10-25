@@ -48,18 +48,3 @@ assignGeomIdToAttr <- function(connectionDetails, stagedResult, geomIndexId){
   return(tmp)
 
 }
-
-
-
-#' Get foreign key for attr_of_geom_index_id
-#'
-#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
-#' @param dataSourceUuid (UUID) The UUID for the data source that is registered in the backbone.data_source table
-#'
-#' @return (integer) Identifier for the corresponding backbone.geom_index entry
-#'
-
-getAttrOfGeomIndexId <- function(connectionDetails, dataSourceUuid) {
-  geomIndex <- getGeomIndexTable(connectionDetails)
-  geomIndex[geomIndex$data_source_id == dataSourceUuid,]$geom_index_id
-}
