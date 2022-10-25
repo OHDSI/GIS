@@ -11,19 +11,21 @@ An R package and RShiny app for working with OMOP CDM data in conjunction with g
 
 # Technology
 
-OHDSI GIS is an R package, RShiny app, and a Postgres/PostGIS database.
+gaiaCore is an R package created by the OHDSI GIS work group. A Postgres/PostGIS database is used to store and maintain source records.
 
 # System Requirements
+
+To set up the backbone schema, you must have a Postgres/PostGIS database 
 
 # Getting Started
 
 1.  See the instructions [here](https://ohdsi.github.io/Hades/rSetup.html) for configuring your R environment, including RTools and Java.
 
-2.  You can install the development version of GIS from [GitHub](https://github.com/) with:
+2.  You can install the development version of gaiaCore from [GitHub](https://github.com/) with:
 
     ``` r
     # install.packages("devtools")
-    devtools::install_github("OHDSI/GIS")
+    devtools::install_github("OHDSI/GIS/packages/gaiaCore")
     ```
 
 3.  See the example_execution vignette for information on creating a backbone schema, loading data source and variable information, and creating indices in a Postgres/PostGIS instance.
