@@ -37,6 +37,15 @@ loadVariable <- function(connectionDetails, variableSourceId){
   attrIndexRecord <- getAttrIndexRecord(connectionDetails = connectionDetails,
                                         dataSourceUuid = variableSourceRecord$data_source_uuid)
 
+  # Prevents same variable from being loaded twice
+
+  if(checkVariableExists(connectionDetails = connectionDetails,
+                      attrIndexRecord$database_schema,
+                      attrIndexRecord$table_name,
+                      variableSourceRecord$variable_name)) {
+    return(message("Variable already exists in the database."))
+  }
+
   # get data_source_record
   dataSourceRecord <- getDataSourceRecord(connectionDetails = connectionDetails,
                                           dataSourceUuid = variableSourceRecord$data_source_uuid)

@@ -33,6 +33,12 @@ checkTableExists <- function(connectionDetails, databaseSchema, tableName) {
 checkVariableExists <- function(connectionDetails, databaseSchema, tableName, variableName) {
   conn <-  DatabaseConnector::connect(connectionDetails)
   on.exit(DatabaseConnector::disconnect(conn))
+
+  if (!checkTableExists(connectionDetails = connectionDetails,
+                        databaseSchema = databaseSchema,
+                        tableName = paste0("attr_", tableName))) {
+    return(FALSE)
+  }
   attrTableString <- paste0(databaseSchema, ".\"attr_", tableName, "\"")
   variableExistsQuery <- paste0("select count(*) from ", attrTableString,
                                 " where attr_source_value = '", variableName,"'")
