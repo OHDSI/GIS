@@ -346,14 +346,15 @@ createAttrInstanceTable <- function(connectionDetails, schema, name) {
   conn <-  DatabaseConnector::connect(connectionDetails)
   on.exit(DatabaseConnector::disconnect(conn))
   DatabaseConnector::dbExecute(conn, paste0("CREATE SCHEMA IF NOT EXISTS ", schema, ";"))
-  DatabaseConnector::dbExecute(conn, paste0("CREATE TABLE IF NOT EXISTS ", schema,
-                                            ".\"attr_", name, "\" (like backbone.attr_template);"))
-  DatabaseConnector::dbExecute(conn, paste0("create sequence ", schema, ".attr_", name, "_attr_record_id_seq;"))
-  DatabaseConnector::dbExecute(conn, paste0("ALTER TABLE ONLY ", schema, ".\"attr_", name,
-                                            "\" ALTER COLUMN attr_record_id SET DEFAULT ",
-                                            "nextval('", schema, ".attr_", name, "_attr_record_id_seq'::regclass);"))
+  if(!checkTableExists(connectionDetails, schema, paste0("attr_", name))) {
+    DatabaseConnector::dbExecute(conn, paste0("CREATE TABLE IF NOT EXISTS ", schema,
+                                              ".\"attr_", name, "\" (like backbone.attr_template);"))
+    DatabaseConnector::dbExecute(conn, paste0("create sequence ", schema, ".attr_", name, "_attr_record_id_seq;"))
+    DatabaseConnector::dbExecute(conn, paste0("ALTER TABLE ONLY ", schema, ".\"attr_", name,
+                                              "\" ALTER COLUMN attr_record_id SET DEFAULT ",
+                                              "nextval('", schema, ".attr_", name, "_attr_record_id_seq'::regclass);"))
+  }
 }
-
 
 
 #' Get the attr_template table
