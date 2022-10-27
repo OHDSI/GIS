@@ -11,6 +11,7 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_DB=gaiaDB
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./src/init:/init
