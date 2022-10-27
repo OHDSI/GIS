@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  postgis:
+    container_name: gis_postgis
+    build: ./
+    image: gis_postgis
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mysecretpassword
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./src/init:/init
+    
+volumes:
+  pgdata:
+    name: gis_pgdata
