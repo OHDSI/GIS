@@ -51,12 +51,10 @@ See the example_execution vignette in the gaiaCore R package for instructions on
 5. You can now connect to the database from R using localhost, port 5432 (if not changed), username "postgres", and password "mysecretpassword"
 - Note: to change your password, edit line 13 of the `docker-compose.yml` file. If you've already started the container, you will need to shut down the container, remove the volumes and image that were created, and redo step 4 for the password change to take effect.
 
-# User Documentation
-
 # Support
 
 -   Developer questions/comments/feedback: <a href="http://forums.ohdsi.org/c/developers">OHDSI Forum</a>
--   We use the <a href="../../issues">GitHub issue tracker</a> for all bugs/issues/enhancements
+-   Please use the <a href="../../issues">GitHub issue tracker</a> for all bugs/issues/enhancements
 
 # Contributing
 
@@ -68,10 +66,10 @@ GIS is licensed under Apache License 2.0
 
 # Development
 
-GIS is being developed in R Studio.
+gaiaCore is being developed in R Studio.
 
-### Development status
+gaiaDB is being developed in Postgres/PostGIS
+
+## Development status
 
 Under development
-
-# Acknowledgements
