@@ -51,6 +51,8 @@ See the example_execution vignette in the gaiaCore R package for instructions on
 5. You can now connect to the database from R using localhost, port 5432 (if not changed), username "postgres", and password "mysecretpassword"
 - Note: to change your password, edit line 13 of the `docker-compose.yml` file. If you've already started the container, you will need to shut down the container, remove the volumes and image that were created, and redo step 4 for the password change to take effect.
 
+6. Finally, run the gaiaCore package's function `createIndices(connectionDetails)` to index the source tables
+
 # Support
 
 -   Developer questions/comments/feedback: <a href="http://forums.ohdsi.org/c/developers">OHDSI Forum</a>
