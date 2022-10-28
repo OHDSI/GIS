@@ -67,7 +67,7 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(
   password = "mysecretpassword") 
 ```
 
-2. Run the initializeDatabase(connectionDetails) function
+2. Run the `initializeDatabase(connectionDetails)` function
 
 # Support
 
