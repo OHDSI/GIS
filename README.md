@@ -29,15 +29,16 @@ To set up the backbone schema, you must have a Postgres/PostGIS database
     # install.packages("devtools")
     devtools::install_github("OHDSI/GIS/packages/gaiaCore")
     ```
+    
+3. `library(gaiaCore)`
+
 ## Installing the database
 
-gaiaDB is a postgres database with PostGIS installed and a schema called "backbone" that stores source information and more.
+gaiaDB is a postgres database with PostGIS installed. If you don't have an existing postgres/PostGIS instance, you can create one in a docker container (see below).
 
-### In an existing postgres instance
+If you already have a Postgres/PostGIS database, skip the Docker section. 
 
-See the example_execution vignette in the gaiaCore R package for instructions on creating a backbone schema, loading data source and variable information, and creating indices in an existing Postgres/PostGIS instance.
-
-### As a Docker Container
+### Creating a Docker Container
 
 1. You will need to have Docker and Docker Compose installed. The easiest way to install Docker and Docker Compose is by installing [Docker Desktop]([url](https://docs.docker.com/desktop/)).
 
@@ -52,6 +53,21 @@ See the example_execution vignette in the gaiaCore R package for instructions on
 - Note: to change your password, edit line 13 of the `docker-compose.yml` file. If you've already started the container, you will need to shut down the container, remove the volumes and image that were created, and redo step 4 for the password change to take effect.
 
 6. Finally, run the gaiaCore package's function `createIndices(connectionDetails)` to index the source tables
+
+## Connecting the Database to R
+
+1. Create the `connectionDetails` object
+
+```
+connectionDetails <- DatabaseConnector::createConnectionDetails(
+  dbms = "postgresql",
+  server = "", # name of the server
+  port = 5432,
+  user="postgres", # username to access server
+  password = "mysecretpassword") 
+```
+
+2. Run the initializeDatabase(connectionDetails) function
 
 # Support
 
