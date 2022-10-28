@@ -394,6 +394,7 @@ createAttrInstanceTable <- function(connectionDetails, schema, name) {
   if(!checkTableExists(connectionDetails, schema, paste0("attr_", name))) {
     DatabaseConnector::dbExecute(conn, paste0("CREATE TABLE IF NOT EXISTS ", schema,
                                               ".\"attr_", name, "\" (like backbone.attr_template);"))
+    DatabaseConnector::dbExecute(conn, paste0("drop sequence if exists ", schema, ".attr_", name, "_attr_record_id_seq;"))
     DatabaseConnector::dbExecute(conn, paste0("create sequence ", schema, ".attr_", name, "_attr_record_id_seq;"))
     DatabaseConnector::dbExecute(conn, paste0("ALTER TABLE ONLY ", schema, ".\"attr_", name,
                                               "\" ALTER COLUMN attr_record_id SET DEFAULT ",
