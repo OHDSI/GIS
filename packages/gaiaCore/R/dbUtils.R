@@ -1,5 +1,42 @@
 # General -----------------------------------------------------------------
 
+#' Initialize gaiaDB
+#'
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#'
+#' @return (database schema) The gaiaDB backbone schema is added to the database in connectionDetails
+#'
+#' @examples
+#' \dontrun{
+#' \code{
+#'  connectionDetails <- DatabaseConnector::createConnectionDetails(
+#'    dbms = "postgresql",
+#'    server = "", # name of the server
+#'    port = 5432,
+#'    user="postgres", # username to access server
+#'    password = "mysecretpassword")
+#'
+#'  initializeDatabase(connectionDetails)
+#'
+#' }
+#' }
+#'
+#' @export
+#'
+
+initializeDatabase <- function(connectionDetails) {
+  conn <- DatabaseConnector::connect(connectionDetails)
+  on.exit(DatabaseConnector::disconnect(conn))
+  DatabaseConnector::executeSql(conn, sql = readr::read_file(system.file("sql", "backbone_ddl.sql", package="GIS")))
+  dataSource <- readr::read_csv("https://github.com/OHDSI/GIS/raw/main/source/data_source.csv")
+  variableSource <- readr::read_csv("https://github.com/OHDSI/GIS/raw/main/source/variable_source.csv")
+  DatabaseConnector::dbWriteTable(conn, "backbone.data_source", dataSource, row.names = FALSE, append = TRUE)
+  DatabaseConnector::dbWriteTable(conn, "backbone.variable_source", variableSource, row.names = FALSE, append = TRUE)
+  DatabaseConnector::disconnect(conn)
+  createIndices(connectionDetails)
+}
+
+
 #' Check if a table exists in a database
 #'
 #' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
