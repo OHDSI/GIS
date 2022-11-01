@@ -52,7 +52,7 @@ If you already have a Postgres/PostGIS database, skip the Docker section.
 5. You can now connect to the database from R using localhost, port 5432 (if not changed), username "postgres", and password "mysecretpassword"
 - Note: to change your password, edit line 13 of the `docker-compose.yml` file. If you've already started the container, you will need to shut down the container, remove the volumes and image that were created, and redo step 4 for the password change to take effect.
 
-6. Finally, run the gaiaCore package's function `createIndices(connectionDetails)` to index the source tables
+6. The next section will highlight the steps to connect your PostGIS Docker container to R
 
 ## Connecting the Database to R
 
