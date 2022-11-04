@@ -28,11 +28,12 @@ initializeDatabase <- function(connectionDetails) {
   conn <- DatabaseConnector::connect(connectionDetails)
   on.exit(DatabaseConnector::disconnect(conn))
   DatabaseConnector::executeSql(conn, sql = readr::read_file(system.file("sql", "backbone_ddl.sql", package="GIS")))
+  message("backbone schema created.")
   dataSource <- readr::read_csv("https://github.com/OHDSI/GIS/raw/main/source/data_source.csv")
   variableSource <- readr::read_csv("https://github.com/OHDSI/GIS/raw/main/source/variable_source.csv")
   DatabaseConnector::dbWriteTable(conn, "backbone.data_source", dataSource, row.names = FALSE, append = TRUE)
   DatabaseConnector::dbWriteTable(conn, "backbone.variable_source", variableSource, row.names = FALSE, append = TRUE)
-  DatabaseConnector::disconnect(conn)
+  message("Source metadata added to database.")
   createIndices(connectionDetails)
 }
 
