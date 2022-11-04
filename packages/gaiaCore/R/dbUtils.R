@@ -32,7 +32,6 @@ initializeDatabase <- function(connectionDetails) {
   variableSource <- readr::read_csv("https://github.com/OHDSI/GIS/raw/main/source/variable_source.csv")
   DatabaseConnector::dbWriteTable(conn, "backbone.data_source", dataSource, row.names = FALSE, append = TRUE)
   DatabaseConnector::dbWriteTable(conn, "backbone.variable_source", variableSource, row.names = FALSE, append = TRUE)
-  DatabaseConnector::disconnect(conn)
   createIndices(connectionDetails)
 }
 
