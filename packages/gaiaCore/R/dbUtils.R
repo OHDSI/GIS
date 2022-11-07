@@ -476,7 +476,7 @@ getUniqueVariablesInAttrX <- function(connectionDetails, databaseSchema, tableNa
 #' @return (data.frame) A table of select variable source records
 #'
 
-getVariableSourceSummaryTable <- function(connectionDetails, variableSourceIds) {
+getVariableSourceSummaryTable <- function(connectionDetails) {
   conn <-  DatabaseConnector::connect(connectionDetails)
   on.exit(DatabaseConnector::disconnect(conn))
   getVariableSourceSummaryQuery <- paste0(
@@ -487,8 +487,7 @@ getVariableSourceSummaryTable <- function(connectionDetails, variableSourceIds) 
     "join backbone.data_source ds ",
     "on vs.data_source_uuid=ds.data_source_uuid ",
     "join backbone.data_source ds2 ",
-    "on ds.geom_dependency_uuid = ds2.data_source_uuid ",
-    "where variable_source_id in (", paste(variableSourceIds, collapse = ","), ")")
+    "on ds.geom_dependency_uuid = ds2.data_source_uuid ")
   DatabaseConnector::querySql(conn, getVariableSourceSummaryQuery)
 }
 
