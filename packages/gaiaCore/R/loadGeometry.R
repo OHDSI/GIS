@@ -29,13 +29,21 @@ loadGeometry <- function(connectionDetails, dataSourceUuid) {
 
   dataSourceRecord <- getDataSourceRecord(connectionDetails = connectionDetails,
                                           dataSourceUuid = dataSourceUuid)
+  geomIndexRecord <- getGeomIndexRecord(connectionDetails = connectionDetails,
+                                              dataSourceUuid = dataSourceRecord$data_source_uuid)
 
+  if(checkTableExists(connectionDetails = connectionDetails,
+                         databaseSchema = geomIndexRecord$database_schema,
+                         tableName = paste0("geom_", geomIndexRecord$table_name))) {
+    return(message(paste0("geom_",
+                          geomIndexRecord$database_schema, ".",
+                          geomIndexRecord$table_name,
+                          " already exists in the database.")))
+  }
   staged <- getStaged(dataSourceRecord)
 
   stagedResult <- standardizeStaged(staged = staged, spec = dataSourceRecord$geom_spec)
 
-  geomIndex <- getGeomIndexRecord(connectionDetails = connectionDetails,
-                                  dataSourceUuid = dataSourceRecord$data_source_uuid)
 
 
   # format for insert
@@ -61,13 +69,13 @@ loadGeometry <- function(connectionDetails, dataSourceUuid) {
   res$geom_name <- iconv(res$geom_name, "latin1")
 
   createGeomInstanceTable(connectionDetails = connectionDetails,
-                          schema =  geomIndex$database_schema,
-                          name = geomIndex$table_name)
+                          schema =  geomIndexRecord$database_schema,
+                          name = geomIndexRecord$table_name)
 
   # insert into geom table
   importGeomTable(connectionDetails = connectionDetails,
                   staged = res,
-                  geomIndex = geomIndex)
+                  geomIndex = geomIndexRecord)
 }
 
 #' Import a well-formatted geometry table into an empty instance of geom_X in PostGIS
