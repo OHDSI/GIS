@@ -1,5 +1,60 @@
 # General -----------------------------------------------------------------
 
+#' Get the Variable Source Summary table
+#'
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#'
+#' @return (data.frame) A table of variable source records and a boolean column for if they are loaded.
+#'
+#' @examples
+#' \dontrun{
+#' variableSourceSummaryTable <- getVariableSourceSummaryTable(connectionDetails)
+#' }
+#'
+#' @export
+#'
+
+getVariableSourceSummaryTable <- function(connectionDetails) {
+  attrIndex <- getAttrIndexTable(connectionDetails = connectionDetails)
+  variableSource <- getVariableSourceTable(connectionDetails = connectionDetails)
+  conn <-  DatabaseConnector::connect(connectionDetails)
+  on.exit(DatabaseConnector::disconnect(conn))
+  loadedAttrXs <- DatabaseConnector::querySql(
+    conn,
+    sql = "with existing as(
+            select concat(table_schema, table_name) existing_tbl
+            from information_schema.tables
+            where table_type='BASE TABLE'
+          )
+          select concat(database_schema, '.attr_', table_name) as full_table_name
+          from backbone.attr_index
+          where concat(database_schema, 'attr_', table_name) in (
+            select existing_tbl from existing
+          )")
+  loadedVariableSourceRecordIds <- DatabaseConnector::querySql(
+    conn,
+    sql = paste0("SELECT variable_source_record_id FROM ",
+                 (paste(loadedAttrXs$FULL_TABLE_NAME,
+                        collapse=" UNION SELECT variable_source_record_id FROM "))))
+  getVariableSourceSummaryQuery <- paste0(
+    "select vs.variable_source_id, ds.data_source_uuid as data_source_id, ",
+    "vs.variable_name, vs.variable_desc, ",
+    "ds.dataset_name, ds.dataset_version, ds.boundary_type, ds.geom_dependency_uuid, ",
+    "ds2.dataset_name as geom_dependency_name, ds2.geom_type ",
+    "from backbone.variable_source vs ",
+    "join backbone.data_source ds ",
+    "on vs.data_source_uuid=ds.data_source_uuid ",
+    "join backbone.data_source ds2 ",
+    "on ds.geom_dependency_uuid = ds2.data_source_uuid")
+  summaryTable <- DatabaseConnector::querySql(conn, getVariableSourceSummaryQuery)
+  ids <- loadedVariableSourceRecordIds$VARIABLE_SOURCE_RECORD_ID
+  summaryTable <- dplyr::mutate(summaryTable,
+                                isLoaded = ifelse(
+                                  VARIABLE_SOURCE_ID %in% ids,
+                                  TRUE, FALSE))
+}
+
+
 #' Initialize gaiaDB
 #'
 #' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
@@ -444,51 +499,6 @@ getGeomIdMap <- function(connectionDetails, geomIndexId){
     ,'\";'
   )
   DatabaseConnector::dbGetQuery(conn, sqlQuery)
-}
-
-
-# Get Current Load --------------------------------------------------------
-
-#' Get list of unique variable IDs in attr_X
-#'
-#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
-#' @param databaseSchema (character) schema that contains an attr_X table
-#' @param tableName (character) name of an attr_X table
-#'
-#' @return (vector) a character vector of all loaded variable source IDs
-#'
-
-getUniqueVariablesInAttrX <- function(connectionDetails, databaseSchema, tableName) {
-  conn <-  DatabaseConnector::connect(connectionDetails)
-  on.exit(DatabaseConnector::disconnect(conn))
-  uniqueVarQuery <- paste0("select distinct variable_source_record_id from ",
-                           databaseSchema,".", tableName)
-  uniqueVarResult <- DatabaseConnector::querySql(conn, uniqueVarQuery)
-  uniqueVarResult$VARIABLE_SOURCE_RECORD_ID
-}
-
-
-#' Get a summary table of select variable source records by ID
-#'
-#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
-#' @param loadedVariables (vector) a character vector of all loaded variable source IDs
-#'
-#' @return (data.frame) A table of select variable source records
-#'
-
-getVariableSourceSummaryTable <- function(connectionDetails) {
-  conn <-  DatabaseConnector::connect(connectionDetails)
-  on.exit(DatabaseConnector::disconnect(conn))
-  getVariableSourceSummaryQuery <- paste0(
-    "select vs.variable_source_id, vs.variable_name, vs.variable_desc, ",
-    "ds.dataset_name, ds.dataset_version, ds.boundary_type, ",
-    "ds2.dataset_name as \"geom dependency\", ds2.geom_type ",
-    "from backbone.variable_source vs ",
-    "join backbone.data_source ds ",
-    "on vs.data_source_uuid=ds.data_source_uuid ",
-    "join backbone.data_source ds2 ",
-    "on ds.geom_dependency_uuid = ds2.data_source_uuid ")
-  DatabaseConnector::querySql(conn, getVariableSourceSummaryQuery)
 }
 
 

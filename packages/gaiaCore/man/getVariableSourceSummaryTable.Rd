@@ -2,18 +2,22 @@
 % Please edit documentation in R/dbUtils.R
 \name{getVariableSourceSummaryTable}
 \alias{getVariableSourceSummaryTable}
-\title{Get a summary table of select variable source records by ID}
+\title{Get the Variable Source Summary table}
 \usage{
-getVariableSourceSummaryTable(connectionDetails, variableSourceIds)
+getVariableSourceSummaryTable(connectionDetails)
 }
 \arguments{
 \item{connectionDetails}{(list) An object of class connectionDetails as created by the createConnectionDetails function}
-
-\item{loadedVariables}{(vector) a character vector of all loaded variable source IDs}
 }
 \value{
-(data.frame) A table of select variable source records
+(data.frame) A table of variable source records and a boolean column for if they are loaded.
 }
 \description{
-Get a summary table of select variable source records by ID
+Get the Variable Source Summary table
+}
+\examples{
+\dontrun{
+variableSourceSummaryTable <- getVariableSourceSummaryTable(connectionDetails)
+}
+
 }
