@@ -32,22 +32,6 @@ body:
     validations:
       required: false
   - type: input
-    id: datasourcename
-    attributes:
-      label: Data Source Name
-      description: Name as given by org
-      placeholder: ex. daily_aqi_by_county_2019	
-    validations:
-      required: false
-  - type: input
-    id: datasourcename
-    attributes:
-      label: Data Source Name
-      description: Name as given by org
-      placeholder: ex. daily_aqi_by_county_2019	
-    validations:
-      required: false
-  - type: input
     id: version
     attributes:
       label: Version
