@@ -23,7 +23,7 @@ body:
       placeholder: ex. EPA AQS
     validations:
       required: false
-   - type: input
+  - type: input
     id: datasourcename
     attributes:
       label: Data Source Name
@@ -31,7 +31,7 @@ body:
       placeholder: ex. daily_aqi_by_county_2019	
     validations:
       required: false
-   - type: input
+  - type: input
     id: datasourcename
     attributes:
       label: Data Source Name
@@ -39,7 +39,7 @@ body:
       placeholder: ex. daily_aqi_by_county_2019	
     validations:
       required: false
-   - type: input
+  - type: input
     id: datasourcename
     attributes:
       label: Data Source Name
@@ -47,7 +47,7 @@ body:
       placeholder: ex. daily_aqi_by_county_2019	
     validations:
       required: false
-   - type: input
+  - type: input
     id: version
     attributes:
       label: Version
@@ -55,7 +55,7 @@ body:
       placeholder: ex. 2019
     validations:
       required: false
-   - type: input
+  - type: input
     id: geomtype
     attributes:
       label: Geometry Type
@@ -63,7 +63,7 @@ body:
       placeholder: ex. county	
     validations:
       required: false
-   - type: input
+  - type: input
     id: downloadmethod
     attributes:
       label: Download Method
@@ -71,7 +71,7 @@ body:
       placeholder: ex. direct download	
     validations:
       required: false
-   - type: input
+  - type: input
     id: filetype
     attributes:
       label: Download file type
@@ -79,7 +79,7 @@ body:
       placeholder: ex. csv
     validations:
       required: false
-   - type: input
+  - type: input
     id: filename
     attributes:
       label: Download File Name
@@ -87,7 +87,7 @@ body:
       placeholder: ex. daily_aqi_by_county_2016.csv
     validations:
       required: false
-   - type: input
+  - type: input
     id: downloadurl
     attributes:
       label: Download URL
@@ -95,7 +95,7 @@ body:
       placeholder: ex. https://aqs.epa.gov/aqsweb/airdata/daily_aqi_by_county_2016.zip	
     validations:
       required: false
-   - type: input
+  - type: input
     id: docurl
     attributes:
       label: Documentation URL
