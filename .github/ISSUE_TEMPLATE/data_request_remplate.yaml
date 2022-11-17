@@ -1,0 +1,105 @@
+name: Data Source Request
+description: Submit a data resource for the dev team to add to the data source repo.
+title: "[Data Source Request]: "
+labels: ["data request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please describe the details of the data source below
+  - type: input
+    id: org
+    attributes:
+      label: Organization
+      description: Organization hosting the data
+      placeholder: ex. EPA
+    validations:
+      required: false
+  - type: input
+    id: orgset
+    attributes:
+      label: Organization Subset
+      description: Subset of data within org
+      placeholder: ex. EPA AQS
+    validations:
+      required: false
+   - type: input
+    id: datasourcename
+    attributes:
+      label: Data Source Name
+      description: Name as given by org
+      placeholder: ex. daily_aqi_by_county_2019	
+    validations:
+      required: false
+   - type: input
+    id: datasourcename
+    attributes:
+      label: Data Source Name
+      description: Name as given by org
+      placeholder: ex. daily_aqi_by_county_2019	
+    validations:
+      required: false
+   - type: input
+    id: datasourcename
+    attributes:
+      label: Data Source Name
+      description: Name as given by org
+      placeholder: ex. daily_aqi_by_county_2019	
+    validations:
+      required: false
+   - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Version
+      placeholder: ex. 2019
+    validations:
+      required: false
+   - type: input
+    id: geomtype
+    attributes:
+      label: Geometry Type
+      description: Point, line or (if polygon) tract, county, block, etc.
+      placeholder: ex. county	
+    validations:
+      required: false
+   - type: input
+    id: downloadmethod
+    attributes:
+      label: Download Method
+      description: Direct download or API
+      placeholder: ex. direct download	
+    validations:
+      required: false
+   - type: input
+    id: filetype
+    attributes:
+      label: Download file type
+      description: CSV, JSON, etc.
+      placeholder: ex. csv
+    validations:
+      required: false
+   - type: input
+    id: filename
+    attributes:
+      label: Download File Name
+      description: Name of file as it downloaded
+      placeholder: ex. daily_aqi_by_county_2016.csv
+    validations:
+      required: false
+   - type: input
+    id: downloadurl
+    attributes:
+      label: Download URL
+      description: Direct URL to download or URL to API
+      placeholder: ex. https://aqs.epa.gov/aqsweb/airdata/daily_aqi_by_county_2016.zip	
+    validations:
+      required: false
+   - type: input
+    id: docurl
+    attributes:
+      label: Documentation URL
+      description: URL to data documentation
+      placeholder: ex. https://www.epa.gov/aqs	
+    validations:
+      required: false
