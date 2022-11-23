@@ -1,0 +1,26 @@
+name: "OMOP GIS "
+output_dir: "../docs"
+output:
+  html_document:
+    theme: cosmo
+    css: style.css
+    includes:
+      in_header: "favicon.html"
+exclude: ["extras"]
+navbar:
+  title: '<div><img src="ohdsi16x16.png"></img> OMOP GIS </div>'
+  right:
+    - icon: fa-github
+      href: https://github.com/OHDSI/GIS
+  left:
+    - text: "Terminology"
+      icon: fa-landmark
+      href: terminology.html
+    - text: "Implementation"
+      icon: fa-landmark
+      menu:
+        - text: "Installation"
+          href: installation.html
+    - text: "Applications"
+      icon: fa-landmark
+      href: applications.html
