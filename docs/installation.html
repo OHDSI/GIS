@@ -387,11 +387,81 @@ div.tocify {
 </div>
 
 
-<div id="gaiadb" class="section level1">
-<h1>gaiaDB</h1>
+<div id="gaiacore-r-package" class="section level2">
+<h2>gaiaCore R package</h2>
+<ol style="list-style-type: decimal">
+<li><p>See the instructions <a
+href="https://ohdsi.github.io/Hades/rSetup.html">here</a> for
+configuring your R environment, including RTools and Java.</p></li>
+<li><p>You can install the development version of gaiaCore from <a
+href="https://github.com/">GitHub</a> with:</p>
+<pre class="r"><code># install.packages(&quot;devtools&quot;)
+devtools::install_github(&quot;OHDSI/GIS/packages/gaiaCore&quot;)</code></pre></li>
+<li><p><code>library(gaiaCore)</code></p></li>
+</ol>
 </div>
-<div id="gaiacore" class="section level1">
-<h1>gaiaCore</h1>
+<div id="gaiadb-database" class="section level2">
+<h2>gaiaDB database</h2>
+<p>gaiaDB is a postgres database with PostGIS installed. If you don’t
+have an existing postgres/PostGIS instance, you can download it <a
+href="https://www.postgresql.org/download/">here</a>, or create one in a
+docker container (see below).</p>
+<p>If you already have a Postgres/PostGIS database, skip the Docker
+section.</p>
+<div id="creating-a-docker-container" class="section level3">
+<h3>Creating a Docker Container</h3>
+<ol style="list-style-type: decimal">
+<li><p>You will need to have Docker and Docker Compose installed. The
+easiest way to install Docker and Docker Compose is by installing <a
+href="%5Burl%5D(https://docs.docker.com/desktop/)">Docker
+Desktop</a>.</p></li>
+<li><p>Download the <code>init</code> directory from this
+repository.</p></li>
+<li><p>From a terminal (Command Prompt or Powershell on Windows), make
+sure the <code>init</code> directory is your working directory.</p></li>
+<li><p>Run command <code>docker-compose up -d</code>. This will build a
+docker image, install the database, load the data and variable sources,
+and expose the database at port 5432.</p></li>
+</ol>
+<ul>
+<li>Note: to change the port, open the file
+<code>docker-compose.yml</code> and edit line 10 from
+<code>- "5432:5432"</code> to <code>- "X:5432"</code> where
+<code>X</code> is the desired port.</li>
+</ul>
+<ol start="5" style="list-style-type: decimal">
+<li>You can now connect to the database from R using localhost, port
+5432 (if not changed), username “postgres”, and password
+“mysecretpassword”</li>
+</ol>
+<ul>
+<li>Note: to change your password, edit line 13 of the
+<code>docker-compose.yml</code> file. If you’ve already started the
+container, you will need to shut down the container, remove the volumes
+and image that were created, and redo step 4 for the password change to
+take effect.</li>
+</ul>
+<ol start="6" style="list-style-type: decimal">
+<li>The next section will highlight the steps to connect your PostGIS
+Docker container to R</li>
+</ol>
+</div>
+</div>
+<div id="connecting-the-database-to-r" class="section level2">
+<h2>Connecting the Database to R</h2>
+<ol style="list-style-type: decimal">
+<li>Create the <code>connectionDetails</code> object</li>
+</ol>
+<pre><code>connectionDetails &lt;- DatabaseConnector::createConnectionDetails(
+  dbms = &quot;postgresql&quot;,
+  server = &quot;&quot;, # name of the server
+  port = 5432,
+  user=&quot;postgres&quot;, # username to access server
+  password = &quot;mysecretpassword&quot;) </code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Run the <code>initializeDatabase(connectionDetails)</code>
+function</li>
+</ol>
 </div>
 
 

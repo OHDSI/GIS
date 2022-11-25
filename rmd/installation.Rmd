@@ -8,6 +8,52 @@ output:
           collapsed: false
 ---
 
-# gaiaDB
+## gaiaCore R package
 
-# gaiaCore
+1.  See the instructions [here](https://ohdsi.github.io/Hades/rSetup.html) for configuring your R environment, including RTools and Java.
+
+2.  You can install the development version of gaiaCore from [GitHub](https://github.com/) with:
+
+    ``` r
+    # install.packages("devtools")
+    devtools::install_github("OHDSI/GIS/packages/gaiaCore")
+    ```
+    
+3. `library(gaiaCore)`
+
+## gaiaDB database
+
+gaiaDB is a postgres database with PostGIS installed. If you don't have an existing postgres/PostGIS instance, you can download it [here](https://www.postgresql.org/download/), or create one in a docker container (see below).
+
+If you already have a Postgres/PostGIS database, skip the Docker section. 
+
+### Creating a Docker Container
+
+1. You will need to have Docker and Docker Compose installed. The easiest way to install Docker and Docker Compose is by installing [Docker Desktop]([url](https://docs.docker.com/desktop/)).
+
+2. Download the `init` directory from this repository.
+
+3. From a terminal (Command Prompt or Powershell on Windows), make sure the `init` directory is your working directory.
+
+4. Run command `docker-compose up -d`. This will build a docker image, install the database, load the data and variable sources, and expose the database at port 5432.
+- Note: to change the port, open the file `docker-compose.yml` and edit line 10 from `- "5432:5432"` to `- "X:5432"` where `X` is the desired port.
+
+5. You can now connect to the database from R using localhost, port 5432 (if not changed), username "postgres", and password "mysecretpassword"
+- Note: to change your password, edit line 13 of the `docker-compose.yml` file. If you've already started the container, you will need to shut down the container, remove the volumes and image that were created, and redo step 4 for the password change to take effect.
+
+6. The next section will highlight the steps to connect your PostGIS Docker container to R
+
+## Connecting the Database to R
+
+1. Create the `connectionDetails` object
+
+```
+connectionDetails <- DatabaseConnector::createConnectionDetails(
+  dbms = "postgresql",
+  server = "", # name of the server
+  port = 5432,
+  user="postgres", # username to access server
+  password = "mysecretpassword") 
+```
+
+2. Run the `initializeDatabase(connectionDetails)` function
