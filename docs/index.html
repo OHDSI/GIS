@@ -342,19 +342,12 @@ div.tocify {
     Terminology
   </a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+<li>
+  <a href="installation.html">
     <span class="fa fa-landmark"></span>
      
-    Implementation
-     
-    <span class="caret"></span>
+    Installation
   </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="installation.html">Installation</a>
-    </li>
-  </ul>
 </li>
 <li>
   <a href="applications.html">
@@ -389,11 +382,34 @@ div.tocify {
 
 <div id="problem-space-and-goals" class="section level1">
 <h1><strong>Problem Space and Goals</strong></h1>
-<p>TODO</p>
+<p>Geospatial data come in a variety of source formats, with no
+universal, interoperable standard representation. In order to meet our
+goal of enabling studies of place-related data in conjunction with
+longitudinal patient-level data, it is first necessary to develop
+functionality to automate retrieval and transformation of publicly
+available place-related data into a standard representation. The GIS
+workgroup aims to create a suite of tools built around a lightweight
+“repository of functionality” to incorporate geospatial analyses into
+the familiar research workflows within the OHDSI ecosystem.</p>
 <p><br></p>
 <div id="meeting-schedule" class="section level2">
 <h2><strong>Meeting Schedule</strong></h2>
-<p>TODO</p>
+<p>The GIS General and Development subgroups meet on alternating Fridays
+at 9 AM ET (<a
+href="https://teams.microsoft.com/l/meetup-join/19%3a83e90982136c4665aa5f74a6ce292e39%40thread.tacv2/1647286365762?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%2222effa56-2c2a-408b-9cfd-25cfe976bb49%22%7d">meeting
+link</a>)</p>
+<p>General meetings focus on use cases, integration with OHDSI tools,
+and larger project context. Development meetings provide a time for
+software developers to collaborate or share their recent work.</p>
+<p>We encourage folks with an interest in leveraging Place-related data
+in their research to join or collaborate with the GIS workgroup. While
+anyone is welcome to join either of the meetings, consider attending the
+subgroup meeting that best aligns with your goals: If you would like to
+propose a use case, contribute domain expertise, or learn how the work
+from this group could augment your current research, consider joining us
+at a General meeting. If you are interested in contributing to this
+project on the technical side (code, documentation, unit testing)
+consider joining us at a Development meeting.</p>
 <p><br></p>
 </div>
 <div id="roadmap" class="section level2">
@@ -403,12 +419,30 @@ div.tocify {
 </div>
 <div id="get-involved" class="section level2">
 <h2><strong>Get Involved</strong></h2>
-<p>TODO</p>
-<p><br></p>
+<p>The first iteration of our <strong>gaia</strong> software and
+variable library is now functional! See the <a
+href="https://ohdsi.github.io/GIS/installation.html">installation</a>
+page to get started with the gaiaCore R package and gaiaDB database.
+From there, feel free to build your own tools that interface with gaiaDB
+and enhance the collection of datasets by adding your own (see TODO). We
+encourage anyone who adds data sources to a local gaiaDB instance to
+also create a pull request for them to be added to the full gaiaDB.</p>
+<p>You can also request that a data source be added to gaiaDB by filling
+out a data source request form <a
+href="https://github.com/OHDSI/GIS/issues/new?assignees=&amp;labels=data+request&amp;template=data_request_template.yaml&amp;title=%5BData+Source+Request%5D%3A+">here</a></p>
+<p>Note: For the time being, all software and data sources are still in
+active development, subject to unannounced changes, and should be
+considered “unstable”. There is currently no versioning of software or
+data sources, though there are thoughts to implement Semantic Versioning
+(<a href="https://semver.org/">SemVer</a>) and Universally Unique
+Identifiers (<a
+href="https://en.wikipedia.org/wiki/Universally_unique_identifier">UUIDs</a>)
+<br></p>
 </div>
 <div id="publicationspresentation" class="section level2">
 <h2><strong>Publications/Presentation</strong></h2>
-<p>TODO <br></p>
+<p>OHDSI GIS Workgroup 2022 Objectives and Key Results (<a
+href="https://youtu.be/d8jIAm9cssM">video</a>) <br></p>
 </div>
 </div>
 

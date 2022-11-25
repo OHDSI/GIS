@@ -16,11 +16,9 @@ navbar:
     - text: "Terminology"
       icon: fa-landmark
       href: terminology.html
-    - text: "Implementation"
+    - text: "Installation"
       icon: fa-landmark
-      menu:
-        - text: "Installation"
-          href: installation.html
+      href: installation.html
     - text: "Applications"
       icon: fa-landmark
       href: applications.html
