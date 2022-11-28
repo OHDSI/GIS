@@ -13,12 +13,12 @@ navbar:
     - icon: fa-github
       href: https://github.com/OHDSI/GIS
   left:
-    - text: "Terminology"
-      icon: fa-landmark
-      href: terminology.html
-    - text: "Installation"
-      icon: fa-landmark
-      href: installation.html
     - text: "Applications"
       icon: fa-landmark
       href: applications.html
+    - text: "Installation"
+      icon: fa-landmark
+      href: installation.html
+    - text: "Terminology"
+      icon: fa-landmark
+      href: terminology.html
