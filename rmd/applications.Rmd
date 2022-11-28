@@ -11,12 +11,10 @@ output:
 
 # **Applications**
 
-*TODO: Brief overview *
-
-TODO 
-
+*GAIA is the suite of software used to work with place-related data in conjunction with an OMOP CDM database*
 
 ## **gaiaDB**
+This PostGIS database contains a mirror of the official backbone schema and any variables and dependent geometries that the owner of the instance has loaded. 
 
 ## **gaiaCore**
-
+This R package provides functionality for instantiating and interacting with a gaiaDB instance.
