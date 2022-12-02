@@ -42,17 +42,21 @@ getStaged <- function(rec) {
   baseTimeout <- getOption('timeout')
   options(timeout = 600)
   if (rec$download_method == "file") {
-    if (rec$download_subtype == "zip") {
-      tempzip <- paste0(tempfile(), ".zip")
-      utils::download.file(rec$download_url, tempzip)
-      utils::unzip(tempzip, exdir = tempdir())
-      if (rec$download_data_standard == 'shp') {
-        return(sf::st_read(file.path(tempdir(), rec$download_filename)))
-      } else if (rec$download_data_standard == 'csv') {
-        return(utils::read.csv(file = file.path(tempdir(), rec$download_filename),
-                               check.names = FALSE))
+    gisTempdir <- paste0(tempdir(), "\\", "gaia\\")
+    if (!file.exists(paste0(gisTempdir, basename(rec$download_url)))) {
+      if (rec$download_subtype == "zip") {
+        tempzip <- paste0(gisTempdir, basename(rec$download_url))
+        utils::download.file(rec$download_url, tempzip)
+        utils::unzip(tempzip, exdir = gisTempdir)
       }
-
+    } else {
+      message("Skipping download (zip file located on disk) ...")
+    }
+    if (rec$download_data_standard == 'shp') {
+      return(sf::st_read(file.path(gisTempdir, rec$download_filename)))
+    } else if (rec$download_data_standard == 'csv') {
+      return(utils::read.csv(file = file.path(gisTempdir, rec$download_filename),
+                             check.names = FALSE))
     }
   }
   options(timeout = baseTimeout)
