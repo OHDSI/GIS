@@ -9,7 +9,7 @@ addDataSource(connectionDetails, dataSource)
 \arguments{
 \item{connectionDetails}{(list) An object of class connectionDetails as created by the createConnectionDetails function}
 
-\item{attribute}{(dataSource) A well-formatted data source record. Typically created using gaiaSourceCreator RShiny.}
+\item{dataSource}{(data.frame) A well-formatted data source record. Typically created using gaiaSourceCreator RShiny.}
 }
 \value{
 A new record in the backbone.data_source table in PostGIS

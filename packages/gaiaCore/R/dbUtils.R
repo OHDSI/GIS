@@ -145,7 +145,7 @@ checkVariableExists <- function(connectionDetails, databaseSchema, tableName, va
 #' Append a well-formatted data_source record to the backbone.data_source table in PostGIS
 #'
 #' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
-#' @param attribute (dataSource) A well-formatted data source record. Typically created using gaiaSourceCreator RShiny.
+#' @param dataSource (data.frame) A well-formatted data source record. Typically created using gaiaSourceCreator RShiny.
 #'
 #' @return A new record in the backbone.data_source table in PostGIS
 #'
