@@ -22,3 +22,10 @@ navbar:
     - text: "Terminology"
       icon: fa-landmark
       href: terminology.html
+    - text: "Adding Data Sources"
+      icon: fa-plus-square
+      menu:
+        - text: "How to Add Data Sources to a Local gaiaDB Instance"
+          href: localDataSource.html
+        - text: "Sharing Your Local Data Sources"
+          href: shareDataSource.html
