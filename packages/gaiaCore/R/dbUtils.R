@@ -142,13 +142,12 @@ checkVariableExists <- function(connectionDetails, databaseSchema, tableName, va
 
 # Source Admin ------------------------------------------------------------
 
-#' Import a well-formatted attribute table into an empty instance of attr_X in PostGIS
+#' Append a well-formatted data_source record to the backbone.data_source table in PostGIS
 #'
 #' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
-#' @param attribute (data.frame) A well-formatted attribute. Created by appending staging data table to an attr_template
-#' @param attrIndex (data.frame) A full record (entire row) from the backbone.attr_index table corresponding to the registered attribute of interest
+#' @param attribute (dataSource) A well-formatted data source record. Typically created using gaiaSourceCreator RShiny.
 #'
-#' @return A table (attr_X) in PostGIS
+#' @return A new record in the backbone.data_source table in PostGIS
 #'
 
 addDataSource <- function(connectionDetails, dataSource){
