@@ -44,10 +44,9 @@ getStaged <- function(rec) {
   if (rec$download_method == "file") {
     gisTempdir <- paste0(tempdir(), "\\", "gaia\\")
     if (rec$download_subtype == "zip") {
-      if (!file.exists(paste0(gisTempdir, basename(rec$download_url)))) {
-        tempzip <- paste0(gisTempdir, basename(rec$download_url))
+      tempzip <- paste0(gisTempdir, basename(rec$download_url))
+      if (!file.exists(tempzip)) {
         utils::download.file(rec$download_url, tempzip)
-        utils::unzip(tempzip, exdir = gisTempdir)
       } else {
         message("Skipping download (zip file located on disk) ...")
       }

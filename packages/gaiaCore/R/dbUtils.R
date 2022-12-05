@@ -140,6 +140,30 @@ checkVariableExists <- function(connectionDetails, databaseSchema, tableName, va
   variableExists[1]
 }
 
+# Source Admin ------------------------------------------------------------
+
+#' Import a well-formatted attribute table into an empty instance of attr_X in PostGIS
+#'
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#' @param attribute (data.frame) A well-formatted attribute. Created by appending staging data table to an attr_template
+#' @param attrIndex (data.frame) A full record (entire row) from the backbone.attr_index table corresponding to the registered attribute of interest
+#'
+#' @return A table (attr_X) in PostGIS
+#'
+
+addDataSource <- function(connectionDetails, dataSource){
+  conn <-  DatabaseConnector::connect(connectionDetails)
+  on.exit(DatabaseConnector::disconnect(conn))
+  DatabaseConnector::insertTable(conn,
+                                 databaseSchema = "backbone",
+                                 tableName = "data_source",
+                                 data = dataSource,
+                                 dropTableIfExists = FALSE,
+                                 createTable = FALSE
+  )
+
+}
+
 
 # Get Backbone Tables -----------------------------------------------------
 
