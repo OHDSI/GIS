@@ -1,3 +1,10 @@
 name: Share Data Source
 description: Share Data Sources that you have added to your local gaiaDB instance by replacing the data_source.csv file at [GIS/source](https://github.com/OHDSI/GIS/tree/main/source).
 title: "[Share New Data Source(s) Request]"
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: "Provide a brief summary of the data sources you are adding"
+      placeholder: "Example: EPA AQS air quality data from 2011 - 2020"
