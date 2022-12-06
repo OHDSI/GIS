@@ -43,6 +43,9 @@ getStaged <- function(rec) {
   options(timeout = 600)
   if (rec$download_method == "file") {
     gisTempdir <- paste0(tempdir(), "\\", "gaia\\")
+    if (!dir.exists(gisTempdir)) {
+      dir.create(gisTempdir)
+    }
     if (rec$download_subtype == "zip") {
       tempzip <- paste0(gisTempdir, basename(rec$download_url))
       if (!file.exists(tempzip)) {
