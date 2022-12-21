@@ -26,7 +26,7 @@ navbar:
       icon: fa-list
       menu:
         - text: "gaiaCore"
-          href: "../packages/gaiaCore/index.html"
+          href: "gaiaCore/docs/index.html"
     - text: "Adding Data Sources"
       icon: fa-plus-square
       menu:

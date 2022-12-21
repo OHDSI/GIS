@@ -5,3 +5,4 @@
 ^docs$
 ^pkgdown$
 errorReportSql.txt
+^\.\./\.\./docs/gaiaCore/docs$
