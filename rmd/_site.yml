@@ -1,4 +1,4 @@
-name: "OMOP GIS "
+name: "OMOP GIS"
 output_dir: "../docs"
 output:
   html_document:
@@ -26,7 +26,7 @@ navbar:
       icon: fa-list
       menu:
         - text: "gaiaCore"
-          href: "gaiaCore/docs/index.html"
+          href: "gaiaCore/index.html"
     - text: "Adding Data Sources"
       icon: fa-plus-square
       menu:
