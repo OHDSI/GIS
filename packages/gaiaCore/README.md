@@ -12,5 +12,4 @@
     # install.packages("devtools")
     devtools::install_github("OHDSI/GIS/packages/gaiaCore")
     ```
-
-3.  See the example_execution vignette for information on creating a backbone schema, loading data source and variable information, and creating indices in a Postgres/PostGIS instance.
+3. See the [installation](https://ohdsi.github.io/GIS/installation.html) page to get started  with the gaiaCore R package and gaiaDB database.

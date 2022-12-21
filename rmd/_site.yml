@@ -22,6 +22,11 @@ navbar:
     - text: "Terminology"
       icon: fa-landmark
       href: terminology.html
+    - text: "Documentation"
+      icon: fa-list
+      menu:
+        - text: "gaiaCore"
+          href: "../packages/gaiaCore/index.html"
     - text: "Adding Data Sources"
       icon: fa-plus-square
       menu:
