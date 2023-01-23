@@ -19,7 +19,7 @@ output:
     devtools::install_github("OHDSI/GIS/packages/gaiaCore")
     ```
     
-3. `library(gaiaCore)`
+3. `library(GIS)`
 
 ## gaiaDB database
 
@@ -31,7 +31,7 @@ If you already have a Postgres/PostGIS database, skip the Docker section.
 
 1. You will need to have Docker and Docker Compose installed. The easiest way to install Docker and Docker Compose is by installing [Docker Desktop]([url](https://docs.docker.com/desktop/)).
 
-2. Download the `init` directory from this repository.
+2. Clone the OHDSI/GIS repository to your computer.
 
 3. From a terminal (Command Prompt or Powershell on Windows), make sure the `init` directory is your working directory.
 
@@ -39,7 +39,7 @@ If you already have a Postgres/PostGIS database, skip the Docker section.
 - Note: to change the port, open the file `docker-compose.yml` and edit line 10 from `- "5432:5432"` to `- "X:5432"` where `X` is the desired port.
 
 5. You can now connect to the database from R using localhost, port 5432 (if not changed), username "postgres", and password "mysecretpassword"
-- Note: to change your password, edit line 13 of the `docker-compose.yml` file. If you've already started the container, you will need to shut down the container, remove the volumes and image that were created, and redo step 4 for the password change to take effect.
+- Note: to change your password, edit line 13 of the `docker-compose.yml` file. If you've already started the container, you will need to shut down the container (`docker-compose down`), remove the volumes (`docker volume rm gis_pgdata`) and image (`docker rmi gis_postgis`) that were created, and redo step 4 for the password change to take effect.
 
 6. The next section will highlight the steps to connect your PostGIS Docker container to R
 
@@ -50,10 +50,11 @@ If you already have a Postgres/PostGIS database, skip the Docker section.
 ```
 connectionDetails <- DatabaseConnector::createConnectionDetails(
   dbms = "postgresql",
-  server = "", # name of the server
+  server = "localhost/gaiaDB",
   port = 5432,
-  user="postgres", # username to access server
+  user="postgres",
   password = "mysecretpassword") 
 ```
+- Note: the parameters above assume you did not change any default environment variables in the `docker-compose.yml`file
 
-2. Run the `initializeDatabase(connectionDetails)` function
+2. Run the `GIS::initializeDatabase(connectionDetails)` function
