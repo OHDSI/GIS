@@ -27,6 +27,8 @@ navbar:
       menu:
         - text: "gaiaCore"
           href: "gaiaCore/index.html"
+        - text: "gaiaDB"
+          href: "gaiadb.html"
     - text: "Adding Data Sources"
       icon: fa-plus-square
       menu:
