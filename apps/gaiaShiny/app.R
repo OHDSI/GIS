@@ -25,7 +25,7 @@ library(DT)
 # TODO uncomment the line below to enable reading of config file (this was a good thing!)
 # You may need to specify where this file is in the get function
 # It may be in your Documents folder
-# dbConnectionDetails <- suppressWarnings(get("connectionDetails")) 
+dbConnectionDetails <- NULL#suppressWarnings(get("connectionDetails")) 
 
 databaseConnectionForm <- function(dbName, dbStem) {
   column(6,
