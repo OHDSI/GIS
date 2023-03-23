@@ -6,7 +6,7 @@ library(waiter)
 library(config)
 library(DT)
 
-setwd("C:/Users/kzollovenecek/Documents/gaiaShiny/")
+# setwd("C:/Users/kzollovenecek/Documents/gaiaShiny/")
 #
 # initiateSummaryTable <- function(connectionDetails) {
 #   rawSummaryTable <- getVariableSourceSummaryTable(connectionDetails)
@@ -22,7 +22,10 @@ setwd("C:/Users/kzollovenecek/Documents/gaiaShiny/")
 # datasetFormattedNames <- unique(rawSummaryTable$SOURCE_DATASET)
 # datasetNames <- setNames(stringr::str_extract_all(datasetFormattedNames, ".+(?= \\()"), datasetFormattedNames)
 
-dbConnectionDetails <- suppressWarnings(get("connectionDetails"))
+# TODO uncomment the line below to enable reading of config file (this was a good thing!)
+# You may need to specify where this file is in the get function
+# It may be in your Documents folder
+# dbConnectionDetails <- suppressWarnings(get("connectionDetails")) 
 
 databaseConnectionForm <- function(dbName, dbStem) {
   column(6,
