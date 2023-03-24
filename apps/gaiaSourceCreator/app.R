@@ -254,7 +254,7 @@ server <- function(input, output, session) {
         if (stringr::str_detect(as.character(w), 'corrupt')) {
           res <- httr::GET(url)
           writeBin(httr::content(res), con = tempzip)
-          filename <- utils::unzip(tempzip, exdir = gisTempdir)
+          filename <<- utils::unzip(tempzip, exdir = gisTempdir)
         }
       })
       # if (length(filename) > 1) {
