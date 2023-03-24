@@ -433,8 +433,8 @@ devtools::install_github(&quot;OHDSI/GIS/packages/gaiaCore&quot;)</code></pre></
 have an existing postgres/PostGIS instance, you can download it <a
 href="https://www.postgresql.org/download/">here</a>, or create one in a
 docker container (see below).</p>
-<p>If you already have a Postgres/PostGIS database, skip the Docker
-section.</p>
+<p>If you already have a Postgres/PostGIS database, skip to “Connecting
+the Database to R”.</p>
 <div id="creating-a-docker-container" class="section level3">
 <h3>Creating a Docker Container</h3>
 <ol style="list-style-type: decimal">
@@ -474,9 +474,8 @@ for the password change to take effect.</li>
 Docker container to R</li>
 </ol>
 </div>
-</div>
-<div id="connecting-the-database-to-r" class="section level2">
-<h2>Connecting the Database to R</h2>
+<div id="connecting-the-database-to-r" class="section level3">
+<h3>Connecting the Database to R</h3>
 <ol style="list-style-type: decimal">
 <li>Create the <code>connectionDetails</code> object</li>
 </ol>
@@ -494,6 +493,23 @@ environment variables in the <code>docker-compose.yml</code>file</li>
 <li>Run the <code>GIS::initializeDatabase(connectionDetails)</code>
 function</li>
 </ol>
+</div>
+</div>
+<div id="gaiasourcecreator-r-shiny" class="section level2">
+<h2>gaiaSourceCreator R Shiny</h2>
+<p>This app can be run in a local browser by executing the following
+command in an R console:</p>
+<pre><code>shiny::runGitHub(&#39;GIS&#39;, &#39;OHDSI&#39;, subdir = &#39;apps/gaiaSourceCreator&#39;)</code></pre>
+<p>You will need to have the following packages installed in your R
+environment:</p>
+<pre><code>shiny
+shinyBS
+shinyalert
+shinyvalidate
+shinyjs</code></pre>
+<p>Alternatively, you can run the source code from the Shiny app in your
+R environment. See file <code>apps/gaiaSourceCreator/app.R</code> in the
+OHDSI/GIS repository.</p>
 </div>
 
 

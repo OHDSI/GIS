@@ -25,7 +25,7 @@ output:
 
 gaiaDB is a postgres database with PostGIS installed. If you don't have an existing postgres/PostGIS instance, you can download it [here](https://www.postgresql.org/download/), or create one in a docker container (see below).
 
-If you already have a Postgres/PostGIS database, skip the Docker section. 
+If you already have a Postgres/PostGIS database, skip to "Connecting the Database to R". 
 
 ### Creating a Docker Container
 
@@ -43,7 +43,7 @@ If you already have a Postgres/PostGIS database, skip the Docker section.
 
 6. The next section will highlight the steps to connect your PostGIS Docker container to R
 
-## Connecting the Database to R
+### Connecting the Database to R
 
 1. Create the `connectionDetails` object
 
@@ -58,3 +58,19 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(
 - Note: the parameters above assume you did not change any default environment variables in the `docker-compose.yml`file
 
 2. Run the `GIS::initializeDatabase(connectionDetails)` function
+
+## gaiaSourceCreator R Shiny
+
+This app can be run in a local browser by executing the following command in an R console:
+```
+shiny::runGitHub('GIS', 'OHDSI', subdir = 'apps/gaiaSourceCreator')
+```
+You will need to have the following packages installed in your R environment:
+```
+shiny
+shinyBS
+shinyalert
+shinyvalidate
+shinyjs
+```
+Alternatively, you can run the source code from the Shiny app in your R environment. See file `apps/gaiaSourceCreator/app.R` in the OHDSI/GIS repository.

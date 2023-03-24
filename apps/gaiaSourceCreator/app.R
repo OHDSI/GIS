@@ -31,6 +31,7 @@ ui <- fluidPage(
       # GEOM UI -------
       "Data Source",
       sidebarLayout(
+        # Panel -----
         sidebarPanel(
           style = "height: 90vh; overflow-y: auto;",
           tabPanelBody("dataSourceType",
@@ -141,14 +142,16 @@ ui <- fluidPage(
             )
           )
         ),
+        # Main -------
         mainPanel(
           style = "height: 90vh; overflow-y: auto;",
           tableOutput("dataSourceGeom"),
-          actionButton("addDataSourceGeom", "Create"),
+          # actionButton("addDataSourceGeom", "Create"),
           actionButton("createInsertSqlGeom", "Create INSERT SQL")
           # TODO add a box with summary info for data source that populates after download
         )
       ),
+      # SpecWriter --------
       fluidRow(
         column(12,
                conditionalPanel(
@@ -191,9 +194,11 @@ ui <- fluidPage(
       
       ),
     tabPanel("Variable Source", 
-   # VARIABLE UI -------
+  #( . . . . . . . . . . ) --------    
+  # VARIABLE UI -------
       sidebarLayout(
         sidebarPanel(
+          # Panel --------
           style = "height: 70vh; overflow-y: auto;",
           tabPanelBody("mainVariableSourceFields",
             textInput("variableName", label = inputLabelInfo(
@@ -220,13 +225,15 @@ ui <- fluidPage(
           )
         ),
         mainPanel(
+          # Main -------
           style = "height: 70vh; overflow-y: auto;",
           tableOutput("dataSourceVar"),
-          actionButton("addDataSourceVar", "Create"),
+          # actionButton("addDataSourceVar", "Create"),
           actionButton("createInsertSqlVar", "Create INSERT SQL")
           # TODO add a box with summary info for data source that populates after download
         ),
      ),
+   # SpecWriter -----------
      fluidRow(
        column(12,
         titlePanel("Gaia specWriter"),
@@ -265,6 +272,13 @@ ui <- fluidPage(
     )
   )
 )
+
+#( . . . . . . . . . . ) --------
+
+
+
+
+
 
 server <- function(input, output, session) {
 
@@ -322,7 +336,80 @@ server <- function(input, output, session) {
   observeEvent(input$geomDependencyInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
 
 
-
+  
+  
+  # specWriter --------------------------------------------------------------
+  
+  specReactive <- reactiveValues()
+  
+  observeEvent(input$addMutate, {
+    specReactive$mutateList <- c(isolate(specReactive$mutateList), isolate(input$mutateStatement))
+    updateTextInput(inputId = "mutateStatement", value = "")
+    nr <- input$mutateStatement
+    insertUI(
+      selector = "#mutates",
+      ui = div(
+        id = paste0("newInput", nr),
+        htmltools::span(nr),
+        actionButton(paste0("removeBtn", nr), label = "", icon = icon("minus")),
+        htmltools::br()
+      )
+    )
+    observeEvent(input[[paste0("removeBtn", nr)]], {
+      shiny::removeUI(selector = paste0("#newInput", nr))
+      specReactive$mutateList <- specReactive$mutateList[specReactive$mutateList != nr]
+    })
+  })
+  
+  observeEvent(input$addFilter, {
+    specReactive$filterList <- c(isolate(specReactive$filterList), isolate(input$filterStatement))
+    updateTextInput(inputId = "filterStatement", value = "")
+    nr <- input$filterStatement
+    insertUI(
+      selector = "#filters",
+      ui = div(
+        id = paste0("newInput", nr),
+        htmltools::span(nr),
+        actionButton(paste0("removeBtn", nr), label = "", icon = icon("minus")),
+        htmltools::br()
+      )
+    )
+    observeEvent(input[[paste0("removeBtn", nr)]], {
+      shiny::removeUI(selector = paste0("#newInput", nr))
+      specReactive$filterList <- specReactive$filterList[specReactive$filterList != nr]
+    })
+  })
+  
+  observeEvent(input$addSelect, {
+    specReactive$selectList <- c(isolate(specReactive$selectList), isolate(input$selectStatement))
+    updateTextInput(inputId = "selectStatement", value = "")
+    nr <- input$selectStatement
+    insertUI(
+      selector = "#selects",
+      ui = div(
+        id = paste0("newInput", nr),
+        htmltools::span(nr),
+        actionButton(paste0("removeBtn", nr), label = "", icon = icon("minus")),
+        htmltools::br()
+      )
+    )
+    observeEvent(input[[paste0("removeBtn", nr)]], {
+      shiny::removeUI(selector = paste0("#newInput", nr))
+      specReactive$selectList <- specReactive$selectList[specReactive$selectList != nr]
+    })
+  })
+  
+  output$specWriterOutput <- renderText({
+    paste0(
+      '<pre>{\n\t"stage_transform": [\n',
+      ifelse(length(specReactive$mutateList) > 0, paste0('\t\t"dplyr::mutate(staged,\n\t\t\t\t', paste(specReactive$mutateList, collapse = ",\n\t\t\t\t"), ')",\n'), paste0("")),
+      ifelse(length(specReactive$filterList) > 0, paste0('\t\t"dplyr::filter(staged,\n\t\t\t\t', paste(specReactive$filterList, collapse = ",\n\t\t\t\t"), ')",\n'), paste0("")),
+      ifelse(length(specReactive$selectList) > 0, paste0('\t\t"dplyr::select(staged,\n\t\t\t\t', paste(specReactive$selectList, collapse = ",\n\t\t\t\t"), ')"\n'), paste0("")),
+      '\t]\n}</pre>'
+    )
+  })
+  
+  
 # Validate ----------------------------------------------------------------
 
   main_iv <- InputValidator$new()
@@ -405,7 +492,7 @@ server <- function(input, output, session) {
 
   })
 
-
+# Create data source ----
   observeEvent(input$addDataSourceGeom, {
     main_iv$enable()
     if (main_iv$is_valid()) {
@@ -417,10 +504,8 @@ server <- function(input, output, session) {
     }
   })
   
+  # Create data source insert ----
   observeEvent(input$createInsertSqlGeom, {
-    # TODO
-    # This function should:
-    # 1. run the function that takes all dataSource data and creates a SQL INSERT 
     sql_insert_text <- paste0(
       "INSERT INTO backbone.data_source VALUES (<INSERT-ID> '",
       input$orgId, "', '", input$orgSetId, "', '", input$datasetName, "', ",
@@ -429,86 +514,15 @@ server <- function(input, output, session) {
       input$downloadSubtype, "', '", input$downloadDataStandard, "', '", input$downloadFilename, "', '",
       input$sourceUrl, "', '", input$downloadAuth, "', '", input$documentationUrl, "')"
     )
-    #1a. replace empty string (" ,") with NULL (NULL,)
 
     sql_insert_text <- stringr::str_replace_all(sql_insert_text, "''", "NULL")
-    # 2. Displays as pop-up window with editable text window and a copy button
+    # TODO Display as pop-up window with editable text window and a copy button
     print(sql_insert_text)
   })
 
 
 
-# specWriter --------------------------------------------------------------
 
-  specReactive <- reactiveValues()
-
-  observeEvent(input$addMutate, {
-    specReactive$mutateList <- c(isolate(specReactive$mutateList), isolate(input$mutateStatement))
-    updateTextInput(inputId = "mutateStatement", value = "")
-    nr <- input$mutateStatement
-    insertUI(
-      selector = "#mutates",
-      ui = div(
-        id = paste0("newInput", nr),
-        htmltools::span(nr),
-        actionButton(paste0("removeBtn", nr), label = "", icon = icon("minus")),
-        htmltools::br()
-      )
-    )
-    observeEvent(input[[paste0("removeBtn", nr)]], {
-      shiny::removeUI(selector = paste0("#newInput", nr))
-      specReactive$mutateList <- specReactive$mutateList[specReactive$mutateList != nr]
-    })
-  })
-
-  observeEvent(input$addFilter, {
-    specReactive$filterList <- c(isolate(specReactive$filterList), isolate(input$filterStatement))
-    updateTextInput(inputId = "filterStatement", value = "")
-    nr <- input$filterStatement
-    insertUI(
-      selector = "#filters",
-      ui = div(
-        id = paste0("newInput", nr),
-        htmltools::span(nr),
-        actionButton(paste0("removeBtn", nr), label = "", icon = icon("minus")),
-        htmltools::br()
-      )
-    )
-    observeEvent(input[[paste0("removeBtn", nr)]], {
-      shiny::removeUI(selector = paste0("#newInput", nr))
-      specReactive$filterList <- specReactive$filterList[specReactive$filterList != nr]
-    })
-  })
-
-  observeEvent(input$addSelect, {
-    specReactive$selectList <- c(isolate(specReactive$selectList), isolate(input$selectStatement))
-    updateTextInput(inputId = "selectStatement", value = "")
-    nr <- input$selectStatement
-    insertUI(
-      selector = "#selects",
-      ui = div(
-        id = paste0("newInput", nr),
-        htmltools::span(nr),
-        actionButton(paste0("removeBtn", nr), label = "", icon = icon("minus")),
-        htmltools::br()
-      )
-    )
-    observeEvent(input[[paste0("removeBtn", nr)]], {
-      shiny::removeUI(selector = paste0("#newInput", nr))
-      specReactive$selectList <- specReactive$selectList[specReactive$selectList != nr]
-    })
-  })
-
-  output$specWriterOutput <- renderText({
-    paste0(
-      '<pre>{\n\t"stage_transform": [\n',
-      ifelse(length(specReactive$mutateList) > 0, paste0('\t\t"dplyr::mutate(staged,\n\t\t\t\t', paste(specReactive$mutateList, collapse = ",\n\t\t\t\t"), ')",\n'), paste0("")),
-      ifelse(length(specReactive$filterList) > 0, paste0('\t\t"dplyr::filter(staged,\n\t\t\t\t', paste(specReactive$filterList, collapse = ",\n\t\t\t\t"), ')",\n'), paste0("")),
-      ifelse(length(specReactive$selectList) > 0, paste0('\t\t"dplyr::select(staged,\n\t\t\t\t', paste(specReactive$selectList, collapse = ",\n\t\t\t\t"), ')"\n'), paste0("")),
-      '\t]\n}</pre>'
-      )
-    })
-  
   #( . . . . . . . . . . ) --------
   # VARIABLE ----------
   # Main Panel tables -------------------------------------------------------
@@ -598,6 +612,22 @@ server <- function(input, output, session) {
       ifelse(length(specReactiveAttr$selectListAttr) > 0, paste0('\t\t"dplyr::select(staged,\n\t\t\t\t', paste(specReactiveAttr$selectListAttr, collapse = ",\n\t\t\t\t"), ')"\n'), paste0("")),
       '\t]\n}</pre>'
     )
+  })
+  
+  
+  
+  
+  # Create data source insert ----
+  observeEvent(input$createInsertSqlVar, {
+    sql_insert_text <- paste0(
+      "INSERT INTO backbone.variable_source VALUES (<INSERT-ID> '",
+      input$variableName, "', '", input$variableDescription, "', ",
+      input$dataSourceUuid, ", '", input$attrSpec, "')"
+    )
+
+    sql_insert_text <- stringr::str_replace_all(sql_insert_text, "''", "NULL")
+    # TODO Display as pop-up window with editable text window and a copy button
+    print(sql_insert_text)
   })
 }
 
