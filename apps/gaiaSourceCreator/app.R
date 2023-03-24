@@ -237,13 +237,29 @@ server <- function(input, output, session) {
       if(!dir.exists(gisTempdir)) {
         dir.create(gisTempdir)
       }
-      tempzip <- paste0(gisTempdir, basename(url))
-      if (!file.exists(tempzip)) {
-        utils::download.file(url, tempzip)
-      } else {
-        message("Skipping download (zip file located on disk) ...")
+      tempzip <- paste0(gisTempdir, stringr::str_replace_all(basename(url), "[^[:alnum:]]", ""))
+      if (!endsWith(tempzip, '.zip')) {
+        tempzip <- paste0(tempzip, ".zip")
       }
-      filename <- utils::unzip(tempzip, exdir = gisTempdir)
+      tryCatch({
+        if (!file.exists(tempzip)) {
+          utils::download.file(url, tempzip)
+        } else {
+          message("Skipping download (zip file located on disk) ...")
+        }
+        filename <- utils::unzip(tempzip, exdir = gisTempdir)
+      }, 
+      warning = function(w) {
+        if (stringr::str_detect(as.character(w), 'corrupt')) {
+          res <- httr::GET(url)
+          writeBin(httr::content(res), con = tempzip)
+          filename <- utils::unzip(tempzip, exdir = gisTempdir)
+        }
+      })
+      if (length(filename) > 1) {
+        # popup window that asks to select a source
+        # THIS MAY BE UNNECESSARY
+      } 
       if(any(stringr::str_detect(filename, ".shp$"))) {
         filename <- filename[stringr::str_detect(filename, ".shp$")]
         updateCheckboxInput(inputId = "isGeom", value = TRUE)
