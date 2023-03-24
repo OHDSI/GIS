@@ -25,164 +25,171 @@ outputLabelInfo <- function(inp, title, infoText) {
 
 ui <- fluidPage(
   useShinyjs(),
-  titlePanel("Data Source"),
-  sidebarLayout(
-    sidebarPanel(
-      style = "height: 90vh; overflow-y: auto;",
-      tabPanelBody("dataSourceType",
-         radioButtons("downloadMethod", label = inputLabelInfo(
-           linkId = "downloadMethodInfo",
-           labelText = "Download Method",
-           iconText = "Is the dataset obtained via a direct download URL or an API call?"),
-           choiceNames = c("Direct Download", "API"),
-           choiceValues = c("file", "api")),
-         textInput("sourceUrl", label = inputLabelInfo(
-           linkId = "sourceUrlInfo",
-           labelText = "Enter the source URL for the dataset",
-           iconText = "A URL for a direct download of geospatial data (click for more info)"),
-           placeholder = "e.g. https://aqs.epa.gov/aqsweb/airdata/daily_aqi_by_county_2020.zip"),
-         actionButton("startDownload", "Start Download"),
-         textInput("documentationUrl", label = inputLabelInfo(
-           linkId = "documentationUrlInfo",
-           labelText = "Enter the documentation URL for the dataset",
-           iconText = "A URL that links to the documentation webpage for the dataset"),
-           placeholder = "e.g. https://www.epa.gov/aqs"),
-         checkboxInput("isGeom", label = inputLabelInfo(
-           linkId = "isGeomInfo",
-           labelText = "This dataset contains geometry information",
-           iconText = "Does this dataset contain geometry information? (click for more info)"),
-           # value = TRUE # TODO delete me after dev!!! only for dev!!!
-           ),
-         checkboxInput("hasAttributes", label = inputLabelInfo(
-           linkId = "hasAttributesInfo",
-           labelText = "This dataset contains attribute information",
-           iconText = "Does this dataset contain attribute information? (click for more info)"))),
-      tabPanelBody("mainDataSourceFields",
-         textInput("orgId", label = inputLabelInfo(
-           linkId = "orgIdInfo",
-           labelText = "Enter the organization that hosts this dataset",
-           iconText = "The name, short name, or acronym of the organization that created the dataset (click for more info) "),
-           value = "",
-           placeholder = "e.g. EPA"),
-         textInput("orgSetId", label = inputLabelInfo(
-           linkId = "orgSetIdInfo",
-           labelText = "Enter the organization's subset/dataset ID",
-           iconText = "The subset of the organization that created this dataset (click for more info)"),
-           placeholder = "e.g. AQS"),
-         textInput("datasetName", label = inputLabelInfo(
-           linkId = "datasetNameInfo",
-           labelText = "Enter a dataset name",
-           iconText = "The name of the dataset (click for more info)"),
-           placeholder = "e.g. daily_aqi_by_county_2020"),
-         textInput("datasetVersion", label = inputLabelInfo(
-           linkId = "datasetVersionInfo",
-           labelText = "Enter a dataset version",
-           iconText = "The version or year of the dataset (click for more info)"),
-           placeholder = "e.g. 2020"),
-         textInput("downloadSubtype", label = inputLabelInfo( # This could be dropdown of supported types
-           linkId = "downloadSubtypeInfo",
-           labelText = "Enter a download subtype",
-           iconText = "The download subtype that the URL links to, such as zip or gzip (click for more info)"),
-           placeholder = "e.g. zip"),
-         textInput("downloadDataStandard", label = inputLabelInfo( # This could be dropdown of supported types
-           linkId = "downloadDataStandardInfo",
-           labelText = "Enter a download data standard",
-           iconText = "The standard that the downloaded data is in, such as CSV or SHP (click for more info)"),
-           placeholder = "e.g. csv"),
-         textInput("boundaryType", label = inputLabelInfo(
-           linkId = "boundaryTypeInfo",
-           labelText = "Enter a boundary type",
-           iconText = "Boundary type is the space that the geometry or attribute pertains to, such as county or ZCTA (click for more info)"),
-           placeholder = "e.g. county"),
-       conditionalPanel(
-         condition = "input.downloadMethod != 'file'",
-         textInput("downloadAuth", label = inputLabelInfo(
-           linkId = "downloadAuthInfo",
-           labelText = "Enter authentication details for this dataset",
-           iconText = "Authentication details for dataset's that require authentication for download (click for more info)"))),
-       conditionalPanel(
-         condition = "input.downloadMethod == 'file'",
-         textInput("downloadFilename", label = inputLabelInfo(
-           linkId = "downloadFilenameInfo",
-           labelText = "Enter the name of the dataset file",
-           iconText = "The name of the file downloaded from the source URL"),
-           placeholder = "e.g. daily_aqi_by_county_2020.csv")),
-      conditionalPanel(
-        condition = "input.isGeom == true",
-        radioButtons("geomType", label = inputLabelInfo(
-          linkId = "geomTypeInfo",
-          labelText = "What type of geometry?",
-          iconText = "The geometry type of the dataset (click for more info)"),
-          choices = c("point", "line", "polygon")),
-        # TODO link to detailed page describing geom_spec
-        textAreaInput("geomSpec", label = inputLabelInfo( # TODO geom_spec creator should be it's own tab
-          linkId = "geomSpecInfo",
-          labelText = "Create a geom_spec",
-          iconText = "A geom_spec is used to parse the dataset into a geom_X table (click for more info)"),
-          height = '18em',
-          placeholder = "Manually create a JSON geom_spec: e.g. \n\n{\n\t\"stage_transform\":\n\t\t[\n\t\t\t\"dplyr::filter(staged, ...)\",\n\t\t\t\"dplyr::mutate(staged, ...)\",\n\t\t\t\"...\"\n\t\t]\n}\n\nor use the specWriter tool"),
-        checkboxInput("showSpecWriter", label = inputLabelInfo(
-          linkId = "showSpecWriterInfo",
-          labelText = "Show the specWriter tool",
-          iconText = "The specWriter tool provides an interface for creating a JSON-formatted geom_spec"),
-          value = TRUE # TODO delete me after dev!!! Only for dev!!
-          )),
-        conditionalPanel(
-          condition = "input.hasAttributes == true",
-          textInput("geomDependency", label = inputLabelInfo( # TODO this option should pick from a list that comes from existing geometry data source UUID
-            linkId = "geomDependencyInfo",
-            labelText = "Enter a geometry dependency UUID",
-            iconText = "Attributes must be associated with a geometry. What is the associated geometries UUID? (click for more info)"),
-            placeholder = "e.g. 1234")
-        )
-      )
-    ),
-    mainPanel(
-      style = "height: 90vh; overflow-y: auto;",
-      tableOutput("dataSource"),
-      actionButton("addDataSource", "Create"),
-      actionButton("createInsertSql", "Create INSERT SQL")
-      # TODO add a box with summary info for data source that populates after download
-    )
-  ),
-  fluidRow(
-    column(12,
-           conditionalPanel(
-             condition = "input.showSpecWriter == true && input.isGeom == true",
-             titlePanel("Gaia specWriter"),
-             sidebarLayout(
-               sidebarPanel(
-                 fluidRow(
-                   htmltools::h4("Add Transformations"),
-                   htmltools::span(
-                     div(style="display:inline-block",textInput("mutateStatement", "Mutate:")),
-                     div(style="display:inline-block",actionButton("addMutate", "", icon = icon("plus")),width=6)),
-                   div(id="mutates"),
-                   htmltools::br(),
-                   htmltools::span(
-                     div(style="display:inline-block",textInput("filterStatement", "Filter:")),
-                     div(style="display:inline-block",actionButton("addFilter", "", icon = icon("plus")),width=6)),
-                   div(id="filters"),
-                   htmltools::br(),
-                   htmltools::span(
-                     div(style="display:inline-block",textInput("selectStatement", "Select:")),
-                     div(style="display:inline-block",actionButton("addSelect", "", icon = icon("plus")),width=6)),
-                   div(id="selects")
-                 ),
-                 fluidRow(
-                   htmltools::h4("geom_spec Output"),
-                   htmlOutput("specWriterOutput")
-                   # textAreaInput("specWriterOutput", "",
-                   #               value = '{"stage_transform": []}')
-                 )
+  titlePanel("Gaia Source Creator"),
+  tabsetPanel(
+    tabPanel(
+      "Data Source",
+      sidebarLayout(
+        sidebarPanel(
+          style = "height: 90vh; overflow-y: auto;",
+          tabPanelBody("dataSourceType",
+             radioButtons("downloadMethod", label = inputLabelInfo(
+               linkId = "downloadMethodInfo",
+               labelText = "Download Method",
+               iconText = "Is the dataset obtained via a direct download URL or an API call?"),
+               choiceNames = c("Direct Download", "API"),
+               choiceValues = c("file", "api")),
+             textInput("sourceUrl", label = inputLabelInfo(
+               linkId = "sourceUrlInfo",
+               labelText = "Enter the source URL for the dataset",
+               iconText = "A URL for a direct download of geospatial data (click for more info)"),
+               placeholder = "e.g. https://aqs.epa.gov/aqsweb/airdata/daily_aqi_by_county_2020.zip"),
+             actionButton("startDownload", "Start Download"),
+             textInput("documentationUrl", label = inputLabelInfo(
+               linkId = "documentationUrlInfo",
+               labelText = "Enter the documentation URL for the dataset",
+               iconText = "A URL that links to the documentation webpage for the dataset"),
+               placeholder = "e.g. https://www.epa.gov/aqs"),
+             checkboxInput("isGeom", label = inputLabelInfo(
+               linkId = "isGeomInfo",
+               labelText = "This dataset contains geometry information",
+               iconText = "Does this dataset contain geometry information? (click for more info)"),
+               # value = TRUE # TODO delete me after dev!!! only for dev!!!
                ),
-               mainPanel(
-                 htmltools::h4("Tranformed Table Output"),
-                 style = "height: 90vh; overflow-y: auto;",
-                 tableOutput("transformedSourceTable")
-               )
-             )
-           ))
+             checkboxInput("hasAttributes", label = inputLabelInfo(
+               linkId = "hasAttributesInfo",
+               labelText = "This dataset contains attribute information",
+               iconText = "Does this dataset contain attribute information? (click for more info)"))),
+          tabPanelBody("mainDataSourceFields",
+             textInput("orgId", label = inputLabelInfo(
+               linkId = "orgIdInfo",
+               labelText = "Enter the organization that hosts this dataset",
+               iconText = "The name, short name, or acronym of the organization that created the dataset (click for more info) "),
+               value = "",
+               placeholder = "e.g. EPA"),
+             textInput("orgSetId", label = inputLabelInfo(
+               linkId = "orgSetIdInfo",
+               labelText = "Enter the organization's subset/dataset ID",
+               iconText = "The subset of the organization that created this dataset (click for more info)"),
+               placeholder = "e.g. AQS"),
+             textInput("datasetName", label = inputLabelInfo(
+               linkId = "datasetNameInfo",
+               labelText = "Enter a dataset name",
+               iconText = "The name of the dataset (click for more info)"),
+               placeholder = "e.g. daily_aqi_by_county_2020"),
+             textInput("datasetVersion", label = inputLabelInfo(
+               linkId = "datasetVersionInfo",
+               labelText = "Enter a dataset version",
+               iconText = "The version or year of the dataset (click for more info)"),
+               placeholder = "e.g. 2020"),
+             textInput("downloadSubtype", label = inputLabelInfo( # This could be dropdown of supported types
+               linkId = "downloadSubtypeInfo",
+               labelText = "Enter a download subtype",
+               iconText = "The download subtype that the URL links to, such as zip or gzip (click for more info)"),
+               placeholder = "e.g. zip"),
+             textInput("downloadDataStandard", label = inputLabelInfo( # This could be dropdown of supported types
+               linkId = "downloadDataStandardInfo",
+               labelText = "Enter a download data standard",
+               iconText = "The standard that the downloaded data is in, such as CSV or SHP (click for more info)"),
+               placeholder = "e.g. csv"),
+             textInput("boundaryType", label = inputLabelInfo(
+               linkId = "boundaryTypeInfo",
+               labelText = "Enter a boundary type",
+               iconText = "Boundary type is the space that the geometry or attribute pertains to, such as county or ZCTA (click for more info)"),
+               placeholder = "e.g. county"),
+           conditionalPanel(
+             condition = "input.downloadMethod != 'file'",
+             textInput("downloadAuth", label = inputLabelInfo(
+               linkId = "downloadAuthInfo",
+               labelText = "Enter authentication details for this dataset",
+               iconText = "Authentication details for dataset's that require authentication for download (click for more info)"))),
+           conditionalPanel(
+             condition = "input.downloadMethod == 'file'",
+             textInput("downloadFilename", label = inputLabelInfo(
+               linkId = "downloadFilenameInfo",
+               labelText = "Enter the name of the dataset file",
+               iconText = "The name of the file downloaded from the source URL"),
+               placeholder = "e.g. daily_aqi_by_county_2020.csv")),
+          conditionalPanel(
+            condition = "input.isGeom == true",
+            radioButtons("geomType", label = inputLabelInfo(
+              linkId = "geomTypeInfo",
+              labelText = "What type of geometry?",
+              iconText = "The geometry type of the dataset (click for more info)"),
+              choices = c("point", "line", "polygon")),
+            # TODO link to detailed page describing geom_spec
+            textAreaInput("geomSpec", label = inputLabelInfo( # TODO geom_spec creator should be it's own tab
+              linkId = "geomSpecInfo",
+              labelText = "Create a geom_spec",
+              iconText = "A geom_spec is used to parse the dataset into a geom_X table (click for more info)"),
+              height = '18em',
+              placeholder = "Manually create a JSON geom_spec: e.g. \n\n{\n\t\"stage_transform\":\n\t\t[\n\t\t\t\"dplyr::filter(staged, ...)\",\n\t\t\t\"dplyr::mutate(staged, ...)\",\n\t\t\t\"...\"\n\t\t]\n}\n\nor use the specWriter tool"),
+            checkboxInput("showSpecWriter", label = inputLabelInfo(
+              linkId = "showSpecWriterInfo",
+              labelText = "Show the specWriter tool",
+              iconText = "The specWriter tool provides an interface for creating a JSON-formatted geom_spec"),
+              value = TRUE # TODO delete me after dev!!! Only for dev!!
+              )),
+            conditionalPanel(
+              condition = "input.hasAttributes == true",
+              textInput("geomDependency", label = inputLabelInfo( # TODO this option should pick from a list that comes from existing geometry data source UUID
+                linkId = "geomDependencyInfo",
+                labelText = "Enter a geometry dependency UUID",
+                iconText = "Attributes must be associated with a geometry. What is the associated geometries UUID? (click for more info)"),
+                placeholder = "e.g. 1234")
+            )
+          )
+        ),
+        mainPanel(
+          style = "height: 90vh; overflow-y: auto;",
+          tableOutput("dataSource"),
+          actionButton("addDataSource", "Create"),
+          actionButton("createInsertSql", "Create INSERT SQL")
+          # TODO add a box with summary info for data source that populates after download
+        )
+      ),
+      fluidRow(
+        column(12,
+               conditionalPanel(
+                 condition = "input.showSpecWriter == true && input.isGeom == true",
+                 titlePanel("Gaia specWriter"),
+                 sidebarLayout(
+                   sidebarPanel(
+                     fluidRow(
+                       htmltools::h4("Add Transformations"),
+                       htmltools::span(
+                         div(style="display:inline-block",textInput("mutateStatement", "Mutate:")),
+                         div(style="display:inline-block",actionButton("addMutate", "", icon = icon("plus")),width=6)),
+                       div(id="mutates"),
+                       htmltools::br(),
+                       htmltools::span(
+                         div(style="display:inline-block",textInput("filterStatement", "Filter:")),
+                         div(style="display:inline-block",actionButton("addFilter", "", icon = icon("plus")),width=6)),
+                       div(id="filters"),
+                       htmltools::br(),
+                       htmltools::span(
+                         div(style="display:inline-block",textInput("selectStatement", "Select:")),
+                         div(style="display:inline-block",actionButton("addSelect", "", icon = icon("plus")),width=6)),
+                       div(id="selects")
+                     ),
+                     fluidRow(
+                       htmltools::h4("geom_spec Output"),
+                       htmlOutput("specWriterOutput")
+                       # textAreaInput("specWriterOutput", "",
+                       #               value = '{"stage_transform": []}')
+                     )
+                   ),
+                   mainPanel(
+                     htmltools::h4("Tranformed Table Output"),
+                     style = "height: 90vh; overflow-y: auto;",
+                     tableOutput("transformedSourceTable")
+                   )
+                 )
+               ))
+      )
+      
+      ),
+    tabPanel("Variable Source", h1("Variable Source"))
   )
 )
 
