@@ -140,7 +140,8 @@ ui <- fluidPage(
     mainPanel(
       style = "height: 90vh; overflow-y: auto;",
       tableOutput("dataSource"),
-      actionButton("addDataSource", "Create")
+      actionButton("addDataSource", "Create"),
+      actionButton("createInsertSql", "Create INSERT SQL")
       # TODO add a box with summary info for data source that populates after download
     )
   ),
@@ -256,10 +257,10 @@ server <- function(input, output, session) {
           filename <- utils::unzip(tempzip, exdir = gisTempdir)
         }
       })
-      if (length(filename) > 1) {
-        # popup window that asks to select a source
-        # THIS MAY BE UNNECESSARY
-      } 
+      # if (length(filename) > 1) {
+      #   # popup window that asks to select a source
+      #   # THIS MAY BE UNNECESSARY
+      # } 
       if(any(stringr::str_detect(filename, ".shp$"))) {
         filename <- filename[stringr::str_detect(filename, ".shp$")]
         updateCheckboxInput(inputId = "isGeom", value = TRUE)
@@ -296,6 +297,25 @@ server <- function(input, output, session) {
     } else {
       showNotification("Make sure all fields are correctly filled out", type = "error", duration = 3)
     }
+  })
+  
+  observeEvent(input$createInsertSql, {
+    # TODO
+    # This function should:
+    # 1. run the function that takes all dataSource data and creates a SQL INSERT 
+    sql_insert_text <- paste0(
+      "INSERT INTO backbone.data_source VALUES (<INSERT-ID> '",
+      input$orgId, "', '", input$orgSetId, "', '", input$datasetName, "', ",
+      input$datasetVersion, ", '", input$geomType, "', '", input$geomSpec, "', '", input$boundaryType, "', ",
+      as.numeric(input$hasAttributes), ", ", input$geomDependency, ", '", input$downloadMethod, "', '",
+      input$downloadSubtype, "', '", input$downloadDataStandard, "', '", input$downloadFilename, "', '",
+      input$sourceUrl, "', '", input$downloadAuth, "', '", input$documentationUrl, "')"
+    )
+    #1a. replace empty string (" ,") with NULL (NULL,)
+
+    sql_insert_text <- stringr::str_replace_all(sql_insert_text, "''", "NULL")
+    # 2. Displays as pop-up window with editable text window and a copy button
+    print(sql_insert_text)
   })
 
 
