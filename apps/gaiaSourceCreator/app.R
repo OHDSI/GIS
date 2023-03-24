@@ -28,6 +28,7 @@ ui <- fluidPage(
   titlePanel("Gaia Source Creator"),
   tabsetPanel(
     tabPanel(
+      # GEOM UI -------
       "Data Source",
       sidebarLayout(
         sidebarPanel(
@@ -142,9 +143,9 @@ ui <- fluidPage(
         ),
         mainPanel(
           style = "height: 90vh; overflow-y: auto;",
-          tableOutput("dataSource"),
-          actionButton("addDataSource", "Create"),
-          actionButton("createInsertSql", "Create INSERT SQL")
+          tableOutput("dataSourceGeom"),
+          actionButton("addDataSourceGeom", "Create"),
+          actionButton("createInsertSqlGeom", "Create INSERT SQL")
           # TODO add a box with summary info for data source that populates after download
         )
       ),
@@ -180,7 +181,7 @@ ui <- fluidPage(
                      )
                    ),
                    mainPanel(
-                     htmltools::h4("Tranformed Table Output"),
+                     htmltools::h4("Transformed Table Output"),
                      style = "height: 90vh; overflow-y: auto;",
                      tableOutput("transformedSourceTable")
                    )
@@ -189,11 +190,137 @@ ui <- fluidPage(
       )
       
       ),
-    tabPanel("Variable Source", h1("Variable Source"))
+    tabPanel("Variable Source", 
+   # VARIABLE UI -------
+      sidebarLayout(
+        sidebarPanel(
+          style = "height: 70vh; overflow-y: auto;",
+          tabPanelBody("mainVariableSourceFields",
+            textInput("variableName", label = inputLabelInfo(
+              linkId = "variableNameInfo",
+              labelText = "Enter a variable name",
+              iconText = "The name of the variable (click for more info)"),
+              placeholder = "e.g. PM2.5"),
+            textInput("variableDescription", label = inputLabelInfo(
+              linkId = "variableDescriptionInfo",
+              labelText = "Enter a variable description",
+              iconText = "A written description of the variable (click for more info)"),
+              placeholder = "e.g. The Air Quality Index for the day for PM2.5"),
+            textInput("dataSourceUuid", label = inputLabelInfo( # This could be dropdown of supported types
+              linkId = "dataSourceUuidInfo",
+              labelText = "Enter the UUID of this variable's Data Source",
+              iconText = "The unique identifier of the data source record with which this variable is associated (click for more info)"),
+              placeholder = "e.g. 7870"),
+            textAreaInput("attrSpec", label = inputLabelInfo( # TODO geom_spec creator should be it's own tab
+              linkId = "attrSpecInfo",
+              labelText = "Create an attr_spec",
+              iconText = "An attr_spec is used to parse the dataset into an attr_X table (click for more info)"),
+              height = '18em',
+              placeholder = "Manually create a JSON attr_spec: e.g. \n\n{\n\t\"stage_transform\":\n\t\t[\n\t\t\t\"dplyr::filter(staged, ...)\",\n\t\t\t\"dplyr::mutate(staged, ...)\",\n\t\t\t\"...\"\n\t\t]\n}\n\nor use the specWriter tool")
+          )
+        ),
+        mainPanel(
+          style = "height: 70vh; overflow-y: auto;",
+          tableOutput("dataSourceVar"),
+          actionButton("addDataSourceVar", "Create"),
+          actionButton("createInsertSqlVar", "Create INSERT SQL")
+          # TODO add a box with summary info for data source that populates after download
+        ),
+     ),
+     fluidRow(
+       column(12,
+        titlePanel("Gaia specWriter"),
+        sidebarLayout(
+          sidebarPanel(
+            fluidRow(
+              htmltools::h4("Add Transformations"),
+              htmltools::span(
+                div(style="display:inline-block",textInput("mutateStatementAttr", "Mutate:")),
+                div(style="display:inline-block",actionButton("addMutateAttr", "", icon = icon("plus")),width=6)),
+              div(id="mutatesAttr"),
+              htmltools::br(),
+              htmltools::span(
+                div(style="display:inline-block",textInput("filterStatementAttr", "Filter:")),
+                div(style="display:inline-block",actionButton("addFilterAttr", "", icon = icon("plus")),width=6)),
+              div(id="filtersAttr"),
+              htmltools::br(),
+              htmltools::span(
+                div(style="display:inline-block",textInput("selectStatementAttr", "Select:")),
+                div(style="display:inline-block",actionButton("addSelectAttr", "", icon = icon("plus")),width=6)),
+              div(id="selectsAttr")
+            ),
+            fluidRow(
+              htmltools::h4("attr_spec Output"),
+              htmlOutput("specWriterOutputAttr")
+            )
+          ),
+          mainPanel(
+            htmltools::h4("Transformed Table Output"),
+            style = "height: 90vh; overflow-y: auto;",
+            tableOutput("transformedSourceTableAttr")
+          )
+        )
+      )
+     )
+    )
   )
 )
 
 server <- function(input, output, session) {
+
+
+  # GEOM ----------
+  
+  # Main Panel tables -------------------------------------------------------
+  
+  dataSourceTableGeom <- reactive(dplyr::tibble("org_id" = input$orgId,
+                                                "org_set_id" = input$orgSetId,
+                                                "dataset_name" = input$datasetName,
+                                                "dataset_version" = input$datasetVersion,
+                                                "geom_type" = input$geomType,
+                                                "geom_spec" = input$geomSpec,
+                                                "boundary_type" = input$boundaryType,
+                                                "has_attributes" = as.integer(input$hasAttributes),
+                                                "geom_dependency_uuid" = as.integer(input$geomDependency),
+                                                "download_method" = input$downloadMethod,
+                                                "download_subtype" = input$downloadSubtype,
+                                                "download_data_standard" = input$downloadDataStandard,
+                                                "download_filename" = input$downloadFilename,
+                                                "download_url" = input$sourceUrl,
+                                                "download_auth" = input$downloadAuth,
+                                                "documentation_url" = input$documentationUrl))
+  
+  
+  observeEvent(input$sourceUrl, {
+    updateTextInput(inputId = "downloadSubtype",
+                    value = stringr::str_extract(input$sourceUrl, "(?<=\\.)\\w+$"))
+  })
+  
+  observeEvent(input$isGeom, {
+    updateRadioButtons(inputId = "geomType", selected = character(0))
+    updateTextInput(inputId = "geomSpec", value = NA_character_)
+  })
+  
+  output$dataSourceGeom <- renderTable(dataSourceTableGeom())
+  
+  output$transformedSourceTableGeom <- renderTable(transformedSourceTableGeom())
+  
+  
+  # Info popups -------------------------------------------------------------
+  observeEvent(input$sourceUrlInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
+  observeEvent(input$isGeomInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
+  observeEvent(input$hasAttributesInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
+  observeEvent(input$orgIdInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
+  observeEvent(input$orgSetIdInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
+  observeEvent(input$datasetNameInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
+  observeEvent(input$datasetVersionInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
+  observeEvent(input$downloadSubtypeInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
+  observeEvent(input$downloadDataStandardInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
+  observeEvent(input$boundaryTypeInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
+  observeEvent(input$geomTypeInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
+  observeEvent(input$geomSpecInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
+  observeEvent(input$geomDependencyInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
+
 
 
 # Validate ----------------------------------------------------------------
@@ -212,22 +339,6 @@ server <- function(input, output, session) {
   geom_validator$condition(~ isTRUE(input$isGeom))
   geom_validator$add_rule("geomType", sv_required())
   geom_validator$add_rule("geomSpec", sv_required())
-
-# Info popups -------------------------------------------------------------
-  observeEvent(input$sourceUrlInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
-  observeEvent(input$isGeomInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
-  observeEvent(input$hasAttributesInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
-  observeEvent(input$orgIdInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
-  observeEvent(input$orgSetIdInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
-  observeEvent(input$datasetNameInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
-  observeEvent(input$datasetVersionInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
-  observeEvent(input$downloadSubtypeInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
-  observeEvent(input$downloadDataStandardInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
-  observeEvent(input$boundaryTypeInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
-  observeEvent(input$geomTypeInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
-  observeEvent(input$geomSpecInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
-  observeEvent(input$geomDependencyInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
-
 
 
 
@@ -295,7 +406,7 @@ server <- function(input, output, session) {
   })
 
 
-  observeEvent(input$addDataSource, {
+  observeEvent(input$addDataSourceGeom, {
     main_iv$enable()
     if (main_iv$is_valid()) {
       # TODO some transform function to format correctly for insert
@@ -306,7 +417,7 @@ server <- function(input, output, session) {
     }
   })
   
-  observeEvent(input$createInsertSql, {
+  observeEvent(input$createInsertSqlGeom, {
     # TODO
     # This function should:
     # 1. run the function that takes all dataSource data and creates a SQL INSERT 
@@ -325,40 +436,6 @@ server <- function(input, output, session) {
     print(sql_insert_text)
   })
 
-
-# Main Panel tables -------------------------------------------------------
-
-  dataSourceTable <- reactive(dplyr::tibble("org_id" = input$orgId,
-                                            "org_set_id" = input$orgSetId,
-                                            "dataset_name" = input$datasetName,
-                                            "dataset_version" = input$datasetVersion,
-                                            "geom_type" = input$geomType,
-                                            "geom_spec" = input$geomSpec,
-                                            "boundary_type" = input$boundaryType,
-                                            "has_attributes" = as.integer(input$hasAttributes),
-                                            "geom_dependency_uuid" = as.integer(input$geomDependency),
-                                            "download_method" = input$downloadMethod,
-                                            "download_subtype" = input$downloadSubtype,
-                                            "download_data_standard" = input$downloadDataStandard,
-                                            "download_filename" = input$downloadFilename,
-                                            "download_url" = input$sourceUrl,
-                                            "download_auth" = input$downloadAuth,
-                                            "documentation_url" = input$documentationUrl))
-
-
-  observeEvent(input$sourceUrl, {
-    updateTextInput(inputId = "downloadSubtype",
-                    value = stringr::str_extract(input$sourceUrl, "(?<=\\.)\\w+$"))
-  })
-
-  observeEvent(input$isGeom, {
-    updateRadioButtons(inputId = "geomType", selected = character(0))
-    updateTextInput(inputId = "geomSpec", value = NA_character_)
-  })
-
-  output$dataSource <- renderTable(dataSourceTable())
-
-  output$transformedSourceTable <- renderTable(transformedSourceTable())
 
 
 # specWriter --------------------------------------------------------------
@@ -431,6 +508,98 @@ server <- function(input, output, session) {
       '\t]\n}</pre>'
       )
     })
+  
+  #( . . . . . . . . . . ) --------
+  # VARIABLE ----------
+  # Main Panel tables -------------------------------------------------------
+  
+  dataSourceTableVar <- reactive(dplyr::tibble("variable_name" = input$variableName,
+                                                "variable_description" = input$variableDescription,
+                                                "data_source_uuid" = input$dataSourceUuid,
+                                                "attr_spec" = input$attrSpec))
+  
+  output$dataSourceVar <- renderTable(dataSourceTableVar())
+  
+  output$transformedSourceTableVar <- renderTable(transformedSourceTableVar())
+  
+  
+  # Info popups -------------------------------------------------------------
+  observeEvent(input$variableNameInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
+  observeEvent(input$variableDescriptionInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
+  observeEvent(input$dataSourceUuidInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
+  observeEvent(input$attrSpecInfo, {shinyalert("This feature not yet ready", "Once this feature is ready, each info icon will connect to an individualized popup with guiding information about the input required. Neat!", type = 'info')})
+  
+  # specWriter --------------------------------------------------------------
+  
+  specReactiveAttr <- reactiveValues()
+  
+  observeEvent(input$addMutateAttr, {
+    specReactiveAttr$mutateListAttr <- c(isolate(specReactiveAttr$mutateListAttr), isolate(input$mutateStatementAttr))
+    updateTextInput(inputId = "mutateStatementAttr", value = "")
+    nr <- input$mutateStatementAttr
+    insertUI(
+      selector = "#mutatesAttr",
+      ui = div(
+        id = paste0("newInput", nr),
+        htmltools::span(nr),
+        actionButton(paste0("removeBtn", nr), label = "", icon = icon("minus")),
+        htmltools::br()
+      )
+    )
+    observeEvent(input[[paste0("removeBtn", nr)]], {
+      shiny::removeUI(selector = paste0("#newInput", nr))
+      specReactiveAttr$mutateListAttr <- specReactiveAttr$mutateListAttr[specReactiveAttr$mutateListAttr != nr]
+    })
+  })
+  
+  observeEvent(input$addFilterAttr, {
+    specReactiveAttr$filterListAttr <- c(isolate(specReactiveAttr$filterListAttr), isolate(input$filterStatementAttr))
+    updateTextInput(inputId = "filterStatementAttr", value = "")
+    nr <- input$filterStatementAttr
+    insertUI(
+      selector = "#filtersAttr",
+      ui = div(
+        id = paste0("newInput", nr),
+        htmltools::span(nr),
+        actionButton(paste0("removeBtn", nr), label = "", icon = icon("minus")),
+        htmltools::br()
+      )
+    )
+    observeEvent(input[[paste0("removeBtn", nr)]], {
+      shiny::removeUI(selector = paste0("#newInput", nr))
+      specReactiveAttr$filterListAttr <- specReactiveAttr$filterListAttr[specReactiveAttr$filterListAttr != nr]
+    })
+  })
+  
+  observeEvent(input$addSelectAttr, {
+    specReactiveAttr$selectListAttr <- c(isolate(specReactiveAttr$selectListAttr), isolate(input$selectStatementAttr))
+    updateTextInput(inputId = "selectStatementAttr", value = "")
+    nr <- input$selectStatementAttr
+    insertUI(
+      selector = "#selectsAttr",
+      ui = div(
+        id = paste0("newInput", nr),
+        htmltools::span(nr),
+        actionButton(paste0("removeBtn", nr), label = "", icon = icon("minus")),
+        htmltools::br()
+      )
+    )
+    observeEvent(input[[paste0("removeBtn", nr)]], {
+      shiny::removeUI(selector = paste0("#newInput", nr))
+      specReactiveAttr$selectListAttr <- specReactiveAttr$selectListAttr[specReactiveAttr$selectListAttr != nr]
+    })
+  })
+  
+  output$specWriterOutputAttr <- renderText({
+    paste0(
+      '<pre>{\n\t"stage_transform": [\n',
+      ifelse(length(specReactiveAttr$mutateListAttr) > 0, paste0('\t\t"dplyr::mutate(staged,\n\t\t\t\t', paste(specReactiveAttr$mutateListAttr, collapse = ",\n\t\t\t\t"), ')",\n'), paste0("")),
+      ifelse(length(specReactiveAttr$filterListAttr) > 0, paste0('\t\t"dplyr::filter(staged,\n\t\t\t\t', paste(specReactiveAttr$filterListAttr, collapse = ",\n\t\t\t\t"), ')",\n'), paste0("")),
+      ifelse(length(specReactiveAttr$selectListAttr) > 0, paste0('\t\t"dplyr::select(staged,\n\t\t\t\t', paste(specReactiveAttr$selectListAttr, collapse = ",\n\t\t\t\t"), ')"\n'), paste0("")),
+      '\t]\n}</pre>'
+    )
+  })
 }
 
 shinyApp(ui, server)
+
