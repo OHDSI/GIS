@@ -1,3 +1,34 @@
+required_cran <- c(
+  'shinydashboard'  = system.file(package = 'shinydashboard'),
+  'reactable'       = system.file(package = 'reactable'),
+  'shinyjs'         = system.file(package = 'shinyjs'),
+  'waiter'          = system.file(package = 'waiter'),
+  'config'          = system.file(package = 'config'),
+  'DT'              = system.file(package = 'DT')
+)
+
+required_gh <- c(
+  "remotes::install_github('OHDSI/GIS/packages/gaiaCore')" = system.file(package = 'GIS')
+)
+
+if ("" %in% required_cran) {
+  
+  command = paste0("install.packages(c('", paste(names(required_cran)[required_cran == ""], collapse = '\', \''), "'))")
+  message(
+    paste0("To run this RShiny, the CRAN package(s) ",
+         knitr::combine_words(names(required_cran)[required_cran == ""]),
+         " must be installed.\nRun the command:\n",
+         command, "\nand try again."))
+}
+
+if ("" %in% required_gh) {
+  command = paste(names(required_gh)[required_gh == ""], collapse = "\n")
+  message(
+    paste0("Missing GH packages.\nRun the commands:\n",
+           command, "\nand try again."))
+}
+
+
 library(shiny)
 library(shinydashboard)
 library(reactable)
@@ -5,6 +36,7 @@ library(shinyjs)
 library(waiter)
 library(config)
 library(DT)
+library(GIS)
 
 # setwd("C:/Users/kzollovenecek/Documents/gaiaShiny/")
 #
