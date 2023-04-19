@@ -58,8 +58,10 @@ loadGeometry <- function(connectionDetails, dataSourceUuid) {
 
   res <- plyr::rbind.fill(geomTemplate, stagedResult)
 
+  if ("geom_record_id" %in% names(res)) {
   res <- dplyr::select(res,
                        -geom_record_id)
+  }
 
   if ("geometry" %in% names(res)) {
     res <- dplyr::select(res,
