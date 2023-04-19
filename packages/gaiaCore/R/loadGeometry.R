@@ -52,9 +52,11 @@ loadGeometry <- function(connectionDetails, dataSourceUuid) {
   }
 
   geomTemplate <- getGeomTemplate(connectionDetails = connectionDetails)
-
+  
+  names(stagedResult) <-  tolower(names(stagedResult))
+  
   stagedResult <- dplyr::select(stagedResult,
-                                names(geomTemplate)[names(geomTemplate) %in% names(stagedResult)])
+                                tolower(names(geomTemplate))[tolower(names(geomTemplate)) %in% names(stagedResult)])
 
   res <- plyr::rbind.fill(geomTemplate, stagedResult)
 
@@ -78,6 +80,13 @@ loadGeometry <- function(connectionDetails, dataSourceUuid) {
   importGeomTable(connectionDetails = connectionDetails,
                   staged = res,
                   geomIndex = geomIndexRecord)
+  
+  # TODO Set SRID on geometry table import
+  if (res$geom_local_value)
+    setSrid(connectionDetails = connectionDetails,
+            schema =  geomIndexRecord$database_schema,
+            name = geomIndexRecord$table_name,
+            column = 'geom_local_value')
 }
 
 #' Import a well-formatted geometry table into an empty instance of geom_X in PostGIS
