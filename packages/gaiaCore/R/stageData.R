@@ -17,7 +17,6 @@ standardizeStaged <- function(staged, spec) {
   transformCommands <-jsonSpec$stage_transform
   for (cmd in transformCommands) {
     staged <- eval(parse(text=cmd))
-
   }
   return(staged)
 }

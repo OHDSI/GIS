@@ -44,19 +44,24 @@ loadGeometry <- function(connectionDetails, dataSourceUuid) {
 
   stagedResult <- standardizeStaged(staged = staged, spec = dataSourceRecord$geom_spec)
 
-
-
+  # Transform local geometry to epsg:4326
+  if (!"geom_wgs84" %in% names(stagedResult)) {
+    stagedResult$geom_wgs84 <- sf::st_transform(stagedResult$geom_local_value, 4326)
+  }
+  
   # format for insert
   if (!"character" %in% class(stagedResult$geom_local_value)) {
     stagedResult$geom_local_value <- sf::st_as_binary(stagedResult$geom_local_value, EWKB = TRUE, hex = TRUE)
+    stagedResult$geom_wgs84 <- sf::st_as_binary(stagedResult$geom_wgs84, EWKB = TRUE, hex = TRUE)
+    
   }
-
-  geomTemplate <- getGeomTemplate(connectionDetails = connectionDetails)
   
+  geomTemplate <- getGeomTemplate(connectionDetails = connectionDetails)
+  names(geomTemplate) <- tolower(names(geomTemplate))
   names(stagedResult) <-  tolower(names(stagedResult))
   
   stagedResult <- dplyr::select(stagedResult,
-                                tolower(names(geomTemplate))[tolower(names(geomTemplate)) %in% names(stagedResult)])
+                                names(geomTemplate)[names(geomTemplate) %in% names(stagedResult)])
 
   res <- plyr::rbind.fill(geomTemplate, stagedResult)
 
@@ -71,7 +76,7 @@ loadGeometry <- function(connectionDetails, dataSourceUuid) {
   }
 
   res$geom_name <- iconv(res$geom_name, "latin1")
-
+  
   createGeomInstanceTable(connectionDetails = connectionDetails,
                           schema =  geomIndexRecord$database_schema,
                           name = geomIndexRecord$table_name)
@@ -81,12 +86,8 @@ loadGeometry <- function(connectionDetails, dataSourceUuid) {
                   staged = res,
                   geomIndex = geomIndexRecord)
   
-  # TODO Set SRID on geometry table import
-  if (res$geom_local_value)
-    setSrid(connectionDetails = connectionDetails,
-            schema =  geomIndexRecord$database_schema,
-            name = geomIndexRecord$table_name,
-            column = 'geom_local_value')
+  # TODO Set SRID on geom_wgs84 table import
+  
 }
 
 #' Import a well-formatted geometry table into an empty instance of geom_X in PostGIS
