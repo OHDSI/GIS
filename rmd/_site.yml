@@ -29,6 +29,8 @@ navbar:
           href: "gaiaCore/index.html"
         - text: "gaiaDB"
           href: "gaiadb.html"
+        - text: "Geocoding Workflow"
+          href: "geocoding.html"
     - text: "Adding Data Sources"
       icon: fa-plus-square
       menu:
