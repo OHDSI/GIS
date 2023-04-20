@@ -26,5 +26,89 @@ script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
   });
 ```
 
+# Overview
+
+This workflow demonstrates how to use the OHDSI Gaia suite of GIS tools to filter an existing OHDSI cohort, as defined in ATLAS, using geospatial data.
+
 ![Geocoding Workflow (Cohort Definitions) - [Click here to download](https://github.com/OHDSI/GIS/raw/main/rmd/images/geocodingSchemeCohorts.png)](images/geocodingSchemeCohorts.png){width=150%}
+
+## Prerequisites
+
+This workflow requires the `DatabaseConnector`, `ROhdsiWebApi`, and `CohortGenerator` packages. For this demonstration, we will be using the `Eunomia` package as the source OMOP database. We will be using the [Demo ATLAS](atlas-demo.ohdsi.org)
+instance hosted by OHDSI.
+
+```{r eval=FALSE}
+install.packages("DatabaseConnector")
+remotes::install_github("OHDSI/ROhdsiWebApi")
+remotes::install_github("OHDSI/CohortGenerator")
+remotes::install_github("OHDSI/Eunomia")
+```
+
+## Configuring Connection to the Servers
+We need to configure connections to two servers: the server hosting the OMOP database and the server hosting the gaiaDB Postgres database.
+
+### Connect to OMOP server:
+```{r tidy=FALSE,eval=FALSE}
+library(DatabaseConnector)
+connectionDetails <- createConnectionDetails(
+  dbms = "postgresql",
+  server = "localhost/ohdsi",
+  user = "myUser",
+  password = "mySecretPassword"
+)
+```
+
+For the purposes of this example, we will use the Eunomia test CDM package that is in an Sqlite database stored locally.
+```{r results = FALSE,message = FALSE,warning=FALSE, message = FALSE,eval=FALSE}
+connectionDetails <- Eunomia::getEunomiaConnectionDetails()
+cdmDatabaseSchema <- "main"
+tempEmulationSchema <- NULL
+cohortDatabaseSchema <- "main"
+cohortTable <- "cohort"
+```
+
+### Connect to gaiaDB server:
+If you don't already have a gaiaDB server set up, see the [installation instructions](https://ohdsi.github.io/GIS/installation.html#gaiaDB_database) before proceeding.
+```{r tidy=FALSE,eval=FALSE}
+library(DatabaseConnector)
+gaiaConnectionDetails <- DatabaseConnector::createConnectionDetails(
+  dbms = "postgresql",
+  server = "localhost/gaiaDB",
+  port = 5432,
+  user="postgres",
+  password = "mySecretPassword") 
+```
+
+
+## Step 1. Define a cohort using ATLAS
+Use the OHDSI ATLAS tool to define a cohort 
+
+## Step 2. Import the ATLAS Cohort Definition to R
+Use the ROhdsiWebApi tool to import cohort definition to R
+
+## Step 3. Generate Cohort from the Cohort Definition
+Use the CohortGenerator tool to generate a cohort from the cohort definition
+
+## Step 4. Ingest Addresses from OMOP Database
+TODO: This should be a single function in gaiaCore
+WIP [getCohortAddresses](https://github.com/OHDSI/GIS/issues/170)
+
+## Step 5. Geocode Addresses without Coordinates
+TODO: This should be a single function in gaiaCore
+WIP [geocodeCohort](https://github.com/OHDSI/GIS/issues/162)
+
+## Step 6. Import Geocoded Cohort to gaiaDB Database
+TODO: This should be a single function in gaiaCore
+WIP [importCohort](https://github.com/OHDSI/GIS/issues/171)
+
+## Step 7. Filter Cohort using PostGIS Functionality
+
+
+
+
+
+
+
+
+
 
