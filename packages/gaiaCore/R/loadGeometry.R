@@ -86,9 +86,13 @@ loadGeometry <- function(connectionDetails, dataSourceUuid) {
                   staged = res,
                   geomIndex = geomIndexRecord)
   
-  # TODO Set SRID on geom_wgs84 table import
+  # Set SRID on geom_wgs84 after table import
+  setSridWgs84(connectionDetails = connectionDetails,
+               staged = staged,
+               geomIndex = geomIndexRecord)
   
 }
+
 
 #' Import a well-formatted geometry table into an empty instance of geom_X in PostGIS
 #'

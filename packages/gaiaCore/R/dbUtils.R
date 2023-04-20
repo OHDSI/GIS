@@ -420,6 +420,25 @@ getGeomTemplate <- function(connectionDetails){
 }
 
 
+#' Set the SRID on the geom_wgs84 column in PostGIS gaiaDB
+#'
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#' @param staged (data.frame) A well-formatted geometry table. Created by appending staging data table to an geom_template
+#' @param geomIndex (data.frame) A full record (entire row) from the backbone.geom_index table corresponding to the registered geometry of interest
+#'
+#' @return SRID set to 4326 the geom_wgs84 column in the given table in gaiaDB
+
+setSridWgs84 <- function(connectionDetails, staged, geomIndex) {
+  geometryType <- as.character(unique(sf::st_geometry_type(staged$geometry)))
+  conn <-  DatabaseConnector::connect(connectionDetails)
+  on.exit(DatabaseConnector::disconnect(conn))
+  DatabaseConnector::executeSql(conn, sql = paste0(
+    "ALTER TABLE ", geomIndex$database_schema, ".geom_",
+    geomIndex$table_name, " ALTER COLUMN geom_wgs84 TYPE public.geometry(",
+    geometryType,", 4326) USING public.ST_SetSRID(geom_wgs84, 4326);")
+  )
+}
+
 # Load Variable -----------------------------------------------------------
 
 #' Import a well-formatted attribute table into an empty instance of attr_X in PostGIS
