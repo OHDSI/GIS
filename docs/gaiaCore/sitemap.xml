@@ -46,6 +46,9 @@
     <loc>/reference/createSchemaString.html</loc>
   </url>
   <url>
+    <loc>/reference/geocodeAddresses.html</loc>
+  </url>
+  <url>
     <loc>/reference/getAttrIndexRecord.html</loc>
   </url>
   <url>
@@ -56,6 +59,9 @@
   </url>
   <url>
     <loc>/reference/getAttrTemplate.html</loc>
+  </url>
+  <url>
+    <loc>/reference/getCohortAddresses.html</loc>
   </url>
   <url>
     <loc>/reference/getDataSourceRecord.html</loc>
@@ -97,6 +103,9 @@
     <loc>/reference/importAttrTable.html</loc>
   </url>
   <url>
+    <loc>/reference/importCohortTable.html</loc>
+  </url>
+  <url>
     <loc>/reference/importGeomIndexTable.html</loc>
   </url>
   <url>
@@ -122,6 +131,9 @@
   </url>
   <url>
     <loc>/reference/pipe.html</loc>
+  </url>
+  <url>
+    <loc>/reference/setSridWgs84.html</loc>
   </url>
   <url>
     <loc>/reference/standardizeStaged.html</loc>
