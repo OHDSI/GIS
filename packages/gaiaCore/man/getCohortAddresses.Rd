@@ -14,7 +14,7 @@ getCohortAddresses(connectionDetails, cdmDatabaseSchema, cohort)
 \item{cdmDatabseSchema}{(character) Schema name where your patient-level data in OMOP CDM format resides. Note that for SQL Server, this should include both the database and schema name, for example 'cdm_data.dbo'.}
 }
 \value{
-An augmented Cohort table with patient addresses attached
+(data.frame) An augmented Cohort table with patient addresses attached
 }
 \description{
 Get Cohort Addresses
