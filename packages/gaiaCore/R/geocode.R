@@ -63,14 +63,80 @@ geocodeAddresses <- function(addressTable) {
   # TODO  - If there should be a minimum cutoff score
   readr::write_csv(addressTable, paste0(tempdir(), '\\add.csv'))
   system(paste0('docker run --rm -v ', tempdir(), ':/tmp ghcr.io/degauss-org/geocoder:3.3.0 add.csv'))
-  geocodedTable <- readr::read_csv(paste0(tempdir(), '\\add_geocoder_3.3.0_score_threshold_0.5.csv'))
+  rawGeocodedTable <- readr::read_csv(paste0(tempdir(), '\\add_geocoder_3.3.0_score_threshold_0.5.csv'))
   file.remove(paste0(tempdir(), '\\add.csv'))
   file.remove(paste0(tempdir(), '\\add_geocoder_3.3.0_score_threshold_0.5.csv'))  
-  geocodedTable
+  geocodedTable <- sf::st_as_sf(rawGeocodedTable, coords = c("lon", "lat"), crs = 4326)
+  geocodedTable %>%
+    dplyr::select(COHORT_DEFINITION_ID,
+                  SUBJECT_ID,
+                  COHORT_START_DATE,
+                  COHORT_END_DATE,
+                  geometry)
 }
 
 
-
+#' Import a geocoded cohort table to gaiaDB
+#'
+#' @param gaiaConnectionDetails For connecting to gaiaDB. An object of class
+#'                              connectionDetails as created by the
+#'                              createConnectionDetails function
+#' @param cohort (data.frame) An OHDSI cohort table with a POINT geometry column
+#'                            named geometry 
+#' @param overwrite (boolean) Overwrite existing tables in the cohort schema?
+#'
+#' @return A new cohort table in the gaiaDB cohort schema
+#'
+#' @examples
+#' 
+#' importCohortTable(gaiaConnectionDetails = gaiaConnectionDetails,
+#'                   cohort = geocodedCohort,
+#'                   overwrite = FALSE)
+#' 
+#' @export
+#' 
+importCohortTable <- function(gaiaConnectionDetails, cohort, overwrite = FALSE) {
+  names(cohort) <- tolower(names(cohort))
+  conn <-  DatabaseConnector::connect(gaiaConnectionDetails)
+  on.exit(DatabaseConnector::disconnect(conn))
+  DatabaseConnector::dbExecute(conn, paste0("CREATE SCHEMA IF NOT EXISTS cohort;"))
+  tables <- unique(cohort$cohort_definition_id)
+  lapply(tables, function(cohortId) {
+    if(!checkTableExists(gaiaConnectionDetails, "cohort", paste0('cohort_', cohortId))) {
+      DatabaseConnector::dbExecute(conn, paste0("CREATE TABLE IF NOT EXISTS
+                                                cohort.\"cohort_", cohortId, "\"
+                                                (cohort_definition_id INT,
+                                                subject_id INT,
+                                                cohort_start_date DATE,
+                                                cohort_end_date DATE,
+                                                geometry public.GEOMETRY);"))
+      DatabaseConnector::dbExecute(conn, paste0("
+        ALTER TABLE cohort.\"cohort_", cohortId, "\"
+        ALTER COLUMN geometry TYPE public.geometry(POINT, 4326)
+        USING public.ST_SetSRID(geometry,4326);"))
+    } else {
+      message(paste0('Table cohort.cohort_', cohortId, ' already exists.'))
+      return()
+    }
+    filteredSpatialCohort <- cohort %>% 
+      dplyr::filter(cohort_definition_id == cohortId) %>% 
+      sf::as_Spatial()
+    serv <- strsplit(gaiaConnectionDetails$server(), "/")[[1]]
+    postgisConnection <- RPostgreSQL::dbConnect("PostgreSQL",
+                                   host = serv[1],
+                                   dbname = serv[2],
+                                   user = gaiaConnectionDetails$user(),
+                                   password = gaiaConnectionDetails$password(),
+                                   port = gaiaConnectionDetails$port())
+    on.exit(RPostgreSQL::dbDisconnect(postgisConnection))
+    rpostgis::pgInsert(postgisConnection,
+                       name = c("cohort", paste0('cohort_', cohortId)),
+                       geom = "geometry", 
+                       data.obj = filteredSpatialCohort)
+    RPostgreSQL::dbDisconnect(postgisConnection)
+  })
+  
+}
 
 
 
