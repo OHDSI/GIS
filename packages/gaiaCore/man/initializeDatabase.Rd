@@ -4,10 +4,12 @@
 \alias{initializeDatabase}
 \title{Initialize gaiaDB}
 \usage{
-initializeDatabase(connectionDetails)
+initializeDatabase(connectionDetails, overwrite = FALSE)
 }
 \arguments{
 \item{connectionDetails}{(list) An object of class connectionDetails as created by the createConnectionDetails function}
+
+\item{overwrite}{(boolean) Potential loss of data, proceed with caution! Drop the backbone schema and reinitialize? You will lose any custom data or variable sources that you have added if you overwrite the backbone schema.}
 }
 \value{
 (database schema) The gaiaDB backbone schema is added to the database in connectionDetails

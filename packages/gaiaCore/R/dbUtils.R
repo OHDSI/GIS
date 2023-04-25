@@ -58,7 +58,8 @@ getVariableSourceSummaryTable <- function(connectionDetails) {
 #' Initialize gaiaDB
 #'
 #' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
-#'
+#' @param overwrite (boolean) Potential loss of data, proceed with caution! Drop the backbone schema and reinitialize? You will lose any custom data or variable sources that you have added if you overwrite the backbone schema.
+#' 
 #' @return (database schema) The gaiaDB backbone schema is added to the database in connectionDetails
 #'
 #' @examples
@@ -79,9 +80,25 @@ getVariableSourceSummaryTable <- function(connectionDetails) {
 #' @export
 #'
 
-initializeDatabase <- function(connectionDetails) {
+initializeDatabase <- function(connectionDetails, overwrite = FALSE) {
   conn <- DatabaseConnector::connect(connectionDetails)
   on.exit(DatabaseConnector::disconnect(conn))
+  backboneExists <- DatabaseConnector::querySql(conn, sql = "SELECT schema_name FROM information_schema.schemata WHERE schema_name = 'backbone';")
+  if (backboneExists) {
+    if (isTRUE(overwrite)) {
+      message("WARNING: Preparing to drop the backbone schema.\nYou will lose any custom data sources and/or variable sources\nthat you have added if you overwrite the backbone schema.\n\nTo proceed, enter 2. Any other option will abort.")
+      if (menu(c('No, abort.','Yes, I am certain I want to drop schema and potentially lose data', 'Do not drop schema, abort')) == 2) {
+        message('Dropping backbone schema:')
+        DatabaseConnector::executeSql(conn, sql = "DROP SCHEMA backbone CASCADE")
+      } else {
+        message('gaiaDB reinitialize aborted.')
+        return()
+      }
+    } else {
+      message("Backbone schema already exists.\nIf you wish to overwrite schema, set overwrite to TRUE\nWarning: you will lose any custom data or variable sources\nthat you have added if you overwrite the backbone schema.")
+      return()
+    }
+  }
   DatabaseConnector::executeSql(conn, sql = readr::read_file(system.file("sql", "backbone_ddl.sql", package="GIS")))
   message("backbone schema created.")
   dataSource <- readr::read_csv("https://github.com/OHDSI/GIS/raw/main/source/data_source.csv")
