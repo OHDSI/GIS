@@ -28,7 +28,7 @@ script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
 
 # Overview
 
-This workflow demonstrates how to use the OHDSI Gaia suite of GIS tools to filter an existing OHDSI cohort, as defined in ATLAS, using geospatial data.
+This workflow demonstrates how to use the OHDSI Gaia suite of GIS tools to geocode the patient addresses in an OHDSI cohort, enabling further cohort filtering using geospatial data.
 
 ![Geocoding Workflow (Cohort Definitions) - [Click here to download](https://github.com/OHDSI/GIS/raw/main/rmd/images/geocodingSchemeCohorts.png)](images/geocodingSchemeCohorts.png){width=150%}
 

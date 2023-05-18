@@ -608,6 +608,44 @@ handleShapefileImportJob <- function(connectionDetails, attrTableString, geomTab
 
 # Geocode -----------------------------------------------------------------
 
+#' Get Location Table Addresses
+#'
+#' @param connectionDetails (list) For connecting to an OMOP server. An object of class connectionDetails as created by the createConnectionDetails function
+#' @param cdmDatabseSchema (character) Schema name where your patient-level data in OMOP CDM format resides. Note that for SQL Server, this should include both the database and schema name, for example 'cdm_data.dbo'.
+#'
+#' @return (data.frame) A transformed Location table with addresses and any existing latitude and longitudes attached
+#'
+#' @examples
+#' \dontrun
+#' {
+#' getCohortAddresses(connectionDetails = connectionDetails,
+#'                    cdmDatabaseSchema = myDatabase.dbo)
+#' }
+#' 
+#' @export
+#' 
+getLocationAddresses <- function(connectionDetails, cdmDatabaseSchema){
+  addressQuery <- paste0("SELECT l.location_id
+	  , CONCAT(l.address_1, ' ', l.address_2, ' ', l.city, ' ', l.state, ' ', LEFT(l.zip, 5)) AS address
+	  , CASE
+        WHEN latitude IS NULL THEN NULL
+        ELSE latitude
+    END AS latitude
+	  , CASE
+        WHEN longitude IS NULL THEN NULL
+        ELSE longitude
+    END AS longitude
+    FROM ", cdmDatabaseSchema, ".location l
+    WHERE person_id in (", paste(personIds, collapse = ", "),")")
+  conn <-  DatabaseConnector::connect(connectionDetails)
+  on.exit(DatabaseConnector::disconnect(conn))
+  locationAddresses <- DatabaseConnector::querySql(connection = conn, sql = addressQuery)
+  locationAddresses
+}
+
+
+
+
 #' Get Cohort Addresses
 #'
 #' @param connectionDetails (list) For connecting to an OMOP server. An object of class connectionDetails as created by the createConnectionDetails function
