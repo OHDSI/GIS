@@ -662,7 +662,7 @@ getLocationAddresses <- function(connectionDetails, cdmDatabaseSchema){
 #' @examples
 #' 
 #' importLocationTable(gaiaConnectionDetails = gaiaConnectionDetails,
-#'                     location = geocodedLocation,
+#'                     location = geocodedLocation,88
 #'                     overwrite = FALSE)
 #' 
 #' @export
