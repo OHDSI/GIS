@@ -35,3 +35,51 @@ geocodeAddresses <- function(addressTable) {
                   COHORT_END_DATE,
                   geometry)
 }
+
+#' Split a table of addresses based on presence of coordinates
+#'
+#' @param addressTable (data.frame) A table of addresses. If there are not two columns
+#'                                  named "LATITUDE" and "LONGITUDE", this function
+#'                                  will just return this table as-is.
+#'
+#' @return (list) Two dataframes (geocoded and ungeocoded) inside of a list object.
+#'                If there are not a LATITUDE and a LONGITUDE column, the original
+#'                table of addresses is returned as the only item in the list.
+#'
+#' @examples
+#' 
+#' addressTable <- tibble::tibble(
+#'   "LOCATION_ID" = 1:6,
+#'   "ADDRESS" = c(
+#'     "456 WOOD STREET  MALDEN MA 02148",                  
+#'     "123 MAIN ST APT 111  BROOKLINE MA 02446",        
+#'     "999 DUCK STREET WEYMOUTH MA 02188",
+#'     "100 PRESIDENT STREET MILTON MA 02186",                
+#'     "1 SOUTH AVE REVERE MA 02151",             
+#'     "99 BEACH ROAD SOUTH DENNIS MA 02660"),
+#'   "LATITUDE" = c(NA_real_, 22.2, NA_real_, NA_real_, 43.666, 75.6),
+#'   "LONGITUDE" = c(33.3, NA_real_, NA_real_, NA_real_, 43.666, 75.6)
+#'     )
+#'     
+#' results <- splitAddresses(addressTable)
+#' 
+#' results$ungeocoded # addresses and location_ids without prepopulated coordinates
+#' results$geocoded # addresses and location_ids with prepopulated coordinates
+#' 
+#' @export
+#' 
+
+splitAddresses <- function(addressTable) {
+  # TODO if table does not contain lat lon columns, do nothing
+  if (!all(c("LATITUDE", "LONGITUDE") %in% names(addressTable))) {
+    cat("No geocoded addresses")
+    results <- list(ungeocoded = addressTable)
+    return(results)
+  }
+  
+  results <- list(
+    geocoded = subset(addressTable, !is.na(LATITUDE) & !is.na(LONGITUDE)),
+    ungeocoded = subset(addressTable, !(!is.na(LATITUDE) & !is.na(LONGITUDE)))
+  )
+  results
+}
