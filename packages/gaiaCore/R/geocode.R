@@ -22,18 +22,41 @@ geocodeAddresses <- function(addressTable) {
   # TODO decision must be made on:
   # TODO  - which add'l columns should be returned (matched_*, score, precision)
   # TODO  - If there should be a minimum cutoff score
-  readr::write_csv(addressTable, paste0(tempdir(), '\\add.csv'))
-  system(paste0('docker run --rm -v ', tempdir(), ':/tmp ghcr.io/degauss-org/geocoder:3.3.0 add.csv'))
-  rawGeocodedTable <- readr::read_csv(paste0(tempdir(), '\\add_geocoder_3.3.0_score_threshold_0.5.csv'))
-  file.remove(paste0(tempdir(), '\\add.csv'))
-  file.remove(paste0(tempdir(), '\\add_geocoder_3.3.0_score_threshold_0.5.csv'))  
-  geocodedTable <- sf::st_as_sf(rawGeocodedTable, coords = c("lon", "lat"), crs = 4326)
-  geocodedTable %>%
-    dplyr::select(COHORT_DEFINITION_ID,
-                  SUBJECT_ID,
-                  COHORT_START_DATE,
-                  COHORT_END_DATE,
-                  geometry)
+  if (!any(stringr::str_detect(names(addressTable), stringr::regex('address', ignore_case = T)))) {
+    message("Invalid addressTable. Must contain a column \"address\".")
+    return(NULL)
+  }
+  
+  if (!any(stringr::str_detect(names(addressTable), 'address'))) {
+    names(addressTable) <- tolower(names(addressTable))
+  }
+  
+  # TODO break addressTable into 100K row pieces
+  chunksize = 100#000
+  n_chunks = 3
+  #n_chunks <- (nrow(addressTable) %/% chunksize) + 1
+  finalGeocodedTable <- tibble::tibble()
+  temptab <- tibble::tibble()
+  if (n_chunks > 1) {
+    message(paste0("Breaking table into ", n_chunks, " chunks..."))
+  }
+  out <- lapply(1:n_chunks, function(i) {
+    message(paste0("Geocoding chunk ", i, " of ", n_chunks))
+    readr::write_csv(
+      subset(addressTable[(chunksize * (i - 1)):(chunksize * i),], !is.na(address)),
+      paste0(tempdir(), '\\add.csv'))
+    system(paste0('docker run --rm -v ', tempdir(), ':/tmp ghcr.io/degauss-org/geocoder:3.3.0 add.csv'))
+    rawGeocodedTablePart <- readr::read_csv(paste0(tempdir(), '\\add_geocoder_3.3.0_score_threshold_0.5.csv'))
+    file.remove(paste0(tempdir(), '\\add.csv'))
+    file.remove(paste0(tempdir(), '\\add_geocoder_3.3.0_score_threshold_0.5.csv'))
+    # TODO remove values that are missing from table
+    successfulGeocodedTablePart <- subset(rawGeocodedTablePart, geocoded_result == 'geocoded')
+    geocodedTablePart <- sf::st_as_sf(rawGeocodedTablePart, coords = c("lon", "lat"), crs = 4326)
+    # TODO remove unwanted columns?
+    finalGeocodedTable <- rbind(finalGeocodedTable, geocodedTablePart)
+  })
+  
+  finalGeocodedTable
 }
 
 #' Split a table of addresses based on presence of coordinates
