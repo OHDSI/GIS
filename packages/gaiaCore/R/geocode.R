@@ -22,25 +22,21 @@ geocodeAddresses <- function(addressTable) {
   # TODO decision must be made on:
   # TODO  - which add'l columns should be returned (matched_*, score, precision)
   # TODO  - If there should be a minimum cutoff score
+  # TODO allow user to specify minimum cutoff score?
   if (!any(stringr::str_detect(names(addressTable), stringr::regex('address', ignore_case = T)))) {
     message("Invalid addressTable. Must contain a column \"address\".")
     return(NULL)
   }
-  
   if (!any(stringr::str_detect(names(addressTable), 'address'))) {
     names(addressTable) <- tolower(names(addressTable))
   }
-  
-  # TODO break addressTable into 100K row pieces
-  chunksize = 100#000
-  n_chunks = 3
-  #n_chunks <- (nrow(addressTable) %/% chunksize) + 1
-  finalGeocodedTable <- tibble::tibble()
-  temptab <- tibble::tibble()
+    # break addressTable into 100K row pieces
+  chunksize = 100000
+  n_chunks <- (nrow(addressTable) %/% chunksize) + 1
   if (n_chunks > 1) {
     message(paste0("Breaking table into ", n_chunks, " chunks..."))
   }
-  out <- lapply(1:n_chunks, function(i) {
+  tableParts <- lapply(1:n_chunks, function(i) {
     message(paste0("Geocoding chunk ", i, " of ", n_chunks))
     readr::write_csv(
       subset(addressTable[(chunksize * (i - 1)):(chunksize * i),], !is.na(address)),
@@ -49,13 +45,11 @@ geocodeAddresses <- function(addressTable) {
     rawGeocodedTablePart <- readr::read_csv(paste0(tempdir(), '\\add_geocoder_3.3.0_score_threshold_0.5.csv'))
     file.remove(paste0(tempdir(), '\\add.csv'))
     file.remove(paste0(tempdir(), '\\add_geocoder_3.3.0_score_threshold_0.5.csv'))
-    # TODO remove values that are missing from table
-    successfulGeocodedTablePart <- subset(rawGeocodedTablePart, geocoded_result == 'geocoded')
-    geocodedTablePart <- sf::st_as_sf(rawGeocodedTablePart, coords = c("lon", "lat"), crs = 4326)
-    # TODO remove unwanted columns?
-    finalGeocodedTable <- rbind(finalGeocodedTable, geocodedTablePart)
+    successfulGeocodedTablePart <- subset(rawGeocodedTablePart, geocode_result == 'geocoded')
   })
-  
+  boundGeocodedTable <- do.call(rbind, tableParts)
+  finalSubset <- boundGeocodedTable[, c(names(addressTable), "lat", "lon")]
+  finalGeocodedTable <- sf::st_as_sf(finalSubset, coords = c("lon", "lat"), crs = 4326)
   finalGeocodedTable
 }
 

@@ -87,7 +87,7 @@ notGeocodedLocation <- splitResult$ungeocoded
 
 ## Step 3. Geocode Addresses without Coordinates
 ``` {r eval=FALSE}
-geocodedCohort <- geocodeAddresses(addressTable = notGeocodedLocation)
+geocodedLocation <- geocodeAddresses(addressTable = notGeocodedLocation)
 ```
 
 ## Step 4. Stack pre-populated and newly geocoded location tables
