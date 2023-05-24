@@ -608,6 +608,105 @@ handleShapefileImportJob <- function(connectionDetails, attrTableString, geomTab
 
 # Geocode -----------------------------------------------------------------
 
+#' Get Location Table Addresses
+#'
+#' @param connectionDetails (list) For connecting to an OMOP server. An object of class connectionDetails as created by the createConnectionDetails function
+#' @param cdmDatabseSchema (character) Schema name where your patient-level data in OMOP CDM format resides. Note that for SQL Server, this should include both the database and schema name, for example 'cdm_data.dbo'.
+#'
+#' @return (data.frame) A transformed Location table with addresses and any existing latitude and longitudes attached
+#'
+#' @examples
+#' \dontrun
+#' {
+#' getLocationAddresses(connectionDetails = connectionDetails,
+#'                    cdmDatabaseSchema = myDatabase.dbo)
+#' }
+#' 
+#' @export
+#' 
+getLocationAddresses <- function(connectionDetails, cdmDatabaseSchema){
+  addressQuery <- paste0("SELECT l.location_id
+	  , CONCAT(l.address_1, ' ', l.address_2, ' ', l.city, ' ', l.state, ' ', LEFT(l.zip, 5)) AS address
+	  , latitude
+	  , longitude
+    FROM ", cdmDatabaseSchema, ".location l")
+  conn <-  DatabaseConnector::connect(connectionDetails)
+  on.exit(DatabaseConnector::disconnect(conn))
+  locationAddresses <- tryCatch({
+    DatabaseConnector::querySql(connection = conn, sql = addressQuery)
+  }, error = function(err) {
+    if(stringr::str_detect(conditionMessage(err), "longitude|latitude")) {
+      message('\nLatitude/Longitude columns skipped.')
+      addressQuery <- paste0("SELECT l.location_id
+  	  , CONCAT(l.address_1, ' ', l.address_2, ' ', l.city, ' ', l.state, ' ', LEFT(l.zip, 5)) AS address
+      FROM ", cdmDatabaseSchema, ".location l")
+      DatabaseConnector::querySql(connection = conn, sql = addressQuery)
+    } else {
+      cat(conditionMessage(err))
+    }
+  })
+  locationAddresses
+}
+
+#' Import a geocoded cohort table to gaiaDB
+#'
+#' @param gaiaConnectionDetails For connecting to gaiaDB. An object of class
+#'                              connectionDetails as created by the
+#'                              createConnectionDetails function
+#' @param location (data.frame) A table with OMOP location_ids, an address
+#'                              string, and POINT geometry column named geometry 
+#' @param overwrite (boolean) Overwrite existing tables in the cohort schema?
+#'
+#' @return A new geom_omop_location table in the gaiaDB omop schema
+#'
+#' @examples
+#' 
+#' importLocationTable(gaiaConnectionDetails = gaiaConnectionDetails,
+#'                     location = geocodedLocation,88
+#'                     overwrite = FALSE)
+#' 
+#' @export
+#' 
+
+importLocationTable <- function(gaiaConnectionDetails, location, overwrite = FALSE) {
+  conn <-  DatabaseConnector::connect(gaiaConnectionDetails)
+  on.exit(DatabaseConnector::disconnect(conn))
+  DatabaseConnector::dbExecute(conn, paste0("CREATE SCHEMA IF NOT EXISTS omop;"))
+  if(!checkTableExists(gaiaConnectionDetails, "omop", 'geom_omop_location')) {
+    DatabaseConnector::dbExecute(conn, paste0("CREATE TABLE IF NOT EXISTS
+                                              omop.\"geom_omop_location\"
+                                              (location_id INT,
+                                              address VARCHAR(255),
+                                              geometry public.GEOMETRY);"))
+    DatabaseConnector::dbExecute(conn,
+    paste0("ALTER TABLE omop.\"geom_omop_location\"
+            ALTER COLUMN geometry TYPE public.geometry(POINT, 4326)
+            USING public.ST_SetSRID(geometry,4326);"))
+  } else {
+    message('Table omop.geom_omop_location already exists.')
+    return()
+  }
+  locationSpatial <- location %>% 
+    dplyr::mutate(location_id = as.integer(location_id)) %>%
+    sf::as_Spatial()
+  serv <- strsplit(gaiaConnectionDetails$server(), "/")[[1]]
+  postgisConnection <- RPostgreSQL::dbConnect("PostgreSQL",
+                                              host = serv[1],
+                                              dbname = serv[2],
+                                              user = gaiaConnectionDetails$user(),
+                                              password = gaiaConnectionDetails$password(),
+                                              port = gaiaConnectionDetails$port())
+  on.exit(RPostgreSQL::dbDisconnect(postgisConnection))
+  rpostgis::pgInsert(postgisConnection,
+                     name = c("omop", "geom_omop_location"),
+                     geom = "geometry", 
+                     data.obj = locationSpatial)
+  RPostgreSQL::dbDisconnect(postgisConnection)
+
+  
+}
+
+
 #' Get Cohort Addresses
 #'
 #' @param connectionDetails (list) For connecting to an OMOP server. An object of class connectionDetails as created by the createConnectionDetails function

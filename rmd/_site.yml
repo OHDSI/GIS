@@ -29,8 +29,12 @@ navbar:
           href: "gaiaCore/index.html"
         - text: "gaiaDB"
           href: "gaiadb.html"
-        - text: "Geocoding Workflow"
-          href: "geocoding.html"
+        - text: "Geocoding Workflows"
+          menu:
+            - text: "Geocoding the Location Table (Full)"
+              href: "geocodingFull.html"
+            - text: "Geocoding a Cohort"
+              href: "geocodingCohort.html"
     - text: "Adding Data Sources"
       icon: fa-plus-square
       menu:
