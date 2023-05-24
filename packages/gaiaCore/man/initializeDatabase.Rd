@@ -19,7 +19,6 @@ Initialize gaiaDB
 }
 \examples{
 \dontrun{
-\code{
  connectionDetails <- DatabaseConnector::createConnectionDetails(
    dbms = "postgresql",
    server = "", # name of the server
@@ -28,8 +27,6 @@ Initialize gaiaDB
    password = "mysecretpassword")
 
  initializeDatabase(connectionDetails)
-
-}
 }
 
 }
