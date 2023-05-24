@@ -686,6 +686,10 @@ importLocationTable <- function(gaiaConnectionDetails, location, overwrite = FAL
     message('Table omop.geom_omop_location already exists.')
     return()
   }
+  
+  locationSpatial <- location %>% 
+    dplyr::mutate(location_id = as.integer(location_id)) %>%
+    sf::as_Spatial()
 
   serv <- strsplit(gaiaConnectionDetails$server(), "/")[[1]]
   postgisConnection <- RPostgreSQL::dbConnect("PostgreSQL",
@@ -698,7 +702,7 @@ importLocationTable <- function(gaiaConnectionDetails, location, overwrite = FAL
   rpostgis::pgInsert(postgisConnection,
                      name = c("omop", "geom_omop_location"),
                      geom = "geometry", 
-                     data.obj = location)
+                     data.obj = locationSpatial)
   RPostgreSQL::dbDisconnect(postgisConnection)
 
   

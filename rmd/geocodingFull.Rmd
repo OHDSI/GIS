@@ -93,16 +93,20 @@ geocodedLocation <- geocodeAddresses(addressTable = notGeocodedLocation)
 ## Step 4. Stack pre-populated and newly geocoded location tables
 ``` {r eval=FALSE}
 # ToDO manual rbind between two tables, or a function that handles converting OMOP lat/lon columns?
+fullyGeocodedLocation <- geocodedLocation
+if (!is.null(alreadyGeocodedLocation)) {
+  # TODO ensure that alreadyGeocodedLocation has same schema as geocodedLocation
+  #   -all lowercase
+  #   -lat and lon column converted into geometry column  
+  fullyGeocodedLocation <- rbind(fullyGeocodedLocation, alreadyGeocodedLocation)
+}
 
-# TODO make sure that column names align
-#   -all lowercase
-#   -lat and lon column converted into geometry column
 ```
 
 ## Step 5. Import Geocoded Location table to gaiaDB Database
 ``` {r eval=FALSE}
 importLocationTable(gaiaConnectionDetails = gaiaConnectionDetails,
-                    location = geocodedLocation)
+                    location = fullyGeocodedLocation)
 ```
 
 
