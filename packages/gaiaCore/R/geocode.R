@@ -26,10 +26,6 @@ geocodeAddresses <- function(addressTable) {
   # TODO allow user to specify minimum cutoff score?
   # TODO return list of location_ids/addresses that are NOT geocoded
   # TODO option to save locally?
-  if (!any(stringr::str_detect(names(addressTable), stringr::regex('address', ignore_case = T)))) {
-    message("Invalid addressTable. Must contain a column \"address\".")
-    return(NULL)
-  }
   if (!any(stringr::str_detect(names(addressTable), 'address'))) {
     names(addressTable) <- tolower(names(addressTable))
   }

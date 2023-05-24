@@ -100,7 +100,6 @@ if (!is.null(alreadyGeocodedLocation)) {
   #   -lat and lon column converted into geometry column  
   fullyGeocodedLocation <- rbind(fullyGeocodedLocation, alreadyGeocodedLocation)
 }
-
 ```
 
 ## Step 5. Import Geocoded Location table to gaiaDB Database
