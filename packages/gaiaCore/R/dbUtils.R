@@ -64,7 +64,6 @@ getVariableSourceSummaryTable <- function(connectionDetails) {
 #'
 #' @examples
 #' \dontrun{
-#' \code{
 #'  connectionDetails <- DatabaseConnector::createConnectionDetails(
 #'    dbms = "postgresql",
 #'    server = "", # name of the server
@@ -73,8 +72,6 @@ getVariableSourceSummaryTable <- function(connectionDetails) {
 #'    password = "mysecretpassword")
 #'
 #'  initializeDatabase(connectionDetails)
-#'
-#' }
 #' }
 #'
 #' @export
@@ -616,8 +613,7 @@ handleShapefileImportJob <- function(connectionDetails, attrTableString, geomTab
 #' @return (data.frame) A transformed Location table with addresses and any existing latitude and longitudes attached
 #'
 #' @examples
-#' \dontrun
-#' {
+#' \dontrun{
 #' getLocationAddresses(connectionDetails = connectionDetails,
 #'                    cdmDatabaseSchema = myDatabase.dbo)
 #' }
@@ -650,7 +646,7 @@ getLocationAddresses <- function(connectionDetails, cdmDatabaseSchema){
 
 #' Import a geocoded cohort table to gaiaDB
 #'
-#' @param gaiaConnectionDetails For connecting to gaiaDB. An object of class
+#' @param gaiaConnectionDetails (list) For connecting to gaiaDB. An object of class
 #'                              connectionDetails as created by the
 #'                              createConnectionDetails function
 #' @param location (data.frame) A table with OMOP location_ids, an address
@@ -660,10 +656,11 @@ getLocationAddresses <- function(connectionDetails, cdmDatabaseSchema){
 #' @return A new geom_omop_location table in the gaiaDB omop schema
 #'
 #' @examples
-#' 
+#' \dontrun{
 #' importLocationTable(gaiaConnectionDetails = gaiaConnectionDetails,
-#'                     location = geocodedLocation,88
+#'                     location = geocodedLocation,
 #'                     overwrite = FALSE)
+#' }
 #' 
 #' @export
 #' 
@@ -716,10 +713,9 @@ importLocationTable <- function(gaiaConnectionDetails, location, overwrite = FAL
 #' @return (data.frame) An augmented Cohort table with patient addresses attached
 #'
 #' @examples
-#' \dontrun
-#' {
+#' \dontrun{
 #' getCohortAddresses(connectionDetails = connectionDetails,
-#'                    cdmDatabaseSchema = myDatabase.dbo,
+#'                    cdmDatabaseSchema = "myDatabase.dbo",
 #'                    cohort = cohort)
 #' }
 #' 
@@ -748,7 +744,7 @@ getCohortAddresses <- function(connectionDetails, cdmDatabaseSchema, cohort){
 
 #' Import a geocoded cohort table to gaiaDB
 #'
-#' @param gaiaConnectionDetails For connecting to gaiaDB. An object of class
+#' @param gaiaConnectionDetails (list) For connecting to gaiaDB. An object of class
 #'                              connectionDetails as created by the
 #'                              createConnectionDetails function
 #' @param cohort (data.frame) An OHDSI cohort table with a POINT geometry column
@@ -758,11 +754,11 @@ getCohortAddresses <- function(connectionDetails, cdmDatabaseSchema, cohort){
 #' @return A new cohort table in the gaiaDB cohort schema
 #'
 #' @examples
-#' 
+#' \dontrun{
 #' importCohortTable(gaiaConnectionDetails = gaiaConnectionDetails,
 #'                   cohort = geocodedCohort,
 #'                   overwrite = FALSE)
-#' 
+#' }
 #' @export
 #' 
 

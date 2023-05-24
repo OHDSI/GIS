@@ -11,7 +11,7 @@
 
 
 
-<title>localDataSource.knit</title>
+<title>geocodingCohort.knit</title>
 
 <script src="site_libs/header-attrs-2.15/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -419,58 +419,243 @@ div.tocify {
 
 
 <h1 class="title toc-ignore"><div>
-<img src="ohdsi40x40.png"></img> OHDSI GIS WG Adding a Data Source
-Locally
+<img src="ohdsi40x40.png"></img> OHDSI GIS WG Geocoding Workflow
 </div></h1>
 
 </div>
 
 
-<div id="adding-a-data-source" class="section level1">
-<h1><strong>Adding a Data Source</strong></h1>
-<div id="background" class="section level2">
-<h2>Background</h2>
-<p>Data sources in gaiaDB are stored in the gaiaDB.backbone.data_source
-table in a Postgres database. Each row in this table is a single “data
-source”, though the name may be a bit misleading. All “data sources” in
-gaiaDB are actually bits of descriptive, technical, and operational
-metadata that refer to an externally hosted dataset. For example, the
-gaiaDB data source “daily_aqi_by_county_2020” is actually just a single
-row of data that contains information on how to extract, transform, and
-load (ETL) the EPA dataset located on their data catalog. The gaiaDB
-data source includes all the information necessary to acquire and use
-this dataset (including the dataset URL, documentation URL, and R code
-to transform it to gaia’s own data standard), without actually storing
-the dataset itself. Not only does this keep gaiaDB very lightweight (a
-data source takes only about 1 KB of storage), it also allows gaiaDB to
-handle a boundless amount of variability in source datasets.</p>
-<p>The trade-off to this design is that each data source requires a
-certain degree of custom tailoring. Fortunately, many well-curated
-sources of geospatial data publish all of their own datasets with the
-same schema. So, while it may take a bit of effort to create the gaiaDB
-data source for “daily_aqi_by_county_2020”, the gaiaDB data source for
-“daily_aqi_by_county_2019”, and any other years, can be created in a
-matter of minutes by simply redirecting the data source to other years’
-data.</p>
+<style type="text/css">
+script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+</style>
+<script type="text/javascript">
+ $(document).ready(function() {
+    $('body').prepend('<div class=\"zoomDiv\"><img src=\"\" class=\"zoomImg\"></div>');
+    // onClick function for all plots (img's)
+    $('img:not(.zoomImg)').click(function() {
+      $('.zoomImg').attr('src', $(this).attr('src')).css({width: '100%'});
+      $('.zoomDiv').css({opacity: '1', width: 'auto', border: '1px solid white', borderRadius: '5px', position: 'fixed', top: '50%', left: '50%', marginRight: '-50%', transform: 'translate(-50%, -50%)', boxShadow: '0px 0px 50px #888888', zIndex: '50', overflow: 'auto', maxHeight: '100%'});
+    });
+    // onClick function for zoomImg
+    $('img.zoomImg').click(function() {
+      $('.zoomDiv').css({opacity: '0', width: '0%'}); 
+    });
+  });
+</script>
+<div id="overview" class="section level1">
+<h1>Overview</h1>
+<p>This workflow demonstrates how to use the OHDSI Gaia suite of GIS
+tools to geocode the patient addresses in an OHDSI cohort, enabling
+further cohort filtering using geospatial data.</p>
+<div class="figure">
+<img src="images/geocodingSchemeCohorts.png" style="width:150.0%"
+alt="" />
+<p class="caption">Geocoding Workflow (Cohort Definitions) - <a
+href="https://github.com/OHDSI/GIS/raw/main/rmd/images/geocodingSchemeCohorts.png">Click
+here to download</a></p>
 </div>
-<div id="creating-a-data-source" class="section level2">
-<h2>Creating a Data Source</h2>
-<p>As of now, there are two main ways that gaiaDB data sources can be
-created:</p>
-<ol style="list-style-type: decimal">
-<li>Manually, by writing <code>INSERT INTO</code> SQL statements.
-Usually this is most easily done with a combination of spreadsheet
-software like MS Excel (for writing the original record), an R
-environment for creating the geom_spec (detailed below), and some sort
-of automation tool for recycling the original data source across
-multiple datasets.</li>
-<li>Using the gaiaSourceCreator RShiny form, which can help guide the
-creation of data sources.</li>
-</ol>
+<div id="prerequisites" class="section level2">
+<h2>Prerequisites</h2>
+<p>This workflow requires the <code>DatabaseConnector</code>,
+<code>ROhdsiWebApi</code>, and <code>CohortGenerator</code> packages.
+For this demonstration, we will be using the <code>Eunomia</code>
+package as the source OMOP database. We will be using the <a
+href="atlas-demo.ohdsi.org">Demo ATLAS</a> instance hosted by OHDSI.</p>
+<pre class="r"><code>install.packages(&quot;DatabaseConnector&quot;)
+remotes::install_github(&quot;OHDSI/ROhdsiWebApi&quot;)
+remotes::install_github(&quot;OHDSI/CohortGenerator&quot;)
+remotes::install_github(&quot;OHDSI/Eunomia&quot;)</code></pre>
 </div>
-<div id="creating-the-geom_spec" class="section level2">
-<h2>Creating the <em>geom_spec</em></h2>
-<p>TODO</p>
+<div id="configuring-connection-to-the-servers" class="section level2">
+<h2>Configuring Connection to the Servers</h2>
+<p>We need to configure connections to two servers: the server hosting
+the OMOP database and the server hosting the gaiaDB Postgres
+database.</p>
+<div id="connect-to-omop-server" class="section level3">
+<h3>Connect to OMOP server:</h3>
+<pre class="r"><code>library(DatabaseConnector)
+connectionDetails &lt;- createConnectionDetails(
+  dbms = &quot;postgresql&quot;,
+  server = &quot;localhost/ohdsi&quot;,
+  user = &quot;myUser&quot;,
+  password = &quot;mySecretPassword&quot;
+)</code></pre>
+<p>For the purposes of this example, we will use the Eunomia test CDM
+package that is in an Sqlite database stored locally.</p>
+<pre class="r"><code>connectionDetails &lt;- Eunomia::getEunomiaConnectionDetails()
+cdmDatabaseSchema &lt;- &quot;main&quot;
+tempEmulationSchema &lt;- NULL
+cohortDatabaseSchema &lt;- &quot;main&quot;
+cohortTable &lt;- &quot;cohort&quot;</code></pre>
+<p>Eunomia does not include location information. We are going to add
+random US addresses to the Eunomia database for this demonstration.</p>
+<p>Start by getting a “fake” address for each person in the Eunomia
+database:</p>
+<pre class="r"><code># TODO add openadds addresses
+
+library(openadds)
+
+# Get all datasets
+datasets &lt;- openadds::oa_list()
+
+# Filter datasets to those covering Massachusetts
+ma_datasets &lt;- datasets[grep(&quot;us/ma/statewide&quot;, datasets$source),]
+
+# Download the data for the dataset
+data &lt;- oa_get(ma_datasets$processed)[[1]]
+
+data_sample &lt;- data[sample(1:nrow(data), 2694, replace = FALSE), ]</code></pre>
+<p>Now we’ll create a location table in Eunomia and assign the
+location_ids to the records in the person table:</p>
+<pre class="r"><code>location &lt;- dplyr::mutate(data_sample,
+                          LOCATION_ID = 1:nrow(data_sample),
+                          ADDRESS_1 = paste(NUMBER, STREET),
+                          ADDRESS_2 = UNIT) %&gt;% 
+  dplyr::select(
+    LOCATION_ID,
+    ADDRESS_1,
+    ADDRESS_2,
+    CITY,
+    STATE = REGION,
+    ZIP = POSTCODE,
+    COUNTY = DISTRICT,
+    LOCATION_SOURCE_VALUE = HASH
+  )
+
+# Load
+conn &lt;- DatabaseConnector::connect(connectionDetails)
+DatabaseConnector::dbWriteTable(conn, &quot;location&quot;, location, overwrite = TRUE)
+# Attach to person records
+amendedPersonTable &lt;- DatabaseConnector::querySql(con, &#39;SELECT * FROM main.person&#39;) %&gt;% 
+  dplyr::mutate(LOCATION_ID = PERSON_ID)
+DatabaseConnector::dbWriteTable(conn, &quot;person&quot;, amendedPersonTable, overwrite = TRUE)
+DatabaseConnector::disconnect(conn)</code></pre>
+</div>
+<div id="connect-to-gaiadb-server" class="section level3">
+<h3>Connect to gaiaDB server:</h3>
+<p>If you don’t already have a gaiaDB server set up, see the <a
+href="https://ohdsi.github.io/GIS/installation.html#gaiaDB_database">installation
+instructions</a> before proceeding.</p>
+<pre class="r"><code>library(DatabaseConnector)
+gaiaConnectionDetails &lt;- DatabaseConnector::createConnectionDetails(
+  dbms = &quot;postgresql&quot;,
+  server = &quot;localhost/gaiaDB&quot;,
+  port = 5432,
+  user=&quot;postgres&quot;,
+  password = &quot;mySecretPassword&quot;) </code></pre>
+</div>
+</div>
+<div id="step-1.-define-a-cohort-using-atlas" class="section level2">
+<h2>Step 1. Define a cohort using ATLAS</h2>
+<p>Use the OHDSI ATLAS tool to define a cohort. This example uses a
+cohort definition with an entry event of “Heart Failure” condition
+occurrence (316139) at age 65 or older. We refer to the WebAPI base URL
+and the ID of our cohort definition:</p>
+<pre class="r"><code>baseUrl &lt;- &quot;https://atlas-demo.ohdsi.org/WebAPI&quot;
+cohortIds &lt;- c(1782669)</code></pre>
+</div>
+<div id="step-2.-import-the-atlas-cohort-definition-to-r"
+class="section level2">
+<h2>Step 2. Import the ATLAS Cohort Definition to R</h2>
+<p>Use the ROhdsiWebApi tool to import the cohort definition to R.</p>
+<pre class="r"><code>cohortDefinitionSet &lt;- ROhdsiWebApi::exportCohortDefinitionSet(
+  baseUrl = baseUrl,
+  cohortIds = cohortIds,
+  generateStats = TRUE
+)</code></pre>
+</div>
+<div id="step-3.-generate-cohort-from-the-cohort-definition"
+class="section level2">
+<h2>Step 3. Generate Cohort from the Cohort Definition</h2>
+<p>Use the CohortGenerator package to create cohort tables in the
+database cohort schema and generate the cohort set.</p>
+<pre class="r"><code>cohortTableNames &lt;- CohortGenerator::getCohortTableNames(cohortTable = cohortTable)
+
+# Next create the tables on the database
+CohortGenerator::createCohortTables(
+  connectionDetails = connectionDetails,
+  cohortTableNames = cohortTableNames,
+  cohortDatabaseSchema = cohortDatabaseSchema,
+  incremental = FALSE
+)
+
+# Generate the cohort set
+CohortGenerator::generateCohortSet(
+  connectionDetails = connectionDetails,
+  cdmDatabaseSchema = cdmDatabaseSchema,
+  cohortDatabaseSchema = cohortDatabaseSchema,
+  cohortTableNames = cohortTableNames,
+  cohortDefinitionSet = cohortDefinitionSet,
+  incremental = FALSE
+)
+
+# Pull the cohort table into R
+conn &lt;- DatabaseConnector::connect(connectionDetails)
+cohortDataframe &lt;- DatabaseConnector::querySql(con,
+                                               &#39;SELECT * FROM main.cohort&#39;)
+DatabaseConnector::disconnect(conn)</code></pre>
+</div>
+<div id="step-4.-ingest-addresses-from-omop-database"
+class="section level2">
+<h2>Step 4. Ingest Addresses from OMOP Database</h2>
+<p>Use the gaiaCore function <code>getCohortAddresses()</code> to
+extract addresses from OMOP and attach them to our cohort table:</p>
+<pre class="r"><code>cohortWithAddresses &lt;- getCohortAddresses(connectionDetails = connectionDetails,
+                                          cdmDatabaseSchema = cdmDatabaseSchema,
+                                          cohort = cohortDataframe)</code></pre>
+</div>
+<div id="step-5.-geocode-addresses-without-coordinates"
+class="section level2">
+<h2>Step 5. Geocode Addresses without Coordinates</h2>
+<pre class="r"><code>geocodedCohort &lt;- geocodeAddresses(addressTable = cohortWithAddresses)</code></pre>
+</div>
+<div id="step-6.-import-geocoded-cohort-to-gaiadb-database"
+class="section level2">
+<h2>Step 6. Import Geocoded Cohort to gaiaDB Database</h2>
+<pre class="r"><code>importCohortTable(gaiaConnectionDetails = gaiaConnectionDetails,
+                  cohort = geocodedCohort)</code></pre>
+</div>
+<div id="step-7.-filter-cohort-using-postgis-functionality"
+class="section level2">
+<h2>Step 7. Filter Cohort using PostGIS Functionality</h2>
+<p>We are going to filter the cohort based on proximity to a temperature
+sensor. For this example, we only want to include patients whose current
+address is within about 11.1 km of an EPA air temperature sensor that
+recorded a temperature greater than 101 degrees Fahrenheit in 2018,
+2019, or 2020:</p>
+<pre class="r"><code>conn &lt;-  DatabaseConnector::connect(gaiaConnectionDetails)
+
+x &lt;- DatabaseConnector::querySql(conn, sql =&quot;select *
+    from cohort.cohort_&quot;, 1782669, &quot; ct
+    where exists (
+        select 1
+        from (
+            select *
+    -- This join is ideally made automatically. User should specify a variable (by name)
+    -- and threshold (i.e. 101 deg F, 11km radius)
+  -- This union is also ideally automatic. In the case of no time constraint, it 
+  -- should union all attr_daily_temp_*
+            from (
+                select * from 
+                epa_aqs.attr_daily_temp_2020 a20
+                union
+                select * from
+                epa_aqs.attr_daily_temp_2019 a19
+                union
+                select * from
+                epa_aqs.attr_daily_temp_2018 a18
+            )  adt
+            inner join epa_aqs.geom_aqs_sites gas 
+            on adt.geom_record_id = gas.geom_record_id 
+            and variable_source_record_id IN (29, 27, 25)
+            and value_as_number &gt; 101
+        ) c
+        where st_distance(
+            ct.geometry,
+            c.geom_local_value) &lt; .1 -- degrees, approx 11.1km      
+        )&quot;)
+
+DatabaseConnector::disconnect(conn)</code></pre>
 </div>
 </div>
 
