@@ -19,10 +19,13 @@
 #' @export
 #' 
 geocodeAddresses <- function(addressTable) {
+  # TODO suppress some or all of the Degauss messaging
   # TODO decision must be made on:
   # TODO  - which add'l columns should be returned (matched_*, score, precision)
   # TODO  - If there should be a minimum cutoff score
   # TODO allow user to specify minimum cutoff score?
+  # TODO return list of location_ids/addresses that are NOT geocoded
+  # TODO option to save locally?
   if (!any(stringr::str_detect(names(addressTable), stringr::regex('address', ignore_case = T)))) {
     message("Invalid addressTable. Must contain a column \"address\".")
     return(NULL)
@@ -46,10 +49,10 @@ geocodeAddresses <- function(addressTable) {
     file.remove(paste0(tempdir(), '\\add.csv'))
     file.remove(paste0(tempdir(), '\\add_geocoder_3.3.0_score_threshold_0.5.csv'))
     successfulGeocodedTablePart <- subset(rawGeocodedTablePart, geocode_result == 'geocoded')
+    successfulGeocodedTablePartSubset <- successfulGeocodedTablePart[, c(names(addressTable), "lat", "lon")]
   })
   boundGeocodedTable <- do.call(rbind, tableParts)
-  finalSubset <- boundGeocodedTable[, c(names(addressTable), "lat", "lon")]
-  finalGeocodedTable <- sf::st_as_sf(finalSubset, coords = c("lon", "lat"), crs = 4326)
+  finalGeocodedTable <- sf::st_as_sf(boundGeocodedTable, coords = c("lon", "lat"), crs = 4326)
   finalGeocodedTable
 }
 
