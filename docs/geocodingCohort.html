@@ -545,8 +545,10 @@ gaiaConnectionDetails &lt;- DatabaseConnector::createConnectionDetails(
   password = &quot;mySecretPassword&quot;) </code></pre>
 </div>
 </div>
-<div id="step-1.-define-a-cohort-using-atlas" class="section level2">
-<h2>Step 1. Define a cohort using ATLAS</h2>
+<div id="prequisites-cohort-definition" class="section level2">
+<h2>Prequisites: Cohort Definition</h2>
+<div id="p1.-define-a-cohort-using-atlas" class="section level3">
+<h3>P1. Define a cohort using ATLAS</h3>
 <p>Use the OHDSI ATLAS tool to define a cohort. This example uses a
 cohort definition with an entry event of “Heart Failure” condition
 occurrence (316139) at age 65 or older. We refer to the WebAPI base URL
@@ -554,9 +556,9 @@ and the ID of our cohort definition:</p>
 <pre class="r"><code>baseUrl &lt;- &quot;https://atlas-demo.ohdsi.org/WebAPI&quot;
 cohortIds &lt;- c(1782669)</code></pre>
 </div>
-<div id="step-2.-import-the-atlas-cohort-definition-to-r"
-class="section level2">
-<h2>Step 2. Import the ATLAS Cohort Definition to R</h2>
+<div id="p2.-import-the-atlas-cohort-definition-to-r"
+class="section level3">
+<h3>P2. Import the ATLAS Cohort Definition to R</h3>
 <p>Use the ROhdsiWebApi tool to import the cohort definition to R.</p>
 <pre class="r"><code>cohortDefinitionSet &lt;- ROhdsiWebApi::exportCohortDefinitionSet(
   baseUrl = baseUrl,
@@ -564,9 +566,9 @@ class="section level2">
   generateStats = TRUE
 )</code></pre>
 </div>
-<div id="step-3.-generate-cohort-from-the-cohort-definition"
-class="section level2">
-<h2>Step 3. Generate Cohort from the Cohort Definition</h2>
+<div id="p3.-generate-cohort-from-the-cohort-definition"
+class="section level3">
+<h3>P3. Generate Cohort from the Cohort Definition</h3>
 <p>Use the CohortGenerator package to create cohort tables in the
 database cohort schema and generate the cohort set.</p>
 <pre class="r"><code>cohortTableNames &lt;- CohortGenerator::getCohortTableNames(cohortTable = cohortTable)
@@ -595,29 +597,55 @@ cohortDataframe &lt;- DatabaseConnector::querySql(con,
                                                &#39;SELECT * FROM main.cohort&#39;)
 DatabaseConnector::disconnect(conn)</code></pre>
 </div>
-<div id="step-4.-ingest-addresses-from-omop-database"
-class="section level2">
-<h2>Step 4. Ingest Addresses from OMOP Database</h2>
+</div>
+<div id="geocoding" class="section level2">
+<h2>Geocoding</h2>
+<div id="step-1.-ingest-addresses-from-omop-database"
+class="section level3">
+<h3>Step 1. Ingest Addresses from OMOP Database</h3>
 <p>Use the gaiaCore function <code>getCohortAddresses()</code> to
 extract addresses from OMOP and attach them to our cohort table:</p>
 <pre class="r"><code>cohortWithAddresses &lt;- getCohortAddresses(connectionDetails = connectionDetails,
                                           cdmDatabaseSchema = cdmDatabaseSchema,
                                           cohort = cohortDataframe)</code></pre>
 </div>
-<div id="step-5.-geocode-addresses-without-coordinates"
-class="section level2">
-<h2>Step 5. Geocode Addresses without Coordinates</h2>
-<pre class="r"><code>geocodedCohort &lt;- geocodeAddresses(addressTable = cohortWithAddresses)</code></pre>
+<div
+id="step-2.-split-cohort-dataframe-into-two-tables-based-on-whether-it-already-contains-latitude-and-longitude-information"
+class="section level3">
+<h3>Step 2. Split cohort dataframe into two tables based on whether it
+already contains latitude and longitude information</h3>
+<pre class="r"><code>splitResult &lt;- splitAddresses(addressTable = cohortWithAddresses)
+
+alreadyGeocodedCohort &lt;- splitResult$geocoded
+
+notGeocodedCohort &lt;- splitResult$ungeocoded</code></pre>
 </div>
-<div id="step-6.-import-geocoded-cohort-to-gaiadb-database"
-class="section level2">
-<h2>Step 6. Import Geocoded Cohort to gaiaDB Database</h2>
+<div id="step-3.-geocode-addresses-without-coordinates"
+class="section level3">
+<h3>Step 3. Geocode Addresses without Coordinates</h3>
+<pre class="r"><code>geocodedCohort &lt;- geocodeAddresses(addressTable = notGeocodedCohort)</code></pre>
+</div>
+<div id="step-4.-stack-pre-populated-and-newly-geocoded-location-tables"
+class="section level3">
+<h3>Step 4. Stack pre-populated and newly geocoded location tables</h3>
+<pre class="r"><code>fullyGeocodedCohort &lt;- geocodedCohort
+if (!is.null(alreadyGeocodedCohort)) {
+  names(alreadyGeocodedCohort) &lt;- tolower(names(alreadyGeocodedCohort))
+  alreadyGeocodedCohort &lt;- dplyr::mutate(alreadyGeocodedCohort, lat = latitude, lon = longitude)
+  alreadyGeocodedCohort &lt;- dplyr::select(alreadyGeocodedCohort, names(fullyGeocodedCohort))
+  alreadyGeocodedCohort &lt;- sf::st_as_sf(boundGeocodedTable, coords = c(&quot;lon&quot;, &quot;lat&quot;), crs = 4326)
+  fullyGeocodedCohort &lt;- rbind(fullyGeocodedCohort, alreadyGeocodedCohort)
+}</code></pre>
+</div>
+<div id="step-5.-import-geocoded-cohort-to-gaiadb-database"
+class="section level3">
+<h3>Step 5. Import Geocoded Cohort to gaiaDB Database</h3>
 <pre class="r"><code>importCohortTable(gaiaConnectionDetails = gaiaConnectionDetails,
-                  cohort = geocodedCohort)</code></pre>
+                  cohort = fullyGeocodedCohort)</code></pre>
 </div>
-<div id="step-7.-filter-cohort-using-postgis-functionality"
-class="section level2">
-<h2>Step 7. Filter Cohort using PostGIS Functionality</h2>
+<div id="step-6.-filter-cohort-using-postgis-functionality"
+class="section level3">
+<h3>Step 6. Filter Cohort using PostGIS Functionality</h3>
 <p>We are going to filter the cohort based on proximity to a temperature
 sensor. For this example, we only want to include patients whose current
 address is within about 11.1 km of an EPA air temperature sensor that
@@ -656,6 +684,7 @@ x &lt;- DatabaseConnector::querySql(conn, sql =&quot;select *
         )&quot;)
 
 DatabaseConnector::disconnect(conn)</code></pre>
+</div>
 </div>
 </div>
 

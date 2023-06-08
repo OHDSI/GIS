@@ -490,9 +490,11 @@ gaiaConnectionDetails &lt;- DatabaseConnector::createConnectionDetails(
   password = &quot;mySecretPassword&quot;) </code></pre>
 </div>
 </div>
+<div id="geocoding" class="section level2">
+<h2>Geocoding</h2>
 <div id="step-1.-ingest-the-location-table-from-omop-database"
-class="section level2">
-<h2>Step 1. Ingest the Location table from OMOP Database</h2>
+class="section level3">
+<h3>Step 1. Ingest the Location table from OMOP Database</h3>
 <p>Use the gaiaCore function <code>getLocationAddresses()</code> to
 extract addresses from OMOP and return a transformed location table:</p>
 <pre class="r"><code>transformedLocation &lt;- getLocationAddresses(connectionDetails = connectionDetails,
@@ -500,10 +502,10 @@ extract addresses from OMOP and return a transformed location table:</p>
 </div>
 <div
 id="step-2.-split-the-transformedlocation-dataframe-into-two-tables-based-on-whether-it-already-contains-latitude-and-longitude-information"
-class="section level2">
-<h2>Step 2. Split the transformedLocation dataframe into two tables
+class="section level3">
+<h3>Step 2. Split the transformedLocation dataframe into two tables
 based on whether it already contains latitude and longitude
-information:</h2>
+information:</h3>
 <pre class="r"><code>splitResult &lt;- splitAddresses(addressTable = transformedLocation)
 
 alreadyGeocodedLocation &lt;- splitResult$geocoded
@@ -511,27 +513,28 @@ alreadyGeocodedLocation &lt;- splitResult$geocoded
 notGeocodedLocation &lt;- splitResult$ungeocoded</code></pre>
 </div>
 <div id="step-3.-geocode-addresses-without-coordinates"
-class="section level2">
-<h2>Step 3. Geocode Addresses without Coordinates</h2>
+class="section level3">
+<h3>Step 3. Geocode Addresses without Coordinates</h3>
 <pre class="r"><code>geocodedLocation &lt;- geocodeAddresses(addressTable = notGeocodedLocation)</code></pre>
 </div>
 <div id="step-4.-stack-pre-populated-and-newly-geocoded-location-tables"
-class="section level2">
-<h2>Step 4. Stack pre-populated and newly geocoded location tables</h2>
-<pre class="r"><code># ToDO manual rbind between two tables, or a function that handles converting OMOP lat/lon columns?
-fullyGeocodedLocation &lt;- geocodedLocation
+class="section level3">
+<h3>Step 4. Stack pre-populated and newly geocoded location tables</h3>
+<pre class="r"><code>fullyGeocodedLocation &lt;- geocodedLocation
 if (!is.null(alreadyGeocodedLocation)) {
-  # TODO ensure that alreadyGeocodedLocation has same schema as geocodedLocation
-  #   -all lowercase
-  #   -lat and lon column converted into geometry column  
+  names(alreadyGeocodedLocation) &lt;- tolower(names(alreadyGeocodedLocation))
+  alreadyGeocodedLocation &lt;- dplyr::mutate(alreadyGeocodedLocation, lat = latitude, lon = longitude)
+  alreadyGeocodedLocation &lt;- dplyr::select(alreadyGeocodedLocation, names(fullyGeocodedLocation))
+  alreadyGeocodedLocation &lt;- sf::st_as_sf(boundGeocodedTable, coords = c(&quot;lon&quot;, &quot;lat&quot;), crs = 4326)
   fullyGeocodedLocation &lt;- rbind(fullyGeocodedLocation, alreadyGeocodedLocation)
 }</code></pre>
 </div>
 <div id="step-5.-import-geocoded-location-table-to-gaiadb-database"
-class="section level2">
-<h2>Step 5. Import Geocoded Location table to gaiaDB Database</h2>
+class="section level3">
+<h3>Step 5. Import Geocoded Location table to gaiaDB Database</h3>
 <pre class="r"><code>importLocationTable(gaiaConnectionDetails = gaiaConnectionDetails,
                     location = fullyGeocodedLocation)</code></pre>
+</div>
 </div>
 </div>
 

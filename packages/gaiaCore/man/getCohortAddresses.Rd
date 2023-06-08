@@ -20,10 +20,9 @@ getCohortAddresses(connectionDetails, cdmDatabaseSchema, cohort)
 Get Cohort Addresses
 }
 \examples{
-\dontrun
-{
+\dontrun{
 getCohortAddresses(connectionDetails = connectionDetails,
-                   cdmDatabaseSchema = myDatabase.dbo,
+                   cdmDatabaseSchema = "myDatabase.dbo",
                    cohort = cohort)
 }
 
