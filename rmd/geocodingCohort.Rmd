@@ -194,18 +194,39 @@ cohortWithAddresses <- getCohortAddresses(connectionDetails = connectionDetails,
                                           cohort = cohortDataframe)
 ```
 
-### Step 2. Geocode Addresses without Coordinates
+### Step 2. Split cohort dataframe into two tables based on whether it already contains latitude and longitude information
 ``` {r eval=FALSE}
-geocodedCohort <- geocodeAddresses(addressTable = cohortWithAddresses)
+splitResult <- splitAddresses(addressTable = cohortWithAddresses)
+
+alreadyGeocodedCohort <- splitResult$geocoded
+
+notGeocodedCohort <- splitResult$ungeocoded
 ```
 
-### Step 3. Import Geocoded Cohort to gaiaDB Database
+### Step 3. Geocode Addresses without Coordinates
+``` {r eval=FALSE}
+geocodedCohort <- geocodeAddresses(addressTable = notGeocodedCohort)
+```
+
+### Step 4. Stack pre-populated and newly geocoded location tables
+``` {r eval=FALSE}
+fullyGeocodedCohort <- geocodedCohort
+if (!is.null(alreadyGeocodedCohort)) {
+  names(alreadyGeocodedCohort) <- tolower(names(alreadyGeocodedCohort))
+  alreadyGeocodedCohort <- dplyr::mutate(alreadyGeocodedCohort, lat = latitude, lon = longitude)
+  alreadyGeocodedCohort <- dplyr::select(alreadyGeocodedCohort, names(fullyGeocodedCohort))
+  alreadyGeocodedCohort <- sf::st_as_sf(boundGeocodedTable, coords = c("lon", "lat"), crs = 4326)
+  fullyGeocodedCohort <- rbind(fullyGeocodedCohort, alreadyGeocodedCohort)
+}
+```
+
+### Step 5. Import Geocoded Cohort to gaiaDB Database
 ``` {r eval=FALSE}
 importCohortTable(gaiaConnectionDetails = gaiaConnectionDetails,
-                  cohort = geocodedCohort)
+                  cohort = fullyGeocodedCohort)
 ```
 
-### Step 4. Filter Cohort using PostGIS Functionality
+### Step 6. Filter Cohort using PostGIS Functionality
 We are going to filter the cohort based on proximity to a temperature sensor. For
 this example, we only want to include patients whose current address is within 
 about 11.1 km of an EPA air temperature sensor that recorded a temperature greater
