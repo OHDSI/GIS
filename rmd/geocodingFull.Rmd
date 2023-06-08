@@ -68,7 +68,9 @@ gaiaConnectionDetails <- DatabaseConnector::createConnectionDetails(
   password = "mySecretPassword") 
 ```
 
-## Step 1. Ingest the Location table from OMOP Database
+## Geocoding
+
+### Step 1. Ingest the Location table from OMOP Database
 Use the gaiaCore function `getLocationAddresses()` to extract addresses from OMOP
 and return a transformed location table:
 ``` {r eval=FALSE}
@@ -76,7 +78,7 @@ transformedLocation <- getLocationAddresses(connectionDetails = connectionDetail
                                             cdmDatabaseSchema = cdmDatabaseSchema)
 ```
 
-## Step 2. Split the transformedLocation dataframe into two tables based on whether it already contains latitude and longitude information:
+### Step 2. Split the transformedLocation dataframe into two tables based on whether it already contains latitude and longitude information:
 ``` {r eval=FALSE}
 splitResult <- splitAddresses(addressTable = transformedLocation)
 
@@ -85,14 +87,13 @@ alreadyGeocodedLocation <- splitResult$geocoded
 notGeocodedLocation <- splitResult$ungeocoded
 ```
 
-## Step 3. Geocode Addresses without Coordinates
+### Step 3. Geocode Addresses without Coordinates
 ``` {r eval=FALSE}
 geocodedLocation <- geocodeAddresses(addressTable = notGeocodedLocation)
 ```
 
-## Step 4. Stack pre-populated and newly geocoded location tables
+### Step 4. Stack pre-populated and newly geocoded location tables
 ``` {r eval=FALSE}
-# ToDO manual rbind between two tables, or a function that handles converting OMOP lat/lon columns?
 fullyGeocodedLocation <- geocodedLocation
 if (!is.null(alreadyGeocodedLocation)) {
   names(alreadyGeocodedLocation) <- tolower(names(alreadyGeocodedLocation))
@@ -103,7 +104,7 @@ if (!is.null(alreadyGeocodedLocation)) {
 }
 ```
 
-## Step 5. Import Geocoded Location table to gaiaDB Database
+### Step 5. Import Geocoded Location table to gaiaDB Database
 ``` {r eval=FALSE}
 importLocationTable(gaiaConnectionDetails = gaiaConnectionDetails,
                     location = fullyGeocodedLocation)
