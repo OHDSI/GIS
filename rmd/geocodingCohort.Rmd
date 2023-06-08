@@ -132,14 +132,16 @@ gaiaConnectionDetails <- DatabaseConnector::createConnectionDetails(
 ```
 
 
-## Step 1. Define a cohort using ATLAS
+## Prequisites: Cohort Definition
+
+### P1. Define a cohort using ATLAS
 Use the OHDSI ATLAS tool to define a cohort. This example uses a cohort definition with an entry event of "Heart Failure" condition occurrence (316139) at age 65 or older. We refer to the WebAPI base URL and the ID of our cohort definition:
 ```{r eval=FALSE}
 baseUrl <- "https://atlas-demo.ohdsi.org/WebAPI"
 cohortIds <- c(1782669)
 ```
 
-## Step 2. Import the ATLAS Cohort Definition to R
+### P2. Import the ATLAS Cohort Definition to R
 Use the ROhdsiWebApi tool to import the cohort definition to R.
 
 ```{r eval=FALSE}
@@ -150,7 +152,7 @@ cohortDefinitionSet <- ROhdsiWebApi::exportCohortDefinitionSet(
 )
 ```
 
-## Step 3. Generate Cohort from the Cohort Definition
+### P3. Generate Cohort from the Cohort Definition
 Use the CohortGenerator package to create cohort tables in the database cohort
 schema and generate the cohort set.
 ```{r eval=FALSE}
@@ -181,7 +183,9 @@ cohortDataframe <- DatabaseConnector::querySql(con,
 DatabaseConnector::disconnect(conn)
 ```
 
-## Step 4. Ingest Addresses from OMOP Database
+## Geocoding
+
+### Step 1. Ingest Addresses from OMOP Database
 Use the gaiaCore function `getCohortAddresses()` to extract addresses from OMOP
 and attach them to our cohort table:
 ``` {r eval=FALSE}
@@ -190,18 +194,39 @@ cohortWithAddresses <- getCohortAddresses(connectionDetails = connectionDetails,
                                           cohort = cohortDataframe)
 ```
 
-## Step 5. Geocode Addresses without Coordinates
+### Step 2. Split cohort dataframe into two tables based on whether it already contains latitude and longitude information
 ``` {r eval=FALSE}
-geocodedCohort <- geocodeAddresses(addressTable = cohortWithAddresses)
+splitResult <- splitAddresses(addressTable = cohortWithAddresses)
+
+alreadyGeocodedCohort <- splitResult$geocoded
+
+notGeocodedCohort <- splitResult$ungeocoded
 ```
 
-## Step 6. Import Geocoded Cohort to gaiaDB Database
+### Step 3. Geocode Addresses without Coordinates
+``` {r eval=FALSE}
+geocodedCohort <- geocodeAddresses(addressTable = notGeocodedCohort)
+```
+
+### Step 4. Stack pre-populated and newly geocoded location tables
+``` {r eval=FALSE}
+fullyGeocodedCohort <- geocodedCohort
+if (!is.null(alreadyGeocodedCohort)) {
+  names(alreadyGeocodedCohort) <- tolower(names(alreadyGeocodedCohort))
+  alreadyGeocodedCohort <- dplyr::mutate(alreadyGeocodedCohort, lat = latitude, lon = longitude)
+  alreadyGeocodedCohort <- dplyr::select(alreadyGeocodedCohort, names(fullyGeocodedCohort))
+  alreadyGeocodedCohort <- sf::st_as_sf(boundGeocodedTable, coords = c("lon", "lat"), crs = 4326)
+  fullyGeocodedCohort <- rbind(fullyGeocodedCohort, alreadyGeocodedCohort)
+}
+```
+
+### Step 5. Import Geocoded Cohort to gaiaDB Database
 ``` {r eval=FALSE}
 importCohortTable(gaiaConnectionDetails = gaiaConnectionDetails,
-                  cohort = geocodedCohort)
+                  cohort = fullyGeocodedCohort)
 ```
 
-## Step 7. Filter Cohort using PostGIS Functionality
+### Step 6. Filter Cohort using PostGIS Functionality
 We are going to filter the cohort based on proximity to a temperature sensor. For
 this example, we only want to include patients whose current address is within 
 about 11.1 km of an EPA air temperature sensor that recorded a temperature greater

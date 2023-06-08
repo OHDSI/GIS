@@ -727,17 +727,30 @@ getCohortAddresses <- function(connectionDetails, cdmDatabaseSchema, cohort){
     dplyr::pull("SUBJECT_ID") %>%
     unique()
   addressQuery <- paste0("SELECT p.person_id
-	  , CONCAT(l.address_1, ' ', l.address_2, ' ', l.city, ' ', l.state, ' ', LEFT(l.zip, 5)) AS address  
+	  , CONCAT(l.address_1, ' ', l.address_2, ' ', l.city, ' ', l.state, ' ', LEFT(l.zip, 5)) AS address,
+	  , latitude
+	  , longitude
     FROM ", cdmDatabaseSchema, ".person p
     LEFT JOIN ", cdmDatabaseSchema, ".location l
     ON p.location_id = l.location_id
     WHERE person_id in (", paste(personIds, collapse = ", "),")")
   conn <-  DatabaseConnector::connect(connectionDetails)
   on.exit(DatabaseConnector::disconnect(conn))
-  personAddresses <- DatabaseConnector::querySql(connection = conn, sql = addressQuery)
+  personAddresses <- tryCatch({
+    DatabaseConnector::querySql(connection = conn, sql = addressQuery)
+  }, error = function(err) {
+    if(stringr::str_detect(conditionMessage(err), "longitude|latitude")) {
+      message('\nLatitude/Longitude columns skipped.')
+      addressQuery <- paste0("SELECT l.location_id
+  	  , CONCAT(l.address_1, ' ', l.address_2, ' ', l.city, ' ', l.state, ' ', LEFT(l.zip, 5)) AS address
+      FROM ", cdmDatabaseSchema, ".location l")
+      DatabaseConnector::querySql(connection = conn, sql = addressQuery)
+    } else {
+      cat(conditionMessage(err))
+    }
+  })
   cohortWithAddresses <- cohort %>%
-    dplyr::left_join(personAddresses, by = c("SUBJECT_ID"="PERSON_ID")) %>% 
-    dplyr::rename("address"="ADDRESS")
+    dplyr::left_join(personAddresses, by = c("SUBJECT_ID"="PERSON_ID"))
   cohortWithAddresses
 }
 
