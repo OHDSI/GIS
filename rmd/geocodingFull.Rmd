@@ -95,9 +95,10 @@ geocodedLocation <- geocodeAddresses(addressTable = notGeocodedLocation)
 # ToDO manual rbind between two tables, or a function that handles converting OMOP lat/lon columns?
 fullyGeocodedLocation <- geocodedLocation
 if (!is.null(alreadyGeocodedLocation)) {
-  # TODO ensure that alreadyGeocodedLocation has same schema as geocodedLocation
-  #   -all lowercase
-  #   -lat and lon column converted into geometry column  
+  names(alreadyGeocodedLocation) <- tolower(names(alreadyGeocodedLocation))
+  alreadyGeocodedLocation <- dplyr::mutate(alreadyGeocodedLocation, lat = latitude, lon = longitude)
+  alreadyGeocodedLocation <- dplyr::select(alreadyGeocodedLocation, names(fullyGeocodedLocation))
+  alreadyGeocodedLocation <- sf::st_as_sf(boundGeocodedTable, coords = c("lon", "lat"), crs = 4326)
   fullyGeocodedLocation <- rbind(fullyGeocodedLocation, alreadyGeocodedLocation)
 }
 ```
