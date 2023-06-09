@@ -87,6 +87,8 @@ loadVariable <- function(connectionDetails, variableSourceId){
   # stagedResult <- tmp
   # get attr template
   attrTemplate <- getAttrTemplate(connectionDetails = connectionDetails)
+  
+  names(attrTemplate) <- tolower(names(attrTemplate))
 
   stagedResult <- dplyr::select(stagedResult, which(names(stagedResult) %in% names(attrTemplate)))
 
