@@ -81,7 +81,7 @@ initializeDatabase <- function(connectionDetails, overwrite = FALSE) {
   conn <- DatabaseConnector::connect(connectionDetails)
   on.exit(DatabaseConnector::disconnect(conn))
   backboneExists <- DatabaseConnector::querySql(conn, sql = "SELECT schema_name FROM information_schema.schemata WHERE schema_name = 'backbone';")
-  if (backboneExists) {
+  if (nrow(backboneExists) > 0) {
     if (isTRUE(overwrite)) {
       message("WARNING: Preparing to drop the backbone schema.\nYou will lose any custom data sources and/or variable sources\nthat you have added if you overwrite the backbone schema.\n\nTo proceed, enter 2. Any other option will abort.")
       if (menu(c('No, abort.','Yes, I am certain I want to drop schema and potentially lose data', 'Do not drop schema, abort')) == 2) {
