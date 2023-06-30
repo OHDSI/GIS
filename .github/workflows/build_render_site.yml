@@ -17,7 +17,7 @@ jobs:
       - uses: r-lib/actions/setup-tinytex@v2
       - name: Install rmd depedencies  
         run: |
-          Rscript -e "install.packages('rmarkdown')"
+          Rscript -e "install.packages(c('rmarkdown', 'kableExtra'))"
       - name: render all rmd 
         run: |
           Rscript -e "rmarkdown::render_site('rmd/')"
