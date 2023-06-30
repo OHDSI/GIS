@@ -22,6 +22,9 @@ navbar:
     - text: "Terminology"
       icon: fa-landmark
       href: terminology.html
+    - text: "Data Model"
+      icon: fa-database
+      href: dataModel.html
     - text: "Documentation"
       icon: fa-list
       menu:

@@ -11,7 +11,7 @@
 
 
 
-<title>applications.knit</title>
+<title>dataModel.knit</title>
 
 <script src="site_libs/header-attrs-2.15/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -426,41 +426,123 @@ div.tocify {
 
 
 <h1 class="title toc-ignore"><div>
-<img src="ohdsi40x40.png"></img> OHDSI GIS WG Applications
+<img src="ohdsi40x40.png"></img> OHDSI GIS WG gaiaDB Data Model
 </div></h1>
 
 </div>
 
 
-<div id="applications" class="section level1">
-<h1><strong>Applications</strong></h1>
-<p><em>GAIA is the suite of software used to work with place-related
-data in conjunction with an OMOP CDM database</em></p>
-<p>All applications are in a state of active development. We encourage
-you to experiment with these tools and anticipate that they will be
-steadily evolving. We greatly appreciate all bug reports, feature
-request, and general comments, which can all be submitted through the <a
-href="https://github.com/OHDSI/GIS/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc">GitHub
-Issue Tracker</a></p>
-<p>Please don’t hesitate to reach out to
-<strong>zollovenecek[at]ohdsi[dot]org</strong> via email or the OHDSI
-Microsoft Teams tenant if you need assistance setting up a working or
-development environment for these tools.</p>
-<div id="gaiadb" class="section level2">
-<h2><strong>gaiaDB</strong></h2>
-<p>This PostGIS database contains a mirror of the official backbone
-schema and any variables and dependent geometries that the owner of the
-instance has loaded.</p>
+<p>This is the specification document for the gaiaDB Data Model.
+<strong>This data model is still under development and likely to
+change.</strong> Each table is represented with a high-level description
+and ETL conventions that should be followed. This is continued with a
+discussion of each field in each table, any conventions related to the
+field, and constraints that should be followed (like primary key,
+foreign key, etc). Should you have questions please feel free to visit
+the <a href="https://forums.ohdsi.org/">forums</a> or the <a
+href="https://github.com/ohdsi/GIS/issues">github issue</a> page.</p>
+<pre><code>## Rows: 6 Columns: 10
+## -- Column specification ----------------------------------------
+## Delimiter: &quot;,&quot;
+## chr (7): gaiaTableName, schema, isRequired, conceptPrefix, t...
+## lgl (3): measurePersonCompleteness, measurePersonCompletenes...
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+## Rows: 59 Columns: 13
+## -- Column specification ----------------------------------------
+## Delimiter: &quot;,&quot;
+## chr (8): gaiaTableName, gaiaFieldName, isRequired, gaiaDataT...
+## lgl (5): userGuidance, etlConventions, fkDomain, fkClass, un...
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div id="backbone" class="section level2">
+<h2><strong>Backbone</strong></h2>
+<div id="data_source" class="section level3 tabset tabset-pills">
+<h3 class="tabset tabset-pills">data_source</h3>
+<p><strong>Table Description</strong></p>
+<p>This table contains records that catalog external (or local)
+web-hosted entities. All source data in gaiaDB must be referenced in
+this table.</p>
+<p><strong>User Guide</strong></p>
+<p>All records in this table are sources of geospatial data. They can be
+sources of geometry data, such as point, line, or polygon, or they can
+be attribute data with an identifier that relates them to geometry data,
+such as a FIPS code or GEOID.</p>
+<p><strong>ETL Conventions</strong></p>
+<p>All sources of data that should be included in gaiaDB must have an
+entry in this table. Geometry data sources require a “geom_spec”: a
+lightweight transformation from the source data to the standardized
+format, written in R and serialized as JSON.</p>
 </div>
-<div id="gaiacore" class="section level2">
-<h2><strong>gaiaCore</strong></h2>
-<p>This R package provides functionality for instantiating and
-interacting with a gaiaDB instance.</p>
+<div id="variable_source" class="section level3 tabset tabset-pills">
+<h3 class="tabset tabset-pills">variable_source</h3>
+<p><strong>Table Description</strong></p>
+<p>This table contains records that describe the distinct variables in a
+data source enabling downstream data integrations. All variables from
+attribute source data must be catalogued in this table.</p>
+<p><strong>User Guide</strong></p>
+<p>All records in this table describe distinct variables from attribute
+source data. For example, consider a weather dataset that is being added
+to gaiaDB. First, the entire dataset is catalogued in the data_source
+table. Then, the distinct variables of that dataset (temperature in
+fahrenheit, temperature in celsius, inches of rain, wind direction,
+etc.) each become a single record in this table. All records in this
+table are related back to their parent source dataset via a foreign key
+relationship to the data_source table. Many variable_source records can
+be related to a single data_source record.</p>
+<p><strong>ETL Conventions</strong></p>
+<p>Every individual variable from a source dataset must have an entry in
+this table. Likewise, any source attribute dataset that gets included in
+the data_source table will likely have many “children” in this table.
+All records in this table contain an “attr_spec”: a lightweight
+transformation of a single variable into the standardized table
+format.</p>
 </div>
-<div id="gaiasourcecreator" class="section level2">
-<h2><strong>gaiaSourceCreator</strong></h2>
-<p>This R Shiny app provides a form-based front end for creating new
-data_source or variable_source records for gaiaDB.</p>
+<div id="attr_index" class="section level3 tabset tabset-pills">
+<h3 class="tabset tabset-pills">attr_index</h3>
+<p><strong>Table Description</strong></p>
+<p>A programmatically derived index table of all the attribute source
+datasets included in the data_source table.</p>
+<p><strong>User Guide</strong></p>
+<p>This table can be (re)generated after new entries are added to the
+data_source table by running the gaiaCore createIndices() function.</p>
+<p><strong>ETL Conventions</strong></p>
+<p>Run the createIndices() function to (re)generate this table.</p>
+</div>
+<div id="geom_index" class="section level3 tabset tabset-pills">
+<h3 class="tabset tabset-pills">geom_index</h3>
+<p><strong>Table Description</strong></p>
+<p>A programmatically derived index table of all the geometry source
+datasets included in the data_source table.</p>
+<p><strong>User Guide</strong></p>
+<p>This table can be (re)generated after new entries are added to the
+data_source table by running the gaiaCore createIndices() function.</p>
+<p><strong>ETL Conventions</strong></p>
+<p>Run the createIndices() function to (re)generate this table.</p>
+</div>
+<div id="attr_template" class="section level3 tabset tabset-pills">
+<h3 class="tabset tabset-pills">attr_template</h3>
+<p><strong>Table Description</strong></p>
+<p>This table is a template for the standardized attribute table that
+get created.</p>
+<p><strong>User Guide</strong></p>
+<p>No action necessary. This table must simply exist (with no entries)
+in the backbone schema.</p>
+<p><strong>ETL Conventions</strong></p>
+<p>No action necessary.</p>
+</div>
+<div id="geom_template" class="section level3 tabset tabset-pills">
+<h3 class="tabset tabset-pills">geom_template</h3>
+<p><strong>Table Description</strong></p>
+<p>This table is a template for the standardized geometry tables that
+get created.</p>
+<p><strong>User Guide</strong></p>
+<p>No action necessary. This table must simply exist (with no entries)
+in the backbone schema.</p>
+<p><strong>ETL Conventions</strong></p>
+<p>No action necessary.</p>
 </div>
 </div>
 
