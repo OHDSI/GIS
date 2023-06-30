@@ -1,4 +1,4 @@
-Package: GIS
+Package: gaiaCore
 Title: Functions for interacting with gaiaDB and the OHDSI GIS software suite
 Version: 0.0.0.9000
 Authors@R: 
