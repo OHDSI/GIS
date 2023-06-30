@@ -4,105 +4,71 @@
 #' dialect. By default the @cdmDatabaseSchema parameter is kept in the SQL file and needs to be replaced before
 #' execution.
 #'
-#' @param targetDialect  The dialect of the target database. Choices are "oracle", "postgresql", "pdw", "redshift", "impala", "netezza", "bigquery", "sql server",
-#'                       "spark", "snowflake", "synapse"
-#' @param cdmVersion The version of the CDM you are creating, e.g. 5.3, 5.4
+#' @param gaiaVersion The version of the CDM you are creating, e.g. 5.3, 5.4
 #' @param outputfolder The directory or folder where the SQL file should be saved.
-#' @param cdmDatabaseSchema The schema of the CDM instance where the DDL will be run. For example, this would be "ohdsi.dbo" when testing on sql server.
-#'                          Defaults to "@cdmDatabaseSchema"
 #'
 #' @export
-writeDdl <- function(targetDialect, cdmVersion, outputfolder, cdmDatabaseSchema = "@cdmDatabaseSchema") {
+#' 
+writeDdl <- function(gaiaVersion, outputfolder) {
   
   # argument checks
-  stopifnot(targetDialect %in% c("oracle", "postgresql", "pdw", "redshift", "impala", "netezza", "bigquery", "sql server", "spark", "snowflake", "synapse"))
-  stopifnot(cdmVersion %in% listSupportedVersions())
-  stopifnot(is.character(cdmDatabaseSchema))
-  
+  stopifnot(gaiaVersion %in% c("001"))
+
   if(missing(outputfolder)) {
-    outputfolder <- file.path("ddl", cdmVersion, gsub(" ", "_", targetDialect))
+    outputfolder <- file.path(getwd(), "packages", "gaiaCore", "inst", "ddl", gaiaVersion)  
   }
   
   if(!dir.exists(outputfolder)) dir.create(outputfolder, showWarnings = FALSE, recursive = TRUE)
   
-  sql <- createDdl(cdmVersion)
-  sql <- SqlRender::render(sql = sql, cdmDatabaseSchema = cdmDatabaseSchema, targetDialect = targetDialect)
-  sql <- SqlRender::translate(sql, targetDialect = targetDialect)
+  sql <- createDdl(gaiaVersion)
+  sql <- SqlRender::render(sql = sql)
+  sql <- SqlRender::translate(sql, targetDialect = "postgresql")
   
-  filename <- paste("OMOPCDM", gsub(" ", "_", targetDialect), cdmVersion, "ddl.sql", sep = "_")
+  filename <- paste("gaiadb", gaiaVersion, "ddl.sql", sep = "_")
   SqlRender::writeSql(sql = sql, targetFile = file.path(outputfolder, filename))
   invisible(filename)
 }
 
 #' @describeIn writeDdl writePrimaryKeys Write the SQL code that creates the primary keys to a file.
 #' @export
-writePrimaryKeys <- function(targetDialect, cdmVersion, outputfolder, cdmDatabaseSchema = "@cdmDatabaseSchema") {
+writePrimaryKeys <- function(gaiaVersion, outputfolder) {
   
   # argument checks
-  stopifnot(targetDialect %in% c("oracle", "postgresql", "pdw", "redshift", "impala", "netezza", "bigquery", "sql server", "spark", "snowflake", "synapse"))
-  stopifnot(cdmVersion %in% listSupportedVersions())
-  stopifnot(is.character(cdmDatabaseSchema))
-  
+  stopifnot(gaiaVersion %in% c("001"))
+
   if(missing(outputfolder)) {
-    outputfolder <- file.path("ddl", cdmVersion, gsub(" ", "_", targetDialect))
+    outputfolder <- file.path(getwd(), "packages", "gaiaCore", "inst", "ddl", gaiaVersion)  
   }
   
   if(!dir.exists(outputfolder)) dir.create(outputfolder, showWarnings = FALSE, recursive = TRUE)
   
-  sql <- createPrimaryKeys(cdmVersion)
-  sql <- SqlRender::render(sql = sql, cdmDatabaseSchema = cdmDatabaseSchema, targetDialect = targetDialect)
-  sql <- SqlRender::translate(sql, targetDialect = targetDialect)
+  sql <- createPrimaryKeys(gaiaVersion)
+  sql <- SqlRender::render(sql = sql)
+  sql <- SqlRender::translate(sql, targetDialect = "postgresql")
   
-  filename <- paste("OMOPCDM", gsub(" ", "_", targetDialect), cdmVersion, "primary", "keys.sql", sep = "_")
+  filename <- paste("gaiadb", gaiaVersion, "primary", "keys.sql", sep = "_")
   SqlRender::writeSql(sql = sql, targetFile = file.path(outputfolder, filename))
   invisible(filename)
 }
 
 #' @describeIn writeDdl writeForeignKeys Write the SQL code that creates the foreign keys to a file.
 #' @export
-writeForeignKeys <- function(targetDialect, cdmVersion, outputfolder, cdmDatabaseSchema = "@cdmDatabaseSchema") {
+writeForeignKeys <- function(gaiaVersion, outputfolder) {
   
   # argument checks
-  stopifnot(targetDialect %in% c("oracle", "postgresql", "pdw", "redshift", "impala", "netezza", "bigquery", "sql server", "spark", "snowflake", "synapse"))
-  stopifnot(cdmVersion %in% listSupportedVersions())
-  stopifnot(is.character(cdmDatabaseSchema))
-  
-  if(missing(outputfolder)) {
-    outputfolder <- file.path("ddl", cdmVersion, gsub(" ", "_", targetDialect))
-  }
-  
-  if(!dir.exists(outputfolder)) dir.create(outputfolder, showWarnings = FALSE, recursive = TRUE)
-  
-  sql <- createForeignKeys(cdmVersion)
-  sql <- SqlRender::render(sql = sql, cdmDatabaseSchema = cdmDatabaseSchema, targetDialect = targetDialect)
-  sql <- SqlRender::translate(sql, targetDialect = targetDialect)
-  
-  filename <- paste("OMOPCDM", gsub(" ", "_", targetDialect), cdmVersion, "constraints.sql", sep = "_")
-  SqlRender::writeSql(sql = sql, targetFile = file.path(outputfolder, filename))
-  invisible(filename)
-}
+  stopifnot(gaiaVersion %in% c("001"))
 
-#' @describeIn writeDdl writeIndex Write the rendered and translated sql that creates recommended indexes to a file.
-#' @export
-writeIndex <- function(targetDialect, cdmVersion, outputfolder, cdmDatabaseSchema  = "@cdmDatabaseSchema") {
-  
-  # argument checks
-  stopifnot(targetDialect %in% c("oracle", "postgresql", "pdw", "redshift", "impala", "netezza", "bigquery", "sql server", "spark", "snowflake", "synapse"))
-  stopifnot(cdmVersion %in% listSupportedVersions())
-  stopifnot(is.character(cdmDatabaseSchema))
-  
   if(missing(outputfolder)) {
-    outputfolder <- file.path("ddl", cdmVersion, gsub(" ", "_", targetDialect))
+    outputfolder <- file.path(getwd(), "packages", "gaiaCore", "inst", "ddl", gaiaVersion)  
   }
   
   if(!dir.exists(outputfolder)) dir.create(outputfolder, showWarnings = FALSE, recursive = TRUE)
   
-  sqlFilename <- paste0("OMOP_CDM_indices_v", cdmVersion, ".sql")
-  sql <- readr::read_file(system.file(file.path("sql", "sql_server", sqlFilename), package = "CommonDataModel"))
-  sql <- SqlRender::render(sql, targetDialect = targetDialect, cdmDatabaseSchema = cdmDatabaseSchema)
-  sql <- SqlRender::translate(sql, targetDialect = targetDialect)
+  sql <- createForeignKeys(gaiaVersion)
+  sql <- SqlRender::render(sql = sql)
+  sql <- SqlRender::translate(sql, targetDialect = "postgresql")
   
-  filename <- paste("OMOPCDM", gsub(" ", "_", targetDialect), cdmVersion, "indices.sql", sep = "_")
+  filename <- paste("gaiadb", gaiaVersion, "constraints.sql", sep = "_")
   SqlRender::writeSql(sql = sql, targetFile = file.path(outputfolder, filename))
   invisible(filename)
 }
