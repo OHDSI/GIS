@@ -98,8 +98,8 @@ initializeDatabase <- function(connectionDetails, overwrite = FALSE) {
   }
   DatabaseConnector::executeSql(conn, sql = readr::read_file(system.file("sql", "backbone_ddl.sql", package="GIS")))
   message("backbone schema created.")
-  dataSource <- readr::read_csv("https://github.com/OHDSI/GIS/raw/main/source/data_source.csv")
-  variableSource <- readr::read_csv("https://github.com/OHDSI/GIS/raw/main/source/variable_source.csv")
+  dataSource <- readr::read_csv(system.file(file.path("csv", paste0("data_source.csv")), package = 'gaiaCore'))
+  variableSource <- readr::read_csv(system.file(file.path("csv", paste0("variable_source.csv")), package = 'gaiaCore'))
   DatabaseConnector::dbWriteTable(conn, "backbone.data_source", dataSource, row.names = FALSE, append = TRUE)
   DatabaseConnector::dbWriteTable(conn, "backbone.variable_source", variableSource, row.names = FALSE, append = TRUE)
   message("Source metadata added to database.")

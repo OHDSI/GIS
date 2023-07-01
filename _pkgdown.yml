@@ -1,5 +1,5 @@
 url: ~
 template:
   bootstrap: 5
-destination: ../../docs/gaiaCore
+destination: ./docs/gaiaCore
 
