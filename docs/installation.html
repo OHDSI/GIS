@@ -350,13 +350,6 @@ div.tocify {
   </a>
 </li>
 <li>
-  <a href="terminology.html">
-    <span class="fa fa-landmark"></span>
-     
-    Terminology
-  </a>
-</li>
-<li>
   <a href="dataModel.html">
     <span class="fa fa-database"></span>
      
@@ -372,6 +365,9 @@ div.tocify {
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="terminology.html">Terminology</a>
+    </li>
     <li>
       <a href="gaiaCore/index.html">gaiaCore</a>
     </li>
@@ -438,11 +434,11 @@ div.tocify {
 <li><p>See the instructions <a
 href="https://ohdsi.github.io/Hades/rSetup.html">here</a> for
 configuring your R environment, including RTools and Java.</p></li>
-<li><p>You can install the development version of gaiaCore from <a
+<li><p>You can install the latest version of gaiaCore from <a
 href="https://github.com/">GitHub</a> with:</p>
 <pre class="r"><code># install.packages(&quot;devtools&quot;)
-devtools::install_github(&quot;OHDSI/GIS/packages/gaiaCore&quot;)</code></pre></li>
-<li><p><code>library(GIS)</code></p></li>
+devtools::install_github(&quot;OHDSI/GIS&quot;)</code></pre></li>
+<li><p><code>library(gaiaCore)</code></p></li>
 </ol>
 </div>
 <div id="gaiadb-database" class="section level2">
@@ -508,7 +504,7 @@ Docker container to R</li>
 environment variables in the <code>docker-compose.yml</code>file</li>
 </ul>
 <ol start="2" style="list-style-type: decimal">
-<li>Run the <code>GIS::initializeDatabase(connectionDetails)</code>
+<li>Run the <code>gaiaCore::initializeDatabase(connectionDetails)</code>
 function</li>
 </ol>
 </div>
@@ -517,7 +513,7 @@ function</li>
 <h2>gaiaSourceCreator R Shiny</h2>
 <p>This app can be run in a local browser by executing the following
 command in an R console:</p>
-<pre><code>shiny::runGitHub(&#39;GIS&#39;, &#39;OHDSI&#39;, subdir = &#39;apps/gaiaSourceCreator&#39;)</code></pre>
+<pre><code>shiny::runGitHub(&#39;GIS&#39;, &#39;OHDSI&#39;, subdir = &#39;inst/shiny/gaiaSourceCreator&#39;)</code></pre>
 <p>You will need to have the following packages installed in your R
 environment:</p>
 <pre><code>shiny

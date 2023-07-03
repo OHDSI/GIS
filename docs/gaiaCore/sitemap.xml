@@ -34,6 +34,9 @@
     <loc>/reference/createAttrInstanceTable.html</loc>
   </url>
   <url>
+    <loc>/reference/createDdl.html</loc>
+  </url>
+  <url>
     <loc>/reference/createGeomInstanceTable.html</loc>
   </url>
   <url>
@@ -146,5 +149,8 @@
   </url>
   <url>
     <loc>/reference/standardizeStaged.html</loc>
+  </url>
+  <url>
+    <loc>/reference/writeDdl.html</loc>
   </url>
 </urlset>

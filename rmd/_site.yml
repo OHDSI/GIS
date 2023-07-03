@@ -1,4 +1,4 @@
-name: "OMOP GIS"
+name: "OHDSI GIS"
 output_dir: "../docs"
 output:
   html_document:
@@ -19,15 +19,14 @@ navbar:
     - text: "Installation"
       icon: fa-landmark
       href: installation.html
-    - text: "Terminology"
-      icon: fa-landmark
-      href: terminology.html
     - text: "Data Model"
       icon: fa-database
       href: dataModel.html
     - text: "Documentation"
       icon: fa-list
       menu:
+        - text: "Terminology"
+          href: terminology.html
         - text: "gaiaCore"
           href: "gaiaCore/index.html"
         - text: "gaiaDB"
