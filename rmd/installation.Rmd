@@ -12,14 +12,14 @@ output:
 
 1.  See the instructions [here](https://ohdsi.github.io/Hades/rSetup.html) for configuring your R environment, including RTools and Java.
 
-2.  You can install the development version of gaiaCore from [GitHub](https://github.com/) with:
+2.  You can install the latest version of gaiaCore from [GitHub](https://github.com/) with:
 
     ``` r
     # install.packages("devtools")
-    devtools::install_github("OHDSI/GIS/packages/gaiaCore")
+    devtools::install_github("OHDSI/GIS")
     ```
     
-3. `library(GIS)`
+3. `library(gaiaCore)`
 
 ## gaiaDB database
 
@@ -57,13 +57,13 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(
 ```
 - Note: the parameters above assume you did not change any default environment variables in the `docker-compose.yml`file
 
-2. Run the `GIS::initializeDatabase(connectionDetails)` function
+2. Run the `gaiaCore::initializeDatabase(connectionDetails)` function
 
 ## gaiaSourceCreator R Shiny
 
 This app can be run in a local browser by executing the following command in an R console:
 ```
-shiny::runGitHub('GIS', 'OHDSI', subdir = 'apps/gaiaSourceCreator')
+shiny::runGitHub('GIS', 'OHDSI', subdir = 'inst/shiny/gaiaSourceCreator')
 ```
 You will need to have the following packages installed in your R environment:
 ```
