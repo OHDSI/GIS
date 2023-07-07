@@ -11,7 +11,7 @@
 
 
 
-<title>index.knit</title>
+<title>dataModelEditing.knit</title>
 
 <script src="site_libs/header-attrs-2.15/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -292,12 +292,6 @@ div.tocify {
   border-radius: 0px;
 }
 
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
 
 </style>
 
@@ -433,76 +427,21 @@ div.tocify {
 
 
 <h1 class="title toc-ignore"><div>
-<img src="ohdsi40x40.png"></img> OHDSI GIS WG
+<img src="ohdsi40x40.png"></img> Proposing changes to gaiaDB Data Model
 </div></h1>
 
 </div>
 
 
-<div id="problem-space-and-goals" class="section level1">
-<h1><strong>Problem Space and Goals</strong></h1>
-<p>Geospatial data come in a variety of source formats, with no
-universal, interoperable standard representation. In order to meet our
-goal of enabling studies of place-related data in conjunction with
-longitudinal patient-level data, it is first necessary to develop
-functionality to automate retrieval and transformation of publicly
-available place-related data into a standard representation. The GIS
-workgroup aims to create a suite of tools built around a lightweight
-“repository of functionality” to incorporate geospatial analyses into
-the familiar research workflows within the OHDSI ecosystem.</p>
-<p><br></p>
-<div id="meeting-schedule" class="section level2">
-<h2><strong>Meeting Schedule</strong></h2>
-<p>The GIS General and Development subgroups meet on alternating Fridays
-at 9 AM ET (<a
-href="https://teams.microsoft.com/l/meetup-join/19%3a83e90982136c4665aa5f74a6ce292e39%40thread.tacv2/1647286365762?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%2222effa56-2c2a-408b-9cfd-25cfe976bb49%22%7d">meeting
-link</a>)</p>
-<p>General meetings focus on use cases, integration with OHDSI tools,
-and larger project context. Development meetings provide a time for
-software developers to collaborate or share their recent work.</p>
-<p>We encourage folks with an interest in leveraging Place-related data
-in their research to join or collaborate with the GIS workgroup. While
-anyone is welcome to join either of the meetings, consider attending the
-subgroup meeting that best aligns with your goals: If you would like to
-propose a use case, contribute domain expertise, or learn how the work
-from this group could augment your current research, consider joining us
-at a General meeting. If you are interested in contributing to this
-project on the technical side (code, documentation, unit testing)
-consider joining us at a Development meeting.</p>
-<p><br></p>
-</div>
-<div id="roadmap" class="section level2">
-<h2><strong>Roadmap</strong></h2>
-<p>TODO</p>
-<p><br></p>
-</div>
-<div id="get-involved" class="section level2">
-<h2><strong>Get Involved</strong></h2>
-<p>The first iteration of our <strong>gaia</strong> software and
-variable library is now functional! See the <a
-href="https://ohdsi.github.io/GIS/installation.html">installation</a>
-page to get started with the gaiaCore R package and gaiaDB database.
-From there, feel free to build your own tools that interface with gaiaDB
-and enhance the collection of datasets by adding your own (see TODO). We
-encourage anyone who adds data sources to a local gaiaDB instance to
-also create a pull request for them to be added to the full gaiaDB.</p>
-<p>You can also request that a data source be added to gaiaDB by filling
-out a data source request form <a
-href="https://github.com/OHDSI/GIS/issues/new?assignees=&amp;labels=data+request&amp;template=data_request_template.yaml&amp;title=%5BData+Source+Request%5D%3A+">here</a></p>
-<p>Note: For the time being, all software and data sources are still in
-active development, subject to unannounced changes, and should be
-considered “unstable”. There is currently no versioning of software or
-data sources, though there are thoughts to implement Semantic Versioning
-(<a href="https://semver.org/">SemVer</a>) and Universally Unique
-Identifiers (<a
-href="https://en.wikipedia.org/wiki/Universally_unique_identifier">UUIDs</a>)
-<br></p>
-</div>
-<div id="publicationspresentation" class="section level2">
-<h2><strong>Publications/Presentation</strong></h2>
-<p>OHDSI GIS Workgroup 2022 Objectives and Key Results (<a
-href="https://youtu.be/d8jIAm9cssM">video</a>) <br></p>
-</div>
+<div id="overview" class="section level1">
+<h1>Overview</h1>
+<p>The gaiaDB data model is still in early development. We hope to build
+a model that suits a wide range of needs, and as such we encourage
+interested parties to install, use, and provide feedback on the gaiaDB
+backbone and harmonized data tables. This documentation demonstrates how
+to create and submit “formal” change requests via pull requests. That
+said, we always welcome ad-hoc feedback via email or GitHub issue
+tracker.</p>
 </div>
 
 
@@ -563,7 +502,7 @@ $(document).ready(function ()  {
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
     };
-    options.showAndHide = false;
+    options.showAndHide = true;
     options.smoothScroll = true;
 
     // tocify

@@ -39,9 +39,13 @@ navbar:
               href: "geocodingFull.html"
             - text: "Geocoding a Cohort"
               href: "geocodingCohort.html"
-    - text: "Adding Data Sources"
-      icon: fa-plus-square
+    - text: "Contributor Resources"
+      icon: fa-globe
       menu:
+        - text: "How to Edit Documentation"
+          href: documentationEditing.html
+        - text: "How to Propose Changes to the gaiaDB Data Model"
+          href: dataModelEditing.html
         - text: "How to Add Data Sources to a Local gaiaDB Instance"
           href: localDataSource.html
         - text: "Sharing Your Local Data Sources"

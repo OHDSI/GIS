@@ -1,0 +1,13 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> Proposing changes to gaiaDB Data Model </div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float: yes
+---
+
+# Overview
+
+The gaiaDB data model is still in early development. We hope to build a model that suits a wide range of needs, and as such we encourage interested parties to install, use, and provide feedback on the gaiaDB backbone and harmonized data tables. This documentation demonstrates how to create and submit "formal" change requests via pull requests. That said, we always welcome ad-hoc feedback via email or GitHub issue tracker.
+

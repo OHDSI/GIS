@@ -11,7 +11,7 @@
 
 
 
-<title>index.knit</title>
+<title>documentationEditing.knit</title>
 
 <script src="site_libs/header-attrs-2.15/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -292,12 +292,6 @@ div.tocify {
   border-radius: 0px;
 }
 
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
 
 </style>
 
@@ -433,75 +427,73 @@ div.tocify {
 
 
 <h1 class="title toc-ignore"><div>
-<img src="ohdsi40x40.png"></img> OHDSI GIS WG
+<img src="ohdsi40x40.png"></img> Editing the OHDSI GIS WG website or
+documentation
 </div></h1>
 
 </div>
 
 
-<div id="problem-space-and-goals" class="section level1">
-<h1><strong>Problem Space and Goals</strong></h1>
-<p>Geospatial data come in a variety of source formats, with no
-universal, interoperable standard representation. In order to meet our
-goal of enabling studies of place-related data in conjunction with
-longitudinal patient-level data, it is first necessary to develop
-functionality to automate retrieval and transformation of publicly
-available place-related data into a standard representation. The GIS
-workgroup aims to create a suite of tools built around a lightweight
-“repository of functionality” to incorporate geospatial analyses into
-the familiar research workflows within the OHDSI ecosystem.</p>
-<p><br></p>
-<div id="meeting-schedule" class="section level2">
-<h2><strong>Meeting Schedule</strong></h2>
-<p>The GIS General and Development subgroups meet on alternating Fridays
-at 9 AM ET (<a
-href="https://teams.microsoft.com/l/meetup-join/19%3a83e90982136c4665aa5f74a6ce292e39%40thread.tacv2/1647286365762?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%2222effa56-2c2a-408b-9cfd-25cfe976bb49%22%7d">meeting
-link</a>)</p>
-<p>General meetings focus on use cases, integration with OHDSI tools,
-and larger project context. Development meetings provide a time for
-software developers to collaborate or share their recent work.</p>
-<p>We encourage folks with an interest in leveraging Place-related data
-in their research to join or collaborate with the GIS workgroup. While
-anyone is welcome to join either of the meetings, consider attending the
-subgroup meeting that best aligns with your goals: If you would like to
-propose a use case, contribute domain expertise, or learn how the work
-from this group could augment your current research, consider joining us
-at a General meeting. If you are interested in contributing to this
-project on the technical side (code, documentation, unit testing)
-consider joining us at a Development meeting.</p>
-<p><br></p>
+<div id="overview" class="section level1">
+<h1>Overview</h1>
+<p>We encourage contributions to our software documentation and our
+website. Follow these guidelines for making and proposing changes.</p>
+<div id="website" class="section level2">
+<h2>Website</h2>
+<p>This section explains how to edit the content of the website. In this
+context, the website refers to everything at <a
+href="https://ohdsi.github.io/GIS/"
+class="uri">https://ohdsi.github.io/GIS/</a> <em>except</em> for the <a
+href="https://ohdsi.github.io/GIS/gaiaCore"
+class="uri">https://ohdsi.github.io/GIS/gaiaCore</a> content which is
+covered in the next section.</p>
+<p>The source of the website’s content are contained in the ./rmd/
+directory at the root of this repository. Most of the content in the
+./rmd/ directory are RMarkdown files which are rendered to HTML, stored
+in the ./docs/ directory, and served as a website using GitHub Pages.
+Along with RMD files, there are images, stylesheets (CSS), and a file
+called _site.yml. The _site.yml file specifies the website structure and
+defines the elements on the site’s navbar.</p>
+<p>To edit existing pages on the website, simply find and edit the
+corresponding RMD file. To add new pages to the website, create an RMD
+file, fill it with content, and then add it to _site.yml in a fitting
+place. Whether you are editing existing pages or creating new ones, the
+function <code>RMarkdown::render_site()</code> can be run to regenerate
+the HTML files docs directory. More on rendering below.</p>
 </div>
-<div id="roadmap" class="section level2">
-<h2><strong>Roadmap</strong></h2>
-<p>TODO</p>
-<p><br></p>
+<div id="r-package-documentation" class="section level2">
+<h2>R Package Documentation</h2>
+<p>R Package documentation is created using ROxygen within R scripts.
+The ROxygen is rendered to .Rd files by running
+<code>devtools::document()</code>. After documentation is created, the
+function <code>pkgdown::build_site()</code> can be run to render the .Rd
+files into HTML, which automatically ends up in ./docs/gaiaCore/ and can
+be accessed from the website. More on rendering below.</p>
 </div>
-<div id="get-involved" class="section level2">
-<h2><strong>Get Involved</strong></h2>
-<p>The first iteration of our <strong>gaia</strong> software and
-variable library is now functional! See the <a
-href="https://ohdsi.github.io/GIS/installation.html">installation</a>
-page to get started with the gaiaCore R package and gaiaDB database.
-From there, feel free to build your own tools that interface with gaiaDB
-and enhance the collection of datasets by adding your own (see TODO). We
-encourage anyone who adds data sources to a local gaiaDB instance to
-also create a pull request for them to be added to the full gaiaDB.</p>
-<p>You can also request that a data source be added to gaiaDB by filling
-out a data source request form <a
-href="https://github.com/OHDSI/GIS/issues/new?assignees=&amp;labels=data+request&amp;template=data_request_template.yaml&amp;title=%5BData+Source+Request%5D%3A+">here</a></p>
-<p>Note: For the time being, all software and data sources are still in
-active development, subject to unannounced changes, and should be
-considered “unstable”. There is currently no versioning of software or
-data sources, though there are thoughts to implement Semantic Versioning
-(<a href="https://semver.org/">SemVer</a>) and Universally Unique
-Identifiers (<a
-href="https://en.wikipedia.org/wiki/Universally_unique_identifier">UUIDs</a>)
-<br></p>
+<div id="rendering" class="section level2">
+<h2>Rendering</h2>
+<p>If you’ve been keeping track, there are three functions which need to
+be called to generate the HTML for the website: 1.
+<code>devtools::document()</code> creates .Rd files from inline ROxygen
+2. <code>RMarkdown::render_site()</code> creates HTML for website
+content 3. <code>pkgdown::build_site()</code> creates HTML for the R
+Package documentation</p>
+<p>Running three functions each time you need to regenerate the website
+can be a drag. Even worse, the website won’t generate correctly if they
+are run out of order.</p>
+<p>To make things easier, there is a helper R script,
+<code>render_gaia_site.R</code>, that can be run using
+<code>source('./render_gaia_site.R')</code>. This simply calls those
+three functions in the correct order. It makes life just a bit
+easier.</p>
 </div>
-<div id="publicationspresentation" class="section level2">
-<h2><strong>Publications/Presentation</strong></h2>
-<p>OHDSI GIS Workgroup 2022 Objectives and Key Results (<a
-href="https://youtu.be/d8jIAm9cssM">video</a>) <br></p>
+<div id="publishing" class="section level2">
+<h2>Publishing</h2>
+<p>Finally, after changes have been made to the website or documentation
+and the new HTML has been rendered, simply commit your changes and
+create a Pull Request on the OHDSI GIS WG repository. A maintainer will
+review your changes, provide feedback if necessary, and accept your
+changes when they are ready.</p>
 </div>
 </div>
 
@@ -563,7 +555,7 @@ $(document).ready(function ()  {
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
     };
-    options.showAndHide = false;
+    options.showAndHide = true;
     options.smoothScroll = true;
 
     // tocify
