@@ -1,5 +1,5 @@
 ---
-title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG Geocoding Workflow </div>'
+title: '<div><img src="ohdsi40x40.png"></img> Geocoding Workflow </div>'
 output:
    html_document:
         toc: TRUE

@@ -30,7 +30,9 @@ navbar:
         - text: "gaiaCore"
           href: "gaiaCore/index.html"
         - text: "gaiaDB"
-          href: "gaiadb.html"
+          menu:
+            - text: "Diagrams"
+              href: "erd.html"
         - text: "Geocoding Workflows"
           menu:
             - text: "Geocoding the Location Table (Full)"

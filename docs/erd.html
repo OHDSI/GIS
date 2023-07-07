@@ -11,7 +11,7 @@
 
 
 
-<title>gaiadb.knit</title>
+<title>erd.knit</title>
 
 <script src="site_libs/header-attrs-2.15/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -29,9 +29,6 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -233,75 +230,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
-
-</style>
-
-
 
 </head>
 
@@ -309,16 +237,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -371,8 +289,13 @@ div.tocify {
     <li>
       <a href="gaiaCore/index.html">gaiaCore</a>
     </li>
-    <li>
-      <a href="gaiadb.html">gaiaDB</a>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">gaiaDB</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="erd.html">Diagrams</a>
+        </li>
+      </ul>
     </li>
     <li class="dropdown-submenu">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Geocoding Workflows</a>
@@ -422,7 +345,8 @@ div.tocify {
 
 
 <h1 class="title toc-ignore"><div>
-<img src="ohdsi40x40.png"></img> OHDSI GIS WG gaiaDB Data Model
+<img src="ohdsi40x40.png"></img> gaiaDB Data Model Diagrams and
+Information Flow
 </div></h1>
 
 </div>
@@ -445,17 +369,63 @@ script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
     });
   });
 </script>
+<p><br></p>
+<div id="the-backbone-data-catalog" class="section level1">
+<h1>The “Backbone” Data Catalog</h1>
+<p>Entity-Relationship diagram for the backbone schema. Note that
+linkages between entities are shown with solid association lines. The
+dashed arrows represent the transfer of metadata from the source to the
+index tables</p>
+<p>The Backbone Schema serves as the foundation for managing source
+geospatial datasets and their variables. Its core tables, data_source
+and variable_source, provide descriptions and computable instructions
+for accessing and using the source data. A single record in the data
+source table represents a complete web-hosted entity; a source dataset.
+A record in the variable_source table represents a unitary non-geometric
+component (a variable) to be extracted from a source dataset. Variables
+can often be thought of as a single column from a table, but certain
+table structures (such as Entity-Attribute-Value tables) contain
+variables that require more detailed extraction logic to access.</p>
 <div class="figure">
-<img src="images/backbone_er.png" style="width:150.0%" alt="" />
-<p class="caption">gaiaDB Entity Relationships - <a
+<img src="images/backbone_slice_1.png" style="width:150.0%" alt="" />
+<p class="caption">gaiaDB “Backbone” Data Catalog Schema - <a
 href="https://github.com/OHDSI/GIS/raw/main/rmd/images/backbone_er.png">Click
 here to download</a></p>
 </div>
-
-
-
+<p><br></p>
+</div>
+<div id="creating-harmonized-data-tables" class="section level1">
+<h1>Creating harmonized data tables</h1>
+<p>Relationships between the backbone schema and the harmonized data
+tables. Solid lines represent linkages between entities, while dashed
+lines show which values from the backbone schema are used to generate
+schema and table names</p>
+<p>The geom_index and attr_index tables store derived information from
+the data_source and variable_source tables that facilitate the
+on-the-fly creation of harmonized data tables. For example, The
+database_schema values in the geom_index and attr_index tables are
+concatenated “cleaned” versions of the org_id and org_set_id values from
+the data_source table. Similarly, the table_name values are “cleaned”
+copies of the dataset_name values from the data_source table.</p>
+<p>The gaiaCore software extensively relies on the attr_index and
+geom_index tables to create or locate tables associated with specific
+data sources or variable sources. Within a gaiaDB instance, multiple
+<database_schema> schemas exist, each potentially containing multiple
+attr_<table_name> and geom_<table_name> tables. This modular design
+allows for efficient management and retrieval of geospatial data within
+the OMOP CDM, enhancing the interoperability and analytical capabilities
+of the OHDSI community.</p>
+<div class="figure">
+<img src="images/backbone_slice_2.png" style="width:150.0%" alt="" />
+<p class="caption">gaiaDB “Backbone” holds instructions to populate
+harmonized data tables - <a
+href="https://github.com/OHDSI/GIS/raw/main/rmd/images/backbone_er.png">Click
+here to download</a></p>
 </div>
 </div>
+
+
+
 
 </div>
 
@@ -488,35 +458,6 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
-<script>
-$(document).ready(function ()  {
-
-    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
-    $('.unlisted.unnumbered').addClass('toc-ignore')
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
