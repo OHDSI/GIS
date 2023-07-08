@@ -442,6 +442,36 @@ backbone and harmonized data tables. This documentation demonstrates how
 to create and submit “formal” change requests via pull requests. That
 said, we always welcome ad-hoc feedback via email or GitHub issue
 tracker.</p>
+<p>The “official” data model at any given time is displayed on the <a
+href="https://ohdsi.github.io/GIS/dataModel.html">Data Model</a> page of
+this website. This model reflects the csv files
+gaia<version>fieldLevel.csv and gaia<version>tableLevel.csv that are
+stored at ./inst/csv at the root of the OHDSI GIS WG git
+repository.These csv files are used as the Single Source of Truth (SSoT)
+throughout the project, meaning they are referenced in scripts that
+create the SQL DDL scripts as well as functions in gaiaCore that operate
+on gaiaDB.</p>
+<p>The csv files, and their formatted counterpart on the Data Model
+page, provide us a clear method proposing changes. Any changes to the
+data model should be implemented directly (on a fork or branch of the
+main repository) to csv files. After changes are made to the csv files,
+the DDLs can be regenerated (see below), the website can be rerendered
+to reflect these changes (see <a
+href="https://ohdsi.github.io/GIS/documentationEditing.html#Rendering">here</a>),
+a Pull Request can be opened, and a discussion about the changes can
+begin.</p>
+<div id="generating-ddl-scripts" class="section level2">
+<h2>Generating DDL scripts</h2>
+<p>The “official” DDL scripts at any given time are stored at
+./inst/ddl. The only time these need to be regenerated is when there are
+changes or proposed changes to the data model. If you just need to
+implement the DDL in your database, simply run the scripts in that
+directory against your Postgres database.</p>
+<p>To regenerate the DDL scripts, simply run the scripts
+gaiaCore::writeGaiaDdl(gaiaVersion, outputfolder),
+gaiaCore::writePrimaryKeys(gaiaVersion, outputfolder), and
+gaiaCore::writeForeignKeys(gaiaVersion, outputfolder).</p>
+</div>
 </div>
 
 
