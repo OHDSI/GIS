@@ -24,7 +24,7 @@ createDdl <- function(gaiaVersion){
   tableSpecs <- read.csv(gaiaTableCsvLoc, stringsAsFactors = FALSE)
   gaiaSpecs <- read.csv(gaiaFieldCsvLoc, stringsAsFactors = FALSE)
   
-  tableList <- tableSpecs$gaiaTableName
+  tableList <- subset(tableSpecs$gaiaTableName, tableSpecs$schema == 'gaia')
   
   sql_result <- c()
   sql_result <- c(paste0("-- DDL Specification for gaiaDB version ", gaiaVersion))
@@ -77,7 +77,7 @@ createPrimaryKeys <- function(gaiaVersion){
   gaiaFieldCsvLoc <- system.file(file.path("csv", paste0("gaia", gaiaVersion, "fieldLevel.csv")), package = "gaiaCore", mustWork = TRUE)
   gaiaSpecs <- read.csv(gaiaFieldCsvLoc, stringsAsFactors = FALSE)
   
-  primaryKeys <- subset(gaiaSpecs, isPrimaryKey == "Yes")
+  primaryKeys <- subset(gaiaSpecs, isPrimaryKey == "Yes" & gaiaTableName != "exposure_occurrence")
   pkFields <- primaryKeys$gaiaFieldName
   
   sql_result <- c(paste0("-- Primary Key Constraints for gaiaDB version ", gaiaVersion))
@@ -101,7 +101,7 @@ createForeignKeys <- function(gaiaVersion){
   gaiaFieldCsvLoc <- system.file(file.path("csv", paste0("gaia", gaiaVersion, "fieldLevel.csv")), package = "gaiaCore", mustWork = TRUE)
   gaiaSpecs <- read.csv(gaiaFieldCsvLoc, stringsAsFactors = FALSE)
   
-  foreignKeys <- subset(gaiaSpecs, isForeignKey == "Yes")
+  foreignKeys <- subset(gaiaSpecs, isForeignKey == "Yes" & gaiaTableName != "exposure_occurrence")
   foreignKeys$key <- paste0(foreignKeys$gaiaTableName, "_", foreignKeys$gaiaFieldName)
   
   sql_result <- c(paste0("-- Foreign Key Constraints for gaiaDB version ", gaiaVersion))

@@ -15,7 +15,7 @@ writeDdl <- function(gaiaVersion, outputfolder) {
   stopifnot(gaiaVersion %in% c("001"))
 
   if(missing(outputfolder)) {
-    outputfolder <- file.path(getwd(), "packages", "gaiaCore", "inst", "ddl", gaiaVersion)  
+    outputfolder <- file.path(getwd(), "inst", "ddl", gaiaVersion)  
   }
   
   if(!dir.exists(outputfolder)) dir.create(outputfolder, showWarnings = FALSE, recursive = TRUE)
@@ -37,7 +37,7 @@ writePrimaryKeys <- function(gaiaVersion, outputfolder) {
   stopifnot(gaiaVersion %in% c("001"))
 
   if(missing(outputfolder)) {
-    outputfolder <- file.path(getwd(), "packages", "gaiaCore", "inst", "ddl", gaiaVersion)  
+    outputfolder <- file.path(getwd(), "inst", "ddl", gaiaVersion)  
   }
   
   if(!dir.exists(outputfolder)) dir.create(outputfolder, showWarnings = FALSE, recursive = TRUE)
@@ -59,7 +59,7 @@ writeForeignKeys <- function(gaiaVersion, outputfolder) {
   stopifnot(gaiaVersion %in% c("001"))
 
   if(missing(outputfolder)) {
-    outputfolder <- file.path(getwd(), "packages", "gaiaCore", "inst", "ddl", gaiaVersion)  
+    outputfolder <- file.path(getwd(), "inst", "ddl", gaiaVersion)  
   }
   
   if(!dir.exists(outputfolder)) dir.create(outputfolder, showWarnings = FALSE, recursive = TRUE)

@@ -5,3 +5,4 @@ attr_index,gaia,Yes,attr_,,,,A programmatically derived index table of all the a
 geom_index,gaia,Yes,geom_,,,,A programmatically derived index table of all the geometry source datasets included in the data_source table.,This table can be (re)generated after new entries are added to the data_source table by running the gaiaCore createIndices() function.,Run the createIndices() function to (re)generate this table.
 attr_template,gaia,Yes,attr_,,,,This table is a template for the standardized attribute table that get created.,No action necessary. This table must simply exist (with no entries) in the backbone schema.,No action necessary.
 geom_template,gaia,Yes,geom_,,,,This table is a template for the standardized geometry tables that get created.,No action necessary. This table must simply exist (with no entries) in the backbone schema.,No action necessary.
+exposure_occurrence,gaiaResults,No,exposure_,,,,This table is used to interface with ATLAS and OHDSI tool stack,,
