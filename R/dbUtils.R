@@ -192,7 +192,9 @@ addDataSource <- function(connectionDetails, dataSource){
 getDataSourceTable <- function(connectionDetails) {
   conn <-  DatabaseConnector::connect(connectionDetails)
   on.exit(DatabaseConnector::disconnect(conn))
-  DatabaseConnector::dbReadTable(conn, "backbone.data_source")
+  dataSource <- DatabaseConnector::dbReadTable(conn, "backbone.data_source")
+  names(dataSource) <- tolower(names(dataSource))
+  dataSource
 }
 
 
@@ -208,7 +210,9 @@ getDataSourceTable <- function(connectionDetails) {
 getVariableSourceTable <- function(connectionDetails) {
   conn <-  DatabaseConnector::connect(connectionDetails)
   on.exit(DatabaseConnector::disconnect(conn))
-  DatabaseConnector::dbReadTable(conn, "backbone.variable_source")
+  variableSource <- DatabaseConnector::dbReadTable(conn, "backbone.variable_source")
+  names(variableSource) <- tolower(names(variableSource))
+  variableSource
 }
 
 
@@ -224,7 +228,9 @@ getVariableSourceTable <- function(connectionDetails) {
 getGeomIndexTable <- function(connectionDetails) {
   conn <-  DatabaseConnector::connect(connectionDetails)
   on.exit(DatabaseConnector::disconnect(conn))
-  DatabaseConnector::dbReadTable(conn, "backbone.geom_index")
+  geomIndex <- DatabaseConnector::dbReadTable(conn, "backbone.geom_index")
+  names(geomIndex) <- tolower(names(geomIndex))
+  geomIndex
 }
 
 
@@ -240,7 +246,9 @@ getGeomIndexTable <- function(connectionDetails) {
 getAttrIndexTable <- function(connectionDetails) {
   conn <-  DatabaseConnector::connect(connectionDetails)
   on.exit(DatabaseConnector::disconnect(conn))
-  DatabaseConnector::dbReadTable(conn, "backbone.attr_index")
+  attrIndex <- DatabaseConnector::dbReadTable(conn, "backbone.attr_index")
+  names(attrIndex) <- tolower(names(attrIndex))
+  attrIndex
 }
 
 
@@ -430,7 +438,9 @@ insertPostgisGeometry <- function(connectionDetails, staged, geomIndex) {
 getGeomTemplate <- function(connectionDetails){
   conn <-  DatabaseConnector::connect(connectionDetails)
   on.exit(DatabaseConnector::disconnect(conn))
-  DatabaseConnector::dbReadTable(conn, "backbone.geom_template")
+  geomTemplate <- DatabaseConnector::dbReadTable(conn, "backbone.geom_template")
+  names(geomTemplate) <- tolower(names(geomTemplate))
+  geomTemplate
 }
 
 
@@ -526,7 +536,9 @@ createAttrInstanceTable <- function(connectionDetails, schema, name) {
 getAttrTemplate <- function(connectionDetails){
   conn <-  DatabaseConnector::connect(connectionDetails)
   on.exit(DatabaseConnector::disconnect(conn))
-  DatabaseConnector::dbReadTable(conn, "backbone.attr_template")
+  attrTemplate <- DatabaseConnector::dbReadTable(conn, "backbone.attr_template")
+  names(attrTemplate) <- tolower(names(attrTemplate))
+  attrTemplate
 }
 
 
