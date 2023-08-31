@@ -107,7 +107,7 @@ createOccurrenceForeignKeys <- function(gaiaVersion){
   gaiaFieldCsvLoc <- system.file(file.path("csv", paste0("gaia", gaiaVersion, "fieldLevel.csv")), package = "gaiaCore", mustWork = TRUE)
   gaiaSpecs <- read.csv(gaiaFieldCsvLoc, stringsAsFactors = FALSE)
   
-  foreignKeys <- subset(gaiaSpecs, isForeignKey == "Yes" & gaiaTableName != "exposure_occurrence")
+  foreignKeys <- subset(gaiaSpecs, isForeignKey == "Yes" & gaiaTableName == "exposure_occurrence")
   foreignKeys$key <- paste0(foreignKeys$gaiaTableName, "_", foreignKeys$gaiaFieldName)
   
   sql_result <- c(paste0("--@targetDialect CDM Foreign Key Constraints for Gaia Results Exposure Occurrence ", gaiaVersion, "\n"))
