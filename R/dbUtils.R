@@ -55,6 +55,71 @@ getVariableSourceSummaryTable <- function(connectionDetails) {
 }
 
 
+#' Get the name of a variable_source's geom dependency
+#'
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#' @param variableSourceId (integer) Identifier of a record in the variable_source table
+#'
+#' @return (character) The schema and table name for the source geom dependency 
+#'
+#' @examples
+#' \dontrun{
+#' geomName <- getGeomNameFromVariableSourceId(connectionDetails, 101)
+#' }
+#'
+#' @export
+#'
+
+getGeomNameFromVariableSourceId <- function(connectionDetails, variableSourceId) {
+  conn <-  DatabaseConnector::connect(connectionDetails)
+  on.exit(DatabaseConnector::disconnect(conn))
+  DatabaseConnector::dbGetQuery(conn, paste0(
+    "select concat(database_schema, '.geom_', table_name)
+    from backbone.geom_index gi 
+    where data_source_id in (
+        select geom_dependency_uuid
+        from backbone.data_source ds 
+        where data_source_uuid in (
+            select data_source_uuid
+            from backbone.variable_source vs 
+            where variable_source_id = ", variableSourceId,"
+        )
+    )"
+  )
+  )[[1]]  
+}
+
+
+#' Get the name of a variable_source's attr dependency
+#'
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#'
+#' @return (character) The schema and table name for the source attr dependency 
+#'
+#' @examples
+#' \dontrun{
+#' attrName <- getAttrNameFromVariableSourceId(connectionDetails, 101)
+#' }
+#'
+#' @export
+#'
+
+getAttrNameFromVariableSourceId <- function(connectionDetails, variableSourceId) {
+  conn <-  DatabaseConnector::connect(connectionDetails)
+  on.exit(DatabaseConnector::disconnect(conn))
+  DatabaseConnector::dbGetQuery(conn, paste0(
+    "select concat(database_schema, '.attr_', table_name)
+    from backbone.attr_index ai
+    where data_source_id in (
+    	select data_source_uuid
+    	from backbone.variable_source vs
+    	where variable_source_id = ", variableSourceId,"
+    )"
+  )
+  )[[1]]  
+}
+
+
 #' Initialize gaiaDB
 #'
 #' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
