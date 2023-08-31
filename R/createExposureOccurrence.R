@@ -185,7 +185,7 @@ writeOccurrencePrimaryKeys <- function(targetDialect, gaiaVersion, outputfolder,
 
 #' @describeIn writeDdl writeForeignKeys Write the SQL code that creates the foreign keys to a file.
 #' @export
-writeOccurrenceForeignKeys <- function(targetDialect, cdmVersion, outputfolder, cdmDatabaseSchema = "@cdmDatabaseSchema") {
+writeOccurrenceForeignKeys <- function(targetDialect, gaiaVersion, outputfolder, cdmDatabaseSchema = "@cdmDatabaseSchema") {
   
   # argument checks
   stopifnot(targetDialect %in% c("oracle", "postgresql", "pdw", "redshift", "impala", "netezza", "bigquery", "sql server", "spark", "snowflake", "synapse"))
@@ -209,7 +209,7 @@ writeOccurrenceForeignKeys <- function(targetDialect, cdmVersion, outputfolder, 
 
 #' @describeIn writeDdl writeIndex Write the rendered and translated sql that creates recommended indexes to a file.
 #' @export
-writeOccurrenceIndex <- function(targetDialect, cdmVersion, outputfolder, cdmDatabaseSchema  = "@cdmDatabaseSchema") {
+writeOccurrenceIndex <- function(targetDialect, gaiaVersion, outputfolder, cdmDatabaseSchema  = "@cdmDatabaseSchema") {
   
   # argument checks
   stopifnot(targetDialect %in% c("oracle", "postgresql", "pdw", "redshift", "impala", "netezza", "bigquery", "sql server", "spark", "snowflake", "synapse"))
