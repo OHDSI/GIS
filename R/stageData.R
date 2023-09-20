@@ -53,11 +53,13 @@ getStaged <- function(rec) {
         message("Skipping download (zip file located on disk) ...")
       }
       utils::unzip(tempzip, exdir = gisTempdir)
-      if (rec$download_data_standard == 'shp') {
+      if (rec$download_data_standard %in% list('shp','gdb')) {
         return(sf::st_read(file.path(gisTempdir, rec$download_filename)))
       } else if (rec$download_data_standard == 'csv') {
         return(utils::read.csv(file = file.path(gisTempdir, rec$download_filename),
                                check.names = FALSE))
+      } else {
+        message(paste0("no import handler for",rec$download_data_standard))
       }
     }
   }
