@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% block title %}{{ name_id }}{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style>
+      .grid-color {
+        background:#ddd
+      }
+      .grid-color:nth-child(even) {
+        background:#fff;
+      }
+    </style>
+{% endblock %}
+
+{% block content %}
+      <div class="container mb-6">
+        <div class="row mb-2">
+          <form method="post" action="/" id="filterForm" name="filterForm">
+            <input type="hidden" id="active" name="active" value="{{ referrer.active }}">
+            <input type="hidden" id="collection" name="collection" value="{{ referrer.collection }}">
+            <input type="hidden" id="searchTerm" name="searchTerm" value="{{ referrer.query if (referrer.query != "" and referrer.query != None) else "" }}">
+          </form>
+          <a href="/">gdsc</a>&nbsp;>&nbsp; 
+          <a href="#" onclick="javascript:document.getElementById('filterForm').submit();">search</a>
+        </div>
+        <div class="row">
+          <div class="col-7 align-top">
+            <h4 class="float-left">{% if document['dct_title'] %}{{ document['dct_title'][0] }}{% endif %}</h4>
+          </div>
+          <div class="col-5 align-top">
+            {% if document['gdsc_collections'] and document['gdsc_collections']|length > 0 %}
+            <span class="d-block float-right align-top text-right"><b>Collections:</b>
+              {% for collection in document['gdsc_collections'] %}{{ collection }}{{ " | " if not loop.last else "" }}{% endfor %}
+            </span>
+            {% endif %}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col ml-4 mt-2">
+            <div class="container">
+              <div class="row">
+                <div class="col-10 pl-0">
+                <b>Citation:</b> 
+                {% if document['dct_creator'] %}{{ document['dct_creator'][0] }}{% endif %}
+                ({% if document['dct_issued'] %}{{ document['dct_issued'][0][:4] }}{% endif %}).
+                {% if document['dct_title'] %}{{ document['dct_title'][0] }}{% endif %} [gis dataset].
+                {% if document['dct_publisher'] %}{{ document['dct_publisher'][0] }}{% endif %}.
+                {% if document['dct_identifier'] %}<a href="{{ document['dct_identifier'][0] }}" target="_blank" class="text-wrap text-break">{{ document['dct_identifier'][0] }}</a>.{% endif %}
+                {% if document['dct_modified'] %} last updated: {{ document['dct_modified'][0][:10] }}{% endif %}
+                {% if document['dcat_downloadURL'] %} from <a href="{{ document['dcat_downloadURL'][0] }}" target="_blank">{{ document['dcat_downloadURL'][0] }}</a>{% endif %} 
+                {% if document['dct_accrualPeriodicity'] %} (update frequency: {{ document['dct_accrualPeriodicity'][0] }}){% endif %}.
+                {% if document['dct_description'] %}
+                <span class="mt-2 d-block"><b>Abstract:</b> {{ document['dct_description'][0] }}</span>
+                {% endif %}
+                {% if document['dcat_keyword'] and document['dcat_keyword']|length > 0 %}
+                <span class="mt-1 d-block"><b>key words:</b>
+                  {# {% for keyword in document['dcat_keyword'] %}{{ keyword }}{{ ", " if not loop.last else "" }}{% endfor %} #}
+                  {{ ", ".join(document['dcat_keyword']) }}
+                </span>
+                {% endif %}
+                </div>
+                <div class="col">
+                  {% if document['gdsc_sponsor'] %}
+                  Sponsors:<br>
+                  {% for sponsor in document['gdsc_sponsor'] %}
+                  <a href="{{ sponsor.split(';')[1] }}" target="_blank"><img src="/static/{{ sponsor.split(';')[0] }}-small.jpg" style="max-height:30px;"></a>
+                  {% endfor %}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            {% if document['gdsc_attributes'] and document['gdsc_attributes']|length > 0 %}
+            <div class="accordion mt-2" id="attributes-container">
+              <div class="accordion-item">
+                <div class="accordion-header">
+                  <a href="attributes" data-bs-toggle="collapse" data-bs-target="#attributes" aria-expanded="false" aria-controls="attributes">
+                    <b>attributes:</b>
+                  </a>
+                </div>
+                <div id="attributes" class="accordion-collapse collapse" data-bs-parent="#attributes-container">
+                  <div class="accordion-body">
+                    <div class="container mt-2 text-break">
+                      <div class="row border-bottom border-dark">
+                        <div class="col">Name</div>
+                        <div class="col-6">Description</div>
+                        <div class="col">Type</div>
+                        <div class="col">Units</div>
+                      </div>    
+                      {% for attr in document['gdsc_attributes'] %}
+                      <div class="row grid-color">
+                        <div class="col">{{ attr[0] }}</div>
+                        <div class="col-6">{{ attr[1] }}</div>
+                        <div class="col">{{ attr[3] }}</div>
+                        <div class="col">{{ attr[4] }}</div>
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+            <span class="mt-4 d-block">
+              <b>Open Geospatial Consortium Standards:</b>
+              {% if "Raster" not in document['dct_type'][0] %}
+                <a href="https://gdsc.idsc.miami.edu/vector/public.{{ document['gdsc_tablename'][0] }}.html" target="_blank">vector tiles</a>
+              {% endif %}
+              | WMS (coming soon) | WFS (coming soon)
+            </span>
+            {% if document['gdsc_arcgisSD'] %}
+            <span class="mt-1 d-block">
+              <b>ESRI Standards:</b>
+              <a href="https://arcgis.gdsc.miami.edu/arcgis/rest/services/{{ document['gdsc_tablename'][0] }}/MapServer" target="_blank">ArcGIS MapServer</a> |
+              <a href="https://arcgis.gdsc.miami.edu/arcgis/rest/services/{{ document['gdsc_tablename'][0] }}/FeatureServer" target="_blank">ArcGIS FeatureServer</a> |
+              <a href="https://portal.gdsc.miami.edu/arcgis/home/webmap/viewer.html?url=https%3A%2F%2Farcgis.gdsc.miami.edu%2Farcgis%2Frest%2Fservices%2F{{ document['gdsc_tablename'][0] }}%2FFeatureServer&source=sd" target="_blank">Open in ArcGIS Portal for GDSC</a>
+            </span>
+            {% endif %}
+            {% if document['gdsc_functions'] and document['gdsc_functions']|length > 0 %}
+            <span class="mt-1 d-block text-wrap text-break">
+              <b>Analytical Functions:</b>
+                {% for function in document['gdsc_functions'] %}
+                  {% if function == "gdsc_get_attributes" %}
+                    <a target="_blank" href="https://gdsc.idsc.miami.edu/functions/rpc/gdsc_get_attributes?tablename=public.{{ document['gdsc_tablename'][0] }}&lat=25.718&lng=-80.279&identifier={{ document['gdsc_label'][0] }}&attrs=%7B{{ ','.join(document['gdsc_columns']) }}%7D&normal=">gdsc_get_attributes(tablename={{ document['gdsc_tablename'][0] }},lat=25.718,lng=-80.279,identifier={{ document['gdsc_label'][0] }},attrs=[{{ ','.join(document['gdsc_columns']) }}],normal='')</a>
+                  {% endif %}
+                  {% if function == "gdsc_nearest_neighbor" %}
+                    <a target="_blank" href="https://gdsc.idsc.miami.edu/functions/rpc/gdsc_nearest_neighbor?tablename=public.{{ document['gdsc_tablename'][0] }}&lat=25.718&lng=-80.279&identifier={{ document['gdsc_label'][0] }}">gdsc_nearest_neighbor(table={{ document['gdsc_tablename'][0] }},lat=25.718,lng=-80.279,id={{ document['gdsc_label'][0] }})</a>
+                  {% endif %}
+                  {% if function == "gdsc_count_within" %}
+                    <a target="_blank" href="https://gdsc.idsc.miami.edu/functions/rpc/gdsc_count_within?tablename=public.{{ document['gdsc_tablename'][0] }}&lat=25.718&lng=-80.279&radius=5280">gdsc_count_within(table={{ document['gdsc_tablename'][0] }},lat=25.718,lng=-80.279,radius=5280)</a>
+                  {% endif %}
+                  {% if function == "gdsc_zonal_statistics" %}
+                    <a target="_blank" href="https://gdsc.idsc.miami.edu/functions/rpc/gdsc_zonal_statistics?tablename=public.{{ document['gdsc_tablename'][0] }}&lat=25.718&lng=-80.279&radius=500">gdsc_zonal_statistics(table={{ document['gdsc_tablename'][0] }},lat=25.718,lng=-80.279,radius=500)</a>
+                  {% endif %}
+                {% endfor %}
+            </span>
+            {% endif %}
+            {% if document['prov_action'] %}
+            <span class="mt-4 d-block text-wrap text-break">
+              <button type="button" class="btn btn-link btn-anchor" data-bs-toggle="modal" data-bs-target="#modal__{{ document['gdsc_tablename'][0] }}" style="outline: none !important; padding: 0; border: 0; vertical-align: baseline;">
+                <b>ETL documentation</b>
+              </button>
+              <div class="modal fade" id="modal__{{ document['gdsc_tablename'][0] }}" tabindex="-1" aria-labelledby="label_{{ document['gdsc_tablename'][0] }}" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="label_{{ document['gdsc_tablename'][0] }}">ETL for {{ document['gdsc_tablename'][0] }}</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <span style="white-space: pre-line">{{ document['prov_action'][0] }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+{% endblock %}
