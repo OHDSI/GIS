@@ -10,10 +10,11 @@ loadExposure <- function(gaiaConnectionDetails, cdmConnectionDetails, cdmDatabas
   if (!checkTableExists(connectionDetails = cdmConnectionDetails,
                        databaseSchema = cdmDatabaseSchema,
                        tableName = "exposure_occurrence")) {
-    message(paste0("Creating exposure_occurrence table in ", cdmConnectionDetails$server(), ".", cdmDatabaseSchema, "."))
+    message(paste0("Creating exposure_occurrence table in ", cdmConnectionDetails$server(), ".", cdmDatabaseSchema, "..."))
     
     message ("TODO: Create function to execute exposure_occurrence DDL with connectionDetails; https://github.com/OHDSI/GIS/issues/240")
     message("TOOD: For now, you will have to manually create exposure_occurrence using the scripts in inst/ddl/001/gaiaResults_*")
+    stop("Table not found")
   }
 
 # Check that specified variable (and geom) are both loaded to staging ---------------
