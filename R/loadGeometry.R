@@ -91,6 +91,10 @@ loadGeometry <- function(connectionDetails, dataSourceUuid) {
                staged = staged,
                geomIndex = geomIndexRecord)
   
+  # Index the geometry column (geom_local_value, geom_wgs84)
+  createGeomTableIndexes(connectionDetails = connectionDetails,
+                         schema =  geomIndexRecord$database_schema,
+                         name = geomIndexRecord$table_name)
 }
 
 

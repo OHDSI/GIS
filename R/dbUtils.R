@@ -527,6 +527,24 @@ setSridWgs84 <- function(connectionDetails, staged, geomIndex) {
     geometryType,", 4326) USING public.ST_SetSRID(geom_wgs84, 4326);")
   )
 }
+#' Create indexes on a geom_* table
+#'
+#' @param connectionDetails (list) An object of class connectionDetails as created by the createConnectionDetails function
+#' @param schema (character) The name of the schema
+#' @param name (character) The geometry table name
+#'
+#' @return Indexes on two geometry columns (geom_local_value, geom_wgs84)
+#' 
+
+createGeomTableIndexes <- function(connectionDetails, schema, name) {
+  conn <-  DatabaseConnector::connect(connectionDetails)
+  on.exit(DatabaseConnector::disconnect(conn))
+  DatabaseConnector::executeSql(conn,
+                                sql = paste0("CREATE INDEX geom_idx_", name, "_local ON ", schema,".geom_", name, " USING gist(geom_local_value);"))
+  DatabaseConnector::executeSql(conn,
+                                sql = paste0("CREATE INDEX geom_idx_", name,  "_wgs84 ON ", schema,".geom_", name, " USING gist(geom_wgs84);"))
+  
+}
 
 # Load Variable -----------------------------------------------------------
 
