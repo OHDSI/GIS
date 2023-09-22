@@ -82,7 +82,7 @@
         <dd>Create an empty instance of the attr_template in a given schema in PostGIS</dd>
       </dl><dl><dt>
           
-          <code><a href="createDdl.html">createDdl()</a></code> <code><a href="createDdl.html">createPrimaryKeys()</a></code> <code><a href="createDdl.html">createForeignKeys()</a></code> 
+          <code><a href="createDdl.html">createOccurrencePrimaryKeys()</a></code> <code><a href="createDdl.html">createOccurrenceForeignKeys()</a></code> <code><a href="createDdl.html">createDdl()</a></code> <code><a href="createDdl.html">createPrimaryKeys()</a></code> <code><a href="createDdl.html">createForeignKeys()</a></code> 
         </dt>
         <dd>Create the OHDSI-SQL Common Data Model DDL code</dd>
       </dl><dl><dt>
@@ -90,6 +90,11 @@
           <code><a href="createGeomInstanceTable.html">createGeomInstanceTable()</a></code> 
         </dt>
         <dd>Create an empty instance of the geom_template in a given schema in PostGIS</dd>
+      </dl><dl><dt>
+          
+          <code><a href="createGeomTableIndexes.html">createGeomTableIndexes()</a></code> 
+        </dt>
+        <dd>Create indexes on a geom_* table</dd>
       </dl><dl><dt>
           
           <code><a href="createIndices.html">createIndices()</a></code> 
@@ -100,6 +105,11 @@
           <code><a href="createNameString.html">createNameString()</a></code> 
         </dt>
         <dd>Sanitize and create table name from source values</dd>
+      </dl><dl><dt>
+          
+          <code><a href="createOccurrenceDdl.html">createOccurrenceDdl()</a></code> 
+        </dt>
+        <dd>Create the OHDSI-SQL Common Data Model DDL code</dd>
       </dl><dl><dt>
           
           <code><a href="createSchemaString.html">createSchemaString()</a></code> 
@@ -120,6 +130,11 @@
           <code><a href="getAttrIndexTable.html">getAttrIndexTable()</a></code> 
         </dt>
         <dd>Get the backbone.attr_index table</dd>
+      </dl><dl><dt>
+          
+          <code><a href="getAttrNameFromVariableSourceId.html">getAttrNameFromVariableSourceId()</a></code> 
+        </dt>
+        <dd>Get the name of a variable_source's attr dependency</dd>
       </dl><dl><dt>
           
           <code><a href="getAttrOfGeomIndexId.html">getAttrOfGeomIndexId()</a></code> 
@@ -160,6 +175,11 @@
           <code><a href="getGeomIndexTable.html">getGeomIndexTable()</a></code> 
         </dt>
         <dd>Get the backbone.geom_index table</dd>
+      </dl><dl><dt>
+          
+          <code><a href="getGeomNameFromVariableSourceId.html">getGeomNameFromVariableSourceId()</a></code> 
+        </dt>
+        <dd>Get the name of a variable_source's geom dependency</dd>
       </dl><dl><dt>
           
           <code><a href="getGeomTemplate.html">getGeomTemplate()</a></code> 
@@ -267,9 +287,14 @@
         <dd>Create a standardized version of the staged data that was imported from source</dd>
       </dl><dl><dt>
           
-          <code><a href="writeDdl.html">writeDdl()</a></code> <code><a href="writeDdl.html">writePrimaryKeys()</a></code> <code><a href="writeDdl.html">writeForeignKeys()</a></code> 
+          <code><a href="writeDdl.html">writeOccurrencePrimaryKeys()</a></code> <code><a href="writeDdl.html">writeOccurrenceForeignKeys()</a></code> <code><a href="writeDdl.html">writeOccurrenceIndex()</a></code> <code><a href="writeDdl.html">writeDdl()</a></code> <code><a href="writeDdl.html">writePrimaryKeys()</a></code> <code><a href="writeDdl.html">writeForeignKeys()</a></code> 
         </dt>
         <dd>Write gaiaDB DDL script</dd>
+      </dl><dl><dt>
+          
+          <code><a href="writeOccurrenceDdl.html">writeOccurrenceDdl()</a></code> 
+        </dt>
+        <dd>Write DDL script</dd>
       </dl></div>
   </main></div>
 
