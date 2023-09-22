@@ -912,3 +912,11 @@ importCohortTable <- function(gaiaConnectionDetails, cohort, overwrite = FALSE) 
   })
   
 }
+
+createGeomOmopLocationIdex <- function(connectionDetails) {
+  conn <-  DatabaseConnector::connect(connectionDetails)
+  on.exit(DatabaseConnector::disconnect(conn))
+  DatabaseConnector::executeSql(conn,
+                                sql = paste0("CREATE INDEX omop_location_idx ON omop.geom_omop_location USING gist (geometry);
+"))
+}
