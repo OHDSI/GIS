@@ -142,7 +142,7 @@ getAttrNameFromVariableSourceId <- function(connectionDetails, variableSourceId)
 #' @export
 #'
 
-initializeDatabase <- function(connectionDetails, overwrite = FALSE) {
+initializeDatabase <- function(connectionDetails, overwrite = FALSE, testing = FALSE) {
   conn <- DatabaseConnector::connect(connectionDetails)
   on.exit(DatabaseConnector::disconnect(conn))
   backboneExists <- DatabaseConnector::querySql(conn, sql = "SELECT schema_name FROM information_schema.schemata WHERE schema_name = 'backbone';")
@@ -163,8 +163,13 @@ initializeDatabase <- function(connectionDetails, overwrite = FALSE) {
   }
   DatabaseConnector::executeSql(conn, sql = readr::read_file(system.file("sql", "backbone_ddl.sql", package="gaiaCore")))
   message("backbone schema created.")
-  dataSource <- readr::read_csv(system.file(file.path("csv", paste0("data_source.csv")), package = 'gaiaCore'))
-  variableSource <- readr::read_csv(system.file(file.path("csv", paste0("variable_source.csv")), package = 'gaiaCore'))
+  if (!testing) {
+    dataSource <- readr::read_csv(system.file(file.path("csv", paste0("data_source.csv")), package = 'gaiaCore'))
+    variableSource <- readr::read_csv(system.file(file.path("csv", paste0("variable_source.csv")), package = 'gaiaCore'))
+  } else {
+    dataSource <- readr::read_csv(system.file(file.path("csv", paste0("test_data_source.csv")), package = 'gaiaCore'))
+    variableSource <- readr::read_csv(system.file(file.path("csv", paste0("test_variable_source.csv")), package = 'gaiaCore'))
+  }
   DatabaseConnector::dbWriteTable(conn, "backbone.data_source", dataSource, row.names = FALSE, append = TRUE)
   DatabaseConnector::dbWriteTable(conn, "backbone.variable_source", variableSource, row.names = FALSE, append = TRUE)
   message("Source metadata added to database.")

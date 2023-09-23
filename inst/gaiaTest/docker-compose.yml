@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  postgis:
+    container_name: test_postgis
+    build: ./
+    image: gis_postgis
+    restart: always
+    ports:
+      - "5431:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_DB=gaiaTest
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    
+volumes:
+  pgdata:
+    name: test_pgdata
