@@ -1,0 +1,4 @@
+"vocabulary_id","vocabulary_name","vocabulary_reference","vocabulary_version","vocabulary_concept_id"
+"None","OMOP Standardized Vocabularies","OMOP generated","v5.0 23-JAN-23","44819096"
+"OMOP GIS","OMOP GIS","SDOH","OMOP GIS version 2023-09-29",
+"SDOH","SDOH","SDOH","SDOH version 2023-09-29",
