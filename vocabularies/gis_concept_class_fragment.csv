@@ -1,0 +1,26 @@
+concept_class_id,concept_class_name,concept_class_concept_id
+Geometry Item,Geometry Item,2000002262
+AHRQ Item,AHRQ Item,2000002263
+SDOH Determinant,SDOH Determinant,2000002264
+SDOHO Construct,SDOHO Construct,2000002265
+AHRQ Determinant,AHRQ Determinant,2000002266
+SDOH Construct,SDOH Construct,2000002267
+SDOHO Geo Item,SDOHO Geo Item,2000002268
+SDOHO Determinant,SDOHO Determinant,2000002269
+AHRQ Geo Item,AHRQ Geo Item,2000002270
+Geometry Relationship,Geometry Relationship,2000002271
+Location,Location,2000002272
+SDOHO Value,SDOHO Value,2000002273
+SDOH,SDOH,2000002274
+SVI Item,SVI Item,2000002275
+SDOHO Item,SDOHO Item,2000002276
+SDOH Geo Item,SDOH Geo Item,2000002277
+SVI Geo Item,SVI Geo Item,2000002278
+AHRQ Construct,AHRQ Construct,2000002279
+OMOP GIS,OMOP GIS,2000002280
+Geometry Type,Geometry Type,2000002281
+SDOH Value,SDOH Value,2000002282
+SVI Construct,SVI Construct,2000002283
+SVI Determinant,SVI Determinant,2000002284
+Domain,Domain,2000002285
+SDOH Item,SDOH Item,2000002286
