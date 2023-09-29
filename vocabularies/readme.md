@@ -1,0 +1,8 @@
+# SDOH Vocabulary
+The "Social Determinants of Health" (SDOH) vocabulary encapsulates a refined set of terminologies delineating the multifaceted environmental and societal factors that significantly influence individual and community health outcomes. The vocabulary boasts a comprehensive structure, organized hierarchically to facilitate precise categorization and effective data navigation. Within this structure, the SDOH vocabulary seamlessly integrates key components from recognized standards such as the Social Vulnerability Index (SVI), the Agency for Healthcare Research and Quality (AHRQ) frameworks, and the Social Determinants of Health Ontology (SDOHO) nodes. This integration ensures a rich, multi-dimensional perspective, capturing a wide spectrum of determinants from socioeconomic status to healthcare access, and from educational opportunities to neighborhood and built environment. 
+
+# OMOP GIS Vocabulary
+The Observational Medical Outcomes Partnership (OMOP) GIS vocabulary represents a meticulous compilation of terminologies focused on geography, boundaries, and spatial elements essential in the healthcare domain. Rooted in the intersection of healthcare and geospatial studies, this vocabulary serves as the foundation for precise geospatial analyses in observational health research.
+
+# OMOP Toxin Vocabulary
+The Observational Medical Outcomes Partnership (OMOP) Toxin Vocabulary offers a comprehensive taxonomy and classification system centered on toxins and their respective implications in healthcare and medical research. Designed to facilitate structured data capture, analysis, and interpretation, this vocabulary forms the foundation for toxicological studies within the observational health data paradigm.
