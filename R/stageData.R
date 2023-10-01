@@ -54,6 +54,9 @@ getStaged <- function(rec) {
       }
       utils::unzip(tempzip, exdir = gisTempdir)
       if (rec$download_data_standard %in% list('shp','gdb')) {
+        # TODO: handle cases for gdb where feature class name is different than geodatabase 
+        #       name -- this may need an extra piece of metadata to specify the named feature
+        #       class within the geodatabase.
         return(sf::st_read(file.path(gisTempdir, rec$download_filename)))
       } else if (rec$download_data_standard == 'csv') {
         return(utils::read.csv(file = file.path(gisTempdir, rec$download_filename),
