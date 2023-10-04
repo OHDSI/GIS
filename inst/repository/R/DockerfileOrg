@@ -1,0 +1,34 @@
+FROM ubuntu:latest
+
+# get necessary system utilties
+RUN apt-get update && \
+    apt-get install -y \
+    software-properties-common \
+    default-jre \
+    default-jdk
+
+# add needed repository for GIS tools
+RUN add-apt-repository ppa:ubuntugis/ppa
+RUN apt update && apt upgrade -y
+
+# get libraries for GIS tools
+RUN apt-get install -y \
+    libgdal-dev gdal-bin \
+    libproj22 \
+    libproj-dev \
+    libfontconfig1-dev \
+    libharfbuzz-dev \
+    libfribidi-dev
+
+# get the sf library for R (precompiled)
+ENV DEBIAN_FRONTEND noninteractive
+RUN add-apt-repository ppa:c2d4u.team/c2d4u4.0+ && \
+    apt update && apt install -y r-cran-sf
+
+# install the gaiaCore library
+RUN R -e "install.packages('githubinstall')"
+RUN R -e "library('githubinstall'); githubinstall('OHDSI/gaia', ask=FALSE, ref='main')"
+
+# copy DatabaseConnector jar file for postgres
+RUN mkdir /ohdsi-gis && mkdir /ohdsi-gis/dbJars
+COPY ./dbJars /ohdsi-gis/dbJars
