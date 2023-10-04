@@ -15,12 +15,16 @@ services:
     image: gis_repo
     ports:
       - "5000:5000"
+    networks:
+      - gaiadb
     links:
       - "solr:index"
       - "gaia_r:gaiaCore"
   solr:
     container_name: solr
     image: solr
+    networks:
+      - gaiadb
     volumes:
       - ./collections:/collections
       - solr-data:/var/solr
