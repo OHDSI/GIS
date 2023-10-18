@@ -1,11 +1,15 @@
 import pandas as pd
+import os
 from sqlalchemy import create_engine
 from configparser import ConfigParser
 
 # Define the file paths for your CSV files
-concept_file = "./vocabularies/gis_vocabs_concept_stage_v1.csv"
-concept_relationship_file = "./vocabularies/gis_vocabs_concept_relationship_stage_v1.csv"
-vocabulary_file = "./vocabularies/gis_vocabs_vocabulary_stage_v1.csv"
+
+script_directory = os.path.dirname(os.path.abspath(__file__))
+
+concept_file = os.path.join(script_directory, 'gis_vocabs_concept_stage_v1.csv')
+concept_relationship_file = os.path.join(script_directory, 'gis_vocabs_concept_relationship_stage_v1.csv')
+vocabulary_file = os.path.join(script_directory, 'gis_vocabs_vocabulary_stage_v1.csv')
 
 # Load CSV files into pandas DataFrames
 concept_df = pd.read_csv(concept_file)
@@ -23,7 +27,7 @@ vocabs = concept_relationship_df['vocabulary_id_2'].unique().tolist()
 
 quoted_vocabs = [f"'{v}'" for v in vocabs]
 
-sql_query = f"SELECT concept_code, vocabulary_id, concept_id FROM gisdev.concept WHERE vocabulary_id IN ({', '.join(map(str, quoted_vocabs))})"
+sql_query = f"SELECT concept_code, vocabulary_id, concept_id FROM @devVocabSchema.concept WHERE vocabulary_id IN ({', '.join(map(str, quoted_vocabs))})"
 
 # Read the database connection details from the config.txt file
 config = ConfigParser()
@@ -95,15 +99,32 @@ vocabulary_df = vocabulary_df[vocabulary_df['vocabulary_concept_id'].isna()]
 # Assign incrementing values to the remaining rows in vocabulary_concept_id
 vocabulary_df['vocabulary_concept_id'] = range(max(concept_class_df['concept_class_concept_id']) + 1, max(concept_class_df['concept_class_concept_id']) + 1 + len(vocabulary_df))
 
+# Create a DataFrame for the unique relationship values
+relationship_df = pd.DataFrame({
+    'relationship_id': ["Has geometry", "Is geometry of"],
+    'relationship_name': ["Has geometry (GIS)", "Is geometry of (GIS)"],
+    'is_hierarchical': [0, 0],
+    'defines_ancestry': [0, 0],
+    'reverse_relationship_id': ["Is geometry of", "Has geometry"],
+    'relationship_concept_id': [max(vocabulary_df['vocabulary_concept_id']) + 1, max(vocabulary_df['vocabulary_concept_id']) + 2]
+})
+
 
 # Define the output file paths with stems
 output_paths = {
-    'concept': './vocabularies/gis_concept_fragment.csv',
-    'concept_relationship': './vocabularies/gis_concept_relationship_fragment.csv',
-    'vocabulary': './vocabularies/gis_vocabulary_fragment.csv',
-    'domain': './vocabularies/gis_domain_fragment.csv',
-    'concept_class': './vocabularies/gis_concept_class_fragment.csv'
+    'concept': os.path.join(script_directory, 'gis_concept_fragment.csv'),
+    'concept_relationship': os.path.join(script_directory, 'gis_concept_relationship_fragment.csv'),
+    'vocabulary': os.path.join(script_directory, 'gis_vocabulary_fragment.csv'),
+    'domain': os.path.join(script_directory, 'gis_domain_fragment.csv'),
+    'concept_class': os.path.join(script_directory, 'gis_concept_class_fragment.csv'),
+    'relationship': os.path.join(script_directory, 'gis_relationship_fragment.csv')
 }
+
+# Truncate concept_name to 255 characters (soem concept_name values cause an error "value too long for type character varying(255)")
+concept_df['concept_name'] = concept_df['concept_name'].str.slice(0, 255)
+
+# Drop extra concept_relationship columns
+concept_relationship_df = concept_relationship_df.drop(columns=['concept_code_1', 'concept_code_2', 'vocabulary_id_1', 'vocabulary_id_2'])
 
 # Write DataFrames to CSV files
 concept_df.to_csv(output_paths['concept'], index=False, line_terminator='')
@@ -111,6 +132,7 @@ concept_relationship_df.to_csv(output_paths['concept_relationship'], index=False
 vocabulary_df.to_csv(output_paths['vocabulary'], index=False, line_terminator='')
 domain_df.to_csv(output_paths['domain'], index=False, line_terminator='')
 concept_class_df.to_csv(output_paths['concept_class'], index=False, line_terminator='')
+relationship_df.to_csv(output_paths['relationship'], index=False, line_terminator='')
 
 # Display the paths of the saved CSV files
 for table_name, file_path in output_paths.items():

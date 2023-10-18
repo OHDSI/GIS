@@ -1,4 +1,4 @@
-set search_path to gisdev;
+set search_path to @devVocabSchema;
 
 CREATE TABLE temporary_ca_base$ AS
 	SELECT r.concept_id_1 AS ancestor_concept_id,
@@ -83,7 +83,7 @@ begin
 		GROUP BY hc.root_ancestor_concept_id,
 			hc.descendant_concept_id;
 	END LOOP;
-end; $$
+end $$;
 
 
 -- --remove non-standard records in descendant_concept_id
@@ -111,7 +111,7 @@ WHERE c.vocabulary_id IN (
 CREATE INDEX idx_tmp_ca$ ON temporary_ca$ (ancestor_concept_id, descendant_concept_id, min_levels_of_separation, max_levels_of_separation) WITH (FILLFACTOR=100);
 ANALYZE temporary_ca$;
 
-INSERT INTO gisdev.concept_ancestor (ancestor_concept_id, descendant_concept_id, min_levels_of_separation, max_levels_of_separation)
+INSERT INTO @devVocabSchema.concept_ancestor (ancestor_concept_id, descendant_concept_id, min_levels_of_separation, max_levels_of_separation)
 SELECT tca.ancestor_concept_id, tca.descendant_concept_id, tca.min_levels_of_separation, tca.max_levels_of_separation
 FROM temporary_ca$ tca
 WHERE NOT EXISTS (
@@ -127,12 +127,9 @@ WHERE ancestor_concept_id IN (
     select concept_id
     from (
     	SELECT *
-    	FROM gisdev.concept
+    	FROM @devVocabSchema.concept
     	where standard_concept is null
-    	or standard_concept = ''
-    	EXCEPT 
-    	SELECT * 
-    	FROM prod.concept) c
+    	or standard_concept = '') c
 );
 
 DELETE FROM concept_ancestor ca
@@ -140,12 +137,9 @@ WHERE descendant_concept_id IN (
     select concept_id
     from (
     	SELECT *
-    	FROM gisdev.concept
+    	FROM @devVocabSchema.concept
     	where standard_concept is null
-    	or standard_concept = ''
-    	EXCEPT 
-    	SELECT * 
-    	FROM prod.concept) c
+    	or standard_concept = '') c
 );
 
 drop table temporary_ca_groups$ cascade;
