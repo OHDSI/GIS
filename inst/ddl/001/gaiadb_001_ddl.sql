@@ -7,7 +7,7 @@ CREATE TABLE backbone.data_source (
 			dataset_version varchar(100) NOT NULL,
 			geom_type varchar(100) NULL,
 			geom_spec text NULL,
-			boundary_type varchar(100) NOT NULL,
+			boundary_type varchar(100) NULL,
 			has_attributes int4 NULL,
 			geom_dependency_uuid int4 NULL,
 			download_method varchar(100) NOT NULL,
