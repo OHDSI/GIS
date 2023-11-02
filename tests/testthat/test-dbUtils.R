@@ -12,6 +12,8 @@ initializeDatabase(testConnectionDetails, testing = T)
 
 library(gaiaCore)
 
+
+# initializeDatabase()
 testthat::test_that("database initializes", {
   conn <- DatabaseConnector::connect(testConnectionDetails)
   on.exit(DatabaseConnector::disconnect(conn))
@@ -32,6 +34,7 @@ testthat::test_that("database initializes", {
   testthat::expect_equal(actual_variable_source_rows, expected_variable_source_rows)
 })
 
+# createIndices()
 testthat::test_that("data_sources are indexed", {
   conn <- DatabaseConnector::connect(testConnectionDetails)
   on.exit(DatabaseConnector::disconnect(conn))
