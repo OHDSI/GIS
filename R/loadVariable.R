@@ -46,13 +46,13 @@ loadVariable <- function(connectionDetails, variableSourceId){
     return(message("Variable already exists in the database."))
   }
 
+  geomIndexRecord <- getGeomIndexRecord(connectionDetails = connectionDetails,
+                                        dataSourceUuid = variableSourceRecord$geom_dependency_uuid)
+
   # get data_source_record
   dataSourceRecord <- getDataSourceRecord(connectionDetails = connectionDetails,
                                           dataSourceUuid = variableSourceRecord$data_source_uuid)
-
-  geomIndexRecord <- getGeomIndexRecord(connectionDetails = connectionDetails,
-                                        dataSourceUuid = dataSourceRecord$geom_dependency_uuid)
-
+  
   # get stage data
   staged <- getStaged(dataSourceRecord)
 
@@ -76,7 +76,7 @@ loadVariable <- function(connectionDetails, variableSourceId){
   if (!geomTableExists) {
     message("Loading geom table dependency")
     loadGeometry(connectionDetails = connectionDetails,
-                 dataSourceUuid = dataSourceRecord$geom_dependency_uuid)
+                 dataSourceUuid = variableSourceRecord$geom_dependency_uuid)
   }
 
   # get mapping values from geom table
