@@ -39,7 +39,7 @@ getVariableSourceSummaryTable <- function(connectionDetails) {
   getVariableSourceSummaryQuery <- paste0(
     "select vs.variable_source_id, ds.data_source_uuid as data_source_id, ",
     "vs.variable_name, vs.variable_desc, ds.org_id, ds.org_set_id, ds.documentation_url, ",
-    "ds.dataset_name, ds.dataset_version, ds.boundary_type, ds.geom_dependency_uuid, ",
+    "ds.dataset_name, ds.dataset_version, ds.boundary_type, vs.geom_dependency_uuid, ",
     "ds2.dataset_name as geom_dependency_name, ds2.geom_type ",
     "from backbone.variable_source vs ",
     "join backbone.data_source ds ",
