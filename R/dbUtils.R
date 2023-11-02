@@ -45,7 +45,7 @@ getVariableSourceSummaryTable <- function(connectionDetails) {
     "join backbone.data_source ds ",
     "on vs.data_source_uuid=ds.data_source_uuid ",
     "join backbone.data_source ds2 ",
-    "on ds.geom_dependency_uuid = ds2.data_source_uuid")
+    "on vs.geom_dependency_uuid = ds2.data_source_uuid")
   summaryTable <- DatabaseConnector::querySql(conn, getVariableSourceSummaryQuery)
   ids <- loadedVariableSourceRecordIds$VARIABLE_SOURCE_RECORD_ID
   summaryTable <- dplyr::mutate(summaryTable,
