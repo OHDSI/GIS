@@ -76,14 +76,11 @@ getGeomNameFromVariableSourceId <- function(connectionDetails, variableSourceId)
   DatabaseConnector::dbGetQuery(conn, paste0(
     "select concat(database_schema, '.geom_', table_name)
     from backbone.geom_index gi 
-    where data_source_id in (
-        select geom_dependency_uuid
-        from backbone.data_source ds 
-        where data_source_uuid in (
-            select data_source_uuid
-            from backbone.variable_source vs 
-            where variable_source_id = ", variableSourceId,"
-        )
+    where geom_index_id in (
+        select attr_of_geom_index_id
+        from backbone.attr_index ai 
+        where variable_source_id = ", variableSourceId,"
+        
     )"
   )
   )[[1]]  
