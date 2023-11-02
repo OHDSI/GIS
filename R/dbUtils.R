@@ -39,13 +39,13 @@ getVariableSourceSummaryTable <- function(connectionDetails) {
   getVariableSourceSummaryQuery <- paste0(
     "select vs.variable_source_id, ds.data_source_uuid as data_source_id, ",
     "vs.variable_name, vs.variable_desc, ds.org_id, ds.org_set_id, ds.documentation_url, ",
-    "ds.dataset_name, ds.dataset_version, ds.boundary_type, ds.geom_dependency_uuid, ",
+    "ds.dataset_name, ds.dataset_version, ds.boundary_type, vs.geom_dependency_uuid, ",
     "ds2.dataset_name as geom_dependency_name, ds2.geom_type ",
     "from backbone.variable_source vs ",
     "join backbone.data_source ds ",
     "on vs.data_source_uuid=ds.data_source_uuid ",
     "join backbone.data_source ds2 ",
-    "on ds.geom_dependency_uuid = ds2.data_source_uuid")
+    "on vs.geom_dependency_uuid = ds2.data_source_uuid")
   summaryTable <- DatabaseConnector::querySql(conn, getVariableSourceSummaryQuery)
   ids <- loadedVariableSourceRecordIds$VARIABLE_SOURCE_RECORD_ID
   summaryTable <- dplyr::mutate(summaryTable,
@@ -75,17 +75,10 @@ getGeomNameFromVariableSourceId <- function(connectionDetails, variableSourceId)
   on.exit(DatabaseConnector::disconnect(conn))
   DatabaseConnector::dbGetQuery(conn, paste0(
     "select concat(database_schema, '.geom_', table_name)
-    from backbone.geom_index gi 
-    where data_source_id in (
-        select geom_dependency_uuid
-        from backbone.data_source ds 
-        where data_source_uuid in (
-            select data_source_uuid
-            from backbone.variable_source vs 
-            where variable_source_id = ", variableSourceId,"
-        )
-    )"
-  )
+    from backbone.geom_index gi
+    inner join backbone.variable_source vs
+    on vs.geom_dependency_uuid = gi.data_source_id 
+    and vs.variable_source_id = ", variableSourceId)
   )[[1]]  
 }
 

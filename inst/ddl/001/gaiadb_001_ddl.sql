@@ -9,7 +9,6 @@ CREATE TABLE backbone.data_source (
 			geom_spec text NULL,
 			boundary_type varchar(100) NULL,
 			has_attributes int4 NULL,
-			geom_dependency_uuid int4 NULL,
 			download_method varchar(100) NOT NULL,
 			download_subtype varchar(100) NOT NULL,
 			download_data_standard varchar(100) NOT NULL,
@@ -19,12 +18,14 @@ CREATE TABLE backbone.data_source (
 			documentation_url varchar(100) NULL );
 CREATE TABLE backbone.variable_source (
 			variable_source_id serial4 NOT NULL,
+			geom_dependency_uuid int4 NULL,
 			variable_name varchar NOT NULL,
 			variable_desc text NOT NULL,
 			data_source_uuid int4 NOT NULL,
 			attr_spec text NOT NULL );
 CREATE TABLE backbone.attr_index (
 			attr_index_id numeric NOT NULL,
+			variable_source_id numeric NOT NULL,
 			attr_of_geom_index_id numeric NOT NULL,
 			database_schema varchar(255) NOT NULL,
 			table_name varchar(255) NOT NULL,

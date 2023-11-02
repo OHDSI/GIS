@@ -14,6 +14,7 @@
 
 createIndices  <-  function(connectionDetails) {
   dataSourceTable <- getDataSourceTable(connectionDetails = connectionDetails)
+  variableSourceTable <- getVariableSourceTable(connectionDetails = connectionDetails)
   uuids <- dataSourceTable$data_source_uuid
   geomIndexTable <- getGeomIndexTable(connectionDetails = connectionDetails)
   attrIndexTable <- getAttrIndexTable(connectionDetails = connectionDetails)
@@ -29,19 +30,28 @@ createIndices  <-  function(connectionDetails) {
                                               dataSourceRecord = record)
     }
     # IF attr AND not in aidsid check dependency
-    if (record$has_attributes == 1 & !id %in% attrIndexTable$data_source_id) {
+    # Removed  "& !id %in% attrIndexTable$data_source_id", need to reincorporate at variable_source level
+    if (record$has_attributes == 1) {
       ## IF geom dependency AND dependency not in gidsid then create geom index record AND insert into db
-      if (!is.na(record$geom_dependency_uuid) &
-          !record$geom_dependency_uuid %in% geomIndexTable$data_source_id &
-          record$geom_dependency_uuid != record$data_source_uuid) {
-        geomDependencyDataSourceRecord <- dplyr::filter(dataSourceTable,
-                                                        data_source_uuid == record$geom_dependency_uuid)
-        geomIndexTable <- appendGeomIndexRecord(geomIndexTable = geomIndexTable,
-                                                dataSourceRecord = geomDependencyDataSourceRecord)
+      # TODO for every variable_source$data_source_uuid == id
+      for (vid in variableSourceTable[variableSourceTable$data_source_uuid == id,]$variable_source_id) {
+        if (!vid %in% attrIndexTable$variable_source_id) {
+          variableRecord <- variableSourceTable[variableSourceTable$variable_source_id == vid,]
+        # TODO switch record$geom_dependency_uuid for varRecord$geom_dependency_uuid
+          if (!is.na(variableRecord$geom_dependency_uuid) &
+              !variableRecord$geom_dependency_uuid %in% geomIndexTable$data_source_id &
+              variableRecord$geom_dependency_uuid != variableRecord$data_source_uuid) {
+            geomDependencyDataSourceRecord <- dplyr::filter(dataSourceTable,
+                                                            data_source_uuid == variableRecord$geom_dependency_uuid)
+            geomIndexTable <- appendGeomIndexRecord(geomIndexTable = geomIndexTable,
+                                                    dataSourceRecord = geomDependencyDataSourceRecord)
+          }
+          attrIndexTable <- appendAttrIndexRecord(attrIndexTable = attrIndexTable,
+                                                  geomIndexTable = geomIndexTable,
+                                                  dataSourceRecord = record,
+                                                  variableSourceRecord = variableRecord)
+        }
       }
-      attrIndexTable <- appendAttrIndexRecord(attrIndexTable = attrIndexTable,
-                                              geomIndexTable = geomIndexTable,
-                                              dataSourceRecord = record)
     }
   }
 
@@ -90,7 +100,8 @@ appendGeomIndexRecord <- function(geomIndexTable, dataSourceRecord) {
 #' @return (data.frame) updated attrIndexTable
 #'
 
-appendAttrIndexRecord <- function(attrIndexTable, geomIndexTable, dataSourceRecord) {
+# TODO incorporate varSourceRecord
+appendAttrIndexRecord <- function(attrIndexTable, geomIndexTable, dataSourceRecord, variableSourceRecord) {
   if (nrow(attrIndexTable) == 0) {
     attr_index_id <- 1
   } else {
@@ -98,8 +109,9 @@ appendAttrIndexRecord <- function(attrIndexTable, geomIndexTable, dataSourceReco
   }
   indexRecord <- dplyr::tibble(
     attr_index_id = attr_index_id,
+    variable_source_id = variableSourceRecord$variable_source_id,
     attr_of_geom_index_id = getAttrOfGeomIndexId(geomIndexTable = geomIndexTable,
-                                                 dataSourceUuid = dataSourceRecord$geom_dependency_uuid),
+                                                 dataSourceUuid = variableSourceRecord$geom_dependency_uuid),
     database_schema = createSchemaString(dataSourceRecord),
     table_name = createNameString(name = dataSourceRecord$dataset_name),
     data_source_id = dataSourceRecord$data_source_uuid)
@@ -110,7 +122,7 @@ appendAttrIndexRecord <- function(attrIndexTable, geomIndexTable, dataSourceReco
 #' Get foreign key for attr_of_geom_index_id
 #'
 #' @param geomIndexTable (data.frame) the existing geomIndexTable
-#' @param dataSourceUuid (UUID) The UUID for the data source that is registered in the backbone.data_source table
+#' @param dataSourceUuid (UUID) The UUID for the geometry data source that is registered in the backbone.data_source table
 #'
 #' @return (integer) Identifier for the corresponding backbone.geom_index entry
 #'
