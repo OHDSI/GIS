@@ -35,7 +35,7 @@ loadVariable <- function(connectionDetails, variableSourceId){
 
   # get attr_index
   attrIndexRecord <- getAttrIndexRecord(connectionDetails = connectionDetails,
-                                        dataSourceUuid = variableSourceRecord$data_source_uuid)
+                                        variableSourceId = variableSourceRecord$variable_source_id)
 
   # Prevents same variable from being loaded twice
 
