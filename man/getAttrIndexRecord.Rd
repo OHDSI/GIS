@@ -4,7 +4,7 @@
 \alias{getAttrIndexRecord}
 \title{Get a single record from the backbone.attr_index table}
 \usage{
-getAttrIndexRecord(connectionDetails, dataSourceUuid)
+getAttrIndexRecord(connectionDetails, variableSourceId)
 }
 \arguments{
 \item{connectionDetails}{(list) An object of class connectionDetails as created by the createConnectionDetails function}
