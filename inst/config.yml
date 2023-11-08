@@ -1,3 +1,5 @@
+---
 offline-storage:
-  directory: './data'
+  directory: './storage'
   persist-data: false
+---

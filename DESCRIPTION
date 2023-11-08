@@ -29,5 +29,6 @@ Imports:
     RPostgreSQL,
     sf,
     stringr,
-    utils
+    utils,
+    yaml
 Config/testthat/edition: 3
