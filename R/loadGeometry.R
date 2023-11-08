@@ -40,7 +40,7 @@ loadGeometry <- function(connectionDetails, dataSourceUuid) {
                           geomIndexRecord$table_name,
                           " already exists in the database.")))
   }
-  staged <- getStaged(dataSourceRecord)
+  staged <- getStaged(dataSourceRecord, storageConfig = readStorageConfig())
 
   stagedResult <- standardizeStaged(staged = staged, spec = dataSourceRecord$geom_spec)
 

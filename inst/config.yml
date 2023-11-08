@@ -1,0 +1,5 @@
+---
+offline-storage:
+  directory: './storage'
+  persist-data: false
+---

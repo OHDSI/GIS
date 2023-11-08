@@ -148,6 +148,12 @@
     <loc>/reference/pipe.html</loc>
   </url>
   <url>
+    <loc>/reference/readFromZip.html</loc>
+  </url>
+  <url>
+    <loc>/reference/readStorageConfig.html</loc>
+  </url>
+  <url>
     <loc>/reference/setSridWgs84.html</loc>
   </url>
   <url>
