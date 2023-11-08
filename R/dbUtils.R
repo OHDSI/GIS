@@ -378,10 +378,10 @@ getGeomIndexRecord <- function(connectionDetails, dataSourceUuid){
 #' @export
 #'
 
-getAttrIndexRecord <- function(connectionDetails, dataSourceUuid) {
+getAttrIndexRecord <- function(connectionDetails, variableSourceId) {
   conn <-  DatabaseConnector::connect(connectionDetails)
   on.exit(DatabaseConnector::disconnect(conn))
-  attrIndex <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.attr_index WHERE data_source_id = ", dataSourceUuid))
+  attrIndex <- DatabaseConnector::dbGetQuery(conn, paste0("SELECT * FROM backbone.attr_index WHERE variable_source_id = ", variableSourceId))
 }
 
 
