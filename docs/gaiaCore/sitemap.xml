@@ -112,9 +112,6 @@
     <loc>/reference/getVariableSourceTable.html</loc>
   </url>
   <url>
-    <loc>/reference/handleShapefileImportJob.html</loc>
-  </url>
-  <url>
     <loc>/reference/importAttrIndexTable.html</loc>
   </url>
   <url>
@@ -131,9 +128,6 @@
   </url>
   <url>
     <loc>/reference/importLocationTable.html</loc>
-  </url>
-  <url>
-    <loc>/reference/importShapefile.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>

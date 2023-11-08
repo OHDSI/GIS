@@ -4,7 +4,7 @@
 \alias{initializeDatabase}
 \title{Initialize gaiaDB}
 \usage{
-initializeDatabase(connectionDetails, overwrite = FALSE)
+initializeDatabase(connectionDetails, overwrite = FALSE, testing = FALSE)
 }
 \arguments{
 \item{connectionDetails}{(list) An object of class connectionDetails as created by the createConnectionDetails function}
