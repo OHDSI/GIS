@@ -1,0 +1,3 @@
+offline-storage:
+  directory: './data'
+  persist-data: false
