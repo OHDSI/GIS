@@ -9,7 +9,7 @@ getAttrOfGeomIndexId(geomIndexTable, dataSourceUuid)
 \arguments{
 \item{geomIndexTable}{(data.frame) the existing geomIndexTable}
 
-\item{dataSourceUuid}{(UUID) The UUID for the data source that is registered in the backbone.data_source table}
+\item{dataSourceUuid}{(UUID) The UUID for the geometry data source that is registered in the backbone.data_source table}
 }
 \value{
 (integer) Identifier for the corresponding backbone.geom_index entry

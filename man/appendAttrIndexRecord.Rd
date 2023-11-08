@@ -4,7 +4,12 @@
 \alias{appendAttrIndexRecord}
 \title{Append a attr_index record to the attrIndexTable object}
 \usage{
-appendAttrIndexRecord(attrIndexTable, geomIndexTable, dataSourceRecord)
+appendAttrIndexRecord(
+  attrIndexTable,
+  geomIndexTable,
+  dataSourceRecord,
+  variableSourceRecord
+)
 }
 \arguments{
 \item{attrIndexTable}{(data.frame) the existing attrIndexTable}
