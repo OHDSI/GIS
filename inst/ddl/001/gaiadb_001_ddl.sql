@@ -13,7 +13,7 @@ CREATE TABLE backbone.data_source (
 			download_subtype varchar(100) NOT NULL,
 			download_data_standard varchar(100) NOT NULL,
 			download_filename varchar(100) NOT NULL,
-			download_url varchar(100) NOT NULL,
+			download_url varchar(100) NULL,
 			download_auth varchar(100) NULL,
 			documentation_url varchar(100) NULL );
 CREATE TABLE backbone.variable_source (
