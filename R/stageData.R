@@ -42,6 +42,7 @@ getStaged <- function(rec, storageConfig = readStorageConfig()) {
   isPersisted <- storageConfig$`offline-storage`$`persist-data`
   storageDir <- file.path(storageConfig$`offline-storage`$directory, rec$dataset_name)
   gisTempDir <- file.path(tempdir(), 'gaia')
+  
   if (!dir.exists(gisTempDir)) {
     dir.create(gisTempDir)
   }
@@ -49,6 +50,18 @@ getStaged <- function(rec, storageConfig = readStorageConfig()) {
   baseTimeout <- getOption('timeout')
   options(timeout = 600)
   on.exit(options(timeout = baseTimeout))
+  
+  if (rec$download_method == "local") {
+    message("Loading locally hosted dataset...")
+    if(!dir.exists(storageDir) || !file.exists(file.path(storageDir, rec$download_url))) {
+      msg <- paste0("You are trying to load source data of type \"local\",\nbut no local dataset was found.\nPlease ensure that the directory you specified for external\nstorage in the config file:\n(", storageDir,")\nexists and contains the source data for this variable (", rec$download_url,").\nFor information about obtaining this source dataset, visit\n", rec$documentation_url)
+      stop(msg, call. = T)
+    }
+    
+    return(readFromZip(zipfile = file.path(storageDir, rec$download_url),
+                       exdir = gisTempDir,
+                       rec = rec))
+  }
   
   if (rec$download_method == "file") {
     if (rec$download_subtype == "zip") {

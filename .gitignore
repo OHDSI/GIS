@@ -4,5 +4,6 @@
 .httr-oauth
 .DS_Store
 inst/doc
+inst/config.yml
 errorReportSql.txt
 examples/
