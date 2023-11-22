@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  postgis_catalog:
+    container_name: gaia_catalog
+    build: ./database
+    image: gaia_catalog
+    restart: always
+    ports:
+      - "5436:5432"
+    env_file:
+      - ./database/.env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - gaiadb
+    
+volumes:
+  pgdata:
+    name: catalog_pgdata
+
+networks:
+  gaiadb:
+    name: gaiadb
+    external: false
