@@ -1,3 +1,5 @@
+OHDSI Symposium poster [here]([url](https://www.ohdsi.org/wp-content/uploads/2023/10/11-Talapova-OHDSIposter.png)), writeup [here]([url](https://www.ohdsi.org/wp-content/uploads/2023/10/Talapova-Polina_A_Toxin_Vocabulary_for_the_OMOP_CDM_2023symposium-Polina-Talapova.pdf))
+
 This branch consists of staging tables needed to use Toxin Vocabulary:
    a) concept_stage - collect all data about the toxins and related entities;
    b) concept_relationship_stage - shows the relationships between the toxins and related entities;
