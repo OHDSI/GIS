@@ -50,6 +50,10 @@ for(tb in tables) {
     cat("## **Backbone**\n\n")
   }
   
+  if(tb == 'exposure_occurrence'){
+    cat("## **CDM Extension**\n\n")
+  }
+  
   cat("###", tb, "{.tabset .tabset-pills} \n\n")
   
   tableInfo <- subset(tableSpecs, gaiaTableName == tb)

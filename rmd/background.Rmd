@@ -1,0 +1,54 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG </div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+
+<br>
+
+# **Problem Space**
+
+Geospatial data come in a variety of source formats with no universal, interoperable standard representation. While working with a single geospatial dataset has presents some technical challenges, the complexity of using geospatial begins to compound when variables from disparate datasets are needed for a single analysis study. As ad-hoc solutions are introduced to deal with the increasing technical complexity, the reproducibility of these studies plummets. 
+
+In order to enable reproducible studies that incorporate place-related data with longitudinal patient-level data, it is first necessary to develop functionality to automate retrieval and transformation of publicly available place-related data into a standard representation. 
+
+# **Goals**
+
+The overarching goal of the OHDSI GIS Workgroup is to develop software and standards for incorporating place-based data into the OMOP CDM and present this back to the OHDSI community. We reach these goals through development in the four key areas below. 
+
+### 1) Infrastructure
+- Functional Metadata Catalog
+- Harmonized geospatial data model
+
+### 2) Functionality
+- Geocoding
+- Accessing geospatial datasets
+
+### 3) Vocabulary
+- GIS specific concepts
+- SDoH vocabulary
+- Toxin vocabulary
+
+### 4) Extensions
+- Exposure_occurrence
+
+<br>
+
+## **Publications/Presentation**
+OHDSI GIS Infrastructure (2023 OHDSI Symposium [Poster](https://www.ohdsi.org/2023showcase-19/), [Abstract](https://www.ohdsi.org/wp-content/uploads/2023/10/19-zollovenecek-BriefReport.pdf))
+
+Toxins Vocabulary (2023 OHDSI Symposium [Poster](https://www.ohdsi.org/2023showcase-11/), [Abstract](https://www.ohdsi.org/wp-content/uploads/2023/10/Talapova-Polina_A_Toxin_Vocabulary_for_the_OMOP_CDM_2023symposium-Polina-Talapova.pdf)) 
+
+OHDSI GIS Workgroup October 10, 2023 Update ([video](https://youtu.be/QZY-slWdsMs?si=UxMT39rqWTAW_AMx&t=2178))
+
+OHDSI GIS Workgroup 2023 Objectives and Key Results ([video](https://www.youtube.com/watch?v=bd0htzO1hx4&t=1103s), [slides](https://www.ohdsi.org/wp-content/uploads/2023/02/GIS-OKRs2023Q1.pdf))
+
+
+OHDSI GIS Workgroup August 23, 2022 Update ([video](https://youtu.be/d8jIAm9cssM))
+<br>
+
+

@@ -11,7 +11,7 @@
 
 
 
-<title>index.knit</title>
+<title>background.knit</title>
 
 <script src="site_libs/header-attrs-2.15/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -331,11 +331,25 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html"><div><img src="ohdsi16x16.png"></img> OMOP GIS </div></a>
+      <a class="navbar-brand" href="index.html"><div><img src="ohdsi16x16.png"></img> OHDSI GIS </div></a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="background.html">
+    <span class="fa fa-circle-info"></span>
+     
+    Background
+  </a>
+</li>
+<li>
   <a href="applications.html">
     <span class="fa fa-landmark"></span>
      
@@ -439,24 +453,74 @@ div.tocify {
 </div>
 
 
-<div id="mission" class="section level1">
-<h1><strong>Mission</strong></h1>
-<p>The OHDSI GIS workgroup aims to introduce new infrastructure,
-tooling, and CDM extension tables that will allow researchers to
-seamlessly incorporate place-based datasets into their OMOP-shaped
-databases to enhance their evidence-generating workflows.</p>
-</div>
-<div id="meeting-schedule" class="section level1">
-<h1><strong>Meeting Schedule</strong></h1>
-<p>The GIS General and Development subgroups meet on alternating
-<strong>Fridays at 9 AM ET</strong></p>
-<p>(<a
-href="https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1680892162259?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22df92a21b-7fa5-4c86-9f81-9f6ec39e042c%22%7d">General
-meeting link</a>)</p>
-<p>(<a
-href="https://teams.microsoft.com/l/meetup-join/19%3a83e90982136c4665aa5f74a6ce292e39%40thread.tacv2/1647286365762?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%2222effa56-2c2a-408b-9cfd-25cfe976bb49%22%7d">Development
-meeting link</a>)</p>
 <p><br></p>
+<div id="problem-space" class="section level1">
+<h1><strong>Problem Space</strong></h1>
+<p>Geospatial data come in a variety of source formats with no
+universal, interoperable standard representation. While working with a
+single geospatial dataset has presents some technical challenges, the
+complexity of using geospatial begins to compound when variables from
+disparate datasets are needed for a single analysis study. As ad-hoc
+solutions are introduced to deal with the increasing technical
+complexity, the reproducibility of these studies plummets.</p>
+<p>In order to enable reproducible studies that incorporate
+place-related data with longitudinal patient-level data, it is first
+necessary to develop functionality to automate retrieval and
+transformation of publicly available place-related data into a standard
+representation.</p>
+</div>
+<div id="goals" class="section level1">
+<h1><strong>Goals</strong></h1>
+<p>The overarching goal of the OHDSI GIS Workgroup is to develop
+software and standards for incorporating place-based data into the OMOP
+CDM and present this back to the OHDSI community. We reach these goals
+through development in the four key areas below.</p>
+<div id="infrastructure" class="section level3">
+<h3>1) Infrastructure</h3>
+<ul>
+<li>Functional Metadata Catalog</li>
+<li>Harmonized geospatial data model</li>
+</ul>
+</div>
+<div id="functionality" class="section level3">
+<h3>2) Functionality</h3>
+<ul>
+<li>Geocoding</li>
+<li>Accessing geospatial datasets</li>
+</ul>
+</div>
+<div id="vocabulary" class="section level3">
+<h3>3) Vocabulary</h3>
+<ul>
+<li>GIS specific concepts</li>
+<li>SDoH vocabulary</li>
+<li>Toxin vocabulary</li>
+</ul>
+</div>
+<div id="extensions" class="section level3">
+<h3>4) Extensions</h3>
+<ul>
+<li>Exposure_occurrence</li>
+</ul>
+<p><br></p>
+</div>
+<div id="publicationspresentation" class="section level2">
+<h2><strong>Publications/Presentation</strong></h2>
+<p>OHDSI GIS Infrastructure (2023 OHDSI Symposium <a
+href="https://www.ohdsi.org/2023showcase-19/">Poster</a>, <a
+href="https://www.ohdsi.org/wp-content/uploads/2023/10/19-zollovenecek-BriefReport.pdf">Abstract</a>)</p>
+<p>Toxins Vocabulary (2023 OHDSI Symposium <a
+href="https://www.ohdsi.org/2023showcase-11/">Poster</a>, <a
+href="https://www.ohdsi.org/wp-content/uploads/2023/10/Talapova-Polina_A_Toxin_Vocabulary_for_the_OMOP_CDM_2023symposium-Polina-Talapova.pdf">Abstract</a>)</p>
+<p>OHDSI GIS Workgroup October 10, 2023 Update (<a
+href="https://youtu.be/QZY-slWdsMs?si=UxMT39rqWTAW_AMx&amp;t=2178">video</a>)</p>
+<p>OHDSI GIS Workgroup 2023 Objectives and Key Results (<a
+href="https://www.youtube.com/watch?v=bd0htzO1hx4&amp;t=1103s">video</a>,
+<a
+href="https://www.ohdsi.org/wp-content/uploads/2023/02/GIS-OKRs2023Q1.pdf">slides</a>)</p>
+<p>OHDSI GIS Workgroup August 23, 2022 Update (<a
+href="https://youtu.be/d8jIAm9cssM">video</a>) <br></p>
+</div>
 </div>
 
 

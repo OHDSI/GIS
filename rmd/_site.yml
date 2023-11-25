@@ -8,11 +8,17 @@ output:
       in_header: "favicon.html"
 exclude: ["extras"]
 navbar:
-  title: '<div><img src="ohdsi16x16.png"></img> OMOP GIS </div>'
+  title: '<div><img src="ohdsi16x16.png"></img> OHDSI GIS </div>'
   right:
     - icon: fa-github
       href: https://github.com/OHDSI/GIS
   left:
+    - text: "Home"
+      icon: fa-home
+      href: index.html
+    - text: "Background"
+      icon: fa-circle-info
+      href: background.html
     - text: "Applications"
       icon: fa-landmark
       href: applications.html
