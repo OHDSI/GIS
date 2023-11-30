@@ -19,16 +19,16 @@ navbar:
     - text: "Background"
       icon: fa-circle-info
       href: background.html
-    - text: "Applications"
+    - text: "Gaia Overview"
       icon: fa-landmark
-      href: applications.html
+      href: overview.html
     - text: "Installation"
       icon: fa-landmark
       href: installation.html
     - text: "Data Model"
       icon: fa-database
       href: dataModel.html
-    - text: "Documentation"
+    - text: "User Documentation"
       icon: fa-list
       menu:
         - text: "Terminology"

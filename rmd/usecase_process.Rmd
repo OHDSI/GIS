@@ -1,0 +1,23 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG </div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+
+# **OHDSI GIS Process for New Use Cases**
+
+Development in the OHDSI GIS Workgroup is **use case driven**, meaning that specific needs to produce real world evidence determine the workgroup's objectives and direct the groups members' efforts.
+
+## **Proposing a new Use Case**
+
+For other OHDSI workgroups, research projects, or individual researchers that are interested in proposing a new use case to drive OHDSI GIS Workgroup development, a [Use Case Issue](https://github.com/OHDSI/GIS/issues/new?assignees=&labels=Use+Case&projects=&template=use-case.yaml&title=%5BUse+Case%5D%3A+) can be opened on the OHDSI GIS Workgroup GitHub.
+
+On the issue template, interested parties should:
+
+1) Introduce their project in the **Background** section. Give a general overview of the project, then focus in on specifics such as type of data, temporal and geographical coverage, and desired outcomes. Make sure to provide a link to the project's site where more general information can be found.
+
+2) 
