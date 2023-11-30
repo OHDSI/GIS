@@ -2,7 +2,7 @@ name: Use Case
 description: Proposal for a new OHDSI GIS WG Use Case.
 title: "[Use Case]: "
 labels: ["Use Case"]
-projects: ""
+# projects: ""
 body:
   - type: markdown
     attributes:
