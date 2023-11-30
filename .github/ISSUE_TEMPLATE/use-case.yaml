@@ -46,6 +46,6 @@ body:
   - type: textarea
     id: depends
     attributes:
-      label: Depends On:
+      label: Depends On
       description: "This is a space for linking work issues. If you are not sure which issues this use case depends on, leave this blank."
       placeholder: "Issue task list goes here"
