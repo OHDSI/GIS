@@ -1,0 +1,51 @@
+name: Use Case 
+description: Proposal for a new OHDSI GIS WG Use Case.
+title: "[Use Case]: "
+labels: ["Use Case"]
+projects: ""
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # OHDSI GIS WG Use Case
+        ## Overview
+  - type: textarea
+    id: background
+    attributes:
+      label: Background
+      description: "Provide an introductory paragraph to your project and specific use case."
+      placeholder: "Project and use case background goes here"
+  - type: input
+    id: link
+    attributes:
+      label: Link to more project information
+      description: Link 
+      placeholder: Enter a link to your project's web site
+  - type: textarea
+    id: datasets
+    attributes:
+      label: Datasets of Interest
+      description: "Provide a list of datasets (titles, links, descriptions, etc.) that your project is interested in using."
+      placeholder: "List the datasets your project is interested in using"
+  - type: textarea
+    id: analyses
+    attributes:
+      label: Analyses or Tools
+      description: "Provide a list of the analyses or types of analyses that your project is interested in performing. If you're project is hoping to use existing OHDSI tools, list them here."
+      placeholder: "List the analyses and/or tools necessary for your project"
+  - type: textarea
+    id: functionality
+    attributes:
+      label: New Functionality
+      description: "If there is desired functionality that you know OHDSI GIS tools do not currently possess, describe the functionality and why your project depends on it here."
+      placeholder: "Describe desired new functionality"
+  - type: markdown
+    attributes:
+      value: |
+        # Use Case Work Orders
+  - type: textarea
+    id: depends
+    attributes:
+      label: Depends On:
+      description: "This is a space for linking work issues. If you are not sure which issues this use case depends on, leave this blank."
+      placeholder: "Issue task list goes here"
