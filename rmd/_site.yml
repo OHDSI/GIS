@@ -19,40 +19,44 @@ navbar:
     - text: "Background"
       icon: fa-circle-info
       href: background.html
-    - text: "Gaia Overview"
-      icon: fa-landmark
-      href: overview.html
-    - text: "Installation"
-      icon: fa-landmark
-      href: installation.html
-    - text: "Data Model"
+    - text: "Data Models"
       icon: fa-database
-      href: dataModel.html
-    - text: "User Documentation"
-      icon: fa-list
-      menu:
-        - text: "Terminology"
-          href: terminology.html
-        - text: "gaiaCore"
-          href: "gaiaCore/index.html"
-        - text: "gaiaDB"
-          menu:
-            - text: "Diagrams"
-              href: "erd.html"
-        - text: "Geocoding Workflows"
-          menu:
-            - text: "Geocoding the Location Table (Full)"
-              href: "geocodingFull.html"
-            - text: "Geocoding a Cohort"
-              href: "geocodingCohort.html"
-    - text: "Contributor Resources"
+      href: gaia-datamodels.html
+    - text: "Gaia"
       icon: fa-globe
       menu:
-        - text: "How to Edit Documentation"
-          href: documentationEditing.html
-        - text: "How to Propose Changes to the gaiaDB Data Model"
-          href: dataModelEditing.html
+        - text: "Introduction"
+          href: gaia-intro.html                     # TODO add the architecture diagram
+        - text: "Terminology"
+          href: gaia-terminology.html               # TODO edit and update
+        - text: "GaiaCatalog"
+          href: gaia-catalog.html
+        - text: "GaiaCore"
+          menu:
+            - text: "Overview"
+              href: gaia-core-overview.html         # TODO create this
+            - text: "R Package"
+              href: "gaiaCore/index.html"
+        - text: "Extensions"
+          menu:
+            - text: "GaiaOhdsi"
+              href: gaia-extension-ohdsi.html       # TODO create this
+    - text: "How to"
+      icon: fa-question
+      menu:
+        - text: "Geocoding the Location Table (Full)"
+          href: geocodingFull.html              # TODO combine into one geocoding article
+        - text: "Geocoding a Cohort"
+          href: geocodingCohort.html            # TODO combine into one geocoding article
         - text: "How to Add Data Sources to a Local gaiaDB Instance"
           href: localDataSource.html
         - text: "Sharing Your Local Data Sources"
           href: shareDataSource.html
+    - text: "Getting Involved"
+      icon: fa-info
+      menu:
+        - text: "Use Case Proposals"
+          href: usecase_process.html
+        - text: "How to Edit Documentation"
+          href: documentationEditing.html           # TODO add a quick para on cycle of clone repo -> edit RMD -> regenerate with render_gaia_site.R
+
