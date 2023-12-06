@@ -16,19 +16,28 @@ navbar:
     - text: "Home"
       icon: fa-home
       href: index.html
-    - text: "Background"
-      icon: fa-circle-info
-      href: background.html
-    - text: "Data Models"
-      icon: fa-database
-      href: datamodels.html
-    - text: "Gaia"
+    - text: "Gaia Overview"
       icon: fa-globe
       menu:
         - text: "Introduction"
-          href: gaia-intro.html                     # TODO add the architecture diagram
-        - text: "Terminology"
-          href: gaia-terminology.html               # TODO edit and update
+          href: gaia-intro.html#OHDSI_GIS_Gaia_Overview                     # TODO add the architecture diagram
+        - text: "Purpose"
+          href: gaia-intro.html#Purpose                     # TODO add the architecture diagram
+        - text: "Foundational Goals"
+          href: gaia-intro.html#Foundational_Goals                     # TODO add the architecture diagram
+        - text: "Design Principles"
+          href: gaia-intro.html#Design_Principles                     # TODO add the architecture diagram
+        - text: "Specifications"
+          menu: 
+             - text: "Terminology"
+               href: gaia-terminology.html    
+             - text: "Data Models"
+               href: gaia-datamodels.html
+    - text: "Framework"
+      icon: fa-globe
+      menu:
+        - text: "Overview & Diagram"
+          href: framework.html
         - text: "GaiaCatalog"
           href: gaia-catalog.html
         - text: "GaiaCore"
