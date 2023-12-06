@@ -21,7 +21,7 @@ navbar:
       href: background.html
     - text: "Data Models"
       icon: fa-database
-      href: gaia-datamodels.html
+      href: datamodels.html
     - text: "Gaia"
       icon: fa-globe
       menu:
