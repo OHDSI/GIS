@@ -11,7 +11,7 @@
 
 
 
-<title>installation.knit</title>
+<title>gaia-catalog.knit</title>
 
 <script src="site_libs/header-attrs-2.15/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -29,9 +29,6 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -233,75 +230,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
-
-</style>
-
-
 
 </head>
 
@@ -309,16 +237,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -331,62 +249,46 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html"><div><img src="ohdsi16x16.png"></img> OMOP GIS </div></a>
+      <a class="navbar-brand" href="index.html"><div><img src="ohdsi16x16.png"></img> OHDSI GIS </div></a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="applications.html">
-    <span class="fa fa-landmark"></span>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
      
-    Applications
-  </a>
-</li>
-<li>
-  <a href="installation.html">
-    <span class="fa fa-landmark"></span>
-     
-    Installation
-  </a>
-</li>
-<li>
-  <a href="dataModel.html">
-    <span class="fa fa-database"></span>
-     
-    Data Model
+    Home
   </a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <span class="fa fa-list"></span>
+    <span class="fa fa-globe"></span>
      
-    Documentation
+    Gaia Overview
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="terminology.html">Terminology</a>
+      <a href="gaia-intro.html#OHDSI_GIS_Gaia_Overview">Introduction</a>
     </li>
     <li>
-      <a href="gaiaCore/index.html">gaiaCore</a>
+      <a href="gaia-intro.html#Purpose">Purpose</a>
+    </li>
+    <li>
+      <a href="gaia-intro.html#Foundational_Goals">Foundational Goals</a>
+    </li>
+    <li>
+      <a href="gaia-intro.html#Design_Principles">Design Principles</a>
     </li>
     <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">gaiaDB</a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Specifications</a>
       <ul class="dropdown-menu" role="menu">
         <li>
-          <a href="erd.html">Diagrams</a>
-        </li>
-      </ul>
-    </li>
-    <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Geocoding Workflows</a>
-      <ul class="dropdown-menu" role="menu">
-        <li>
-          <a href="geocodingFull.html">Geocoding the Location Table (Full)</a>
+          <a href="gaia-terminology.html">Terminology</a>
         </li>
         <li>
-          <a href="geocodingCohort.html">Geocoding a Cohort</a>
+          <a href="gaia-datamodels.html">Data Models</a>
         </li>
       </ul>
     </li>
@@ -396,22 +298,75 @@ div.tocify {
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-globe"></span>
      
-    Contributor Resources
+    Framework
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="documentationEditing.html">How to Edit Documentation</a>
+      <a href="framework.html">Overview &amp; Diagram</a>
     </li>
     <li>
-      <a href="dataModelEditing.html">How to Propose Changes to the gaiaDB Data Model</a>
+      <a href="gaia-catalog.html">GaiaCatalog</a>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">GaiaCore</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="gaia-core-overview.html">Overview</a>
+        </li>
+        <li>
+          <a href="gaiaCore/index.html">R Package</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Extensions</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="gaia-extension-ohdsi.html">GaiaOhdsi</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-question"></span>
+     
+    How to
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="geocodingFull.html">Geocoding the Location Table (Full)</a>
+    </li>
+    <li>
+      <a href="geocodingCohort.html">Geocoding a Cohort</a>
     </li>
     <li>
       <a href="localDataSource.html">How to Add Data Sources to a Local gaiaDB Instance</a>
     </li>
     <li>
       <a href="shareDataSource.html">Sharing Your Local Data Sources</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-info"></span>
+     
+    Getting Involved
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="usecase_process.html">Use Case Proposals</a>
+    </li>
+    <li>
+      <a href="documentationEditing.html">How to Edit Documentation</a>
     </li>
   </ul>
 </li>
@@ -432,115 +387,14 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore"><div>
-<img src="ohdsi40x40.png"></img> OHDSI GIS WG Installation
-</div></h1>
 
 </div>
 
 
-<div id="gaiacore-r-package" class="section level2">
-<h2>gaiaCore R package</h2>
-<ol style="list-style-type: decimal">
-<li><p>See the instructions <a
-href="https://ohdsi.github.io/Hades/rSetup.html">here</a> for
-configuring your R environment, including RTools and Java.</p></li>
-<li><p>You can install the latest version of gaiaCore from <a
-href="https://github.com/">GitHub</a> with:</p>
-<pre class="r"><code># install.packages(&quot;devtools&quot;)
-devtools::install_github(&quot;OHDSI/GIS&quot;)</code></pre></li>
-<li><p><code>library(gaiaCore)</code></p></li>
-</ol>
-</div>
-<div id="gaiadb-database" class="section level2">
-<h2>gaiaDB database</h2>
-<p>gaiaDB is a postgres database with PostGIS installed. If you don’t
-have an existing postgres/PostGIS instance, you can download it <a
-href="https://www.postgresql.org/download/">here</a>, or create one in a
-docker container (see below).</p>
-<p>If you already have a Postgres/PostGIS database, skip to “Connecting
-the Database to R”.</p>
-<div id="creating-a-docker-container" class="section level3">
-<h3>Creating a Docker Container</h3>
-<ol style="list-style-type: decimal">
-<li><p>You will need to have Docker and Docker Compose installed. The
-easiest way to install Docker and Docker Compose is by installing <a
-href="%5Burl%5D(https://docs.docker.com/desktop/)">Docker
-Desktop</a>.</p></li>
-<li><p>Clone the OHDSI/GIS repository to your computer.</p></li>
-<li><p>From a terminal (Command Prompt or Powershell on Windows), make
-sure the <code>init</code> directory is your working directory.</p></li>
-<li><p>Run command <code>docker-compose up -d</code>. This will build a
-docker image, install the database, load the data and variable sources,
-and expose the database at port 5432.</p></li>
-</ol>
-<ul>
-<li>Note: to change the port, open the file
-<code>docker-compose.yml</code> and edit line 10 from
-<code>- "5432:5432"</code> to <code>- "X:5432"</code> where
-<code>X</code> is the desired port.</li>
-</ul>
-<ol start="5" style="list-style-type: decimal">
-<li>You can now connect to the database from R using localhost, port
-5432 (if not changed), username “postgres”, and password
-“mysecretpassword”</li>
-</ol>
-<ul>
-<li>Note: to change your password, edit line 13 of the
-<code>docker-compose.yml</code> file. If you’ve already started the
-container, you will need to shut down the container
-(<code>docker-compose down</code>), remove the volumes
-(<code>docker volume rm gis_pgdata</code>) and image
-(<code>docker rmi gis_postgis</code>) that were created, and redo step 4
-for the password change to take effect.</li>
-</ul>
-<ol start="6" style="list-style-type: decimal">
-<li>The next section will highlight the steps to connect your PostGIS
-Docker container to R</li>
-</ol>
-</div>
-<div id="connecting-the-database-to-r" class="section level3">
-<h3>Connecting the Database to R</h3>
-<ol style="list-style-type: decimal">
-<li>Create the <code>connectionDetails</code> object</li>
-</ol>
-<pre><code>connectionDetails &lt;- DatabaseConnector::createConnectionDetails(
-  dbms = &quot;postgresql&quot;,
-  server = &quot;localhost/gaiaDB&quot;,
-  port = 5432,
-  user=&quot;postgres&quot;,
-  password = &quot;mysecretpassword&quot;) </code></pre>
-<ul>
-<li>Note: the parameters above assume you did not change any default
-environment variables in the <code>docker-compose.yml</code>file</li>
-</ul>
-<ol start="2" style="list-style-type: decimal">
-<li>Run the <code>gaiaCore::initializeDatabase(connectionDetails)</code>
-function</li>
-</ol>
-</div>
-</div>
-<div id="gaiasourcecreator-r-shiny" class="section level2">
-<h2>gaiaSourceCreator R Shiny</h2>
-<p>This app can be run in a local browser by executing the following
-command in an R console:</p>
-<pre><code>shiny::runGitHub(&#39;GIS&#39;, &#39;OHDSI&#39;, subdir = &#39;inst/shiny/gaiaSourceCreator&#39;)</code></pre>
-<p>You will need to have the following packages installed in your R
-environment:</p>
-<pre><code>shiny
-shinyBS
-shinyalert
-shinyvalidate
-shinyjs</code></pre>
-<p>Alternatively, you can run the source code from the Shiny app in your
-R environment. See file <code>apps/gaiaSourceCreator/app.R</code> in the
-OHDSI/GIS repository.</p>
-</div>
 
 
 
-</div>
-</div>
+
 
 </div>
 
@@ -573,35 +427,6 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
-<script>
-$(document).ready(function ()  {
-
-    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
-    $('.unlisted.unnumbered').addClass('toc-ignore')
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

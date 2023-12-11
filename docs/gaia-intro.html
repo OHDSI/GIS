@@ -11,7 +11,7 @@
 
 
 
-<title>geocodingFull.knit</title>
+<title>gaia-intro.knit</title>
 
 <script src="site_libs/header-attrs-2.15/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -470,122 +470,159 @@ div.tocify {
 
 
 <h1 class="title toc-ignore"><div>
-<img src="ohdsi40x40.png"></img> OHDSI GIS WG Geocoding Workflow
+<img src="ohdsi40x40.png"></img> OHDSI GIS WG
 </div></h1>
 
 </div>
 
 
-<style type="text/css">
-script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
-</style>
-<script type="text/javascript">
- $(document).ready(function() {
-    $('body').prepend('<div class=\"zoomDiv\"><img src=\"\" class=\"zoomImg\"></div>');
-    // onClick function for all plots (img's)
-    $('img:not(.zoomImg)').click(function() {
-      $('.zoomImg').attr('src', $(this).attr('src')).css({width: '100%'});
-      $('.zoomDiv').css({opacity: '1', width: 'auto', border: '1px solid white', borderRadius: '5px', position: 'fixed', top: '50%', left: '50%', marginRight: '-50%', transform: 'translate(-50%, -50%)', boxShadow: '0px 0px 50px #888888', zIndex: '50', overflow: 'auto', maxHeight: '100%'});
-    });
-    // onClick function for zoomImg
-    $('img.zoomImg').click(function() {
-      $('.zoomDiv').css({opacity: '0', width: '0%'}); 
-    });
-  });
-</script>
-<div id="overview" class="section level1">
-<h1>Overview</h1>
-<p>This workflow demonstrates how to use the OHDSI Gaia suite of GIS
-tools to geocode the entirety of an OMOP Location table, fully enabling
-any further geospatial analyses supported by the Gaia GIS tools.</p>
-<div class="figure">
-<img src="images/geocodingSchemeFull.png" style="width:150.0%" alt="" />
-<p class="caption">Geocoding Workflow (Cohort Definitions) - <a
-href="https://github.com/OHDSI/GIS/raw/main/rmd/images/geocodingSchemeFull.png">Click
-here to download</a></p>
+<div id="ohdsi-gis-gaia" class="section level1">
+<h1><strong>OHDSI GIS Gaia</strong></h1>
+<p><strong>Gaia</strong> refers to the amalgamation of infrastructure,
+software, standards, tools, and the overall workflow that the OHDSI GIS
+Workgroup has developed to assist researchers with integrating
+place-based datasets into their patient-centric health database and
+perform subsequent analyses.</p>
+<p><strong>Gaia</strong> includes multiple major elements: -
+GaiaCatalog: a functional metadata catalog containing references to
+publicly-hosted geospatial datasets and instructions for their download
+and standardization - GaiaCore: a Postgis database for managing
+harmonized data sources, the dockerized DeGauss geocoding tool, and an R
+package. - Extensions: a broad suite of software packages providing
+functionality for interacting with GaiaCore. The most relevant of these
+extensions is gaiaOhdsi, an R package that contains operations specific
+to interacting with an OMOP CDM or external OHDSI software. Another
+example extension are the gaiaVis tools which provide a set of
+visualizations for data in GaiaCore.</p>
 </div>
-<div id="prerequisites" class="section level2">
-<h2>Prerequisites</h2>
-<p>This workflow requires the <code>DatabaseConnector</code>
-package.</p>
-<pre class="r"><code>install.packages(&quot;DatabaseConnector&quot;)
-library(DatabaseConnector)</code></pre>
+<div id="ohdsi-gis-gaia-overview" class="section level1">
+<h1><strong>OHDSI GIS Gaia Overview</strong></h1>
+<p><strong>Gaia</strong> refers to the amalgamation of infrastructure,
+software, standards, tools, and the overall workflow that the OHDSI GIS
+Workgroup has developed to assist researchers with integrating
+place-based datasets into their patient-based health database and
+subsequent analyses.</p>
+<p><strong>Gaia</strong> includes multiple major elements: -
+gaiaCatalog: a functional metadata catalog containing references to
+publicly-hosted geospatial datasets and instructions for their download
+and standardization - gaiaCore: a Postgis database for managing
+harmonized data sources, the dockerized DeGauss geocoding tool, and
+gaiaR, an R package for managing interactions between gaiaCore,
+gaiaCatalog, and any of the Gaia “extensions” - Extensions: a broad
+suite of software packages that are powered by gaiaCore. The most
+relevant of these packages is gaiaOhdsi, an R package that contains
+operations specific to interacting with an OMOP CDM or external OHDSI
+software. Other example of extensions are the gaiaVis tools which
+provide a set of visualizations for data in gaiaCore.</p>
+<div id="purpose" class="section level2">
+<h2>Purpose</h2>
+<p>What is the purpose of Gaia? Why are we doing all of this?</p>
+<p>Gaia provides a standardized, automated, reproducible, and easily
+shareable means for integrating place-based datasets into a database of
+longitudinal patient health data.</p>
 </div>
-<div id="configuring-connection-to-the-servers" class="section level2">
-<h2>Configuring Connection to the Servers</h2>
-<p>We need to configure connections to two servers: the server hosting
-the OMOP database and the server hosting the gaiaDB Postgres
-database.</p>
-<div id="connect-to-omop-server" class="section level3">
-<h3>Connect to OMOP server:</h3>
-<pre class="r"><code>connectionDetails &lt;- createConnectionDetails(
-  dbms = keyring::key_get(&#39;cdm-dbms&#39;), 
-  user = keyring::key_get(&#39;cdm-username&#39;), 
-  password = keyring::key_get(&#39;cdm-password&#39;), 
-  server = keyring::key_get(&#39;cdm-server&#39;)
-)
-
-cdmDatabaseSchema &lt;- &quot;TMC_RED.dbo&quot;</code></pre>
+<div id="the-case-for-gaia" class="section level2">
+<h2>The Case for Gaia</h2>
+<div id="simplest-case" class="section level3">
+<h3>Simplest case</h3>
+<p>The <em>simplest case</em> for Gaia is a single researcher looking to
+leverage place-based data. After standing up a local or cloud instance
+of GaiaCore, any researcher now has access to a wealth of curated
+sources of geospatial data ranging from environmental toxin data to one
+of many Social Determinants of Health Indexes derived from the US Census
+data. Instead of the countless hours of work typical to munging multiple
+disparate geospatial datasets, the researcher can simply use the
+functions from the gaiaR package to load datasets into their Postgis
+database all in a harmonized geospatial data format. They’ve now quickly
+enabled datasets across many domains, years, and regions in a single
+Postgis database to which they connect using the software of their
+choice and begin performing ad hoc exploratory data analyses, creating
+visualizations, or even powering their own geospatial applications.</p>
 </div>
-<div id="connect-to-gaiadb-server" class="section level3">
-<h3>Connect to gaiaDB server:</h3>
-<p>If you don’t already have a gaiaDB server set up, see the <a
-href="https://ohdsi.github.io/GIS/installation.html#gaiaDB_database">installation
-instructions</a> before proceeding.</p>
-<pre class="r"><code>library(DatabaseConnector)
-gaiaConnectionDetails &lt;- DatabaseConnector::createConnectionDetails(
-  dbms = &quot;postgresql&quot;,
-  server = &quot;localhost/gaiaDB&quot;,
-  port = 5432,
-  user=&quot;postgres&quot;,
-  password = &quot;mySecretPassword&quot;) </code></pre>
-</div>
-</div>
-<div id="geocoding" class="section level2">
-<h2>Geocoding</h2>
-<div id="step-1.-ingest-the-location-table-from-omop-database"
+<div id="using-gaiacore-with-an-omop-shaped-database"
 class="section level3">
-<h3>Step 1. Ingest the Location table from OMOP Database</h3>
-<p>Use the gaiaCore function <code>getLocationAddresses()</code> to
-extract addresses from OMOP and return a transformed location table:</p>
-<pre class="r"><code>transformedLocation &lt;- getLocationAddresses(connectionDetails = connectionDetails,
-                                            cdmDatabaseSchema = cdmDatabaseSchema)</code></pre>
+<h3>Using GaiaCore with an OMOP-shaped database</h3>
+<p>Taking this scenario a step further, a researcher with an established
+OMOP CDM database may wish to incorporate a subset of geospatial
+variables into their CDM database alongside their patient health data.
+The steps necessary to perform this ingestion, which requires geocoding
+of patient address and a spatiotemporal join, are all handled by
+GaiaCore and the gaiaOhdsi extension. Thehe DeGauss geocoder, a
+lightweight geocoder that operates fully locally to ensure that patient
+information is not transmitted, is easily utilized through a gaiaR
+wrapper. standardized spatiotemporal joins from the gaiaOhdsi extension
+relate patient addresses to polygon, line, or point geometries. By
+transforming the place-based data into patient-level information, it is
+now ready to be inserted into the CDM extension table
+“exposure_occurrence”. The DDL and insert scripts for this table are
+also contained in the gaiaOhdsi extension. Once the data has been added
+to the CDM, it can be used to create cohort definitions, develop
+predictive models, and generally utilized by all relevant external OHDSI
+tooling.</p>
 </div>
-<div
-id="step-2.-split-the-transformedlocation-dataframe-into-two-tables-based-on-whether-it-already-contains-latitude-and-longitude-information"
-class="section level3">
-<h3>Step 2. Split the transformedLocation dataframe into two tables
-based on whether it already contains latitude and longitude
-information:</h3>
-<pre class="r"><code>splitResult &lt;- splitAddresses(addressTable = transformedLocation)
-
-alreadyGeocodedLocation &lt;- splitResult$geocoded
-
-notGeocodedLocation &lt;- splitResult$ungeocoded</code></pre>
+<div id="federated-networks-and-research" class="section level3">
+<h3>Federated networks and research</h3>
+<p>Finally, Gaia enables standardized and reproducible workflows for
+federated data networks and studies. The process highlighted above to
+retrieve and harmonize geospatial datasets, perform spatiotemporal joins
+to transform place-based data to person-level information, and insert
+person-level information into an OMOP CDM and define cohorts, is fully
+reproducible. Each step of the process contains detailed, structured
+metadata focused on provenance of source data and rationale for
+transformation methods. By scripting and containerizing an entire Gaia
+workflow, the process of pairing place-based data, often handled using
+undocumented ad-hoc methods unique to single sites, can be packaged and
+shipped across an entire network with minimal effort.</p>
+<p>The <em>simplest case</em> for Gaia is a single researcher looking to
+leverage place-based data. After standing up a local or cloud instance
+of gaiaCore, any researcher now has access to a wealth of curated
+sources of geospatial data ranging from environmental toxin data to one
+of many Social Determinants of Health Indexes derived from the US Census
+data. Instead of the countless hours of work typical to munging multiple
+disparate geospatial datasets, the researcher can simply use the
+functions from the gaiaR package to load datasets into their Postgis
+database all in a harmonized geospatial data format. They’ve now quickly
+enabled datasets across many domains, years, and regions in a single
+Postgis database to which they connect using the software of their
+choice and begin performing ad hoc exploratory data analyses, creating
+visualizations, or even powering their own geospatial applications.</p>
+<p>Taking this scenario a step further, a researcher with an established
+OMOP CDM database may wish to incorporate a subset of geospatial
+variables into their CDM database alongside their patient health data.
+The steps necessary to perform this ingestion, which requires geocoding
+of patient address and a spatiotemporal join, are all handled by
+gaiaCore and the gaiaOhdsi extension. Thehe DeGauss geocoder, a
+lightweight geocoder that operates fully locally to ensure that patient
+information is not transmitted, is easily utilized through a gaiaR
+wrapper. standardized spatiotemporal joins from the gaiaOhdsi extension
+relate patient addresses to polygon, line, or point geometries. By
+transforming the place-based data into patient-level information, it is
+now ready to be inserted into the CDM extension table
+“exposure_occurrence”. The DDL and insert scripts for this table are
+also contained in the gaiaOhdsi extension. Once the data has been added
+to the CDM, it can be used to create cohort definitions, develop
+predictive models, and generally utilized by all relevant external OHDSI
+tooling.</p>
+<p>Finally, Gaia enables standardized and reproducible workflows for
+federated data networks and studies. The process highlighted above to
+retrieve and harmonize geospatial datasets, perform spatiotemporal joins
+to transform place-based data to person-level information, and insert
+person-level information into an OMOP CDM and define cohorts, is fully
+reproducible. Each step of the process contains detailed, structured
+metadata focused on provenance of source data and rationale for
+transformation methods. By scripting and containerizing an entire Gaia
+workflow, the process of pairing place-based data, often handled using
+undocumented ad-hoc methods unique to single sites, can be packaged and
+shipped across an entire network with minimal effort.</p>
 </div>
-<div id="step-3.-geocode-addresses-without-coordinates"
-class="section level3">
-<h3>Step 3. Geocode Addresses without Coordinates</h3>
-<pre class="r"><code>geocodedLocation &lt;- geocodeAddresses(addressTable = notGeocodedLocation)</code></pre>
 </div>
-<div id="step-4.-stack-pre-populated-and-newly-geocoded-location-tables"
-class="section level3">
-<h3>Step 4. Stack pre-populated and newly geocoded location tables</h3>
-<pre class="r"><code>fullyGeocodedLocation &lt;- geocodedLocation
-if (!is.null(alreadyGeocodedLocation)) {
-  names(alreadyGeocodedLocation) &lt;- tolower(names(alreadyGeocodedLocation))
-  alreadyGeocodedLocation &lt;- dplyr::mutate(alreadyGeocodedLocation, lat = latitude, lon = longitude)
-  alreadyGeocodedLocation &lt;- dplyr::select(alreadyGeocodedLocation, names(fullyGeocodedLocation))
-  alreadyGeocodedLocation &lt;- sf::st_as_sf(boundGeocodedTable, coords = c(&quot;lon&quot;, &quot;lat&quot;), crs = 4326)
-  fullyGeocodedLocation &lt;- rbind(fullyGeocodedLocation, alreadyGeocodedLocation)
-}</code></pre>
+<div id="foundational-goals" class="section level2">
+<h2>Foundational Goals</h2>
+<p>TODO</p>
 </div>
-<div id="step-5.-import-geocoded-location-table-to-gaiadb-database"
-class="section level3">
-<h3>Step 5. Import Geocoded Location table to gaiaDB Database</h3>
-<pre class="r"><code>importLocationTable(gaiaConnectionDetails = gaiaConnectionDetails,
-                    location = fullyGeocodedLocation)</code></pre>
-</div>
+<div id="design-principles" class="section level2">
+<h2>Design Principles</h2>
+<p>TODO</p>
 </div>
 </div>
 

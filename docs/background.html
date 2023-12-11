@@ -11,7 +11,7 @@
 
 
 
-<title>erd.knit</title>
+<title>background.knit</title>
 
 <script src="site_libs/header-attrs-2.15/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -29,6 +29,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -230,6 +233,75 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
 
 </head>
 
@@ -237,6 +309,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -249,62 +331,46 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html"><div><img src="ohdsi16x16.png"></img> OMOP GIS </div></a>
+      <a class="navbar-brand" href="index.html"><div><img src="ohdsi16x16.png"></img> OHDSI GIS </div></a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="applications.html">
-    <span class="fa fa-landmark"></span>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
      
-    Applications
-  </a>
-</li>
-<li>
-  <a href="installation.html">
-    <span class="fa fa-landmark"></span>
-     
-    Installation
-  </a>
-</li>
-<li>
-  <a href="dataModel.html">
-    <span class="fa fa-database"></span>
-     
-    Data Model
+    Home
   </a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <span class="fa fa-list"></span>
+    <span class="fa fa-globe"></span>
      
-    Documentation
+    Gaia Overview
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="terminology.html">Terminology</a>
+      <a href="gaia-intro.html#OHDSI_GIS_Gaia_Overview">Introduction</a>
     </li>
     <li>
-      <a href="gaiaCore/index.html">gaiaCore</a>
+      <a href="gaia-intro.html#Purpose">Purpose</a>
+    </li>
+    <li>
+      <a href="gaia-intro.html#Foundational_Goals">Foundational Goals</a>
+    </li>
+    <li>
+      <a href="gaia-intro.html#Design_Principles">Design Principles</a>
     </li>
     <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">gaiaDB</a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Specifications</a>
       <ul class="dropdown-menu" role="menu">
         <li>
-          <a href="erd.html">Diagrams</a>
-        </li>
-      </ul>
-    </li>
-    <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Geocoding Workflows</a>
-      <ul class="dropdown-menu" role="menu">
-        <li>
-          <a href="geocodingFull.html">Geocoding the Location Table (Full)</a>
+          <a href="gaia-terminology.html">Terminology</a>
         </li>
         <li>
-          <a href="geocodingCohort.html">Geocoding a Cohort</a>
+          <a href="gaia-datamodels.html">Data Models</a>
         </li>
       </ul>
     </li>
@@ -314,22 +380,75 @@ $(document).ready(function () {
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-globe"></span>
      
-    Contributor Resources
+    Framework
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="documentationEditing.html">How to Edit Documentation</a>
+      <a href="framework.html">Overview &amp; Diagram</a>
     </li>
     <li>
-      <a href="dataModelEditing.html">How to Propose Changes to the gaiaDB Data Model</a>
+      <a href="gaia-catalog.html">GaiaCatalog</a>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">GaiaCore</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="gaia-core-overview.html">Overview</a>
+        </li>
+        <li>
+          <a href="gaiaCore/index.html">R Package</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Extensions</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="gaia-extension-ohdsi.html">GaiaOhdsi</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-question"></span>
+     
+    How to
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="geocodingFull.html">Geocoding the Location Table (Full)</a>
+    </li>
+    <li>
+      <a href="geocodingCohort.html">Geocoding a Cohort</a>
     </li>
     <li>
       <a href="localDataSource.html">How to Add Data Sources to a Local gaiaDB Instance</a>
     </li>
     <li>
       <a href="shareDataSource.html">Sharing Your Local Data Sources</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-info"></span>
+     
+    Getting Involved
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="usecase_process.html">Use Case Proposals</a>
+    </li>
+    <li>
+      <a href="documentationEditing.html">How to Edit Documentation</a>
     </li>
   </ul>
 </li>
@@ -351,87 +470,86 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore"><div>
-<img src="ohdsi40x40.png"></img> gaiaDB Data Model Diagrams and
-Information Flow
+<img src="ohdsi40x40.png"></img> OHDSI GIS WG
 </div></h1>
 
 </div>
 
 
-<style type="text/css">
-script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
-</style>
-<script type="text/javascript">
- $(document).ready(function() {
-    $('body').prepend('<div class=\"zoomDiv\"><img src=\"\" class=\"zoomImg\"></div>');
-    // onClick function for all plots (img's)
-    $('img:not(.zoomImg)').click(function() {
-      $('.zoomImg').attr('src', $(this).attr('src')).css({width: '100%'});
-      $('.zoomDiv').css({opacity: '1', width: 'auto', border: '1px solid white', borderRadius: '5px', position: 'fixed', top: '50%', left: '50%', marginRight: '-50%', transform: 'translate(-50%, -50%)', boxShadow: '0px 0px 50px #888888', zIndex: '50', overflow: 'auto', maxHeight: '100%'});
-    });
-    // onClick function for zoomImg
-    $('img.zoomImg').click(function() {
-      $('.zoomDiv').css({opacity: '0', width: '0%'}); 
-    });
-  });
-</script>
 <p><br></p>
-<div id="the-backbone-data-catalog" class="section level1">
-<h1>The “Backbone” Data Catalog</h1>
-<p>Entity-Relationship diagram for the backbone schema. Note that
-linkages between entities are shown with solid association lines. The
-dashed arrows represent the transfer of metadata from the source to the
-index tables</p>
-<p>The Backbone Schema serves as the foundation for managing source
-geospatial datasets and their variables. Its core tables, data_source
-and variable_source, provide descriptions and computable instructions
-for accessing and using the source data. A single record in the data
-source table represents a complete web-hosted entity; a source dataset.
-A record in the variable_source table represents a unitary non-geometric
-component (a variable) to be extracted from a source dataset. Variables
-can often be thought of as a single column from a table, but certain
-table structures (such as Entity-Attribute-Value tables) contain
-variables that require more detailed extraction logic to access.</p>
-<div class="figure">
-<img src="images/backbone_slice_1.png" style="width:150.0%" alt="" />
-<p class="caption">gaiaDB “Backbone” Data Catalog Schema - <a
-href="https://github.com/OHDSI/GIS/raw/main/rmd/images/backbone_er.png">Click
-here to download</a></p>
+<div id="problem-space" class="section level1">
+<h1><strong>Problem Space</strong></h1>
+<p>Geospatial data come in a variety of source formats with no
+universal, interoperable standard representation. While working with a
+single geospatial dataset has presents some technical challenges, the
+complexity of using geospatial begins to compound when variables from
+disparate datasets are needed for a single analysis study. As ad-hoc
+solutions are introduced to deal with the increasing technical
+complexity, the reproducibility of these studies plummets.</p>
+<p>In order to enable reproducible studies that incorporate
+place-related data with longitudinal patient-level data, it is first
+necessary to develop functionality to automate retrieval and
+transformation of publicly available place-related data into a standard
+representation.</p>
 </div>
+<div id="goals" class="section level1">
+<h1><strong>Goals</strong></h1>
+<p>The overarching goal of the OHDSI GIS Workgroup is to develop
+software and standards for incorporating place-based data into the OMOP
+CDM and present this back to the OHDSI community. We reach these goals
+through development in the four key areas below.</p>
+<div id="infrastructure" class="section level3">
+<h3>1) Infrastructure</h3>
+<ul>
+<li>Functional Metadata Catalog</li>
+<li>Harmonized geospatial data model</li>
+</ul>
+</div>
+<div id="functionality" class="section level3">
+<h3>2) Functionality</h3>
+<ul>
+<li>Geocoding</li>
+<li>Accessing geospatial datasets</li>
+</ul>
+</div>
+<div id="vocabulary" class="section level3">
+<h3>3) Vocabulary</h3>
+<ul>
+<li>GIS specific concepts</li>
+<li>SDoH vocabulary</li>
+<li>Toxin vocabulary</li>
+</ul>
+</div>
+<div id="extensions" class="section level3">
+<h3>4) Extensions</h3>
+<ul>
+<li>Exposure_occurrence</li>
+</ul>
 <p><br></p>
 </div>
-<div id="creating-harmonized-data-tables" class="section level1">
-<h1>Creating harmonized data tables</h1>
-<p>Relationships between the backbone schema and the harmonized data
-tables. Solid lines represent linkages between entities, while dashed
-lines show which values from the backbone schema are used to generate
-schema and table names</p>
-<p>The geom_index and attr_index tables store derived information from
-the data_source and variable_source tables that facilitate the
-on-the-fly creation of harmonized data tables. For example, The
-database_schema values in the geom_index and attr_index tables are
-concatenated “cleaned” versions of the org_id and org_set_id values from
-the data_source table. Similarly, the table_name values are “cleaned”
-copies of the dataset_name values from the data_source table.</p>
-<p>The gaiaCore software extensively relies on the attr_index and
-geom_index tables to create or locate tables associated with specific
-data sources or variable sources. Within a gaiaDB instance, multiple
-<database_schema> schemas exist, each potentially containing multiple
-attr_<table_name> and geom_<table_name> tables. This modular design
-allows for efficient management and retrieval of geospatial data within
-the OMOP CDM, enhancing the interoperability and analytical capabilities
-of the OHDSI community.</p>
-<div class="figure">
-<img src="images/backbone_slice_2.png" style="width:150.0%" alt="" />
-<p class="caption">gaiaDB “Backbone” holds instructions to populate
-harmonized data tables - <a
-href="https://github.com/OHDSI/GIS/raw/main/rmd/images/backbone_er.png">Click
-here to download</a></p>
+<div id="publicationspresentation" class="section level2">
+<h2><strong>Publications/Presentation</strong></h2>
+<p>OHDSI GIS Infrastructure (2023 OHDSI Symposium <a
+href="https://www.ohdsi.org/2023showcase-19/">Poster</a>, <a
+href="https://www.ohdsi.org/wp-content/uploads/2023/10/19-zollovenecek-BriefReport.pdf">Abstract</a>)</p>
+<p>Toxins Vocabulary (2023 OHDSI Symposium <a
+href="https://www.ohdsi.org/2023showcase-11/">Poster</a>, <a
+href="https://www.ohdsi.org/wp-content/uploads/2023/10/Talapova-Polina_A_Toxin_Vocabulary_for_the_OMOP_CDM_2023symposium-Polina-Talapova.pdf">Abstract</a>)</p>
+<p>OHDSI GIS Workgroup October 10, 2023 Update (<a
+href="https://youtu.be/QZY-slWdsMs?si=UxMT39rqWTAW_AMx&amp;t=2178">video</a>)</p>
+<p>OHDSI GIS Workgroup 2023 Objectives and Key Results (<a
+href="https://www.youtube.com/watch?v=bd0htzO1hx4&amp;t=1103s">video</a>,
+<a
+href="https://www.ohdsi.org/wp-content/uploads/2023/02/GIS-OKRs2023Q1.pdf">slides</a>)</p>
+<p>OHDSI GIS Workgroup August 23, 2022 Update (<a
+href="https://youtu.be/d8jIAm9cssM">video</a>) <br></p>
 </div>
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -464,6 +582,35 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

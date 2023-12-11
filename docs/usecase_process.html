@@ -11,7 +11,7 @@
 
 
 
-<title>geocodingFull.knit</title>
+<title>usecase_process.knit</title>
 
 <script src="site_libs/header-attrs-2.15/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -470,122 +470,34 @@ div.tocify {
 
 
 <h1 class="title toc-ignore"><div>
-<img src="ohdsi40x40.png"></img> OHDSI GIS WG Geocoding Workflow
+<img src="ohdsi40x40.png"></img> OHDSI GIS WG
 </div></h1>
 
 </div>
 
 
-<style type="text/css">
-script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
-</style>
-<script type="text/javascript">
- $(document).ready(function() {
-    $('body').prepend('<div class=\"zoomDiv\"><img src=\"\" class=\"zoomImg\"></div>');
-    // onClick function for all plots (img's)
-    $('img:not(.zoomImg)').click(function() {
-      $('.zoomImg').attr('src', $(this).attr('src')).css({width: '100%'});
-      $('.zoomDiv').css({opacity: '1', width: 'auto', border: '1px solid white', borderRadius: '5px', position: 'fixed', top: '50%', left: '50%', marginRight: '-50%', transform: 'translate(-50%, -50%)', boxShadow: '0px 0px 50px #888888', zIndex: '50', overflow: 'auto', maxHeight: '100%'});
-    });
-    // onClick function for zoomImg
-    $('img.zoomImg').click(function() {
-      $('.zoomDiv').css({opacity: '0', width: '0%'}); 
-    });
-  });
-</script>
-<div id="overview" class="section level1">
-<h1>Overview</h1>
-<p>This workflow demonstrates how to use the OHDSI Gaia suite of GIS
-tools to geocode the entirety of an OMOP Location table, fully enabling
-any further geospatial analyses supported by the Gaia GIS tools.</p>
-<div class="figure">
-<img src="images/geocodingSchemeFull.png" style="width:150.0%" alt="" />
-<p class="caption">Geocoding Workflow (Cohort Definitions) - <a
-href="https://github.com/OHDSI/GIS/raw/main/rmd/images/geocodingSchemeFull.png">Click
-here to download</a></p>
-</div>
-<div id="prerequisites" class="section level2">
-<h2>Prerequisites</h2>
-<p>This workflow requires the <code>DatabaseConnector</code>
-package.</p>
-<pre class="r"><code>install.packages(&quot;DatabaseConnector&quot;)
-library(DatabaseConnector)</code></pre>
-</div>
-<div id="configuring-connection-to-the-servers" class="section level2">
-<h2>Configuring Connection to the Servers</h2>
-<p>We need to configure connections to two servers: the server hosting
-the OMOP database and the server hosting the gaiaDB Postgres
-database.</p>
-<div id="connect-to-omop-server" class="section level3">
-<h3>Connect to OMOP server:</h3>
-<pre class="r"><code>connectionDetails &lt;- createConnectionDetails(
-  dbms = keyring::key_get(&#39;cdm-dbms&#39;), 
-  user = keyring::key_get(&#39;cdm-username&#39;), 
-  password = keyring::key_get(&#39;cdm-password&#39;), 
-  server = keyring::key_get(&#39;cdm-server&#39;)
-)
-
-cdmDatabaseSchema &lt;- &quot;TMC_RED.dbo&quot;</code></pre>
-</div>
-<div id="connect-to-gaiadb-server" class="section level3">
-<h3>Connect to gaiaDB server:</h3>
-<p>If you don’t already have a gaiaDB server set up, see the <a
-href="https://ohdsi.github.io/GIS/installation.html#gaiaDB_database">installation
-instructions</a> before proceeding.</p>
-<pre class="r"><code>library(DatabaseConnector)
-gaiaConnectionDetails &lt;- DatabaseConnector::createConnectionDetails(
-  dbms = &quot;postgresql&quot;,
-  server = &quot;localhost/gaiaDB&quot;,
-  port = 5432,
-  user=&quot;postgres&quot;,
-  password = &quot;mySecretPassword&quot;) </code></pre>
-</div>
-</div>
-<div id="geocoding" class="section level2">
-<h2>Geocoding</h2>
-<div id="step-1.-ingest-the-location-table-from-omop-database"
-class="section level3">
-<h3>Step 1. Ingest the Location table from OMOP Database</h3>
-<p>Use the gaiaCore function <code>getLocationAddresses()</code> to
-extract addresses from OMOP and return a transformed location table:</p>
-<pre class="r"><code>transformedLocation &lt;- getLocationAddresses(connectionDetails = connectionDetails,
-                                            cdmDatabaseSchema = cdmDatabaseSchema)</code></pre>
-</div>
-<div
-id="step-2.-split-the-transformedlocation-dataframe-into-two-tables-based-on-whether-it-already-contains-latitude-and-longitude-information"
-class="section level3">
-<h3>Step 2. Split the transformedLocation dataframe into two tables
-based on whether it already contains latitude and longitude
-information:</h3>
-<pre class="r"><code>splitResult &lt;- splitAddresses(addressTable = transformedLocation)
-
-alreadyGeocodedLocation &lt;- splitResult$geocoded
-
-notGeocodedLocation &lt;- splitResult$ungeocoded</code></pre>
-</div>
-<div id="step-3.-geocode-addresses-without-coordinates"
-class="section level3">
-<h3>Step 3. Geocode Addresses without Coordinates</h3>
-<pre class="r"><code>geocodedLocation &lt;- geocodeAddresses(addressTable = notGeocodedLocation)</code></pre>
-</div>
-<div id="step-4.-stack-pre-populated-and-newly-geocoded-location-tables"
-class="section level3">
-<h3>Step 4. Stack pre-populated and newly geocoded location tables</h3>
-<pre class="r"><code>fullyGeocodedLocation &lt;- geocodedLocation
-if (!is.null(alreadyGeocodedLocation)) {
-  names(alreadyGeocodedLocation) &lt;- tolower(names(alreadyGeocodedLocation))
-  alreadyGeocodedLocation &lt;- dplyr::mutate(alreadyGeocodedLocation, lat = latitude, lon = longitude)
-  alreadyGeocodedLocation &lt;- dplyr::select(alreadyGeocodedLocation, names(fullyGeocodedLocation))
-  alreadyGeocodedLocation &lt;- sf::st_as_sf(boundGeocodedTable, coords = c(&quot;lon&quot;, &quot;lat&quot;), crs = 4326)
-  fullyGeocodedLocation &lt;- rbind(fullyGeocodedLocation, alreadyGeocodedLocation)
-}</code></pre>
-</div>
-<div id="step-5.-import-geocoded-location-table-to-gaiadb-database"
-class="section level3">
-<h3>Step 5. Import Geocoded Location table to gaiaDB Database</h3>
-<pre class="r"><code>importLocationTable(gaiaConnectionDetails = gaiaConnectionDetails,
-                    location = fullyGeocodedLocation)</code></pre>
-</div>
+<div id="ohdsi-gis-process-for-new-use-cases" class="section level1">
+<h1><strong>OHDSI GIS Process for New Use Cases</strong></h1>
+<p>Development in the OHDSI GIS Workgroup is <strong>use case
+driven</strong>, meaning that specific needs to produce real world
+evidence determine the workgroup’s objectives and direct the groups
+members’ efforts.</p>
+<div id="proposing-a-new-use-case" class="section level2">
+<h2><strong>Proposing a new Use Case</strong></h2>
+<p>For other OHDSI workgroups, research projects, or individual
+researchers that are interested in proposing a new use case to drive
+OHDSI GIS Workgroup development, a <a
+href="https://github.com/OHDSI/GIS/issues/new?assignees=&amp;labels=Use+Case&amp;projects=&amp;template=use-case.yaml&amp;title=%5BUse+Case%5D%3A+">Use
+Case Issue</a> can be opened on the OHDSI GIS Workgroup GitHub.</p>
+<p>On the issue template, interested parties should:</p>
+<ol style="list-style-type: decimal">
+<li><p>Introduce their project in the <strong>Background</strong>
+section. Give a general overview of the project, then focus in on
+specifics such as type of data, temporal and geographical coverage, and
+desired outcomes. Make sure to provide a link to the project’s site
+where more general information can be found.</p></li>
+<li></li>
+</ol>
 </div>
 </div>
 
