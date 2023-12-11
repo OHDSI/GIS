@@ -11,7 +11,7 @@
 
 
 
-<title>applications.knit</title>
+<title>gaia-core-overview.knit</title>
 
 <script src="site_libs/header-attrs-2.15/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -29,9 +29,6 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -233,75 +230,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
-
-</style>
-
-
 
 </head>
 
@@ -309,16 +237,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -331,62 +249,46 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html"><div><img src="ohdsi16x16.png"></img> OMOP GIS </div></a>
+      <a class="navbar-brand" href="index.html"><div><img src="ohdsi16x16.png"></img> OHDSI GIS </div></a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="applications.html">
-    <span class="fa fa-landmark"></span>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
      
-    Applications
-  </a>
-</li>
-<li>
-  <a href="installation.html">
-    <span class="fa fa-landmark"></span>
-     
-    Installation
-  </a>
-</li>
-<li>
-  <a href="dataModel.html">
-    <span class="fa fa-database"></span>
-     
-    Data Model
+    Home
   </a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <span class="fa fa-list"></span>
+    <span class="fa fa-globe"></span>
      
-    Documentation
+    Gaia Overview
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="terminology.html">Terminology</a>
+      <a href="gaia-intro.html#OHDSI_GIS_Gaia_Overview">Introduction</a>
     </li>
     <li>
-      <a href="gaiaCore/index.html">gaiaCore</a>
+      <a href="gaia-intro.html#Purpose">Purpose</a>
+    </li>
+    <li>
+      <a href="gaia-intro.html#Foundational_Goals">Foundational Goals</a>
+    </li>
+    <li>
+      <a href="gaia-intro.html#Design_Principles">Design Principles</a>
     </li>
     <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">gaiaDB</a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Specifications</a>
       <ul class="dropdown-menu" role="menu">
         <li>
-          <a href="erd.html">Diagrams</a>
-        </li>
-      </ul>
-    </li>
-    <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Geocoding Workflows</a>
-      <ul class="dropdown-menu" role="menu">
-        <li>
-          <a href="geocodingFull.html">Geocoding the Location Table (Full)</a>
+          <a href="gaia-terminology.html">Terminology</a>
         </li>
         <li>
-          <a href="geocodingCohort.html">Geocoding a Cohort</a>
+          <a href="gaia-datamodels.html">Data Models</a>
         </li>
       </ul>
     </li>
@@ -396,22 +298,75 @@ div.tocify {
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-globe"></span>
      
-    Contributor Resources
+    Framework
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="documentationEditing.html">How to Edit Documentation</a>
+      <a href="framework.html">Overview &amp; Diagram</a>
     </li>
     <li>
-      <a href="dataModelEditing.html">How to Propose Changes to the gaiaDB Data Model</a>
+      <a href="gaia-catalog.html">GaiaCatalog</a>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">GaiaCore</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="gaia-core-overview.html">Overview</a>
+        </li>
+        <li>
+          <a href="gaiaCore/index.html">R Package</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Extensions</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="gaia-extension-ohdsi.html">GaiaOhdsi</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-question"></span>
+     
+    How to
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="geocodingFull.html">Geocoding the Location Table (Full)</a>
+    </li>
+    <li>
+      <a href="geocodingCohort.html">Geocoding a Cohort</a>
     </li>
     <li>
       <a href="localDataSource.html">How to Add Data Sources to a Local gaiaDB Instance</a>
     </li>
     <li>
       <a href="shareDataSource.html">Sharing Your Local Data Sources</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-info"></span>
+     
+    Getting Involved
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="usecase_process.html">Use Case Proposals</a>
+    </li>
+    <li>
+      <a href="documentationEditing.html">How to Edit Documentation</a>
     </li>
   </ul>
 </li>
@@ -432,49 +387,14 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore"><div>
-<img src="ohdsi40x40.png"></img> OHDSI GIS WG Applications
-</div></h1>
 
 </div>
 
 
-<div id="applications" class="section level1">
-<h1><strong>Applications</strong></h1>
-<p><em>GAIA is the suite of software used to work with place-related
-data in conjunction with an OMOP CDM database</em></p>
-<p>All applications are in a state of active development. We encourage
-you to experiment with these tools and anticipate that they will be
-steadily evolving. We greatly appreciate all bug reports, feature
-request, and general comments, which can all be submitted through the <a
-href="https://github.com/OHDSI/GIS/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc">GitHub
-Issue Tracker</a></p>
-<p>Please don’t hesitate to reach out to
-<strong>zollovenecek[at]ohdsi[dot]org</strong> via email or the OHDSI
-Microsoft Teams tenant if you need assistance setting up a working or
-development environment for these tools.</p>
-<div id="gaiadb" class="section level2">
-<h2><strong>gaiaDB</strong></h2>
-<p>This PostGIS database contains a mirror of the official backbone
-schema and any variables and dependent geometries that the owner of the
-instance has loaded.</p>
-</div>
-<div id="gaiacore" class="section level2">
-<h2><strong>gaiaCore</strong></h2>
-<p>This R package provides functionality for instantiating and
-interacting with a gaiaDB instance.</p>
-</div>
-<div id="gaiasourcecreator" class="section level2">
-<h2><strong>gaiaSourceCreator</strong></h2>
-<p>This R Shiny app provides a form-based front end for creating new
-data_source or variable_source records for gaiaDB.</p>
-</div>
-</div>
 
 
 
-</div>
-</div>
+
 
 </div>
 
@@ -507,35 +427,6 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
-<script>
-$(document).ready(function ()  {
-
-    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
-    $('.unlisted.unnumbered').addClass('toc-ignore')
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

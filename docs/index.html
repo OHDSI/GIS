@@ -342,34 +342,51 @@ div.tocify {
     Home
   </a>
 </li>
-<li>
-  <a href="background.html">
-    <span class="fa fa-circle-info"></span>
-     
-    Background
-  </a>
-</li>
-<li>
-  <a href="gaia-datamodels.html">
-    <span class="fa fa-database"></span>
-     
-    Data Models
-  </a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-globe"></span>
      
-    Gaia
+    Gaia Overview
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="gaia-intro.html">Introduction</a>
+      <a href="gaia-intro.html#OHDSI_GIS_Gaia_Overview">Introduction</a>
     </li>
     <li>
-      <a href="gaia-terminology.html">Terminology</a>
+      <a href="gaia-intro.html#Purpose">Purpose</a>
+    </li>
+    <li>
+      <a href="gaia-intro.html#Foundational_Goals">Foundational Goals</a>
+    </li>
+    <li>
+      <a href="gaia-intro.html#Design_Principles">Design Principles</a>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Specifications</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="gaia-terminology.html">Terminology</a>
+        </li>
+        <li>
+          <a href="gaia-datamodels.html">Data Models</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-globe"></span>
+     
+    Framework
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="framework.html">Overview &amp; Diagram</a>
     </li>
     <li>
       <a href="gaia-catalog.html">GaiaCatalog</a>
@@ -478,113 +495,72 @@ href="https://teams.microsoft.com/l/meetup-join/19%3a83e90982136c4665aa5f74a6ce2
 meeting link</a>)</p>
 <p><br></p>
 </div>
-<div id="site-map" class="section level1">
-<h1><strong>Site Map</strong></h1>
-<p>This site contains the following sections:</p>
+<div id="problem-space" class="section level1">
+<h1><strong>Problem Space</strong></h1>
+<p>Geospatial data come in a variety of source formats with no
+universal, interoperable standard representation. While working with a
+single geospatial dataset has presents some technical challenges, the
+complexity of using geospatial begins to compound when variables from
+disparate datasets are needed for a single analysis study. As ad-hoc
+solutions are introduced to deal with the increasing technical
+complexity, the reproducibility of these studies plummets.</p>
+<p>In order to enable reproducible studies that incorporate
+place-related data with longitudinal patient-level data, it is first
+necessary to develop functionality to automate retrieval and
+transformation of publicly available place-related data into a standard
+representation.</p>
+</div>
+<div id="goals" class="section level1">
+<h1><strong>Goals</strong></h1>
+<p>The overarching goal of the OHDSI GIS Workgroup is to develop
+software and standards for incorporating place-based data into the OMOP
+CDM and present this back to the OHDSI community. We reach these goals
+through development in the four key areas below.</p>
+<div id="infrastructure" class="section level3">
+<h3>1) Infrastructure</h3>
+<ul>
+<li>Functional Metadata Catalog</li>
+<li>Harmonized geospatial data model</li>
+</ul>
+</div>
+<div id="functionality" class="section level3">
+<h3>2) Functionality</h3>
+<ul>
+<li>Geocoding</li>
+<li>Accessing geospatial datasets</li>
+</ul>
+</div>
+<div id="vocabulary" class="section level3">
+<h3>3) Vocabulary</h3>
+<ul>
+<li>GIS specific concepts</li>
+<li>SDoH vocabulary</li>
+<li>Toxin vocabulary</li>
+</ul>
+</div>
+<div id="extensions" class="section level3">
+<h3>4) Extensions</h3>
+<ul>
+<li>Exposure_occurrence</li>
+</ul>
 <p><br></p>
-<div id="background" class="section level3">
-<h3><strong><a href="background.html">Background</a></strong></h3>
-<table>
-<colgroup>
-<col width="40%" />
-<col width="60%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td><a href="background.html#Problem_Space">Problem Space</a></td>
-<td align="left">High level summary of working group mission</td>
-</tr>
-<tr class="even">
-<td><a href="background.html#Goals">Goals</a></td>
-<td align="left">Goals of working group</td>
-</tr>
-<tr class="odd">
-<td><a href="background.html#Notable_Challenges">Notable
-Challenges</a></td>
-<td align="left">Core challenges of effort</td>
-</tr>
-<tr class="even">
-<td><a
-href="background.html#PublicationsPresentation">Publications/Presentations</a></td>
-<td align="left">Links to some relevant publications &amp;
-presentations</td>
-</tr>
-</tbody>
-</table>
 </div>
-<div id="development-effort" class="section level3">
-<h3><strong>Development Effort</strong></h3>
-<table>
-<colgroup>
-<col width="40%" />
-<col width="60%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td><strong><a href="development.html">Development Overview</a></strong>
-<br> <a href="development.html#Purpose_and_Goals">Purpose and Goals</a>
-<br> <a href="development.html#Context">Context</a> <br> <a
-href="development.html#Scope">Scope</a> <br> <a
-href="development.html##What_we_need">What we need</a> <br> <a
-href="development.html#Project_Management">Project Management</a></td>
-<td align="left">Overview of current development effort</td>
-</tr>
-<tr class="even">
-<td><strong><a href="progressMap.html">Progress Map</a></strong> <br> <a
-href="progressMap.html#Miro_Map">Miro Map</a> <br> <a
-href="progressMap.html#Roadmap">Roadmap</a></td>
-<td align="left">Miro Map of completed and outstanding work within scope
-(with links)</td>
-</tr>
-<tr class="odd">
-<td><strong><a href="githubProject.html">Github Project
-Orientation</a></strong> <br> <a
-href="githubProject.html#Approach">Approach</a> <br> <a
-href="githubProject.html#Architecture">Architecture</a> <br> <a
-href="githubProject.html#Project_Views">Project Views</a> <br> <a
-href="githubProject.html#Approach">Example Walkthrough</a></td>
-<td align="left">Documentation about navigating and understanding the
-Github Project and approach</td>
-</tr>
-<tr class="even">
-<td><strong><a href="gettingInvolved.html">Getting Involved</a></strong>
-<br> <a
-href="gettingInvolved.html#join_collaboration_channels">Collaboration
-Channels</a> <br> <a
-href="gettingInvolved.html#Review_Project_Documentation">Review Project
-Documentation</a></td>
-<td align="left">Suggestions and links for getting started in the
-effort!</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="conventions" class="section level3">
-<h3><strong><a href="conventions.html">Conventions</a></strong></h3>
-<table>
-<colgroup>
-<col width="40%" />
-<col width="60%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td><a href="conventions.html#Diagnostic">Diagnostic</a></td>
-<td align="left">Overview of current development effort</td>
-</tr>
-<tr class="even">
-<td><a href="conventions.html#Treatment">Treatment</a></td>
-<td align="left">Overview of current development effort</td>
-</tr>
-</tbody>
-</table>
-<hr />
-</div>
-<div id="model" class="section level3">
-<h3><strong><a href="model.html">Model</a></strong></h3>
-<hr />
-</div>
-<div id="tools" class="section level3">
-<h3><strong><a href="tooling.html">Tools</a></strong></h3>
+<div id="publicationspresentation" class="section level2">
+<h2><strong>Publications/Presentation</strong></h2>
+<p>OHDSI GIS Infrastructure (2023 OHDSI Symposium <a
+href="https://www.ohdsi.org/2023showcase-19/">Poster</a>, <a
+href="https://www.ohdsi.org/wp-content/uploads/2023/10/19-zollovenecek-BriefReport.pdf">Abstract</a>)</p>
+<p>Toxins Vocabulary (2023 OHDSI Symposium <a
+href="https://www.ohdsi.org/2023showcase-11/">Poster</a>, <a
+href="https://www.ohdsi.org/wp-content/uploads/2023/10/Talapova-Polina_A_Toxin_Vocabulary_for_the_OMOP_CDM_2023symposium-Polina-Talapova.pdf">Abstract</a>)</p>
+<p>OHDSI GIS Workgroup October 10, 2023 Update (<a
+href="https://youtu.be/QZY-slWdsMs?si=UxMT39rqWTAW_AMx&amp;t=2178">video</a>)</p>
+<p>OHDSI GIS Workgroup 2023 Objectives and Key Results (<a
+href="https://www.youtube.com/watch?v=bd0htzO1hx4&amp;t=1103s">video</a>,
+<a
+href="https://www.ohdsi.org/wp-content/uploads/2023/02/GIS-OKRs2023Q1.pdf">slides</a>)</p>
+<p>OHDSI GIS Workgroup August 23, 2022 Update (<a
+href="https://youtu.be/d8jIAm9cssM">video</a>) <br></p>
 </div>
 </div>
 
