@@ -38,7 +38,6 @@ These pieces of information will help to inform the OHDSI GIS Workgroup about th
 
 The only remaining field in the form is for linking "work order" tickets. This field is used to create a checklist of discrete development work orders that will enable your project deliverable. There is generally *no reason to fill this field out at this time*, though if you are aware of existing work orders that you know your proposed use case would depend on, this would be the spot to link them.
 
-
 #### Building a checklist in the work orders field
 
 > Use a dash and brackets, and a link to the work order, to create a checklist item in GitHub Markdown:
