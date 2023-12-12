@@ -16,8 +16,33 @@ Development in the OHDSI GIS Workgroup is **use case driven**, meaning that spec
 
 For other OHDSI workgroups, research projects, or individual researchers that are interested in proposing a new use case to drive OHDSI GIS Workgroup development, a [Use Case Issue](https://github.com/OHDSI/GIS/issues/new?assignees=&labels=Use+Case&projects=&template=use-case.yaml&title=%5BUse+Case%5D%3A+) can be opened on the OHDSI GIS Workgroup GitHub.
 
-On the issue template, interested parties should:
+### Project deliverable
 
-1) Introduce their project in the **Background** section. Give a general overview of the project, then focus in on specifics such as type of data, temporal and geographical coverage, and desired outcomes. Make sure to provide a link to the project's site where more general information can be found.
+The issue template focuses on your project's, or this collaboration's, hypothetical "Project Deliverable": what exactly will the final output of this work be? On the issue template, interested parties should:
 
-2) 
+1) Introduce their project deliverable in the **Description** section. Provide enough information so that all parties can form a mental image of the final product and will be able to align their work towards a single goal.
+
+2) Use the **infrastructure** section to describe what changes would need to be made to the OHDSI GIS infrastructure or tooling to help realize your project.
+
+3) In the **Timeline** section, provide any hard or soft deadlines that you have for your project deliverable. Would a development sprint for this work be able to start immediately, or need to wait until some future date? If you imagine your deliverable being completed in multiple steps, feel free to add detail to the order and timing in which they should be completed here. Finally, begin to think about desired cadence of development or progress meetings.
+
+4) Describe the way you and your team envision **Credit** being attributed at the end of the development sprint. How does your team hope to be recognized for the collaborative effort with other OHDSI GIS Workgroup members?
+
+5) What sort of **Support** do you need from OHDSI GIS Workgroup? Are you looking for help with using existing OHDSI GIS tools, planning a development sprint, or integrating new features?
+
+6) Are there any **Datasets of Interest** that you need to use that are *not already in GaiaCatalog*? Feel free to include links and descriptions of content, shape, and format of the data.
+
+These pieces of information will help to inform the OHDSI GIS Workgroup about the scope and goals of your project before scheduling a virtual meeting slot to have discuss. The more accurately and completely you provide this information, the more quickly and efficiently we can all collaborate to plan and execute a new development sprint and produce real world evidence.
+
+### Use Case Work Orders
+
+The only remaining field in the form is for linking "work order" tickets. This field is used to create a checklist of discrete development work orders that will enable your project deliverable. There is generally *no reason to fill this field out at this time*, though if you are aware of existing work orders that you know your proposed use case would depend on, this would be the spot to link them.
+
+
+#### Building a checklist in the work orders field
+
+> Use a dash and brackets, and a link to the work order, to create a checklist item in GitHub Markdown:
+>
+> `- [ ] https://github.com/OHDSI/GIS/issues/198`
+>
+> `- [ ] #198` (you can use this shorthand if the issue is in the OHDSI GIS repository)
