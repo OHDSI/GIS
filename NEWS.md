@@ -1,4 +1,4 @@
-Gaia (OHDSI GIS) Development Version.
+# Gaia (OHDSI GIS) Development Version.
 
 - Restructured the OHDSI GIS website (#303)
 
