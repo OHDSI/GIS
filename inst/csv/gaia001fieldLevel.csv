@@ -1,4 +1,4 @@
-﻿gaiaTableName,gaiaFieldName,isRequired,gaiaDataType,userGuidance,etlConventions,isPrimaryKey,isForeignKey,fkTableName,fkFieldName,fkDomain,fkClass,unique DQ identifiers
+gaiaTableName,gaiaFieldName,isRequired,gaiaDataType,userGuidance,etlConventions,isPrimaryKey,isForeignKey,fkTableName,fkFieldName,fkDomain,fkClass,unique DQ identifiers
 data_source,data_source_uuid,Yes,int4,,,Yes,No,,,,,
 data_source,org_id,Yes,varchar(100),,,No,No,,,,,
 data_source,org_set_id,Yes,varchar(100),,,No,No,,,,,
@@ -31,7 +31,7 @@ geom_index,geom_index_id,Yes,numeric,,,Yes,No,,,,,
 geom_index,data_type_id,No,numeric,,,No,No,,,,,
 geom_index,data_type_name,Yes,varchar(255),,,No,No,,,,,
 geom_index,geom_type_concept_id,No,numeric,,,No,Yes,concept,concept_id,,,
-geom_index,geom_type_source_value,Yes,varchar(255),,,No,No,,,,,
+geom_index,geom_type_source_value,No,varchar(255),,,No,No,,,,,
 geom_index,database_schema,Yes,varchar(255),,,No,No,,,,,
 geom_index,table_name,Yes,varchar(255),,,No,No,,,,,
 geom_index,table_desc,Yes,varchar(255),,,No,No,,,,,
