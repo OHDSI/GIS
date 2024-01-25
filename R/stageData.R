@@ -65,23 +65,24 @@ getStaged <- function(rec, storageConfig = readStorageConfig()) {
   
   if (rec$download_method == "file") {
     if (rec$download_subtype == "zip") {
-
-    # If the storage directory exists, assume zip file must be there
-      if(dir.exists(storageDir)) {
-        message("Skipping download (zip file located on disk) ...")
-        return(readFromZip(zipfile = file.path(storageDir, rec$download_url),
-                    exdir = gisTempDir,
-                    rec = rec))
-      }
-      
-      # If the storage directory does not exist, but isPersisted is True, create storageDirectory and save zip there
-      if(isPersisted && !dir.exists(storageDir)) {
-        dir.create(storageDir)
-        zipfile <- file.path(storageDir, basename(rec$download_url))
-        # TODO use a try-catch: 
-        # If download fails, delete storageDir entirely
-        utils::download.file(url = rec$download_url, destfile = zipfile)
-        return(readFromZip(zipfile = zipfile, exdir = gisTempDir, rec = rec))
+      if(isTRUE(storageDir)) { # If there is no config file or no storageDir set, this can be skipped
+      # If the storage directory exists, assume zip file must be there
+        if(dir.exists(storageDir)) {
+          message("Skipping download (zip file located on disk) ...")
+          return(readFromZip(zipfile = file.path(storageDir, rec$download_url),
+                      exdir = gisTempDir,
+                      rec = rec))
+        }
+        
+        # If the storage directory does not exist, but isPersisted is True, create storageDirectory and save zip there
+        if(isPersisted && !dir.exists(storageDir)) {
+          dir.create(storageDir)
+          zipfile <- file.path(storageDir, basename(rec$download_url))
+          # TODO use a try-catch: 
+          # If download fails, delete storageDir entirely
+          utils::download.file(url = rec$download_url, destfile = zipfile)
+          return(readFromZip(zipfile = zipfile, exdir = gisTempDir, rec = rec))
+        }
       }
     
       tempzip <- file.path(gisTempDir, basename(rec$download_url))
