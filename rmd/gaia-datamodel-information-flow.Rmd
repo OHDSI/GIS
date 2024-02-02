@@ -1,6 +1,11 @@
 ---
-title: '<div><img src="ohdsi40x40.png"></img> gaiaDB Data Model Diagrams and Information Flow</div>'
-output: html_document
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG</div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
 ---
 ```{css zoom-lib-src, echo = FALSE}
 script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
@@ -22,6 +27,8 @@ script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
 ```
 
 <br>
+
+#**Gaia Data Model Diagrams and Information Flow**
 
 # The "Backbone" Data Catalog
 

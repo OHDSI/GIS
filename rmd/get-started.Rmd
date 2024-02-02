@@ -8,4 +8,7 @@ output:
           collapsed: false
 ---
 
-# **GaiaCore Overview**
+# **Getting Started with Gaia**
+
+TODO
+

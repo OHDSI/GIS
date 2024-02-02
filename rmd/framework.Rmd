@@ -1,5 +1,5 @@
 ---
-title: '<div><img src="ohdsi40x40.png"></img> Framework </div>'
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG</div>'
 output:
    html_document:
         toc: TRUE
@@ -7,5 +7,7 @@ output:
         toc_float:
           collapsed: false
 ---
+
+# **Framework**
 
 TODO

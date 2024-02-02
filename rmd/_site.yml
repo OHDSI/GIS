@@ -17,10 +17,10 @@ navbar:
       icon: fa-home
       href: index.html
     - text: "Gaia Overview"
-      icon: fa-globe
+      icon: fa-earth-americas
       menu:
         - text: "Introduction"
-          href: gaia-intro.html#OHDSI_GIS_Gaia_Overview                     # TODO add the architecture diagram
+          href: gaia-intro.html#Overview                    # TODO add the architecture diagram
         - text: "Purpose"
           href: gaia-intro.html#Purpose                     # TODO add the architecture diagram
         - text: "Foundational Goals"
@@ -34,7 +34,7 @@ navbar:
              - text: "Data Models"
                href: gaia-datamodels.html
     - text: "Framework"
-      icon: fa-globe
+      icon: fa-cubes
       menu:
         - text: "Overview & Diagram"
           href: framework.html
@@ -53,13 +53,17 @@ navbar:
     - text: "How to"
       icon: fa-question
       menu:
-        - text: "Geocoding the Location Table (Full)"
+        - text: "Get Started with Gaia"
+          href: get-started.html
+        - text: "Use a Local Dataset"
+          href: local-dataset.html
+        - text: "Geocode the OMOP Location Table (Full)"
           href: geocodingFull.html              # TODO combine into one geocoding article
-        - text: "Geocoding a Cohort"
+        - text: "Geocode an OMOP Cohort"
           href: geocodingCohort.html            # TODO combine into one geocoding article
-        - text: "How to Add Data Sources to a Local gaiaDB Instance"
+        - text: "Add Data Sources to a Local gaiaDB Instance"
           href: localDataSource.html
-        - text: "Sharing Your Local Data Sources"
+        - text: "Share Your Local Data Sources"
           href: shareDataSource.html
     - text: "Getting Involved"
       icon: fa-info

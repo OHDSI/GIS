@@ -1,5 +1,5 @@
 ---
-title: '<div><img src="ohdsi40x40.png"></img> Editing the OHDSI GIS WG website or documentation </div>'
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG</div>'
 output:
    html_document:
         toc: TRUE
@@ -7,7 +7,9 @@ output:
         toc_float: yes
 ---
 
-# Overview
+#**Editing the OHDSI GIS WG documentation website**
+
+## Overview
 
 We encourage contributions to our software documentation and our website. Follow these guidelines for making and proposing changes.
 

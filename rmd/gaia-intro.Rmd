@@ -8,16 +8,9 @@ output:
           collapsed: false
 ---
 
-# **OHDSI GIS Gaia**
+# **Gaia**
 
-**Gaia** refers to the amalgamation of infrastructure, software, standards, tools, and the overall workflow that the OHDSI GIS Workgroup has developed to assist researchers with integrating place-based datasets into their patient-centric health database and perform subsequent analyses.
-
-**Gaia** includes multiple major elements:
-- GaiaCatalog: a functional metadata catalog containing references to publicly-hosted geospatial datasets and instructions for their download and standardization
-- GaiaCore: a Postgis database for managing harmonized data sources, the dockerized DeGauss geocoding tool, and an R package.
-- Extensions: a broad suite of software packages providing functionality for interacting with GaiaCore. The most relevant of these extensions is gaiaOhdsi, an R package that contains operations specific to interacting with an OMOP CDM or external OHDSI software. Another example extension are the gaiaVis tools which provide a set of visualizations for data in GaiaCore.
-
-# **OHDSI GIS Gaia Overview**
+## Overview
 
 **Gaia** refers to the amalgamation of infrastructure, software, standards, tools, and the overall workflow that the OHDSI GIS Workgroup has developed to assist researchers with integrating place-based datasets into their patient-based health database and subsequent analyses.
 
