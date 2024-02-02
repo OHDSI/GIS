@@ -8,4 +8,6 @@ output:
           collapsed: false
 ---
 
-# **GaiaCore Overview**
+# **Gaia Extensions**
+
+## Overview

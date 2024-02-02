@@ -344,7 +344,7 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <span class="fa fa-globe"></span>
+    <span class="fa fa-earth-americas"></span>
      
     Gaia Overview
      
@@ -352,16 +352,16 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="gaia-intro.html#OHDSI_GIS_Gaia_Overview">Introduction</a>
+      <a href="gaia-intro.html#Overview">Introduction</a>
     </li>
     <li>
       <a href="gaia-intro.html#Purpose">Purpose</a>
     </li>
     <li>
-      <a href="gaia-intro.html#Foundational_Goals">Foundational Goals</a>
+      <a href="gaia-goals.html">Foundational Goals</a>
     </li>
     <li>
-      <a href="gaia-intro.html#Design_Principles">Design Principles</a>
+      <a href="gaia-principles.html">Design Principles</a>
     </li>
     <li class="dropdown-submenu">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Specifications</a>
@@ -378,9 +378,9 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <span class="fa fa-globe"></span>
+    <span class="fa fa-cubes"></span>
      
-    Framework
+    Gaia Framework
      
     <span class="caret"></span>
   </a>
@@ -389,24 +389,19 @@ div.tocify {
       <a href="framework.html">Overview &amp; Diagram</a>
     </li>
     <li>
-      <a href="gaia-catalog.html">GaiaCatalog</a>
+      <a href="gaia-catalog.html">Gaia Catalog</a>
     </li>
-    <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">GaiaCore</a>
-      <ul class="dropdown-menu" role="menu">
-        <li>
-          <a href="gaia-core-overview.html">Overview</a>
-        </li>
-        <li>
-          <a href="gaiaCore/index.html">R Package</a>
-        </li>
-      </ul>
+    <li>
+      <a href="gaia-core.html">Gaia Core</a>
     </li>
     <li class="dropdown-submenu">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Extensions</a>
       <ul class="dropdown-menu" role="menu">
         <li>
-          <a href="gaia-extension-ohdsi.html">GaiaOhdsi</a>
+          <a href="gaia-extensions.html">Overview</a>
+        </li>
+        <li>
+          <a href="gaia-extensions-ohdsi.html">GaiaOhdsi</a>
         </li>
       </ul>
     </li>
@@ -422,16 +417,22 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="geocodingFull.html">Geocoding the Location Table (Full)</a>
+      <a href="get-started.html">Get Started with Gaia</a>
     </li>
     <li>
-      <a href="geocodingCohort.html">Geocoding a Cohort</a>
+      <a href="local-dataset.html">Use a Local Dataset</a>
     </li>
     <li>
-      <a href="localDataSource.html">How to Add Data Sources to a Local gaiaDB Instance</a>
+      <a href="geocodingFull.html">Geocode the OMOP Location Table (Full)</a>
     </li>
     <li>
-      <a href="shareDataSource.html">Sharing Your Local Data Sources</a>
+      <a href="geocodingCohort.html">Geocode an OMOP Cohort</a>
+    </li>
+    <li>
+      <a href="localDataSource.html">Add Data Sources to a Local gaiaDB Instance</a>
+    </li>
+    <li>
+      <a href="shareDataSource.html">Share Your Local Data Sources</a>
     </li>
   </ul>
 </li>
@@ -476,27 +477,22 @@ div.tocify {
 </div>
 
 
-<div id="ohdsi-gis-gaia" class="section level1">
-<h1><strong>OHDSI GIS Gaia</strong></h1>
-<p><strong>Gaia</strong> refers to the amalgamation of infrastructure,
-software, standards, tools, and the overall workflow that the OHDSI GIS
-Workgroup has developed to assist researchers with integrating
-place-based datasets into their patient-centric health database and
-perform subsequent analyses.</p>
-<p><strong>Gaia</strong> includes multiple major elements: -
-GaiaCatalog: a functional metadata catalog containing references to
-publicly-hosted geospatial datasets and instructions for their download
-and standardization - GaiaCore: a Postgis database for managing
-harmonized data sources, the dockerized DeGauss geocoding tool, and an R
-package. - Extensions: a broad suite of software packages providing
-functionality for interacting with GaiaCore. The most relevant of these
-extensions is gaiaOhdsi, an R package that contains operations specific
-to interacting with an OMOP CDM or external OHDSI software. Another
-example extension are the gaiaVis tools which provide a set of
-visualizations for data in GaiaCore.</p>
+<div id="gaia" class="section level1">
+<h1><strong>Gaia</strong></h1>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>TODO</p>
+<div id="current-scope" class="section level3">
+<h3>Current Scope</h3>
+<p>TODO</p>
 </div>
-<div id="ohdsi-gis-gaia-overview" class="section level1">
-<h1><strong>OHDSI GIS Gaia Overview</strong></h1>
+<div id="limitations" class="section level3">
+<h3>Limitations</h3>
+<p>TODO</p>
+</div>
+</div>
+<div id="overview" class="section level2">
+<h2>Overview</h2>
 <p><strong>Gaia</strong> refers to the amalgamation of infrastructure,
 software, standards, tools, and the overall workflow that the OHDSI GIS
 Workgroup has developed to assist researchers with integrating
@@ -514,6 +510,7 @@ relevant of these packages is gaiaOhdsi, an R package that contains
 operations specific to interacting with an OMOP CDM or external OHDSI
 software. Other example of extensions are the gaiaVis tools which
 provide a set of visualizations for data in gaiaCore.</p>
+</div>
 <div id="purpose" class="section level2">
 <h2>Purpose</h2>
 <p>What is the purpose of Gaia? Why are we doing all of this?</p>
@@ -615,14 +612,6 @@ workflow, the process of pairing place-based data, often handled using
 undocumented ad-hoc methods unique to single sites, can be packaged and
 shipped across an entire network with minimal effort.</p>
 </div>
-</div>
-<div id="foundational-goals" class="section level2">
-<h2>Foundational Goals</h2>
-<p>TODO</p>
-</div>
-<div id="design-principles" class="section level2">
-<h2>Design Principles</h2>
-<p>TODO</p>
 </div>
 </div>
 

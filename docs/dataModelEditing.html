@@ -338,7 +338,7 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <span class="fa fa-globe"></span>
+    <span class="fa fa-earth-americas"></span>
      
     Gaia Overview
      
@@ -346,16 +346,16 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="gaia-intro.html#OHDSI_GIS_Gaia_Overview">Introduction</a>
+      <a href="gaia-intro.html#Overview">Introduction</a>
     </li>
     <li>
       <a href="gaia-intro.html#Purpose">Purpose</a>
     </li>
     <li>
-      <a href="gaia-intro.html#Foundational_Goals">Foundational Goals</a>
+      <a href="gaia-goals.html">Foundational Goals</a>
     </li>
     <li>
-      <a href="gaia-intro.html#Design_Principles">Design Principles</a>
+      <a href="gaia-principles.html">Design Principles</a>
     </li>
     <li class="dropdown-submenu">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Specifications</a>
@@ -372,9 +372,9 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <span class="fa fa-globe"></span>
+    <span class="fa fa-cubes"></span>
      
-    Framework
+    Gaia Framework
      
     <span class="caret"></span>
   </a>
@@ -383,24 +383,19 @@ div.tocify {
       <a href="framework.html">Overview &amp; Diagram</a>
     </li>
     <li>
-      <a href="gaia-catalog.html">GaiaCatalog</a>
+      <a href="gaia-catalog.html">Gaia Catalog</a>
     </li>
-    <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">GaiaCore</a>
-      <ul class="dropdown-menu" role="menu">
-        <li>
-          <a href="gaia-core-overview.html">Overview</a>
-        </li>
-        <li>
-          <a href="gaiaCore/index.html">R Package</a>
-        </li>
-      </ul>
+    <li>
+      <a href="gaia-core.html">Gaia Core</a>
     </li>
     <li class="dropdown-submenu">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Extensions</a>
       <ul class="dropdown-menu" role="menu">
         <li>
-          <a href="gaia-extension-ohdsi.html">GaiaOhdsi</a>
+          <a href="gaia-extensions.html">Overview</a>
+        </li>
+        <li>
+          <a href="gaia-extensions-ohdsi.html">GaiaOhdsi</a>
         </li>
       </ul>
     </li>
@@ -416,16 +411,22 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="geocodingFull.html">Geocoding the Location Table (Full)</a>
+      <a href="get-started.html">Get Started with Gaia</a>
     </li>
     <li>
-      <a href="geocodingCohort.html">Geocoding a Cohort</a>
+      <a href="local-dataset.html">Use a Local Dataset</a>
     </li>
     <li>
-      <a href="localDataSource.html">How to Add Data Sources to a Local gaiaDB Instance</a>
+      <a href="geocodingFull.html">Geocode the OMOP Location Table (Full)</a>
     </li>
     <li>
-      <a href="shareDataSource.html">Sharing Your Local Data Sources</a>
+      <a href="geocodingCohort.html">Geocode an OMOP Cohort</a>
+    </li>
+    <li>
+      <a href="localDataSource.html">Add Data Sources to a Local gaiaDB Instance</a>
+    </li>
+    <li>
+      <a href="shareDataSource.html">Share Your Local Data Sources</a>
     </li>
   </ul>
 </li>
@@ -464,14 +465,15 @@ div.tocify {
 
 
 <h1 class="title toc-ignore"><div>
-<img src="ohdsi40x40.png"></img> Proposing changes to gaiaDB Data Model
+<img src="ohdsi40x40.png"></img> OHDSI GIS WG
 </div></h1>
 
 </div>
 
 
-<div id="overview" class="section level1">
-<h1>Overview</h1>
+<p>#<strong>Proposing changes to Gaia Data Models</strong></p>
+<div id="overview" class="section level2">
+<h2>Overview</h2>
 <p>The gaiaDB data model is still in early development. We hope to build
 a model that suits a wide range of needs, and as such we encourage
 interested parties to install, use, and provide feedback on the gaiaDB
@@ -497,6 +499,7 @@ to reflect these changes (see <a
 href="https://ohdsi.github.io/GIS/documentationEditing.html#Rendering">here</a>),
 a Pull Request can be opened, and a discussion about the changes can
 begin.</p>
+</div>
 <div id="generating-ddl-scripts" class="section level2">
 <h2>Generating DDL scripts</h2>
 <p>The “official” DDL scripts at any given time are stored at
@@ -508,7 +511,6 @@ directory against your Postgres database.</p>
 gaiaCore::writeGaiaDdl(gaiaVersion, outputfolder),
 gaiaCore::writePrimaryKeys(gaiaVersion, outputfolder), and
 gaiaCore::writeForeignKeys(gaiaVersion, outputfolder).</p>
-</div>
 </div>
 
 

@@ -11,7 +11,7 @@
 
 
 
-<title>localDataSource.knit</title>
+<title>gaia-principles.knit</title>
 
 <script src="site_libs/header-attrs-2.15/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -477,51 +477,49 @@ div.tocify {
 </div>
 
 
-<div id="adding-a-data-source" class="section level1">
-<h1><strong>Adding a Data Source</strong></h1>
-<div id="background" class="section level2">
-<h2>Background</h2>
-<p>Data sources in gaiaDB are stored in the gaiaDB.backbone.data_source
-table in a Postgres database. Each row in this table is a single “data
-source”, though the name may be a bit misleading. All “data sources” in
-gaiaDB are actually bits of descriptive, technical, and operational
-metadata that refer to an externally hosted dataset. For example, the
-gaiaDB data source “daily_aqi_by_county_2020” is actually just a single
-row of data that contains information on how to extract, transform, and
-load (ETL) the EPA dataset located on their data catalog. The gaiaDB
-data source includes all the information necessary to acquire and use
-this dataset (including the dataset URL, documentation URL, and R code
-to transform it to gaia’s own data standard), without actually storing
-the dataset itself. Not only does this keep gaiaDB very lightweight (a
-data source takes only about 1 KB of storage), it also allows gaiaDB to
-handle a boundless amount of variability in source datasets.</p>
-<p>The trade-off to this design is that each data source requires a
-certain degree of custom tailoring. Fortunately, many well-curated
-sources of geospatial data publish all of their own datasets with the
-same schema. So, while it may take a bit of effort to create the gaiaDB
-data source for “daily_aqi_by_county_2020”, the gaiaDB data source for
-“daily_aqi_by_county_2019”, and any other years, can be created in a
-matter of minutes by simply redirecting the data source to other years’
-data.</p>
-</div>
-<div id="creating-a-data-source" class="section level2">
-<h2>Creating a Data Source</h2>
-<p>As of now, there are two main ways that gaiaDB data sources can be
-created:</p>
-<ol style="list-style-type: decimal">
-<li>Manually, by writing <code>INSERT INTO</code> SQL statements.
-Usually this is most easily done with a combination of spreadsheet
-software like MS Excel (for writing the original record), an R
-environment for creating the geom_spec (detailed below), and some sort
-of automation tool for recycling the original data source across
-multiple datasets.</li>
-<li>Using the gaiaSourceCreator RShiny form, which can help guide the
-creation of data sources.</li>
-</ol>
-</div>
-<div id="creating-the-geom_spec" class="section level2">
-<h2>Creating the <em>geom_spec</em></h2>
+<div id="gaia" class="section level1">
+<h1><strong>Gaia</strong></h1>
+<div id="design-principles" class="section level2">
+<h2>Design Principles</h2>
+<div id="gaia-core" class="section level3">
+<h3>Gaia Core</h3>
 <p>TODO</p>
+<ul>
+<li>Lightweight execution engine of/for functional metadata</li>
+<li>Populates local standardized implementation &lt; Dependencies
+Diagram &gt;</li>
+</ul>
+</div>
+<div id="catalog" class="section level3">
+<h3>Catalog</h3>
+<p>TODO &lt; Diagram Showing interaction with local DB &gt; -
+Centralized - Contains the functional metadata instead of source data
+itself</p>
+</div>
+<div id="functional-metadata" class="section level3">
+<h3>Functional Metadata</h3>
+<p>TODO - Show how it changes from wide table to EAV - Give
+examples/breakdown of each of: - Data source (geometry) - Variable
+(attribute)</p>
+</div>
+<div id="storage-design" class="section level3">
+<h3>Storage Design</h3>
+<p>TODO &lt; Diagram with connections between backbone tables and
+templated tables &gt; - Backbone - Data source; variable source &lt;
+Diagram showing relationships &gt; &lt; Diagram showing an example of
+variables pointing to same data source &gt; - Indexing design &lt;
+Diagram &gt; - Rationale / How it is functionally referenced - Templates
+&lt; Diagram of relation to each other &gt; - Structure of the tables -
+Example of populated tables (subsets of columns) and their relation</p>
+</div>
+<div id="common-model-eav" class="section level3">
+<h3>Common Model/ EAV</h3>
+<p>TODO</p>
+<p>&lt; Diagram showing transition from wide source table to
+standardized EAV structure &gt; - What this enables - Extensible tooling
+- Efficient querying on smaller tables - (?) integration with
+ontologies/additional metadata</p>
+</div>
 </div>
 </div>
 

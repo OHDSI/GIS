@@ -24,32 +24,30 @@ navbar:
         - text: "Purpose"
           href: gaia-intro.html#Purpose                     # TODO add the architecture diagram
         - text: "Foundational Goals"
-          href: gaia-intro.html#Foundational_Goals                     # TODO add the architecture diagram
+          href: gaia-goals.html                    # TODO add the architecture diagram
         - text: "Design Principles"
-          href: gaia-intro.html#Design_Principles                     # TODO add the architecture diagram
+          href: gaia-principles.html                     # TODO add the architecture diagram
         - text: "Specifications"
           menu: 
              - text: "Terminology"
                href: gaia-terminology.html    
              - text: "Data Models"
                href: gaia-datamodels.html
-    - text: "Framework"
+    - text: "Gaia Framework"
       icon: fa-cubes
       menu:
         - text: "Overview & Diagram"
           href: framework.html
-        - text: "GaiaCatalog"
+        - text: "Gaia Catalog"
           href: gaia-catalog.html
-        - text: "GaiaCore"
-          menu:
-            - text: "Overview"
-              href: gaia-core-overview.html         # TODO create this
-            - text: "R Package"
-              href: "gaiaCore/index.html"
+        - text: "Gaia Core"
+          href: gaia-core.html         # TODO create this
         - text: "Extensions"
           menu:
+            - text: "Overview"
+              href: gaia-extensions.html       # TODO create this
             - text: "GaiaOhdsi"
-              href: gaia-extension-ohdsi.html       # TODO create this
+              href: gaia-extensions-ohdsi.html       # TODO create this
     - text: "How to"
       icon: fa-question
       menu:

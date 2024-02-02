@@ -344,7 +344,7 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <span class="fa fa-globe"></span>
+    <span class="fa fa-earth-americas"></span>
      
     Gaia Overview
      
@@ -352,16 +352,16 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="gaia-intro.html#OHDSI_GIS_Gaia_Overview">Introduction</a>
+      <a href="gaia-intro.html#Overview">Introduction</a>
     </li>
     <li>
       <a href="gaia-intro.html#Purpose">Purpose</a>
     </li>
     <li>
-      <a href="gaia-intro.html#Foundational_Goals">Foundational Goals</a>
+      <a href="gaia-goals.html">Foundational Goals</a>
     </li>
     <li>
-      <a href="gaia-intro.html#Design_Principles">Design Principles</a>
+      <a href="gaia-principles.html">Design Principles</a>
     </li>
     <li class="dropdown-submenu">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Specifications</a>
@@ -378,9 +378,9 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <span class="fa fa-globe"></span>
+    <span class="fa fa-cubes"></span>
      
-    Framework
+    Gaia Framework
      
     <span class="caret"></span>
   </a>
@@ -389,24 +389,19 @@ div.tocify {
       <a href="framework.html">Overview &amp; Diagram</a>
     </li>
     <li>
-      <a href="gaia-catalog.html">GaiaCatalog</a>
+      <a href="gaia-catalog.html">Gaia Catalog</a>
     </li>
-    <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">GaiaCore</a>
-      <ul class="dropdown-menu" role="menu">
-        <li>
-          <a href="gaia-core-overview.html">Overview</a>
-        </li>
-        <li>
-          <a href="gaiaCore/index.html">R Package</a>
-        </li>
-      </ul>
+    <li>
+      <a href="gaia-core.html">Gaia Core</a>
     </li>
     <li class="dropdown-submenu">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Extensions</a>
       <ul class="dropdown-menu" role="menu">
         <li>
-          <a href="gaia-extension-ohdsi.html">GaiaOhdsi</a>
+          <a href="gaia-extensions.html">Overview</a>
+        </li>
+        <li>
+          <a href="gaia-extensions-ohdsi.html">GaiaOhdsi</a>
         </li>
       </ul>
     </li>
@@ -422,16 +417,22 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="geocodingFull.html">Geocoding the Location Table (Full)</a>
+      <a href="get-started.html">Get Started with Gaia</a>
     </li>
     <li>
-      <a href="geocodingCohort.html">Geocoding a Cohort</a>
+      <a href="local-dataset.html">Use a Local Dataset</a>
     </li>
     <li>
-      <a href="localDataSource.html">How to Add Data Sources to a Local gaiaDB Instance</a>
+      <a href="geocodingFull.html">Geocode the OMOP Location Table (Full)</a>
     </li>
     <li>
-      <a href="shareDataSource.html">Sharing Your Local Data Sources</a>
+      <a href="geocodingCohort.html">Geocode an OMOP Cohort</a>
+    </li>
+    <li>
+      <a href="localDataSource.html">Add Data Sources to a Local gaiaDB Instance</a>
+    </li>
+    <li>
+      <a href="shareDataSource.html">Share Your Local Data Sources</a>
     </li>
   </ul>
 </li>
@@ -476,15 +477,17 @@ div.tocify {
 </div>
 
 
-<div id="mission" class="section level1">
-<h1><strong>Mission</strong></h1>
+<p>#<strong>OHDSI Geographic Informations Systems (GIS) Workgroup
+Homepage</strong></p>
+<div id="mission" class="section level2">
+<h2><strong>Mission</strong></h2>
 <p>The OHDSI GIS workgroup aims to introduce new infrastructure,
 tooling, and CDM extension tables that will allow researchers to
 seamlessly incorporate place-based datasets into their OMOP-shaped
 databases to enhance their evidence-generating workflows.</p>
 </div>
-<div id="meeting-schedule" class="section level1">
-<h1><strong>Meeting Schedule</strong></h1>
+<div id="meeting-schedule" class="section level2">
+<h2><strong>Meeting Schedule</strong></h2>
 <p>The GIS General and Development subgroups meet on alternating
 <strong>Fridays at 9 AM ET</strong></p>
 <p>(<a
@@ -495,8 +498,8 @@ href="https://teams.microsoft.com/l/meetup-join/19%3a83e90982136c4665aa5f74a6ce2
 meeting link</a>)</p>
 <p><br></p>
 </div>
-<div id="problem-space" class="section level1">
-<h1><strong>Problem Space</strong></h1>
+<div id="problem-space" class="section level2">
+<h2><strong>Problem Space</strong></h2>
 <p>Geospatial data come in a variety of source formats with no
 universal, interoperable standard representation. While working with a
 single geospatial dataset has presents some technical challenges, the
@@ -510,8 +513,8 @@ necessary to develop functionality to automate retrieval and
 transformation of publicly available place-related data into a standard
 representation.</p>
 </div>
-<div id="goals" class="section level1">
-<h1><strong>Goals</strong></h1>
+<div id="goals" class="section level2">
+<h2><strong>Goals</strong></h2>
 <p>The overarching goal of the OHDSI GIS Workgroup is to develop
 software and standards for incorporating place-based data into the OMOP
 CDM and present this back to the OHDSI community. We reach these goals
@@ -545,6 +548,12 @@ through development in the four key areas below.</p>
 </ul>
 <p><br></p>
 </div>
+</div>
+<div id="roadmap" class="section level2">
+<h2><strong>Roadmap</strong></h2>
+<p>Under Construction</p>
+<p><br></p>
+</div>
 <div id="publicationspresentation" class="section level2">
 <h2><strong>Publications/Presentation</strong></h2>
 <p>OHDSI GIS Infrastructure (2023 OHDSI Symposium <a
@@ -561,7 +570,6 @@ href="https://www.youtube.com/watch?v=bd0htzO1hx4&amp;t=1103s">video</a>,
 href="https://www.ohdsi.org/wp-content/uploads/2023/02/GIS-OKRs2023Q1.pdf">slides</a>)</p>
 <p>OHDSI GIS Workgroup August 23, 2022 Update (<a
 href="https://youtu.be/d8jIAm9cssM">video</a>) <br></p>
-</div>
 </div>
 
 

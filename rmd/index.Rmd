@@ -8,12 +8,13 @@ output:
           collapsed: false
 ---
 
+#**OHDSI Geographic Informations Systems (GIS) Workgroup Homepage**
 
-# **Mission**
+## **Mission**
 
 The OHDSI GIS workgroup aims to introduce new infrastructure, tooling, and CDM extension tables that will allow researchers to seamlessly incorporate place-based datasets into their OMOP-shaped databases to enhance their evidence-generating workflows.
 
-# **Meeting Schedule**
+## **Meeting Schedule**
 
 The GIS General and Development subgroups meet on alternating **Fridays at 9 AM ET**
 
@@ -25,13 +26,13 @@ The GIS General and Development subgroups meet on alternating **Fridays at 9 AM 
 
 
 
-# **Problem Space**
+## **Problem Space**
 
 Geospatial data come in a variety of source formats with no universal, interoperable standard representation. While working with a single geospatial dataset has presents some technical challenges, the complexity of using geospatial begins to compound when variables from disparate datasets are needed for a single analysis study. As ad-hoc solutions are introduced to deal with the increasing technical complexity, the reproducibility of these studies plummets. 
 
 In order to enable reproducible studies that incorporate place-related data with longitudinal patient-level data, it is first necessary to develop functionality to automate retrieval and transformation of publicly available place-related data into a standard representation. 
 
-# **Goals**
+## **Goals**
 
 The overarching goal of the OHDSI GIS Workgroup is to develop software and standards for incorporating place-based data into the OMOP CDM and present this back to the OHDSI community. We reach these goals through development in the four key areas below. 
 
@@ -50,6 +51,13 @@ The overarching goal of the OHDSI GIS Workgroup is to develop software and stand
 
 ### 4) Extensions
 - Exposure_occurrence
+
+<br>
+
+## **Roadmap**
+
+Under Construction
+
 
 <br>
 

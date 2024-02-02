@@ -1,0 +1,76 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG </div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+
+# **Gaia**
+
+## Design Principles 
+
+### Gaia Core
+
+TODO
+
+ - Lightweight execution engine of/for functional metadata
+ - Populates local standardized implementation
+< Dependencies Diagram >
+
+### Catalog
+
+TODO
+< Diagram Showing interaction with local DB >
+ - Centralized
+ - Contains the functional metadata instead of source data itself
+
+### Functional Metadata
+
+TODO
+ - Show how it changes from wide table to EAV
+ - Give examples/breakdown of each of:
+   - Data source (geometry)
+   - Variable (attribute)
+
+
+### Storage Design
+
+TODO
+< Diagram with connections between backbone tables and templated tables >
+ - Backbone
+   - Data source; variable source
+     < Diagram showing relationships > 
+     < 	Diagram showing an example of variables pointing to same data source >
+   - Indexing design
+    < Diagram >
+   - Rationale / How it is functionally referenced
+ -	Templates
+   < Diagram of relation to each other >
+   - Structure of the tables
+   - Example of populated tables (subsets of columns) and their relation
+
+
+
+### Common Model/ EAV 
+
+TODO
+
+< Diagram showing transition from wide source table to standardized EAV structure >
+- What this enables
+   - Extensible tooling
+   - Efficient querying on smaller tables 
+   - (?) integration with ontologies/additional metadata
+
+
+
+
+
+
+
+
+
+
+

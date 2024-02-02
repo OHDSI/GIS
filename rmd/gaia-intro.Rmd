@@ -10,6 +10,18 @@ output:
 
 # **Gaia**
 
+## Introduction
+
+TODO
+ 
+### Current Scope
+
+TODO
+
+### Limitations
+
+TODO
+
 ## Overview
 
 **Gaia** refers to the amalgamation of infrastructure, software, standards, tools, and the overall workflow that the OHDSI GIS Workgroup has developed to assist researchers with integrating place-based datasets into their patient-based health database and subsequent analyses.
@@ -47,10 +59,3 @@ Taking this scenario a step further, a researcher with an established OMOP CDM d
 
 Finally, Gaia enables standardized and reproducible workflows for federated data networks and studies. The process highlighted above to retrieve and harmonize geospatial datasets, perform spatiotemporal joins to transform place-based data to person-level information, and insert person-level information into an OMOP CDM and define cohorts, is fully reproducible. Each step of the process contains detailed, structured metadata focused on provenance of source data and rationale for transformation methods. By scripting and containerizing an entire Gaia workflow, the process of pairing place-based data, often handled using undocumented ad-hoc methods unique to single sites, can be packaged and shipped across an entire network with minimal effort.
 
-## Foundational Goals 
-
-TODO 
-
-## Design Principles 
-
-TODO 

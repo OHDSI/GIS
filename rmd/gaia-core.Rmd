@@ -8,4 +8,6 @@ output:
           collapsed: false
 ---
 
-# **Gaia Catalog**
+# **GaiaCore**
+
+Documentation: [GaiaCore (R Package)](gaiaCore/index.html)
