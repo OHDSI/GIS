@@ -479,7 +479,37 @@ div.tocify {
 
 <div id="getting-started-with-gaia" class="section level1">
 <h1><strong>Getting Started with Gaia</strong></h1>
-<p>TODO</p>
+<p>For background information on Gaia, see the <a
+href="gaia-intro.html#Overview">Gaia Overview</a>. For an explanation of
+the Gaia architecture, see the <a href="framework.html">Framework
+Overview</a>.</p>
+<div id="installation" class="section level2">
+<h2>Installation</h2>
+<p>To get started with Gaia you’ll need to install <a
+href="gaia-core.html">gaiaCore (R Package)</a> from GitHub, create a
+PostGIS database and load the metadata source files, and then connect to
+the database from your R environment:</p>
+<p><br></p>
+<div id="gaiacore-r-package" class="section level3">
+<h3><a href="gaia-core.html">gaiaCore (R Package)</a></h3>
+<ol style="list-style-type: decimal">
+<li><p>See the instructions <a
+href="https://ohdsi.github.io/Hades/rSetup.html">here</a> for
+configuring your R environment, including RTools and Java.</p></li>
+<li><p>You can install the latest version of gaiaCore from <a
+href="https://github.com/">GitHub</a> with:</p></li>
+</ol>
+<pre class="r"><code># install.packages(&quot;remotes&quot;)
+
+remotes::install_github(&quot;OHDSI/GIS&quot;)</code></pre>
+<p><br></p>
+</div>
+<div id="postgis-database-gaia-catalog-and-staging-environment"
+class="section level3">
+<h3>PostGIS Database (<a href="gaia-catalog.html">Gaia Catalog</a> and
+Staging Environment)</h3>
+</div>
+</div>
 </div>
 
 
