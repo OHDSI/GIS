@@ -18,11 +18,11 @@ To get started with Gaia you'll need to install [gaiaCore (R Package)](gaia-core
 
 <br>
 
-### [gaiaCore (R Package)](gaia-core.html)
+### gaiaCore (R Package)
 
 1. See the instructions [here](https://ohdsi.github.io/Hades/rSetup.html) for configuring your R environment, including RTools and Java.
 
-2. You can install the latest version of gaiaCore from [GitHub](https://github.com/) with:
+2. You can install the latest version of [gaiaCore (R Package)](gaia-core.html) from GitHub with:
 ```{r, eval=FALSE}
 # install.packages("remotes")
 
@@ -31,7 +31,7 @@ remotes::install_github("OHDSI/GIS")
 
 <br>
 
-### PostGIS Database ([Gaia Catalog](gaia-catalog.html) and Staging Environment)
+### PostGIS Database (Catalog and Staging)
 
 Once you have a postgres database with PostGIS installed, the helper script `initialize.sql` in the [inst directory](https://github.com/OHDSI/GIS/tree/main/inst/) will do the rest of the setup. This includes:
 
