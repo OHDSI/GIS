@@ -11,7 +11,7 @@
 
 
 
-<title>framework.knit</title>
+<title>framework-overview.knit</title>
 
 <script src="site_libs/header-attrs-2.15/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -29,9 +29,6 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -233,75 +230,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
-
-</style>
-
-
 
 </head>
 
@@ -309,16 +237,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -386,7 +304,7 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="framework.html">Overview &amp; Diagram</a>
+      <a href="framework-overview.html">Overview</a>
     </li>
     <li>
       <a href="gaia-catalog.html">Gaia Catalog</a>
@@ -477,15 +395,69 @@ div.tocify {
 </div>
 
 
-<div id="framework" class="section level1">
-<h1><strong>Framework</strong></h1>
-<p>&lt; Diagram &gt;</p>
+<div id="gaia-framework-overview" class="section level1">
+<h1><strong>Gaia Framework Overview</strong></h1>
+<p>The <strong>Gaia Framework</strong> is divided into three main
+parts:</p>
+<hr />
+<p><br></p>
+<div id="gaia-catalog" class="section level2">
+<h2><a href="gaia-catalog.html">Gaia Catalog</a></h2>
+<p>A readily-extensible catalog of source datasets. Gaia Catalog
+contains metadata for public geospatial datasets. Descriptive metadata
+facilitates search and discovery of relevant datasets. Functional
+metadata (machine-actionable instructions) enables automated retrieval,
+extraction, transformation, and loading of public datasets and their
+constituent variables.</p>
+<hr />
+<p><br></p>
+</div>
+<div id="gaia-core" class="section level2">
+<h2><a href="gaia-core.html">Gaia Core</a></h2>
+<p>Gaia Core is the central functionality and storage of Gaia and itself
+consists of two main features: a <strong>staging database</strong> and
+an <strong>execution engine</strong>.</p>
+<p>The staging database is a PostGIS database with a replica copy of the
+Gaia Catalog installed in a schema named “backbone”. In this database,
+public datasets that are registered in Gaia Catalog can be “staged”:
+transformed and then loaded as tables in a standardized
+Entity-Attribute-Value format. Other geospatial data, such as geocoded
+addresses, can also be loaded into the staging database for use in
+conjunction with the staged data.</p>
+<p>All operations on the staging database (creating tables, inserting
+data, accessing data, etc.) are performed through the “execution
+engine”. The execution engine can be any software package (e.g. R
+package, Python library, CLI) that connects to the database and
+functionalizes the logic required to write or read data to and from the
+standard format. Currently, there is one execution engine: an R Package
+named <a href="gaiaCore/index.html">gaiaCore</a>.</p>
+<hr />
+<p><br></p>
+</div>
+<div id="extensions" class="section level2">
+<h2><a href="gaia-extensions.html">Extensions</a></h2>
+<p>Any functionality that falls outside of Gaia Core’s scope (basic
+Create, Read, Update and Delete operations) can be encapsulated in an
+Extension. An extension can be thought of as a software package or
+library that interfaces with Gaia Core (through the execution engine)
+that collects similar functionality. Extensions can be grouped by the
+communities they serve or by the functionality they provide. For
+example, the <a href="gaia-extensions-ohdsi.html">gaiaOHDSI
+extension</a> is built to provide members of the OHDSI community useful
+connectors between Gaia Core and an OMOP database and various OHDSI
+tools. On the other hand, general (hypothetical) extensions like gaiaVis
+or gaiaLayer provide visualization and layer building software to Gaia
+Core, respectively.</p>
+<hr />
+<p><br></p>
+<div>
+<img src="images/framework_overview.png"></img>
+</div>
+</div>
 </div>
 
 
 
-</div>
-</div>
 
 </div>
 
@@ -518,35 +490,6 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
-<script>
-$(document).ready(function ()  {
-
-    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
-    $('.unlisted.unnumbered').addClass('toc-ignore')
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

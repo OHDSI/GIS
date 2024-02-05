@@ -29,9 +29,6 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -233,75 +230,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
-
-</style>
-
-
 
 </head>
 
@@ -309,16 +237,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -386,7 +304,7 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="framework.html">Overview &amp; Diagram</a>
+      <a href="framework-overview.html">Overview</a>
     </li>
     <li>
       <a href="gaia-catalog.html">Gaia Catalog</a>
@@ -479,12 +397,38 @@ div.tocify {
 
 <div id="gaia-catalog" class="section level1">
 <h1><strong>Gaia Catalog</strong></h1>
+<div id="description" class="section level2">
+<h2>Description</h2>
+<p>A readily-extensible catalog of source datasets. Gaia Catalog
+contains metadata for public geospatial datasets. Descriptive metadata
+facilitates search and discovery of relevant datasets. Functional
+metadata (machine-actionable instructions) enables automated retrieval,
+extraction, transformation, and loading of public datasets and their
+constituent variables.</p>
+</div>
+<div id="scope" class="section level2">
+<h2>Scope</h2>
+<p>The <strong>ultimate vision</strong> of Gaia Catalog is a web-hosted
+repository where users can access and contribute functional and
+descriptive metadata for public datasets to facilitate their standard
+use across networks and beyond. <strong>Currently</strong>, the data for
+still-developing catalog is contained in the OHDSI GIS WG GitHub
+Repository:</p>
+<p>The <a
+href="https://github.com/OHDSI/GIS/blob/main/inst/csv/data_source.csv">data_source.csv</a>
+file contains information on public datasets.</p>
+<p>The <a
+href="https://github.com/OHDSI/GIS/blob/main/inst/csv/variable_source.csv">variable_source.csv</a>
+file contains information on the variables contained in those
+datasets.</p>
+<p>To start using the Gaia Catalog see the article <a
+href="get-started.html"><strong>Getting Started with
+Gaia</strong></a>.</p>
+</div>
 </div>
 
 
 
-</div>
-</div>
 
 </div>
 
@@ -517,35 +461,6 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
-<script>
-$(document).ready(function ()  {
-
-    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
-    $('.unlisted.unnumbered').addClass('toc-ignore')
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

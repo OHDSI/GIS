@@ -36,8 +36,8 @@ navbar:
     - text: "Gaia Framework"
       icon: fa-cubes
       menu:
-        - text: "Overview & Diagram"
-          href: framework.html
+        - text: "Overview"
+          href: framework-overview.html
         - text: "Gaia Catalog"
           href: gaia-catalog.html
         - text: "Gaia Core"
