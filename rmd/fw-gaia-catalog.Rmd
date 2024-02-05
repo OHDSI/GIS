@@ -1,0 +1,24 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG</div>'
+output:
+   html_document:
+        toc: FALSE
+---
+
+# **Gaia Catalog**
+
+## Description
+
+A readily-extensible catalog of source datasets. Gaia Catalog contains metadata for public geospatial datasets. Descriptive metadata facilitates search and discovery of relevant datasets. Functional metadata (machine-actionable instructions) enables automated retrieval, extraction, transformation, and loading of public datasets and their constituent variables.
+
+## Scope
+
+The **ultimate vision** of Gaia Catalog is a web-hosted repository where users can access and contribute functional and descriptive metadata for public datasets to facilitate their standard use across networks and beyond. **Currently**, the data for still-developing catalog is contained in the OHDSI GIS WG GitHub Repository:
+
+## Resources
+
+The [data_source.csv](https://github.com/OHDSI/GIS/blob/main/inst/csv/data_source.csv) file contains information on public datasets.
+
+The [variable_source.csv](https://github.com/OHDSI/GIS/blob/main/inst/csv/variable_source.csv) file contains information on the variables contained in those datasets.
+
+To start using the Gaia Catalog see the article [**Getting Started with Gaia**](get-started.html).

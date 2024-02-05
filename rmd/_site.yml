@@ -17,7 +17,7 @@ navbar:
       icon: fa-home
       href: index.html
     - text: "Gaia Overview"
-      icon: fa-earth-americas
+      icon: fa-earth
       menu:
         - text: "Introduction"
           href: gaia-intro.html#Overview                    # TODO add the architecture diagram
@@ -37,37 +37,37 @@ navbar:
       icon: fa-cubes
       menu:
         - text: "Overview"
-          href: framework-overview.html
+          href: fw-overview.html
         - text: "Gaia Catalog"
-          href: gaia-catalog.html
+          href: fw-gaia-catalog.html
         - text: "Gaia Core"
-          href: gaia-core.html         # TODO create this
+          href: fw-gaia-core.html         # TODO create this
         - text: "Extensions"
           menu:
             - text: "Overview"
-              href: gaia-extensions.html       # TODO create this
+              href: fw-gaia-extensions.html       # TODO create this
             - text: "GaiaOhdsi"
-              href: gaia-extensions-ohdsi.html       # TODO create this
+              href: fw-gaia-extensions-ohdsi.html       # TODO create this
     - text: "How to"
       icon: fa-question
       menu:
         - text: "Get Started with Gaia"
-          href: get-started.html
+          href: ht-get-started.html
         - text: "Use a Local Dataset"
-          href: local-dataset.html
+          href: ht-local-dataset.html
         - text: "Geocode the OMOP Location Table (Full)"
           href: geocodingFull.html              # TODO combine into one geocoding article
         - text: "Geocode an OMOP Cohort"
           href: geocodingCohort.html            # TODO combine into one geocoding article
         - text: "Add Data Sources to a Local gaiaDB Instance"
-          href: localDataSource.html
+          href: ht-add-data-source.html
         - text: "Share Your Local Data Sources"
-          href: shareDataSource.html
+          href: ht-share-data-source.html
     - text: "Getting Involved"
       icon: fa-info
       menu:
         - text: "Use Case Proposals"
-          href: usecase_process.html
+          href: gi-propose-usecase.html
         - text: "How to Edit Documentation"
-          href: documentationEditing.html           # TODO add a quick para on cycle of clone repo -> edit RMD -> regenerate with render_gaia_site.R
+          href: gi-edit-docs.html           # TODO add a quick para on cycle of clone repo -> edit RMD -> regenerate with render_gaia_site.R
 

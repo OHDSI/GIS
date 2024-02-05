@@ -1,0 +1,15 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG</div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+
+# **Gaia Extensions**
+
+## gaiaOHDSI
+
+The gaiaOHDSI extension is built to provide members of the OHDSI community useful connectors between Gaia Core and an OMOP database and various OHDSI tools.
