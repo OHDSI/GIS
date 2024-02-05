@@ -508,6 +508,36 @@ remotes::install_github(&quot;OHDSI/GIS&quot;)</code></pre>
 class="section level3">
 <h3>PostGIS Database (<a href="gaia-catalog.html">Gaia Catalog</a> and
 Staging Environment)</h3>
+<p>Once you have a postgres database with PostGIS installed, the helper
+script <code>initialize.sql</code> in the <a
+href="https://github.com/OHDSI/GIS/tree/main/inst/">inst directory</a>
+will do the rest of the setup. This includes:</p>
+<ol style="list-style-type: decimal">
+<li>Creating a schema named “backbone”</li>
+<li>Creating the tables described in the <a
+href="gaia-datamodels.html#Backbone">backbone specification</a> and
+sequences for autoincrementing identifiers.</li>
+<li>Inserting <a href="gaia-catalog.html">Gaia Catalog</a> metadata
+(IMPORTANT: script assumes the files ‘./csv/data_source.csv’ and
+‘./csv/variable_source.csv’ exist relative to ‘initialize.sql’, as they
+do in the <a href="https://github.com/OHDSI/GIS/tree/main/inst/">inst
+directory</a>) 4.Populating the geom_index and attr_index</li>
+</ol>
+</div>
+<div id="connecting-the-database-to-r" class="section level3">
+<h3>Connecting the Database to R</h3>
+<ol style="list-style-type: decimal">
+<li>Create a connection from your R environment to the PostGIS database.
+This can be done using the DatabaseConnector package:</li>
+</ol>
+<pre><code>library(gaiaCore)
+
+connectionDetails &lt;- DatabaseConnector::createConnectionDetails(
+  dbms = &quot;postgresql&quot;,
+  server = &quot;localhost/gaiaDB&quot;,
+  port = 5432,
+  user=&quot;postgres&quot;,
+  password = &quot;mysecretpassword&quot;) </code></pre>
 </div>
 </div>
 </div>
