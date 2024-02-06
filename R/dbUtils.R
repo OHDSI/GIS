@@ -676,7 +676,7 @@ getGeomIdMap <- function(connectionDetails, geomIndexId){
 #' 
 getLocationAddresses <- function(connectionDetails, cdmDatabaseSchema){
   addressQuery <- paste0("SELECT l.location_id
-	  , CONCAT(l.address_1, ' ', l.address_2, ' ', l.city, ' ', l.state, ' ', LEFT(l.zip, 5)) AS address
+	  , CONCAT(COALESCE(l.address_1, ''), ' ', COALESCE(l.address_2, ''), ' ', COALESCE(l.city, ''), ' ', COALESCE(l.state, ''), ' ', LEFT(COALESCE(l.zip, ''), 5)) AS address
 	  , latitude
 	  , longitude
     FROM ", cdmDatabaseSchema, ".location l")
@@ -688,7 +688,7 @@ getLocationAddresses <- function(connectionDetails, cdmDatabaseSchema){
     if(stringr::str_detect(conditionMessage(err), "longitude|latitude")) {
       message('\nLatitude/Longitude columns skipped.')
       addressQuery <- paste0("SELECT l.location_id
-  	  , CONCAT(l.address_1, ' ', l.address_2, ' ', l.city, ' ', l.state, ' ', LEFT(l.zip, 5)) AS address
+  	  , CONCAT(COALESCE(l.address_1, ''), ' ', COALESCE(l.address_2, ''), ' ', COALESCE(l.city, ''), ' ', COALESCE(l.state, ''), ' ', LEFT(COALESCE(l.zip, ''), 5)) AS address
       FROM ", cdmDatabaseSchema, ".location l")
       DatabaseConnector::querySql(connection = conn, sql = addressQuery)
     } else {
