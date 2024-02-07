@@ -1,0 +1,118 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG Geocoding Workflow </div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+```{css zoom-lib-src, echo = FALSE}
+script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+```
+
+```{js zoom-jquery, echo = FALSE}
+ $(document).ready(function() {
+    $('body').prepend('<div class=\"zoomDiv\"><img src=\"\" class=\"zoomImg\"></div>');
+    // onClick function for all plots (img's)
+    $('img:not(.zoomImg)').click(function() {
+      $('.zoomImg').attr('src', $(this).attr('src')).css({width: '100%'});
+      $('.zoomDiv').css({opacity: '1', width: 'auto', border: '1px solid white', borderRadius: '5px', position: 'fixed', top: '50%', left: '50%', marginRight: '-50%', transform: 'translate(-50%, -50%)', boxShadow: '0px 0px 50px #888888', zIndex: '50', overflow: 'auto', maxHeight: '100%'});
+    });
+    // onClick function for zoomImg
+    $('img.zoomImg').click(function() {
+      $('.zoomDiv').css({opacity: '0', width: '0%'}); 
+    });
+  });
+```
+
+# Overview
+
+This workflow demonstrates how to use the OHDSI Gaia suite of GIS tools to geocode the entirety of an OMOP Location table, fully enabling any further geospatial analyses supported by the Gaia GIS tools.
+
+![Geocoding Workflow (Cohort Definitions) - [Click here to download](https://github.com/OHDSI/GIS/raw/main/rmd/images/geocodingSchemeFull.png)](images/geocodingSchemeFull.png){width=150%}
+
+## Prerequisites
+
+This workflow requires the `DatabaseConnector` package.
+
+```{r eval=FALSE}
+install.packages("DatabaseConnector")
+library(DatabaseConnector)
+```
+
+## Configuring Connection to the Servers
+We need to configure connections to two servers: the server hosting the OMOP database and the server hosting the gaiaDB Postgres database.
+
+### Connect to OMOP server:
+```{r tidy=FALSE,eval=FALSE}
+connectionDetails <- createConnectionDetails(
+  dbms = keyring::key_get('cdm-dbms'), 
+  user = keyring::key_get('cdm-username'), 
+  password = keyring::key_get('cdm-password'), 
+  server = keyring::key_get('cdm-server')
+)
+
+cdmDatabaseSchema <- "TMC_RED.dbo"
+```
+
+### Connect to gaiaDB server:
+If you don't already have a gaiaDB server set up, see the [installation instructions](https://ohdsi.github.io/GIS/installation.html#gaiaDB_database) before proceeding.
+```{r tidy=FALSE,eval=FALSE}
+library(DatabaseConnector)
+gaiaConnectionDetails <- DatabaseConnector::createConnectionDetails(
+  dbms = "postgresql",
+  server = "localhost/gaiaDB",
+  port = 5432,
+  user="postgres",
+  password = "mySecretPassword") 
+```
+
+## Geocoding
+
+### Step 1. Ingest the Location table from OMOP Database
+Use the gaiaCore function `getLocationAddresses()` to extract addresses from OMOP
+and return a transformed location table:
+``` {r eval=FALSE}
+transformedLocation <- getLocationAddresses(connectionDetails = connectionDetails,
+                                            cdmDatabaseSchema = cdmDatabaseSchema)
+```
+
+### Step 2. Split the transformedLocation dataframe into two tables based on whether it already contains latitude and longitude information:
+``` {r eval=FALSE}
+splitResult <- splitAddresses(addressTable = transformedLocation)
+
+alreadyGeocodedLocation <- splitResult$geocoded
+
+notGeocodedLocation <- splitResult$ungeocoded
+```
+
+### Step 3. Geocode Addresses without Coordinates
+``` {r eval=FALSE}
+geocodedLocation <- geocodeAddresses(addressTable = notGeocodedLocation)
+```
+
+### Step 4. Stack pre-populated and newly geocoded location tables
+``` {r eval=FALSE}
+fullyGeocodedLocation <- geocodedLocation
+if (!is.null(alreadyGeocodedLocation)) {
+  names(alreadyGeocodedLocation) <- tolower(names(alreadyGeocodedLocation))
+  alreadyGeocodedLocation <- dplyr::mutate(alreadyGeocodedLocation, lat = latitude, lon = longitude)
+  alreadyGeocodedLocation <- dplyr::select(alreadyGeocodedLocation, names(fullyGeocodedLocation))
+  alreadyGeocodedLocation <- sf::st_as_sf(boundGeocodedTable, coords = c("lon", "lat"), crs = 4326)
+  fullyGeocodedLocation <- rbind(fullyGeocodedLocation, alreadyGeocodedLocation)
+}
+```
+
+### Step 5. Import Geocoded Location table to gaiaDB Database
+``` {r eval=FALSE}
+importLocationTable(gaiaConnectionDetails = gaiaConnectionDetails,
+                    location = fullyGeocodedLocation)
+```
+
+
+
+
+
+
+

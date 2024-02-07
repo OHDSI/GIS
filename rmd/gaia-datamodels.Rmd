@@ -48,11 +48,15 @@ gaiaSpecsClean[is.na(gaiaSpecsClean)] <- ""
 
 for(tb in tables) {
   
-  if(tb == 'data_source'){
+  if(tb == 'data_source') {
     cat("## **Backbone**\n\n")
   }
   
-  if(tb == 'exposure_occurrence'){
+  if(tb == 'geom_omop_location') {
+    cat("## **OMOP**\n\n")
+  }
+  
+  if(tb == 'exposure_occurrence') {
     cat("## **CDM Extension**\n\n")
   }
   

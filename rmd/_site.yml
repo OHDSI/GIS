@@ -55,8 +55,8 @@ navbar:
           href: ht-get-started.html
         - text: "Use a Local Dataset"
           href: ht-local-dataset.html
-        - text: "Geocode the OMOP Location Table (Full)"
-          href: geocodingFull.html              # TODO combine into one geocoding article
+        - text: "Geocode for OMOP Database Addresses"
+          href: ht-geocode.html              # TODO combine into one geocoding article
         - text: "Geocode an OMOP Cohort"
           href: geocodingCohort.html            # TODO combine into one geocoding article
         - text: "Add Data Sources to a Local gaiaDB Instance"
