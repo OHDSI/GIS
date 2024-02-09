@@ -1,76 +1,271 @@
 ---
-title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG </div>'
+title: '<div><img src="ohdsi40x40.png"></img>  Gaia Design</div>'
 output:
    html_document:
         toc: TRUE
-        toc_depth: 3
+        toc_depth: 2
         toc_float:
           collapsed: false
 ---
 
-# **Gaia**
+<br>
 
-## Design Principles 
+> ! **UNDER CONSTRUCTION** !
 
-### Gaia Core
+<br>
 
-TODO
+---
 
- - Lightweight execution engine of/for functional metadata
- - Populates local standardized implementation
-< Dependencies Diagram >
+# **Overview**
 
-### Catalog
-
-TODO
-< Diagram Showing interaction with local DB >
- - Centralized
- - Contains the functional metadata instead of source data itself
-
-### Functional Metadata
-
-TODO
- - Show how it changes from wide table to EAV
- - Give examples/breakdown of each of:
-   - Data source (geometry)
-   - Variable (attribute)
-
-
-### Storage Design
-
-TODO
-< Diagram with connections between backbone tables and templated tables >
- - Backbone
-   - Data source; variable source
-     < Diagram showing relationships > 
-     < 	Diagram showing an example of variables pointing to same data source >
-   - Indexing design
-    < Diagram >
-   - Rationale / How it is functionally referenced
- -	Templates
-   < Diagram of relation to each other >
-   - Structure of the tables
-   - Example of populated tables (subsets of columns) and their relation
+<br>
 
 
 
-### Common Model/ EAV 
+## Use Case Preface
 
-TODO
+<br>
 
-< Diagram showing transition from wide source table to standardized EAV structure >
-- What this enables
-   - Extensible tooling
-   - Efficient querying on smaller tables 
-   - (?) integration with ontologies/additional metadata
+To oversimplify, our goal is to create a mechanism to locally deploy a geospatial database, standardize the representation of place-related data within, and automate the process of populating data into it. 
+
+Consequently, the foundational goals of our design can be summarized as:
+
+- Extensibility
+  - Tooling (via a standard data model)
+  - Collaborative growth
+  - Integration with ontologies
+- Automation
+  - Data retrieval, standardization, ingestion 
+  - Deployment of stack 
+- Efficiency
+  - Storage design
+  - Centralized functional metadata
+
+
+---
+
+<br>
+
+## Strategy Snapshot
+
+<br>
+
+| Challenge                                                                                      |                                                                                                                            | Approach                                                                                                                                 |
+| :---------------------------------------------------------------------------------------------- | ------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| Enable extensible tooling                                                                      |                                                                                                                            | Implement a common data model for place-related data                                                                                     |
+| Establish universal representation for any place-related data   |                               | Represent data as geometries and attributes (of geometries)                                                                |
+| Create efficiency when dealing with large amount of standardized data                  |        | Split each data source into it's own pair of geometries and attributes                                                     |
+| Create static functionality that works for any new data added                           |       | Indexing structures and parameterization to treat the collection of disparate tables as if they were functionally combined |
+| Maintain source data provenance and versioning                 |              | Data source and variable metadata, given unique identifiers, that are referenced throughout the schema                                   |
+| Automate the processes of data retrieval, ingestion, and standardization into our common model | | Create "functional metadata" at both the data source and variable level, and an R package to execute it                    |
+| Enable collaborative growth of functional metadata                   |            | Host the metadata centrally, instead of the actual data sources. Create separate tooling to ease burden of creating new metadata records |
+
+
+---
+
+<br>
+
+## Pipeline
+
+
+<br>
+
+TODO: brief description of the pipline. "GaiaR takes metadata specifications to..." etc. 
+
+<br>
+
+![](images/pipeline_flow.png)
+TODO: image descC
+
+<br>
+
+---
+
+
+# **Schema** 
+
+<br>
+
+There are three distinct portions of our schema:
+
+<br>
+
+- #### Data Source & Variable Metadata
+  - contained within **DATA_SOURCE** and **VARIABLE_SOURCE** tables
+    - VARIABLE_SOURCE to DATA_SOURCE is a many-to-one relationship
+  - both functional and descriptive metadata
+
+<br>
+
+
+- #### Indexing Tables
+  - Contained within **GEOM_INDEX** and **ATTR_INDEX**
+  - This provides the functional mapping between the data source and variable definitions to the local place-related data
+  - These tables are automatically populated when new data sources are added
+
+<br>
+
+
+- #### Standardized Place-Related data
+  - Contained within **GEOM_*{x}*** and **ATTR_*{x}*** tables (many instances)
+  - All place-related data, once ingested, is represented as two tables:
+     - Geometries
+     - Attributes (of geometries)
+  - Each data source is ingested as it's own unique set GEOM and ATTR tables
+
+<br>
+
+
+
+---
+
+
+<br>
+
+
+## *Schema*tics {.tabset .tabset-fade}
+
+
+<br>
+
+ 
+### Conceptual
+
+![](images/schema_3_tier.png)
+
+TODO: Summarize diagram
+
+<br>
+
+
+
+---
+
+### Relation Summary
+
+![](images/rel_diagram_1.png)
+
+
+TODO: Summarize diagram
+
+<br>
+
+
+
+---
+
+### Full Schema 
+
+
+![](images/backbone_er.png)
+
+TODO: Summarize diagram
+
+<br>
+
+
+
+---
+
+--- 
+
+
+<br>
+
+
+# **Standardized Place-Related Data**
+
+<br>
+
+## Common Data Model Approach
+
+TODO: rationale
+
+(placeholder)
+- enables extensible tooling
+- defines specification for functional metadata
+  - data sources are structured the same but stored separately 
+
+
+<br>
+
+
+## GEOMETRY and ATTRIBUTE
+
+<br>
+
+// TODO 
+
+- make replication clear
+- naming conventions
+- schema assignment conventions
+- geom and/or attr for given data source 
 
 
 
 
+### Transition to EAV design
 
 
 
 
+<br> 
+
+---
+
+# **Backbone Schema**
+
+// TODO - 1-2 sentence intro
+
+// TODO - Diagram
+
+<br>
+
+## Data & Variable source metadata 
 
 
+// TODO: 
+- diagram breaking down data_source (retrieval, translation, storage, etc. )
+- explain relationship between them; what they contain 
 
+// TODO: Diagram
+
+<br>
+
+## Indexing & Linkages
+
+// TODO
+- automatically built by data_source specification
+- provides functional mapping to parameterize tooling 
+
+<br> 
+
+---
+
+# **Metadata**
+
+<br>
+
+TODO: purpose/use, etc.
+
+- defined structure
+
+- "recipes"
+
+<br>
+
+## Centralized Repository
+
+- to be hosted centrally
+- lightweight
+- holds recipes not data 
+- mechanism for collaborative growth 
+
+
+## Descriptive Metadata
+
+<br>
+
+## Functional Metadata
+
+<br>
