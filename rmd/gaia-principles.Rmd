@@ -16,13 +16,11 @@ output:
 
 ---
 
-# **Overview**
+# **Preface**
 
-<br>
+<br> 
 
-
-
-## Use Case Preface
+## Use Case Simplified
 
 <br>
 
@@ -82,7 +80,7 @@ TODO: image descC
 ---
 
 
-# **Schema** 
+# **Schema Overview** 
 
 <br>
 
