@@ -2,6 +2,7 @@ name: Data Source Request
 description: Submit a data resource for the dev team to add to the data source repo.
 title: "[Data Source Request]: "
 labels: ["data request"]
+projects: "OHDSI/26"
 body:
   - type: markdown
     attributes:
