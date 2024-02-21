@@ -11,7 +11,7 @@
 
 
 
-<title>gaia-principles.knit</title>
+<title> Gaia Design</title>
 
 <script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -339,22 +339,16 @@ div.tocify {
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-earth"></span>
      
-    Gaia Overview
+    Gaia
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="gaia-intro.html#Overview">Introduction</a>
+      <a href="gaia-intro.html">Overview</a>
     </li>
     <li>
-      <a href="gaia-intro.html#Purpose">Purpose</a>
-    </li>
-    <li>
-      <a href="gaia-goals.html">Foundational Goals</a>
-    </li>
-    <li>
-      <a href="gaia-principles.html">Design Principles</a>
+      <a href="gaia-principles.html">Design</a>
     </li>
     <li class="dropdown-submenu">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Specifications</a>
@@ -463,56 +457,434 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore"><div>
-<img src="ohdsi40x40.png"></img> OHDSI GIS WG
-</div></h1>
+<h1 class="title toc-ignore"><img src="ohdsi40x40.png"></img> Gaia
+Design</h1>
 
 </div>
 
 
-<div id="gaia" class="section level1">
-<h1><strong>Gaia</strong></h1>
-<div id="design-principles" class="section level2">
-<h2>Design Principles</h2>
-<div id="gaia-core" class="section level3">
-<h3>Gaia Core</h3>
-<p>TODO</p>
+<p><br></p>
+<blockquote>
+<p>! <strong>UNDER CONSTRUCTION</strong> !</p>
+</blockquote>
+<p><br></p>
+<hr />
+<div id="preface" class="section level1">
+<h1><strong>Preface</strong></h1>
+<p><br></p>
+<div id="use-case-simplified" class="section level2">
+<h2>Use Case Simplified</h2>
+<p><br></p>
+<p>To oversimplify, our goal is to create a mechanism to locally deploy
+a geospatial database, standardize the representation of place-related
+data within, and automate the process of populating data into it.</p>
+<p>Consequently, the foundational goals of our design can be summarized
+as:</p>
 <ul>
-<li>Lightweight execution engine of/for functional metadata</li>
-<li>Populates local standardized implementation &lt; Dependencies
-Diagram &gt;</li>
+<li>Extensibility
+<ul>
+<li>Tooling (via a standard data model)</li>
+<li>Collaborative growth</li>
+<li>Integration with ontologies</li>
+</ul></li>
+<li>Automation
+<ul>
+<li>Data retrieval, standardization, ingestion</li>
+<li>Deployment of stack</li>
+</ul></li>
+<li>Efficiency
+<ul>
+<li>Storage design</li>
+<li>Centralized functional metadata</li>
+</ul></li>
 </ul>
+<hr />
+<p><br></p>
 </div>
-<div id="catalog" class="section level3">
-<h3>Catalog</h3>
-<p>TODO &lt; Diagram Showing interaction with local DB &gt; -
-Centralized - Contains the functional metadata instead of source data
-itself</p>
+<div id="strategy-snapshot" class="section level2">
+<h2>Strategy Snapshot</h2>
+<p><br></p>
+<table>
+<colgroup>
+<col width="36%" />
+<col width="9%" />
+<col width="53%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Challenge</th>
+<th></th>
+<th align="left">Approach</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Enable extensible tooling</td>
+<td></td>
+<td align="left">Implement a common data model for place-related
+data</td>
+</tr>
+<tr class="even">
+<td align="left">Establish universal representation for any
+place-related data</td>
+<td></td>
+<td align="left">Represent data as geometries and attributes (of
+geometries)</td>
+</tr>
+<tr class="odd">
+<td align="left">Create efficiency when dealing with large amount of
+standardized data</td>
+<td></td>
+<td align="left">Split each data source into it’s own pair of geometries
+and attributes</td>
+</tr>
+<tr class="even">
+<td align="left">Create static functionality that works for any new data
+added</td>
+<td></td>
+<td align="left">Indexing structures and parameterization to treat the
+collection of disparate tables as if they were functionally
+combined</td>
+</tr>
+<tr class="odd">
+<td align="left">Maintain source data provenance and versioning</td>
+<td></td>
+<td align="left">Data source and variable metadata, given unique
+identifiers, that are referenced throughout the schema</td>
+</tr>
+<tr class="even">
+<td align="left">Automate the processes of data retrieval, ingestion,
+and standardization into our common model</td>
+<td></td>
+<td align="left">Create “functional metadata” at both the data source
+and variable level, and an R package to execute it</td>
+</tr>
+<tr class="odd">
+<td align="left">Enable collaborative growth of functional metadata</td>
+<td></td>
+<td align="left">Host the metadata centrally, instead of the actual data
+sources. Create separate tooling to ease burden of creating new metadata
+records</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><br></p>
 </div>
-<div id="functional-metadata" class="section level3">
-<h3>Functional Metadata</h3>
-<p>TODO - Show how it changes from wide table to EAV - Give
-examples/breakdown of each of: - Data source (geometry) - Variable
-(attribute)</p>
+<div id="pipeline" class="section level2">
+<h2>Pipeline</h2>
+<p><br></p>
+<p>TODO: brief description of the pipline. “GaiaR takes metadata
+specifications to…” etc.</p>
+<p><br></p>
+<p><img src="images/pipeline_flow.png" /> TODO: image descC</p>
+<p><br></p>
+<hr />
+<p><br></p>
 </div>
-<div id="storage-design" class="section level3">
-<h3>Storage Design</h3>
-<p>TODO &lt; Diagram with connections between backbone tables and
-templated tables &gt; - Backbone - Data source; variable source &lt;
-Diagram showing relationships &gt; &lt; Diagram showing an example of
-variables pointing to same data source &gt; - Indexing design &lt;
-Diagram &gt; - Rationale / How it is functionally referenced - Templates
-&lt; Diagram of relation to each other &gt; - Structure of the tables -
-Example of populated tables (subsets of columns) and their relation</p>
 </div>
-<div id="common-model-eav" class="section level3">
-<h3>Common Model/ EAV</h3>
-<p>TODO</p>
-<p>&lt; Diagram showing transition from wide source table to
-standardized EAV structure &gt; - What this enables - Extensible tooling
-- Efficient querying on smaller tables - (?) integration with
-ontologies/additional metadata</p>
+<div id="backbone-schema" class="section level1">
+<h1><strong>Backbone Schema</strong></h1>
+<p><br></p>
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<p><br></p>
+<p>There are three distinct portions of our schema:</p>
+<p><br></p>
+<ul>
+<li><h4 id="data-source-variable-metadata">Data Source &amp; Variable
+Metadata</h4>
+<ul>
+<li>contained within <strong>DATA_SOURCE</strong> and
+<strong>VARIABLE_SOURCE</strong> tables
+<ul>
+<li>VARIABLE_SOURCE to DATA_SOURCE is a many-to-one relationship</li>
+</ul></li>
+<li>both functional and descriptive metadata</li>
+</ul></li>
+</ul>
+<p><br></p>
+<ul>
+<li><h4 id="indexing-tables">Indexing Tables</h4>
+<ul>
+<li>Contained within <strong>GEOM_INDEX</strong> and
+<strong>ATTR_INDEX</strong></li>
+<li>This provides the functional mapping between the data source and
+variable definitions to the local place-related data</li>
+<li>These tables are automatically populated when new data sources are
+added</li>
+</ul></li>
+</ul>
+<p><br></p>
+<ul>
+<li><h4 id="standardized-place-related-data">Standardized Place-Related
+data</h4>
+<ul>
+<li>Contained within <strong>GEOM_<em>{x}</em></strong> and
+<strong>ATTR_<em>{x}</em></strong> tables (many instances)</li>
+<li>All place-related data, once ingested, is represented as two tables:
+<ul>
+<li>Geometries</li>
+<li>Attributes (of geometries)</li>
+</ul></li>
+<li>Each data source is ingested as it’s own unique set GEOM and ATTR
+tables</li>
+</ul></li>
+</ul>
+<p><br></p>
+<hr />
+<p><br></p>
 </div>
+<div id="schematics" class="section level2 tabset tabset-fade">
+<h2 class="tabset tabset-fade"><em>Schema</em>tics</h2>
+<p><br></p>
+<div id="conceptual" class="section level3">
+<h3>Conceptual</h3>
+<p><img src="images/schema_3_tier.png" /></p>
+<p>TODO: Summarize diagram</p>
+<p><br></p>
+<hr />
+</div>
+<div id="relation-summary" class="section level3">
+<h3>Relation Summary</h3>
+<p><img src="images/rel_diagram_1.png" /></p>
+<p>TODO: Summarize diagram</p>
+<p><br></p>
+<hr />
+</div>
+<div id="full-schema" class="section level3">
+<h3>Full Schema</h3>
+<p><img src="images/backbone_er.png" /></p>
+<p>TODO: Summarize diagram</p>
+<p><br></p>
+<hr />
+<hr />
+<p>// TODO - 1-2 sentence intro</p>
+<p>// TODO - Diagram</p>
+<p><br></p>
+</div>
+</div>
+<div id="metadata-tables" class="section level2">
+<h2><strong>Metadata Tables</strong></h2>
+<p>There are two tables within the ‘Metadata’ portion of our schema:</p>
+<ol style="list-style-type: decimal">
+<li><a href="gaia-principles.html#DATA_SOURCE">DATA_SOURCE</a></li>
+<li><a
+href="gaia-principles.html#VARIABLE_SOURCE">VARIABLE_SOURCE</a></li>
+</ol>
+<p><br></p>
+<p><img src="images/data_and_var_source.png" /></p>
+<p><br></p>
+<blockquote>
+<p>The blue stars signify <a
+href="gaia-principles.html#Functional_Metadata">functional metadata</a>,
+described below</p>
+</blockquote>
+<hr />
+<p><br></p>
+<div id="data_source" class="section level3">
+<h3>DATA_SOURCE</h3>
+<p><br></p>
+<blockquote>
+<p>For a detailed description see: <a
+href="gaia-datamodels.html#data_source">Specifications/Backbone/data_source</a></p>
+</blockquote>
+<ul>
+<li>This table contains records that catalog external (or local)
+web-hosted entities.</li>
+<li>All source data in gaiaDB must be referenced in this table</li>
+<li>Every record in DATA_SOURCE has it’s own UUID</li>
+<li>A DATA_SOURCE record is considered valid when the type of polygon is
+consistent (e.g. political boundary) and it has a unique combination of
+{Organization, Organization Set, Dataset Name}
+<ul>
+<li>If a data source has more than one “granularity” of geometry within
+(albeit quite rare), we split it up into multiple DATA_SOURCE records
+accordingly</li>
+</ul></li>
+<li>This table contains descriptive and functional metadata that is
+leveraged when:
+<ul>
+<li>creating the indexing tables</li>
+<li>downloading and ingesting data sources</li>
+<li>translating and populating geometry-referenced data into the
+GEOM_{x} tables</li>
+</ul></li>
+<li>VARIABLE_SOURCE, GEOM_INDEX and ATTR_INDEX all must persist valid
+foreign keys to DATA_SOURCE, thus the creation of DATA_SOURCE is the
+first step of ingestion</li>
+<li>For a given data set, the translation logic for the geometry data is
+stored within the (DATA_SOURCE).<em>geom_spec</em> field. The attributes
+within a given data source are stored within VARIABLE_SOURCE and the
+attribute translation logic within
+(VARIABLE_SOURCE).<em>attr_spec</em></li>
+</ul>
+<p><br></p>
+<hr />
+<p><br></p>
+</div>
+<div id="variable_source" class="section level3">
+<h3>VARIABLE_SOURCE</h3>
+<p><br></p>
+<blockquote>
+<p>For a detailed description see: <a
+href="gaia-datamodels.html#variable_source">Specifications/Backbone/variable_source</a></p>
+</blockquote>
+<ul>
+<li>The VARIABLE_SOURCE table specifies the identification and
+translation logic for invidivual variables within a given data
+source.</li>
+<li>The relation of VARIABLE_SOURCE to DATA_SOURCE is many-to-one.</li>
+<li>While DATA_SOURCE contains the functional metadata for translating
+geometry objects (i.e. DATA_SOURCE.geom_spec), the logic for translating
+attributes is contained with VARIABLE_SOURCE
+(i.e. VARIABLE_SOURCE.attr_spec)</li>
+</ul>
+<p><br></p>
+<p>// TODO: Diagrams</p>
+<ul>
+<li>one (ds) to many (vs)</li>
+<li>example with 1 ds and many vs (svi?)</li>
+</ul>
+<hr />
+<p><br></p>
+</div>
+</div>
+<div id="indexing-tables-1" class="section level2">
+<h2><strong>Indexing tables</strong> </u></h2>
+<p>There are two tables within the ‘Metadata’ portion of our schema:</p>
+<ol style="list-style-type: decimal">
+<li><a href="gaia-principles.html#GEOM_INDEX">GEOM_INDEX</a></li>
+<li><a href="gaia-principles.html#ATTR_INDEX">ATTR_INDEX</a></li>
+</ol>
+<p><br></p>
+<ul>
+<li>Both tables are automatically populated by metadata contained within
+the DATA_SOURCE table.</li>
+<li>These tables serve as a means to provide functional mapping to
+standardized place-related data contained in disparate schemas and
+tables, and, consequently, enables parameterized querying</li>
+</ul>
+<p><br></p>
+<p><img src="images/rel_diagram_1.png" /></p>
+<p><br></p>
+<p><img src="images/backbone_slice_1.png" /></p>
+<p><br></p>
+<div id="geom_index" class="section level3">
+<h3>GEOM_INDEX</h3>
+<p><br></p>
+<blockquote>
+<p>For a detailed description see: <a
+href="gaia-datamodels.html#geom_index">Specifications/Backbone/geom_index</a></p>
+</blockquote>
+<p><img src="images/geom_index.png" /> <br></p>
+<hr />
+</div>
+<div id="attr_index" class="section level3">
+<h3>ATTR_INDEX</h3>
+<p><br></p>
+<blockquote>
+<p>For a detailed description see: <a
+href="gaia-datamodels.html#attr_index">Specifications/Backbone/attr_index</a></p>
+</blockquote>
+<p><br></p>
+<p><img src="images/attr_index.png" /></p>
+<hr />
+<p><br></p>
+</div>
+</div>
+<div id="standardized-place-related-data-1" class="section level2">
+<h2><strong>Standardized Place-Related Data</strong></h2>
+<p><br></p>
+<div id="common-data-model-approach" class="section level3">
+<h3>Common Data Model Approach</h3>
+<p><br></p>
+<p>The common data model approach has been a widely adopted solution for
+clinical data, notably for two specific reasons:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Interoperability</strong>: Data sources are structured
+the same but stored separately .If data sets are harmonized then
+distributed research is enabled</p></li>
+<li><p><strong>Extensibility</strong>: If the underlying model is
+static, it serves as a strong foundation to develop stable tooling, and
+community growth, on top of it</p></li>
+</ol>
+<p><br></p>
+<ul>
+<li>While interoperability and opening the doors for federated research
+are positives, the main reason for adoption of such an approach is to
+<strong>enable extensibility in tooling, application, and scaling of
+data sources</strong>.</li>
+<li>In the simplest description, our “common data model” can be though
+of as <strong>geometry objects with affiliated temporal
+attributes</strong></li>
+<li>The most significant restructuring that occurs is translating
+attributes to be represented in a format that is (close to) an
+<strong>Entity, Attribute, Value (EAV) structure</strong>. While many if
+not most place-related data sets are represented as “wide” tables, with
+variance in column naming and structure, we convert these “wide” tables
+into “EAV” table - similar to a “transpose” function. In doing so, we
+allow a single standard representation, with static columns, for all
+attributes and geometries.</li>
+</ul>
+<hr />
+<p><br></p>
+</div>
+<div id="geometry-and-attribute" class="section level3">
+<h3>GEOMETRY and ATTRIBUTE</h3>
+<p><br></p>
+<ul>
+<li>There are two template tables that are used to replicate the same
+two tables for every data source.
+<ul>
+<li>GEOM_TEPLATE &amp; ATTR_TEMPLATE</li>
+</ul></li>
+<li>The schema and table names are:
+<ul>
+<li>Determined by fields in the respective row of the DATA_SOURCE
+table</li>
+<li>Persisted as mapping within the indexing tables</li>
+</ul></li>
+</ul>
+<p><br></p>
+<p><img src="images/backbone_slice_2v2.png" /></p>
+<p><br></p>
+<div id="geom_template" class="section level4">
+<h4>GEOM_TEMPLATE</h4>
+<p><img src="images/geom_template.png" /></p>
+<hr />
+</div>
+<div id="attr_template" class="section level4">
+<h4>ATTR_TEMPLATE</h4>
+<p><img src="images/attr_template.png" /></p>
+<p><br></p>
+<hr />
+</div>
+</div>
+</div>
+</div>
+<div id="functional-metadata" class="section level1">
+<h1><strong>Functional Metadata</strong></h1>
+<p><br></p>
+<p>TODO: purpose/use, etc.</p>
+<ul>
+<li><p>defined structure</p></li>
+<li><p>“recipes”</p></li>
+<li><p>Centralized Repository</p>
+<ul>
+<li>one paragraph and a link to GaiaCatalog</li>
+</ul></li>
+</ul>
+<p><br></p>
+<div id="geom_spec" class="section level2">
+<h2><em>geom_spec</em></h2>
+<p>// TODO: description</p>
+<p><br></p>
+</div>
+<div id="attr_spec" class="section level2">
+<h2><em>attr_spec</em></h2>
+<p>// TODO: description</p>
+<p><br></p>
 </div>
 </div>
 

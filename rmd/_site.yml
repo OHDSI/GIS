@@ -16,16 +16,12 @@ navbar:
     - text: "Home"
       icon: fa-home
       href: index.html
-    - text: "Gaia Overview"
+    - text: "Gaia"
       icon: fa-earth
       menu:
-        - text: "Introduction"
-          href: gaia-intro.html#Overview                    # TODO add the architecture diagram
-        - text: "Purpose"
-          href: gaia-intro.html#Purpose                     # TODO add the architecture diagram
-        - text: "Foundational Goals"
-          href: gaia-goals.html                    # TODO add the architecture diagram
-        - text: "Design Principles"
+        - text: "Overview"
+          href: gaia-intro.html
+        - text: "Design"
           href: gaia-principles.html                     # TODO add the architecture diagram
         - text: "Specifications"
           menu: 

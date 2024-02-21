@@ -11,7 +11,7 @@
 
 
 
-<title>gaia-datamodel-information-flow.knit</title>
+<title> OHDSI GIS WG</title>
 
 <script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -339,22 +339,16 @@ div.tocify {
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-earth"></span>
      
-    Gaia Overview
+    Gaia
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="gaia-intro.html#Overview">Introduction</a>
+      <a href="gaia-intro.html">Overview</a>
     </li>
     <li>
-      <a href="gaia-intro.html#Purpose">Purpose</a>
-    </li>
-    <li>
-      <a href="gaia-goals.html">Foundational Goals</a>
-    </li>
-    <li>
-      <a href="gaia-principles.html">Design Principles</a>
+      <a href="gaia-principles.html">Design</a>
     </li>
     <li class="dropdown-submenu">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Specifications</a>
@@ -463,9 +457,8 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore"><div>
-<img src="ohdsi40x40.png"></img> OHDSI GIS WG
-</div></h1>
+<h1 class="title toc-ignore"><img src="ohdsi40x40.png"></img> OHDSI GIS
+WG</h1>
 
 </div>
 
@@ -473,7 +466,7 @@ div.tocify {
 <style type="text/css">
 script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
 </style>
-<script type="text/javascript">
+<script>
  $(document).ready(function() {
     $('body').prepend('<div class=\"zoomDiv\"><img src=\"\" class=\"zoomImg\"></div>');
     // onClick function for all plots (img's)
@@ -505,11 +498,12 @@ component (a variable) to be extracted from a source dataset. Variables
 can often be thought of as a single column from a table, but certain
 table structures (such as Entity-Attribute-Value tables) contain
 variables that require more detailed extraction logic to access.</p>
-<div class="figure">
-<img src="images/backbone_slice_1.png" style="width:150.0%" alt="" />
-<p class="caption">gaiaDB “Backbone” Data Catalog Schema - <a
+<div class="float">
+<img src="images/backbone_slice_1.png" style="width:150.0%"
+alt="gaiaDB “Backbone” Data Catalog Schema - Click here to download" />
+<div class="figcaption">gaiaDB “Backbone” Data Catalog Schema - <a
 href="https://github.com/OHDSI/GIS/raw/main/rmd/images/backbone_er.png">Click
-here to download</a></p>
+here to download</a></div>
 </div>
 <p><br></p>
 </div>
@@ -534,12 +528,13 @@ attr_<table_name> and geom_<table_name> tables. This modular design
 allows for efficient management and retrieval of geospatial data within
 the OMOP CDM, enhancing the interoperability and analytical capabilities
 of the OHDSI community.</p>
-<div class="figure">
-<img src="images/backbone_slice_2.png" style="width:150.0%" alt="" />
-<p class="caption">gaiaDB “Backbone” holds instructions to populate
+<div class="float">
+<img src="images/backbone_slice_2.png" style="width:150.0%"
+alt="gaiaDB “Backbone” holds instructions to populate harmonized data tables - Click here to download" />
+<div class="figcaption">gaiaDB “Backbone” holds instructions to populate
 harmonized data tables - <a
 href="https://github.com/OHDSI/GIS/raw/main/rmd/images/backbone_er.png">Click
-here to download</a></p>
+here to download</a></div>
 </div>
 </div>
 
