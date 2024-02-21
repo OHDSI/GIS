@@ -20,17 +20,17 @@ For other OHDSI workgroups, research projects, or individual researchers that ar
 
 The issue template focuses on your project's, or this collaboration's, hypothetical "Project Deliverable": what exactly will the final output of this work be? On the issue template, interested parties should:
 
-1) Introduce their project deliverable in the **Description** section. Provide enough information so that all parties can form a mental image of the final product and will be able to align their work towards a single goal.
+1) **Description** What evidence based on a combination of place-related data and EHR data do you want generate? Provide enough information so that all parties can form a mental image of the final product and will be able to align their work towards a single goal.
 
-2) Use the **infrastructure** section to describe what changes would need to be made to the OHDSI GIS infrastructure or tooling to help realize your project.
+2) **Infrastructure** What changes would need to be made to the OHDSI GIS infrastructure or tooling to help realize your project. How much would generation of this evidence rely on existing OHDSI GIS infrastructure vs. the development of new infrastructure? If it requires new infrastructure, how much could you/your team contribute to the needed development?
 
-3) In the **Timeline** section, provide any hard or soft deadlines that you have for your project deliverable. Would a development sprint for this work be able to start immediately, or need to wait until some future date? If you imagine your deliverable being completed in multiple steps, feel free to add detail to the order and timing in which they should be completed here. Finally, begin to think about desired cadence of development or progress meetings.
+3) **Timeline** Provide any hard or soft deadlines that you have for your project deliverable. Would a development sprint for this work be able to start immediately, or need to wait until some future date? If you imagine your deliverable being completed in multiple steps, feel free to add detail to the order and timing in which they should be completed here. Finally, begin to think about desired cadence of development or progress meetings.
 
-4) Describe the way you and your team envision **Credit** being attributed at the end of the development sprint. How does your team hope to be recognized for the collaborative effort with other OHDSI GIS Workgroup members?
+4) **Credit** Describe the way you and your team envision credit being attributed at the end of the development sprint. How does your team hope to be recognized for the collaborative effort with other OHDSI GIS Workgroup members?
 
-5) What sort of **Support** do you need from OHDSI GIS Workgroup? Are you looking for help with using existing OHDSI GIS tools, planning a development sprint, or integrating new features?
+5) **Support** What sort of support do you need from OHDSI GIS Workgroup? Are you looking for help with using existing OHDSI GIS tools, planning a development sprint, or integrating new features?
 
-6) Are there any **Datasets of Interest** that you need to use that are *not already in GaiaCatalog*? Feel free to include links and descriptions of content, shape, and format of the data.
+6) **Datasets of Interest** Are there any datasets that you need to use that are *not already in GaiaCatalog*? Include source dataset specifics like version and URLs, where applicable. Feel free to include links and descriptions of content, shape, and format of the data.
 
 These pieces of information will help to inform the OHDSI GIS Workgroup about the scope and goals of your project before scheduling a virtual meeting slot to have discuss. The more accurately and completely you provide this information, the more quickly and efficiently we can all collaborate to plan and execute a new development sprint and produce real world evidence.
 

@@ -1,5 +1,5 @@
 ---
-title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG </div>'
+title: '<div><img src="ohdsi40x40.png"></img>  Gaia Design</div>'
 output:
    html_document:
         toc: TRUE
@@ -8,69 +8,401 @@ output:
           collapsed: false
 ---
 
-# **Gaia**
+<br>
 
-## Design Principles 
+> ! **UNDER CONSTRUCTION** !
 
-### Gaia Core
+<br>
 
-TODO
+---
 
- - Lightweight execution engine of/for functional metadata
- - Populates local standardized implementation
-< Dependencies Diagram >
+# **Preface**
 
-### Catalog
+<br> 
 
-TODO
-< Diagram Showing interaction with local DB >
- - Centralized
- - Contains the functional metadata instead of source data itself
+## Use Case Simplified
 
-### Functional Metadata
+<br>
 
-TODO
- - Show how it changes from wide table to EAV
- - Give examples/breakdown of each of:
-   - Data source (geometry)
-   - Variable (attribute)
+To oversimplify, our goal is to create a mechanism to locally deploy a geospatial database, standardize the representation of place-related data within, and automate the process of populating data into it. 
 
+Consequently, the foundational goals of our design can be summarized as:
 
-### Storage Design
-
-TODO
-< Diagram with connections between backbone tables and templated tables >
- - Backbone
-   - Data source; variable source
-     < Diagram showing relationships > 
-     < 	Diagram showing an example of variables pointing to same data source >
-   - Indexing design
-    < Diagram >
-   - Rationale / How it is functionally referenced
- -	Templates
-   < Diagram of relation to each other >
-   - Structure of the tables
-   - Example of populated tables (subsets of columns) and their relation
+- Extensibility
+  - Tooling (via a standard data model)
+  - Collaborative growth
+  - Integration with ontologies
+- Automation
+  - Data retrieval, standardization, ingestion 
+  - Deployment of stack 
+- Efficiency
+  - Storage design
+  - Centralized functional metadata
 
 
+---
 
-### Common Model/ EAV 
+<br>
 
-TODO
+## Strategy Snapshot
 
-< Diagram showing transition from wide source table to standardized EAV structure >
-- What this enables
-   - Extensible tooling
-   - Efficient querying on smaller tables 
-   - (?) integration with ontologies/additional metadata
+<br>
+
+| Challenge                                                                                      |                                                                                                                            | Approach                                                                                                                                 |
+| :---------------------------------------------------------------------------------------------- | ------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------- |
+| Enable extensible tooling                                                                      |                                                                                                                            | Implement a common data model for place-related data                                                                                     |
+| Establish universal representation for any place-related data   |                               | Represent data as geometries and attributes (of geometries)                                                                |
+| Create efficiency when dealing with large amount of standardized data                  |        | Split each data source into it's own pair of geometries and attributes                                                     |
+| Create static functionality that works for any new data added                           |       | Indexing structures and parameterization to treat the collection of disparate tables as if they were functionally combined |
+| Maintain source data provenance and versioning                 |              | Data source and variable metadata, given unique identifiers, that are referenced throughout the schema                                   |
+| Automate the processes of data retrieval, ingestion, and standardization into our common model | | Create "functional metadata" at both the data source and variable level, and an R package to execute it                    |
+| Enable collaborative growth of functional metadata                   |            | Host the metadata centrally, instead of the actual data sources. Create separate tooling to ease burden of creating new metadata records |
+
+
+---
+
+<br>
+
+## Pipeline
+
+
+<br>
+
+TODO: brief description of the pipline. "GaiaR takes metadata specifications to..." etc. 
+
+<br>
+
+![](images/pipeline_flow.png)
+TODO: image descC
+
+<br>
+
+---
+
+<br>
+
+# **Backbone Schema** 
+
+<br>
+
+
+## Overview
+
+<br>
+
+There are three distinct portions of our schema:
+
+<br>
+
+- #### Data Source & Variable Metadata
+  - contained within **DATA_SOURCE** and **VARIABLE_SOURCE** tables
+    - VARIABLE_SOURCE to DATA_SOURCE is a many-to-one relationship
+  - both functional and descriptive metadata
+
+<br>
+
+
+- #### Indexing Tables
+  - Contained within **GEOM_INDEX** and **ATTR_INDEX**
+  - This provides the functional mapping between the data source and variable definitions to the local place-related data
+  - These tables are automatically populated when new data sources are added
+
+<br>
+
+
+- #### Standardized Place-Related data
+  - Contained within **GEOM_*{x}*** and **ATTR_*{x}*** tables (many instances)
+  - All place-related data, once ingested, is represented as two tables:
+     - Geometries
+     - Attributes (of geometries)
+  - Each data source is ingested as it's own unique set GEOM and ATTR tables
+
+<br>
+
+
+
+---
+
+
+<br>
+
+
+## *Schema*tics {.tabset .tabset-fade}
+
+
+<br>
+
+ 
+### Conceptual
+
+![](images/schema_3_tier.png)
+
+TODO: Summarize diagram
+
+<br>
+
+
+
+---
+
+### Relation Summary
+
+![](images/rel_diagram_1.png)
+
+
+TODO: Summarize diagram
+
+<br>
+
+
+
+---
+
+### Full Schema 
+
+
+![](images/backbone_er.png)
+
+TODO: Summarize diagram
+
+<br>
+
+
+
+---
+
+--- 
+
+
+
+// TODO - 1-2 sentence intro
+
+// TODO - Diagram
+
+<br>
+
+## **Metadata Tables**
+
+
+
+There are two tables within the 'Metadata' portion of our schema:
+
+1) [DATA_SOURCE](gaia-principles.html#DATA_SOURCE)
+2) [VARIABLE_SOURCE](gaia-principles.html#VARIABLE_SOURCE)
+
+<br>
+
+![](images/data_and_var_source.png)
+
+<br>
+
+> The blue stars signify [functional metadata](gaia-principles.html#Functional_Metadata), described below
+
+---
+
+<br>
+
+### DATA_SOURCE
+
+<br>
+
+> For a detailed description see: [Specifications/Backbone/data_source](gaia-datamodels.html#data_source)
+
+
+- This table contains records that catalog external (or local) web-hosted entities. 
+- All source data in gaiaDB must be referenced in this table
+- Every record in DATA_SOURCE has it's own UUID
+- A DATA_SOURCE record is considered valid when the type of polygon is consistent (e.g. political boundary) and it has a unique combination of {Organization, Organization Set, Dataset Name}
+  - If a data source has more than one "granularity" of geometry within (albeit quite rare), we split it up into multiple DATA_SOURCE records accordingly
+- This table contains descriptive and functional metadata that is leveraged when:
+  - creating the indexing tables
+  - downloading and ingesting data sources
+  - translating and populating geometry-referenced data into the GEOM_{x} tables
+- VARIABLE_SOURCE, GEOM_INDEX and ATTR_INDEX all must persist valid foreign keys to DATA_SOURCE, thus the creation of DATA_SOURCE is the first step of ingestion
+- For a given data set, the translation logic for the geometry data is stored within the (DATA_SOURCE).*geom_spec* field. The attributes within a given data source are stored within VARIABLE_SOURCE and the attribute translation logic within (VARIABLE_SOURCE).*attr_spec*
 
 
 
 
 
+<br>
 
 
 
+
+---
+
+<br>
+
+### VARIABLE_SOURCE
+
+<br>
+
+> For a detailed description see: [Specifications/Backbone/variable_source](gaia-datamodels.html#variable_source)
+
+
+- The VARIABLE_SOURCE table specifies the identification and translation logic for invidivual variables within a given data source. 
+- The relation of VARIABLE_SOURCE to DATA_SOURCE is many-to-one. 
+- While DATA_SOURCE contains the functional metadata for translating geometry objects (i.e. DATA_SOURCE.geom_spec), the logic for translating attributes is contained with VARIABLE_SOURCE (i.e. VARIABLE_SOURCE.attr_spec)
+
+<br>
+
+// TODO: Diagrams
+
+- one (ds) to many (vs)
+- example with 1 ds and many vs (svi?)
+
+--- 
+
+
+<br> 
+
+
+##  **Indexing tables** </u>
+
+There are two tables within the 'Metadata' portion of our schema:
+
+1. [GEOM_INDEX](gaia-principles.html#GEOM_INDEX)
+2. [ATTR_INDEX](gaia-principles.html#ATTR_INDEX)
+
+<br>
+
+- Both tables are automatically populated by metadata contained within the DATA_SOURCE table. 
+- These tables serve as a means to provide functional mapping to standardized place-related data contained in disparate schemas and tables, and, consequently, enables parameterized querying 
+
+<br>
+
+![](images/rel_diagram_1.png)
+
+
+<br> 
+
+![](images/backbone_slice_1.png)
+
+
+<br>
+
+### GEOM_INDEX
+
+<br>
+
+> For a detailed description see: [Specifications/Backbone/geom_index](gaia-datamodels.html#geom_index)
+
+![](images/geom_index.png)
+<br>
+
+--- 
+
+
+### ATTR_INDEX
+
+<br>
+
+> For a detailed description see: [Specifications/Backbone/attr_index](gaia-datamodels.html#attr_index)
+
+<br>
+
+![](images/attr_index.png)
+
+--- 
+
+
+
+
+
+<br>
+
+
+## **Standardized Place-Related Data**
+
+<br>
+
+### Common Data Model Approach
+
+<br>
+
+The common data model approach has been a widely adopted solution for clinical data, notably for two specific reasons:
+
+  1. **Interoperability**: Data sources are structured the same but stored separately .If data sets are harmonized then distributed research is enabled
+  
+  2. **Extensibility**:  If the underlying model is static, it serves as a strong foundation to develop stable tooling, and community growth, on top of it
+  
+<br>
+  
+- While interoperability and opening the doors for federated research are positives, the main reason for adoption of such an approach is to **enable extensibility in tooling, application, and scaling of data sources**. 
+- In the simplest description, our "common data model" can be though of as **geometry objects with affiliated temporal attributes**
+- The most significant restructuring that occurs is translating attributes to be represented in a format that is (close to) an **Entity, Attribute, Value (EAV) structure**. While many if not most place-related data sets are represented as "wide" tables, with variance in column naming and structure, we convert these "wide" tables into "EAV" table - similar to a "transpose" function. In doing so, we allow a single standard representation, with static columns, for all attributes and geometries. 
+
+
+---
+
+<br>
+
+
+### GEOMETRY and ATTRIBUTE
+
+<br>
+
+- There are two template tables that are used to replicate the same two tables for every data source. 
+  - GEOM_TEPLATE & ATTR_TEMPLATE
+- The schema and table names are:
+  - Determined by fields in the respective row of the DATA_SOURCE table
+  - Persisted as mapping within the indexing tables
+
+<br>
+
+
+![](images/backbone_slice_2v2.png)
+
+
+<br> 
+
+
+#### GEOM_TEMPLATE
+
+![](images/geom_template.png)
+
+--- 
+
+#### ATTR_TEMPLATE
+
+
+![](images/attr_template.png)
+
+
+
+<br> 
+
+---
+
+# **Functional Metadata**
+
+<br>
+
+TODO: purpose/use, etc.
+
+- defined structure
+
+- "recipes"
+
+- Centralized Repository 
+  - one paragraph and a link to GaiaCatalog
+
+<br>
+
+## *geom_spec* 
+
+
+// TODO: description 
+
+<br>
+
+## *attr_spec*
+
+
+// TODO: description 
+
+<br>
 
 
 
