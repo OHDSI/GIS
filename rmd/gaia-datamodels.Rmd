@@ -65,12 +65,13 @@ for(tb in tables) {
   tableInfo <- subset(tableSpecs, gaiaTableName == tb)
   cat("**Table Description**\n\n",tableInfo[,"tableDescription"][[1]], "\n\n")
   
-  if(!isTRUE(tableInfo[,"userGuidance"][[1]]=="")){
-    cat("**User Guide**\n\n",tableInfo[,"userGuidance"][[1]],"\n\n")
+  fieldInfo <- subset(cdmSpecs, gaiaTableName == tb)
+  if(!isTRUE(fieldInfo[,"userGuidance"][[1]]=="")){
+    cat("**User Guide**\n\n",fieldInfo[,"userGuidance"][[1]],"\n\n")
   }
   
-  if(!isTRUE(tableInfo[,"etlConventions"][[1]]=="")){
-    cat("**ETL Conventions**\n\n",tableInfo[,"etlConventions"][[1]],"\n\n")
+  if(!isTRUE(fieldInfo[,"etlConventions"][[1]]=="")){
+    cat("**ETL Conventions**\n\n",fieldInfo[,"etlConventions"][[1]],"\n\n")
   }
   
   loopTable <- subset(gaiaSpecsClean, `Gaia Table` == tb)

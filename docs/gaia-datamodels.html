@@ -478,15 +478,9 @@ href="https://github.com/ohdsi/GIS/issues">github issue</a> page.
 web-hosted entities. All source data in gaiaDB must be referenced in
 this table.</p>
 <p><strong>User Guide</strong></p>
-<p>All records in this table are sources of geospatial data. They can be
-sources of geometry data, such as point, line, or polygon, or they can
-be attribute data with an identifier that relates them to geometry data,
-such as a FIPS code or GEOID.</p>
+<p>NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA</p>
 <p><strong>ETL Conventions</strong></p>
-<p>All sources of data that should be included in gaiaDB must have an
-entry in this table. Geometry data sources require a “geom_spec”: a
-lightweight transformation from the source data to the standardized
-format, written in R and serialized as JSON.</p>
+<p>NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA</p>
 <table class="table table-condensed table-hover" style="font-size: 13px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -930,22 +924,9 @@ No
 data source enabling downstream data integrations. All variables from
 attribute source data must be catalogued in this table.</p>
 <p><strong>User Guide</strong></p>
-<p>All records in this table describe distinct variables from attribute
-source data. For example, consider a weather dataset that is being added
-to gaiaDB. First, the entire dataset is catalogued in the data_source
-table. Then, the distinct variables of that dataset (temperature in
-fahrenheit, temperature in celsius, inches of rain, wind direction,
-etc.) each become a single record in this table. All records in this
-table are related back to their parent source dataset via a foreign key
-relationship to the data_source table. Many variable_source records can
-be related to a single data_source record.</p>
+<p>NA NA NA NA NA NA</p>
 <p><strong>ETL Conventions</strong></p>
-<p>Every individual variable from a source dataset must have an entry in
-this table. Likewise, any source attribute dataset that gets included in
-the data_source table will likely have many “children” in this table.
-All records in this table contain an “attr_spec”: a lightweight
-transformation of a single variable into the standardized table
-format.</p>
+<p>NA NA NA NA NA NA</p>
 <table class="table table-condensed table-hover" style="font-size: 13px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1140,10 +1121,9 @@ No
 <p>A programmatically derived index table of all the attribute source
 datasets included in the data_source table.</p>
 <p><strong>User Guide</strong></p>
-<p>This table can be (re)generated after new entries are added to the
-data_source table by running the gaiaCore createIndices() function.</p>
+<p>NA NA NA NA NA NA</p>
 <p><strong>ETL Conventions</strong></p>
-<p>Run the createIndices() function to (re)generate this table.</p>
+<p>NA NA NA NA NA NA</p>
 <table class="table table-condensed table-hover" style="font-size: 13px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1339,10 +1319,9 @@ data_source
 <p>A programmatically derived index table of all the geometry source
 datasets included in the data_source table.</p>
 <p><strong>User Guide</strong></p>
-<p>This table can be (re)generated after new entries are added to the
-data_source table by running the gaiaCore createIndices() function.</p>
+<p>NA NA NA NA NA NA NA NA NA</p>
 <p><strong>ETL Conventions</strong></p>
-<p>Run the createIndices() function to (re)generate this table.</p>
+<p>NA NA NA NA NA NA NA NA NA</p>
 <table class="table table-condensed table-hover" style="font-size: 13px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1612,10 +1591,9 @@ data_source
 <p>This table is a template for the standardized attribute table that
 get created.</p>
 <p><strong>User Guide</strong></p>
-<p>No action necessary. This table must simply exist (with no entries)
-in the backbone schema.</p>
+<p>NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA</p>
 <p><strong>ETL Conventions</strong></p>
-<p>No action necessary.</p>
+<p>NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA</p>
 <table class="table table-condensed table-hover" style="font-size: 13px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -2065,10 +2043,9 @@ No
 <p>This table is a template for the standardized geometry tables that
 get created.</p>
 <p><strong>User Guide</strong></p>
-<p>No action necessary. This table must simply exist (with no entries)
-in the backbone schema.</p>
+<p>NA NA NA NA NA NA NA</p>
 <p><strong>ETL Conventions</strong></p>
-<p>No action necessary.</p>
+<p>NA NA NA NA NA NA NA</p>
 <table class="table table-condensed table-hover" style="font-size: 13px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -2289,12 +2266,9 @@ No
 <p>This table contains identifier and text address from OMOP Location
 table records along with their associated geocoded, point geometry.</p>
 <p><strong>User Guide</strong></p>
-<p>Populate this table from the OMOP Location table to facilitate
-creation of CDM Extension tables.</p>
+<p>NA NA NA</p>
 <p><strong>ETL Conventions</strong></p>
-<p>Use the geocodeAddresses() function as outlined in <a
-href="https://ohdsi.github.io/GIS/ht-geocode.html"
-class="uri">https://ohdsi.github.io/GIS/ht-geocode.html</a></p>
+<p>NA NA NA</p>
 <table class="table table-condensed table-hover" style="font-size: 13px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -2412,11 +2386,9 @@ class="section level3 tabset tabset-pills">
 <p><strong>Table Description</strong></p>
 <p>This table is a copy of the OMOP Location_History table.</p>
 <p><strong>User Guide</strong></p>
-<p>Copy the OMOP Location_History table to Gaia to facilitate creation
-of CDM Extension tables</p>
+<p>NA NA NA NA NA NA</p>
 <p><strong>ETL Conventions</strong></p>
-<p>This table should be an exact duplicate of the OMOP Location_History
-table.</p>
+<p>NA NA NA NA NA NA</p>
 <table class="table table-condensed table-hover" style="font-size: 13px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -2616,9 +2588,53 @@ class="section level3 tabset tabset-pills">
 transformations of data from Gaia and to interface with ATLAS and OHDSI
 tool stack from an OMOP CDM database.</p>
 <p><strong>User Guide</strong></p>
-<p>NA</p>
+<p>The unique key given to a social or environmental exposure for a
+Person The LOCATION_ID of the Person for whom the exposure is
+associated. The PERSON_ID of the Person for whom the exposure is
+associated. The EXPOSURE_CONCEPT_ID field is recommended for primary use
+in analyses, and must be used for network studies. This is the standard
+concept mapped from the source value which represents a exposure. Use
+this date to determine the start date of the exposure. NA Use this date
+to determine the end date of the exposure. NA This field identifies the
+origin of the exposure record (e.g. Census, EHR, Environmental data,
+Geospatial data, Satellite imagery, GIS mapping, Sensor network, Mobile
+device geolocation, LiDAR) This field can be used to determine the
+spatiotemporal relationship between the source Exposure and the Person
+This field can be used to determine the original source of place-based
+exposure data This field houses the verbatim name of the original source
+of place-based exposure data. NA NA NA NA The meaning of
+Concept?4172703?for ?=? is identical to omission of a
+OPERATOR_CONCEPT_ID value. Since the use of this field is rare, it?s
+important when devising analyses to not to forget testing for the
+content of this field for values different from =. This is the numerical
+value of the Exposure, if available. If the raw data gives a categorial
+result for exposures those values are captured and mapped to standard
+concepts in the ?Exposure Value? domain. UNIT_SOURCE_VALUES should be
+mapped to a Standard Concept in the Unit domain that best represents the
+unit as given in the source data.</p>
 <p><strong>ETL Conventions</strong></p>
-<p>NA</p>
+<p>Each derived instance of an exposure should be assigned this unique
+key. NA NA The CONCEPT_ID to which the source exposure is mapped. This
+mapping should be integrated into the variable_source record and
+automatically populated in this record. The date range of the exposure
+should represent the temporal overlap between the place-based exposure
+data point and the LOCATION_ID’s location_history record. NA The date
+range of the exposure should represent the temporal overlap between the
+place-based exposure data point and the LOCATION_ID’s location_history
+record. NA The CONCEPT_ID to which the exposure’s data source type is
+mapped. This mapping should be integrated into the data_source record
+and automatically populated in this record. The CONCEPT_ID to which the
+relationship between the Exposure and the Person is mapped. This mapping
+should be automatically populated in this record. The CONCEPT_ID to
+which the exposure’s data source is mapped. This mapping should be
+integrated into the data_source record and automatically populated in
+this record. This name is mapped to a Standard Exposure Source Concept
+and the original name is stored here for reference. NA NA NA NA NA This
+value should be integrated into the variable_source record and
+automatically populated in this record. This mapping should be
+integrated into the variable_source record and automatically populated
+in this record. This mapping should be integrated into the
+variable_source record and automatically populated in this record.</p>
 <table class="table table-condensed table-hover" style="font-size: 13px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -2878,9 +2894,9 @@ No
 exposure_type_concept_id
 </td>
 <td style="text-align:left;">
-This field can be used to determine the provenance of the Exposure
-record, as in whether the exposure was from an ___________ or other
-sources.
+This field identifies the origin of the exposure record (e.g. Census,
+EHR, Environmental data, Geospatial data, Satellite imagery, GIS
+mapping, Sensor network, Mobile device geolocation, LiDAR)
 </td>
 <td style="text-align:left;">
 The CONCEPT_ID to which the exposure’s data source type is mapped. This
@@ -3102,11 +3118,10 @@ No
 operator_concept_id
 </td>
 <td style="text-align:left;">
-The meaning of Concept<a0>4172703<a0>for &lt;91&gt;=&lt;92&gt; is
-identical to omission of a OPERATOR_CONCEPT_ID value. Since the use of
-this field is rare, it&lt;92&gt;s important when devising analyses to
-not to forget testing for the content of this field for values different
-from =. </a0></a0>
+The meaning of Concept?4172703?for ?=? is identical to omission of a
+OPERATOR_CONCEPT_ID value. Since the use of this field is rare, it?s
+important when devising analyses to not to forget testing for the
+content of this field for values different from =.
 </td>
 <td style="text-align:left;">
 </td>
@@ -3162,8 +3177,7 @@ value_as_concept_id
 </td>
 <td style="text-align:left;">
 If the raw data gives a categorial result for exposures those values are
-captured and mapped to standard concepts in the &lt;91&gt;Exposure
-Value&lt;92&gt; domain.
+captured and mapped to standard concepts in the ?Exposure Value? domain.
 </td>
 <td style="text-align:left;">
 This mapping should be integrated into the variable_source record and
