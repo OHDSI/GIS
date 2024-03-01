@@ -13,3 +13,5 @@ ALTER TABLE backbone.attr_template  ADD CONSTRAINT fpk_attr_template_value_as_co
 ALTER TABLE backbone.attr_template  ADD CONSTRAINT fpk_attr_template_unit_concept_id FOREIGN KEY (unit_concept_id) REFERENCES backbone.concept (concept_id);
 ALTER TABLE backbone.attr_template  ADD CONSTRAINT fpk_attr_template_qualifier_concept_id FOREIGN KEY (qualifier_concept_id) REFERENCES backbone.concept (concept_id);
 ALTER TABLE backbone.attr_template  ADD CONSTRAINT fpk_attr_template_attr_source_concept_id FOREIGN KEY (attr_source_concept_id) REFERENCES backbone.concept (concept_id);
+ALTER TABLE backbone.omop_location_history  ADD CONSTRAINT fpk_omop_location_history_location_id FOREIGN KEY (location_id) REFERENCES backbone.location (location_id);
+ALTER TABLE backbone.omop_location_history  ADD CONSTRAINT fpk_omop_location_history_relationship_type_concept_id FOREIGN KEY (relationship_type_concept_id) REFERENCES backbone.concept (concept_id);

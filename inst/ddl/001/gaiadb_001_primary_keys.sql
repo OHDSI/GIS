@@ -5,3 +5,4 @@ ALTER TABLE backbone.attr_index  ADD CONSTRAINT xpk_attr_index PRIMARY KEY (attr
 ALTER TABLE backbone.geom_index  ADD CONSTRAINT xpk_geom_index PRIMARY KEY (geom_index_id);
 ALTER TABLE backbone.attr_template  ADD CONSTRAINT xpk_attr_template PRIMARY KEY (attr_record_id);
 ALTER TABLE backbone.geom_template  ADD CONSTRAINT xpk_geom_template PRIMARY KEY (geom_record_id);
+ALTER TABLE backbone.geom_omop_location  ADD CONSTRAINT xpk_geom_omop_location PRIMARY KEY (location_id);

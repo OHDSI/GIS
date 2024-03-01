@@ -11,7 +11,7 @@
 
 
 
-<title> OHDSI GIS WG</title>
+<title>gaia-datamodels.knit</title>
 
 <script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -451,8 +451,9 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore"><img src="ohdsi40x40.png"></img> OHDSI GIS
-WG</h1>
+<h1 class="title toc-ignore"><div>
+<img src="ohdsi40x40.png"></img> OHDSI GIS WG
+</div></h1>
 
 </div>
 
@@ -2656,8 +2657,10 @@ FK Domain
 exposure_occurrence_id
 </td>
 <td style="text-align:left;">
+The unique key given to a social or environmental exposure for a Person
 </td>
 <td style="text-align:left;">
+Each derived instance of an exposure should be assigned this unique key.
 </td>
 <td style="text-align:left;">
 integer
@@ -2681,6 +2684,7 @@ No
 location_id
 </td>
 <td style="text-align:left;">
+The LOCATION_ID of the Person for whom the exposure is associated.
 </td>
 <td style="text-align:left;">
 </td>
@@ -2707,6 +2711,7 @@ location
 person_id
 </td>
 <td style="text-align:left;">
+The PERSON_ID of the Person for whom the exposure is associated.
 </td>
 <td style="text-align:left;">
 </td>
@@ -2730,36 +2735,17 @@ person
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;">
-cohort_definition_id
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-integer
-</td>
-<td style="text-align:left;">
-No
-</td>
-<td style="text-align:left;">
-No
-</td>
-<td style="text-align:left;">
-No
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-</tr>
-<tr>
-<td style="text-align:left;font-weight: bold;">
 exposure_concept_id
 </td>
 <td style="text-align:left;">
+The EXPOSURE_CONCEPT_ID field is recommended for primary use in
+analyses, and must be used for network studies. This is the standard
+concept mapped from the source value which represents a exposure.
 </td>
 <td style="text-align:left;">
+The CONCEPT_ID to which the source exposure is mapped. This mapping
+should be integrated into the variable_source record and automatically
+populated in this record.
 </td>
 <td style="text-align:left;">
 integer
@@ -2784,8 +2770,12 @@ concept
 exposure_start_date
 </td>
 <td style="text-align:left;">
+Use this date to determine the start date of the exposure.
 </td>
 <td style="text-align:left;">
+The date range of the exposure should represent the temporal overlap
+between the place-based exposure data point and the LOCATION_ID’s
+location_history record.
 </td>
 <td style="text-align:left;">
 date
@@ -2834,8 +2824,12 @@ No
 exposure_end_date
 </td>
 <td style="text-align:left;">
+Use this date to determine the end date of the exposure.
 </td>
 <td style="text-align:left;">
+The date range of the exposure should represent the temporal overlap
+between the place-based exposure data point and the LOCATION_ID’s
+location_history record.
 </td>
 <td style="text-align:left;">
 date
@@ -2884,8 +2878,14 @@ No
 exposure_type_concept_id
 </td>
 <td style="text-align:left;">
+This field can be used to determine the provenance of the Exposure
+record, as in whether the exposure was from an ___________ or other
+sources.
 </td>
 <td style="text-align:left;">
+The CONCEPT_ID to which the exposure’s data source type is mapped. This
+mapping should be integrated into the data_source record and
+automatically populated in this record.
 </td>
 <td style="text-align:left;">
 integer
@@ -2911,8 +2911,13 @@ Type Concept
 exposure_relationship_concept_id
 </td>
 <td style="text-align:left;">
+This field can be used to determine the spatiotemporal relationship
+between the source Exposure and the Person
 </td>
 <td style="text-align:left;">
+The CONCEPT_ID to which the relationship between the Exposure and the
+Person is mapped. This mapping should be automatically populated in this
+record.
 </td>
 <td style="text-align:left;">
 integer
@@ -2937,8 +2942,13 @@ concept
 exposure_source_concept_id
 </td>
 <td style="text-align:left;">
+This field can be used to determine the original source of place-based
+exposure data
 </td>
 <td style="text-align:left;">
+The CONCEPT_ID to which the exposure’s data source is mapped. This
+mapping should be integrated into the data_source record and
+automatically populated in this record.
 </td>
 <td style="text-align:left;">
 integer
@@ -2963,8 +2973,12 @@ concept
 exposure_source_value
 </td>
 <td style="text-align:left;">
+This field houses the verbatim name of the original source of
+place-based exposure data.
 </td>
 <td style="text-align:left;">
+This name is mapped to a Standard Exposure Source Concept and the
+original name is stored here for reference.
 </td>
 <td style="text-align:left;">
 varchar(50)
@@ -3088,6 +3102,11 @@ No
 operator_concept_id
 </td>
 <td style="text-align:left;">
+The meaning of Concept<a0>4172703<a0>for &lt;91&gt;=&lt;92&gt; is
+identical to omission of a OPERATOR_CONCEPT_ID value. Since the use of
+this field is rare, it&lt;92&gt;s important when devising analyses to
+not to forget testing for the content of this field for values different
+from =. </a0></a0>
 </td>
 <td style="text-align:left;">
 </td>
@@ -3114,8 +3133,11 @@ concept
 value_as_number
 </td>
 <td style="text-align:left;">
+This is the numerical value of the Exposure, if available.
 </td>
 <td style="text-align:left;">
+This value should be integrated into the variable_source record and
+automatically populated in this record.
 </td>
 <td style="text-align:left;">
 float
@@ -3139,8 +3161,13 @@ No
 value_as_concept_id
 </td>
 <td style="text-align:left;">
+If the raw data gives a categorial result for exposures those values are
+captured and mapped to standard concepts in the &lt;91&gt;Exposure
+Value&lt;92&gt; domain.
 </td>
 <td style="text-align:left;">
+This mapping should be integrated into the variable_source record and
+automatically populated in this record.
 </td>
 <td style="text-align:left;">
 integer
@@ -3165,8 +3192,12 @@ concept
 unit_concept_id
 </td>
 <td style="text-align:left;">
+UNIT_SOURCE_VALUES should be mapped to a Standard Concept in the Unit
+domain that best represents the unit as given in the source data.
 </td>
 <td style="text-align:left;">
+This mapping should be integrated into the variable_source record and
+automatically populated in this record.
 </td>
 <td style="text-align:left;">
 integer
