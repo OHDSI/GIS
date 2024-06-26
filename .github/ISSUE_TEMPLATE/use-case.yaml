@@ -19,25 +19,25 @@ body:
   - type: textarea
     id: infrastructure
     attributes:
-      label: Infrastructure
-      description: "Can this be delivered with existing Infrastructure? If no, what needs to be added?"        
+      label: Infrastructure: Can this be delivered with existing Infrastructure? 
+      description: "If no, what needs to be added?"        
       placeholder: "Can this be delivered with existing infrastructure?"
   - type: textarea
     id: timeline
     attributes:
-      label: Timeline
+      label: Timeline: What is your desired timeline for completing this work?
       description: "What is your desired timeline for completing this work?"        
       placeholder: "Explain your desired timeline here"
   - type: textarea
     id: credit
     attributes:
-      label: Credit
+      label: Credit: How would you and your team like to receive credit for this work?
       description: "How would you and your team like to receive credit for this work?"        
       placeholder: "Can this be delivered with existing infrastructure?"
   - type: textarea
     id: support
     attributes:
-      label: Support
+      label: Support: What kind of support does your team need from the workgroup?
       description: "What kind of support does your team need from the workgroup?"        
       placeholder: "Describe the type of support you will need"
   - type: textarea
