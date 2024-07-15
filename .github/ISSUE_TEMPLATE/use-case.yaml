@@ -13,9 +13,9 @@ body:
   - type: textarea
     id: deliverable
     attributes:
-      label: Description
-      description: "What is your deliverable?"        
-      placeholder: "Give a description of your deliverable here"
+      label: Description - What evidence do you want generate?
+      description: "What evidence based on a combination of place-related data and EHR data do you want generate?"        
+      placeholder: "Give a description of your deliverable here. Provide enough information so that all parties can form a mental image of the final product and will be able to align their work towards a single goal."
   - type: textarea
     id: infrastructure
     attributes:
