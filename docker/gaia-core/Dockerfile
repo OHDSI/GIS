@@ -1,6 +1,12 @@
 FROM ohdsi/broadsea-hades:4.2.1
-LABEL maintainer="Tufts Medical Center <jared.houghtaling@tuftsmedicine.org>"
-USER root
+
+RUN apt-get update && \
+    apt-get install --yes --no-install-recommends \
+        libpq-dev \
+        libudunits2-dev \
+        libgdal-dev \
+        libgeos-dev \
+        libproj-dev
 
 RUN Rscript -e 'remotes::install_github("OHDSI/GIS")'
 
