@@ -1,31 +1,31 @@
 # OMOP GIS Vocabulary Package
-The OMOP GIS Vocabulary Package is designed to elevate data-driven healthcare research by enabling the integration of spatial, environmental, behavioral, socioeconomic, phenotypic, and toxin-related determinants of health into standardized data structures. This comprehensive framework facilitates a multi-dimensional understanding of health outcomes, accounting for both external environmental exposures and intrinsic patient characteristics.
+The OMOP GIS (Geographic Information System) Vocabulary Package is designed to elevate data-driven healthcare research by enabling the integration of spatial, environmental, behavioral, socioeconomic, phenotypic, and toxin-related determinants of health into standardized data structures. This comprehensive framework facilitates a multi-dimensional understanding of health outcomes, accounting for both external environmental exposures and intrinsic patient characteristics.
 
 This package is a vital extension of the OMOP CDM, addressing the growing need to contextualize healthcare data with external environmental and societal factors. Developed and maintained by the [GIS Working Group](https://www.ohdsi.org/web/wiki/doku.php?id=projects:workgroups:gis), this package provides vocabularies, scripts, and documentation for seamless term integration into existing OHDSI vocabularies.
 
 * **Objective**: To provide a comprehensive, standardized framework that enables the incorporation of geographic, toxicological, healthcare, behavioral, and socioeconomic terminology into the OMOP Common Data Model (CDM).
-* **Application**: Ideal for terminologists, researchers, epidemiologists, and data analysts.
+* **Application**: Ideal for terminologists, ontologists, researchers, epidemiologists, and data analysts.
 * **Integration**:
-    * The package is compatible with existing OMOP CDM, allowing for the extension and integration of geographic and societal data into standard health databases.
-    * All vocabularies, scripts, and mappings conform to OMOP standards, ensuring interoperability with commonly used health data platforms and tools.
-    * Designed to scale with evolving data needs, including new terms, environmental datasets, and expanding global health contexts.
+    * The package is compatible with existing OMOP CDM.
+    * All vocabularies, scripts, and mappings conform to OMOP standards.
+    * Designed to scale with evolving data needs and expanding global health contexts.
+----------------------------------------------      
 * **Features**:
     * **OMOP GIS Vocabulary**: Standardizes geographical terminologies and spatial data, supporting geospatial epidemiology, healthcare accessibility studies, and population health research. The OMOP GIS vocabulary is a compilation of terminologies related to geography, boundaries, and spatial elements. 
-The vocabulary encompasses 159 concepts of the Observation OMOP domain. They are categorized by **concept_class_id as**.* **Target OMOP Vocabularies used in mappings**: OSM, SNOMED (+SDOH)
-    * **OMOP Exposome Vocabulary**: Integrates environmental and toxicological factors (exposomes) into the OMOP CDM, providing a taxonomy of environmental pollutants, toxins, and chemical agents. Offers a comprehensive taxonomy and classification system centered on environmental substances (exposomes). Designed to facilitate structured data capture, analysis, and interpretation, this vocabulary forms the foundation for toxicological studies within the observational health data paradigm. The concepts within the OMOP Exposome Vocabulary belong to the 'Observation' domain and the 'Substance' concept class in OMOP. **Target OMOP Vocabularies used in mappings**: SNOMED, RxNorm, RxNorm Extension, OMOP Genomic. 
-    * **OMOP SDOH (Social Determinants of Health) Vocabulary**: Captures and standardizes social and environmental factors critical to understanding health disparities and community health. The SDOH vocabulary encapsulates a refined set of terminologies delineating the multifaceted environmental and societal factors that significantly influence individual and community health outcomes. The vocabulary boasts a comprehensive structure, organized hierarchically to facilitate precise categorization and effective data navigation. Within this structure, the SDOH vocabulary seamlessly integrates key components from recognized standards such as the Social Vulnerability Index (SVI), the Agency for Healthcare Research and Quality (AHRQ) frameworks, and the Social Determinants of Health Ontology (SDOHO) nodes. This integration ensures a rich, multi-dimensional perspective, capturing a wide spectrum of determinants from socioeconomic status to healthcare access, and from educational opportunities to neighborhood and built environment. The concepts in the SDOH Vocabulary are part of the newly introduced domains to expand the scope of OMOP. Within the SDOH Vocabulary, there are precisely 8,194 concept associations, systematically structured. This framework defines an intrinsic hierarchy specific to SDOH, while simultaneously interfacing with external OMOP vocabularies. This dual-layered architectural design enhances the robustness and granularity of the representation of the social determinants of health across ODHSI. **Target OMOP Vocabularies used in mappings**: SNOMED, ATC, CPT4, HCPCS, LOINC, Nebraska Lexicon, OMOP Extension, PPI, Race, UK Biobank (+OMOP GIS).
-#### Examples of Main Nodes of the SDOH Hierarchy
-* Element Relevant To Demographics
-* Element Relevant To Education
-* Element Relevant To Geographic Location
-* Element Relevant To Health
-* Element Relevant To Physical Environment
-* Element Relevant To Population
-* Element Relevant To Social And Community Context
+The vocabulary encompasses 159 concepts of the Observation OMOP domain. 
+    * **OMOP Exposome Vocabulary**: Integrates environmental and toxicological factors (exposomes) into the OMOP CDM, providing a taxonomy of environmental pollutants, toxins, and chemical agents. Offers a comprehensive taxonomy and classification system centered on environmental substances (exposomes). Designed to facilitate structured data capture, analysis, and interpretation, this vocabulary forms the foundation for toxicological studies within the observational health data paradigm. The concepts within the OMOP Exposome Vocabulary belong to the 'Observation' domain and the 'Substance' concept class in OMOP.
+    * **OMOP SDOH (Social Determinants of Health) Vocabulary**: encapsulates a refined set of terminologies delineating the multifaceted environmental and societal factors that significantly influence individual and community health outcomes. The vocabulary boasts a comprehensive structure, organized hierarchically to facilitate precise categorization and effective data navigation. Within this structure, the SDOH vocabulary seamlessly integrates key components from recognized standards such as the Social Vulnerability Index (SVI), the Agency for Healthcare Research and Quality (AHRQ) frameworks, and the Social Determinants of Health Ontology (SDOHO) nodes. This integration ensures a rich, multi-dimensional perspective, capturing a wide spectrum of determinants from socioeconomic status to healthcare access, and from educational opportunities to neighborhood and built environment. Examples of Main Nodes of the SDOH Hierarchy:
+     * Element Relevant To Demographics
+     * Element Relevant To Education
+     * Element Relevant To Geographic Location
+     * Element Relevant To Health
+     * Element Relevant To Physical Environment
+     * Element Relevant To Population
+     * Element Relevant To Social And Community Context
 
 -----------------------------------
 ## Sources
-The following data sources have been processed to enrich and integrate spatial, environmental, behavioral, socioeconomic, phenotypic, and toxin-related determinants into the OMOP GIS Vocabulary Package. 
+The following data sources have been processed to enrich and integrate spatial, environmental, behavioral, socioeconomic, phenotypic, and toxin-related entities into the OMOP GIS Vocabulary Package. 
 
 1. **Area Deprivation Index (ADI)**
 * Link: [ADI Story Map](https://storymaps.arcgis.com/stories/a5511f076857458188737a6c9c18a744)
@@ -73,7 +73,16 @@ The following data sources have been processed to enrich and integrate spatial, 
 * Use Case: [Issue #194](https://github.com/OHDSI/GIS/issues/194)
 * Description: The Toxin and Toxin Target Database (T3DB) is a comprehensive resource that catalogs toxins and their biological targets.
 
+The list of the collected source terms and their mappings are maintained in an editable [Google Spreadsheet](https://docs.google.com/spreadsheets/d/1hMLjKokFCpoDqC_WsAd7ZXyBKDmnPif2rR9DlQ9X7cs/edit?usp=sharing), allowing for real-time collaboration and ongoing validation by the community.
+
+## Concept Names
+Concept names adhere to source data specifications or are guided by relevant literature.
+
+## Concept Codes
+Concept codes were either adopted directly from source data or autogenerated for newly developed terms (start with 'GIS' prefix).
+
 ## Domains
+
 | **domain_id**           | **Definition**                                                                                               | **Example**                                             | **Exists in OMOP** |
 |-------------------------|-------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|--------------------|
 | **Behavioral Feature**   | Refers to actions or behaviors by individuals that influence health outcomes, often related to lifestyle choices. | `Element Relevant To Physical Activity`                                                    | **NO**             |
@@ -85,12 +94,6 @@ The following data sources have been processed to enrich and integrate spatial, 
 | **Phenotypic Feature**   | Refers to observable traits or characteristics of an individual, influenced by genetic and environmental factors. | `Element Relevant To Depression`                             | **NO**             |
 | **Socioeconomic Feature**| Involves social and economic factors that impact health, such as income, education, or employment status.     | `Employment In Population`                                                     | **NO**             |
 | **Type Concept**         | A categorization used to define where the record comes from.                                                 | `Air Quality Database`                                                                                             | **YES**            |
-## Concept Names
-All concept names are uniquely generated, adhering to source data specifications and informed by the relevant literature to ensure precision and alignment with established terminologies.
-
-## Concept Codes
-Concept codes were either adopted directly from source data or autogenerated for newly developed terms (start with 'GIS' prefix).
-
 ## Concept Classes
 | **concept_class_id**    | **Definition**                                                                                                     | **Example**                                                                                                     |
 |-------------------------|---------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
@@ -129,43 +132,89 @@ Concept codes were either adopted directly from source data or autogenerated for
 | **SVI Item**            | A specific data point within the SVI framework.                                                                     | `Persons Below 150% Poverty Estimate MOE`      |
 
 ### Additional Glossary for Concept Classes Understanding:
-* **Construct**:
-* A construct is an abstract concept used to understand and evaluate various determinants of health. It serves as a framework or model that explains complex relationships and behaviors.
-* Constructs are often broken down into measurable variables for research. For example, "socioeconomic status" is a construct, but it can be measured using concrete variables like income, education level, or occupation.
-* Constructs organize and conceptualize determinants, making it easier to analyze and understand their impact on health outcomes.
+* **Construct**: represents conceptual or behavioral elements that are often measured through subjective or indirect means. Constructs are used to characterize complex or abstract social, psychological, or environmental phenomena that contribute to understanding health outcomes but are not necessarily directly measurable or causal by themselves. Examples:
+    * Social Norms And Attitude (SDOHO Construct)
+    * Sexual Orientation (SDOHO Construct)
+    * Occupational Hazards (SDOH Construct)
+    * Neighborhood Safety (SDOH Construct)
+These examples reflect behaviors, relationships, and environmental factors that influence health outcomes, but they are abstract and typically involve interpretation, surveys, or proxies for measurement.
 
-* **Determinant**: 
-* A determinant is a specific factor or condition that directly affects health outcomes. It refers to real-world factors that influence the health of individuals or populations.
-* Determinants can be either positive or negative, including factors like socioeconomic status, education, physical environment, employment, and social support.
-* They are actionable, meaning interventions can target these determinants to improve health outcomes.
+* **Determinant**: is a specific, measurable factor that has a more direct influence on health outcomes. Determinants are often quantifiable and can be linked more concretely to causes or risk factors affecting a person’s health, such as economic status, education, or access to healthcare. Examples:
+    * Veteran Status (SDOHO Determinant)
+    * Healthcare Provider Availability (SDOH Determinant)
+    * Income (AHRQ Determinant)
+    * Tobacco Use (SDOHO Determinant)
+    * Vaccination Status (SDOH Determinant)
 
-* **Item**:
-    * Refers to a specific element or factor within a broader determinant category. Think of determinants as overarching categories or themes, and determinant items as the individual aspects or components of those themes.
-    * Each determinant item provides a more granulated perspective, allowing for detailed examination and understanding of the broader determinant.
-* **Item Value**:
-    * For some determinant items, there are specific measurable values or states that the item can take.
-    * Using the example of the determinant item "employment status," the item values might include "employed," "unemployed," "self-employed," "retired," etc.
+* **Item**: is a specific, measurable data point or element that is used to evaluate a larger construct or determinant.
+    * % Households Without A Motor Vehicle (ADI Item)
+    * All Cause Readmissions Per 100 Male Admissions (AHRQ Item)
+    * Ambient Concentrations Of Diesel PM/M3 (EJI EBM Item)
+    * Civilian (Age 16+) Unemployed Estimate (SVI Item)
+
+* **Item Value**: is a specific measurable value or state that the item can take. The item values might include "employed," "unemployed," "self-employed," "retired," etc.
       
 ## Concept Status (Standardness)
-By default, all GIS codes are designated as standard concepts. However, if a full semantic match is identified, they are mapped to the corresponding standard concepts in their respective domains and reclassified as non-standard.
+If a full semantic match is identified in OMOP, GIS codes are mapped to the corresponding standard concepts and reclassified as non-standard. If no match is found, GIS codes are retained as standard concepts.
+
+## Valid Start Date
+| **vocabulary_id**       | **valid_start_date**                  |
+|-------------------------|---------------------------------------|
+| OMOP Exposome            | source field `updated_at` in 'MM-DD-YYYY' format   |
+| OMOP Exposome (cas is null) | 09-14-2024  |
+| OMOP SDOH (concept_class_id_1 ~ 'SDOHO') | 01-01-2022           |
+| OMOP SDOH (concept_class_id_1 ~ 'ADI')     | 01-01-2018           |
+| OMOP SDOH (concept_class_id_1 ~ 'AHRQ')   | 01-01-2022           |
+| OMOP SDOH (concept_class_id_1 ~ 'COI')     | 01-01-2020           |
+| OMOP SDOH (concept_class_id_1 ~ 'EJI')     | 01-01-2022           |
+| OMOP SDOH (concept_class_id_1 ~ 'SEDH')   | 01-01-2021           |
+| OMOP SDOH (concept_class_id_1 ~ 'SVI')     | 01-01-2018           |
+| OMOP SDOH (concept_class_id_1 ~ 'SDG')     | 03-01-2017             |
+| All other cases          | 09-14-2024       |
 
 ## Relationships
+| **relationship_id**         | **reverse_relationship_id** | **Meaning**                                                                                             |
+|-----------------------------|-----------------------------|---------------------------------------------------------------------------------------------------------|
+| **Locates in cell**          | **Cell contains**            | Indicates that a certain agent or substance is found within or targets a cellular entity.                |
+| **Locates in tissue**        | **Tissue contains**          | Suggests that a certain agent or substance is present within or targets a specific tissue type.          |
+| **Impacts on process**       | **Impacted by**              | Signifies that an agent or substance exerts an influence on a specific process.                          |
+| **Affects biostructure**     | **Affected by**              | Suggests that an agent or substance has an impact on a certain biological structure.                     |
+| **Maps to**                  | **Mapped from**              | Indicates a relationship where a concept is equated to or represented as a standard OMOP concept.        |
+| **Is a**                     | **Subsumes**                 | Hierarchical relationship where a concept is a subset or instance of a more general concept.             |
+| **Has associated finding**   | **Asso finding of**          | Indicates a relationship between a concept and an associated finding related to it.                      |
+| **Has relat context**        | **Relat context of**         | Describes the contextual relationship between two related concepts.                                      |
+| **Has geometry**             | **Is geometry of**           | Represents the spatial or geometric relationship between an entity and its geographic or spatial structure. |
 
-| relationship_id     | reverse relationship_id | meaning |
-|---------------------|-------|-------|
-| Cellular agent     | Locates in cell | Indicates that a certain agent or substance is found within or targets a cellular entity. |
-| Tissue agent  | Locates in tissue | Suggests that a certain agent or substance is present within or targets a specific tissue type. |
-| Impacts on process         | Impacted by  | Signifies that an agent or substance exerts an influence on a specific process. |
-| Affects biostructure |  Affected by | Suggests that an agent or substance has an impact on a certain biological structure. |
-| Maps to             | Mapped from | This signifies a relationship where a concept can be equated to or represented as a standard OMOP concept. |
-| Is a                | Subsumes | Hierarchical relationship where a concept is a subset or instance of another more general concept. |
-| Has component  | Component of | Represents mapping to a SNOMED/LOINC attribute where relevant |
+Examples:
+    * **Hierarchical relationships**: *'Is a'* - *'Subsumes'*: 'Polygon' - 'Is a' - '2D (Two-Dimensional) Geometry' / '2D (Two-Dimensional) Geometry' - 'Subsumes' - 'Polygon'
+    * **Supplemental GIS-specific relationships**: e.g. *'Is geometry of'* - *'Has geometry'*: 'LineString'	-	 'Is geometry of' -	'International Border' / 'International Border'	-	'Has geometry' - 'LineString'
 
-- **Hierarchical relationships**: *'Is a'* - *'Subsumes'*: 'Polygon' - 'Is a' - '2D (Two-Dimensional) Geometry' / '2D (Two-Dimensional) Geometry' - 'Subsumes' - 'Polygon'
-- **Supplemental GIS-specific relationships**: e.g. *'Is geometry of'* - *'Has geometry'*: 'LineString'	-	 'Is geometry of' -	'International Border' / 'International Border'	-	'Has geometry' - 'LineString'
+## Mapping and Hierarchy
+
+| **target_vocabulary_id** | **number of associations** |
+|----------------------------|-----------|
+| OMOP Exposome               | 82,150    |
+| OMOP SDOH                   | 6,738     |
+| RxNorm                      | 4,418     |
+| RxNorm Extension            | 2,221     |
+| SNOMED                      | 1,769     |
+| LOINC                       | 776       |
+| OMOP GIS                    | 423       |
+| ICD10CM                     | 122       |
+| PPI                         | 56        |
+| OMOP Genomic                | 49        |
+| OMOP Extension              | 32        |
+| OSM                         | 25        |
+| UK Biobank                  | 24        |
+| Type Concept                | 24        |
+| CPT4                        | 10        |
+| HCPCS                       | 9         |
+| Nebraska Lexicon            | 3         |
+| Race                        | 2         |
+| ATC                         | 2         |
     
 ### Future work:
-* Test the vocabulary with more use cases
+* Test the vocabulary with more use cases.
 * Fix hidden errors.
 * Build additional hierarchical relationships.
 * Enrich and refine the vocabulary.
