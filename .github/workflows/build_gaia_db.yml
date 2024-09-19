@@ -21,7 +21,7 @@ jobs:
       matrix:
         include:
           - dockerfile: ./docker/gaia-db/Dockerfile
-            image: ghcr.io/ohdsi/gaia-db
+            image: ghcr.io/TuftsCTSI/gaia-db
             context: .
     permissions:
       contents: read
@@ -41,7 +41,7 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
-          username: <SOME ADMIN USER>
+          username: jshoughtaling
           password: ${{ secrets.GH_TOKEN }}
 
       - name: Extract Docker metadata
