@@ -32,7 +32,7 @@ tableExists <- DatabaseConnector::existsTable(conn,
 
 if (!tableExists) {
   message("Loading attr table dependency")
-  loadVariable(conn = conn, connectionDetails = connectionDetails, variableSourceId)
+  loadVariable(connectionDetails = connectionDetails, variableSourceId)
 }
 }
 
