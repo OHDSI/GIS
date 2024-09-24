@@ -4,14 +4,14 @@
 \alias{setSridWgs84}
 \title{Set the SRID on the geom_wgs84 column in PostGIS gaiaDB}
 \usage{
-setSridWgs84(connectionDetails, staged, geomIndex)
+setSridWgs84(connectionDetails, geometryType, geomIndex)
 }
 \arguments{
 \item{connectionDetails}{(list) An object of class connectionDetails as created by the createConnectionDetails function}
 
-\item{staged}{(data.frame) A well-formatted geometry table. Created by appending staging data table to an geom_template}
-
 \item{geomIndex}{(data.frame) A full record (entire row) from the backbone.geom_index table corresponding to the registered geometry of interest}
+
+\item{staged}{(data.frame) A well-formatted geometry table. Created by appending staging data table to an geom_template}
 }
 \value{
 SRID set to 4326 the geom_wgs84 column in the given table in gaiaDB
