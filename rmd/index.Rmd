@@ -16,7 +16,7 @@ The OHDSI GIS workgroup aims to introduce new infrastructure, tooling, and CDM e
 
 ## **Meeting Schedule**
 
-The OHDSI GIS Workgroup meets weekly on **Fridays at 10 AM ET** ([Meeting Link](https://teams.microsoft.com/l/meetup-join/19%3ameeting_NmJlZGU3ZWYtZTc3OC00Mjk4LThjMGEtNWMxYjdhNzgzY2Zi%40thread.v2/0?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d))
+The OHDSI GIS Workgroup meets weekly on **Fridays at 10 AM ET** ([Meeting Link](https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d))
 
 We also meet out-of-band with collaborators at "use case" meetings. If you have specific goals for generating evidence using place-based data in conjunction with OMOP data, we’d love to work with you. Please see our page on [proposing new use cases](gi-propose-usecase.html).
 <br>
