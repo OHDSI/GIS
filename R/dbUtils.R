@@ -107,7 +107,7 @@ getAttrNameFromVariableSourceId <- function(connectionDetails, variableSourceId)
     	select data_source_uuid
     	from backbone.variable_source vs
     	where variable_source_id = ", variableSourceId,"
-    )"
+    ) LIMIT 1"
   )
   )[[1]]  
 }
