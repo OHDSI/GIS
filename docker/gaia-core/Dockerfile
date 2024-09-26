@@ -13,4 +13,13 @@ RUN Rscript -e 'remotes::install_github(repo = "r-spatial/sf", ref = "93a25fd8e2
 
 RUN Rscript -e 'remotes::install_github("OHDSI/GIS")'
 
+# This provides an API to gaiaCore, could be moved to the package DESCRIPTION
+RUN Rscript -e 'install.packages("plumber")'
+
+# copy api app for gaiaCore
+COPY ./docker/gaia-core/R /ohdsi-gis
+WORKDIR /ohdsi-gis
+
+# CMD ["sh", "-c", "Rscript gaia.R"]
+
 #ENTRYPOINT ["/app/entrypoint.sh"]
