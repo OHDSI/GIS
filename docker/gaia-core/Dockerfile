@@ -13,4 +13,6 @@ RUN Rscript -e 'remotes::install_github(repo = "r-spatial/sf", ref = "93a25fd8e2
 
 RUN Rscript -e 'remotes::install_github("OHDSI/GIS")'
 
+RUN Rscript -e 'DatabaseConnector::downloadJdbcDrivers(dbms="postgresql", pathToDriver="/opt")'
+
 #ENTRYPOINT ["/app/entrypoint.sh"]
