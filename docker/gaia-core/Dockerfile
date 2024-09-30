@@ -18,6 +18,11 @@ RUN Rscript -e 'remotes::install_github("OHDSI/GIS@containerize")'
 # Install postgres driver
 RUN Rscript -e 'DatabaseConnector::downloadJdbcDrivers(dbms="postgresql", pathToDriver="/opt")'
 
+# Outdated Andromeda package from Hades causes error
+# "Error: 'isAndromedaTable' is not an exported object from 'namespace:Andromeda'"
+# Broadsea HADES dockerhub package should be updated to use Andromeda v0.6.7
+RUN Rscript -e 'install.packages("Andromeda")'
+
 # This provides an API to gaiaCore, could be moved to the package DESCRIPTION
 RUN Rscript -e 'install.packages("plumber")'
 
