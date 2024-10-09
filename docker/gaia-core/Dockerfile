@@ -16,7 +16,8 @@ RUN Rscript -e 'remotes::install_github(repo = "r-spatial/sf", ref = "93a25fd8e2
 RUN Rscript -e 'remotes::install_github("OHDSI/GIS@containerize")'
 
 # Install postgres driver
-RUN Rscript -e 'DatabaseConnector::downloadJdbcDrivers(dbms="postgresql", pathToDriver="/opt")'
+ENV DATABASECONNECTOR_JAR_FOLDER=/jdbc
+RUN Rscript -e 'DatabaseConnector::downloadJdbcDrivers("postgresql")'
 
 # Outdated Andromeda package from Hades causes error
 # "Error: 'isAndromedaTable' is not an exported object from 'namespace:Andromeda'"
@@ -29,7 +30,6 @@ RUN Rscript -e 'install.packages("plumber")'
 # copy api app for gaiaCore
 COPY ./docker/gaia-core/R /ohdsi-gis
 WORKDIR /ohdsi-gis
-
-# CMD ["sh", "-c", "Rscript gaia.R"]
+RUN Rscript gaia.R
 
 #ENTRYPOINT ["/app/entrypoint.sh"]
