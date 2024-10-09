@@ -30,6 +30,6 @@ RUN Rscript -e 'install.packages("plumber")'
 # copy api app for gaiaCore
 COPY ./docker/gaia-core/R /ohdsi-gis
 WORKDIR /ohdsi-gis
-RUN Rscript gaia.R
+# RUN Rscript gaia.R
 
 #ENTRYPOINT ["/app/entrypoint.sh"]
