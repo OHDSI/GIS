@@ -22,14 +22,14 @@ RUN Rscript -e 'install.packages("Andromeda")'
 
 # This provides an API to gaiaCore, could be moved to the package DESCRIPTION
 RUN Rscript -e 'install.packages("plumber")'
-
-# copy api app for gaiaCore
 COPY ./docker/gaia-core/R /ohdsi-gis
 WORKDIR /ohdsi-gis
-# RUN Rscript gaia.R
 
+# Add API service to supervisord
 RUN echo "" >> /etc/supervisor/conf.d/supervisord.conf \
     && echo "[program:Rscript]" >> /etc/supervisor/conf.d/supervisord.conf \
-    && echo "command=/usr/local/bin/Rscript /ohdsi-gis/gaia.R" >> /etc/supervisor/conf.d/supervisord.conf 
+    && echo "command=/usr/local/bin/Rscript /ohdsi-gis/gaia.R" >> /etc/supervisor/conf.d/supervisord.conf \
+	&& echo "" >> /etc/supervisor/conf.d/supervisord.conf \
+	&& echo "stdout_logfile=/var/log/supervisor/%(program_name)s.log" >> /etc/supervisor/conf.d/supervisord.conf
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
