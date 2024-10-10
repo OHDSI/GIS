@@ -28,4 +28,8 @@ COPY ./docker/gaia-core/R /ohdsi-gis
 WORKDIR /ohdsi-gis
 # RUN Rscript gaia.R
 
-#ENTRYPOINT ["/app/entrypoint.sh"]
+RUN echo "" >> /etc/supervisor/conf.d/supervisord.conf \
+    && echo "[program:Rscript]" >> /etc/supervisor/conf.d/supervisord.conf \
+	&& echo "command=/usr/local/bin/Rscript /ohdsi-gis/gaia.R" >> /etc/supervisor/conf.d/supervisord.conf 
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
