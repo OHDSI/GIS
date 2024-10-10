@@ -15,10 +15,6 @@ RUN Rscript -e 'remotes::install_github(repo = "r-spatial/sf", ref = "93a25fd8e2
 # on the containerize branch
 RUN Rscript -e 'remotes::install_github("OHDSI/GIS@containerize")'
 
-# Install postgres driver
-ENV DATABASECONNECTOR_JAR_FOLDER=/jdbc
-RUN Rscript -e 'DatabaseConnector::downloadJdbcDrivers("postgresql")'
-
 # Outdated Andromeda package from Hades causes error
 # "Error: 'isAndromedaTable' is not an exported object from 'namespace:Andromeda'"
 # Broadsea HADES dockerhub package should be updated to use Andromeda v0.6.7
