@@ -44,12 +44,37 @@ loadGeometry <- function(connectionDetails, dataSourceUuid) {
 
   stagedResult <- standardizeStaged(staged = staged, spec = dataSourceRecord$geom_spec)
 
+  geometryType <- ""
+  if (!is.null(staged$geometry)) {
+    geometryType <- as.character(unique(sf::st_geometry_type(staged$geometry)))
+  } else {
+    geometryType <- as.character(unique(sf::st_geometry_type(sf::st_as_sf(stagedResult)$geom_local_value)))
+  }
+  
   # Transform local geometry to epsg:4326
   if (!"geom_wgs84" %in% names(stagedResult)) {
+    stagedResult <- sf::st_as_sf(stagedResult)
+    if (is.na(sf::st_crs(stagedResult))){
+        if (length(unique(stagedResult$geom_local_epsg)) == 0) {
+          stop("Error: No local EPSG set. CRS cannot be set. Geometry cannot be loaded.")
+        } else if (length(unique(stagedResult$geom_local_epsg)) == 1) {
+          stagedResult <- sf::set_crs(stagedResult, unique(stagedResult$geom_local_epsg)[[1]])
+        } else {
+          epsg <- unique(stagedResult$geom_local_epsg)
+          epsg_df <- lapply(epsg, function(x) {
+            epsg_fragment <- dplyr::filter(stagedResult, geom_local_epsg==x)
+            epsg_fragment <- sf::st_set_crs(epsg_fragment, x)
+            epsg_fragment$geom_local_value <- sf::st_transform(epsg_fragment$geom_local_value, 4326)
+            epsg_fragment
+          })
+          stagedResult <- dplyr::bind_rows(epsg_df, .id="column_label")
+        }
+    }
     stagedResult$geom_wgs84 <- sf::st_transform(stagedResult$geom_local_value, 4326)
   }
   
   # format for insert
+  stagedResult <- data.frame(stagedResult)
   if (!"character" %in% class(stagedResult$geom_local_value)) {
     stagedResult$geom_local_value <- sf::st_as_binary(stagedResult$geom_local_value, EWKB = TRUE, hex = TRUE)
     stagedResult$geom_wgs84 <- sf::st_as_binary(stagedResult$geom_wgs84, EWKB = TRUE, hex = TRUE)
@@ -88,7 +113,7 @@ loadGeometry <- function(connectionDetails, dataSourceUuid) {
   
   # Set SRID on geom_wgs84 after table import
   setSridWgs84(connectionDetails = connectionDetails,
-               staged = staged,
+               geometryType = geometryType,
                geomIndex = geomIndexRecord)
   
   # Index the geometry column (geom_local_value, geom_wgs84)
