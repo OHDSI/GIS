@@ -93,8 +93,39 @@ getStaged <- function(rec, storageConfig = readStorageConfig()) {
       }
       return(readFromZip(zipfile = tempzip, exdir = gisTempDir, rec = rec))
 
+    } else if (rec$download_subtype == "tar" | rec$download_subtype == "tar.gz" ) { 
+      # copied from above, much optimization to do in all of this ...
+
+      if(isTRUE(storageDir)) { # If there is no config file or no storageDir set, this can be skipped
+      # If the storage directory exists, assume zip file must be there
+        if(dir.exists(storageDir)) {
+          message("Skipping download (rar file located on disk) ...")
+          return(readFromRar(rarfile = file.path(storageDir, rec$download_url),
+                      exdir = gisTempDir,
+                      rec = rec))
+        }
+        
+        # If the storage directory does not exist, but isPersisted is True, create storageDirectory and save zip there
+        if(isPersisted && !dir.exists(storageDir)) {
+          dir.create(storageDir)
+          rarile <- file.path(storageDir, basename(rec$download_url))
+          # TODO use a try-catch: 
+          # If download fails, delete storageDir entirely
+          utils::download.file(url = rec$download_url, destfile = rarfile)
+          return(readFromRar(rarfile = zipfile, exdir = gisTempDir, rec = rec))
+        }
+      }
+    
+      temprar <- file.path(gisTempDir, basename(rec$download_url))
+      if (!file.exists(temprar)) {
+        utils::download.file(rec$download_url, temprar)
+      } else {
+        message("Skipping download (rarfile located on disk) ...")
+      }
+      return(readFromRar(rarfile = temprar, exdir = gisTempDir, rec = rec))
+
     }
-  }
+  } 
 }
 
 
@@ -121,6 +152,28 @@ readStorageConfig <- function() {
 
 readFromZip <- function(zipfile, exdir, rec) {
   utils::unzip(zipfile, exdir=exdir)
+  if (rec$download_data_standard %in% list('shp','gdb')) {
+    return(sf::st_read(file.path(exdir, rec$download_filename)))
+  } else if (rec$download_data_standard == 'csv') {
+    return(utils::read.csv(file = file.path(exdir, rec$download_filename),
+                           check.names = FALSE))
+  } else {
+    message(paste0("no import handler for",rec$download_data_standard))
+  }
+}
+
+
+#' Unrar and read contents of a rar file into R memory
+#'
+#' @param rarfile (character) path to the compressed file
+#' @param exdir (character) path to where contents of the compressed file should be extracted
+#' @param rec (data.frame) A full record (entire row) from the backbone.data_source table corresponding to the data source of interest. Usually created using \code{getDataSourceRecord} function
+#'
+#' @return (data.frame) An untransformed version of the source data
+#'
+
+readFromRar <- function(rarfile, exdir, rec) {
+  utils::unrar(rarfile, exdir=exdir)
   if (rec$download_data_standard %in% list('shp','gdb')) {
     return(sf::st_read(file.path(exdir, rec$download_filename)))
   } else if (rec$download_data_standard == 'csv') {
