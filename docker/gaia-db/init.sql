@@ -24,7 +24,7 @@ CREATE TABLE data_source (
 			download_filename varchar(100) NOT NULL,
 			download_url varchar(100) NOT NULL,
 			download_auth varchar(100) NULL,
-			documentation_url varchar(100) NULL );
+			documentation_url varchar(120) NULL );
 
 
 CREATE TABLE variable_source (
