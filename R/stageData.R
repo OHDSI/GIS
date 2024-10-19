@@ -97,32 +97,32 @@ getStaged <- function(rec, storageConfig = readStorageConfig()) {
       # copied from above, much optimization to do in all of this ...
 
       if(isTRUE(storageDir)) { # If there is no config file or no storageDir set, this can be skipped
-      # If the storage directory exists, assume zip file must be there
+      # If the storage directory exists, assume tar file must be there
         if(dir.exists(storageDir)) {
-          message("Skipping download (rar file located on disk) ...")
-          return(readFromRar(rarfile = file.path(storageDir, rec$download_url),
+          message("Skipping download (tar file located on disk) ...")
+          return(readFromTar(tarfile = file.path(storageDir, rec$download_url),
                       exdir = gisTempDir,
                       rec = rec))
         }
         
-        # If the storage directory does not exist, but isPersisted is True, create storageDirectory and save zip there
+        # If the storage directory does not exist, but isPersisted is True, create storageDirectory and save tip there
         if(isPersisted && !dir.exists(storageDir)) {
           dir.create(storageDir)
-          rarile <- file.path(storageDir, basename(rec$download_url))
+          tarfile <- file.path(storageDir, basename(rec$download_url))
           # TODO use a try-catch: 
           # If download fails, delete storageDir entirely
-          utils::download.file(url = rec$download_url, destfile = rarfile)
-          return(readFromRar(rarfile = zipfile, exdir = gisTempDir, rec = rec))
+          utils::download.file(url = rec$download_url, destfile = tarfile)
+          return(readFromTar(tarfile = tarfile, exdir = gisTempDir, rec = rec))
         }
       }
     
-      temprar <- file.path(gisTempDir, basename(rec$download_url))
-      if (!file.exists(temprar)) {
-        utils::download.file(rec$download_url, temprar)
+      temptar <- file.path(gisTempDir, basename(rec$download_url))
+      if (!file.exists(temptar)) {
+        utils::download.file(rec$download_url, temptar)
       } else {
-        message("Skipping download (rarfile located on disk) ...")
+        message("Skipping download (tarfile located on disk) ...")
       }
-      return(readFromRar(rarfile = temprar, exdir = gisTempDir, rec = rec))
+      return(readFromTar(tarfile = temptar, exdir = gisTempDir, rec = rec))
 
     }
   } 
@@ -172,8 +172,8 @@ readFromZip <- function(zipfile, exdir, rec) {
 #' @return (data.frame) An untransformed version of the source data
 #'
 
-readFromRar <- function(rarfile, exdir, rec) {
-  utils::unrar(rarfile, exdir=exdir)
+readFromTar <- function(tarfile, exdir, rec) {
+  utils::untar(tarfile, exdir=exdir)
   if (rec$download_data_standard %in% list('shp','gdb')) {
     return(sf::st_read(file.path(exdir, rec$download_filename)))
   } else if (rec$download_data_standard == 'csv') {
