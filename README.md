@@ -38,6 +38,17 @@ docker run -itd --rm -e USER="ohdsi" -e PASSWORD="mypass" --network gaia -p 8787
 docker run -itd --rm -e POSTGRES_PASSWORD=SuperSecret -e POSTGRES_USER=postgres --network gaia -p 5432:5432 --name gaia-db gaia-db
 ```
 
+## Load "local" datasets
+Local datasets can be used in gaia-db by loading them to the "offline storage directory", as specified in config.yml, in the gaia-core container. This directory can be specified in the inst/config.yml before building the image (/opt/data by default).
+
+Datasets must share the `download_url` from the data_source_record and be stored in a subdirectory that shares the `dataset_name` from the data_source record:
+```sh
+# Create directory as specified in config.yml/offline_storage/directory
+docker exec -it gaia-core bash -c "mkdir -p /opt/data/annual_measurement_2024"
+# Copy file to directory specified in config.yml, with filename specified in data_source/download_url
+docker cp /path/to/local/shpfile.zip gaia-core:/opt/data/annual_measurement_2024/shpfile.zip
+```
+
 ## Using gaiaCore
 The gaia-core container provides an R and RStudio environment with the R Package `gaiaCore` alongside the OHDSI HADES R Packages. `gaiaCore` provides the functionality for loading cataloged geospatial datasets into gaia-db and generate "exposures" by linking geospatial data to patient addresses.
 

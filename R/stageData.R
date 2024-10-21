@@ -39,8 +39,8 @@ getStaged <- function(rec, storageConfig = readStorageConfig()) {
   # ONLY HANDLES FILES (NO API YET)
   # TODO there has to be a different way to change timeout without changing options
   
-  isPersisted <- storageConfig$`offline-storage`$`persist-data`
-  storageDir <- file.path(storageConfig$`offline-storage`$directory, rec$dataset_name)
+  isPersisted <- storageConfig$offline_storage$persist_data
+  storageDir <- file.path(storageConfig$offline_storage$directory, rec$dataset_name)
   gisTempDir <- file.path(tempdir(), 'gaia')
   
   if (!dir.exists(gisTempDir)) {
@@ -135,7 +135,7 @@ getStaged <- function(rec, storageConfig = readStorageConfig()) {
 #' 
 
 readStorageConfig <- function() {
-  yaml::read_yaml(system.file('config.yml', package = 'gaiaCore'))
+  yaml::read_yaml(system.file('config/storage.yml', package = 'gaiaCore'))
 }
 
 

@@ -13,9 +13,9 @@ CREATE TABLE backbone.data_source (
 			download_subtype varchar(100) NOT NULL,
 			download_data_standard varchar(100) NOT NULL,
 			download_filename varchar(100) NOT NULL,
-			download_url varchar(120) NOT NULL,
+			download_url varchar(255) NOT NULL,
 			download_auth varchar(100) NULL,
-			documentation_url varchar(100) NULL );
+			documentation_url varchar(255) NULL );
 CREATE TABLE backbone.variable_source (
 			variable_source_id serial4 NOT NULL,
 			geom_dependency_uuid int4 NULL,

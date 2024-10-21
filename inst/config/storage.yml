@@ -1,0 +1,3 @@
+offline_storage:
+  directory: /opt/data
+  persist_data: false
