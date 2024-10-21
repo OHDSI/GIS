@@ -20,7 +20,7 @@
 #'
 #' if (!tableExists) {
 #'   message("Loading attr table dependency")
-#'   loadVariable(conn = conn, connectionDetails = connectionDetails, variableSourceId)
+#'   loadVariable(connectionDetails = connectionDetails, variableSourceId)
 #' }
 #' }
 #'
@@ -33,6 +33,9 @@ loadVariable <- function(connectionDetails, variableSourceId){
   variableSourceRecord <- getVariableSourceRecord(connectionDetails = connectionDetails,
                                            variableSourceId = variableSourceId)
 
+  if(nrow(variableSourceRecord) == 0) {
+    return(message(paste0("Variable ", variableSourceId," not found in the database.")))
+  }
   # get attr_index
   attrIndexRecord <- getAttrIndexRecord(connectionDetails = connectionDetails,
                                         variableSourceId = variableSourceRecord$variable_source_id)
