@@ -39,7 +39,7 @@ docker run -itd --rm -e POSTGRES_PASSWORD=SuperSecret -e POSTGRES_USER=postgres 
 ```
 
 ## Load "local" datasets
-Local datasets can be used in gaia-db by loading them to the "offline storage directory", as specified in config.yml, in the gaia-core container. This directory can be specified in the inst/config.yml before building the image (/opt/data by default).
+Local datasets can be used in gaia-db by loading them to the "offline storage directory", as specified in storage.yml, in the gaia-core container. This directory can be specified in the inst/config/storage.yml file before building the image. The default offline storage directory is /opt/data.
 
 Datasets must share the `download_url` from the data_source_record and be stored in a subdirectory that shares the `dataset_name` from the data_source record:
 ```sh
@@ -68,7 +68,7 @@ connectionDetails <- DatabaseConnector::createConnectionDetails(
     server = "gaia-db/postgres",
     user="postgres",
     password = "SuperSecret",
-    pathToDriver = "/opt"
+    pathToDriver = "/opt/hades/jdbc_drivers"
 )
 
 # Import and format geocoded addresses

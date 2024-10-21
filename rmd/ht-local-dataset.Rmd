@@ -11,7 +11,7 @@ output:
 # **Using a Local Dataset**
 
 Two things must be done by the Gaia maintainer to enable offline storage:
-1. A config.yml file in the inst directory must be created or edited to point to the offline storage directory where dataset files can be found
+1. A storage.yml file in the inst/config directory must be created or edited to point to the offline storage directory where dataset files can be found
 ```yml
 offline_storage:
   directory: /opt/data
