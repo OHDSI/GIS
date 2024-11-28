@@ -5,8 +5,10 @@ Authors@R:
     c(person("Kyle", "Zollo-Venecek", , "kzollovenecek@tuftsmedicalcenter.org", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-1615-590X")),
     person("Robert", "Miller", , "rmiller@minderoo.org", role = c("aut"),
-           comment = c(ORCID = "0000-0002-1787-2855")))
-Description: What the package does (one paragraph).
+           comment = c(ORCID = "0000-0002-1787-2855")),
+    person("Timothy", "Norris", , "tibben@ocf.berkeley.edu", role = c("aut"),
+           comment = c(ORCID = "0000-0002-0898-3027")))
+Description: GIS integration into the OHDSI assemblage of tools for EHR analysis.
 License: Apache License (>= 2)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -23,6 +25,7 @@ Imports:
     DatabaseConnector,
     dplyr,
     magrittr,
+    plumber,
     plyr,
     rjson,
     rpostgis,
