@@ -1,0 +1,141 @@
+{
+  "@id": "ark:59852/rocrate-gaia_rocrate-s6glDka",
+  "@type": "https://w3id.org/EVI#ROCrate",
+  "context": {
+    "@vocab": "https://schema.org/",
+    "EVI": "https://w3id.org/EVI#"
+  },
+  "name": "gaia_rocrate",
+  "description": "Gaia RO Crate",
+  "keywords": [
+    "GIS",
+    "gaia",
+    "ohdsi"
+  ],
+  "isPartOf": [
+    {
+      "@id": "ark:59852/organization-ohdsi-gis-workgroup-s6glDka",
+      "@type": "Organization",
+      "name": "OHDSI GIS Workgroup"
+    },
+    {
+      "@id": "ark:59852/project-ohdsi-gis-gaia-s6glDka",
+      "@type": "Project",
+      "name": "OHDSI GIS Gaia"
+    }
+  ],
+  "@graph": [
+    {
+      "@id": "ark:59852/software-gaiacore-MW0hjVo",
+      "@context": {
+        "@vocab": "https://schema.org/",
+        "evi": "https://w3id.org/EVI#"
+      },
+      "@type": "https://w2id.org/EVI#Software",
+      "url": "https://github.com/OHDSI/gaiaCore/archive/refs/tags/v0.1.0.zip",
+      "name": "gaiaCore",
+      "keywords": [
+        "GIS",
+        "gaia"
+      ],
+      "description": "An R Package for gaiaDB relatd operations",
+      "author": "OHDSI GIS Workgroup",
+      "dateModified": "2024-11-15",
+      "version": "0.1.0",
+      "format": "zip",
+      "usedByComputation": [],
+      "contentUrl": "file:///gaiaCore.zip"
+    },
+    {
+      "@id": "ark:59852/dataset-data_source-yIvA8OW",
+      "@context": {
+        "@vocab": "https://schema.org/",
+        "evi": "https://w3id.org/EVI#"
+      },
+      "@type": "https://w3id.org/EVI#Dataset",
+      "name": "data_source",
+      "keywords": [
+        "GIS",
+        "gaia"
+      ],
+      "description": "Data Source",
+      "author": "OHDSI GIS Workgroup",
+      "datePublished": "2024-11-15",
+      "version": "0.1.0",
+      "additionalDocumentation": "https://ohdsi.github.io/GIS/",
+      "format": "csv",
+      "generatedBy": [],
+      "derivedFrom": [],
+      "usedBy": [],
+      "contentUrl": "file:///data_source.csv"
+    },
+    {
+      "@id": "ark:59852/dataset-variable_source-RHVDNA3",
+      "@context": {
+        "@vocab": "https://schema.org/",
+        "evi": "https://w3id.org/EVI#"
+      },
+      "@type": "https://w3id.org/EVI#Dataset",
+      "name": "variable_source",
+      "keywords": [
+        "GIS",
+        "gaia"
+      ],
+      "description": "Variable Source",
+      "author": "OHDSI GIS Workgroup",
+      "datePublished": "2024-11-15",
+      "version": "0.1.0",
+      "additionalDocumentation": "https://ohdsi.github.io/GIS/",
+      "format": "csv",
+      "generatedBy": [],
+      "derivedFrom": [],
+      "usedBy": [],
+      "contentUrl": "file:///variable_source.csv"
+    },
+    {
+      "@id": "ark:59852/software-gaiaohdsi-miDgVSU",
+      "@context": {
+        "@vocab": "https://schema.org/",
+        "evi": "https://w3id.org/EVI#"
+      },
+      "@type": "https://w2id.org/EVI#Software",
+      "url": "https://github.com/OHDSI/gaiaOHDSI/archive/refs/tags/v0.1.0.zip",
+      "name": "gaiaOHDSI",
+      "keywords": [
+        "GIS",
+        "gaia",
+        "ohdsi"
+      ],
+      "description": "Gaia OHDSI: facilitating spatiotemporal joins between harmonized geospatial data and patient-level OMOP data",
+      "author": "OHDSI GIS Workgroup",
+      "dateModified": "2024-11-15",
+      "version": "0.1.0",
+      "format": "zip",
+      "usedByComputation": [],
+      "contentUrl": "file:///gaiaOHDSI.zip"
+    },
+    {
+      "@id": "ark:59852/dataset-nasa-sedac-pm2.5-YjwT7Y8",
+      "@context": {
+        "@vocab": "https://schema.org/",
+        "evi": "https://w3id.org/EVI#"
+      },
+      "@type": "https://w3id.org/EVI#Dataset",
+      "name": "NASA SEDAC PM2.5",
+      "keywords": [
+        "air",
+        "air quality"
+      ],
+      "description": "The Annual PM2.5 Concentrations for Countries and Urban Areas, 1998-2016, consists of mean concentrations of particulate matter (PM2.5) for countries and urban areas. The PM2.5 data are from the Global Annual PM2.5 Grids from MODIS, MISR and SeaWiFS Aerosol Optical Depth (AOD) with GWR, 1998-2016. The urban areas are from the Global Rural-Urban Mapping Project, Version 1 (GRUMPv1): Urban Extent Polygons, Revision 02, and its time series runs from 1998 to 2016. The country averages are population-weighted such that concentrations in populated areas count more toward the country average than concentrations in less populated areas, and its time series runs from 2008 to 2015.",
+      "author": "NASA SEDAC group",
+      "datePublished": "2021-04-05",
+      "version": "1",
+      "additionalDocumentation": "https://sedac.ciesin.columbia.edu/downloads/docs/sdei/sdei-annual-pm2-5-concentrations-countries-urban-areas-v1-1998-2016-documentation.pdf",
+      "format": "zip",
+      "generatedBy": [],
+      "derivedFrom": [],
+      "usedBy": [],
+      "contentUrl": "file:///sdei-annual-pm2-5-concentrations-countries-urban-areas-v1-1998-2016-urban-areas-shp.zip"
+    }
+  ]
+}

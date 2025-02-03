@@ -1,0 +1,175 @@
+{
+  "@id": null,
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "EVI": "https://w3id.org/EVI#"
+  },
+  "@type": "EVI:Schema",
+  "schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "data_source schema",
+  "description": "Tabular format for the gaiaDB data_source table",
+  "properties": {
+    "data_source_uuid": {
+      "description": "Unique identifier for the data source",
+      "index": 0,
+      "valueURL": null,
+      "type": "integer",
+      "maximum": null,
+      "minimum": null
+    },
+    "org_id": {
+      "description": "Organization identifier",
+      "index": 1,
+      "valueURL": null,
+      "type": "string",
+      "pattern": null,
+      "maxLength": null,
+      "minLength": null
+    },
+    "org_set_id": {
+      "description": "Organization Set ID",
+      "index": 2,
+      "valueURL": null,
+      "type": "integer",
+      "maximum": null,
+      "minimum": null
+    },
+    "dataset_name": {
+      "description": "Name of the dataset",
+      "index": 3,
+      "valueURL": null,
+      "type": "string",
+      "pattern": null,
+      "maxLength": null,
+      "minLength": null
+    },
+    "dataset_version": {
+      "description": "Version of the dataset",
+      "index": 4,
+      "valueURL": null,
+      "type": "string",
+      "pattern": null,
+      "maxLength": null,
+      "minLength": null
+    },
+    "geom_type": {
+      "description": "Type of the geometry",
+      "index": 5,
+      "valueURL": null,
+      "type": "string",
+      "pattern": null,
+      "maxLength": null,
+      "minLength": null
+    },
+    "geom_spec": {
+      "description": "JSON-encoded transformation logic for the source dataset to the harmonized geom_X data format",
+      "index": 6,
+      "valueURL": null,
+      "type": "string",
+      "pattern": null,
+      "maxLength": null,
+      "minLength": null
+    },
+    "boundary_type": {
+      "description": "Type of boundary",
+      "index": 7,
+      "valueURL": null,
+      "type": "string",
+      "pattern": null,
+      "maxLength": null,
+      "minLength": null
+    },
+    "has_attributes": {
+      "description": "0 or 1 representation of whether the dataset contains attribute data",
+      "index": 8,
+      "valueURL": null,
+      "type": "boolean"
+    },
+    "download_method": {
+      "description": "Whether the dataset is downloaded from the internet (file) or accessed on disk (local)",
+      "index": 9,
+      "valueURL": null,
+      "type": "string",
+      "pattern": null,
+      "maxLength": null,
+      "minLength": null
+    },
+    "download_subtype": {
+      "description": "Compressed format of the download (e.g. zip, tar.gz)",
+      "index": 10,
+      "valueURL": null,
+      "type": "string",
+      "pattern": null,
+      "maxLength": null,
+      "minLength": null
+    },
+    "download_data_standard": {
+      "description": "File format of the uncompressed dataset (e.g. csv, shp)",
+      "index": 11,
+      "valueURL": null,
+      "type": "string",
+      "pattern": null,
+      "maxLength": null,
+      "minLength": null
+    },
+    "download_filename": {
+      "description": "Filename of the uncompressed dataset (e.g. SVI2012.csv)",
+      "index": 12,
+      "valueURL": null,
+      "type": "string",
+      "pattern": null,
+      "maxLength": null,
+      "minLength": null
+    },
+    "download_url": {
+      "description": "The URL where the dataset is available for download, or if local, the name of the compressed file",
+      "index": 13,
+      "valueURL": null,
+      "type": "string",
+      "pattern": null,
+      "maxLength": null,
+      "minLength": null
+    },
+    "download_auth": {
+      "description": "Authentication details",
+      "index": 14,
+      "valueURL": null,
+      "type": "string",
+      "pattern": null,
+      "maxLength": null,
+      "minLength": null
+    },
+    "documentation_url": {
+      "description": "The URL where documentation for the dataset can be found",
+      "index": 15,
+      "valueURL": null,
+      "type": "string",
+      "pattern": null,
+      "maxLength": null,
+      "minLength": null
+    }
+  },
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "data_source_uuid",
+    "org_id",
+    "org_set_id",
+    "dataset_name",
+    "dataset_version",
+    "geom_type",
+    "geom_spec",
+    "boundary_type",
+    "has_attributes",
+    "download_method",
+    "download_subtype",
+    "download_data_standard",
+    "download_filename",
+    "download_url",
+    "download_auth",
+    "documentation_url"
+  ],
+  "separator": ",",
+  "header": true,
+  "examples": []
+}
