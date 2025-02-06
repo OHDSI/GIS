@@ -41,9 +41,11 @@ createDdl <- function(cdmVersion){
   # argument checks
   stopifnot(is.character(cdmVersion), length(cdmVersion) == 1, cdmVersion %in% listSupportedVersions())
 
-  cdmTableCsvLoc <- system.file(file.path("csv", paste0("OMOP_CDMv", cdmVersion, "_Table_Level.csv")), package = "CommonDataModel", mustWork = TRUE)
-  cdmFieldCsvLoc <- system.file(file.path("csv", paste0("OMOP_CDMv", cdmVersion, "_Field_Level.csv")), package = "CommonDataModel", mustWork = TRUE)
-
+  # cdmTableCsvLoc <- system.file(file.path("csv", paste0("OMOP_CDMv", cdmVersion, "_Table_Level.csv")), package = "CommonDataModel", mustWork = TRUE)
+  # cdmFieldCsvLoc <- system.file(file.path("csv", paste0("OMOP_CDMv", cdmVersion, "_Field_Level.csv")), package = "CommonDataModel", mustWork = TRUE)
+  cdmTableCsvLoc <- "./inst/csv/Gaia_Table_Level.csv"
+  cdmFieldCsvLoc <- "./inst/csv/Gaia_Field_Level.csv"
+  
   tableSpecs <- read.csv(cdmTableCsvLoc, stringsAsFactors = FALSE)
   cdmSpecs <- read.csv(cdmFieldCsvLoc, stringsAsFactors = FALSE)
 
@@ -106,7 +108,8 @@ createPrimaryKeys <- function(cdmVersion){
   # argument checks
   stopifnot(is.character(cdmVersion), length(cdmVersion) == 1, cdmVersion %in% listSupportedVersions())
 
-  cdmFieldCsvLoc <- system.file(file.path("csv", paste0("OMOP_CDMv", cdmVersion, "_Field_Level.csv")), package = "CommonDataModel", mustWork = TRUE)
+  # cdmFieldCsvLoc <- system.file(file.path("csv", paste0("OMOP_CDMv", cdmVersion, "_Field_Level.csv")), package = "CommonDataModel", mustWork = TRUE)
+  cdmFieldCsvLoc <- "./inst/csv/Gaia_Field_Level.csv"
   cdmSpecs <- read.csv(cdmFieldCsvLoc, stringsAsFactors = FALSE)
 
   primaryKeys <- subset(cdmSpecs, isPrimaryKey == "Yes")
@@ -133,7 +136,8 @@ createForeignKeys <- function(cdmVersion){
   # argument checks
   stopifnot(is.character(cdmVersion), length(cdmVersion) == 1, cdmVersion %in% listSupportedVersions())
 
-  cdmFieldCsvLoc <- system.file(file.path("csv", paste0("OMOP_CDMv", cdmVersion, "_Field_Level.csv")), package = "CommonDataModel", mustWork = TRUE)
+  # cdmFieldCsvLoc <- system.file(file.path("csv", paste0("OMOP_CDMv", cdmVersion, "_Field_Level.csv")), package = "CommonDataModel", mustWork = TRUE)
+  cdmFieldCsvLoc <- "./inst/csv/Gaia_Field_Level.csv"
   cdmSpecs <- read.csv(cdmFieldCsvLoc, stringsAsFactors = FALSE)
 
   foreignKeys <- subset(cdmSpecs, isForeignKey == "Yes")

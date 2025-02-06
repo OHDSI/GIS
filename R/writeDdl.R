@@ -36,7 +36,7 @@ writeDdl <- function(targetDialect, cdmVersion, outputfolder, cdmDatabaseSchema 
   stopifnot(is.character(cdmDatabaseSchema))
 
   if(missing(outputfolder)) {
-    outputfolder <- file.path("ddl", cdmVersion, gsub(" ", "_", targetDialect))
+    outputfolder <- file.path("inst/ddl", cdmVersion, gsub(" ", "_", targetDialect))
   }
 
   if(!dir.exists(outputfolder)) dir.create(outputfolder, showWarnings = FALSE, recursive = TRUE)
@@ -62,7 +62,7 @@ writePrimaryKeys <- function(targetDialect, cdmVersion, outputfolder, cdmDatabas
   stopifnot(is.character(cdmDatabaseSchema))
 
   if(missing(outputfolder)) {
-    outputfolder <- file.path("ddl", cdmVersion, gsub(" ", "_", targetDialect))
+    outputfolder <- file.path("inst/ddl", cdmVersion, gsub(" ", "_", targetDialect))
   }
 
   if(!dir.exists(outputfolder)) dir.create(outputfolder, showWarnings = FALSE, recursive = TRUE)
@@ -87,7 +87,7 @@ writeForeignKeys <- function(targetDialect, cdmVersion, outputfolder, cdmDatabas
   stopifnot(is.character(cdmDatabaseSchema))
 
   if(missing(outputfolder)) {
-    outputfolder <- file.path("ddl", cdmVersion, gsub(" ", "_", targetDialect))
+    outputfolder <- file.path("inst/ddl", cdmVersion, gsub(" ", "_", targetDialect))
   }
 
   if(!dir.exists(outputfolder)) dir.create(outputfolder, showWarnings = FALSE, recursive = TRUE)
@@ -112,7 +112,7 @@ writeIndex <- function(targetDialect, cdmVersion, outputfolder, cdmDatabaseSchem
   stopifnot(is.character(cdmDatabaseSchema))
 
   if(missing(outputfolder)) {
-    outputfolder <- file.path("ddl", cdmVersion, gsub(" ", "_", targetDialect))
+    outputfolder <- file.path("inst/ddl", cdmVersion, gsub(" ", "_", targetDialect))
   }
 
   if(!dir.exists(outputfolder)) dir.create(outputfolder, showWarnings = FALSE, recursive = TRUE)

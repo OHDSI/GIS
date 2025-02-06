@@ -1,0 +1,1 @@
+ALTER TABLE @cdmDatabaseSchema.external_exposure ADD CONSTRAINT xpk_external_exposure  (external_exposure_id);
