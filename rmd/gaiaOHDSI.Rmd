@@ -5,7 +5,7 @@ output:
         toc: FALSE
 ---
 
-# **GaiaCore**
+# **gaiaOHDSI**
 
 ## Description
 
@@ -21,4 +21,4 @@ The **ultimate vision** of Gaia Core is support for multiple geospatial database
 
 ## Documentation
 
-[gaiaCore (R Package)](gaiaCore/index.html)
+[gaiaOHDSI (R Package)](gaiaOHDSI/index.html)

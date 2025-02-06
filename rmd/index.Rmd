@@ -8,11 +8,11 @@ output:
           collapsed: false
 ---
 
-#**OHDSI Geographic Informations Systems (GIS) Workgroup Homepage**
+# **OHDSI Geographic Informations Systems (GIS) Workgroup Homepage**
 
 ## **Mission**
 
-The OHDSI GIS workgroup aims to introduce new infrastructure, tooling, and CDM extension tables that will allow researchers to seamlessly incorporate place-based datasets into their OMOP-shaped databases to enhance their evidence-generating workflows.
+The OHDSI GIS Workgroup aims to introduce new vocabularies, infrastructure, tooling, and CDM extension tables that will allow researchers to incorporate place-based datasets into their OMOP-shaped databases to enhance their evidence-generating workflows.
 
 ## **Meeting Schedule**
 
@@ -31,15 +31,15 @@ In order to enable reproducible studies that incorporate place-related data with
 
 ## **Goals**
 
-The overarching goal of the OHDSI GIS Workgroup is to develop software and standards for incorporating place-based data into the OMOP CDM and present this back to the OHDSI community. We reach these goals through development in the four key areas below. 
+The overarching goal of the OHDSI GIS Workgroup is to develop vocabularies, software, and standards for incorporating place-based data into the OMOP CDM and present these work outputs back to the OHDSI community. We reach these goals through development in the five key areas below. 
 
 ### 1) Infrastructure
 - Functional Metadata Catalog
 - Harmonized geospatial data model
 
 ### 2) Functionality
-- Geocoding
 - Accessing geospatial datasets
+- OMOP-specific data transformations
 
 ### 3) Vocabulary
 - GIS specific concepts
@@ -47,26 +47,23 @@ The overarching goal of the OHDSI GIS Workgroup is to develop software and stand
 - Toxin vocabulary
 
 ### 4) Extensions
-- Exposure_occurrence
+- EXTERNAL_EXPOSURE
 
-<br>
-
-## **Roadmap**
-
-Under Construction
-
-
-<br>
+### 5) Community Recommendations
+- Geocoding
+- Data Preparation
 
 ## **Publications/Presentation**
+OHDSI GIS Toolchain Live Demonstration (2024 OHDSI Symposium [Video](https://www.youtube.com/watch?v=NLfWvuZJVK4))
+
 OHDSI GIS Infrastructure (2023 OHDSI Symposium [Poster](https://www.ohdsi.org/2023showcase-19/), [Abstract](https://www.ohdsi.org/wp-content/uploads/2023/10/19-zollovenecek-BriefReport.pdf))
 
 Toxins Vocabulary (2023 OHDSI Symposium [Poster](https://www.ohdsi.org/2023showcase-11/), [Abstract](https://www.ohdsi.org/wp-content/uploads/2023/10/Talapova-Polina_A_Toxin_Vocabulary_for_the_OMOP_CDM_2023symposium-Polina-Talapova.pdf)) 
 
-OHDSI GIS Workgroup October 10, 2023 Update ([video](https://youtu.be/QZY-slWdsMs?si=UxMT39rqWTAW_AMx&t=2178))
+OHDSI GIS Workgroup October 10, 2023 Update ([Video](https://youtu.be/QZY-slWdsMs?si=UxMT39rqWTAW_AMx&t=2178))
 
-OHDSI GIS Workgroup 2023 Objectives and Key Results ([video](https://www.youtube.com/watch?v=bd0htzO1hx4&t=1103s), [slides](https://www.ohdsi.org/wp-content/uploads/2023/02/GIS-OKRs2023Q1.pdf))
+OHDSI GIS Workgroup 2023 Objectives and Key Results ([Video](https://www.youtube.com/watch?v=bd0htzO1hx4&t=1103s), [slides](https://www.ohdsi.org/wp-content/uploads/2023/02/GIS-OKRs2023Q1.pdf))
 
-OHDSI GIS Workgroup August 23, 2022 Update ([video](https://youtu.be/d8jIAm9cssM))
+OHDSI GIS Workgroup August 23, 2022 Update ([Video](https://youtu.be/d8jIAm9cssM))
 <br>
 

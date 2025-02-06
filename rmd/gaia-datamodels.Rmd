@@ -26,17 +26,17 @@ This is the specification document for the gaiaDB Data Model. **This data model 
 
 ```{r docLoopGaia, echo=FALSE, results='asis'}
 
-tableSpecs <- readr::read_csv("../inst/csv/gaia001tableLevel.csv", show_col_types = FALSE)
-cdmSpecs <- readr::read_csv("../inst/csv/gaia001fieldLevel.csv", show_col_types = FALSE)
+tableSpecs <- readr::read_csv("../inst/csv/Gaia_Table_Level.csv", show_col_types = FALSE)
+cdmSpecs <- readr::read_csv("../inst/csv/Gaia_Field_Level.csv", show_col_types = FALSE)
 
-tables <- tableSpecs$gaiaTableName
+tables <- tableSpecs$cdmTableName
 
 gaiaSpecsClean <- cdmSpecs %>%
-  dplyr::select(`Gaia Table` = gaiaTableName,
-                `Gaia Field` = gaiaFieldName,
+  dplyr::select(`Gaia Table` = cdmTableName,
+                `Gaia Field` = cdmFieldName,
                 `User Guide` = userGuidance,
                 `ETL Conventions` = etlConventions,
-                `Datatype` = gaiaDataType,
+                `Datatype` = cdmDataType,
                 `Required` = isRequired,
                 `Primary Key` = isPrimaryKey,
                 `Foreign Key` = isForeignKey,
@@ -48,24 +48,20 @@ gaiaSpecsClean[is.na(gaiaSpecsClean)] <- ""
 
 for(tb in tables) {
   
-  if(tb == 'data_source') {
-    cat("## **Backbone**\n\n")
-  }
-  
-  if(tb == 'geom_omop_location') {
+  if(tb == 'location_history') {
     cat("## **OMOP**\n\n")
   }
   
-  if(tb == 'exposure_occurrence') {
+  if(tb == 'external_exposure') {
     cat("## **CDM Extension**\n\n")
   }
   
   cat("###", tb, "{.tabset .tabset-pills} \n\n")
   
-  tableInfo <- subset(tableSpecs, gaiaTableName == tb)
+  tableInfo <- subset(tableSpecs, cdmTableName == tb)
   cat("**Table Description**\n\n",tableInfo[,"tableDescription"][[1]], "\n\n")
   
-  fieldInfo <- subset(cdmSpecs, gaiaTableName == tb)
+  fieldInfo <- subset(cdmSpecs, cdmTableName == tb)
   if(!isTRUE(fieldInfo[,"userGuidance"][[1]]=="")){
     cat("**User Guide**\n\n",fieldInfo[,"userGuidance"][[1]],"\n\n")
   }
