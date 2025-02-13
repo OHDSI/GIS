@@ -408,151 +408,67 @@ WG</h1>
 </div>
 
 
-<div id="ohdsi-geographic-informations-systems-gis-workgroup-homepage"
-class="section level1">
-<h1><strong>OHDSI Geographic Informations Systems (GIS) Workgroup
-Homepage</strong></h1>
-<div id="mission" class="section level2">
-<h2><strong>Mission</strong></h2>
-<p>Improve the health of populations by generating reliable evidence
-from integrated geospatial and person-level health data.</p>
+<div id="getting-started-with-gaia" class="section level1">
+<h1><strong>Getting Started with Gaia</strong></h1>
+<p>For background information on Gaia, see the <a
+href="gaia-intro.html#Overview">Gaia Overview</a>. For an explanation of
+the Gaia architecture, see the <a href="framework.html">Framework
+Overview</a>.</p>
+<div id="installation" class="section level2">
+<h2>Installation</h2>
+<p>To get started with Gaia you’ll need to install <a
+href="gaia-core.html">gaiaCore (R Package)</a> from GitHub, create a
+PostGIS database and load the metadata source files, and then connect to
+the database from your R environment:</p>
+<p><br></p>
+<div id="gaiacore-r-package" class="section level3">
+<h3>gaiaCore (R Package)</h3>
+<ol style="list-style-type: decimal">
+<li><p>See the instructions <a
+href="https://ohdsi.github.io/Hades/rSetup.html">here</a> for
+configuring your R environment, including RTools and Java.</p></li>
+<li><p>You can install the latest version of <a
+href="gaia-core.html">gaiaCore (R Package)</a> from GitHub
+with:</p></li>
+</ol>
+<pre class="r"><code># install.packages(&quot;remotes&quot;)
+
+remotes::install_github(&quot;OHDSI/GIS&quot;)</code></pre>
+<p><br></p>
 </div>
-<div id="meeting-schedule" class="section level2">
-<h2><strong>Meeting Schedule</strong></h2>
-<p>The OHDSI GIS Workgroup meets weekly on <strong>Fridays at 10 AM
-ET</strong> (<a
-href="https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d">Meeting
-Link</a>)</p>
-<p>We also meet out-of-band with collaborators at “use case” meetings.
-If you have specific goals for generating evidence using place-based
-data in conjunction with OMOP data, we’d love to work with you. Please
-see our page on <a href="gi-propose-usecase.html">proposing new use
-cases</a>. <br></p>
+<div id="postgis-database-catalog-and-staging" class="section level3">
+<h3>PostGIS Database (Catalog and Staging)</h3>
+<p>Once you have a postgres database with PostGIS installed, the helper
+script <code>initialize.sql</code> in the <a
+href="https://github.com/OHDSI/GIS/tree/main/inst/">inst directory</a>
+will do the rest of the setup. This includes:</p>
+<ol style="list-style-type: decimal">
+<li>Creating a schema named “backbone”</li>
+<li>Creating the tables described in the <a
+href="gaia-datamodels.html#Backbone">backbone specification</a> and
+sequences for autoincrementing identifiers.</li>
+<li>Inserting <a href="gaia-catalog.html">Gaia Catalog</a> metadata
+(IMPORTANT: script assumes the files ‘./csv/data_source.csv’ and
+‘./csv/variable_source.csv’ exist relative to ‘initialize.sql’, as they
+do in the <a href="https://github.com/OHDSI/GIS/tree/main/inst/">inst
+directory</a>) 4.Populating the geom_index and attr_index</li>
+</ol>
 </div>
-<div id="gis-toolchain" class="section level2">
-<h2><strong>GIS Toolchain</strong></h2>
-<p>The GIS toolchain consists of extensions to the OMOP schema,
-extensions to the OMOP Vocabulary, and GIS-specific software for
-acquiring and working with geospatial data. Together, these enable
-researchers to use health-related attributes of the regions where
-patients live in OHDSI study cohort definitions. For example, you can
-use the GIS toolchain to define cohorts that include regional data on
-exposure to toxicants or social deprivation along with EHR data on
-relevant health outcomes. The toolchain also includes informatics
-resources that support integration with the main OHDSI tool stack
-(HADES) and integration with externally supported solutions for
-geocoding and for finding and deriving relevant data sources from
-catalogs of available data sources.</p>
-<p>Importantly, the toolchain allows integrated analysis of geospatial
-and EHR data without sharing any sensitive patient location data.</p>
-<div id="omop-gis-schema-extensions" class="section level3">
-<h3>OMOP GIS schema extensions</h3>
-<p>The External_Exposure table is an extension to the main OMOP schema.
-It holds data on things that can affect health that are associated with
-the places where patients live. The Location_History table contains
-information on patient’s residence and the dates during which they lived
-in that location. The DDLs and associated documentation for the
-External_Exposure table and the Location_History table are <a
-href="schema-extensions.html#location_history">here</a> and <a
-href="schema-extensions.html#external_exposure">here</a> respectively.
-The entity-relationship diagram showing the joins between these tables
-and the main OMOP schema is <a
-href="schema-extensions.html#OMOP_GIS_Schema_Extensions">here</a>.</p>
+<div id="connecting-the-database-to-r" class="section level3">
+<h3>Connecting the Database to R</h3>
+<ol style="list-style-type: decimal">
+<li>Create a connection from your R environment to the PostGIS database.
+This can be done using the DatabaseConnector package:</li>
+</ol>
+<pre><code>library(gaiaCore)
+
+connectionDetails &lt;- DatabaseConnector::createConnectionDetails(
+  dbms = &quot;postgresql&quot;,
+  server = &quot;localhost/gaiaDB&quot;,
+  port = 5432,
+  user=&quot;postgres&quot;,
+  password = &quot;mysecretpassword&quot;) </code></pre>
 </div>
-<div id="omop-vocabulary-extensions" class="section level3">
-<h3>OMOP Vocabulary extensions</h3>
-<p>The GIS extensions to the OMOP Vocabulary cover geometries,
-toxicants, and social determinants. They are used to represent a very
-large set of entities that can affect health and their relationships.
-The draft versions of these vocabularies are available <a
-href="https://github.com/OHDSI/GIS/tree/main/vocabularies">here</a>.
-They are based on mature existing ontologies and were developed by GIS
-workgroup members who are part of the OHDSI Core Vocabulary team in
-accordance with the guiding principles for OMOP vocabulary development,
-quality assurance, and integration. Current work on their validation in
-real use cases is expected to support their eventual acceptance as
-versioned community-maintained extensions of the core OMOP
-Vocabulary.</p>
-</div>
-<div id="gaiacore" class="section level3">
-<h3>gaiaCore</h3>
-<p>The gaiaCore software and associated gaiaDB schema support
-specification of attributes and geographic shapes in publicly available
-datasets. This specification allows the tables in the GIS schema
-extension to be joined with patient-level clinical data stored in the
-main OMOP schema. The current Beta release of gaiaCore software and its
-documentation are <a
-href="https://github.com/OHDSI/gaiaCore">here</a>.</p>
-</div>
-<div id="guidance" class="section level3">
-<h3>Guidance</h3>
-<p>The GIS toolchain requires patient addresses to be geocoded into
-representations that GIS software expects; for example, the latitude and
-longitude coordinates of street addresses or the coordinates of the
-lines that define a postal region. The OHDSI GIS workgroup does not
-provide or maintain software that does this geocoding. The GIS Workgroup
-does provide guidance about privacy-preserving options for geocoding
-address information and considerations for using available open-source
-and comercial geocoding approaches. The workgroup is also developing
-guidance to aid researchers in making informed decisions about selecting
-and working with alternative geospatial data sources that are relevant
-to addressing a research question.</p>
-</div>
-<div id="support-for-integration-with-ohdsis-technical-ecosytem"
-class="section level3">
-<h3>Support for integration with OHDSI’s technical ecosytem</h3>
-<p>The GIS Workgroup provides modified versions of the BroadSea
-container that inlcudes versions of the OHDSI Vocabulary that include
-draft the GIS vocabularies and the other components of the toolchain.
-Modified versions of the Tufts Synthetic Data and associated for
-demonstrating the use of the HADES PLP package to predict incident
-respiratory conditions using regional air quality data are included in
-the container. The workgroup is developing a robust approach to working
-with available geospatial data sources via catalogs. The approach uses
-schema.org-compliant standards and federated metadata sharing methods
-widely used in the GIS community to share information about available
-datasets.</p>
-</div>
-</div>
-<div id="goals" class="section level2">
-<h2><strong>Goals</strong></h2>
-<p>The OHDSI GIS Workgroup carries out work in support of its mission by
-pursuing the following goals: - Support OHDSI studies that use the GIS
-toolchain - Conduct studies that use the GIS toolchain - Advance the
-development of the GIS toolchain - Facilitate the use of externally
-supported privacy-protecting geocoding software - Develop data
-cataloging resources and guidance that enable reuse of specific
-geospatial datasets in OHDSI studies</p>
-</div>
-<div id="roadmaps" class="section level2">
-<h2><strong>Roadmaps</strong></h2>
-<ul>
-<li><a href="https://github.com/OHDSI/GIS/issues/368">Gaia</a></li>
-<li><a href="https://github.com/OHDSI/GIS/issues/365">Gaia
-Catalog</a></li>
-<li><a href="https://github.com/OHDSI/GIS/issues/366">Geocoding</a></li>
-<li><a
-href="https://github.com/OHDSI/GIS/issues/369">Vocabulary</a></li>
-</ul>
-</div>
-<div id="publicationspresentation" class="section level2">
-<h2><strong>Publications/Presentation</strong></h2>
-<p>OHDSI GIS Toolchain Live Demonstration (2024 OHDSI Symposium <a
-href="https://www.youtube.com/watch?v=NLfWvuZJVK4">Video</a>)</p>
-<p>OHDSI GIS Infrastructure (2023 OHDSI Symposium <a
-href="https://www.ohdsi.org/2023showcase-19/">Poster</a>, <a
-href="https://www.ohdsi.org/wp-content/uploads/2023/10/19-zollovenecek-BriefReport.pdf">Abstract</a>)</p>
-<p>Toxins Vocabulary (2023 OHDSI Symposium <a
-href="https://www.ohdsi.org/2023showcase-11/">Poster</a>, <a
-href="https://www.ohdsi.org/wp-content/uploads/2023/10/Talapova-Polina_A_Toxin_Vocabulary_for_the_OMOP_CDM_2023symposium-Polina-Talapova.pdf">Abstract</a>)</p>
-<p>OHDSI GIS Workgroup October 10, 2023 Update (<a
-href="https://youtu.be/QZY-slWdsMs?si=UxMT39rqWTAW_AMx&amp;t=2178">Video</a>)</p>
-<p>OHDSI GIS Workgroup 2023 Objectives and Key Results (<a
-href="https://www.youtube.com/watch?v=bd0htzO1hx4&amp;t=1103s">Video</a>,
-<a
-href="https://www.ohdsi.org/wp-content/uploads/2023/02/GIS-OKRs2023Q1.pdf">slides</a>)</p>
-<p>OHDSI GIS Workgroup August 23, 2022 Update (<a
-href="https://youtu.be/d8jIAm9cssM">Video</a>) <br></p>
 </div>
 </div>
 

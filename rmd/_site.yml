@@ -26,8 +26,8 @@ navbar:
           href: gaia-intro.html
         - text: "Design"
           href: gaia-principles.html                     # TODO add the architecture diagram
-        - text: "Data Models"
-          href: gaia-datamodels.html 
+        - text: "Schema Extensions"
+          href: schema-extensions.html 
         - text: "gaiaDB"
           href: gaiaDB.html
         - text: "gaiaCore"

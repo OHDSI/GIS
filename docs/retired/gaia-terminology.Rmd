@@ -1,0 +1,139 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG Working Terminology </div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+
+
+
+## **Terminology**
+
+*Definitions and context for common terminology within the GIS workgroup*
+
+### *Backbone*
+* **Definition**
+  The name of the database schema that contains the core components for sourcing and staging source data 
+* **In Context**
+  * This is where data_source, variable_source, attr_index, geom_index, attr_template and geom_template live. 
+  * The DDL statement for this schema as well as DML statement or CSV file for the data_source and variable_source are lightweight ways for anyone with Postgres to stand-up and run the database. 
+
+### *data_source*
+* **Definition**
+  A table that stores the basic information necessary to source and stage web-hosted geographic datasets. The basis to a "catalog" of available source datasets 
+* **In Context**
+  * Lives in the backbone schema 
+  * The data in this table requires some manual attention to create and is valuable 
+  * Contains the download URL for all datasets and declares whether they contain attributes, a geometry, or both. For geometry datasets, also contains the geom_spec 
+  * This would likely be where more advanced source metadata could be stored 
+
+### *variable_source*
+* **Definition**
+  A table that stores supplemental information necessary to extract individual variables from a source attribute table. The basis to a "catalog" of available variables
+* **In Context**
+  * Lives in the backbone schema 
+  * The data in this table requires some manual attention to create and is valuable 
+  * Used in conjunction with the data_source table to download and stage inidividual variables from a source attribute table. 
+  * This table contains the attr_spec which contains the directions for transforming the staged attribute table into a specific variable 
+
+### *geom_index*
+* **Definition**
+  An index of source datasets containing a geometry
+* **In Context**
+  * Lives in the backbone schema 
+  * The data in this table is generated programmatically from the data_source table using a function called createIndices() in the R package. It is fairly simple and cheap to regenerate.
+  
+### *geom_template*
+* **Definition**
+  An empty table that provides the structure (column name, type, and constraints) to geom_X tables. 
+* **In Context**
+  * This table should serve as the Single Source of Truth for geom_X table structure. Functionality in the R package should defer to this. 
+  
+### *geom_X*
+* **Definition**
+  Refers to a transformed, staged version of a source geometry dataset. Essentially, a final data product that is in a standardized form and is analysis ready. 
+* **In Context**
+  * An instance of this table will have the name "geom_<table_name>" and live in schema <database_schema>. Table name and database schema are specified in geom_index.
+  * The data in an instance of this table is generated programmatically using the loadGeometry() function in the R package. It is fairly simple to create instances, but may be time intensive depending on the size of the source dataset. 
+  * Typically, these instances will be created in the background when a variable that depends on the geometry is created. 
+
+### *geom_spec*
+* **Definition**
+  A JSON-formatted string that contains a list of R functions to be performed in R in order to transform a source geometry dataset into the standardized geom_X
+* **In Context**
+  * The geom_spec lives as an entry in a data source record. 
+  * Only datasets with geometries have geom_spec entries in the data_source table
+  
+### *attr_index*
+* **Definition**
+  An index of source datasets containing a n attribute
+* **In Context**
+  * Lives in the backbone schema 
+  * The data in this table is generated programmatically from the data_source table using a function called createIndices() in the R package. It is fairly simple and cheap to regenerate 
+
+### *attr_template*
+* **Definition**
+  An empty table that provides the structure (column name, type, and constraints) to attr_X tables
+* **In Context**
+  * This table should serve as the Single Source of Truth for attr_X table structure. Functionality in the R package should defer to this. 
+
+### *attr_X*
+* **Definition**
+  Refers to a transformed, staged version of a source attribute dataset. Essentially, a final data product that is in a standardized form and is analysis ready. 
+* **In Context**
+  * Attr_X tables are Entity-Attribute-Value (EAV) tables with additional metadata columns such as start and end date for its constituent variables 
+  * An instance of this table will have the name “attr_<table_name>” and live in schema <database_schema>. Table name and database schema are specified in attr_index. 
+  * The data in an instance of this table is generated programmatically using the loadVariable() function in the R package. It is fairly simple to create instances, but may be time intensive depending on the size of the source dataset. 
+  * An attr_X table is created the first time a variable from an attribute data source is loaded. Every subsequent variable loaded from that data source is appended to that attr_X table 
+  * The granularity of this table is a data point that is associated to a single geometry at a time (I.e. a county for a given date, a coordinate for a given year). Therefore, each entry has a value, attribute, start and end date, and is associated to a geometry in a geom_X instance via a geom_record_id 
+
+### *attr_spec*
+* **Definition**
+  A JSON-formatted string that contains a list of R functions to be performed in R in order to transform a source attribute dataset into a single variable that will be part of the standardized attr_X
+* **In Context**
+  * The attr_spec lives as an entry in a variable source record. 
+  * Unlike geom_spec, of which there is a one-to-one link with a source dataset, there is likely more than one attr_spec with a source attribute dataset 
+
+### *Geometry*
+* **Definition**
+  The spatial component of data. A single geometry value will typically be in the form of POINT, LINESTRING, POLYGON, but can also be MULTIPOINT, MULTILINESTRING, MULTIPOLYGON, or a set of two or more types called GEOMETRYCOLLECTION
+* **In Context**
+  * data_source
+    * Does a source of data contain a geometry? If yes, geom_type and geom_spec will not be null 
+    * Geom_type will list the data type (POINT, LINESTRING, etc) 
+    * Geom_spec will contain a list of transformations to perform on the source dataset 
+    *Geom_dependency_uuid is utilized by attribute sources to link them to the data_source ID of the geometry on which they depend 
+  * geom_index
+    * An index for the geometries in data_source.
+    * Provides no “new” information about the geometry, but does contain the reformatted database_schema and table_name where the geom_X table will be populated 
+
+### *Attribute*
+* **Definition**
+  A set or collection of variables that are or can be associated to a geometry. An attribute almost always refers to the entire source dataset, excluding the geometry and any metadata columns (I.e. all variables). 
+* **In Context**
+  * data_source
+    * Does a source of data contain an attribute? If yes, the has_attributes boolean column will have a value 1 
+    * Geom_dependency_uuid must point to a geometry on which the attribute depends. If the dependency is within the same source dataset, geom_dependency_uuid and data_source_uuid will have the same value 
+  * variable_source
+    * The individual variables within an attribute are described here. 
+    * A variable’s Data_source_uuid in the variable_source links to it’s parent attribute in the data_source 
+  * attr_index
+    * An index or the attributes in variable_source 
+    * Links to a geometry dependency in the geom_index table 
+    * contain the reformatted database_schema and table_name where the attr_X table will be populated 
+
+### *Variable*
+* **Definition**
+  A single descriptive element that can be associated to a geometry. This can be thought of as a single column from a source attribute. 
+* **In Context**
+  * variable_source
+    * Each variable is given a unique identifier, name, and description here 
+    * Linked back to their parent attribute via the data_source_uuid column 
+    * The procedure for extracting the variable from the source dataset is stored in the attr_spec 
+
+
+
+	

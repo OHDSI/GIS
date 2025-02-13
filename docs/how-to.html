@@ -408,152 +408,94 @@ WG</h1>
 </div>
 
 
-<div id="ohdsi-geographic-informations-systems-gis-workgroup-homepage"
-class="section level1">
-<h1><strong>OHDSI Geographic Informations Systems (GIS) Workgroup
-Homepage</strong></h1>
-<div id="mission" class="section level2">
-<h2><strong>Mission</strong></h2>
-<p>Improve the health of populations by generating reliable evidence
-from integrated geospatial and person-level health data.</p>
+<div id="adding-a-data-source" class="section level1">
+<h1><strong>Adding a Data Source</strong></h1>
+<div id="background" class="section level2">
+<h2>Background</h2>
+<p>Data sources in gaiaDB are stored in the gaiaDB.backbone.data_source
+table in a Postgres database. Each row in this table is a single “data
+source”, though the name may be a bit misleading. All “data sources” in
+gaiaDB are actually bits of descriptive, technical, and operational
+metadata that refer to an externally hosted dataset. For example, the
+gaiaDB data source “daily_aqi_by_county_2020” is actually just a single
+row of data that contains information on how to extract, transform, and
+load (ETL) the EPA dataset located on their data catalog. The gaiaDB
+data source includes all the information necessary to acquire and use
+this dataset (including the dataset URL, documentation URL, and R code
+to transform it to gaia’s own data standard), without actually storing
+the dataset itself. Not only does this keep gaiaDB very lightweight (a
+data source takes only about 1 KB of storage), it also allows gaiaDB to
+handle a boundless amount of variability in source datasets.</p>
+<p>The trade-off to this design is that each data source requires a
+certain degree of custom tailoring. Fortunately, many well-curated
+sources of geospatial data publish all of their own datasets with the
+same schema. So, while it may take a bit of effort to create the gaiaDB
+data source for “daily_aqi_by_county_2020”, the gaiaDB data source for
+“daily_aqi_by_county_2019”, and any other years, can be created in a
+matter of minutes by simply redirecting the data source to other years’
+data.</p>
 </div>
-<div id="meeting-schedule" class="section level2">
-<h2><strong>Meeting Schedule</strong></h2>
-<p>The OHDSI GIS Workgroup meets weekly on <strong>Fridays at 10 AM
-ET</strong> (<a
-href="https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d">Meeting
-Link</a>)</p>
-<p>We also meet out-of-band with collaborators at “use case” meetings.
-If you have specific goals for generating evidence using place-based
-data in conjunction with OMOP data, we’d love to work with you. Please
-see our page on <a href="gi-propose-usecase.html">proposing new use
-cases</a>. <br></p>
+<div id="creating-a-data-source" class="section level2">
+<h2>Creating a Data Source</h2>
+<p>As of now, there are two main ways that gaiaDB data sources can be
+created:</p>
+<ol style="list-style-type: decimal">
+<li>Manually, by writing <code>INSERT INTO</code> SQL statements.
+Usually this is most easily done with a combination of spreadsheet
+software like MS Excel (for writing the original record), an R
+environment for creating the geom_spec (detailed below), and some sort
+of automation tool for recycling the original data source across
+multiple datasets.</li>
+<li>Using the gaiaSourceCreator RShiny form, which can help guide the
+creation of data sources.</li>
+</ol>
 </div>
-<div id="gis-toolchain" class="section level2">
-<h2><strong>GIS Toolchain</strong></h2>
-<p>The GIS toolchain consists of extensions to the OMOP schema,
-extensions to the OMOP Vocabulary, and GIS-specific software for
-acquiring and working with geospatial data. Together, these enable
-researchers to use health-related attributes of the regions where
-patients live in OHDSI study cohort definitions. For example, you can
-use the GIS toolchain to define cohorts that include regional data on
-exposure to toxicants or social deprivation along with EHR data on
-relevant health outcomes. The toolchain also includes informatics
-resources that support integration with the main OHDSI tool stack
-(HADES) and integration with externally supported solutions for
-geocoding and for finding and deriving relevant data sources from
-catalogs of available data sources.</p>
-<p>Importantly, the toolchain allows integrated analysis of geospatial
-and EHR data without sharing any sensitive patient location data.</p>
-<div id="omop-gis-schema-extensions" class="section level3">
-<h3>OMOP GIS schema extensions</h3>
-<p>The External_Exposure table is an extension to the main OMOP schema.
-It holds data on things that can affect health that are associated with
-the places where patients live. The Location_History table contains
-information on patient’s residence and the dates during which they lived
-in that location. The DDLs and associated documentation for the
-External_Exposure table and the Location_History table are <a
-href="schema-extensions.html#location_history">here</a> and <a
-href="schema-extensions.html#external_exposure">here</a> respectively.
-The entity-relationship diagram showing the joins between these tables
-and the main OMOP schema is <a
-href="schema-extensions.html#OMOP_GIS_Schema_Extensions">here</a>.</p>
-</div>
-<div id="omop-vocabulary-extensions" class="section level3">
-<h3>OMOP Vocabulary extensions</h3>
-<p>The GIS extensions to the OMOP Vocabulary cover geometries,
-toxicants, and social determinants. They are used to represent a very
-large set of entities that can affect health and their relationships.
-The draft versions of these vocabularies are available <a
-href="https://github.com/OHDSI/GIS/tree/main/vocabularies">here</a>.
-They are based on mature existing ontologies and were developed by GIS
-workgroup members who are part of the OHDSI Core Vocabulary team in
-accordance with the guiding principles for OMOP vocabulary development,
-quality assurance, and integration. Current work on their validation in
-real use cases is expected to support their eventual acceptance as
-versioned community-maintained extensions of the core OMOP
-Vocabulary.</p>
-</div>
-<div id="gaiacore" class="section level3">
-<h3>gaiaCore</h3>
-<p>The gaiaCore software and associated gaiaDB schema support
-specification of attributes and geographic shapes in publicly available
-datasets. This specification allows the tables in the GIS schema
-extension to be joined with patient-level clinical data stored in the
-main OMOP schema. The current Beta release of gaiaCore software and its
-documentation are <a
-href="https://github.com/OHDSI/gaiaCore">here</a>.</p>
-</div>
-<div id="guidance" class="section level3">
-<h3>Guidance</h3>
-<p>The GIS toolchain requires patient addresses to be geocoded into
-representations that GIS software expects; for example, the latitude and
-longitude coordinates of street addresses or the coordinates of the
-lines that define a postal region. The OHDSI GIS workgroup does not
-provide or maintain software that does this geocoding. The GIS Workgroup
-does provide guidance about privacy-preserving options for geocoding
-address information and considerations for using available open-source
-and comercial geocoding approaches. The workgroup is also developing
-guidance to aid researchers in making informed decisions about selecting
-and working with alternative geospatial data sources that are relevant
-to addressing a research question.</p>
-</div>
-<div id="support-for-integration-with-ohdsis-technical-ecosytem"
-class="section level3">
-<h3>Support for integration with OHDSI’s technical ecosytem</h3>
-<p>The GIS Workgroup provides modified versions of the BroadSea
-container that inlcudes versions of the OHDSI Vocabulary that include
-draft the GIS vocabularies and the other components of the toolchain.
-Modified versions of the Tufts Synthetic Data and associated for
-demonstrating the use of the HADES PLP package to predict incident
-respiratory conditions using regional air quality data are included in
-the container. The workgroup is developing a robust approach to working
-with available geospatial data sources via catalogs. The approach uses
-schema.org-compliant standards and federated metadata sharing methods
-widely used in the GIS community to share information about available
-datasets.</p>
+<div id="creating-the-geom_spec" class="section level2">
+<h2>Creating the <em>geom_spec</em></h2>
+<p>TODO</p>
 </div>
 </div>
-<div id="goals" class="section level2">
-<h2><strong>Goals</strong></h2>
-<p>The OHDSI GIS Workgroup carries out work in support of its mission by
-pursuing the following goals: - Support OHDSI studies that use the GIS
-toolchain - Conduct studies that use the GIS toolchain - Advance the
-development of the GIS toolchain - Facilitate the use of externally
-supported privacy-protecting geocoding software - Develop data
-cataloging resources and guidance that enable reuse of specific
-geospatial datasets in OHDSI studies</p>
+<div id="sharing-a-data-source" class="section level1">
+<h1><strong>Sharing a Data Source</strong></h1>
+<div id="motivation" class="section level2">
+<h2>Motivation</h2>
+<p>If you have taken the time and effort to add a data source to your
+own local instance of gaiaDB, consider sharing it back to the rest of
+OHDSI GIS community. By sharing your data source you effectively reduce
+the duplication of effort, help to canonize a single “gaia version” of a
+web-hosted resource and increase the size of the public gaiaDB
+repository. All of this helps to nourish the OHDSI GIS system of tools
+and data sources.</p>
 </div>
-<div id="roadmaps" class="section level2">
-<h2><strong>Roadmaps</strong></h2>
-<ul>
-<li><a href="https://github.com/OHDSI/GIS/issues/368">Gaia</a></li>
-<li><a href="https://github.com/OHDSI/GIS/issues/365">Gaia
-Catalog</a></li>
-<li><a href="https://github.com/OHDSI/GIS/issues/366">Geocoding</a></li>
-<li><a
-href="https://github.com/OHDSI/GIS/issues/369">Vocabulary</a></li>
-</ul>
+<div id="github-pull-request" class="section level2">
+<h2>GitHub Pull Request</h2>
+<p>At this time, the most straightforward way to share your local data
+source is via a GitHub Pull Request:</p>
+<ol style="list-style-type: decimal">
+<li>The source file for the gaiaDB.backbone.data_source table is on the
+OHDSI Github <a
+href="https://github.com/OHDSI/GIS/tree/main/source">GIS/source</a>.
+Make sure that your local gaiaDB instance reflects this source when you
+add data sources locally.</li>
+<li>After you have added one or more data sources to your local gaiaDB
+instance, export the gaiaDB.backbone.data_source table as a CSV
+file.</li>
+<li>Create a pull request using <a
+href="https://github.com/OHDSI/GIS/issues/new?assignees=&amp;labels=&amp;template=share_data_source.yaml&amp;title=%5BShare+New+Data+Source%28s%29+Request%5D">this
+template</a>, attaching the CSV file that should replace the current
+source csv.</li>
+<li>The gaiaDB software maintainers will accept and merge your
+contributions or reply to your issue with feedback.</li>
+</ol>
 </div>
-<div id="publicationspresentation" class="section level2">
-<h2><strong>Publications/Presentation</strong></h2>
-<p>OHDSI GIS Toolchain Live Demonstration (2024 OHDSI Symposium <a
-href="https://www.youtube.com/watch?v=NLfWvuZJVK4">Video</a>)</p>
-<p>OHDSI GIS Infrastructure (2023 OHDSI Symposium <a
-href="https://www.ohdsi.org/2023showcase-19/">Poster</a>, <a
-href="https://www.ohdsi.org/wp-content/uploads/2023/10/19-zollovenecek-BriefReport.pdf">Abstract</a>)</p>
-<p>Toxins Vocabulary (2023 OHDSI Symposium <a
-href="https://www.ohdsi.org/2023showcase-11/">Poster</a>, <a
-href="https://www.ohdsi.org/wp-content/uploads/2023/10/Talapova-Polina_A_Toxin_Vocabulary_for_the_OMOP_CDM_2023symposium-Polina-Talapova.pdf">Abstract</a>)</p>
-<p>OHDSI GIS Workgroup October 10, 2023 Update (<a
-href="https://youtu.be/QZY-slWdsMs?si=UxMT39rqWTAW_AMx&amp;t=2178">Video</a>)</p>
-<p>OHDSI GIS Workgroup 2023 Objectives and Key Results (<a
-href="https://www.youtube.com/watch?v=bd0htzO1hx4&amp;t=1103s">Video</a>,
-<a
-href="https://www.ohdsi.org/wp-content/uploads/2023/02/GIS-OKRs2023Q1.pdf">slides</a>)</p>
-<p>OHDSI GIS Workgroup August 23, 2022 Update (<a
-href="https://youtu.be/d8jIAm9cssM">Video</a>) <br></p>
 </div>
+<div id="geocoding" class="section level1">
+<h1><strong>Geocoding</strong></h1>
+<p>TODO</p>
+</div>
+<div id="using-a-local-dataset" class="section level1">
+<h1><strong>Using a Local Dataset</strong></h1>
+<p>TODO</p>
 </div>
 
 
