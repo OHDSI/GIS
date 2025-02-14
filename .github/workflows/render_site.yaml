@@ -33,12 +33,12 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rmarkdown
-          needs: website
+          extra-packages: |
+            any::rmarkdown
+            any::knitr
 
-      - name: Build site
-        run: rmarkdown::render_site("rmd")
-        shell: Rscript {0}
+      - name: Render RMarkdown site
+        run: Rscript -e 'rmarkdown::render_site("rmd")'
 
       - name: Deploy to GitHub pages 🚀
         if: github.event_name != 'pull_request'
