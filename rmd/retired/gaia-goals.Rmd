@@ -1,0 +1,35 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG </div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+
+# **Gaia**
+
+## Foundational Goals 
+
+TODO
+
+### Automation of Data Retrieval, Standardization, and Ingestion
+
+TODO
+
+### Leveraging ontologies
+
+TODO
+
+### enable extensible tooling
+
+TODO
+
+### Local geocoding capacity
+
+TODO
+
+### Enable collaborative growth
+
+TODO

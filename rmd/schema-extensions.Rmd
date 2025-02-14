@@ -1,0 +1,97 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG</div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float: yes
+---
+
+```{r setup, include=FALSE, eval=TRUE}
+
+library(rmarkdown)
+library(knitr)
+library(kableExtra)
+library(magrittr)
+library(dplyr)
+library(readr)
+library(stringr)
+
+```
+
+```{css zoom-lib-src, echo = FALSE}
+script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+```
+
+```{js zoom-jquery, echo = FALSE}
+ $(document).ready(function() {
+    $('body').prepend('<div class=\"zoomDiv\"><img src=\"\" class=\"zoomImg\"></div>');
+    // onClick function for all plots (img's)
+    $('img:not(.zoomImg)').click(function() {
+      $('.zoomImg').attr('src', $(this).attr('src')).css({width: '100%'});
+      $('.zoomDiv').css({opacity: '1', width: 'auto', border: '1px solid white', borderRadius: '5px', position: 'fixed', top: '50%', left: '50%', marginRight: '-50%', transform: 'translate(-50%, -50%)', boxShadow: '0px 0px 50px #888888', zIndex: '50', overflow: 'auto', maxHeight: '100%'});
+    });
+    // onClick function for zoomImg
+    $('img.zoomImg').click(function() {
+      $('.zoomDiv').css({opacity: '0', width: '0%'}); 
+    });
+  });
+```
+
+# **OMOP GIS Schema Extensions**
+
+![OMOP GIS Schema Extensions - [Click here to download](https://github.com/OHDSI/GIS/raw/main/rmd/images/cdm_extension_erd.png)](images/cdm_extension_erd.png){width=150%}
+<br>
+
+```{r docLoopGaia, echo=FALSE, results='asis'}
+
+tableSpecs <- readr::read_csv("../inst/csv/Gaia_Table_Level.csv", show_col_types = FALSE)
+cdmSpecs <- readr::read_csv("../inst/csv/Gaia_Field_Level.csv", show_col_types = FALSE)
+
+tables <- tableSpecs$cdmTableName
+
+gaiaSpecsClean <- cdmSpecs %>%
+  dplyr::select(`Gaia Table` = cdmTableName,
+                `Gaia Field` = cdmFieldName,
+                `User Guide` = userGuidance,
+                `ETL Conventions` = etlConventions,
+                `Datatype` = cdmDatatype,
+                `Required` = isRequired,
+                `Primary Key` = isPrimaryKey,
+                `Foreign Key` = isForeignKey,
+                `FK Table` = fkTableName,
+                `FK Domain` = fkDomain
+                )
+
+gaiaSpecsClean[is.na(gaiaSpecsClean)] <- ""
+
+for(tb in tables) {
+
+  cat("##", tb, "{.tabset .tabset-pills} \n\n")
+  
+  cat("Access DDL scripts [here](https://github.com/OHDSI/GIS/tree/main/inst/ddl/)\n\n")
+
+  tableInfo <- subset(tableSpecs, cdmTableName == tb)
+  cat("**Table Description**\n\n",tableInfo[,"tableDescription"][[1]], "\n\n")
+  
+  fieldInfo <- subset(cdmSpecs, cdmTableName == tb)
+  if(!isTRUE(fieldInfo[,"userGuidance"][[1]]=="")){
+    cat("**User Guide**\n\n",fieldInfo[,"userGuidance"][[1]],"\n\n")
+  }
+  
+  if(!isTRUE(fieldInfo[,"etlConventions"][[1]]=="")){
+    cat("**ETL Conventions**\n\n",fieldInfo[,"etlConventions"][[1]],"\n\n")
+  }
+  
+  loopTable <- subset(gaiaSpecsClean, `Gaia Table` == tb)
+  loopTable <- subset(loopTable, select = -c(1))
+ 
+  cat(knitr::kable(x = loopTable, align = "l", row.names = FALSE, format = "html", escape = FALSE) %>%
+           column_spec(1, bold = T) %>%
+           # column_spec(2, width = "3in", include_thead = T) %>%
+           # column_spec(3, width = "4in", include_thead = T) %>%
+           # column_spec(4:9, width = "1in", include_thead = T) %>%
+           kable_styling(c("condensed","hover"), position = "center", full_width = T, font_size = 13))
+    
+  }
+```
