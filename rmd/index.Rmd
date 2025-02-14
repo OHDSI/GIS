@@ -42,7 +42,7 @@ The GIS toolchain consists of extensions to the OMOP schema, extensions to the O
 Importantly, the toolchain allows integrated analysis of geospatial and EHR data without sharing any sensitive patient location data.
 
 #### **OMOP GIS schema extensions**
-The External_Exposure table is an extension to the main OMOP schema. It holds data on things that can affect health that are associated with the places where patients live. The Location_History table contains information on patient's residence and the dates during which they lived in that location. The DDLs and associated documentation for the External_Exposure table and the Location_History table are [here](schema-extensions.html#location_history) and [here](schema-extensions.html#external_exposure) respectively. The entity-relationship diagram showing the joins between these tables and the main OMOP schema is [here](schema-extensions.html#OMOP_GIS_Schema_Extensions).
+The External_Exposure table is an extension to the main OMOP schema. It holds data on things that can affect health that are associated with the places where patients live. The Location_History table contains information on patient's residence and the dates during which they lived in that location. The DDLs and associated documentation for the External_Exposure table and the Location_History table are [here](schema-extensions.html#external_exposure) and [here](schema-extensions.html#location_history) respectively. The entity-relationship diagram showing the joins between these tables and the main OMOP schema is [here](schema-extensions.html#OMOP_GIS_Schema_Extensions).
 
 #### **OMOP Vocabulary extensions**
 The GIS extensions to the OMOP Vocabulary cover geometries, toxicants, and social determinants. They are used to represent a very large set of entities that can affect health and their relationships. The draft versions of these vocabularies are available [here](https://github.com/OHDSI/GIS/tree/main/vocabularies). They are based on mature existing ontologies and were developed by GIS workgroup members who are part of the OHDSI Core Vocabulary team in accordance with the guiding principles for OMOP vocabulary development, quality assurance, and integration. Current work on their validation in real use cases is expected to support their eventual acceptance as versioned community-maintained extensions of the core OMOP Vocabulary.
@@ -68,11 +68,12 @@ The green and black elements at the top of the figure above show the production 
 ## **Goals**
 
 The OHDSI GIS Workgroup carries out work in support of its mission by pursuing the following goals:
-- Support OHDSI studies that use the GIS toolchain
-- Conduct studies that use the GIS toolchain
-- Advance the development of the GIS toolchain
-- Facilitate the use of externally supported privacy-protecting geocoding software
-- Develop data cataloging resources and guidance that enable reuse of specific geospatial datasets in OHDSI studies
+ 
+ - Support OHDSI studies that use the GIS toolchain
+ - Conduct studies that use the GIS toolchain
+ - Advance the development of the GIS toolchain
+ - Facilitate the use of externally supported privacy-protecting geocoding software
+ - Develop data cataloging resources and guidance that enable reuse of specific geospatial datasets in OHDSI studies
 
 <br>
 
