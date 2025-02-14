@@ -25,7 +25,7 @@ An R Package for interacting with gaiaDB - part of the OHDSI GIS Gaia toolchain
 
 ## Quick Start
 
-Instructions to quickly install and start using Gaia are [here](https://ohdsi.github.io/GIS/get-started.html)
+Instructions to quickly install and start using Gaia are [here](https://ohdsi.github.io/GIS/getting-started.html)
 
 ## Support
 
