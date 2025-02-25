@@ -8,3 +8,4 @@ inst/config.yml
 errorReportSql.txt
 examples/
 env/
+scratch*

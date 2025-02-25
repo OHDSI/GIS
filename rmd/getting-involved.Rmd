@@ -1,0 +1,79 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG </div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+
+# **OHDSI GIS Process for New Use Cases**
+
+Development in the OHDSI GIS Workgroup is **use case driven**, meaning that specific needs to produce real world evidence determine the workgroup's objectives and direct the groups members' efforts.
+
+## **Proposing a new Use Case**
+
+For other OHDSI workgroups, research projects, or individual researchers that are interested in proposing a new use case to drive OHDSI GIS Workgroup development, a [Use Case Issue](https://github.com/OHDSI/GIS/issues/new?assignees=&labels=Use+Case&projects=&template=use-case.yaml&title=%5BUse+Case%5D%3A+) can be opened on the OHDSI GIS Workgroup GitHub.
+
+### Project deliverable
+
+The issue template focuses on your project's, or this collaboration's, hypothetical "Project Deliverable": what exactly will the final output of this work be? On the issue template, interested parties should:
+
+1) **Description** What evidence based on a combination of place-related data and EHR data do you want generate? Provide enough information so that all parties can form a mental image of the final product and will be able to align their work towards a single goal.
+
+2) **Infrastructure** What changes would need to be made to the OHDSI GIS infrastructure or tooling to help realize your project. How much would generation of this evidence rely on existing OHDSI GIS infrastructure vs. the development of new infrastructure? If it requires new infrastructure, how much could you/your team contribute to the needed development?
+
+3) **Timeline** Provide any hard or soft deadlines that you have for your project deliverable. Would a development sprint for this work be able to start immediately, or need to wait until some future date? If you imagine your deliverable being completed in multiple steps, feel free to add detail to the order and timing in which they should be completed here. Finally, begin to think about desired cadence of development or progress meetings.
+
+4) **Credit** Describe the way you and your team envision credit being attributed at the end of the development sprint. How does your team hope to be recognized for the collaborative effort with other OHDSI GIS Workgroup members?
+
+5) **Support** What sort of support do you need from OHDSI GIS Workgroup? Are you looking for help with using existing OHDSI GIS tools, planning a development sprint, or integrating new features?
+
+6) **Datasets of Interest** Are there any datasets that you need to use that are *not already in GaiaCatalog*? Include source dataset specifics like version and URLs, where applicable. Feel free to include links and descriptions of content, shape, and format of the data.
+
+These pieces of information will help to inform the OHDSI GIS Workgroup about the scope and goals of your project before scheduling a virtual meeting slot to have discuss. The more accurately and completely you provide this information, the more quickly and efficiently we can all collaborate to plan and execute a new development sprint and produce real world evidence.
+
+### Use Case Work Orders
+
+The only remaining field in the form is for linking "work order" tickets. This field is used to create a checklist of discrete development work orders that will enable your project deliverable. There is generally *no reason to fill this field out at this time*, though if you are aware of existing work orders that you know your proposed use case would depend on, this would be the spot to link them.
+
+#### Building a checklist in the work orders field
+
+> Use a dash and brackets, and a link to the work order, to create a checklist item in GitHub Markdown:
+>
+> `- [ ] https://github.com/OHDSI/GIS/issues/198`
+>
+> `- [ ] #198` (you can use this shorthand if the issue is in the OHDSI GIS repository)
+
+
+# **Editing the OHDSI GIS WG documentation website**
+
+## Overview
+
+We encourage contributions to our software documentation and our website. Follow these guidelines for making and proposing changes.
+
+## Website
+This section explains how to edit the content of the website. In this context, the website refers to everything at https://ohdsi.github.io/GIS/ *except* for the https://ohdsi.github.io/GIS/gaiaCore content which is covered in the next section.
+
+The source of the website's content are contained in the ./rmd/ directory at the root of this repository. Most of the content in the ./rmd/ directory are RMarkdown files which are rendered to HTML, stored in the ./docs/ directory, and served as a website using GitHub Pages. Along with RMD files, there are images, stylesheets (CSS), and a file called _site.yml. The _site.yml file specifies the website structure and defines the elements on the site's navbar.
+
+To edit existing pages on the website, simply find and edit the corresponding RMD file. To add new pages to the website, create an RMD file, fill it with content, and then add it to _site.yml in a fitting place. Whether you are editing existing pages or creating new ones, the function `RMarkdown::render_site()` can be run to regenerate the HTML files docs directory. More on rendering below.
+
+## R Package Documentation
+R Package documentation is created using ROxygen within R scripts. The ROxygen is rendered to .Rd files by running `devtools::document()`. After documentation is created, the function `pkgdown::build_site()` can be run to render the .Rd files into HTML, which automatically ends up in ./docs/gaiaCore/ and can be accessed from the website. More on rendering below.
+
+## Rendering
+
+If you've been keeping track, there are three functions which need to be called to generate the HTML for the website:
+1. `devtools::document()` creates .Rd files from inline ROxygen
+2. `RMarkdown::render_site()` creates HTML for website content
+3. `pkgdown::build_site()` creates HTML for the R Package documentation
+
+Running three functions each time you need to regenerate the website can be a drag. Even worse, the website won't generate correctly if they are run out of order.
+
+To make things easier, there is a helper R script, `render_gaia_site.R`, that can be run using `source('./render_gaia_site.R')`. This simply calls those three functions in the correct order. It makes life just a bit easier.
+
+## Publishing
+
+Finally, after changes have been made to the website or documentation and the new HTML has been rendered, simply commit your changes and create a Pull Request on the OHDSI GIS WG repository. A maintainer will review your changes, provide feedback if necessary, and accept your changes when they are ready.

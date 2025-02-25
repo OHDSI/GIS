@@ -1,0 +1,52 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG</div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+```{css zoom-lib-src, echo = FALSE}
+script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+```
+
+```{js zoom-jquery, echo = FALSE}
+ $(document).ready(function() {
+    $('body').prepend('<div class=\"zoomDiv\"><img src=\"\" class=\"zoomImg\"></div>');
+    // onClick function for all plots (img's)
+    $('img:not(.zoomImg)').click(function() {
+      $('.zoomImg').attr('src', $(this).attr('src')).css({width: '100%'});
+      $('.zoomDiv').css({opacity: '1', width: 'auto', border: '1px solid white', borderRadius: '5px', position: 'fixed', top: '50%', left: '50%', marginRight: '-50%', transform: 'translate(-50%, -50%)', boxShadow: '0px 0px 50px #888888', zIndex: '50', overflow: 'auto', maxHeight: '100%'});
+    });
+    // onClick function for zoomImg
+    $('img.zoomImg').click(function() {
+      $('.zoomDiv').css({opacity: '0', width: '0%'}); 
+    });
+  });
+```
+
+<br>
+
+#**Gaia Data Model Diagrams and Information Flow**
+
+# The "Backbone" Data Catalog
+
+Entity-Relationship diagram for the backbone schema. Note that linkages between entities are shown with solid association lines. The dashed arrows represent the transfer of metadata from the source to the index tables
+
+The Backbone Schema serves as the foundation for managing source geospatial datasets and their variables. Its core tables, data_source and variable_source, provide descriptions and computable instructions for accessing and using the source data. A single record in the data source table represents a complete web-hosted entity; a source dataset. A record in the variable_source table represents a unitary non-geometric component (a variable) to be extracted from a source dataset. Variables can often be thought of as a single column from a table, but certain table structures (such as Entity-Attribute-Value tables) contain variables that require more detailed extraction logic to access. 
+
+![gaiaDB "Backbone" Data Catalog Schema - [Click here to download](https://github.com/OHDSI/GIS/raw/main/rmd/images/backbone_er.png)](images/backbone_slice_1.png){width=150%}
+
+<br>
+
+# Creating harmonized data tables
+
+Relationships between the backbone schema and the harmonized data tables. Solid lines represent linkages between entities, while dashed lines show which values from the backbone schema are used to generate schema and table names
+
+The geom_index and attr_index tables store derived information from the data_source and variable_source tables that facilitate the on-the-fly creation of harmonized data tables. For example, The database_schema values in the geom_index and attr_index tables are concatenated "cleaned" versions of the org_id and org_set_id values from the data_source table. Similarly, the table_name values are "cleaned" copies of the dataset_name values from the data_source table.
+
+The gaiaCore software  extensively relies on the attr_index and geom_index tables to create or locate tables associated with specific data sources or variable sources. Within a gaiaDB instance, multiple <database_schema> schemas exist, each potentially containing multiple attr_<table_name> and geom_<table_name> tables. This modular design allows for efficient management and retrieval of geospatial data within the OMOP CDM, enhancing the interoperability and analytical capabilities of the OHDSI community.
+
+
+![gaiaDB "Backbone" holds instructions to populate harmonized data tables - [Click here to download](https://github.com/OHDSI/GIS/raw/main/rmd/images/backbone_er.png)](images/backbone_slice_2.png){width=150%}

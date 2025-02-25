@@ -16,6 +16,9 @@ navbar:
     - text: "Home"
       icon: fa-home
       href: index.html
+    - text: "Getting Started"
+      icon: fa-home
+      href: getting-started.html 
     - text: "Gaia"
       icon: fa-earth
       menu:
@@ -23,47 +26,17 @@ navbar:
           href: gaia-intro.html
         - text: "Design"
           href: gaia-principles.html                     # TODO add the architecture diagram
-        - text: "Specifications"
-          menu: 
-             - text: "Terminology"
-               href: gaia-terminology.html    
-             - text: "Data Models"
-               href: gaia-datamodels.html
-    - text: "Gaia Framework"
-      icon: fa-cubes
-      menu:
-        - text: "Overview"
-          href: fw-overview.html
-        - text: "Gaia Catalog"
-          href: fw-gaia-catalog.html
-        - text: "Gaia Core"
-          href: fw-gaia-core.html         # TODO create this
-        - text: "Extensions"
-          menu:
-            - text: "Overview"
-              href: fw-gaia-extensions.html       # TODO create this
-            - text: "GaiaOhdsi"
-              href: fw-gaia-extensions-ohdsi.html       # TODO create this
+        - text: "Schema Extensions"
+          href: schema-extensions.html 
+        - text: "gaiaDB"
+          href: gaiaDB.html
+        - text: "gaiaCore"
+          href: gaiaCore.html
+        - text: "gaiaOHDSI"
+          href: gaiaOHDSI.html
     - text: "How to"
       icon: fa-question
-      menu:
-        - text: "Get Started with Gaia"
-          href: ht-get-started.html
-        - text: "Use a Local Dataset"
-          href: ht-local-dataset.html
-        - text: "Geocode for OMOP Database Addresses"
-          href: ht-geocode.html              # TODO combine into one geocoding article
-        - text: "Geocode an OMOP Cohort"
-          href: geocodingCohort.html            # TODO combine into one geocoding article
-        - text: "Add Data Sources to a Local gaiaDB Instance"
-          href: ht-add-data-source.html
-        - text: "Share Your Local Data Sources"
-          href: ht-share-data-source.html
+      href: how-to.html # MERGE ht-overview, ht-local-dataset, ht-add-data-source, ht-share-data-source
     - text: "Getting Involved"
       icon: fa-info
-      menu:
-        - text: "Use Case Proposals"
-          href: gi-propose-usecase.html
-        - text: "How to Edit Documentation"
-          href: gi-edit-docs.html           # TODO add a quick para on cycle of clone repo -> edit RMD -> regenerate with render_gaia_site.R
-
+      href: getting-involved.html # MERGE gi-propose-usecase, gi-edit-docs, and start with a blurb about joining Workgroup meetings

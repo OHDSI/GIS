@@ -8,65 +8,96 @@ output:
           collapsed: false
 ---
 
-#**OHDSI Geographic Informations Systems (GIS) Workgroup Homepage**
+# **OHDSI Geographic Informations Systems (GIS)**
+
+<br>
 
 ## **Mission**
 
-The OHDSI GIS workgroup aims to introduce new infrastructure, tooling, and CDM extension tables that will allow researchers to seamlessly incorporate place-based datasets into their OMOP-shaped databases to enhance their evidence-generating workflows.
+Improve the health of populations by generating reliable evidence from integrated geospatial and person-level health data.
 
-## **Meeting Schedule**
-
-The OHDSI GIS Workgroup meets weekly on **Fridays at 10 AM ET** ([Meeting Link](https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d))
-
-We also meet out-of-band with collaborators at "use case" meetings. If you have specific goals for generating evidence using place-based data in conjunction with OMOP data, we’d love to work with you. Please see our page on [proposing new use cases](gi-propose-usecase.html).
 <br>
 
+## **Collaboration Approach**
 
+Like most of OHDSI, we use Github and MS Teams for collaboration, version control, etc. There are no perfect options for supporting collaboration. We'll help you accomodate to ours as best we can. In particular, we use Github for managing tasks like defining and monitoring progress on OHDSI studies, infrastructure roadmaps, technical issues, etc.
 
-## **Problem Space**
+We review progress and get input from the broader group at weekly meetings on Fridays. Leaders of specific projects within the GIS workgroup schedule and hold meetings with subgroups outside the main Friday meeting. Those other meetings are where most of the work on use cases and advancing technical infrastructure gets done.
 
-Geospatial data come in a variety of source formats with no universal, interoperable standard representation. While working with a single geospatial dataset has presents some technical challenges, the complexity of using geospatial begins to compound when variables from disparate datasets are needed for a single analysis study. As ad-hoc solutions are introduced to deal with the increasing technical complexity, the reproducibility of these studies plummets. 
+Apart from the groups' offical leadership, many members make fundamental contributions to the group's decisions, strategies, and products.
 
-In order to enable reproducible studies that incorporate place-related data with longitudinal patient-level data, it is first necessary to develop functionality to automate retrieval and transformation of publicly available place-related data into a standard representation. 
+All are welcome. We'd love to work with you. Please see our page on [proposing new use cases](getting-involved.html#Proposing_a_new_Use_Case). If you are new and are considering using the GIS toolchain to do research or contibuting to the group's work, we will schedule a separate meeting with you to help you figure out what manner of participation makes sense for you.
+
+New to OHDSI? First sign up for an OHDSI MS Teams account [here](https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUQ05MOU9BSzEwOThZVjNQVVFGTDNZRENONiQlQCN0PWcu). It's easy peasy.
+Already have an OHDSI Teams account? Great. Just sign up for the GIS Workgroup [here](https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu).
+
+The main workgroup call is on MS Teams every Friday at 10 AM US Eastern Time ([Meeting Link](https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d)). We are always looking for better ways to accomodate the time constraints of valued members around the world. Please let us know if this schedule is an obstacle.
+
+<br>
+
+## **GIS Toolchain**
+
+The GIS toolchain consists of extensions to the OMOP schema, extensions to the OMOP Vocabulary, and GIS-specific software for acquiring and working with geospatial data. Together, these enable researchers to use health-related attributes of the regions where patients live in OHDSI study cohort definitions. For example, you can use the GIS toolchain to define cohorts that include regional data on exposure to toxicants or social deprivation along with EHR data on relevant health outcomes. The toolchain also includes informatics resources that support integration with the main OHDSI tool stack (HADES) and integration with externally supported solutions for geocoding and for finding and deriving relevant data sources from catalogs of available data sources.
+
+Importantly, the toolchain allows integrated analysis of geospatial and EHR data without sharing any sensitive patient location data.
+
+#### **OMOP GIS schema extensions**
+The External_Exposure table is an extension to the main OMOP schema. It holds data on things that can affect health that are associated with the places where patients live. The Location_History table contains information on patient's residence and the dates during which they lived in that location. The DDLs and associated documentation for the External_Exposure table and the Location_History table are [here](schema-extensions.html#external_exposure) and [here](schema-extensions.html#location_history) respectively. The entity-relationship diagram showing the joins between these tables and the main OMOP schema is [here](schema-extensions.html#OMOP_GIS_Schema_Extensions).
+
+#### **OMOP Vocabulary extensions**
+The GIS extensions to the OMOP Vocabulary cover geometries, toxicants, and social determinants. They are used to represent a very large set of entities that can affect health and their relationships. The draft versions of these vocabularies are available [here](https://github.com/OHDSI/GIS/tree/main/vocabularies). They are based on mature existing ontologies and were developed by GIS workgroup members who are part of the OHDSI Core Vocabulary team in accordance with the guiding principles for OMOP vocabulary development, quality assurance, and integration. Current work on their validation in real use cases is expected to support their eventual acceptance as versioned community-maintained extensions of the core OMOP Vocabulary.
+
+#### **gaiaCore**
+The gaiaCore software and associated gaiaDB schema support specification of attributes and geographic shapes in publicly available datasets. This specification allows the tables in the GIS schema extension to be joined with patient-level clinical data stored in the main OMOP schema. The current Beta release of gaiaCore software and its documentation are [here](https://github.com/OHDSI/gaiaCore).
+
+#### **Guidance**
+The GIS toolchain requires patient addresses to be geocoded into representations that GIS software expects; for example, the latitude and longitude coordinates of street addresses or the coordinates of the lines that define a postal region. The OHDSI GIS workgroup does not provide or maintain software that does this geocoding. The GIS Workgroup does provide guidance about privacy-preserving options for geocoding address information and considerations for using available open-source and comercial geocoding approaches. The workgroup is also developing guidance to aid researchers in making informed decisions about selecting and working with alternative geospatial data sources that are relevant to addressing a research question.
+
+#### **Support for integration with OHDSI's technical ecosytem**
+The GIS Workgroup provides modified versions of the BroadSea container that inlcudes versions of the OHDSI Vocabulary that include draft the GIS vocabularies and the other components of the toolchain. Modified versions of the Tufts Synthetic Data and associated for demonstrating the use of the HADES PLP package to predict incident respiratory conditions using regional air quality data are included in the container.
+The workgroup is developing a robust approach to working with available geospatial data sources via catalogs. The approach uses schema.org-compliant standards and federated metadata sharing methods widely used in the GIS community to share information about available datasets.
+
+<br>
+
+![](images/ohdsi_gis_overview.png){width=150%}
+
+The green and black elements at the top of the figure above show the production of reliable evidence by applying standardized analytics to standardized person-level clinical data. The extension of this approach by the GIS toolchain is shown below that. Geocoded patient addresses are linked to geospatial datasets and standardized in the OMOP GIS extension. The GIS toolchain uses the same modeling approach as the main OMOP CDM and vocabulary. This allows the same best practice analytics to be applied simultaneously to both person-level clinical data and geospatial data on exposures outside the clinic. As with OHDSI's use of clinical data, analyses of external exposures are done without sharing patient address information.
+
+<br>
 
 ## **Goals**
 
-The overarching goal of the OHDSI GIS Workgroup is to develop software and standards for incorporating place-based data into the OMOP CDM and present this back to the OHDSI community. We reach these goals through development in the four key areas below. 
-
-### 1) Infrastructure
-- Functional Metadata Catalog
-- Harmonized geospatial data model
-
-### 2) Functionality
-- Geocoding
-- Accessing geospatial datasets
-
-### 3) Vocabulary
-- GIS specific concepts
-- SDoH vocabulary
-- Toxin vocabulary
-
-### 4) Extensions
-- Exposure_occurrence
+The OHDSI GIS Workgroup carries out work in support of its mission by pursuing the following goals:
+ 
+ - Support OHDSI studies that use the GIS toolchain
+ - Conduct studies that use the GIS toolchain
+ - Advance the development of the GIS toolchain
+ - Facilitate the use of externally supported privacy-protecting geocoding software
+ - Develop data cataloging resources and guidance that enable reuse of specific geospatial datasets in OHDSI studies
 
 <br>
 
-## **Roadmap**
+## **Roadmaps**
 
-Under Construction
-
+- [Gaia](https://github.com/OHDSI/GIS/issues/368)
+- [Gaia Catalog](https://github.com/OHDSI/GIS/issues/365)
+- [Geocoding](https://github.com/OHDSI/GIS/issues/366)
+- [Vocabulary](https://github.com/OHDSI/GIS/issues/369)
 
 <br>
 
-## **Publications/Presentation**
+## **Publications/Presentations**
+OHDSI GIS Toolchain Live Demonstration (2024 OHDSI Symposium [Video](https://www.youtube.com/watch?v=NLfWvuZJVK4))
+
 OHDSI GIS Infrastructure (2023 OHDSI Symposium [Poster](https://www.ohdsi.org/2023showcase-19/), [Abstract](https://www.ohdsi.org/wp-content/uploads/2023/10/19-zollovenecek-BriefReport.pdf))
 
 Toxins Vocabulary (2023 OHDSI Symposium [Poster](https://www.ohdsi.org/2023showcase-11/), [Abstract](https://www.ohdsi.org/wp-content/uploads/2023/10/Talapova-Polina_A_Toxin_Vocabulary_for_the_OMOP_CDM_2023symposium-Polina-Talapova.pdf)) 
 
-OHDSI GIS Workgroup October 10, 2023 Update ([video](https://youtu.be/QZY-slWdsMs?si=UxMT39rqWTAW_AMx&t=2178))
+OHDSI GIS Workgroup October 10, 2023 Update ([Video](https://youtu.be/QZY-slWdsMs?si=UxMT39rqWTAW_AMx&t=2178))
 
-OHDSI GIS Workgroup 2023 Objectives and Key Results ([video](https://www.youtube.com/watch?v=bd0htzO1hx4&t=1103s), [slides](https://www.ohdsi.org/wp-content/uploads/2023/02/GIS-OKRs2023Q1.pdf))
+OHDSI GIS Workgroup 2023 Objectives and Key Results ([Video](https://www.youtube.com/watch?v=bd0htzO1hx4&t=1103s), [slides](https://www.ohdsi.org/wp-content/uploads/2023/02/GIS-OKRs2023Q1.pdf))
 
-OHDSI GIS Workgroup August 23, 2022 Update ([video](https://youtu.be/d8jIAm9cssM))
+OHDSI GIS Workgroup August 23, 2022 Update ([Video](https://youtu.be/d8jIAm9cssM))
+
 <br>
 

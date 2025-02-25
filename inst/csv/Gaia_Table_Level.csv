@@ -1,0 +1,3 @@
+﻿cdmTableName,schema,isRequired,conceptPrefix,measurePersonCompleteness,measurePersonCompletenessThreshold,validation,tableDescription,userGuidance,etlConventions
+location_history,CDM,No,,,,,This table is a copy of the OMOP Location_History table.,Copy the OMOP Location_History table to Gaia to facilitate creation of CDM Extension tables,This table should be an exact duplicate of the OMOP Location_History table.
+external_exposure,CDM,No,external_exposure_,,,,This CDM Extension table is used to represent person-related transformations of data from Gaia and to interface with ATLAS and OHDSI tool stack from an OMOP CDM database.,,
