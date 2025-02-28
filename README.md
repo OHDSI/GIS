@@ -39,6 +39,11 @@ cd GIS
 
 docker compose -f ./docker/docker-compose.yaml up -d
 ```
+The gaiaCore R Package is wrapped with an HTTP API. You can test that the service is started in running at the specified port with the /hello endpoint, or load a variable to gaiaDB with the /load endpoint
+
+```bash
+curl "http://localhost:8000/load?variable_id=1"
+```
 
 Configure database connection details and HTTP API port in the .env file in the docker directory.
 
@@ -48,6 +53,10 @@ The gaiaDB image is **built** from the Dockerfile in the [gaiaDB repository](htt
 
 The gaiaCore image is **built** from the Dockerfile in the docker directory in this repository.
 
+```bash
+# stop containers
+docker compose -f ./docker/docker-compose.yaml down
+```
 ## Support
 
 -   Developer questions/comments/feedback: <a href="http://forums.ohdsi.org/c/developers">OHDSI Forum</a>
