@@ -1,0 +1,32 @@
+services:
+  gaiaDB:
+    image: ohdsi/gaiadb
+    build:
+      context: https://github.com/OHDSI/gaiaDB.git
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+    ports:
+      - "5432:5432"
+    networks:
+      - gaia-network
+
+  gaiaCore:
+    image: ohdsi/gaiacore
+    build:
+      # context: https://github.com/OHDSI/gaiaCore.git
+      context: .
+    depends_on:
+      - gaiaDB
+    ports:
+      - "8000:8000"
+    networks:
+      - gaia-network
+    env_file:
+      - .env
+
+networks:
+  gaia-network:
+    driver: bridge
