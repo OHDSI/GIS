@@ -27,6 +27,27 @@ An R Package for interacting with gaiaDB - part of the OHDSI GIS Gaia toolchain
 
 Instructions to quickly install and start using Gaia are [here](https://ohdsi.github.io/GIS/getting-started.html)
 
+### Docker Quick Start
+> Prerequisite: this solution requires that you have Docker and Docker Compose installed. See [here](https://docs.docker.com/engine/install/).
+
+Containerized instances of gaiaDB (geospatial data store) and the gaiaCore R package (built in to Broadsea Hades and wrapped with an HTTP API via Plumber) can quickly be deployed and connected using Docker Compose
+
+```bash
+git clone git@github.com:OHDSI/GIS.git
+
+cd GIS
+
+docker compose -f ./docker/docker-compose.yaml up -d
+```
+
+Configure database connection details and HTTP API port in the .env file in the docker directory.
+
+At this time, images are *not* published and are built when docker compose is run:
+
+The gaiaDB image is **built** from the Dockerfile in the [gaiaDB repository](https://github.com/ohdsi/gaiaDB).
+
+The gaiaCore image is **built** from the Dockerfile in the docker directory in this repository.
+
 ## Support
 
 -   Developer questions/comments/feedback: <a href="http://forums.ohdsi.org/c/developers">OHDSI Forum</a>
