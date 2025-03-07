@@ -10,12 +10,14 @@ For **project management**, see the [GIS Project Page](https://github.com/orgs/O
 
 ## Our Work
 
-### [OMOP GIS Vocabulary Package](https://github.com/OHDSI/GIS/tree/main/vocabularies)
+### [OMOP GIS Vocabulary Package](https://ohdsi.github.io/GIS/vocabulary.html)
 The OMOP GIS (Geographic Information System) Vocabulary Package is designed to elevate data-driven healthcare research by enabling the integration of spatial, environmental, behavioral, socioeconomic, phenotypic, and toxin-related determinants of health into standardized data structures.
 Features:
 - OMOP GIS Vocabulary
 - OMOP Exposome Vocabulary
 - OMOP SDoH (Social Determinants of Health) Vocabulary
+
+Find the Delta Vocabulary files for the Vocabulary Package [here](https://github.com/TuftsCTSI/CVB/tree/main/GIS/Ontology)
 
 ### [gaiaDB](https://github.com/ohdsi/gaiaDB)
 A staging database and collection of transformation recipes for public place-based datasets
