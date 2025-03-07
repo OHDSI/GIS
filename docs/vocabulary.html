@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title> OHDSI GIS WG</title>
+
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+<link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><div><img src="ohdsi16x16.png"></img> OHDSI GIS </div></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="getting-started.html">
+    <span class="fa fa-home"></span>
+     
+    Getting Started
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-earth"></span>
+     
+    Gaia
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="gaia-intro.html">Overview</a>
+    </li>
+    <li>
+      <a href="gaia-principles.html">Design</a>
+    </li>
+    <li>
+      <a href="schema-extensions.html">Schema Extensions</a>
+    </li>
+    <li>
+      <a href="gaiaDB.html">gaiaDB</a>
+    </li>
+    <li>
+      <a href="gaiaCore.html">gaiaCore</a>
+    </li>
+    <li>
+      <a href="gaiaOHDSI.html">gaiaOHDSI</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="vocabulary.html">
+    <span class="fa fa-book"></span>
+     
+    Vocabulary
+  </a>
+</li>
+<li>
+  <a href="how-to.html">
+    <span class="fa fa-question"></span>
+     
+    How to
+  </a>
+</li>
+<li>
+  <a href="getting-involved.html">
+    <span class="fa fa-info"></span>
+     
+    Getting Involved
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/OHDSI/GIS">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore"><img src="ohdsi40x40.png"></img> OHDSI GIS
+WG</h1>
+
+</div>
+
+
+<div id="omop-gis-vocabulary-package" class="section level1">
+<h1><strong>OMOP GIS Vocabulary Package</strong></h1>
+<p>The OMOP GIS (Geographic Information System) Vocabulary Package is
+designed to elevate data-driven healthcare research by enabling the
+integration of spatial, environmental, behavioral, socioeconomic,
+phenotypic, and toxin-related determinants of health into standardized
+data structures. This comprehensive framework facilitates a
+multi-dimensional understanding of health outcomes, accounting for both
+external environmental exposures and intrinsic patient
+characteristics.</p>
+<p>This package is a vital extension of the OMOP CDM, addressing the
+growing need to contextualize healthcare data with external
+environmental and societal factors. Developed and maintained by the <a
+href="https://www.ohdsi.org/web/wiki/doku.php?id=projects:workgroups:gis">GIS
+Working Group</a>, this package provides vocabularies, scripts, and
+documentation for seamless term integration into existing OHDSI
+vocabularies.</p>
+<ul>
+<li><strong>Objective</strong>: To provide a comprehensive, standardized
+framework that enables the incorporation of geographic, toxicological,
+healthcare, behavioral, and socioeconomic terminology into the OMOP
+Common Data Model (CDM).</li>
+<li><strong>Application</strong>: Ideal for terminologists, ontologists,
+researchers, epidemiologists, and data analysts.</li>
+<li><strong>Integration</strong>:
+<ul>
+<li>The package is compatible with existing OMOP CDM.</li>
+<li>All vocabularies, scripts, and mappings conform to OMOP
+standards.</li>
+<li>Designed to scale with evolving data needs and expanding global
+health contexts.</li>
+</ul></li>
+</ul>
+<blockquote>
+<p>Find the Delta Vocabulary files for the Vocabulary Package <a
+href="https://github.com/TuftsCTSI/CVB/tree/main/GIS/Ontology">here</a></p>
+</blockquote>
+<table style="width:74%;">
+<colgroup>
+<col width="73%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left">* <strong>Features</strong>: * <strong>OMOP GIS
+Vocabulary</strong>: Standardizes geographical terminologies and spatial
+data, supporting geospatial epidemiology, healthcare accessibility
+studies, and population health research. The OMOP GIS vocabulary is a
+compilation of terminologies related to geography, boundaries, and
+spatial elements. The vocabulary encompasses 159 concepts of the
+Observation OMOP domain. * <strong>OMOP Exposome Vocabulary</strong>:
+Integrates environmental and toxicological factors (exposomes) into the
+OMOP CDM, providing a taxonomy of environmental pollutants, toxins, and
+chemical agents. Offers a comprehensive taxonomy and classification
+system centered on environmental substances (exposomes). Designed to
+facilitate structured data capture, analysis, and interpretation, this
+vocabulary forms the foundation for toxicological studies within the
+observational health data paradigm. The concepts within the OMOP
+Exposome Vocabulary belong to the ‘Observation’ domain and the
+‘Substance’ concept class in OMOP. * <strong>OMOP SDOH (Social
+Determinants of Health) Vocabulary</strong>: encapsulates a refined set
+of terminologies delineating the multifaceted environmental and societal
+factors that significantly influence individual and community health
+outcomes. The vocabulary boasts a comprehensive structure, organized
+hierarchically to facilitate precise categorization and effective data
+navigation. Within this structure, the SDOH vocabulary seamlessly
+integrates key components from recognized standards such as the Social
+Vulnerability Index (SVI), the Agency for Healthcare Research and
+Quality (AHRQ) frameworks, and the Social Determinants of Health
+Ontology (SDOHO) nodes. This integration ensures a rich,
+multi-dimensional perspective, capturing a wide spectrum of determinants
+from socioeconomic status to healthcare access, and from educational
+opportunities to neighborhood and built environment. Examples of Main
+Nodes of the SDOH Hierarchy: * Element Relevant To Demographics *
+Element Relevant To Education * Element Relevant To Geographic Location
+* Element Relevant To Health * Element Relevant To Physical Environment
+* Element Relevant To Population * Element Relevant To Social And
+Community Context</td>
+</tr>
+</tbody>
+</table>
+<div id="sources" class="section level2">
+<h2>Sources</h2>
+<p>The following data sources have been processed to enrich and
+integrate spatial, environmental, behavioral, socioeconomic, phenotypic,
+and toxin-related entities into the OMOP GIS Vocabulary Package.</p>
+<ol style="list-style-type: decimal">
+<li><strong>Area Deprivation Index (ADI)</strong></li>
+</ol>
+<ul>
+<li>Link: <a
+href="https://storymaps.arcgis.com/stories/a5511f076857458188737a6c9c18a744">ADI
+Story Map</a></li>
+<li>Use Case: <a href="https://github.com/OHDSI/GIS/issues/290">Issue
+#290</a></li>
+<li>Description: The ADI measures socioeconomic deprivation at the
+neighborhood level, which is a critical factor in understanding
+disparities in health outcomes. The dataset helps identify areas with
+high social and economic challenges that impact population health.</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>AHRQ Social Determinants of Health (SDOH)
+Database</strong></li>
+</ol>
+<ul>
+<li>Link: <a
+href="https://www.ahrq.gov/sites/default/files/wysiwyg/sdoh/SDOH-Data-Sources-Documentation-v1-Final.pdf">AHRQ
+SDOH Data Sources Documentation</a></li>
+<li>Use Case: <a href="https://github.com/OHDSI/GIS/issues/175">Issue
+#175</a></li>
+<li>Description: This database, provided by the Agency for Healthcare
+Research and Quality (AHRQ), offers a collection of data sources on
+social determinants of health (SDOH). It includes key indicators such as
+income, education, employment, and healthcare access, which influence
+health outcomes across populations.</li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li><strong>Child Opportunity Index (COI)</strong></li>
+</ol>
+<ul>
+<li>Link: <a
+href="https://data.diversitydatakids.org/dataset/coi20-child-opportunity-index-2-0-database/resource/080cfe52-90aa-4925-beaa-90efb04ab7fb">COI
+Database</a></li>
+<li>Use Case: <a href="https://github.com/OHDSI/GIS/issues/288">Issue
+#288</a></li>
+<li>Description: The COI provides insights into the quality of resources
+and opportunities available to children across different neighborhoods.
+The index covers multiple dimensions, including education, health, and
+social environment, critical for analyzing the impact of socioeconomic
+factors on child development.</li>
+</ul>
+<ol start="5" style="list-style-type: decimal">
+<li><strong>Environmental Justice Index (EJI)</strong></li>
+</ol>
+<ul>
+<li>Link: <a
+href="https://eji.cdc.gov/Documents/Data/2022/EJI_2022_Data_Dictionary_508.pdf">EJI
+Data Dictionary</a></li>
+<li>Use Case: <a href="https://github.com/OHDSI/GIS/issues/307">Issue
+#307</a></li>
+<li>Description: The EJI measures the cumulative impacts of
+environmental injustice on health, particularly in vulnerable
+communities. It integrates environmental, social, and health data to
+highlight areas where health outcomes are disproportionately affected by
+environmental hazards.</li>
+</ul>
+<ol start="6" style="list-style-type: decimal">
+<li><strong>Sustainable Development Goals (SDG)</strong></li>
+</ol>
+<ul>
+<li>Link: <a
+href="https://globalcompact.org.ua/en/17-sustainable-development-goals/">SDG
+Overview</a></li>
+<li>Use Case: <a href="https://github.com/OHDSI/GIS/issues/288">Issue
+#288</a></li>
+<li>Description: The United Nations’ 17 Sustainable Development Goals
+(SDGs) and their indicators aim to address global challenges, including
+poverty, inequality, climate change, environmental degradation, and
+health.</li>
+</ul>
+<ol start="7" style="list-style-type: decimal">
+<li><strong>Social Determinants of Health Ontology (SDOHO)</strong></li>
+</ol>
+<ul>
+<li>Link 1: <a href="https://pubmed.ncbi.nlm.nih.gov/37301740/">SDOHO
+PubMed Article</a></li>
+<li>Link 2: <a
+href="https://ww2.uth.edu/dA/e1e921b288/SDoHO_1005.owl?language_id=1">SDOHO
+OWL</a></li>
+<li>Use Case: <a href="https://github.com/OHDSI/GIS/issues/198">Issue
+#198</a></li>
+<li>Description: SDOHO is an ontology that models the social
+determinants of health, providing a structured framework to represent
+the complex relationships between social, economic, and environmental
+factors that influence individual and population health outcomes.</li>
+</ul>
+<ol start="8" style="list-style-type: decimal">
+<li><strong>Social and Environmental Determinants of Health
+(SEDH)</strong></li>
+</ol>
+<ul>
+<li>Link: <a
+href="https://info.ornl.gov/sites/publications/Files/Pub200164.pdf">SEDH
+Report</a></li>
+<li>Use Case: <a href="https://github.com/OHDSI/GIS/issues/307">Issue
+#307</a></li>
+<li>Description: This dataset focuses on the social and environmental
+determinants of health, providing a rich source of data on the external
+factors influencing public health, including physical environment,
+socioeconomic status, and behavioral factors.</li>
+</ul>
+<ol start="9" style="list-style-type: decimal">
+<li><strong>Social Vulnerability Index (SVI)</strong></li>
+</ol>
+<ul>
+<li>Link: <a
+href="https://www.atsdr.cdc.gov/placeandhealth/svi/documentation/pdf/SVI-2022-Documentation-H.pdf">SVI
+Documentation</a></li>
+<li>Use Case: <a href="https://github.com/OHDSI/GIS/issues/9">Issue
+#9</a></li>
+<li>Description: The Social Vulnerability Index (SVI) identifies
+communities that may need support before, during, or after disasters. It
+uses census data to evaluate the vulnerability of different areas based
+on factors like poverty, housing, and access to transportation.</li>
+</ul>
+<ol start="10" style="list-style-type: decimal">
+<li><strong>Toxin and Toxin Target Database (T3DB)</strong></li>
+</ol>
+<ul>
+<li>Link: <a href="http://www.t3db.ca/downloads">T3DB Downloads</a></li>
+<li>Use Case: <a href="https://github.com/OHDSI/GIS/issues/194">Issue
+#194</a></li>
+<li>Description: The Toxin and Toxin Target Database (T3DB) is a
+comprehensive resource that catalogs toxins and their biological
+targets.</li>
+</ul>
+<p>The list of the collected source terms and their mappings are
+maintained in an editable <a
+href="https://docs.google.com/spreadsheets/d/1hMLjKokFCpoDqC_WsAd7ZXyBKDmnPif2rR9DlQ9X7cs/edit?usp=sharing">Google
+Spreadsheet</a>, allowing for real-time collaboration and ongoing
+validation by the community.</p>
+</div>
+<div id="concept-names" class="section level2">
+<h2>Concept Names</h2>
+<p>Concept names adhere to source data specifications or are guided by
+relevant literature.</p>
+</div>
+<div id="concept-codes" class="section level2">
+<h2>Concept Codes</h2>
+<p>Concept codes were either adopted directly from source data or
+autogenerated for newly developed terms (start with ‘GIS’ prefix).</p>
+</div>
+<div id="domains" class="section level2">
+<h2>Domains</h2>
+<table>
+<colgroup>
+<col width="9%" />
+<col width="41%" />
+<col width="41%" />
+<col width="7%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>domain_id</strong></th>
+<th><strong>Definition</strong></th>
+<th><strong>Example</strong></th>
+<th><strong>Exists in OMOP</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Behavioral Feature</strong></td>
+<td>Refers to actions or behaviors by individuals that influence health
+outcomes, often related to lifestyle choices.</td>
+<td><code>Element Relevant To Physical Activity</code></td>
+<td><strong>NO</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Demographic Feature</strong></td>
+<td>Describes the characteristics of a population, such as age, gender,
+race, or ethnicity.</td>
+<td><code>Race In Population</code></td>
+<td><strong>NO</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Environmental Feature</strong></td>
+<td>Involves natural or man-made environmental factors that affect
+health and well-being.</td>
+<td><code>Air Quality Index (AQI)</code></td>
+<td><strong>NO</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Geographic Feature</strong></td>
+<td>Describes physical locations, spatial relationships, and
+geographical characteristics relevant to health studies.</td>
+<td><code>State-County FIPS Code (5-Digit)</code></td>
+<td><strong>NO</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Healthcare Feature</strong></td>
+<td>Involves elements directly related to healthcare services, access,
+and utilization.</td>
+<td><code>Element Relevant To Health Care</code></td>
+<td><strong>NO</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Observation</strong></td>
+<td>Captures clinical or non-clinical observations relevant to the
+contextual data.</td>
+<td><code>Total Number Of Households</code></td>
+<td><strong>YES</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Phenotypic Feature</strong></td>
+<td>Refers to observable traits or characteristics of an individual,
+influenced by genetic and environmental factors.</td>
+<td><code>Element Relevant To Depression</code></td>
+<td><strong>NO</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Socioeconomic Feature</strong></td>
+<td>Involves social and economic factors that impact health, such as
+income, education, or employment status.</td>
+<td><code>Employment In Population</code></td>
+<td><strong>NO</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Type Concept</strong></td>
+<td>A categorization used to define where the record comes from.</td>
+<td><code>Air Quality Database</code></td>
+<td><strong>YES</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="concept-classes" class="section level2">
+<h2>Concept Classes</h2>
+<table>
+<colgroup>
+<col width="9%" />
+<col width="46%" />
+<col width="43%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>concept_class_id</strong></th>
+<th><strong>Definition</strong></th>
+<th><strong>Example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>ADI Construct</strong></td>
+<td>Represents a high-level conceptual framework within the Area
+Deprivation Index (ADI) for analyzing socioeconomic factors.</td>
+<td><code>Area Deprivation Index (ADI)</code></td>
+</tr>
+<tr class="even">
+<td><strong>ADI Item</strong></td>
+<td>Refers to specific elements or data points that make up the ADI
+framework.</td>
+<td><code>% Families Below Federal Poverty Level</code></td>
+</tr>
+<tr class="odd">
+<td><strong>AHRQ Construct</strong></td>
+<td>A conceptual framework from the Agency for Healthcare Research and
+Quality (AHRQ) related to social determinants of health.</td>
+<td><code>Food Access</code></td>
+</tr>
+<tr class="even">
+<td><strong>AHRQ Determinant</strong></td>
+<td>A measurable factor derived from AHRQ’s data, influencing health
+outcomes.</td>
+<td><code>Crime And Violence</code></td>
+</tr>
+<tr class="odd">
+<td><strong>AHRQ Item</strong></td>
+<td>Specific data points or elements within the AHRQ framework.</td>
+<td><code>Total Number Of Households</code></td>
+</tr>
+<tr class="even">
+<td><strong>COI Construct</strong></td>
+<td>A framework within the Child Opportunity Index (COI) for assessing
+child well-being and opportunity.</td>
+<td><code>Economic Resource Index</code></td>
+</tr>
+<tr class="odd">
+<td><strong>COI Determinant</strong></td>
+<td>A measurable factor in the COI influencing child development and
+health.</td>
+<td><code>Access To Green Spaces</code></td>
+</tr>
+<tr class="even">
+<td><strong>COI Item</strong></td>
+<td>Specific data points or factors that make up the COI.</td>
+<td><code>Mean Estimated 8-Hour Average Ozone Concentration</code></td>
+</tr>
+<tr class="odd">
+<td><strong>EJI EBM Item</strong></td>
+<td>Refers to an Environmental Burden Measure (EBM) within the
+Environmental Justice Index (EJI).</td>
+<td><code>Ambient Concentrations Of Diesel PM/M3</code></td>
+</tr>
+<tr class="even">
+<td><strong>EJI HVM Item</strong></td>
+<td>Refers to a Health Vulnerability Measure (HVM) within the EJI.</td>
+<td><code>Percentage Of Individuals With Cancer</code></td>
+</tr>
+<tr class="odd">
+<td><strong>EJI Item</strong></td>
+<td>A general item from the EJI, integrating environmental and health
+vulnerability data.</td>
+<td><code>Census Tract Code</code></td>
+</tr>
+<tr class="even">
+<td><strong>Exposome Target</strong></td>
+<td>Represents specific biological targets within the exposome (a
+measure of all environmental exposures across a lifetime).</td>
+<td><code>Tissue-type plasminogen activator</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Exposome Transporter</strong></td>
+<td>Refers to biological transporters related to the exposome,
+responsible for moving substances within an organism.</td>
+<td><code>SLCO2B1 (OATP2B1, OATP-B)</code></td>
+</tr>
+<tr class="even">
+<td><strong>Exposure Type Concept</strong></td>
+<td>A category defining types of exposures relevant to toxicology and
+environmental health studies.</td>
+<td><code>Census Data</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Geometry Relationship</strong></td>
+<td>Refers to spatial relationships within geographic data, such as
+spatial proximity or overlap.</td>
+<td><code>Near/Proximity to</code></td>
+</tr>
+<tr class="even">
+<td><strong>Geometry Type</strong></td>
+<td>Defines the type of geometry used in spatial data.</td>
+<td><code>Polygon</code></td>
+</tr>
+<tr class="odd">
+<td><strong>GIS Measure</strong></td>
+<td>A specific metric or quantitative value derived from GIS data.</td>
+<td><code>Estimate</code></td>
+</tr>
+<tr class="even">
+<td><strong>Location</strong></td>
+<td>Refers to the specific geographic location or spatial point in GIS
+data.</td>
+<td><code>Administrative Boundary</code></td>
+</tr>
+<tr class="odd">
+<td><strong>SDG Goal</strong></td>
+<td>Represents one of the United Nations’ Sustainable Development Goals
+(SDGs) related to health, environment, and equity.</td>
+<td><code>Significantly reduce all forms of violence and related death rates everywhere</code></td>
+</tr>
+<tr class="even">
+<td><strong>SDG Indicator</strong></td>
+<td>A measurable indicator for tracking progress toward SDG goals.</td>
+<td><code>Proportion of bodies of water with good ambient water quality</code></td>
+</tr>
+<tr class="odd">
+<td><strong>SDOH Construct</strong></td>
+<td>A high-level framework for understanding social determinants of
+health (SDOH) and their impact on population health.</td>
+<td><code>Neighborhood Quality</code></td>
+</tr>
+<tr class="even">
+<td><strong>SDOH Determinant</strong></td>
+<td>A specific social or economic factor that directly influences health
+outcomes.</td>
+<td><code>Air Quality Index (AQI)</code></td>
+</tr>
+<tr class="odd">
+<td><strong>SDOH Item</strong></td>
+<td>A specific data element within the SDOH framework.</td>
+<td><code>The Air Quality Index For The Day For PM2.5</code></td>
+</tr>
+<tr class="even">
+<td><strong>SDOHO Construct</strong></td>
+<td>A conceptual framework from the Social Determinants of Health
+Ontology (SDOHO) focused on categorizing health determinants.</td>
+<td><code>Smoking</code></td>
+</tr>
+<tr class="odd">
+<td><strong>SDOHO Determinant</strong></td>
+<td>A measurable factor in the SDOHO framework affecting health.</td>
+<td><code>Alcohol Use</code></td>
+</tr>
+<tr class="even">
+<td><strong>SDOHO Item</strong></td>
+<td>A specific measurable element in the SDOHO framework.</td>
+<td><code>Occupational Prestige Score</code></td>
+</tr>
+<tr class="odd">
+<td><strong>SDOHO Value</strong></td>
+<td>A specific value or outcome within the SDOHO framework that reflects
+health disparities or social conditions.</td>
+<td><code>Intersex</code></td>
+</tr>
+<tr class="even">
+<td><strong>SEDH Construct</strong></td>
+<td>A conceptual framework for Social and Environmental Determinants of
+Health (SEDH).</td>
+<td><code>Social Capital Index</code></td>
+</tr>
+<tr class="odd">
+<td><strong>SEDH Item</strong></td>
+<td>A data element within the SEDH framework.</td>
+<td><code>Veteran Segments By Census Block Group</code></td>
+</tr>
+<tr class="even">
+<td><strong>Substance</strong></td>
+<td>A chemical or biological substance relevant to environmental
+exposure or toxicology.</td>
+<td><code>Nicotine</code></td>
+</tr>
+<tr class="odd">
+<td><strong>SVI Construct</strong></td>
+<td>A conceptual framework for the Social Vulnerability Index (SVI),
+representing factors that make communities vulnerable.</td>
+<td><code>Household Characteristics</code></td>
+</tr>
+<tr class="even">
+<td><strong>SVI Determinant</strong></td>
+<td>A specific factor in the SVI that directly impacts a community’s
+resilience to health risks or environmental hazards.</td>
+<td><code>Housing Type &amp; Transportation</code></td>
+</tr>
+<tr class="odd">
+<td><strong>SVI Item</strong></td>
+<td>A specific data point within the SVI framework.</td>
+<td><code>Persons Below 150% Poverty Estimate MOE</code></td>
+</tr>
+</tbody>
+</table>
+<div id="additional-glossary-for-concept-classes-understanding"
+class="section level3">
+<h3>Additional Glossary for Concept Classes Understanding:</h3>
+<ul>
+<li><strong>Construct</strong>: represents conceptual or behavioral
+elements that are often measured through subjective or indirect means.
+Constructs are used to characterize complex or abstract social,
+psychological, or environmental phenomena that contribute to
+understanding health outcomes but are not necessarily directly
+measurable or causal by themselves. Examples:
+<ul>
+<li>Social Norms And Attitude (SDOHO Construct)</li>
+<li>Sexual Orientation (SDOHO Construct)</li>
+<li>Occupational Hazards (SDOH Construct)</li>
+<li>Neighborhood Safety (SDOH Construct) These examples reflect
+behaviors, relationships, and environmental factors that influence
+health outcomes, but they are abstract and typically involve
+interpretation, surveys, or proxies for measurement.</li>
+</ul></li>
+<li><strong>Determinant</strong>: is a specific, measurable factor that
+has a more direct influence on health outcomes. Determinants are often
+quantifiable and can be linked more concretely to causes or risk factors
+affecting a person’s health, such as economic status, education, or
+access to healthcare. Examples:
+<ul>
+<li>Veteran Status (SDOHO Determinant)</li>
+<li>Healthcare Provider Availability (SDOH Determinant)</li>
+<li>Income (AHRQ Determinant)</li>
+<li>Tobacco Use (SDOHO Determinant)</li>
+<li>Vaccination Status (SDOH Determinant)</li>
+</ul></li>
+<li><strong>Item</strong>: is a specific, measurable data point or
+element that is used to evaluate a larger construct or determinant.
+<ul>
+<li>% Households Without A Motor Vehicle (ADI Item)</li>
+<li>All Cause Readmissions Per 100 Male Admissions (AHRQ Item)</li>
+<li>Ambient Concentrations Of Diesel PM/M3 (EJI EBM Item)</li>
+<li>Civilian (Age 16+) Unemployed Estimate (SVI Item)</li>
+</ul></li>
+<li><strong>Item Value</strong>: is a specific measurable value or state
+that the item can take. The item values might include “employed,”
+“unemployed,” “self-employed,” “retired,” etc.</li>
+</ul>
+</div>
+</div>
+<div id="concept-status-standardness" class="section level2">
+<h2>Concept Status (Standardness)</h2>
+<p>If a full semantic match is identified in OMOP, GIS codes are mapped
+to the corresponding standard concepts and reclassified as non-standard.
+If no match is found, GIS codes are retained as standard concepts.</p>
+</div>
+<div id="valid-start-date" class="section level2">
+<h2>Valid Start Date</h2>
+<table>
+<colgroup>
+<col width="39%" />
+<col width="60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>vocabulary_id</strong></th>
+<th><strong>valid_start_date</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>OMOP Exposome</td>
+<td>source field <code>updated_at</code> in ‘MM-DD-YYYY’ format</td>
+</tr>
+<tr class="even">
+<td>OMOP Exposome (cas is null)</td>
+<td>09-14-2024</td>
+</tr>
+<tr class="odd">
+<td>OMOP SDOH (concept_class_id_1 ~ ‘SDOHO’)</td>
+<td>01-01-2022</td>
+</tr>
+<tr class="even">
+<td>OMOP SDOH (concept_class_id_1 ~ ‘ADI’)</td>
+<td>01-01-2018</td>
+</tr>
+<tr class="odd">
+<td>OMOP SDOH (concept_class_id_1 ~ ‘AHRQ’)</td>
+<td>01-01-2022</td>
+</tr>
+<tr class="even">
+<td>OMOP SDOH (concept_class_id_1 ~ ‘COI’)</td>
+<td>01-01-2020</td>
+</tr>
+<tr class="odd">
+<td>OMOP SDOH (concept_class_id_1 ~ ‘EJI’)</td>
+<td>01-01-2022</td>
+</tr>
+<tr class="even">
+<td>OMOP SDOH (concept_class_id_1 ~ ‘SEDH’)</td>
+<td>01-01-2021</td>
+</tr>
+<tr class="odd">
+<td>OMOP SDOH (concept_class_id_1 ~ ‘SVI’)</td>
+<td>01-01-2018</td>
+</tr>
+<tr class="even">
+<td>OMOP SDOH (concept_class_id_1 ~ ‘SDG’)</td>
+<td>03-01-2017</td>
+</tr>
+<tr class="odd">
+<td>All other cases</td>
+<td>09-14-2024</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="relationships" class="section level2">
+<h2>Relationships</h2>
+<table>
+<colgroup>
+<col width="17%" />
+<col width="17%" />
+<col width="64%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>relationship_id</strong></th>
+<th><strong>reverse_relationship_id</strong></th>
+<th><strong>Meaning</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Locates in cell</strong></td>
+<td><strong>Cell contains</strong></td>
+<td>Indicates that a certain agent or substance is found within or
+targets a cellular entity.</td>
+</tr>
+<tr class="even">
+<td><strong>Locates in tissue</strong></td>
+<td><strong>Tissue contains</strong></td>
+<td>Suggests that a certain agent or substance is present within or
+targets a specific tissue type.</td>
+</tr>
+<tr class="odd">
+<td><strong>Impacts on process</strong></td>
+<td><strong>Impacted by</strong></td>
+<td>Signifies that an agent or substance exerts an influence on a
+specific process.</td>
+</tr>
+<tr class="even">
+<td><strong>Affects biostructure</strong></td>
+<td><strong>Affected by</strong></td>
+<td>Suggests that an agent or substance has an impact on a certain
+biological structure.</td>
+</tr>
+<tr class="odd">
+<td><strong>Maps to</strong></td>
+<td><strong>Mapped from</strong></td>
+<td>Indicates a relationship where a concept is equated to or
+represented as a standard OMOP concept.</td>
+</tr>
+<tr class="even">
+<td><strong>Is a</strong></td>
+<td><strong>Subsumes</strong></td>
+<td>Hierarchical relationship where a concept is a subset or instance of
+a more general concept.</td>
+</tr>
+<tr class="odd">
+<td><strong>Has associated finding</strong></td>
+<td><strong>Asso finding of</strong></td>
+<td>Indicates a relationship between a concept and an associated finding
+related to it.</td>
+</tr>
+<tr class="even">
+<td><strong>Has relat context</strong></td>
+<td><strong>Relat context of</strong></td>
+<td>Describes the contextual relationship between two related
+concepts.</td>
+</tr>
+<tr class="odd">
+<td><strong>Has geometry</strong></td>
+<td><strong>Is geometry of</strong></td>
+<td>Represents the spatial or geometric relationship between an entity
+and its geographic or spatial structure.</td>
+</tr>
+</tbody>
+</table>
+<p>Examples: * <strong>Hierarchical relationships</strong>: <em>‘Is
+a’</em> - <em>‘Subsumes’</em>: ‘Polygon’ - ‘Is a’ - ‘2D
+(Two-Dimensional) Geometry’ / ‘2D (Two-Dimensional) Geometry’ -
+‘Subsumes’ - ‘Polygon’ * <strong>Supplemental GIS-specific
+relationships</strong>: e.g. <em>‘Is geometry of’</em> - <em>‘Has
+geometry’</em>: ‘LineString’ - ‘Is geometry of’ - ‘International Border’
+/ ‘International Border’ - ‘Has geometry’ - ‘LineString’</p>
+</div>
+<div id="mapping-and-hierarchy" class="section level2">
+<h2>Mapping and Hierarchy</h2>
+<table>
+<thead>
+<tr class="header">
+<th><strong>target_vocabulary_id</strong></th>
+<th><strong>number of associations</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>OMOP Exposome</td>
+<td>82,150</td>
+</tr>
+<tr class="even">
+<td>OMOP SDOH</td>
+<td>6,738</td>
+</tr>
+<tr class="odd">
+<td>RxNorm</td>
+<td>4,418</td>
+</tr>
+<tr class="even">
+<td>RxNorm Extension</td>
+<td>2,221</td>
+</tr>
+<tr class="odd">
+<td>SNOMED</td>
+<td>1,769</td>
+</tr>
+<tr class="even">
+<td>LOINC</td>
+<td>776</td>
+</tr>
+<tr class="odd">
+<td>OMOP GIS</td>
+<td>423</td>
+</tr>
+<tr class="even">
+<td>ICD10CM</td>
+<td>122</td>
+</tr>
+<tr class="odd">
+<td>PPI</td>
+<td>56</td>
+</tr>
+<tr class="even">
+<td>OMOP Genomic</td>
+<td>49</td>
+</tr>
+<tr class="odd">
+<td>OMOP Extension</td>
+<td>32</td>
+</tr>
+<tr class="even">
+<td>OSM</td>
+<td>25</td>
+</tr>
+<tr class="odd">
+<td>UK Biobank</td>
+<td>24</td>
+</tr>
+<tr class="even">
+<td>Type Concept</td>
+<td>24</td>
+</tr>
+<tr class="odd">
+<td>CPT4</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>HCPCS</td>
+<td>9</td>
+</tr>
+<tr class="odd">
+<td>Nebraska Lexicon</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>Race</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>ATC</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<div id="future-work" class="section level3">
+<h3>Future work:</h3>
+<ul>
+<li>Test the vocabulary with more use cases.</li>
+<li>Fix hidden errors.</li>
+<li>Build additional hierarchical relationships.</li>
+<li>Enrich and refine the vocabulary.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

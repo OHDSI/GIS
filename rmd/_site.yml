@@ -34,6 +34,9 @@ navbar:
           href: gaiaCore.html
         - text: "gaiaOHDSI"
           href: gaiaOHDSI.html
+    - text: "Vocabulary"
+      icon: fa-book
+      href: vocabulary.html
     - text: "How to"
       icon: fa-question
       href: how-to.html # MERGE ht-overview, ht-local-dataset, ht-add-data-source, ht-share-data-source
