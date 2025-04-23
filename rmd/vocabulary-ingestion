@@ -1,0 +1,169 @@
+## OMOP GIS Vocabulary Package Installation Manual
+
+This manual guides you through the process of integrating the OMOP GIS Vocabulary Package, which enhances standard vocabularies with geospatial concepts, into your OMOP CDM database. This integration leverages data from Athena OHDSI and delta tables provided in a GitHub repository, ensuring your data is enriched with accurate and up-to-date geospatial terminology.
+
+### Prerequisites:
+
+* Access to [Athena OHDSI](http://athena.ohdsi.org) (vocabulary service).
+* Access to your workspace (database).
+* SQL client (e.g., SQL Workbench, DBeaver, SQL Developer, pgAdmin) with permissions to upload data.
+* Access to the [GitHub repository](https://github.com/TuftsCTSI/CVB/tree/main/GIS/Ontology) containing delta tables.
+* Basic understanding of [OMOP CDM](https://www.ohdsi.org/data-standardization/) (Common Data Model) and vocabulary concepts.
+
+### Step-by-Step Manual:
+
+#### 1. Preparation and Workspace Setup
+
+##### 1.1 Verify OMOP CDM Instance and Database Access:
+
+* Ensure your OMOP Common Data Model (CDM) instance is properly deployed and operational.
+* Confirm that you have the necessary credentials and permissions to access the database schema where the OMOP Standardized Vocabularies will be stored.
+
+##### 1.2 Verify Required OMOP Vocabulary Tables:
+
+* Connect to your OMOP database using your preferred SQL client.
+* Verify the existence of the following OMOP Standardized Vocabulary tables:
+
+||
+|---|
+| CONCEPT |
+| CONCEPT_ANCESTOR |
+| CONCEPT_CLASS |
+| CONCEPT_RELATIONSHIP |
+| CONCEPT_SYNONYM |
+| DOMAIN |
+| DRUG_STRENGTH |
+| RELATIONSHIP |
+| VOCABULARY |
+
+* If any of the required OMOP vocabulary tables are missing, create them using the [Data Definition Language (DDL)](https://github.com/OHDSI/Vocabulary-v5.0/blob/master/working/DevV5_DDL.sql) specifications provided in the official OMOP CDM documentation.
+
+##### 1.3. Create GIS Vocabulary Package Tables:
+
+Use this script to create delta tables: [create_delta_tables.sql](https://github.com/OHDSI/GIS/blob/main/rmd/data/create_delta_tables.sql)
+
+#### 2. Download Required Vocabularies from Athena OHDSI:
+
+##### 2.1 Access Athena:
+
+* Open your web browser and navigate to the [Athena OHDSI](http://athena.ohdsi.org) website.
+* Log in using your credentials. If you don't have an account, register for one.
+
+##### 2.2 Search for Relevant Vocabularies:
+
+* Use the search functionality to find the vocabulary versions you need.
+* You may need the following vocabularies:
+
+||
+|---|
+| ATC |
+| CPT4* |
+| HCPCS |
+| ICD10CM |
+| LOINC |
+| Nebraska Lexicon |
+| OMOP Extension |
+| OSM |
+| PPI |
+| RxNorm |
+| RxNorm Extension |
+| SNOMED |
+| UK Biobank |
+
+##### 2.3 Select and Download:
+
+* Click "Download" in the top right corner of the page.
+* Select the desired vocabularies.
+* Click "Download Vocabularies."
+* Name the bundle and choose the appropriate version.
+* Initiate the download process. Athena will send the vocabularies as CSV files (often zipped) to your email.
+* Unzip the downloaded files to a local directory.
+
+##### 2.4 Verify Downloaded Files:
+
+Confirm that you have the following essential vocabulary files:
+
+||
+|---|
+| CONCEPT.csv |
+| CONCEPT_ANCESTOR.csv |
+| CONCEPT_CLASS.csv |
+| CONCEPT_RELATIONSHIP.csv |
+| CONCEPT_SYNONYM.csv |
+| DOMAIN.csv |
+| DRUG_STRENGTH.csv |
+| RELATIONSHIP.csv |
+| VOCABULARY.csv |
+
+##### 2.5. Download Delta Tables from the GitHub Repository:
+
+**Access the GitHub Repository:** Open the provided [GitHub repository](https://github.com/TuftsCTSI/CVB/tree/main/GIS/Ontology) link.
+
+**Download Delta Tables:**
+ * Locate and download the delta table files.
+ * Save these files to a local directory.
+ * Ensure you download:
+||
+|---|
+| concept_ancestor_delta.csv |
+| concept_class_delta.csv |
+| concept_delta.csv |
+| concept_relationship_delta.csv |
+| concept_synonym_delta.csv |
+| domain_delta.csv |
+| mapping_metadata.csv |
+| relationship_delta.csv |
+| source_to_concept_map.csv |
+| vocabulary_delta.csv |
+
+**Note!** You can disregard `restore.sql` and  `update_log.csv`; they are not part of the necessary download files
+
+#### 3. Upload Vocabularies into Your OMOP Workspace Schema:
+
+##### 3.1 Connect to Your OMOP Database:
+
+* Open your SQL client and connect to your database using your credentials.
+* Ensure you are connected to the correct schema where your tables reside.
+
+##### 3.2 Import CSV Files:
+
+Import the data from the downloaded Athena CSV files into the corresponding OMOP vocabulary tables:
+
+||||
+|---|---|---|
+| CONCEPT.csv | →  |concept |
+| CONCEPT_ANCESTOR.csv | →  |concept_ancestor |
+| CONCEPT_CLASS.csv | →  |concept_class |
+| CONCEPT_RELATIONSHIP.csv | →  |concept_relationship |
+| CONCEPT_SYNONYM.csv | →  |concept_synonym |
+| DOMAIN.csv | →  |domain |
+| DRUG_STRENGTH.csv | →  |drug_strength |
+| RELATIONSHIP.csv | →  |relationship |
+| VOCABULARY.csv | →  |vocabulary |
+
+##### 3.3 Verify Upload:
+
+Use this script to check delta tables: [check_delta_tables.sql](https://github.com/OHDSI/GIS/blob/main/rmd/data/check_delta_tables.sql)
+
+##### 3.4 Apply Delta Changes Using SQL:
+
+Use this script to insert GIS Vocabulary Package entities into your tables: [insert_delta_tables_into_omop.sql](https://github.com/OHDSI/GIS/blob/main/rmd/data/insert_delta_tables_into_omop.sql)
+
+||||
+|---|---|---|
+| concept_ancestor_delta.csv | → | concept_ancestor |
+| concept_class_delta.csv | → | concept_class |
+| concept_delta.csv | → | concept |
+| concept_relationship_delta.csv | → | concept_relationship |
+| concept_synonym_delta.csv | → | concept_synonym |
+| domain_delta.csv | → | domain |
+| mapping_metadata.csv | → | mapping_metadata |
+| relationship_delta.csv | → | relationship |
+| source_to_concept_map.csv | → | source_to_concept_map |
+| vocabulary_delta.csv | → | vocabulary |
+
+##### 3.5. Verify Delta Table Application:
+
+Use this script toto verify that the delta data has been successfully applied to the vocabulary tables and the GIS tables: [check_delta_tables_inserts.sql](https://github.com/OHDSI/GIS/blob/main/rmd/data/check_delta_tables_inserts.sql)
+
+##### OMOP GIS Vocabulary Package Installation Complete
