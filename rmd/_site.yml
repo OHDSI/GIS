@@ -37,6 +37,9 @@ navbar:
     - text: "Vocabulary"
       icon: fa-book
       href: vocabulary.html
+    - text: "Vocabulary Ingestion"
+      icon: fa-book
+      href: vocabulary-ingestion.html
     - text: "How to"
       icon: fa-question
       href: how-to.html # MERGE ht-overview, ht-local-dataset, ht-add-data-source, ht-share-data-source
