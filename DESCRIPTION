@@ -1,0 +1,12 @@
+Package: GIS
+Title: Tools and Vocabularies for Enabling GIS-Linked Analytics in OMOP CDM
+Version: 0.0.0.9000
+Authors@R: 
+    person("Kyle", "Zollo-Venecek", , "zollovenecek@ohdsi.org", role = c("aut", "cre"))
+Description:  Tools and vocabulary resources for integrating geospatial and environmental data into the OMOP Common Data Model.
+License: Apache License (>= 2.0)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+URL: https://ohdsi.github.io/GIS
+BugReports: https://github.com/OHDSI/GIS/issues

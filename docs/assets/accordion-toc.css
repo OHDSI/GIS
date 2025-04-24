@@ -1,0 +1,19 @@
+.accordion-toc .tocify-item {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  padding-left: 1em;
+}
+
+.accordion-toc .toc-sublist-container {
+  margin-left: 1em;
+  transition: all 0.2s ease;
+}
+
+.toc-toggle-icon {
+  position: absolute;
+  left: 0;
+  font-size: 0.8em;
+  color: #007acc;
+  transition: transform 0.2s ease;
+}

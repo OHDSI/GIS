@@ -25,6 +25,7 @@
 #' Dashboard.
 #'
 #' @param cdmVersion The version of the CDM you are creating, e.g. 5.3, 5.4
+#' @param cdmDatabaseSchema The name of the CDM database schema (e.g., "omop_cdm_schema")
 #' @return A character string containing the OHDSQL DDL
 #' @importFrom utils read.csv
 #' @export
@@ -34,7 +35,7 @@
 #' pk <- createPrimaryKeys("5.4")
 #' fk <- createForeignKeys("5.4")
 #'}
-createDdl <- function(cdmVersion){
+createDdl <- function(cdmVersion, cdmDatabaseSchema){
   # prevent check NOTE from occurring due to non-standard evaluation of variables
   cdmTableName <- cdmFieldName <- isRequired <- cdmDatatype <- NULL
 
@@ -43,9 +44,10 @@ createDdl <- function(cdmVersion){
 
   # cdmTableCsvLoc <- system.file(file.path("csv", paste0("OMOP_CDMv", cdmVersion, "_Table_Level.csv")), package = "CommonDataModel", mustWork = TRUE)
   # cdmFieldCsvLoc <- system.file(file.path("csv", paste0("OMOP_CDMv", cdmVersion, "_Field_Level.csv")), package = "CommonDataModel", mustWork = TRUE)
-  cdmTableCsvLoc <- "./inst/csv/Gaia_Table_Level.csv"
-  cdmFieldCsvLoc <- "./inst/csv/Gaia_Field_Level.csv"
-  
+  cdmTableCsvLoc <- system.file("csv", "Gaia_Table_Level.csv", package = "GIS", mustWork = TRUE)
+  cdmFieldCsvLoc <- system.file("csv", "Gaia_Field_Level.csv", package = "GIS", mustWork = TRUE)
+
+
   tableSpecs <- read.csv(cdmTableCsvLoc, stringsAsFactors = FALSE)
   cdmSpecs <- read.csv(cdmFieldCsvLoc, stringsAsFactors = FALSE)
 
@@ -63,12 +65,13 @@ createDdl <- function(cdmVersion){
       query <- "\n\n--HINT DISTRIBUTE ON RANDOM\n"
     }
 
-    sql_result <- c(sql_result, query, paste0("CREATE TABLE @cdmDatabaseSchema.", tableName, " ("))
+sql_result <- c(sql_result, query, paste0("CREATE TABLE ", cdmDatabaseSchema, ".", tableName, " ("))
+
 
     n_fields <- length(fieldNames)
     for(fieldName in fieldNames) {
 
-      if (subset(fields, cdmFieldName == fieldName, isRequired) == "Yes") {
+      if (fields[fields$cdmFieldName == fieldName, "isRequired"] == "Yes") {
         nullable_sql <- (" NOT NULL")
       } else {
         nullable_sql <- (" NULL")
@@ -87,7 +90,7 @@ createDdl <- function(cdmVersion){
       }
       fieldSql <- paste0("\n\t\t\t",
                          field," ",
-                         subset(fields, cdmFieldName == fieldName, cdmDatatype),
+                         fields[fields$cdmFieldName == fieldName, "cdmDatatype"],
                          nullable_sql,
                          closing_sql)
       sql_result <- c(sql_result, fieldSql)
@@ -99,9 +102,10 @@ createDdl <- function(cdmVersion){
 
 
 #' @describeIn createDdl createPrimaryKeys Returns a string containing the OHDSQL for creation of primary keys in the OMOP CDM.
+#' @param cdmDatabaseSchema The name of the CDM database schema (e.g., "omop_cdm_schema")
 #' @return A string containing the OHDSQL for creation of primary keys in the OMOP CDM.
 #' @export
-createPrimaryKeys <- function(cdmVersion){
+createPrimaryKeys <- function(cdmVersion, cdmDatabaseSchema){
   # prevent check NOTE from occurring due to non-standard evaluation of variables
   isPrimaryKey <- cdmFieldName <- NULL
 
@@ -120,16 +124,17 @@ createPrimaryKeys <- function(cdmVersion){
 
     subquery <- subset(primaryKeys, cdmFieldName==pkField)
 
-    sql_result <- c(sql_result, paste0("\nALTER TABLE @cdmDatabaseSchema.", subquery$cdmTableName, " ADD CONSTRAINT xpk_", subquery$cdmTableName, " PRIMARY KEY NONCLUSTERED (", subquery$cdmFieldName , ");\n"))
+    sql_result <- c(sql_result, paste0("\nALTER TABLE ", cdmDatabaseSchema, ".", subquery$cdmTableName, " ADD CONSTRAINT xpk_", subquery$cdmTableName, " PRIMARY KEY NONCLUSTERED (", subquery$cdmFieldName , ");\n"))
 
   }
   return(paste0(sql_result, collapse = ""))
 }
 
 #' @describeIn createDdl createForeignKeys Returns a string containing the OHDSQL for creation of foreign keys in the OMOP CDM.
+#' @param cdmDatabaseSchema The name of the CDM database schema (e.g., "omop_cdm_schema")
 #' @return A string containing the OHDSQL for creation of foreign keys in the OMOP CDM.
 #' @export
-createForeignKeys <- function(cdmVersion){
+createForeignKeys <- function(cdmVersion, cdmDatabaseSchema){
   # prevent check NOTE from occurring due to non-standard evaluation of variables
   isForeignKey <- NULL
 
@@ -146,9 +151,9 @@ createForeignKeys <- function(cdmVersion){
   sql_result <- c(paste0("--@targetDialect CDM Foreign Key Constraints for OMOP Common Data Model ", cdmVersion, "\n"))
   for (foreignKey in foreignKeys$key){
 
-    subquery <- subset(foreignKeys, foreignKeys$key==foreignKey)
+    subquery <- foreignKeys[foreignKeys$key == foreignKey, ]
 
-    sql_result <- c(sql_result, paste0("\nALTER TABLE @cdmDatabaseSchema.", subquery$cdmTableName, " ADD CONSTRAINT fpk_", subquery$cdmTableName, "_", subquery$cdmFieldName, " FOREIGN KEY (", subquery$cdmFieldName , ") REFERENCES @cdmDatabaseSchema.", subquery$fkTableName, " (", subquery$fkFieldName, ");\n"))
+    sql_result <- c(sql_result, paste0("\nALTER TABLE ", cdmDatabaseSchema, ".", subquery$cdmTableName, " ADD CONSTRAINT fpk_", subquery$cdmTableName, "_", subquery$cdmFieldName, " FOREIGN KEY (", subquery$cdmFieldName , ") REFERENCES ", cdmDatabaseSchema, ".", subquery$fkTableName,, " (", subquery$fkFieldName, ");\n"))
 
   }
   return(paste0(sql_result, collapse = ""))

@@ -1,0 +1,375 @@
+/* vocabulary-browser-ui.css */
+
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #222222;
+}
+
+.main-title {
+    background-color: #222222;
+    color: #ffffff;
+    padding: 25px;
+    text-align: center;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: 1.8em;
+    display: flex;
+    align-items: center;
+    justify-content: left; /* Center the logo and text */
+}
+
+.logo {
+    margin-right: 15px;
+    max-height: 40px; /* Ensure logo doesn't overwhelm the title */
+}
+
+.top-pagination {
+    /* REMOVE position absolute */
+    display: flex;
+    justify-content: flex-end; /* align it to the right */
+    gap: 5px;
+    align-items: center;
+    font-size: 1em;
+    margin-left: auto;   /* ensures it sits at the right in the flexbox */
+}
+
+#search-container {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative; /* Make it a positioning context */
+}
+
+#search-container > label {
+    font-weight: bold;
+}
+
+#searchInput {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+#vocabularyFilter,
+#domainFilter,
+#conceptClassFilter{
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    min-width: 220px;
+    max-width: 220px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+#rowsPerPage {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    min-width: 70px;
+    max-width: 70px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+#results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden; /* To contain rounded borders of header and rows */
+    table-layout: fixed;
+}
+
+#results-table th:nth-child(1),
+#results-table td:nth-child(1) {
+    width: 100px;
+}
+
+#results-table th:nth-child(2),
+#results-table td:nth-child(2) {
+    width: 600px;
+}
+
+#results-table th:nth-child(3),
+#results-table td:nth-child(3) {
+    width: 100px;
+}
+
+#results-table th:nth-child(4),
+#results-table td:nth-child(4) {
+    width: 100px;
+}
+
+#results-table th:nth-child(5),
+#results-table td:nth-child(5) {
+    width: 100px;
+}
+
+#results-table th:nth-child(6),
+#results-table td:nth-child(6) {
+    width: 100px;
+}
+
+#results-table th:nth-child(7),
+#results-table td:nth-child(7) {
+    width: 100px;
+}
+
+#results-table th:nth-child(8),
+#results-table td:nth-child(8) {
+    width: 100px;
+}
+
+#results-table th:nth-child(9),
+#results-table td:nth-child(9) {
+    width: 100px;
+}
+
+#results-table th,
+#results-table td {
+    border: 1px solid #eee;
+    padding: 12px 15px;
+    text-align: left;
+}
+
+#results-table th {
+    background-color: #f8f8f8;
+    font-weight: bold;
+    color: #222222;
+}
+
+#results-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#results-table tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+.bottom-pagination {
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.bottom-pagination button,
+.top-pagination button {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #222222;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 0.9em;
+    width: 50px; /* Set your desired fixed width */
+    height: 40px; /* Set your desired fixed height */
+    display: inline-flex; /* To easily center content if needed */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+}
+
+.bottom-pagination button:hover:not(:disabled),
+.top-pagination button:hover:not(:disabled) {
+    background-color: #eee;
+}
+
+.bottom-pagination button:disabled,
+.top-pagination button:disabled {
+    background-color: #f9f9f9;
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+.relationship-container {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    position: relative;
+}
+
+.relationship-container h2 {
+    margin-top: 0;
+    color: #222222;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.relationship-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.relationship-table th,
+.relationship-table td {
+    border-bottom: 1px solid #eee;
+    padding: 8px 10px;
+    text-align: left;
+}
+
+.relationship-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    color: #222222;
+}
+
+.relationship-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.relationship-dropdown {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+    z-index: 10;
+    min-width: 300px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: auto; /* Handle potentially long dropdowns */
+    max-height: 400px; /* Limit dropdown height with scroll */
+}
+
+.relationship-dropdown h3 {
+    padding: 10px 15px;
+    margin-top: 0;
+    border-bottom: 1px solid #eee;
+    color: #222222;
+    font-size: 1.1em;
+}
+
+.relationship-dropdown table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.relationship-dropdown th,
+.relationship-dropdown td {
+    border-bottom: 1px solid #eee;
+    padding: 8px 10px;
+    text-align: left;
+    font-size: 0.9em;
+}
+
+.relationship-dropdown {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+    z-index: 10;
+    min-width: 300px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* overflow: auto; Remove this for cleaner accordion */
+    /* max-height: 400px; Remove this for cleaner accordion */
+    transition: max-height 0.3s ease-out; /* For smooth open/close */
+    max-height: fit-content; /* Adjust as needed, or remove if fully controlled by JS */
+}
+
+.relationship-dropdown h3 {
+    padding: 10px 15px;
+    margin-top: 0;
+    border-bottom: 1px solid #eee;
+    color: #555;
+    font-size: 1.1em;
+    cursor: pointer; /* Indicate it's clickable */
+}
+
+.relationship-dropdown h3:hover {
+    background-color: #f0f0f0;
+}
+
+.relationship-dropdown .dropdown-content {
+    padding: 10px 15px;
+    border-top: 1px solid #eee; /* Separator from the title */
+    overflow: hidden; /* To contain content during animation */
+    transition: max-height 0.3s ease-out;
+    max-height: 0; /* Initially closed */
+}
+
+.relationship-dropdown.open .dropdown-content {
+    max-height: 1000px; /* Adjust to a large enough value to contain content */
+    transition: max-height 0.3s ease-in;
+}
+
+.relationship-dropdown.open {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.relationship-dropdown .dropdown-content h4 {
+    margin-top: 0;
+    color: #222222;
+    font-size: 1em;
+    margin-bottom: 5px;
+}
+
+.relationship-dropdown .dropdown-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+.relationship-dropdown .dropdown-content th,
+.relationship-dropdown .dropdown-content td {
+    border-bottom: 1px solid #eee;
+    padding: 8px 10px;
+    text-align: left;
+    font-size: 0.9em;
+}
+
+.relationship-dropdown .dropdown-content th {
+    background-color: #f8f8f8;
+    font-weight: bold;
+    color: #222222;
+}
+
+.relationship-dropdown .dropdown-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+
+.relationship-dropdown .dropdown-content ul li {
+    padding: 5px 0;
+    border-bottom: 1px dotted #ccc;
+}
+
+.relationship-dropdown .dropdown-content ul li:last-child {
+    border-bottom: none;
+}
+
+.relationship-dropdown .dropdown-content p {
+    margin-top: 0;
+    color: #222222;
+    font-size: 0.9em;
+}
