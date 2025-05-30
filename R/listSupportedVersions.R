@@ -1,19 +1,19 @@
-#' List CDM versions supported by this package
+#' List OMOP CDM versions supported by this package
 #'
-#' @return A character vector containing the supported Common Data Model (CDM) versions in major.minor format.
+#' Returns the list of OMOP Common Data Model versions for which the package provides DDL and constraint support.
+#'
+#' @return A character vector of supported CDM versions (e.g., "5.3", "5.4").
 #' @export
 listSupportedVersions <- function() {
-  supportedVersions <- c("5.3", "5.4")
-  return(supportedVersions)
+  c("5.3", "5.4")
 }
 
-#' List RDBMS dialects supported by this package
+#' List SQL dialects supported by this package
 #'
-#' @return A list containing the supported Structured Query Language (SQL) dialects.
+#' Returns the SQL dialects supported via SqlRender, which this package can use to generate dialect-specific DDL.
+#'
+#' @return A character vector of supported SQL dialects.
 #' @export
-
 listSupportedDialects <- function() {
-  sqlRenderSupportedDialects <- SqlRender::listSupportedDialects()
-  supportedDialects <- sqlRenderSupportedDialects$dialect
-  return(supportedDialects)
+  SqlRender::listSupportedDialects()$dialect
 }

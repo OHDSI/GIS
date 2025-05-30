@@ -1,0 +1,59 @@
+package: GIS
+url: https://ohdsi.github.io/GIS
+template:
+  bootstrap: 5
+  bootswatch: cosmo
+  params:
+    bootswatch: cosmo
+    ganalytics: ""
+
+navbar:
+  title: "GIS"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Getting Started"
+      href: getting-started.html
+    - text: "Gaia"
+      menu:
+        - text: "Overview"
+          href: gaia-intro.html
+        - text: "gaiaDB"
+          href: gaiaDB.html
+        - text: "gaiaCore"
+          href: gaiaCore.html
+    - text: "Vocabulary"
+      href: vocabulary.html
+    - text: "Reference"
+      href: reference/index.html
+    - text: "Get Involved"
+      href: getting-involved.html
+  right:
+    - icon: fa-github
+      aria-label: GitHub
+      href: https://github.com/OHDSI/GIS
+
+reference:
+  - title: "DDL Utilities"
+    desc: "Functions for generating DDL SQL for OMOP CDM."
+    contents:
+      - createDdl
+      - createPrimaryKeys
+      - createForeignKeys
+
+  - title: "Supported Versions and Dialects"
+    desc: "Helper functions to list supported CDM versions and SQL dialects."
+    contents:
+      - listSupportedDialects
+      - listSupportedVersions
+
+  - title: "DDL Writers"
+    desc: "Functions to render and write translated DDL files."
+    contents:
+      - writeDdl
+
+articles: {}
+
+output_dir: "../docs"
+
+# Optional favicons and assets can be added here as needed

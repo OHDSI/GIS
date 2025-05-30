@@ -1,0 +1,133 @@
+---
+title: "4_qa"
+output: html_document
+---
+
+This checklist is designed to validate new GIS Vocabulary Package releases in OMOP CDM format.
+
+---
+
+## 4.1. General QA for Core Vocabulary Tables
+
+### 4.1.1 Table Row Counts
+
+Ensure the following delta tables are populated unless explicitly expected to be empty:
+
+- `concept_delta`
+- `concept_relationship_delta`
+- `concept_synonym_delta` (if synonyms are defined)
+- `concept_ancestor_delta` (if hierarchical terms are used)
+- `source_to_concept_map` (if supplemental mappings are included)
+
+### 4.1.2 Vocabulary Metadata
+
+- Confirm `vocabulary_delta`, `domain_delta`, `relationship_delta`, and `concept_class_delta` only contain new or modified entries.
+- Verify required fields exist (e.g., `vocabulary_id`, `vocabulary_name`, `vocabulary_reference`, etc.).
+
+---
+
+## 4.2. Semantic Consistency Checks
+
+### 4.2.1. Mapping Validity
+
+- Concepts with `standard_concept IS NULL` should have at least one outbound `Maps to` or `Mapped from` relationship.
+- Concepts with `standard_concept = 'S'` should not map to other standard concepts unless it's a self-map.
+- Non-standard to non-standard mappings are permitted for auxiliary relationships (e.g., `Has geometry`, `Locates in cell`) but must be flagged for review.
+
+### 4.2.2. Duplicate Mappings
+
+- No duplicate `(concept_id_1, relationship_id, concept_id_2)` combinations.
+- Multiple `Maps to` targets for the same source must be clinically or hierarchically justified.
+
+### 4.2.3. Invalid Target Concepts
+
+Ensure all `target_concept_id` values from the [source mapping table](https://docs.google.com/spreadsheets/d/1hMLjKokFCpoDqC_WsAd7ZXyBKDmnPif2rR9DlQ9X7cs/edit?usp=sharing):
+
+- Exist in the current `concept` or `concept_delta` table
+- Have `invalid_reason IS NULL`
+
+### 4.2.4. Domain Compatibility
+
+- Detect domain inconsistencies (e.g., source `Procedure` → target `Measurement`) unless justified.
+- Validate that concepts in specific GIS domains consistently map to expected domains.
+
+---
+
+## 4.3. Syntactic Integrity
+
+### 4.3.1. Concept Code Naming
+
+- Validate `concept_code` format. Ensure they match declared `source_code` values.
+
+### 4.3.2. Concept Names
+
+- No duplicate `concept_name` entries unless codes differ.
+- Avoid placeholder or malformed names.
+
+### 4.3.3. Field Completeness
+
+Ensure these fields are always populated:
+
+- `concept_id`
+- `concept_name`
+- `domain_id`
+- `vocabulary_id` 
+- `concept_code` 
+- `valid_start_date`
+- `valid_end_date`
+
+---
+
+## 4.4. Source Mapping QA
+
+### 4.4.1. Coverage
+
+- Every `source_code` in the source mapping table should exist in `concept_delta`.
+- Every `source_description` should match a `concept_name`.
+- Every `source_description_synonym` should match a `concept_synonym_name`.
+
+### 4.4.2. Source-to-Concept Map QA
+
+- `source_to_concept_map` must contain complete mappings:
+  - `source_code`
+  - `source_concept_id`
+  - `target_concept_id`
+
+---
+
+## 4.5. Concept Synonym Validation
+
+- Each `concept_synonym_delta` entry must:
+  - Reference a valid `concept_id` from `concept_delta`
+  - Include a non-empty, distinct `concept_synonym_name`
+  - Not duplicate the main `concept_name`
+- Cross-check expected synonyms (from source mapping table) are present.
+
+---
+
+## 4.6. Concept Ancestor Integrity
+
+- Ensure all transitive or hierarchical relationships exist in `concept_ancestor_delta`.
+- No cycles or broken ancestry chains.
+- Confirm taxonomic hierarchies are correctly represented.
+- Only standard concept participate in the hierarchy
+
+---
+
+## 4.7. Naming & Formatting Edge Cases
+
+- Validate encoding of Unicode characters.
+- Ensure special characters (e.g., brackets, slashes) do not break parsing.
+- Detect changes in `concept_name` between source and derived vocabularies.
+
+---
+
+## 4.8. Summary and Reporting
+
+- Provide counts of:
+  - New and modified rows per table
+  - Failed validations (e.g., invalid mappings, duplicates)
+  - Mapping coverage (e.g., `% source codes mapped`)
+- Generate a `.csv` or `.md` QA report to accompany the vocabulary release.
+
+> These checks complement automated scripts and should be validated by vocabulary experts and domain specialists, especially for novel environmental or spatial concepts.

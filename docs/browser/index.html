@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vocabulary Browser</title>
+
+    <!-- Main styles -->
+    <link rel="stylesheet" href="css/vocabulary-browser.css" />
+
+    <!-- PapaParse -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+    <!-- Optional favicon -->
+    <!-- <link rel="icon" href="favicon.ico" /> -->
+  </head>
+
+  <body>
+    <!-- Title Bar -->
+    <header class="main-title">
+      <img src="ohdsi40x40.png" class="logo" alt="OHDSI Logo" />
+      Vocabulary Browser
+    </header>
+
+    <!-- Filters + Search -->
+    <section id="search-container">
+      <label for="searchInput">Search:</label>
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search..."
+        autocomplete="off"
+      />
+
+      <label for="vocabularyFilter">Vocabulary:</label>
+      <select id="vocabularyFilter"></select>
+
+      <label for="domainFilter">Domain:</label>
+      <select id="domainFilter"></select>
+
+      <label for="conceptClassFilter">Class:</label>
+      <select id="conceptClassFilter"></select>
+
+      <label for="standardConceptFilter">Standard Concept:</label>
+      <select id="standardConceptFilter">
+        <option value="">All</option>
+        <option value="S">Standard</option>
+        <option value="C">Classification</option>
+        <option value="N">Non-standard</option>
+      </select>
+
+      <label for="rowsPerPage">Rows per page:</label>
+      <select id="rowsPerPage">
+        <option value="1">1</option>
+        <option value="25" selected>25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+
+      <!-- Compact pagination -->
+      <div id="top-right-pagination-container" class="top-pagination"></div>
+    </section>
+
+    <!-- Results Table -->
+    <table id="results-table">
+      <thead>
+        <tr>
+          <th>Concept&nbsp;ID</th>
+          <th>Name</th>
+          <th>Domain</th>
+          <th>Vocabulary</th>
+          <th>Class</th>
+          <th>Std</th>
+          <th>Code</th>
+          <th>Start</th>
+          <th>End</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div id="pagination-container" class="bottom-pagination"></div>
+
+    <!-- Relationship & Synonym Viewer (Single Instance) -->
+    <div id="relationship-display" class="relationship-container hidden">
+      <h2>Relationships for: <span id="selected-concept-id"></span></h2>
+      <table id="relationship-table" class="relationship-table">
+        <thead>
+          <tr>
+            <th>relationship_id</th>
+            <th>concept_id_2</th>
+            <th>concept_name</th>
+          </tr>
+        </thead>
+        <tbody id="relationship-table-body"></tbody>
+      </table>
+
+      <h3>Synonyms</h3>
+      <ul id="synonym-list"></ul>
+    </div>
+
+    <!-- Main JavaScript module -->
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

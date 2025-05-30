@@ -1,0 +1,8 @@
+pandoc: '3.4'
+pkgdown: 2.1.2
+pkgdown_sha: ~
+articles: {}
+last_built: 2025-05-23T12:22Z
+urls:
+  reference: https://ohdsi.github.io/GIS/reference
+  article: https://ohdsi.github.io/GIS/articles

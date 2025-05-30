@@ -1,0 +1,45 @@
+---
+title: "3_1_design"
+output: html_document
+---
+
+The OMOP GIS Ontology utilizes the GIS Vocabulary Package as its foundational layer, which is collaboratively maintained through a Google Spreadsheet system integrated with Google Apps Scripts and GitHub-based automation pipelines. This ontology serves as a semantic scaffold for spatial and contextual reasoning in health data, enabling structured representation and analysis of geographically-linked, environmental, social, and behavioral determinants of health. It also functions as a machine-interpretable layer that supports standardized analytics, ontology-informed feature generation, and federated ETL workflows across distributed data networks.
+
+### 3.1.1. Ontology Definition in Context
+
+In general, an **ontology** is a structured framework for representing knowledge as a set of concepts within a domain and the relationships between those concepts. Ontologies enable formal semantics, reasoning, and integration across diverse datasets by providing consistent definitions and hierarchical structure.
+
+Within the OMOP GIS framework, the ontology performs a similar function - defining and categorizing **geographic features, environmental exposures, social determinants of health, and their interrelationships** - using the language and constraints of the OMOP CDM. It extends the existing OMOP vocabulary model to support location-aware analyses and geospatial semantics without breaking conformance with OMOP's relational architecture.
+
+### 3.1.2. Architecture and Workflow
+
+The GIS Ontology is constructed through the following components and processes:
+
+- **Source Definition Layer**: Concepts and relationships are entered and curated in a structured Google Spreadsheet format. This spreadsheet includes validated fields for source code, concept class, domain, mappings, predicates, and metadata. Collaborative access and semantic protections are enforced using **Google Apps Scripts**, which regulate row-level editability.
+
+- **Version-Controlled Vocabulary Pipeline**: Approved concepts and mappings are automatically synchronized from Google Sheets to GitHub using scheduled Apps Script tasks. This process creates a persistent and auditable version history while simultaneously preparing mapping data for downstream transformation.
+
+- **Ontology Transformation Pipeline**: A GitHub Action orchestrates a multi-step workflow that converts the spreadsheet-based mappings into relational OMOP-compatible vocabulary tables. This includes:
+  1. Ingestion of mapping rows into a **PostgreSQL instance** hosted in Azure
+  2. **Syntactic validation** of concept fields, metadata, and predicate consistency
+  3. **Differencing logic** to detect novel or updated concepts relative to the baseline OMOP vocabularies
+  4. **Construction of staging tables**, including new `concept`, `concept_relationship`, and `concept_synonym` records with assigned `concept_id`s in the reserved space (>2,000,000,000)
+  5. **Insertion of validated concepts** into constrained tables in a controlled schema
+  6. **Export of delta tables** (vocabulary overlays) to GitHub for use in external ETL workflows
+
+Two Azure-hosted components support this automation: a **Container App** acting as a virtual GitHub runner and a **Flexible Postgres Server** that stores the ontology's relational tables. These components ensure that updates can be executed securely and reproducibly.
+
+### 3.1.3. Ontological Table Structure
+
+The ontology is materialized through a suite of relational "delta" tables. Each table mirrors a specific component of the OMOP vocabulary schema, while systematically extending it to accommodate geospatial logic, including location-referenced features, environmental indices, and spatially-resolved determinants. For example:
+
+- `concept_delta.csv`: Defines both standard and non-standard GIS concepts, including representatives of new domains like `Geographic Feature`, `Environmental Feature`, and `Socioeconomic Feature`.
+- `concept_relationship_delta.csv`: Encodes semantic links using relationships such as `Has geometry`, `Affects biostructure`, and `Locates in cell`, facilitating ontology-driven inferences.
+- `concept_ancestor_delta.csv`: Reconstructs hierarchical ancestry for reasoning across spatial or categorical groupings.
+- `concept_synonym_delta.csv`: Includes synonyms to support flexible querying across GIS, public health, and environmental terminology variants.
+
+This table set collectively reproduces an **ontological graph** within a relational schema, enabling semantic linkage between OMOP-standard concepts and domain-specific enhancements required for contextualized health research.
+
+### 3.1.4. Summary
+
+The OMOP GIS Ontology integrates community-based term curation, semantic standardization via SSSOM predicates, and automated deployment pipelines to construct a modular, versioned vocabulary system. This infrastructure supports not only geospatial analysis but also cross-domain reasoning on determinants of health, exposures, and environment. It positions the OMOP CDM for expanded utility in real-world evidence generation that incorporates place, population context, and environmental burden.
