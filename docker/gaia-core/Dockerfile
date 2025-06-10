@@ -8,10 +8,10 @@ RUN apt-get update && \
         libgeos-dev \
         libproj-dev
 
-ENV USER=ohdsi
-ENV GROUPNAME=$USER
-ENV UID=1001
-RUN useradd -u "$UID" $USER
+#ENV USER=ohdsi
+#ENV GROUPNAME=$USER
+#ENV UID=1001
+#RUN useradd -u "$UID" $USER
 
 # Temporary workaround for bug in sf -> https://forum.posit.co/t/sf-wont-install-for-anyone-on-posit-cloud/191242/2
 RUN Rscript -e 'remotes::install_github(repo = "r-spatial/sf", ref = "93a25fd8e2f5c6af7c080f92141cb2b765a04a84")'
@@ -26,15 +26,15 @@ RUN Rscript -e 'remotes::install_github("OHDSI/GIS@containerize")'
 RUN Rscript -e 'install.packages("Andromeda")'
 
 # This provides an API to gaiaCore, could be moved to the package DESCRIPTION
-#RUN Rscript -e 'install.packages("plumber")'
-#COPY ./docker/gaia-core/R /ohdsi-gis
-#WORKDIR /ohdsi-gis
+RUN Rscript -e 'install.packages("plumber")'
+COPY ./docker/gaia-core/R /ohdsi-gis
+WORKDIR /ohdsi-gis
 
 # Add API service to supervisord
-#RUN echo "" >> /etc/supervisor/conf.d/supervisord.conf \
-#    && echo "[program:Rscript]" >> /etc/supervisor/conf.d/supervisord.conf \
-#    && echo "command=/usr/local/bin/Rscript /ohdsi-gis/gaia.R" >> /etc/supervisor/conf.d/supervisord.conf \
-#	&& echo "" >> /etc/supervisor/conf.d/supervisord.conf \
-#	&& echo "stdout_logfile=/var/log/supervisor/%(program_name)s.log" >> /etc/supervisor/conf.d/supervisord.conf
+RUN echo "" >> /etc/supervisor/conf.d/supervisord.conf \
+    && echo "[program:Rscript]" >> /etc/supervisor/conf.d/supervisord.conf \
+    && echo "command=/usr/local/bin/Rscript /ohdsi-gis/gaia.R" >> /etc/supervisor/conf.d/supervisord.conf \
+	&& echo "" >> /etc/supervisor/conf.d/supervisord.conf \
+	&& echo "stdout_logfile=/var/log/supervisor/%(program_name)s.log" >> /etc/supervisor/conf.d/supervisord.conf
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
