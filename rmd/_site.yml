@@ -18,7 +18,7 @@ navbar:
       href: index.html
     - text: "Getting Started"
       icon: fa-home
-      href: getting-started.html 
+      href: getting-started.html
     - text: "Gaia"
       icon: fa-earth
       menu:
@@ -27,7 +27,7 @@ navbar:
         - text: "Design"
           href: gaia-principles.html                     # TODO add the architecture diagram
         - text: "Schema Extensions"
-          href: schema-extensions.html 
+          href: schema-extensions.html
         - text: "gaiaDB"
           href: gaiaDB.html
         - text: "gaiaCore"
@@ -37,9 +37,9 @@ navbar:
     - text: "Vocabulary"
       icon: fa-book
       href: vocabulary.html
-    - text: "Vocabulary Ingestion"
-      icon: fa-book
-      href: vocabulary-ingestion.html
+    ###- text: "Vocabulary Browser"
+    ###  icon: fa-search
+    ###  href: https://ohdsi.github.io/gaiaVocabulary/
     - text: "How to"
       icon: fa-question
       href: how-to.html # MERGE ht-overview, ht-local-dataset, ht-add-data-source, ht-share-data-source

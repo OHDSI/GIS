@@ -1,0 +1,132 @@
+---
+title: "5_validation"
+output: html_document
+---
+
+This section describes a structured approach for validating the **usability** of the GIS Vocabulary Package in real-world OMOP CDM integration scenarios. The process focuses on semantic coverage, geospatial linkage, and practical implementation using environmental exposure data such as EJI, EPA air quality, or other standardized GIS sources.
+
+---
+
+## 5.1. Step-by-Step Validation Workflow
+
+**5.1.1. Define Validation Objectives**
+
+- What is being tested?
+  - Does the GIS Vocabulary cover all environmental exposure concepts of interest?
+  - Can it support integration of specific datasets (e.g., EJI, SVI)?
+- What decisions will the results support?
+  - Use in OMOP CDM `EXTERNAL_EXPOSURE` analytics.
+  - Extension to GIS-enabled observational studies.
+
+---
+
+**5.1.2. Acquire and Preprocess GIS Data**
+
+- Select an authoritative GIS dataset (e.g., EJI, EPA AirNow, WHO noise pollution index).
+- Ensure spatial identifiers are available:
+  - `GEOID` (Census Tract), `ZIP`, or `latitude/longitude`.
+- Normalize location granularity:
+  - Convert ZIP+4 to Census Tract.
+  - Crosswalk coordinates to GEOID using reverse geocoding or lookup tables.
+- Assess temporal granularity (e.g., 3-year average, annual, monthly).
+
+---
+
+**5.1.3. Link GIS Data to OMOP Locations**
+
+- Extract location attributes from OMOP:
+  - `location_id`, `state`, `county`, `zip`, `lat`, `lon`, `location_source_value`.
+- Match GIS-to-OMOP using hierarchical fallback:
+  - `GEOID` → direct match on `location_source_value`.
+  - (`state`, `county`, `zip`) → match against parsed `GEOID`.
+  - `lat/lon` → reverse geocode to determine tract or area.
+- Validate spatial linkage:
+  - Detect inconsistencies or missing mappings.
+  - If `location_history` is implemented (CDM v6.0+), consider temporal changes.
+
+---
+
+**5.1.4. Map GIS Variables to OMOP Concepts**
+
+- For each environmental variable (e.g., PM2.5 days above threshold):
+  - Map to `exposure_concept_id` in the GIS Vocabulary.
+  - If no match exists, flag the concept for vocabulary extension.
+- Map measurement units (e.g., percent, μg/m³) to `unit_concept_id` via OHDSI Athena.
+- Build a mapping table:  
+  `source_variable` → `concept_id`, `unit_concept_id`, `value_as_concept_id`/`value_as_number`.
+
+---
+
+**5.1.5. Populate the `external_exposure` Table**
+
+- Ensure that each patient in OMOP has a geospatial identifier that can be linked to GIS datasets.
+- For each matched patient-location pair assign exposure_concept_id based on the mapped GIS variable.
+- Set exposure_start_date (reference date from the GIS dataset)
+- Populate value_as_number and unit_concept_id.
+- Populate other fields if applicable.
+
+| **Field Name**   | **Description**     | **Data Example**  |
+|---------------------------------------|-----------------------------------------------------------------------------|---------------------------|
+| `exposure_occurrence_id`  | Unique identifier for each exposure record   | `123456`  |
+| `location_id`  | Foreign key linking to the `location` table, indicating where exposure occurred | `789`  |
+| `person_id`   | Foreign key linking to the `person` table, identifying the individual exposed | `100234`  |
+| `cohort_definition_id` | (Optional) Links to a defined cohort in research studies  | `25`  |
+| `exposure_concept_id`  | Standard OMOP **concept_id** representing the type of exposure  | `2052498173` (Percentile Rank Of Annual Mean Days Above PM2.5 Regulatory Standard - 3-Year Average) |
+| `exposure_start_date`  | Date when the exposure event started   | `2024-01-15`  |
+| `exposure_end_date`  | Date when the exposure event ended (NULL if ongoing exposure)  | `NULL` (ongoing)  |
+| `exposure_type_concept_id` | Concept ID defining the origin of the exposure record  | `2052499258` (Government Data)  |
+| `exposure_relationship_concept_id` | Concept ID describing how exposure relates to the person  | `NULL` |
+| `exposure_source_concept_id` | Source-specific concept ID before standardization to OMOP  | `90000001` |
+| `exposure_source_value`  | Raw exposure value from source data   | `"EPL_PM"`  |
+| `exposure_relationship_source_value` | Raw value describing the exposure-person relationship  | `NULL` |
+| `dose_unit_source_value`  | Source unit before standardization   | `NULL`  |
+| `quantity`  | Number of exposure occurrences (if applicable)   | `1`  |
+| `modifier_source_value`  | (Optional) Modifier describing the exposure type or intensity  | `NULL`  |
+| `operator_concept_id`  | Concept ID defining operator logic (e.g., `<`, `>`, `=`)  | `NULL` |
+| `value_as_number`  | Numerical value of the exposure (e.g., concentration level)  | `0.8503` |
+| `value_as_concept_id`  | Concept ID for categorical exposure values   | NULL |
+| `unit_concept_id`  | Concept ID representing the measurement unit      | NULL    ||
+
+> Ensure complete and consistent population of required fields. Non-null exposure values and units are critical for downstream analytics.
+
+---
+
+## 5.2. Proposed Usability Validation Criteria
+
+**5.2.1. Coverage**
+
+- Do GIS concepts cover all variables in your dataset?
+- Are spatial scales represented (e.g., tract, zip, grid, regional)?
+- Are distinctions like satellite vs. ground sensor captured?
+- Are measurement units and result values standardized?
+
+**5.2.2. Interoperability**
+
+- Can patient-level OMOP locations link unambiguously to GIS identifiers?
+- Does the `external_exposure` table schema support all relevant metadata?
+
+**5.2.3. Practical Usability**
+
+- Are mapping guidelines and examples provided?
+- Are variable-to-concept lookup tables available or easy to construct?
+- Can you populate `external_exposure` using real-world datasets without data loss or transformation ambiguity?
+
+---
+
+## 5.3. Additional QA Recommendations
+
+- Check **temporal coherence**: Do exposure dates align with person observation periods?
+- Validate **concept synonym coverage**: Are source variable names discoverable via synonyms?
+- Spot check **semantic overlap**: Are concepts with similar meaning unnecessarily duplicated?
+- Ensure **data pipeline readiness**: Can the vocabulary support ETL workflows using PostgreSQL, Spark, or Python?
+
+---
+
+## 5.4. Suggested Output
+
+- Mapping dictionary (`source_variable` → `concept_id`)
+- Table population sample (`external_exposure`)
+- Coverage and failure summary (`% mapped`, `unmapped terms`)
+- Recommendations for vocabulary enhancement
+
+> This usability validation should be iteratively improved and coordinated across GIS WG stakeholders. Contributions welcome!
