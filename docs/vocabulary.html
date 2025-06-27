@@ -13,7 +13,7 @@
 
 <title> OHDSI GIS WG</title>
 
-<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -35,9 +35,10 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
-<link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="assets/accordion-toc.css">
+<script src="assets/accordion-toc.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -285,12 +286,6 @@ div.tocify {
   border-radius: 0px;
 }
 
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
 
 </style>
 
@@ -416,7 +411,7 @@ WG</h1>
 
 
 <div id="omop-gis-vocabulary-package" class="section level1">
-<h1><strong>OMOP GIS Vocabulary Package</strong></h1>
+<h1>1. OMOP GIS Vocabulary Package</h1>
 <p>The OMOP GIS (Geographic Information System) Vocabulary Package is
 designed to elevate data-driven healthcare research by enabling the
 integration of spatial, environmental, behavioral, socioeconomic,
@@ -428,10 +423,9 @@ characteristics.</p>
 <p>This package is a vital extension of the OMOP CDM, addressing the
 growing need to contextualize healthcare data with external
 environmental and societal factors. Developed and maintained by the <a
-href="https://www.ohdsi.org/web/wiki/doku.php?id=projects:workgroups:gis">GIS
-Working Group</a>, this package provides vocabularies, scripts, and
-documentation for seamless term integration into existing OHDSI
-vocabularies.</p>
+href="https://ohdsi.github.io/GIS/index.html">GIS Working Group</a>,
+this package provides vocabularies, scripts, and documentation for
+terminology integration into existing OHDSI vocabularies.</p>
 <ul>
 <li><strong>Objective</strong>: To provide a comprehensive, standardized
 framework that enables the incorporation of geographic, toxicological,
@@ -452,51 +446,52 @@ health contexts.</li>
 <p>Find the Delta Vocabulary files for the Vocabulary Package <a
 href="https://github.com/TuftsCTSI/CVB/tree/main/GIS/Ontology">here</a></p>
 </blockquote>
-<table style="width:74%;">
-<colgroup>
-<col width="73%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td align="left">* <strong>Features</strong>: * <strong>OMOP GIS
-Vocabulary</strong>: Standardizes geographical terminologies and spatial
-data, supporting geospatial epidemiology, healthcare accessibility
-studies, and population health research. The OMOP GIS vocabulary is a
-compilation of terminologies related to geography, boundaries, and
-spatial elements. The vocabulary encompasses 159 concepts of the
-Observation OMOP domain. * <strong>OMOP Exposome Vocabulary</strong>:
-Integrates environmental and toxicological factors (exposomes) into the
-OMOP CDM, providing a taxonomy of environmental pollutants, toxins, and
-chemical agents. Offers a comprehensive taxonomy and classification
-system centered on environmental substances (exposomes). Designed to
-facilitate structured data capture, analysis, and interpretation, this
-vocabulary forms the foundation for toxicological studies within the
-observational health data paradigm. The concepts within the OMOP
-Exposome Vocabulary belong to the ‘Observation’ domain and the
-‘Substance’ concept class in OMOP. * <strong>OMOP SDOH (Social
-Determinants of Health) Vocabulary</strong>: encapsulates a refined set
-of terminologies delineating the multifaceted environmental and societal
-factors that significantly influence individual and community health
-outcomes. The vocabulary boasts a comprehensive structure, organized
-hierarchically to facilitate precise categorization and effective data
-navigation. Within this structure, the SDOH vocabulary seamlessly
-integrates key components from recognized standards such as the Social
-Vulnerability Index (SVI), the Agency for Healthcare Research and
-Quality (AHRQ) frameworks, and the Social Determinants of Health
-Ontology (SDOHO) nodes. This integration ensures a rich,
-multi-dimensional perspective, capturing a wide spectrum of determinants
-from socioeconomic status to healthcare access, and from educational
-opportunities to neighborhood and built environment. Examples of Main
-Nodes of the SDOH Hierarchy: * Element Relevant To Demographics *
-Element Relevant To Education * Element Relevant To Geographic Location
-* Element Relevant To Health * Element Relevant To Physical Environment
-* Element Relevant To Population * Element Relevant To Social And
-Community Context</td>
-</tr>
-</tbody>
-</table>
+<hr />
+<div id="vocabularies" class="section level2">
+<h2>1.1. Vocabularies</h2>
+<ul>
+<li><strong>OMOP GIS Vocabulary</strong> Standardizes geographical
+terminologies and spatial data, supporting geospatial epidemiology,
+healthcare accessibility studies, and population health research. The
+OMOP GIS vocabulary is a compilation of terminologies related to
+geography, boundaries, and spatial elements. The vocabulary encompasses
+159 concepts of the Observation OMOP domain.</li>
+<li><strong>OMOP Exposome Vocabulary</strong> Integrates environmental
+and toxicological factors (exposomes) into the OMOP CDM, providing a
+taxonomy of environmental pollutants, toxins, and chemical agents.
+Offers a comprehensive taxonomy and classification system centered on
+environmental substances (exposomes). Designed to facilitate structured
+data capture, analysis, and interpretation, this vocabulary forms the
+foundation for toxicological studies within the observational health
+data paradigm. The concepts within the OMOP Exposome Vocabulary belong
+to the ‘Observation’ domain and the ‘Substance’ concept class in
+OMOP.</li>
+<li><strong>OMOP SDOH (Social Determinants of Health)
+Vocabulary</strong> Encapsulates a refined set of terminologies
+delineating the multifaceted environmental and societal factors that
+significantly influence individual and community health outcomes. The
+vocabulary boasts a comprehensive structure, organized hierarchically to
+facilitate precise categorization and effective data navigation. Within
+this structure, the SDOH vocabulary seamlessly integrates key components
+from recognized standards such as the Social Vulnerability Index (SVI),
+the Agency for Healthcare Research and Quality (AHRQ) frameworks, and
+the Social Determinants of Health Ontology (SDOHO) nodes. This
+integration ensures a rich, multi-dimensional perspective, capturing a
+wide spectrum of determinants from socioeconomic status to healthcare
+access, and from educational opportunities to neighborhood and built
+environment.</li>
+</ul>
+<p><strong>Examples of Main Nodes of the SDOH Hierarchy</strong></p>
+<pre><code>* Element Relevant To Demographics
+* Element Relevant To Education
+* Element Relevant To Geographic Location
+* Element Relevant To Health
+* Element Relevant To Physical Environment
+* Element Relevant To Population
+* Element Relevant To Social And Community Context</code></pre>
+</div>
 <div id="sources" class="section level2">
-<h2>Sources</h2>
+<h2>1.2. Sources</h2>
 <p>The following data sources have been processed to enrich and
 integrate spatial, environmental, behavioral, socioeconomic, phenotypic,
 and toxin-related entities into the OMOP GIS Vocabulary Package.</p>
@@ -630,24 +625,19 @@ on factors like poverty, housing, and access to transportation.</li>
 comprehensive resource that catalogs toxins and their biological
 targets.</li>
 </ul>
-<p>The list of the collected source terms and their mappings are
-maintained in an editable <a
-href="https://docs.google.com/spreadsheets/d/1hMLjKokFCpoDqC_WsAd7ZXyBKDmnPif2rR9DlQ9X7cs/edit?usp=sharing">Google
-Spreadsheet</a>, allowing for real-time collaboration and ongoing
-validation by the community.</p>
 </div>
 <div id="concept-names" class="section level2">
-<h2>Concept Names</h2>
+<h2>1.3. Concept Names</h2>
 <p>Concept names adhere to source data specifications or are guided by
 relevant literature.</p>
 </div>
 <div id="concept-codes" class="section level2">
-<h2>Concept Codes</h2>
+<h2>1.4. Concept Codes</h2>
 <p>Concept codes were either adopted directly from source data or
 autogenerated for newly developed terms (start with ‘GIS’ prefix).</p>
 </div>
 <div id="domains" class="section level2">
-<h2>Domains</h2>
+<h2>1.5. Domains</h2>
 <table>
 <colgroup>
 <col width="9%" />
@@ -730,7 +720,7 @@ income, education, or employment status.</td>
 </table>
 </div>
 <div id="concept-classes" class="section level2">
-<h2>Concept Classes</h2>
+<h2>1.6. Concept Classes</h2>
 <table>
 <colgroup>
 <col width="9%" />
@@ -936,57 +926,73 @@ resilience to health risks or environmental hazards.</td>
 </table>
 <div id="additional-glossary-for-concept-classes-understanding"
 class="section level3">
-<h3>Additional Glossary for Concept Classes Understanding:</h3>
+<h3>1.6.1 Additional Glossary for Concept Classes Understanding:</h3>
 <ul>
-<li><strong>Construct</strong>: represents conceptual or behavioral
+<li><p><strong>Construct</strong>: Represents conceptual or behavioral
 elements that are often measured through subjective or indirect means.
 Constructs are used to characterize complex or abstract social,
 psychological, or environmental phenomena that contribute to
 understanding health outcomes but are not necessarily directly
-measurable or causal by themselves. Examples:
+measurable or causal by themselves.</p>
+<p><strong>Examples include:</strong></p>
 <ul>
-<li>Social Norms And Attitude (SDOHO Construct)</li>
-<li>Sexual Orientation (SDOHO Construct)</li>
-<li>Occupational Hazards (SDOH Construct)</li>
-<li>Neighborhood Safety (SDOH Construct) These examples reflect
-behaviors, relationships, and environmental factors that influence
-health outcomes, but they are abstract and typically involve
-interpretation, surveys, or proxies for measurement.</li>
-</ul></li>
-<li><strong>Determinant</strong>: is a specific, measurable factor that
+<li>Social Norms And Attitude <em>(SDOHO Construct)</em><br />
+</li>
+<li>Sexual Orientation <em>(SDOHO Construct)</em><br />
+</li>
+<li>Occupational Hazards <em>(SDOH Construct)</em><br />
+</li>
+<li>Neighborhood Safety <em>(SDOH Construct)</em></li>
+</ul>
+<p>These examples reflect behaviors, relationships, and environmental
+factors that influence health outcomes, but they are abstract and
+typically involve interpretation, surveys, or proxies for
+measurement.</p></li>
+<li><p><strong>Determinant</strong>: A specific, measurable factor that
 has a more direct influence on health outcomes. Determinants are often
 quantifiable and can be linked more concretely to causes or risk factors
 affecting a person’s health, such as economic status, education, or
-access to healthcare. Examples:
+access to healthcare.</p>
+<p><strong>Examples include:</strong></p>
 <ul>
-<li>Veteran Status (SDOHO Determinant)</li>
-<li>Healthcare Provider Availability (SDOH Determinant)</li>
-<li>Income (AHRQ Determinant)</li>
-<li>Tobacco Use (SDOHO Determinant)</li>
-<li>Vaccination Status (SDOH Determinant)</li>
+<li>Veteran Status <em>(SDOHO Determinant)</em><br />
+</li>
+<li>Healthcare Provider Availability <em>(SDOH Determinant)</em><br />
+</li>
+<li>Income <em>(AHRQ Determinant)</em><br />
+</li>
+<li>Tobacco Use <em>(SDOHO Determinant)</em><br />
+</li>
+<li>Vaccination Status <em>(SDOH Determinant)</em></li>
 </ul></li>
-<li><strong>Item</strong>: is a specific, measurable data point or
-element that is used to evaluate a larger construct or determinant.
+<li><p><strong>Item</strong>: A specific, measurable data point or
+element that is used to evaluate a larger construct or determinant.</p>
+<p><strong>Examples include:</strong></p>
 <ul>
-<li>% Households Without A Motor Vehicle (ADI Item)</li>
-<li>All Cause Readmissions Per 100 Male Admissions (AHRQ Item)</li>
-<li>Ambient Concentrations Of Diesel PM/M3 (EJI EBM Item)</li>
-<li>Civilian (Age 16+) Unemployed Estimate (SVI Item)</li>
+<li>% Households Without A Motor Vehicle <em>(ADI Item)</em><br />
+</li>
+<li>All Cause Readmissions Per 100 Male Admissions <em>(AHRQ
+Item)</em><br />
+</li>
+<li>Ambient Concentrations Of Diesel PM/M3 <em>(EJI EBM Item)</em><br />
+</li>
+<li>Civilian (Age 16+) Unemployed Estimate <em>(SVI Item)</em></li>
 </ul></li>
-<li><strong>Item Value</strong>: is a specific measurable value or state
-that the item can take. The item values might include “employed,”
-“unemployed,” “self-employed,” “retired,” etc.</li>
+<li><p><strong>Item Value</strong>: A specific measurable value or state
+that the item can take.<br />
+The item values might include <strong>“employed,” “unemployed,”
+“self-employed,” “retired”</strong>, etc.</p></li>
 </ul>
 </div>
 </div>
 <div id="concept-status-standardness" class="section level2">
-<h2>Concept Status (Standardness)</h2>
+<h2>1.7. Concept Status (Standardness)</h2>
 <p>If a full semantic match is identified in OMOP, GIS codes are mapped
 to the corresponding standard concepts and reclassified as non-standard.
 If no match is found, GIS codes are retained as standard concepts.</p>
 </div>
 <div id="valid-start-date" class="section level2">
-<h2>Valid Start Date</h2>
+<h2>1.8. Valid Start Date</h2>
 <table>
 <colgroup>
 <col width="39%" />
@@ -1047,7 +1053,7 @@ If no match is found, GIS codes are retained as standard concepts.</p>
 </table>
 </div>
 <div id="relationships" class="section level2">
-<h2>Relationships</h2>
+<h2>1.9. Relationships</h2>
 <table>
 <colgroup>
 <col width="17%" />
@@ -1127,7 +1133,7 @@ geometry’</em>: ‘LineString’ - ‘Is geometry of’ - ‘International Bor
 / ‘International Border’ - ‘Has geometry’ - ‘LineString’</p>
 </div>
 <div id="mapping-and-hierarchy" class="section level2">
-<h2>Mapping and Hierarchy</h2>
+<h2>1.10. Mapping and Hierarchy</h2>
 <table>
 <thead>
 <tr class="header">
@@ -1214,8 +1220,9 @@ geometry’</em>: ‘LineString’ - ‘Is geometry of’ - ‘International Bor
 </tr>
 </tbody>
 </table>
-<div id="future-work" class="section level3">
-<h3>Future work:</h3>
+</div>
+<div id="future-work" class="section level2">
+<h2>1.11. Future work</h2>
 <ul>
 <li>Test the vocabulary with more use cases.</li>
 <li>Fix hidden errors.</li>
@@ -1223,6 +1230,1066 @@ geometry’</em>: ‘LineString’ - ‘Is geometry of’ - ‘International Bor
 <li>Enrich and refine the vocabulary.</li>
 </ul>
 </div>
+</div>
+<div id="vocabulary-and-mapping-source" class="section level1">
+<h1>2. Vocabulary and Mapping Source</h1>
+<p>The OMOP GIS Vocabulary Package is built and maintained through a
+structured <a
+href="https://docs.google.com/spreadsheets/d/1hMLjKokFCpoDqC_WsAd7ZXyBKDmnPif2rR9DlQ9X7cs/edit?usp=sharing">Google
+Spreadsheet</a> that supports collaborative editing, centralized
+curation, and version control. This spreadsheet functions as the
+backbone of the vocabulary development process, enabling distributed
+subject-matter experts, curators, and developers to participate in
+real-time. It is composed of multiple interrelated tabs that each
+fulfill a specialized role in the construction of a standardized,
+computable terminology layer.</p>
+<div id="overview-of-source-spreadsheet-components"
+class="section level2">
+<h2>2.1. Overview of Source Spreadsheet Components</h2>
+<p>The structure adheres to the principles of transparency,
+auditability, and semantic alignment with the OMOP CDM. The spreadsheet
+is logically organized into several functional layers:</p>
+<div id="source-terms-layer" class="section level3">
+<h3>2.1.1. Source Terms Layer</h3>
+<p>Captures raw terminology originating from environmental, geographic,
+exposomic, or socio-behavioral data sources. Each record includes a
+unique source code, human-readable description, vocabulary ID, domain
+assignment, concept class identifier, and provenance information such as
+date of review, expert attribution, ORCID ID, and review status.</p>
+</div>
+<div id="mapping-layer" class="section level3">
+<h3>2.1.2. Mapping Layer</h3>
+<p>Establishes the semantic correspondences between the collected source
+terms and OMOP standard concepts. Each mapping contains:</p>
+<ul>
+<li>A relationship type (e.g., <code>Maps to</code>,
+<code>Is a</code>)</li>
+<li>A predicate aligned with <a
+href="https://mapping-commons.github.io/sssom/">SSSOM</a> (e.g.,
+<code>skos:exactMatch</code>, <code>skos:narrowMatch</code>,
+<code>skos:broadMatch</code>, <code>skos:relatedMatch</code>)</li>
+<li>An author-assigned confidence score (0.0–1.0)</li>
+<li>Metadata for mapping validation, status, and reviewer feedback (if
+exists)</li>
+</ul>
+</div>
+<div id="hierarchy-layer" class="section level3">
+<h3>2.1.3. Hierarchy Layer</h3>
+<p>Supports parent-child relationships among concepts and extends the
+OMOP CDM’s ontology-like capabilities. This is particularly important
+for representing aggregate social constructs (e.g., Area Deprivation
+Index) and nested features.</p>
+</div>
+<div id="semantic-extensions-layer" class="section level3">
+<h3>2.1.4. Semantic Extensions Layer</h3>
+<p>Defines custom <strong>Domains</strong>, <strong>Concept
+Classes</strong>, <strong>Vocabularies</strong>, and
+<strong>Relationships</strong> that expand the CDM’s expressivity in the
+context of real-world data. These extensions are consistently registered
+and versioned (e.g., <code>OMOP GIS || 20250424</code>).</p>
+<p>Each term progresses through a structured lifecycle: initial entry,
+expert validation, decision logging, and integration readiness. Fields
+such as <code>change_required</code>, <code>author_comment</code>, and
+<code>status</code> support prioritization and triage workflows.</p>
+</div>
+</div>
+<div id="alignment-with-sssom" class="section level2">
+<h2>2.2. Alignment with SSSOM</h2>
+<p>The mapping layer leverages SSSOM-style predicates, enabling:</p>
+<ul>
+<li><strong>Semantic Precision</strong>: Mappings clearly define
+relationship types for improved analytic reliability</li>
+<li><strong>Bidirectional Navigation</strong>: Reverse mappings (e.g.,
+<code>Is geometry of</code> ↔︎ <code>Has geometry</code>) support
+symmetric reasoning</li>
+<li><strong>Crosswalk Potential</strong>: Mappings bridge environmental,
+clinical, and social data sources for integrated analysis</li>
+</ul>
+</div>
+<div id="automation-and-deployment" class="section level2">
+<h2>2.3. Automation and Deployment</h2>
+<p>Google Apps Script automates the parsing, change detection, and
+transformation of the spreadsheet into <a
+href="https://github.com/TuftsCTSI/CVB/tree/main/GIS/Ontology">vocabulary
+delta tables</a> consumable by OMOP ETL workflows. This enables
+continuous deployment of vocabulary updates without manual intervention.
+Extensions are serialized into OMOP-compatible formats and managed
+according to OHDSI governance protocols.</p>
+</div>
+<div id="contribution-workflow" class="section level2">
+<h2>2.4. Contribution Workflow</h2>
+<p>The spreadsheet functions as both a collaborative workspace and a
+vocabulary staging environment. Contributors may propose new terms or
+mappings by adding rows to designated tabs. Each entry is subject to
+transparent peer review, with review states tracked via controlled
+values. Reviewers are encouraged to document decisions with ORCID and
+institutional affiliation.</p>
+<p>For contributions, questions, or access requests, please contact the
+GIS Vocabulary Coordination Team:</p>
+<ul>
+<li><strong>Polina Talapova</strong>, Ontology Lead - <a
+href="mailto:talapova@ohdsi.org"
+class="email">talapova@ohdsi.org</a></li>
+<li><strong>Jared Houghtaling</strong>, Ontology Engineer - <a
+href="mailto:houghtaling@ohdsi.org"
+class="email">houghtaling@ohdsi.org</a></li>
+</ul>
+</div>
+</div>
+<div id="vocabulary-implementation" class="section level1">
+<h1>3. Vocabulary Implementation</h1>
+<p>This section outlines the implementation framework for the OMOP GIS
+Vocabulary Package, detailing both the underlying ontology architecture
+and the practical processes for vocabulary ingestion and deployment. By
+combining semantic formalism with operational scalability, the
+implementation ensures that spatial and contextual vocabularies are
+conceptually aligned with the OMOP CDM and readily usable in real-world
+analytics environments.</p>
+<div id="omop-gis-ontology-design" class="section level2">
+<h2>3.1 OMOP GIS Ontology Design</h2>
+<p>The OMOP GIS Ontology utilizes the GIS Vocabulary Package as its
+foundational layer, which is collaboratively maintained through a Google
+Spreadsheet system integrated with Google Apps Scripts and GitHub-based
+automation pipelines. This ontology serves as a semantic scaffold for
+spatial and contextual reasoning in health data, enabling structured
+representation and analysis of geographically-linked, environmental,
+social, and behavioral determinants of health. It also functions as a
+machine-interpretable layer that supports standardized analytics,
+ontology-informed feature generation, and federated ETL workflows across
+distributed data networks.</p>
+<div id="ontology-definition-in-context" class="section level3">
+<h3>3.1.1. Ontology Definition in Context</h3>
+<p>In general, an <strong>ontology</strong> is a structured framework
+for representing knowledge as a set of concepts within a domain and the
+relationships between those concepts. Ontologies enable formal
+semantics, reasoning, and integration across diverse datasets by
+providing consistent definitions and hierarchical structure.</p>
+<p>Within the OMOP GIS framework, the ontology performs a similar
+function - defining and categorizing <strong>geographic features,
+environmental exposures, social determinants of health, and their
+interrelationships</strong> - using the language and constraints of the
+OMOP CDM. It extends the existing OMOP vocabulary model to support
+location-aware analyses and geospatial semantics without breaking
+conformance with OMOP’s relational architecture.</p>
+</div>
+<div id="architecture-and-workflow" class="section level3">
+<h3>3.1.2. Architecture and Workflow</h3>
+<p>The GIS Ontology is constructed through the following components and
+processes:</p>
+<ul>
+<li><p><strong>Source Definition Layer</strong>: Concepts and
+relationships are entered and curated in a structured Google Spreadsheet
+format. This spreadsheet includes validated fields for source code,
+concept class, domain, mappings, predicates, and metadata. Collaborative
+access and semantic protections are enforced using <strong>Google Apps
+Scripts</strong>, which regulate row-level editability.</p></li>
+<li><p><strong>Version-Controlled Vocabulary Pipeline</strong>: Approved
+concepts and mappings are automatically synchronized from Google Sheets
+to GitHub using scheduled Apps Script tasks. This process creates a
+persistent and auditable version history while simultaneously preparing
+mapping data for downstream transformation.</p></li>
+<li><p><strong>Ontology Transformation Pipeline</strong>: A GitHub
+Action orchestrates a multi-step workflow that converts the
+spreadsheet-based mappings into relational OMOP-compatible vocabulary
+tables. This includes:</p>
+<ol style="list-style-type: decimal">
+<li>Ingestion of mapping rows into a <strong>PostgreSQL
+instance</strong> hosted in Azure</li>
+<li><strong>Syntactic validation</strong> of concept fields, metadata,
+and predicate consistency</li>
+<li><strong>Differencing logic</strong> to detect novel or updated
+concepts relative to the baseline OMOP vocabularies</li>
+<li><strong>Construction of staging tables</strong>, including new
+<code>concept</code>, <code>concept_relationship</code>, and
+<code>concept_synonym</code> records with assigned
+<code>concept_id</code>s in the reserved space (&gt;2,000,000,000)</li>
+<li><strong>Insertion of validated concepts</strong> into constrained
+tables in a controlled schema</li>
+<li><strong>Export of delta tables</strong> (vocabulary overlays) to
+GitHub for use in external ETL workflows</li>
+</ol></li>
+</ul>
+<p>Two Azure-hosted components support this automation: a
+<strong>Container App</strong> acting as a virtual GitHub runner and a
+<strong>Flexible Postgres Server</strong> that stores the ontology’s
+relational tables. These components ensure that updates can be executed
+securely and reproducibly.</p>
+</div>
+<div id="ontological-table-structure" class="section level3">
+<h3>3.1.3. Ontological Table Structure</h3>
+<p>The ontology is materialized through a suite of relational “delta”
+tables. Each table mirrors a specific component of the OMOP vocabulary
+schema, while systematically extending it to accommodate geospatial
+logic, including location-referenced features, environmental indices,
+and spatially-resolved determinants. For example:</p>
+<ul>
+<li><code>concept_delta.csv</code>: Defines both standard and
+non-standard GIS concepts, including representatives of new domains like
+<code>Geographic Feature</code>, <code>Environmental Feature</code>, and
+<code>Socioeconomic Feature</code>.</li>
+<li><code>concept_relationship_delta.csv</code>: Encodes semantic links
+using relationships such as <code>Has geometry</code>,
+<code>Affects biostructure</code>, and <code>Locates in cell</code>,
+facilitating ontology-driven inferences.</li>
+<li><code>concept_ancestor_delta.csv</code>: Reconstructs hierarchical
+ancestry for reasoning across spatial or categorical groupings.</li>
+<li><code>concept_synonym_delta.csv</code>: Includes synonyms to support
+flexible querying across GIS, public health, and environmental
+terminology variants.</li>
+</ul>
+<p>This table set collectively reproduces an <strong>ontological
+graph</strong> within a relational schema, enabling semantic linkage
+between OMOP-standard concepts and domain-specific enhancements required
+for contextualized health research.</p>
+</div>
+<div id="summary" class="section level3">
+<h3>3.1.4. Summary</h3>
+<p>The OMOP GIS Ontology integrates community-based term curation,
+semantic standardization via SSSOM predicates, and automated deployment
+pipelines to construct a modular, versioned vocabulary system. This
+infrastructure supports not only geospatial analysis but also
+cross-domain reasoning on determinants of health, exposures, and
+environment. It positions the OMOP CDM for expanded utility in
+real-world evidence generation that incorporates place, population
+context, and environmental burden.</p>
+</div>
+</div>
+<div id="omop-gis-ontology-download-and-installation-instructions"
+class="section level2">
+<h2>3.2 OMOP GIS Ontology Download and Installation Instructions</h2>
+<p>The OMOP GIS Ontology can be integrated into a local OMOP CDM
+instance by combining standard vocabulary files obtained from <a
+href="http://athena.ohdsi.org">Athena OHDSI</a> with curated delta
+tables provided via GitHub. This integration enables structured support
+for spatial, environmental, and contextual reasoning through GIS-aligned
+concepts and relationships, while preserving OMOP CDM conformance. The
+process leverages relational structures familiar to OMOP implementers
+and is compatible with federated ETL workflows and AI-driven
+pipelines.</p>
+<div id="required-tools-and-access" class="section level3">
+<h3>3.2.1. Required Tools and Access</h3>
+<p>To begin the installation, ensure you have:</p>
+<ul>
+<li>An Athena OHDSI account to download standard vocabularies.</li>
+<li>SQL client (e.g., DBeaver, pgAdmin) with write access to the OMOP
+CDM vocabulary schema.</li>
+<li>Access to a PostgreSQL-compatible OMOP instance.</li>
+<li>GIS delta files from <a
+href="https://github.com/TuftsCTSI/CVB/tree/main/GIS/Ontology">Tufts
+CTSI GitHub</a>.</li>
+<li>Basic familiarity with OMOP CDM vocabulary architecture.</li>
+<li><strong>A dedicated development schema</strong> (e.g.,
+<code>dev_gis</code>) separate from your production environment, to
+safely test integration and validate results before promotion.</li>
+</ul>
+</div>
+<div id="workspace-preparation" class="section level3">
+<h3>3.2.2. Workspace Preparation</h3>
+<p>Your OMOP schema must contain all required core tables:</p>
+<ul>
+<li><code>concept</code>, <code>concept_ancestor</code>,
+<code>concept_class</code>, <code>concept_relationship</code>,
+<code>concept_synonym</code></li>
+<li><code>domain</code>, <code>relationship</code>,
+<code>vocabulary</code>, <code>drug_strength</code></li>
+</ul>
+<p>If missing, create them using the <a
+href="https://github.com/OHDSI/Vocabulary-v5.0/blob/master/working/DevV5_DDL.sql">OMOP
+CDM DDL</a>.</p>
+<p>To prepare for GIS enrichment, create delta tables via:</p>
+<ul>
+<li><a
+href="https://github.com/OHDSI/GIS/blob/main/rmd/data/create_delta_tables.sql"><code>create_delta_tables.sql</code></a></li>
+</ul>
+<hr />
+</div>
+<div id="download-standard-omop-vocabularies-athena"
+class="section level3">
+<h3>3.2.3. Download Standard OMOP Vocabularies (Athena)</h3>
+<blockquote>
+<p><strong>All vocabularies listed below are mandatory. Do not skip
+any.</strong><br />
+These vocabularies are referenced in the delta tables and are essential
+for resolving mappings and relationships. Partial ingestion will result
+in structural or referential integrity errors.</p>
+</blockquote>
+<p>Select the following <strong>vocabularies</strong> from <a
+href="https://athena.ohdsi.org/vocabulary/list">Athena OHDSI
+Download</a> section, ensuring any license-restricted vocabularies
+(e.g., <strong>CPT4</strong>) are only selected if your organization
+holds a valid license:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Required Vocabulary</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ATC</td>
+</tr>
+<tr class="even">
+<td>CPT4*</td>
+</tr>
+<tr class="odd">
+<td>HCPCS</td>
+</tr>
+<tr class="even">
+<td>ICD10CM</td>
+</tr>
+<tr class="odd">
+<td>LOINC</td>
+</tr>
+<tr class="even">
+<td>Nebraska Lexicon</td>
+</tr>
+<tr class="odd">
+<td>OMOP Extension</td>
+</tr>
+<tr class="even">
+<td>OSM</td>
+</tr>
+<tr class="odd">
+<td>PPI</td>
+</tr>
+<tr class="even">
+<td>RxNorm</td>
+</tr>
+<tr class="odd">
+<td>RxNorm Extension</td>
+</tr>
+<tr class="even">
+<td>SNOMED</td>
+</tr>
+<tr class="odd">
+<td>UK Biobank</td>
+</tr>
+</tbody>
+</table>
+<p>After selecting the vocabularies, click <strong>Download
+Vocabularies</strong>, name the bundle, and download the resulting ZIP
+file directly from the Athena website once it is ready. Unzip the
+archive and confirm that the following files are present:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Expected File</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>CONCEPT.csv</td>
+</tr>
+<tr class="even">
+<td>CONCEPT_ANCESTOR.csv</td>
+</tr>
+<tr class="odd">
+<td>CONCEPT_CLASS.csv</td>
+</tr>
+<tr class="even">
+<td>CONCEPT_RELATIONSHIP.csv</td>
+</tr>
+<tr class="odd">
+<td>CONCEPT_SYNONYM.csv</td>
+</tr>
+<tr class="even">
+<td>DOMAIN.csv</td>
+</tr>
+<tr class="odd">
+<td>DRUG_STRENGTH.csv</td>
+</tr>
+<tr class="even">
+<td>RELATIONSHIP.csv</td>
+</tr>
+<tr class="odd">
+<td>VOCABULARY.csv</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="download-gis-delta-tables" class="section level3">
+<h3>3.2.4. Download GIS Delta Tables</h3>
+<p>Download the <code>delta tables</code> from the <a
+href="https://github.com/TuftsCTSI/CVB/tree/main/GIS/Ontology">GIS
+Vocabulary GitHub repository</a>. These include:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Delta Table</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>CONCEPT_DELTA.CSV</td>
+</tr>
+<tr class="even">
+<td>CONCEPT_ANCESTOR_DELTA.CSV</td>
+</tr>
+<tr class="odd">
+<td>CONCEPT_CLASS_DELTA.CSV</td>
+</tr>
+<tr class="even">
+<td>CONCEPT_RELATIONSHIP_DELTA.CSV</td>
+</tr>
+<tr class="odd">
+<td>CONCEPT_SYNONYM_DELTA.CSV</td>
+</tr>
+<tr class="even">
+<td>DOMAIN_DELTA.CSV</td>
+</tr>
+<tr class="odd">
+<td>RELATIONSHIP_DELTA.CSV</td>
+</tr>
+<tr class="even">
+<td>VOCABULARY_DELTA.CSV</td>
+</tr>
+<tr class="odd">
+<td>MAPPING_METADATA.CSV</td>
+</tr>
+<tr class="even">
+<td>SOURCE_TO_CONCEPT_MAP.CSV</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Note:</strong> Files such as <code>restore.sql</code> and
+<code>update_log.csv</code> are not required for ingestion.</p>
+</blockquote>
+</div>
+<div id="ingest-standard-vocabularies-athena-omop"
+class="section level3">
+<h3>3.2.5. Ingest Standard Vocabularies (Athena → OMOP)</h3>
+<p>Import all downloaded Athena <code>.csv</code> files into the
+corresponding OMOP vocabulary tables using your preferred SQL
+client.</p>
+<blockquote>
+<p><strong>Recommended tools:</strong> Use PostgreSQL <code>COPY</code>
+command via <code>psql</code>, or GUI tools such as DBeaver or pgAdmin
+for loading the files.</p>
+</blockquote>
+<blockquote>
+<p><strong>Important formatting requirements:</strong> - Files must use
+<strong>UTF-8</strong> character encoding. - <strong>Comma</strong>
+should be used as the delimiter. - Text fields should be
+<strong>enclosed in double quotes</strong>.</p>
+</blockquote>
+<p>Match the CSV files to OMOP tables as follows:</p>
+<table>
+<thead>
+<tr class="header">
+<th>CSV File</th>
+<th>→ OMOP Table</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>CONCEPT.csv</td>
+<td>→ CONCEPT</td>
+</tr>
+<tr class="even">
+<td>CONCEPT_ANCESTOR.csv</td>
+<td>→ CONCEPT_ANCESTOR</td>
+</tr>
+<tr class="odd">
+<td>CONCEPT_CLASS.csv</td>
+<td>→ CONCEPT_CLASS</td>
+</tr>
+<tr class="even">
+<td>CONCEPT_RELATIONSHIP.csv</td>
+<td>→ CONCEPT_RELATIONSHIP</td>
+</tr>
+<tr class="odd">
+<td>CONCEPT_SYNONYM.csv</td>
+<td>→ CONCEPT_SYNONYM</td>
+</tr>
+<tr class="even">
+<td>DOMAIN.csv</td>
+<td>→ DOMAIN</td>
+</tr>
+<tr class="odd">
+<td>DRUG_STRENGTH.csv</td>
+<td>→ DRUG_STRENGTH</td>
+</tr>
+<tr class="even">
+<td>RELATIONSHIP.csv</td>
+<td>→ RELATIONSHIP</td>
+</tr>
+<tr class="odd">
+<td>VOCABULARY.csv</td>
+<td>→ VOCABULARY</td>
+</tr>
+</tbody>
+</table>
+<p>After upload, run QA checks.</p>
+</div>
+<div id="ingest-gis-delta-content" class="section level3">
+<h3>3.2.6. Ingest GIS Delta Content</h3>
+<p>Insert delta rows into the already existing tables using: - <a
+href="https://github.com/OHDSI/GIS/blob/main/rmd/data/insert_delta_tables_into_omop.sql"><code>insert_delta_tables_into_omop.sql</code></a></p>
+</div>
+<div id="integrate-gis-delta-tables-into-basic-omop-vocabulary-tables"
+class="section level3">
+<h3>3.2.7. Integrate GIS Delta Tables Into Basic OMOP Vocabulary
+Tables</h3>
+<p>This step inserts data from the GIS delta files into the
+corresponding OMOP vocabulary tables. The mapping between each delta
+file and its target table is shown below:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Delta File</th>
+<th>→ Target Table</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>concept_delta.csv</td>
+<td>→ CONCEPT</td>
+</tr>
+<tr class="even">
+<td>concept_ancestor_delta.csv</td>
+<td>→ CONCEPT_ANCESTOR</td>
+</tr>
+<tr class="odd">
+<td>concept_class_delta.csv</td>
+<td>→ CONCEPT_CLASS</td>
+</tr>
+<tr class="even">
+<td>concept_relationship_delta.csv</td>
+<td>→ CONCEPT_RELATIONSHIP</td>
+</tr>
+<tr class="odd">
+<td>concept_synonym_delta.csv</td>
+<td>→ CONCEPT_SYNONYM</td>
+</tr>
+<tr class="even">
+<td>domain_delta.csv</td>
+<td>→ DOMAIN</td>
+</tr>
+<tr class="odd">
+<td>relationship_delta.csv</td>
+<td>→ RELATIONSHIP</td>
+</tr>
+<tr class="even">
+<td>vocabulary_delta.csv</td>
+<td>→ VOCABULARY</td>
+</tr>
+<tr class="odd">
+<td>mapping_metadata.csv</td>
+<td>→ MAPPING_METADATA</td>
+</tr>
+<tr class="even">
+<td>source_to_concept_map.csv</td>
+<td>→ SOURCE_TO_CONCEPT_MAP</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Important:</strong> Always validate your integration in a
+development schema before applying changes to a production vocabulary
+schema. Ensure referential integrity and uniqueness constraints are
+preserved.</p>
+</blockquote>
+</div>
+<div id="validate-integration" class="section level3">
+<h3>3.2.8. Validate Integration</h3>
+<p>Use <a
+href="https://github.com/OHDSI/GIS/blob/main/rmd/data/check_delta_tables_inserts.sql">check_delta_tables_inserts.sql</a>
+to verify the successful application of the delta content. This includes
+validation of record counts, relationship integrity, and domain
+coverage.</p>
+</div>
+<div id="outcome" class="section level3">
+<h3>3.2.9. Outcome</h3>
+<p>After completing this workflow, your OMOP CDM instance will:</p>
+<ul>
+<li>Contain both standard and GIS-extended vocabularies.</li>
+<li>Support population of <code>EXTERNAL_EXPOSURE</code> and
+<code>SOURCE_TO_CONCEPT_MAP</code> tables.</li>
+<li>Enable structured representation of spatial and environmental health
+data.</li>
+<li>Be interoperable with OHDSI tools, federated queries, and AI
+pipelines.</li>
+</ul>
+<p>Use information in the Vocabulary QA section to confirm completeness
+and correctness of the loaded data.</p>
+<blockquote>
+<p>For feedback or bug reports, please open an issue on <a
+href="https://github.com/TuftsCTSI/CVB/issues">GitHub</a>.</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div id="vocabulary-qa" class="section level1">
+<h1>4. Vocabulary QA</h1>
+<p>This checklist is designed to validate new GIS Vocabulary Package
+releases in OMOP CDM format.</p>
+<hr />
+<div id="general-qa-for-core-vocabulary-tables" class="section level2">
+<h2>4.1. General QA for Core Vocabulary Tables</h2>
+<div id="table-row-counts" class="section level3">
+<h3>4.1.1 Table Row Counts</h3>
+<p>Ensure the following delta tables are populated unless explicitly
+expected to be empty:</p>
+<ul>
+<li><code>concept_delta</code></li>
+<li><code>concept_relationship_delta</code></li>
+<li><code>concept_synonym_delta</code> (if synonyms are defined)</li>
+<li><code>concept_ancestor_delta</code> (if hierarchical terms are
+used)</li>
+<li><code>source_to_concept_map</code> (if supplemental mappings are
+included)</li>
+</ul>
+</div>
+<div id="vocabulary-metadata" class="section level3">
+<h3>4.1.2 Vocabulary Metadata</h3>
+<ul>
+<li>Confirm <code>vocabulary_delta</code>, <code>domain_delta</code>,
+<code>relationship_delta</code>, and <code>concept_class_delta</code>
+only contain new or modified entries.</li>
+<li>Verify required fields exist (e.g., <code>vocabulary_id</code>,
+<code>vocabulary_name</code>, <code>vocabulary_reference</code>,
+etc.).</li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="semantic-consistency-checks" class="section level2">
+<h2>4.2. Semantic Consistency Checks</h2>
+<div id="mapping-validity" class="section level3">
+<h3>4.2.1. Mapping Validity</h3>
+<ul>
+<li>Concepts with <code>standard_concept IS NULL</code> should have at
+least one outbound <code>Maps to</code> or <code>Mapped from</code>
+relationship.</li>
+<li>Concepts with <code>standard_concept = 'S'</code> should not map to
+other standard concepts unless it’s a self-map.</li>
+<li>Non-standard to non-standard mappings are permitted for auxiliary
+relationships (e.g., <code>Has geometry</code>,
+<code>Locates in cell</code>) but must be flagged for review.</li>
+</ul>
+</div>
+<div id="duplicate-mappings" class="section level3">
+<h3>4.2.2. Duplicate Mappings</h3>
+<ul>
+<li>No duplicate
+<code>(concept_id_1, relationship_id, concept_id_2)</code>
+combinations.</li>
+<li>Multiple <code>Maps to</code> targets for the same source must be
+clinically or hierarchically justified.</li>
+</ul>
+</div>
+<div id="invalid-target-concepts" class="section level3">
+<h3>4.2.3. Invalid Target Concepts</h3>
+<p>Ensure all <code>target_concept_id</code> values from the <a
+href="https://docs.google.com/spreadsheets/d/1hMLjKokFCpoDqC_WsAd7ZXyBKDmnPif2rR9DlQ9X7cs/edit?usp=sharing">source
+mapping table</a>:</p>
+<ul>
+<li>Exist in the current <code>concept</code> or
+<code>concept_delta</code> table</li>
+<li>Have <code>invalid_reason IS NULL</code></li>
+</ul>
+</div>
+<div id="domain-compatibility" class="section level3">
+<h3>4.2.4. Domain Compatibility</h3>
+<ul>
+<li>Detect domain inconsistencies (e.g., source <code>Procedure</code> →
+target <code>Measurement</code>) unless justified.</li>
+<li>Validate that concepts in specific GIS domains consistently map to
+expected domains.</li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="syntactic-integrity" class="section level2">
+<h2>4.3. Syntactic Integrity</h2>
+<div id="concept-code-naming" class="section level3">
+<h3>4.3.1. Concept Code Naming</h3>
+<ul>
+<li>Validate <code>concept_code</code> format. Ensure they match
+declared <code>source_code</code> values.</li>
+</ul>
+</div>
+<div id="concept-names-1" class="section level3">
+<h3>4.3.2. Concept Names</h3>
+<ul>
+<li>No duplicate <code>concept_name</code> entries unless codes
+differ.</li>
+<li>Avoid placeholder or malformed names.</li>
+</ul>
+</div>
+<div id="field-completeness" class="section level3">
+<h3>4.3.3. Field Completeness</h3>
+<p>Ensure these fields are always populated:</p>
+<ul>
+<li><code>concept_id</code></li>
+<li><code>concept_name</code></li>
+<li><code>domain_id</code></li>
+<li><code>vocabulary_id</code></li>
+<li><code>concept_code</code></li>
+<li><code>valid_start_date</code></li>
+<li><code>valid_end_date</code></li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="source-mapping-qa" class="section level2">
+<h2>4.4. Source Mapping QA</h2>
+<div id="coverage" class="section level3">
+<h3>4.4.1. Coverage</h3>
+<ul>
+<li>Every <code>source_code</code> in the source mapping table should
+exist in <code>concept_delta</code>.</li>
+<li>Every <code>source_description</code> should match a
+<code>concept_name</code>.</li>
+<li>Every <code>source_description_synonym</code> should match a
+<code>concept_synonym_name</code>.</li>
+</ul>
+</div>
+<div id="source-to-concept-map-qa" class="section level3">
+<h3>4.4.2. Source-to-Concept Map QA</h3>
+<ul>
+<li><code>source_to_concept_map</code> must contain complete mappings:
+<ul>
+<li><code>source_code</code></li>
+<li><code>source_concept_id</code></li>
+<li><code>target_concept_id</code></li>
+</ul></li>
+</ul>
+<hr />
+</div>
+</div>
+<div id="concept-synonym-validation" class="section level2">
+<h2>4.5. Concept Synonym Validation</h2>
+<ul>
+<li>Each <code>concept_synonym_delta</code> entry must:
+<ul>
+<li>Reference a valid <code>concept_id</code> from
+<code>concept_delta</code></li>
+<li>Include a non-empty, distinct <code>concept_synonym_name</code></li>
+<li>Not duplicate the main <code>concept_name</code></li>
+</ul></li>
+<li>Cross-check expected synonyms (from source mapping table) are
+present.</li>
+</ul>
+<hr />
+</div>
+<div id="concept-ancestor-integrity" class="section level2">
+<h2>4.6. Concept Ancestor Integrity</h2>
+<ul>
+<li>Ensure all transitive or hierarchical relationships exist in
+<code>concept_ancestor_delta</code>.</li>
+<li>No cycles or broken ancestry chains.</li>
+<li>Confirm taxonomic hierarchies are correctly represented.</li>
+<li>Only standard concept participate in the hierarchy</li>
+</ul>
+<hr />
+</div>
+<div id="naming-formatting-edge-cases" class="section level2">
+<h2>4.7. Naming &amp; Formatting Edge Cases</h2>
+<ul>
+<li>Validate encoding of Unicode characters.</li>
+<li>Ensure special characters (e.g., brackets, slashes) do not break
+parsing.</li>
+<li>Detect changes in <code>concept_name</code> between source and
+derived vocabularies.</li>
+</ul>
+<hr />
+</div>
+<div id="summary-and-reporting" class="section level2">
+<h2>4.8. Summary and Reporting</h2>
+<ul>
+<li>Provide counts of:
+<ul>
+<li>New and modified rows per table</li>
+<li>Failed validations (e.g., invalid mappings, duplicates)</li>
+<li>Mapping coverage (e.g., <code>% source codes mapped</code>)</li>
+</ul></li>
+<li>Generate a <code>.csv</code> or <code>.md</code> QA report to
+accompany the vocabulary release.</li>
+</ul>
+<blockquote>
+<p>These checks complement automated scripts and should be validated by
+vocabulary experts and domain specialists, especially for novel
+environmental or spatial concepts.</p>
+</blockquote>
+</div>
+</div>
+<div id="vocabulary-usability-validation" class="section level1">
+<h1>5. Vocabulary Usability Validation</h1>
+<p>This section describes a structured approach for validating the
+<strong>usability</strong> of the GIS Vocabulary Package in real-world
+OMOP CDM integration scenarios. The process focuses on semantic
+coverage, geospatial linkage, and practical implementation using
+environmental exposure data such as EJI, EPA air quality, or other
+standardized GIS sources.</p>
+<hr />
+<div id="step-by-step-validation-workflow" class="section level2">
+<h2>5.1. Step-by-Step Validation Workflow</h2>
+<p><strong>5.1.1. Define Validation Objectives</strong></p>
+<ul>
+<li>What is being tested?
+<ul>
+<li>Does the GIS Vocabulary cover all environmental exposure concepts of
+interest?</li>
+<li>Can it support integration of specific datasets (e.g., EJI,
+SVI)?</li>
+</ul></li>
+<li>What decisions will the results support?
+<ul>
+<li>Use in OMOP CDM <code>EXTERNAL_EXPOSURE</code> analytics.</li>
+<li>Extension to GIS-enabled observational studies.</li>
+</ul></li>
+</ul>
+<hr />
+<p><strong>5.1.2. Acquire and Preprocess GIS Data</strong></p>
+<ul>
+<li>Select an authoritative GIS dataset (e.g., EJI, EPA AirNow, WHO
+noise pollution index).</li>
+<li>Ensure spatial identifiers are available:
+<ul>
+<li><code>GEOID</code> (Census Tract), <code>ZIP</code>, or
+<code>latitude/longitude</code>.</li>
+</ul></li>
+<li>Normalize location granularity:
+<ul>
+<li>Convert ZIP+4 to Census Tract.</li>
+<li>Crosswalk coordinates to GEOID using reverse geocoding or lookup
+tables.</li>
+</ul></li>
+<li>Assess temporal granularity (e.g., 3-year average, annual,
+monthly).</li>
+</ul>
+<hr />
+<p><strong>5.1.3. Link GIS Data to OMOP Locations</strong></p>
+<ul>
+<li>Extract location attributes from OMOP:
+<ul>
+<li><code>location_id</code>, <code>state</code>, <code>county</code>,
+<code>zip</code>, <code>lat</code>, <code>lon</code>,
+<code>location_source_value</code>.</li>
+</ul></li>
+<li>Match GIS-to-OMOP using hierarchical fallback:
+<ul>
+<li><code>GEOID</code> → direct match on
+<code>location_source_value</code>.</li>
+<li>(<code>state</code>, <code>county</code>, <code>zip</code>) → match
+against parsed <code>GEOID</code>.</li>
+<li><code>lat/lon</code> → reverse geocode to determine tract or
+area.</li>
+</ul></li>
+<li>Validate spatial linkage:
+<ul>
+<li>Detect inconsistencies or missing mappings.</li>
+<li>If <code>location_history</code> is implemented (CDM v6.0+),
+consider temporal changes.</li>
+</ul></li>
+</ul>
+<hr />
+<p><strong>5.1.4. Map GIS Variables to OMOP Concepts</strong></p>
+<ul>
+<li>For each environmental variable (e.g., PM2.5 days above threshold):
+<ul>
+<li>Map to <code>exposure_concept_id</code> in the GIS Vocabulary.</li>
+<li>If no match exists, flag the concept for vocabulary extension.</li>
+</ul></li>
+<li>Map measurement units (e.g., percent, μg/m³) to
+<code>unit_concept_id</code> via OHDSI Athena.</li>
+<li>Build a mapping table:<br />
+<code>source_variable</code> → <code>concept_id</code>,
+<code>unit_concept_id</code>,
+<code>value_as_concept_id</code>/<code>value_as_number</code>.</li>
+</ul>
+<hr />
+<p><strong>5.1.5. Populate the <code>external_exposure</code>
+Table</strong></p>
+<ul>
+<li>Ensure that each patient in OMOP has a geospatial identifier that
+can be linked to GIS datasets.</li>
+<li>For each matched patient-location pair assign exposure_concept_id
+based on the mapped GIS variable.</li>
+<li>Set exposure_start_date (reference date from the GIS dataset)</li>
+<li>Populate value_as_number and unit_concept_id.</li>
+<li>Populate other fields if applicable.</li>
+</ul>
+<table>
+<colgroup>
+<col width="27%" />
+<col width="53%" />
+<col width="18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Field Name</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Data Example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>exposure_occurrence_id</code></td>
+<td>Unique identifier for each exposure record</td>
+<td><code>123456</code></td>
+</tr>
+<tr class="even">
+<td><code>location_id</code></td>
+<td>Foreign key linking to the <code>location</code> table, indicating
+where exposure occurred</td>
+<td><code>789</code></td>
+</tr>
+<tr class="odd">
+<td><code>person_id</code></td>
+<td>Foreign key linking to the <code>person</code> table, identifying
+the individual exposed</td>
+<td><code>100234</code></td>
+</tr>
+<tr class="even">
+<td><code>cohort_definition_id</code></td>
+<td>(Optional) Links to a defined cohort in research studies</td>
+<td><code>25</code></td>
+</tr>
+<tr class="odd">
+<td><code>exposure_concept_id</code></td>
+<td>Standard OMOP <strong>concept_id</strong> representing the type of
+exposure</td>
+<td><code>2052498173</code> (Percentile Rank Of Annual Mean Days Above
+PM2.5 Regulatory Standard - 3-Year Average)</td>
+</tr>
+<tr class="even">
+<td><code>exposure_start_date</code></td>
+<td>Date when the exposure event started</td>
+<td><code>2024-01-15</code></td>
+</tr>
+<tr class="odd">
+<td><code>exposure_end_date</code></td>
+<td>Date when the exposure event ended (NULL if ongoing exposure)</td>
+<td><code>NULL</code> (ongoing)</td>
+</tr>
+<tr class="even">
+<td><code>exposure_type_concept_id</code></td>
+<td>Concept ID defining the origin of the exposure record</td>
+<td><code>2052499258</code> (Government Data)</td>
+</tr>
+<tr class="odd">
+<td><code>exposure_relationship_concept_id</code></td>
+<td>Concept ID describing how exposure relates to the person</td>
+<td><code>NULL</code></td>
+</tr>
+<tr class="even">
+<td><code>exposure_source_concept_id</code></td>
+<td>Source-specific concept ID before standardization to OMOP</td>
+<td><code>90000001</code></td>
+</tr>
+<tr class="odd">
+<td><code>exposure_source_value</code></td>
+<td>Raw exposure value from source data</td>
+<td><code>"EPL_PM"</code></td>
+</tr>
+<tr class="even">
+<td><code>exposure_relationship_source_value</code></td>
+<td>Raw value describing the exposure-person relationship</td>
+<td><code>NULL</code></td>
+</tr>
+<tr class="odd">
+<td><code>dose_unit_source_value</code></td>
+<td>Source unit before standardization</td>
+<td><code>NULL</code></td>
+</tr>
+<tr class="even">
+<td><code>quantity</code></td>
+<td>Number of exposure occurrences (if applicable)</td>
+<td><code>1</code></td>
+</tr>
+<tr class="odd">
+<td><code>modifier_source_value</code></td>
+<td>(Optional) Modifier describing the exposure type or intensity</td>
+<td><code>NULL</code></td>
+</tr>
+<tr class="even">
+<td><code>operator_concept_id</code></td>
+<td>Concept ID defining operator logic (e.g., <code>&lt;</code>,
+<code>&gt;</code>, <code>=</code>)</td>
+<td><code>NULL</code></td>
+</tr>
+<tr class="odd">
+<td><code>value_as_number</code></td>
+<td>Numerical value of the exposure (e.g., concentration level)</td>
+<td><code>0.8503</code></td>
+</tr>
+<tr class="even">
+<td><code>value_as_concept_id</code></td>
+<td>Concept ID for categorical exposure values</td>
+<td>NULL</td>
+</tr>
+<tr class="odd">
+<td><code>unit_concept_id</code></td>
+<td>Concept ID representing the measurement unit</td>
+<td>NULL</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Ensure complete and consistent population of required fields.
+Non-null exposure values and units are critical for downstream
+analytics.</p>
+</blockquote>
+<hr />
+</div>
+<div id="proposed-usability-validation-criteria" class="section level2">
+<h2>5.2. Proposed Usability Validation Criteria</h2>
+<p><strong>5.2.1. Coverage</strong></p>
+<ul>
+<li>Do GIS concepts cover all variables in your dataset?</li>
+<li>Are spatial scales represented (e.g., tract, zip, grid,
+regional)?</li>
+<li>Are distinctions like satellite vs. ground sensor captured?</li>
+<li>Are measurement units and result values standardized?</li>
+</ul>
+<p><strong>5.2.2. Interoperability</strong></p>
+<ul>
+<li>Can patient-level OMOP locations link unambiguously to GIS
+identifiers?</li>
+<li>Does the <code>external_exposure</code> table schema support all
+relevant metadata?</li>
+</ul>
+<p><strong>5.2.3. Practical Usability</strong></p>
+<ul>
+<li>Are mapping guidelines and examples provided?</li>
+<li>Are variable-to-concept lookup tables available or easy to
+construct?</li>
+<li>Can you populate <code>external_exposure</code> using real-world
+datasets without data loss or transformation ambiguity?</li>
+</ul>
+<hr />
+</div>
+<div id="additional-qa-recommendations" class="section level2">
+<h2>5.3. Additional QA Recommendations</h2>
+<ul>
+<li>Check <strong>temporal coherence</strong>: Do exposure dates align
+with person observation periods?</li>
+<li>Validate <strong>concept synonym coverage</strong>: Are source
+variable names discoverable via synonyms?</li>
+<li>Spot check <strong>semantic overlap</strong>: Are concepts with
+similar meaning unnecessarily duplicated?</li>
+<li>Ensure <strong>data pipeline readiness</strong>: Can the vocabulary
+support ETL workflows using PostgreSQL, Spark, or Python?</li>
+</ul>
+<hr />
+</div>
+<div id="suggested-output" class="section level2">
+<h2>5.4. Suggested Output</h2>
+<ul>
+<li>Mapping dictionary (<code>source_variable</code> →
+<code>concept_id</code>)</li>
+<li>Table population sample (<code>external_exposure</code>)</li>
+<li>Coverage and failure summary (<code>% mapped</code>,
+<code>unmapped terms</code>)</li>
+<li>Recommendations for vocabulary enhancement</li>
+</ul>
+<blockquote>
+<p>This usability validation should be iteratively improved and
+coordinated across GIS WG stakeholders. Contributions welcome!</p>
+</blockquote>
 </div>
 </div>
 
@@ -1284,7 +2351,7 @@ $(document).ready(function ()  {
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
     };
-    options.showAndHide = false;
+    options.showAndHide = true;
     options.smoothScroll = true;
 
     // tocify

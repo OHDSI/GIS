@@ -1,0 +1,158 @@
+---
+title: "3_2_download"
+output: html_document
+---
+
+The OMOP GIS Ontology can be integrated into a local OMOP CDM instance by combining standard vocabulary files obtained from [Athena OHDSI](http://athena.ohdsi.org) with curated delta tables provided via GitHub. This integration enables structured support for spatial, environmental, and contextual reasoning through GIS-aligned concepts and relationships, while preserving OMOP CDM conformance. The process leverages relational structures familiar to OMOP implementers and is compatible with federated ETL workflows and AI-driven pipelines.
+
+### 3.2.1. Required Tools and Access
+
+To begin the installation, ensure you have:
+
+- An Athena OHDSI account to download standard vocabularies.
+- SQL client (e.g., DBeaver, pgAdmin) with write access to the OMOP CDM vocabulary schema.
+- Access to a PostgreSQL-compatible OMOP instance.
+- GIS delta files from [Tufts CTSI GitHub](https://github.com/TuftsCTSI/CVB/tree/main/GIS/Ontology).
+- Basic familiarity with OMOP CDM vocabulary architecture.
+- **A dedicated development schema** (e.g., `dev_gis`) separate from your production environment, to safely test integration and validate results before promotion.
+
+
+### 3.2.2. Workspace Preparation
+
+Your OMOP schema must contain all required core tables:
+
+- `concept`, `concept_ancestor`, `concept_class`, `concept_relationship`, `concept_synonym`
+- `domain`, `relationship`, `vocabulary`, `drug_strength`
+
+If missing, create them using the [OMOP CDM DDL](https://github.com/OHDSI/Vocabulary-v5.0/blob/master/working/DevV5_DDL.sql).
+
+To prepare for GIS enrichment, create delta tables via:
+
+- [`create_delta_tables.sql`](https://github.com/OHDSI/GIS/blob/main/rmd/data/create_delta_tables.sql)
+
+---
+
+### 3.2.3. Download Standard OMOP Vocabularies (Athena)
+
+> **All vocabularies listed below are mandatory. Do not skip any.**  
+> These vocabularies are referenced in the delta tables and are essential for resolving mappings and relationships. Partial ingestion will result in structural or referential integrity errors.
+
+Select the following **vocabularies** from [Athena OHDSI Download](https://athena.ohdsi.org/vocabulary/list) section, ensuring any license-restricted vocabularies (e.g., **CPT4**) are only selected if your organization holds a valid license:
+
+| Required Vocabulary |
+|---------------------|
+| ATC |
+| CPT4* |
+| HCPCS |
+| ICD10CM |
+| LOINC |
+| Nebraska Lexicon |
+| OMOP Extension |
+| OSM |
+| PPI |
+| RxNorm |
+| RxNorm Extension |
+| SNOMED |
+| UK Biobank |
+
+After selecting the vocabularies, click **Download Vocabularies**, name the bundle, and download the resulting ZIP file directly from the Athena website once it is ready. Unzip the archive and confirm that the following files are present:
+
+| Expected File |
+|---------------|
+| CONCEPT.csv |
+| CONCEPT_ANCESTOR.csv |
+| CONCEPT_CLASS.csv |
+| CONCEPT_RELATIONSHIP.csv |
+| CONCEPT_SYNONYM.csv |
+| DOMAIN.csv |
+| DRUG_STRENGTH.csv |
+| RELATIONSHIP.csv |
+| VOCABULARY.csv |
+
+
+### 3.2.4. Download GIS Delta Tables
+
+Download the `delta tables` from the [GIS Vocabulary GitHub repository](https://github.com/TuftsCTSI/CVB/tree/main/GIS/Ontology). These include:
+
+| Delta Table               |
+|---------------------------|
+| CONCEPT_DELTA.CSV         |
+| CONCEPT_ANCESTOR_DELTA.CSV|
+| CONCEPT_CLASS_DELTA.CSV   |
+| CONCEPT_RELATIONSHIP_DELTA.CSV |
+| CONCEPT_SYNONYM_DELTA.CSV |
+| DOMAIN_DELTA.CSV          |
+| RELATIONSHIP_DELTA.CSV    |
+| VOCABULARY_DELTA.CSV      |
+| MAPPING_METADATA.CSV      |
+| SOURCE_TO_CONCEPT_MAP.CSV |
+
+> **Note:** Files such as `restore.sql` and `update_log.csv` are not required for ingestion.
+
+### 3.2.5. Ingest Standard Vocabularies (Athena → OMOP)
+
+Import all downloaded Athena `.csv` files into the corresponding OMOP vocabulary tables using your preferred SQL client.
+
+> **Recommended tools:** Use PostgreSQL `COPY` command via `psql`, or GUI tools such as DBeaver or pgAdmin for loading the files.
+
+> **Important formatting requirements:**
+> - Files must use **UTF-8** character encoding.
+> - **Comma** should be used as the delimiter.
+> - Text fields should be **enclosed in double quotes**.
+
+Match the CSV files to OMOP tables as follows:
+
+| CSV File                   | → OMOP Table         |
+|---------------------------|----------------------|
+| CONCEPT.csv               | → CONCEPT            |
+| CONCEPT_ANCESTOR.csv      | → CONCEPT_ANCESTOR   |
+| CONCEPT_CLASS.csv         | → CONCEPT_CLASS      |
+| CONCEPT_RELATIONSHIP.csv  | → CONCEPT_RELATIONSHIP |
+| CONCEPT_SYNONYM.csv       | → CONCEPT_SYNONYM    |
+| DOMAIN.csv                | → DOMAIN             |
+| DRUG_STRENGTH.csv         | → DRUG_STRENGTH      |
+| RELATIONSHIP.csv          | → RELATIONSHIP       |
+| VOCABULARY.csv            | → VOCABULARY         |
+
+After upload, run QA checks.
+
+### 3.2.6. Ingest GIS Delta Content
+
+Insert delta rows into the already existing tables using:
+- [`insert_delta_tables_into_omop.sql`](https://github.com/OHDSI/GIS/blob/main/rmd/data/insert_delta_tables_into_omop.sql)
+
+### 3.2.7. Integrate GIS Delta Tables Into Basic OMOP Vocabulary Tables
+
+This step inserts data from the GIS delta files into the corresponding OMOP vocabulary tables. The mapping between each delta file and its target table is shown below:
+
+| Delta File                   | → Target Table          |
+|-----------------------------|-------------------------|
+| concept_delta.csv           | → CONCEPT               |
+| concept_ancestor_delta.csv  | → CONCEPT_ANCESTOR      |
+| concept_class_delta.csv     | → CONCEPT_CLASS         |
+| concept_relationship_delta.csv | → CONCEPT_RELATIONSHIP |
+| concept_synonym_delta.csv   | → CONCEPT_SYNONYM       |
+| domain_delta.csv            | → DOMAIN                |
+| relationship_delta.csv      | → RELATIONSHIP          |
+| vocabulary_delta.csv        | → VOCABULARY            |
+| mapping_metadata.csv        | → MAPPING_METADATA      |
+| source_to_concept_map.csv   | → SOURCE_TO_CONCEPT_MAP |
+
+> **Important:** Always validate your integration in a development schema before applying changes to a production vocabulary schema. Ensure referential integrity and uniqueness constraints are preserved.
+
+### 3.2.8. Validate Integration
+
+Use [check_delta_tables_inserts.sql](https://github.com/OHDSI/GIS/blob/main/rmd/data/check_delta_tables_inserts.sql) to verify the successful application of the delta content. This includes validation of record counts, relationship integrity, and domain coverage.
+
+### 3.2.9. Outcome
+
+After completing this workflow, your OMOP CDM instance will:
+
+- Contain both standard and GIS-extended vocabularies.
+- Support population of `EXTERNAL_EXPOSURE` and `SOURCE_TO_CONCEPT_MAP` tables.
+- Enable structured representation of spatial and environmental health data.
+- Be interoperable with OHDSI tools, federated queries, and AI pipelines.
+
+Use information in the Vocabulary QA section to confirm completeness and correctness of the loaded data.
+
+> For feedback or bug reports, please open an issue on [GitHub](https://github.com/TuftsCTSI/CVB/issues).
