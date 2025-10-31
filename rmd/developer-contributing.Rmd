@@ -64,15 +64,11 @@ git remote add upstream https://github.com/OHDSI/REPOSITORY-NAME.git
 
 #### **Install Dependencies**
 
-For **gaiaCore** (R package):
-```r
-install.packages("devtools")
-devtools::install_deps()
-```
-
-For **gaiaDb** (Docker):
+For **gaiaDb** and full stack (via gaiaDocker):
 ```bash
-docker compose -f ./docker/docker-compose.yaml up -d
+git clone https://github.com/OHDSI/gaiaDocker.git
+cd gaiaDocker
+docker compose --profile gaia up -d
 ```
 
 See [Deployment Strategies](developer-deployment.html) for detailed setup.
@@ -95,17 +91,18 @@ git checkout -b fix/your-bug-fix
 
 #### **Coding Standards**
 
-**R Code (gaiaCore)**:
+**R Code (gaiaCore R client)**:
 - Follow [tidyverse style guide](https://style.tidyverse.org/)
 - Use roxygen2 for documentation
 - Include unit tests for new functions
 - Run `devtools::check()` before committing
 
-**SQL (gaiaDb)**:
+**SQL (gaiaDb - core processing logic)**:
 - Use lowercase for keywords
 - Indent for readability
 - Comment complex queries
 - Include transformation documentation
+- All geospatial processing stays in gaiaDb
 
 **Documentation**:
 - Update relevant .Rmd files
@@ -387,7 +384,7 @@ We welcome all skill levels:
 ## **Questions?**
 
 Contact the working group:
-- **Email**: zollovenecek[at]ohdsi[dot]org
+- **Email**: houghtaling[at]ohdsi[dot]org
 - **Teams**: GIS Working Group channel
 - **Meetings**: Fridays 10 AM US Eastern
 - **GitHub**: [@OHDSI/GIS](https://github.com/OHDSI/GIS)

@@ -466,8 +466,8 @@ which OHDSI network sites operate.</p>
 <div id="deployment-options" class="section level3">
 <h3><strong>Deployment Options</strong></h3>
 <ol style="list-style-type: decimal">
-<li><strong>Docker Compose</strong> - Local development and small-scale
-deployments</li>
+<li><strong>gaiaDocker (Docker Compose)</strong> - Official deployment
+method for all scenarios</li>
 <li><strong>Podman</strong> - Daemonless container deployment (preferred
 by some IT departments)</li>
 <li><strong>Ansible</strong> - Infrastructure-as-code deployment on bare
@@ -644,15 +644,20 @@ sudo apt-get install podman podman-compose
 # macOS
 brew install podman</code></pre>
 </div>
-<div id="deployment" class="section level3">
-<h3><strong>Deployment</strong></h3>
-<p>Podman can use the same <code>docker-compose.yaml</code>:</p>
+<div id="deployment-with-podman" class="section level3">
+<h3><strong>Deployment with Podman</strong></h3>
+<p>Podman can use the same gaiaDocker
+<code>docker-compose.yaml</code>:</p>
 <pre class="bash"><code># Initialize Podman machine (macOS/Windows)
 podman machine init
 podman machine start
 
+# Clone gaiaDocker repository
+git clone https://github.com/OHDSI/gaiaDocker.git
+cd gaiaDocker
+
 # Deploy with podman-compose
-podman-compose -f ./docker/docker-compose.yaml up -d
+podman-compose --profile gaia up -d
 
 # Or convert to pod
 podman play kube converted-compose.yaml</code></pre>
@@ -727,7 +732,7 @@ air-gapped environments</p>
         name: gaiadb
         tasks_from: load_recipes</code></pre>
 </div>
-<div id="deployment-1" class="section level3">
+<div id="deployment" class="section level3">
 <h3><strong>Deployment</strong></h3>
 <pre class="bash"><code># Check connectivity
 ansible -i inventory/production all -m ping
@@ -954,12 +959,12 @@ deployments</p>
 <tbody>
 <tr class="odd">
 <td>Local development</td>
-<td>Docker Compose</td>
+<td>gaiaDocker</td>
 <td>Easy setup, quick iteration</td>
 </tr>
 <tr class="even">
 <td>IT requires no Docker daemon</td>
-<td>Podman</td>
+<td>Podman + gaiaDocker</td>
 <td>Daemonless, rootless</td>
 </tr>
 <tr class="odd">
@@ -969,8 +974,8 @@ deployments</p>
 </tr>
 <tr class="even">
 <td>Production, small scale</td>
-<td>Docker Compose + monitoring</td>
-<td>Simple, proven</td>
+<td>gaiaDocker + monitoring</td>
+<td>Simple, proven, versioned</td>
 </tr>
 <tr class="odd">
 <td>Production, large scale</td>
@@ -1204,7 +1209,7 @@ Documentation</a></li>
 <strong>GitHub</strong>: <a
 href="https://github.com/OHDSI/GIS/issues">Open an issue</a> -
 <strong>Meetings</strong>: Fridays 10 AM US Eastern -
-<strong>Email</strong>: zollovenecek[at]ohdsi[dot]org</p>
+<strong>Email</strong>: houghtaling[at]ohdsi[dot]org</p>
 <p><br></p>
 </div>
 </div>

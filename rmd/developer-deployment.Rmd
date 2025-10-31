@@ -20,7 +20,7 @@ The Gaia toolchain can be deployed in multiple ways to accommodate different ins
 
 ### **Deployment Options**
 
-1. **Docker Compose** - Local development and small-scale deployments
+1. **gaiaDocker (Docker Compose)** - Official deployment method for all scenarios
 2. **Podman** - Daemonless container deployment (preferred by some IT departments)
 3. **Ansible** - Infrastructure-as-code deployment on bare metal or VMs
 4. **Manual Installation** - Traditional installation without containers
@@ -202,17 +202,21 @@ sudo apt-get install podman podman-compose
 brew install podman
 ```
 
-### **Deployment**
+### **Deployment with Podman**
 
-Podman can use the same `docker-compose.yaml`:
+Podman can use the same gaiaDocker `docker-compose.yaml`:
 
 ```bash
 # Initialize Podman machine (macOS/Windows)
 podman machine init
 podman machine start
 
+# Clone gaiaDocker repository
+git clone https://github.com/OHDSI/gaiaDocker.git
+cd gaiaDocker
+
 # Deploy with podman-compose
-podman-compose -f ./docker/docker-compose.yaml up -d
+podman-compose --profile gaia up -d
 
 # Or convert to pod
 podman play kube converted-compose.yaml
@@ -511,10 +515,10 @@ Kubernetes Cluster
 
 | Scenario | Recommended Approach | Reason |
 |----------|---------------------|---------|
-| Local development | Docker Compose | Easy setup, quick iteration |
-| IT requires no Docker daemon | Podman | Daemonless, rootless |
+| Local development | gaiaDocker | Easy setup, quick iteration |
+| IT requires no Docker daemon | Podman + gaiaDocker | Daemonless, rootless |
 | Air-gapped environment | Ansible + Manual | No internet, full control |
-| Production, small scale | Docker Compose + monitoring | Simple, proven |
+| Production, small scale | gaiaDocker + monitoring | Simple, proven, versioned |
 | Production, large scale | Kubernetes | Scalability, resilience |
 | Multi-site research network | Kubernetes + federation | Distributed architecture |
 | Cloud-native | Cloud platform | Managed services, scalability |
@@ -710,6 +714,6 @@ Deployment questions? Contact the working group:
 - **Teams**: GIS Working Group channel
 - **GitHub**: [Open an issue](https://github.com/OHDSI/GIS/issues)
 - **Meetings**: Fridays 10 AM US Eastern
-- **Email**: zollovenecek[at]ohdsi[dot]org
+- **Email**: houghtaling[at]ohdsi[dot]org
 
 <br>

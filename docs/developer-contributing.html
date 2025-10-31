@@ -523,11 +523,10 @@ git remote add upstream https://github.com/OHDSI/REPOSITORY-NAME.git</code></pre
 </div>
 <div id="install-dependencies" class="section level4">
 <h4><strong>Install Dependencies</strong></h4>
-<p>For <strong>gaiaCore</strong> (R package):</p>
-<pre class="r"><code>install.packages(&quot;devtools&quot;)
-devtools::install_deps()</code></pre>
-<p>For <strong>gaiaDb</strong> (Docker):</p>
-<pre class="bash"><code>docker compose -f ./docker/docker-compose.yaml up -d</code></pre>
+<p>For <strong>gaiaDb</strong> and full stack (via gaiaDocker):</p>
+<pre class="bash"><code>git clone https://github.com/OHDSI/gaiaDocker.git
+cd gaiaDocker
+docker compose --profile gaia up -d</code></pre>
 <p>See <a href="developer-deployment.html">Deployment Strategies</a> for
 detailed setup.</p>
 </div>
@@ -547,13 +546,14 @@ refactoring</p>
 <h3><strong>Step 3: Make Your Changes</strong></h3>
 <div id="coding-standards" class="section level4">
 <h4><strong>Coding Standards</strong></h4>
-<p><strong>R Code (gaiaCore)</strong>: - Follow <a
+<p><strong>R Code (gaiaCore R client)</strong>: - Follow <a
 href="https://style.tidyverse.org/">tidyverse style guide</a> - Use
 roxygen2 for documentation - Include unit tests for new functions - Run
 <code>devtools::check()</code> before committing</p>
-<p><strong>SQL (gaiaDb)</strong>: - Use lowercase for keywords - Indent
-for readability - Comment complex queries - Include transformation
-documentation</p>
+<p><strong>SQL (gaiaDb - core processing logic)</strong>: - Use
+lowercase for keywords - Indent for readability - Comment complex
+queries - Include transformation documentation - All geospatial
+processing stays in gaiaDb</p>
 <p><strong>Documentation</strong>: - Update relevant .Rmd files -
 Include examples where appropriate - Update function documentation</p>
 </div>
@@ -853,8 +853,8 @@ guidelines</a></li>
 <div id="questions" class="section level2">
 <h2><strong>Questions?</strong></h2>
 <p>Contact the working group: - <strong>Email</strong>:
-zollovenecek[at]ohdsi[dot]org - <strong>Teams</strong>: GIS Working
-Group channel - <strong>Meetings</strong>: Fridays 10 AM US Eastern -
+houghtaling[at]ohdsi[dot]org - <strong>Teams</strong>: GIS Working Group
+channel - <strong>Meetings</strong>: Fridays 10 AM US Eastern -
 <strong>GitHub</strong>: <a href="https://github.com/OHDSI/GIS"><span
 class="citation">@OHDSI/GIS</span></a></p>
 <p><br></p>

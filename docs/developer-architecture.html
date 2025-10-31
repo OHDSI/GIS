@@ -488,10 +488,10 @@ Data Model.</p>
                              ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                       gaiaCore                                   │
-│  • R package for data processing                                 │
-│  • Geospatial transformations                                    │
-│  • Privacy-preserving location handling                          │
-│  • OMOP integration logic                                        │
+│  • Multi-language connector framework                            │
+│  • PostgREST API access                                          │
+│  • Database connection orchestration                             │
+│  • Language-specific client libraries                            │
 └────────────────────────────┬────────────────────────────────────┘
                              │
                              ▼
@@ -619,23 +619,23 @@ that functionality.</p>
 </div>
 <div id="phase-3-exposure-calculation" class="section level4">
 <h4><strong>Phase 3: Exposure Calculation</strong></h4>
-<pre><code>gaiaDb + Patient Locations → gaiaCore
+<pre><code>Patient Locations → gaiaDb (via gaiaCore)
     Input:
         - Patient geocoded addresses
         - Residence time periods
         - Variable specifications
-    Process:
-        - Spatial joins
-        - Temporal alignment
+        - Location_History records
+    Process (in gaiaDb):
+        - Spatial joins (PostGIS)
+        - Temporal alignment (SQL)
         - Aggregation (e.g., average exposure during residence)
         - Privacy preservation (no raw addresses exported)
     Output:
-        - External_Exposure records
-        - Location_History records</code></pre>
+        - External_Exposure records</code></pre>
 </div>
 <div id="phase-4-omop-integration" class="section level4">
 <h4><strong>Phase 4: OMOP Integration</strong></h4>
-<pre><code>gaiaCore Output → OMOP CDM
+<pre><code>gaiaDb Output → OMOP CDM
     Input: Processed exposure data
     Process:
         - Map to OMOP vocabulary concepts
@@ -707,9 +707,12 @@ OMOP External_Exposure Table</code></pre>
 <div id="separation-of-concerns" class="section level3">
 <h3><strong>1. Separation of Concerns</strong></h3>
 <ul>
-<li><strong>gaiaCatalog</strong>: Discovery</li>
-<li><strong>gaiaDb</strong>: Storage &amp; staging</li>
-<li><strong>gaiaCore</strong>: Processing &amp; integration</li>
+<li><strong>gaiaCatalog</strong>: Discovery and metadata management</li>
+<li><strong>gaiaDb</strong>: Storage, processing, and OMOP
+integration</li>
+<li><strong>gaiaCore</strong>: Multi-language access and
+orchestration</li>
+<li><strong>gaiaDocker</strong>: Deployment and orchestration</li>
 <li>Each component has clear responsibilities</li>
 </ul>
 </div>
@@ -789,6 +792,12 @@ OMOP External_Exposure Table</code></pre>
 <div id="gaiadb-1" class="section level3">
 <h3><strong>gaiaDb</strong></h3>
 <table>
+<colgroup>
+<col width="22%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th>Input</th>
@@ -829,24 +838,18 @@ OMOP External_Exposure Table</code></pre>
 <td>PostGIS</td>
 </tr>
 <tr class="even">
-<td>Patient locations</td>
+<td>Patient locations and residence periods</td>
 <td>Geocoded coords</td>
 <td>External_Exposure</td>
 <td>OMOP table</td>
 </tr>
 <tr class="odd">
-<td>Residence periods</td>
-<td>Date ranges</td>
-<td>Location_History</td>
-<td>OMOP table</td>
-</tr>
-<tr class="even">
 <td>Variable IDs</td>
 <td>Integer</td>
 <td>Exposure values</td>
 <td>Numeric</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>SQL function calls</td>
 <td>SQL/PostgREST</td>
 <td>Query results</td>
@@ -994,7 +997,7 @@ detailed deployment options.</p>
 <h3><strong>Containerized Deployment</strong></h3>
 <pre><code>Docker Compose Stack:
 ├── gaiaDb container (PostgreSQL/PostGIS)
-├── gaiaCore container (R + Plumber API)
+├── gaiaCore container(s)
 └── Network configuration</code></pre>
 </div>
 <div id="cloud-deployment" class="section level3">
