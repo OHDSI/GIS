@@ -1,0 +1,197 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG </div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+
+# **Project Management**
+
+The OHDSI GIS Working Group follows an **agile, use-case-driven** development methodology emphasizing clear communication, task-oriented development, regular progress reviews, and transparent tracking.
+
+<br>
+
+## **GitHub Project Board**
+
+**Primary Tool**: [GIS Project Board](https://github.com/orgs/OHDSI/projects/26)
+
+### **Board Views**
+
+- **Status View**: Backlog → To Do → In Progress → Blocked → Review → Done
+- **Use Case View**: Groups tasks by research use case
+- **Priority View**: High, Medium, Low priority items
+
+### **Issue Types**
+
+- **Use Cases** (`Use Case` label): Research-driven proposals via [template](https://github.com/OHDSI/GIS/issues/new?assignees=&labels=Use+Case&projects=&template=use-case.yaml&title=%5BUse+Case%5D%3A+)
+- **Work Orders** (`task` label): Specific development tasks
+- **Bugs** (`bug` label): Software defects
+- **Enhancements** (`enhancement` label): Feature requests
+- **Documentation** (`documentation` label): Documentation updates
+
+<br>
+
+## **Meetings**
+
+### **Weekly Working Group Meeting**
+
+**When**: Fridays 10 AM US Eastern
+**Where**: [MS Teams](https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d)
+
+**Agenda** (60 minutes):
+1. Intros & New Members (5 min)
+2. GitHub Ticket Review (10-15 min) - Review sprint tasks, update board, identify blockers
+3. Standup Updates (2 min max per person) - Completed work, current work, blockers, discussion points
+4. Discussion Topics (25-30 min) - Technical decisions, use cases, architecture
+5. Action Items & Next Steps (5 min)
+
+**Roles**: Facilitator (enforces time), Note Taker (documents decisions), Timekeeper (optional)
+
+### **Subgroup Meetings**
+
+Task-specific subgroups meet separately for focused work on use cases or components, reporting progress at Friday meetings.
+
+<br>
+
+## **Development Workflow**
+
+### **Sprint Cycle** (2-week informal iterations)
+
+- **Week 1**: Plan, assign from backlog, develop, Friday check-in
+- **Week 2**: Continue development, submit PRs, code review, Friday sprint review
+
+### **Definition of Done**
+
+Code written and tested → Tests pass → Documentation updated → Code reviewed → Merged to main → Verified in deployment
+
+<br>
+
+## **Use Case Management**
+
+1. [Submit Use Case](https://github.com/OHDSI/GIS/issues/new?assignees=&labels=Use+Case&projects=&template=use-case.yaml&title=%5BUse+Case%5D%3A+) (Description, Infrastructure needs, Timeline, Credit, Support, Datasets)
+2. Leaders review and schedule discussion
+3. Present in Friday meeting
+4. Decompose into work orders
+5. Prioritize and assign
+6. Execute development sprint
+7. Deliver results
+
+<br>
+
+## **Repository Inventory**
+
+| Repository | Purpose | Status |
+|------------|---------|--------|
+| [OHDSI/GIS](https://github.com/OHDSI/GIS) | Central hub, docs, coordination | Active |
+| [OHDSI/gaiaDb](https://github.com/OHDSI/gaiaDb) | Core data repository | Beta |
+| [OHDSI/gaiaCore](https://github.com/OHDSI/gaiaCore) | Multi-language connector | Development |
+| [OHDSI/gaiaCatalog](https://github.com/OHDSI/gaiaCatalog) | Data catalog | Beta |
+| [OHDSI/gaiaDocker](https://github.com/OHDSI/gaiaDocker) | Deployment orchestration | Active |
+| [TuftsCTSI/CVB](https://github.com/TuftsCTSI/CVB) | Vocabulary builder | Development |
+
+See [Developer Resources](developer.html) for detailed package information.
+
+<br>
+
+## **Roadmaps**
+
+Key component roadmaps maintained as GitHub issues:
+- [Gaia Toolchain](https://github.com/OHDSI/GIS/issues/368)
+- [Gaia Catalog](https://github.com/OHDSI/GIS/issues/365)
+- [Geocoding Guidance](https://github.com/OHDSI/GIS/issues/366)
+- [Vocabulary](https://github.com/OHDSI/GIS/issues/369)
+
+<br>
+
+## **Communication**
+
+### **Channels**
+
+- **GitHub Issues/PRs**: Technical discussion, tracking (primary)
+- **MS Teams GIS Channel**: Quick questions, announcements
+- **Weekly Meetings**: Collaborative decision-making
+- **Email**: Meeting agendas, summaries
+- **OHDSI Forums**: Community questions
+
+### **Best Practices**
+
+- Use GitHub for trackable technical discussions
+- Use Teams for quick coordination
+- Document major decisions in GitHub issues with `decision` label
+- Over-communicate rather than under-communicate
+
+<br>
+
+## **Onboarding**
+
+**New Member Checklist**:
+1. [Sign up for OHDSI Teams](https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUQ05MOU9BSzEwOThZVjNQVVFGTDNZRENONiQlQCN0PWcu)
+2. [Join GIS Working Group](https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu)
+3. Attend Friday meeting and introduce yourself
+4. Review [Developer Resources](developer.html)
+5. Pick a `good first issue` or join subgroup
+6. Set up development environment ([Deployment Guide](developer-deployment.html))
+7. Make first contribution ([Contributing Guidelines](developer-contributing.html))
+
+New contributors are encouraged to pair with experienced members and start with documentation tasks.
+
+<br>
+
+## **Quality Standards**
+
+### **Code Review**
+- Pull request review by ≥1 developer
+- Passing tests (when available)
+- Updated documentation
+- Adherence to coding standards
+
+### **Testing**
+- Unit tests for core functionality
+- Integration tests for database operations
+- Manual testing for UI/UX
+- User acceptance testing for use cases
+
+<br>
+
+## **Vision & OKRs**
+
+The working group establishes quarterly **Objectives and Key Results (OKRs)** aligned with the mission to improve population health through integrated geospatial and clinical data analysis.
+
+**Example OKR** (2023):
+- **Objective**: Advance Gaia toolchain to production-ready state
+  - KR1: Complete 3 validation use cases
+  - KR2: Publish documentation for all components
+  - KR3: Achieve <2 minute load time for typical dataset
+
+OKRs are reviewed quarterly and linked to project board tasks.
+
+<br>
+
+## **Tools**
+
+| Tool | Purpose | Link |
+|------|---------|------|
+| GitHub Projects | Task tracking | [Project Board](https://github.com/orgs/OHDSI/projects/26) |
+| GitHub Issues | Work items, bugs, use cases | [Issues](https://github.com/OHDSI/GIS/issues) |
+| MS Teams | Communication, meetings | [Join](https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu) |
+| GitHub Pages | Documentation | [ohdsi.github.io/GIS](https://ohdsi.github.io/GIS) |
+
+<br>
+
+## **Continuous Improvement**
+
+The working group regularly reflects on processes through quarterly retrospectives, solicits feedback in meetings, and adapts based on what works and OHDSI community best practices.
+
+<br>
+
+## **Contact**
+
+- **Teams**: GIS Working Group channel
+- **Meetings**: Fridays 10 AM US Eastern
+- **Email**: zollovenecek[at]ohdsi[dot]org
+- **GitHub**: Tag @OHDSI/GIS-leaders
+
+<br>

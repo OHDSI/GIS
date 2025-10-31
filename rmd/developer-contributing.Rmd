@@ -1,0 +1,399 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG </div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+
+# **Contributing Guidelines**
+
+Thank you for your interest in contributing to the OHDSI GIS Working Group! This guide will help you get started.
+
+<br>
+
+## **Code of Conduct**
+
+All contributors are expected to follow the [OHDSI Code of Conduct](https://www.ohdsi.org/code-of-conduct/). We are committed to providing a welcoming and inclusive environment for all.
+
+<br>
+
+## **How to Contribute**
+
+### **1. Join the Community**
+
+Before contributing code, we encourage you to:
+
+1. **Sign up for OHDSI Teams** ([registration link](https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUQ05MOU9BSzEwOThZVjNQVVFGTDNZRENONiQlQCN0PWcu))
+2. **Join the GIS Working Group** ([registration link](https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu))
+3. **Attend weekly meetings** - Fridays 10 AM US Eastern ([Teams link](https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d))
+4. **Introduce yourself** - Let us know your interests and background
+
+### **2. Find Something to Work On**
+
+#### **Good First Issues**
+Check the [GitHub Project Board](https://github.com/orgs/OHDSI/projects/26) for issues labeled:
+- `good first issue` - Beginner-friendly tasks
+- `help wanted` - Tasks needing contributors
+- `documentation` - Documentation improvements
+
+#### **Use Cases**
+Review [open use cases](https://github.com/OHDSI/GIS/issues?q=is%3Aissue+is%3Aopen+label%3A%22Use+Case%22) to see active research projects.
+
+#### **Propose Your Own**
+Have an idea? Great! Either:
+- [Submit a use case](https://github.com/OHDSI/GIS/issues/new?assignees=&labels=Use+Case&projects=&template=use-case.yaml&title=%5BUse+Case%5D%3A+)
+- Discuss in weekly meetings
+- Post in the Teams channel
+
+<br>
+
+## **Development Workflow**
+
+### **Step 1: Set Up Your Environment**
+
+#### **Fork and Clone**
+```bash
+# Fork the repository on GitHub, then:
+git clone https://github.com/YOUR-USERNAME/REPOSITORY-NAME.git
+cd REPOSITORY-NAME
+git remote add upstream https://github.com/OHDSI/REPOSITORY-NAME.git
+```
+
+#### **Install Dependencies**
+
+For **gaiaCore** (R package):
+```r
+install.packages("devtools")
+devtools::install_deps()
+```
+
+For **gaiaDb** (Docker):
+```bash
+docker compose -f ./docker/docker-compose.yaml up -d
+```
+
+See [Deployment Strategies](developer-deployment.html) for detailed setup.
+
+### **Step 2: Create a Branch**
+
+```bash
+git checkout -b feature/your-feature-name
+# or
+git checkout -b fix/your-bug-fix
+```
+
+**Branch Naming Conventions**:
+- `feature/description` - New features
+- `fix/description` - Bug fixes
+- `docs/description` - Documentation
+- `refactor/description` - Code refactoring
+
+### **Step 3: Make Your Changes**
+
+#### **Coding Standards**
+
+**R Code (gaiaCore)**:
+- Follow [tidyverse style guide](https://style.tidyverse.org/)
+- Use roxygen2 for documentation
+- Include unit tests for new functions
+- Run `devtools::check()` before committing
+
+**SQL (gaiaDb)**:
+- Use lowercase for keywords
+- Indent for readability
+- Comment complex queries
+- Include transformation documentation
+
+**Documentation**:
+- Update relevant .Rmd files
+- Include examples where appropriate
+- Update function documentation
+
+#### **Testing**
+- Add tests for new functionality
+- Ensure existing tests pass
+- Run full test suite before submitting PR
+
+For R packages:
+```r
+devtools::test()
+devtools::check()
+```
+
+#### **Documentation**
+Update documentation as you code:
+
+For **R functions**:
+```r
+#' Function Title
+#'
+#' Description of what the function does
+#'
+#' @param param1 Description of param1
+#' @param param2 Description of param2
+#' @return Description of return value
+#' @examples
+#' example_code()
+#' @export
+my_function <- function(param1, param2) {
+  # implementation
+}
+```
+
+Then run:
+```r
+devtools::document()
+```
+
+For **website/documentation**:
+- Edit .Rmd files in `rmd/` directory
+- Run `source('./build_site.R')` to rebuild
+
+### **Step 4: Commit Your Changes**
+
+```bash
+git add .
+git commit -m "Brief description of changes
+
+More detailed explanation if needed:
+- Bullet point 1
+- Bullet point 2
+
+Closes #123"
+```
+
+**Commit Message Guidelines**:
+- First line: Brief summary (50 chars or less)
+- Blank line
+- Detailed explanation if needed
+- Reference issues/PRs: `Closes #123`, `Relates to #456`
+
+### **Step 5: Push and Create Pull Request**
+
+```bash
+git push origin feature/your-feature-name
+```
+
+Then on GitHub:
+1. Click "Compare & pull request"
+2. Fill out the PR template
+3. Link related issues
+4. Request reviewers
+
+### **Step 6: Code Review**
+
+- Respond to review comments
+- Make requested changes
+- Push updates (they'll appear in the PR automatically)
+- Mark conversations as resolved when addressed
+
+### **Step 7: Merge**
+
+Once approved:
+- Maintainer will merge your PR
+- Delete your feature branch
+- Pull latest changes from upstream
+
+<br>
+
+## **Pull Request Guidelines**
+
+### **PR Title Format**
+```
+[Component] Brief description
+
+Examples:
+[gaiaCore] Add support for new data source format
+[Docs] Update contributing guidelines
+[gaiaDb] Fix spatial indexing bug
+```
+
+### **PR Description Template**
+
+```markdown
+## Description
+Brief description of changes
+
+## Related Issues
+Closes #123
+Relates to #456
+
+## Type of Change
+- [ ] Bug fix
+- [ ] New feature
+- [ ] Documentation update
+- [ ] Refactoring
+- [ ] Other (please describe)
+
+## Testing
+Describe testing performed:
+- [ ] Unit tests added/updated
+- [ ] Integration tests pass
+- [ ] Manual testing completed
+
+## Checklist
+- [ ] Code follows project style guidelines
+- [ ] Documentation updated
+- [ ] Tests added/updated
+- [ ] All tests pass
+- [ ] No breaking changes (or documented if necessary)
+```
+
+<br>
+
+## **Working Group Coordination**
+
+### **Weekly Meetings**
+
+**Format** (2 minutes max per person):
+1. **What did you complete?** - Last week's accomplishments
+2. **What are you working on?** - Current tasks
+3. **What's blocking you?** - Obstacles or help needed
+4. **Discussion points** - Topics for group discussion (noted, discussed later)
+
+### **Task Management**
+
+We use GitHub Projects for task tracking:
+- **Project Board**: https://github.com/orgs/OHDSI/projects/26
+- **Issues**: Task-oriented development work
+- **Use Cases**: Research-driven requirements
+
+**Issue Labels**:
+- `Use Case` - Research use cases
+- `good first issue` - Beginner-friendly
+- `help wanted` - Need contributors
+- `bug` - Bug reports
+- `enhancement` - Feature requests
+- `documentation` - Docs improvements
+- `priority: high` - High priority items
+
+### **Communication**
+
+- **Weekly meetings**: Primary coordination
+- **Teams channel**: Async discussion
+- **GitHub issues**: Technical discussion, tracking
+- **Email**: Working group announcements
+
+<br>
+
+## **Types of Contributions**
+
+### **Code Contributions**
+- New features
+- Bug fixes
+- Performance improvements
+- Test coverage
+
+### **Documentation**
+- Website content
+- API documentation
+- Tutorials and guides
+- Use case examples
+
+### **Data Sources**
+- New transformation recipes
+- Data source metadata
+- Vocabulary contributions
+- Quality improvements
+
+### **Research**
+- Use case proposals
+- Validation studies
+- Method development
+- Publications
+
+### **Community**
+- Answer questions on forums
+- Help onboard new contributors
+- Present at meetings
+- Review pull requests
+
+<br>
+
+## **Development Best Practices**
+
+### **Privacy & Security**
+- **Never commit** patient data or PHI
+- **Never commit** credentials or API keys
+- Use `.gitignore` for sensitive files
+- Use environment variables for secrets
+
+### **Data Handling**
+- Work with synthetic data for development
+- Document data provenance
+- Respect data licenses
+- Follow institutional policies
+
+### **Code Quality**
+- Write readable, maintainable code
+- Comment complex logic
+- Follow DRY (Don't Repeat Yourself)
+- Refactor when appropriate
+
+### **Version Control**
+- Commit early and often
+- Write meaningful commit messages
+- Keep commits focused
+- Don't commit broken code to main
+
+<br>
+
+## **Getting Help**
+
+### **Technical Questions**
+- Ask in weekly meetings
+- Post in Teams GIS channel
+- Create GitHub discussion
+- Tag relevant maintainers
+
+### **Stuck on Something?**
+Don't struggle alone! We're here to help:
+- Post your question in Teams
+- Bring it to weekly meeting
+- Email working group leaders
+- Create a GitHub issue
+
+### **New to GIS/OMOP/R?**
+We welcome all skill levels:
+- Pair with experienced contributors
+- Start with documentation tasks
+- Ask questions freely
+- Learn as you go
+
+<br>
+
+## **Attribution & Credit**
+
+### **Authorship**
+- Significant code contributors may be listed as authors
+- Discussed on case-by-case basis
+- Typically for substantial, ongoing contributions
+
+### **Acknowledgments**
+- All contributors acknowledged in releases
+- GitHub automatically tracks contributions
+- Presentations credit community effort
+
+### **Publications**
+- Use case-specific authorship discussed upfront
+- Follow [OHDSI publication guidelines](https://ohdsi.org)
+- Collaborative, inclusive approach
+
+<br>
+
+## **Questions?**
+
+Contact the working group:
+- **Email**: zollovenecek[at]ohdsi[dot]org
+- **Teams**: GIS Working Group channel
+- **Meetings**: Fridays 10 AM US Eastern
+- **GitHub**: [@OHDSI/GIS](https://github.com/OHDSI/GIS)
+
+<br>
+
+**Thank you for contributing to OHDSI GIS!** Together, we're building tools that improve population health through integrated geospatial and clinical data analysis.
+
+<br>

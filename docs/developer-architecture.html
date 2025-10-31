@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title> OHDSI GIS WG</title>
+
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+<link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><div><img src="ohdsi16x16.png"></img> OHDSI GIS </div></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="getting-started.html">
+    <span class="fa fa-home"></span>
+     
+    Getting Started
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-earth"></span>
+     
+    Gaia
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="gaia-intro.html">Overview</a>
+    </li>
+    <li>
+      <a href="gaia-principles.html">Design</a>
+    </li>
+    <li>
+      <a href="schema-extensions.html">Schema Extensions</a>
+    </li>
+    <li>
+      <a href="gaiaDb.html">gaiaDb</a>
+    </li>
+    <li>
+      <a href="gaiaCore.html">gaiaCore</a>
+    </li>
+    <li>
+      <a href="gaiaCatalog.html">gaiaCatalog</a>
+    </li>
+    <li>
+      <a href="gaiaDocker.html">gaiaDocker</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="vocabulary.html">
+    <span class="fa fa-book"></span>
+     
+    Vocabulary
+  </a>
+</li>
+<li>
+  <a href="how-to.html">
+    <span class="fa fa-question"></span>
+     
+    How to
+  </a>
+</li>
+<li>
+  <a href="getting-involved.html">
+    <span class="fa fa-info"></span>
+     
+    Getting Involved
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-code"></span>
+     
+    Developer
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="developer.html">Overview</a>
+    </li>
+    <li>
+      <a href="developer-packages.html">Package Status</a>
+    </li>
+    <li>
+      <a href="developer-contributing.html">Contributing</a>
+    </li>
+    <li>
+      <a href="developer-architecture.html">Architecture</a>
+    </li>
+    <li>
+      <a href="developer-deployment.html">Deployment</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="project-management.html">
+    <span class="fa fa-tasks"></span>
+     
+    Project Management
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/OHDSI/GIS">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore"><img src="ohdsi40x40.png"></img> OHDSI GIS
+WG</h1>
+
+</div>
+
+
+<div id="architecture-data-flows" class="section level1">
+<h1><strong>Architecture &amp; Data Flows</strong></h1>
+<p>This page describes the technical architecture of the Gaia toolchain,
+including component interactions, data flows, and design principles.</p>
+<p><br></p>
+<div id="system-architecture-overview" class="section level2">
+<h2><strong>System Architecture Overview</strong></h2>
+<p>The Gaia toolchain consists of multiple interconnected components
+that work together to integrate geospatial data with the OMOP Common
+Data Model.</p>
+<div id="high-level-architecture" class="section level3">
+<h3><strong>High-Level Architecture</strong></h3>
+<pre><code>┌─────────────────────────────────────────────────────────────────┐
+│                    External Data Sources                         │
+│  (Census, EPA, Weather, Social Services, Geographic Boundaries)  │
+└────────────────────────────┬────────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                       gaiaCatalog                                │
+│  • Data source discovery                                         │
+│  • Metadata management                                           │
+│  • Schema.org compliance                                         │
+└────────────────────────────┬────────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                        gaiaDb                                    │
+│  • PostgreSQL/PostGIS staging database                           │
+│  • Transformation recipes                                        │
+│  • Spatial indexing                                              │
+│  • Raw geospatial data storage                                   │
+└────────────────────────────┬────────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                       gaiaCore                                   │
+│  • R package for data processing                                 │
+│  • Geospatial transformations                                    │
+│  • Privacy-preserving location handling                          │
+│  • OMOP integration logic                                        │
+└────────────────────────────┬────────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                  OMOP CDM + GIS Extensions                       │
+│  • Location_History table                                        │
+│  • External_Exposure table                                       │
+│  • Integrated with standard OMOP tables                          │
+└────────────────────────────┬────────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                     HADES Analytics                              │
+│  • Cohort definition                                             │
+│  • Patient-level prediction                                      │
+│  • Population-level estimation                                   │
+│  • Evidence generation                                           │
+└─────────────────────────────────────────────────────────────────┘</code></pre>
+<p><br></p>
+</div>
+</div>
+<div id="component-details" class="section level2">
+<h2><strong>Component Details</strong></h2>
+<div id="gaiacatalog" class="section level3">
+<h3><strong>1. gaiaCatalog</strong></h3>
+<p><strong>Purpose</strong>: Discover and document available geospatial
+data sources</p>
+<p><strong>Inputs</strong>: - External data source URLs and metadata -
+Schema.org-compliant dataset descriptions - Variable-level
+documentation</p>
+<p><strong>Outputs</strong>: - Searchable catalog of geospatial datasets
+- Standardized metadata for each data source - Links to transformation
+recipes in gaiaDb</p>
+<p><strong>Key Features</strong>: - Federated metadata sharing -
+Integration with external catalogs - Version tracking for data sources -
+Variable-level documentation</p>
+<p><strong>Technology Stack</strong>: - Schema.org standards - JSON-LD
+metadata format - Web-accessible catalog interface</p>
+<p><br></p>
+</div>
+<div id="gaiadb" class="section level3">
+<h3><strong>2. gaiaDb</strong></h3>
+<p><strong>Purpose</strong>: Core data repository housing all geospatial
+data, processing logic, and OMOP integration</p>
+<p><strong>Inputs</strong>: - Raw geospatial datasets (shapefiles,
+GeoJSON, raster, etc.) - Patient geocoded locations (lat/lon or
+geographic identifiers) - Variable specifications (which exposures to
+calculate) - Time periods of interest - Transformation recipe
+specifications</p>
+<p><strong>Processing</strong>: - SQL routines for spatial operations -
+PostGIS functions for geospatial analysis - Exposure calculation
+algorithms - OMOP CDM integration logic - Privacy-preserving aggregation
+- Temporal alignment of exposures</p>
+<p><strong>Outputs</strong>: - OMOP External_Exposure table records -
+OMOP Location_History table records - Privacy-preserved location data -
+Standardized spatial tables - Indexed geographic features</p>
+<p><strong>Key Features</strong>: - PostgreSQL/PostGIS spatial database
+- All data processing logic in SQL/PostGIS - LinkML/JSON-LD metadata
+support - Spatial indexing for performance - Support for multiple
+geometry types (points, polygons, rasters) - Transformation recipe
+library - Temporal versioning of datasets - OMOP CDM schema
+extensions</p>
+<p><strong>Technology Stack</strong>: - PostgreSQL (&gt;= 12) - PostGIS
+(&gt;= 3.0) - PostgREST (for API exposure) - LinkML (for metadata)</p>
+<p><strong>Schema Structure</strong>:</p>
+<pre><code>gaiaDb
+├── backbone/            # Core schema (LinkML-based)
+├── working/             # OMOP integration tables
+│   ├── external_exposure
+│   ├── location_history
+│   └── location
+├── data_sources/        # Raw data storage
+├── transformations/     # SQL transformation recipes
+├── functions/           # PostGIS functions
+└── api/                 # PostgREST API exposure</code></pre>
+<p><br></p>
+</div>
+<div id="gaiacore" class="section level3">
+<h3><strong>3. gaiaCore</strong></h3>
+<p><strong>Purpose</strong>: Multi-language connector framework
+providing access to gaiaDB functionality</p>
+<p><strong>Inputs</strong>: - API requests (RESTful via PostgREST) -
+Database connection requests - Function invocation parameters</p>
+<p><strong>Processing</strong>: - Routes requests to gaiaDb -
+Orchestrates SQL function calls - Provides language-specific
+abstractions - Handles authentication/authorization - Manages connection
+pooling</p>
+<p><strong>Outputs</strong>: - Query results to client applications -
+Exposure data in client-preferred format - API responses (JSON) -
+Database query results</p>
+<p><strong>Key Features</strong>: - RESTful API access via PostgREST -
+Direct database connection support - Language-specific client libraries
+(R, Python, etc.) - Does NOT contain data processing logic (lives in
+gaiaDb) - OpenAPI specification for endpoints - Multi-paradigm access
+(API and database)</p>
+<p><strong>Technology Stack</strong>: - PostgREST (automatic API
+generation) - Language-specific connector libraries: - R: httr, DBI,
+jsonlite - Python: requests, psycopg2 - (Additional languages in
+development)</p>
+<p><strong>Architecture Principle</strong>: gaiaCore is an
+<strong>access layer</strong>, not a processing layer. All geospatial
+processing, exposure calculation, and OMOP integration logic resides in
+gaiaDb. gaiaCore simply provides convenient, multi-language access to
+that functionality.</p>
+<p><br></p>
+</div>
+</div>
+<div id="data-flow-details" class="section level2">
+<h2><strong>Data Flow Details</strong></h2>
+<div id="end-to-end-data-flow" class="section level3">
+<h3><strong>End-to-End Data Flow</strong></h3>
+<div id="phase-1-data-discovery" class="section level4">
+<h4><strong>Phase 1: Data Discovery</strong></h4>
+<pre><code>External Source → gaiaCatalog
+    Input: Dataset URL, documentation
+    Process: Metadata extraction, cataloging
+    Output: Cataloged data source with metadata</code></pre>
+</div>
+<div id="phase-2-data-ingestion" class="section level4">
+<h4><strong>Phase 2: Data Ingestion</strong></h4>
+<pre><code>Cataloged Source → gaiaDb
+    Input: Raw geospatial files
+    Process: Data loading, spatial indexing, transformation
+    Output: Staged spatial tables in PostGIS</code></pre>
+</div>
+<div id="phase-3-exposure-calculation" class="section level4">
+<h4><strong>Phase 3: Exposure Calculation</strong></h4>
+<pre><code>gaiaDb + Patient Locations → gaiaCore
+    Input:
+        - Patient geocoded addresses
+        - Residence time periods
+        - Variable specifications
+    Process:
+        - Spatial joins
+        - Temporal alignment
+        - Aggregation (e.g., average exposure during residence)
+        - Privacy preservation (no raw addresses exported)
+    Output:
+        - External_Exposure records
+        - Location_History records</code></pre>
+</div>
+<div id="phase-4-omop-integration" class="section level4">
+<h4><strong>Phase 4: OMOP Integration</strong></h4>
+<pre><code>gaiaCore Output → OMOP CDM
+    Input: Processed exposure data
+    Process:
+        - Map to OMOP vocabulary concepts
+        - Link to Location table (privacy-preserved)
+        - Link to Person via Location_History
+        - Populate External_Exposure table
+    Output: OMOP CDM with integrated geospatial exposures</code></pre>
+</div>
+<div id="phase-5-analytics" class="section level4">
+<h4><strong>Phase 5: Analytics</strong></h4>
+<pre><code>OMOP CDM + GIS Extensions → HADES
+    Input: Integrated clinical + geospatial data
+    Process: Standard OHDSI analytics
+    Output: Evidence generation</code></pre>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="privacy-architecture" class="section level2">
+<h2><strong>Privacy Architecture</strong></h2>
+<div id="privacy-preserving-design" class="section level3">
+<h3><strong>Privacy-Preserving Design</strong></h3>
+<p>The Gaia toolchain enables geospatial analysis <strong>without
+sharing sensitive patient addresses</strong>:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Geocoding at Site</strong>
+<ul>
+<li>Patient addresses geocoded locally</li>
+<li>Only geographic identifiers leave site (e.g., Census block
+group)</li>
+<li>Lat/lon coordinates stay at originating institution</li>
+</ul></li>
+<li><strong>Aggregated Geographic Units</strong>
+<ul>
+<li>Link patients to census blocks, ZIP codes, etc.</li>
+<li>Sufficient for exposure calculation</li>
+<li>Protects individual privacy</li>
+</ul></li>
+<li><strong>Exposure Calculation</strong>
+<ul>
+<li>External exposures calculated via spatial joins</li>
+<li>Results: numeric exposure values (e.g., PM2.5 concentration)</li>
+<li>No reverse geocoding possible from exposure values</li>
+</ul></li>
+<li><strong>OMOP Integration</strong>
+<ul>
+<li>Location table contains aggregated geography only</li>
+<li>External_Exposure links to Location (not raw addresses)</li>
+<li>Standard OMOP privacy protections apply</li>
+</ul></li>
+</ol>
+</div>
+<div id="privacy-workflow" class="section level3">
+<h3><strong>Privacy Workflow</strong></h3>
+<pre><code>Raw Address (Protected)
+    ↓ [Geocoding at site]
+Geographic ID (e.g., Census Block Group)
+    ↓ [Can leave site]
+gaiaCore Processing
+    ↓
+Exposure Values (e.g., air quality index)
+    ↓
+OMOP External_Exposure Table</code></pre>
+<p><br></p>
+</div>
+</div>
+<div id="technical-design-principles" class="section level2">
+<h2><strong>Technical Design Principles</strong></h2>
+<div id="separation-of-concerns" class="section level3">
+<h3><strong>1. Separation of Concerns</strong></h3>
+<ul>
+<li><strong>gaiaCatalog</strong>: Discovery</li>
+<li><strong>gaiaDb</strong>: Storage &amp; staging</li>
+<li><strong>gaiaCore</strong>: Processing &amp; integration</li>
+<li>Each component has clear responsibilities</li>
+</ul>
+</div>
+<div id="standards-compliance" class="section level3">
+<h3><strong>2. Standards Compliance</strong></h3>
+<ul>
+<li>OMOP CDM standards for clinical data</li>
+<li>Schema.org for metadata</li>
+<li>OGC standards for geospatial operations</li>
+<li>OHDSI vocabulary conventions</li>
+</ul>
+</div>
+<div id="privacy-by-design" class="section level3">
+<h3><strong>3. Privacy by Design</strong></h3>
+<ul>
+<li>No PHI in shared components</li>
+<li>Aggregated geographies</li>
+<li>Exposure values only</li>
+<li>Local geocoding</li>
+</ul>
+</div>
+<div id="modularity" class="section level3">
+<h3><strong>4. Modularity</strong></h3>
+<ul>
+<li>Components can be used independently</li>
+<li>Clear interfaces between components</li>
+<li>Pluggable data sources</li>
+<li>Extensible transformation recipes</li>
+</ul>
+</div>
+<div id="reproducibility" class="section level3">
+<h3><strong>5. Reproducibility</strong></h3>
+<ul>
+<li>Version-controlled transformation recipes</li>
+<li>Documented data provenance</li>
+<li>Standardized vocabularies</li>
+<li>Open source tools</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="inputs-and-outputs-by-component" class="section level2">
+<h2><strong>Inputs and Outputs by Component</strong></h2>
+<div id="gaiacatalog-1" class="section level3">
+<h3><strong>gaiaCatalog</strong></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Input</th>
+<th>Format</th>
+<th>Output</th>
+<th>Format</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Dataset URL</td>
+<td>String</td>
+<td>Catalog entry</td>
+<td>JSON-LD</td>
+</tr>
+<tr class="even">
+<td>Metadata</td>
+<td>Schema.org</td>
+<td>Searchable index</td>
+<td>Database</td>
+</tr>
+<tr class="odd">
+<td>Variables</td>
+<td>CSV/JSON</td>
+<td>Variable catalog</td>
+<td>JSON</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="gaiadb-1" class="section level3">
+<h3><strong>gaiaDb</strong></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Input</th>
+<th>Format</th>
+<th>Output</th>
+<th>Format</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Shapefiles</td>
+<td>.shp</td>
+<td>PostGIS tables</td>
+<td>SQL</td>
+</tr>
+<tr class="even">
+<td>GeoJSON</td>
+<td>.geojson</td>
+<td>Indexed geometries</td>
+<td>PostGIS</td>
+</tr>
+<tr class="odd">
+<td>Raster</td>
+<td>.tif, .nc</td>
+<td>Raster tables</td>
+<td>PostGIS</td>
+</tr>
+<tr class="even">
+<td>CSV with coords</td>
+<td>.csv</td>
+<td>Point geometries</td>
+<td>PostGIS</td>
+</tr>
+<tr class="odd">
+<td>Transformation recipe</td>
+<td>SQL</td>
+<td>Transformed data</td>
+<td>PostGIS</td>
+</tr>
+<tr class="even">
+<td>Patient locations</td>
+<td>Geocoded coords</td>
+<td>External_Exposure</td>
+<td>OMOP table</td>
+</tr>
+<tr class="odd">
+<td>Residence periods</td>
+<td>Date ranges</td>
+<td>Location_History</td>
+<td>OMOP table</td>
+</tr>
+<tr class="even">
+<td>Variable IDs</td>
+<td>Integer</td>
+<td>Exposure values</td>
+<td>Numeric</td>
+</tr>
+<tr class="odd">
+<td>SQL function calls</td>
+<td>SQL/PostgREST</td>
+<td>Query results</td>
+<td>JSON/Tabular</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="gaiacore-1" class="section level3">
+<h3><strong>gaiaCore</strong></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Input</th>
+<th>Format</th>
+<th>Output</th>
+<th>Format</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>API requests</td>
+<td>HTTP/JSON</td>
+<td>Exposure data</td>
+<td>JSON</td>
+</tr>
+<tr class="even">
+<td>Database queries</td>
+<td>SQL</td>
+<td>Query results</td>
+<td>Tabular</td>
+</tr>
+<tr class="odd">
+<td>Function calls</td>
+<td>REST/SQL</td>
+<td>Processed data</td>
+<td>Client format</td>
+</tr>
+<tr class="even">
+<td>Connection params</td>
+<td>Config</td>
+<td>Database access</td>
+<td>Connection</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="gaiadocker" class="section level3">
+<h3><strong>gaiaDocker</strong></h3>
+<table>
+<colgroup>
+<col width="22%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Input</th>
+<th>Format</th>
+<th>Output</th>
+<th>Format</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>docker-compose.yaml</td>
+<td>YAML</td>
+<td>Running containers</td>
+<td>Docker services</td>
+</tr>
+<tr class="even">
+<td>Profile selection</td>
+<td>CLI flag</td>
+<td>Stack configuration</td>
+<td>Deployed services</td>
+</tr>
+<tr class="odd">
+<td>Environment config</td>
+<td>.env</td>
+<td>Service parameters</td>
+<td>Runtime config</td>
+</tr>
+<tr class="even">
+<td>Component images</td>
+<td>Docker</td>
+<td>Orchestrated stack</td>
+<td>Running Gaia toolchain</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+</div>
+</div>
+<div id="integration-points" class="section level2">
+<h2><strong>Integration Points</strong></h2>
+<div id="omop-cdm-integration" class="section level3">
+<h3><strong>OMOP CDM Integration</strong></h3>
+<p>The Gaia toolchain integrates with OMOP CDM through two extension
+tables:</p>
+<div id="location_history" class="section level4">
+<h4><strong>Location_History</strong></h4>
+<pre class="sql"><code>CREATE TABLE location_history (
+  location_history_id INTEGER,
+  person_id INTEGER,
+  location_id INTEGER,
+  start_date DATE,
+  end_date DATE,
+  -- Additional fields
+);</code></pre>
+<p>Links patients to locations over time.</p>
+</div>
+<div id="external_exposure" class="section level4">
+<h4><strong>External_Exposure</strong></h4>
+<pre class="sql"><code>CREATE TABLE external_exposure (
+  external_exposure_id INTEGER,
+  person_id INTEGER,
+  exposure_concept_id INTEGER,
+  exposure_date DATE,
+  exposure_value FLOAT,
+  location_id INTEGER,
+  -- Additional fields
+);</code></pre>
+<p>Stores place-based exposure values.</p>
+<p>See <a href="schema-extensions.html">Schema Extensions</a> for
+complete DDL.</p>
+</div>
+</div>
+<div id="hades-integration" class="section level3">
+<h3><strong>HADES Integration</strong></h3>
+<ul>
+<li>Standard HADES packages work with extended OMOP CDM</li>
+<li>Cohort definitions can include External_Exposure criteria</li>
+<li>Patient-level prediction uses exposure features</li>
+<li>Population-level estimation accounts for geospatial confounders</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="deployment-architecture" class="section level2">
+<h2><strong>Deployment Architecture</strong></h2>
+<p>See <a href="developer-deployment.html">Deployment Strategies</a> for
+detailed deployment options.</p>
+<div id="containerized-deployment" class="section level3">
+<h3><strong>Containerized Deployment</strong></h3>
+<pre><code>Docker Compose Stack:
+├── gaiaDb container (PostgreSQL/PostGIS)
+├── gaiaCore container (R + Plumber API)
+└── Network configuration</code></pre>
+</div>
+<div id="cloud-deployment" class="section level3">
+<h3><strong>Cloud Deployment</strong></h3>
+<ul>
+<li>Terraform configurations (in development)</li>
+<li>Kubernetes/Helm charts (planned)</li>
+<li>Multi-site federation support (planned)</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="performance-considerations" class="section level2">
+<h2><strong>Performance Considerations</strong></h2>
+<div id="spatial-indexing" class="section level3">
+<h3><strong>Spatial Indexing</strong></h3>
+<ul>
+<li>PostGIS spatial indexes on all geometry columns</li>
+<li>GIST indexes for efficient spatial queries</li>
+<li>Materialized views for common queries</li>
+</ul>
+</div>
+<div id="caching" class="section level3">
+<h3><strong>Caching</strong></h3>
+<ul>
+<li>Frequently accessed datasets cached in memory</li>
+<li>Transformation results cached when possible</li>
+<li>API response caching</li>
+</ul>
+</div>
+<div id="scalability" class="section level3">
+<h3><strong>Scalability</strong></h3>
+<ul>
+<li>Horizontal scaling via multiple gaiaCore instances</li>
+<li>Database connection pooling</li>
+<li>Batch processing for large cohorts</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="future-architecture-evolution" class="section level2">
+<h2><strong>Future Architecture Evolution</strong></h2>
+<div id="planned-enhancements" class="section level3">
+<h3><strong>Planned Enhancements</strong></h3>
+<ol style="list-style-type: decimal">
+<li><strong>Real-time data streams</strong> - Support for streaming
+geospatial data</li>
+<li><strong>ML integration</strong> - Built-in support for geospatial ML
+models</li>
+<li><strong>Federation</strong> - Multi-site data federation without
+data movement</li>
+<li><strong>Enhanced catalog</strong> - Advanced search and
+recommendation</li>
+<li><strong>API gateway</strong> - Unified REST API across
+components</li>
+</ol>
+</div>
+<div id="research-directions" class="section level3">
+<h3><strong>Research Directions</strong></h3>
+<ul>
+<li>Differential privacy implementations</li>
+<li>Federated learning across sites</li>
+<li>Advanced spatiotemporal modeling</li>
+<li>Integration with additional OHDSI tools</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="additional-resources" class="section level2">
+<h2><strong>Additional Resources</strong></h2>
+<ul>
+<li><a href="developer-packages.html">Package Status</a></li>
+<li><a href="developer-contributing.html">Contributing
+Guidelines</a></li>
+<li><a href="developer-deployment.html">Deployment Strategies</a></li>
+<li><a href="schema-extensions.html">Schema Extensions</a></li>
+<li><a href="index.html#Roadmaps">Project Roadmaps</a></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

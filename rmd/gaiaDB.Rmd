@@ -5,20 +5,36 @@ output:
         toc: FALSE
 ---
 
-# **gaiaDB**
+# **gaiaDb**
 
 ## Description
 
-gaiaDB is the central functionality and storage of Gaia and consists of two main features: a **staging database** and an **execution engine**.
+gaiaDb is the **core data repository** for the Gaia toolchain, implemented as a PostgreSQL/PostGIS database. It contains all geospatial data processing logic, SQL routines, and OMOP CDM integration functionality.
 
-The staging database is a PostGIS database with a replica copy of the Gaia Catalog installed in a schema named "backbone". In this database, public datasets that are registered in Gaia Catalog can be "staged": transformed and then loaded as tables in a standardized Entity-Attribute-Value format. Other geospatial data, such as geocoded addresses, can also be loaded into the staging database for use in conjunction with the staged data.
+## Key Features
 
-All operations on the staging database (creating tables, inserting data, accessing data, etc.) are performed through the "execution engine". The execution engine can be any software package (e.g. R package, Python library, CLI) that connects to the database and functionalizes the logic required to write or read data to and from the standard format.
+- **PostgreSQL/PostGIS backend** for spatial data storage and operations
+- **SQL routines and PostGIS functions** for geospatial analysis and exposure calculations
+- **OMOP CDM integration** via External_Exposure and Location_History tables
+- **LinkML/JSON-LD metadata** support for standardized data representation
+- **RESTful API exposure** via PostgREST for multi-language access
 
-## Scope
+## Architecture
 
-The **ultimate vision** of Gaia DB is support for multiple geospatial databases (particularly cloud-native), as well as execution engine interfaces for multiple popular data science programming languages (e.g. Python, Julia, R, Bash). **Currently**, the staging database has only been implemented in PostGIS and the execution engine has only been implemented in R.
+gaiaDb uses a dual-schema approach:
+- **backbone schema**: Core LinkML-based metadata and data catalog
+- **working schema**: OMOP integration tables (external_exposure, location_history, location)
+
+All data transformation, spatial operations, and exposure calculations are performed within the database using SQL and PostGIS functions.
+
+## Access
+
+gaiaDb is accessed through:
+- **PostgREST API**: RESTful interface to database functions and tables
+- **Direct database connections**: Standard PostgreSQL client connections
+- **gaiaCore connectors**: Language-specific client libraries (R, Python, etc.)
 
 ## Documentation
 
-[gaiaDB (R Package)](gaiaDB/index.html)
+- [Repository](https://github.com/OHDSI/gaiaDb)
+- [Deployment via gaiaDocker](developer-deployment.html)

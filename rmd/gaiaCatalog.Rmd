@@ -1,0 +1,47 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG</div>'
+output:
+   html_document:
+        toc: FALSE
+---
+
+# **gaiaCatalog**
+
+## Description
+
+gaiaCatalog is a **metadata catalog** for discovering and managing geospatial data sources. It provides a searchable, Schema.org-compliant interface for finding datasets relevant to OHDSI GIS research.
+
+## Key Features
+
+- **Schema.org compliant metadata** for standardized data description
+- **Federated data source discovery** across multiple catalogs
+- **Variable-level documentation** for understanding dataset contents
+- **Integration with external catalogs** for broader data discovery
+- **Solr-powered search** for fast, flexible querying
+
+## Use Cases
+
+- Discover available geospatial datasets for research
+- Understand dataset variables and temporal coverage
+- Find data sources matching specific geographic regions
+- Document and share institutional datasets
+- Link data sources to gaiaDb transformation recipes
+
+## Integration
+
+gaiaCatalog integrates with the Gaia toolchain by:
+- Providing dataset metadata that informs gaiaDb ingestion
+- Linking to transformation recipes in gaiaDb
+- Enabling researchers to identify relevant exposures
+- Supporting reproducible research through data provenance
+
+## Access
+
+- **Web Interface**: Flask-based catalog browser (port 5000 in gaiaDocker)
+- **API**: Solr REST API for programmatic access
+- **Database**: PostgreSQL backend for metadata storage
+
+## Documentation
+
+- [Repository](https://github.com/OHDSI/gaiaCatalog)
+- [Deployment via gaiaDocker](developer-deployment.html)

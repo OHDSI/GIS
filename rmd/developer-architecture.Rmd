@@ -1,0 +1,491 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG </div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+
+# **Architecture & Data Flows**
+
+This page describes the technical architecture of the Gaia toolchain, including component interactions, data flows, and design principles.
+
+<br>
+
+## **System Architecture Overview**
+
+The Gaia toolchain consists of multiple interconnected components that work together to integrate geospatial data with the OMOP Common Data Model.
+
+### **High-Level Architecture**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    External Data Sources                         │
+│  (Census, EPA, Weather, Social Services, Geographic Boundaries)  │
+└────────────────────────────┬────────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                       gaiaCatalog                                │
+│  • Data source discovery                                         │
+│  • Metadata management                                           │
+│  • Schema.org compliance                                         │
+└────────────────────────────┬────────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                        gaiaDb                                    │
+│  • PostgreSQL/PostGIS staging database                           │
+│  • Transformation recipes                                        │
+│  • Spatial indexing                                              │
+│  • Raw geospatial data storage                                   │
+└────────────────────────────┬────────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                       gaiaCore                                   │
+│  • R package for data processing                                 │
+│  • Geospatial transformations                                    │
+│  • Privacy-preserving location handling                          │
+│  • OMOP integration logic                                        │
+└────────────────────────────┬────────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                  OMOP CDM + GIS Extensions                       │
+│  • Location_History table                                        │
+│  • External_Exposure table                                       │
+│  • Integrated with standard OMOP tables                          │
+└────────────────────────────┬────────────────────────────────────┘
+                             │
+                             ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                     HADES Analytics                              │
+│  • Cohort definition                                             │
+│  • Patient-level prediction                                      │
+│  • Population-level estimation                                   │
+│  • Evidence generation                                           │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+<br>
+
+## **Component Details**
+
+### **1. gaiaCatalog**
+
+**Purpose**: Discover and document available geospatial data sources
+
+**Inputs**:
+- External data source URLs and metadata
+- Schema.org-compliant dataset descriptions
+- Variable-level documentation
+
+**Outputs**:
+- Searchable catalog of geospatial datasets
+- Standardized metadata for each data source
+- Links to transformation recipes in gaiaDb
+
+**Key Features**:
+- Federated metadata sharing
+- Integration with external catalogs
+- Version tracking for data sources
+- Variable-level documentation
+
+**Technology Stack**:
+- Schema.org standards
+- JSON-LD metadata format
+- Web-accessible catalog interface
+
+<br>
+
+### **2. gaiaDb**
+
+**Purpose**: Core data repository housing all geospatial data, processing logic, and OMOP integration
+
+**Inputs**:
+- Raw geospatial datasets (shapefiles, GeoJSON, raster, etc.)
+- Patient geocoded locations (lat/lon or geographic identifiers)
+- Variable specifications (which exposures to calculate)
+- Time periods of interest
+- Transformation recipe specifications
+
+**Processing**:
+- SQL routines for spatial operations
+- PostGIS functions for geospatial analysis
+- Exposure calculation algorithms
+- OMOP CDM integration logic
+- Privacy-preserving aggregation
+- Temporal alignment of exposures
+
+**Outputs**:
+- OMOP External_Exposure table records
+- OMOP Location_History table records
+- Privacy-preserved location data
+- Standardized spatial tables
+- Indexed geographic features
+
+**Key Features**:
+- PostgreSQL/PostGIS spatial database
+- All data processing logic in SQL/PostGIS
+- LinkML/JSON-LD metadata support
+- Spatial indexing for performance
+- Support for multiple geometry types (points, polygons, rasters)
+- Transformation recipe library
+- Temporal versioning of datasets
+- OMOP CDM schema extensions
+
+**Technology Stack**:
+- PostgreSQL (>= 12)
+- PostGIS (>= 3.0)
+- PostgREST (for API exposure)
+- LinkML (for metadata)
+
+**Schema Structure**:
+```
+gaiaDb
+├── backbone/            # Core schema (LinkML-based)
+├── working/             # OMOP integration tables
+│   ├── external_exposure
+│   ├── location_history
+│   └── location
+├── data_sources/        # Raw data storage
+├── transformations/     # SQL transformation recipes
+├── functions/           # PostGIS functions
+└── api/                 # PostgREST API exposure
+```
+
+<br>
+
+### **3. gaiaCore**
+
+**Purpose**: Multi-language connector framework providing access to gaiaDB functionality
+
+**Inputs**:
+- API requests (RESTful via PostgREST)
+- Database connection requests
+- Function invocation parameters
+
+**Processing**:
+- Routes requests to gaiaDb
+- Orchestrates SQL function calls
+- Provides language-specific abstractions
+- Handles authentication/authorization
+- Manages connection pooling
+
+**Outputs**:
+- Query results to client applications
+- Exposure data in client-preferred format
+- API responses (JSON)
+- Database query results
+
+**Key Features**:
+- RESTful API access via PostgREST
+- Direct database connection support
+- Language-specific client libraries (R, Python, etc.)
+- Does NOT contain data processing logic (lives in gaiaDb)
+- OpenAPI specification for endpoints
+- Multi-paradigm access (API and database)
+
+**Technology Stack**:
+- PostgREST (automatic API generation)
+- Language-specific connector libraries:
+  - R: httr, DBI, jsonlite
+  - Python: requests, psycopg2
+  - (Additional languages in development)
+
+**Architecture Principle**:
+gaiaCore is an **access layer**, not a processing layer. All geospatial processing, exposure calculation, and OMOP integration logic resides in gaiaDb. gaiaCore simply provides convenient, multi-language access to that functionality.
+
+<br>
+
+## **Data Flow Details**
+
+### **End-to-End Data Flow**
+
+#### **Phase 1: Data Discovery**
+```
+External Source → gaiaCatalog
+    Input: Dataset URL, documentation
+    Process: Metadata extraction, cataloging
+    Output: Cataloged data source with metadata
+```
+
+#### **Phase 2: Data Ingestion**
+```
+Cataloged Source → gaiaDb
+    Input: Raw geospatial files
+    Process: Data loading, spatial indexing, transformation
+    Output: Staged spatial tables in PostGIS
+```
+
+#### **Phase 3: Exposure Calculation**
+```
+gaiaDb + Patient Locations → gaiaCore
+    Input:
+        - Patient geocoded addresses
+        - Residence time periods
+        - Variable specifications
+    Process:
+        - Spatial joins
+        - Temporal alignment
+        - Aggregation (e.g., average exposure during residence)
+        - Privacy preservation (no raw addresses exported)
+    Output:
+        - External_Exposure records
+        - Location_History records
+```
+
+#### **Phase 4: OMOP Integration**
+```
+gaiaCore Output → OMOP CDM
+    Input: Processed exposure data
+    Process:
+        - Map to OMOP vocabulary concepts
+        - Link to Location table (privacy-preserved)
+        - Link to Person via Location_History
+        - Populate External_Exposure table
+    Output: OMOP CDM with integrated geospatial exposures
+```
+
+#### **Phase 5: Analytics**
+```
+OMOP CDM + GIS Extensions → HADES
+    Input: Integrated clinical + geospatial data
+    Process: Standard OHDSI analytics
+    Output: Evidence generation
+```
+
+<br>
+
+## **Privacy Architecture**
+
+### **Privacy-Preserving Design**
+
+The Gaia toolchain enables geospatial analysis **without sharing sensitive patient addresses**:
+
+1. **Geocoding at Site**
+   - Patient addresses geocoded locally
+   - Only geographic identifiers leave site (e.g., Census block group)
+   - Lat/lon coordinates stay at originating institution
+
+2. **Aggregated Geographic Units**
+   - Link patients to census blocks, ZIP codes, etc.
+   - Sufficient for exposure calculation
+   - Protects individual privacy
+
+3. **Exposure Calculation**
+   - External exposures calculated via spatial joins
+   - Results: numeric exposure values (e.g., PM2.5 concentration)
+   - No reverse geocoding possible from exposure values
+
+4. **OMOP Integration**
+   - Location table contains aggregated geography only
+   - External_Exposure links to Location (not raw addresses)
+   - Standard OMOP privacy protections apply
+
+### **Privacy Workflow**
+```
+Raw Address (Protected)
+    ↓ [Geocoding at site]
+Geographic ID (e.g., Census Block Group)
+    ↓ [Can leave site]
+gaiaCore Processing
+    ↓
+Exposure Values (e.g., air quality index)
+    ↓
+OMOP External_Exposure Table
+```
+
+<br>
+
+## **Technical Design Principles**
+
+### **1. Separation of Concerns**
+- **gaiaCatalog**: Discovery
+- **gaiaDb**: Storage & staging
+- **gaiaCore**: Processing & integration
+- Each component has clear responsibilities
+
+### **2. Standards Compliance**
+- OMOP CDM standards for clinical data
+- Schema.org for metadata
+- OGC standards for geospatial operations
+- OHDSI vocabulary conventions
+
+### **3. Privacy by Design**
+- No PHI in shared components
+- Aggregated geographies
+- Exposure values only
+- Local geocoding
+
+### **4. Modularity**
+- Components can be used independently
+- Clear interfaces between components
+- Pluggable data sources
+- Extensible transformation recipes
+
+### **5. Reproducibility**
+- Version-controlled transformation recipes
+- Documented data provenance
+- Standardized vocabularies
+- Open source tools
+
+<br>
+
+## **Inputs and Outputs by Component**
+
+### **gaiaCatalog**
+
+| Input | Format | Output | Format |
+|-------|--------|--------|--------|
+| Dataset URL | String | Catalog entry | JSON-LD |
+| Metadata | Schema.org | Searchable index | Database |
+| Variables | CSV/JSON | Variable catalog | JSON |
+
+### **gaiaDb**
+
+| Input | Format | Output | Format |
+|-------|--------|--------|--------|
+| Shapefiles | .shp | PostGIS tables | SQL |
+| GeoJSON | .geojson | Indexed geometries | PostGIS |
+| Raster | .tif, .nc | Raster tables | PostGIS |
+| CSV with coords | .csv | Point geometries | PostGIS |
+| Transformation recipe | SQL | Transformed data | PostGIS |
+| Patient locations | Geocoded coords | External_Exposure | OMOP table |
+| Residence periods | Date ranges | Location_History | OMOP table |
+| Variable IDs | Integer | Exposure values | Numeric |
+| SQL function calls | SQL/PostgREST | Query results | JSON/Tabular |
+
+### **gaiaCore**
+
+| Input | Format | Output | Format |
+|-------|--------|--------|--------|
+| API requests | HTTP/JSON | Exposure data | JSON |
+| Database queries | SQL | Query results | Tabular |
+| Function calls | REST/SQL | Processed data | Client format |
+| Connection params | Config | Database access | Connection |
+
+### **gaiaDocker**
+
+| Input | Format | Output | Format |
+|-------|--------|--------|--------|
+| docker-compose.yaml | YAML | Running containers | Docker services |
+| Profile selection | CLI flag | Stack configuration | Deployed services |
+| Environment config | .env | Service parameters | Runtime config |
+| Component images | Docker | Orchestrated stack | Running Gaia toolchain |
+
+<br>
+
+## **Integration Points**
+
+### **OMOP CDM Integration**
+
+The Gaia toolchain integrates with OMOP CDM through two extension tables:
+
+#### **Location_History**
+```sql
+CREATE TABLE location_history (
+  location_history_id INTEGER,
+  person_id INTEGER,
+  location_id INTEGER,
+  start_date DATE,
+  end_date DATE,
+  -- Additional fields
+);
+```
+
+Links patients to locations over time.
+
+#### **External_Exposure**
+```sql
+CREATE TABLE external_exposure (
+  external_exposure_id INTEGER,
+  person_id INTEGER,
+  exposure_concept_id INTEGER,
+  exposure_date DATE,
+  exposure_value FLOAT,
+  location_id INTEGER,
+  -- Additional fields
+);
+```
+
+Stores place-based exposure values.
+
+See [Schema Extensions](schema-extensions.html) for complete DDL.
+
+### **HADES Integration**
+
+- Standard HADES packages work with extended OMOP CDM
+- Cohort definitions can include External_Exposure criteria
+- Patient-level prediction uses exposure features
+- Population-level estimation accounts for geospatial confounders
+
+<br>
+
+## **Deployment Architecture**
+
+See [Deployment Strategies](developer-deployment.html) for detailed deployment options.
+
+### **Containerized Deployment**
+```
+Docker Compose Stack:
+├── gaiaDb container (PostgreSQL/PostGIS)
+├── gaiaCore container (R + Plumber API)
+└── Network configuration
+```
+
+### **Cloud Deployment**
+- Terraform configurations (in development)
+- Kubernetes/Helm charts (planned)
+- Multi-site federation support (planned)
+
+<br>
+
+## **Performance Considerations**
+
+### **Spatial Indexing**
+- PostGIS spatial indexes on all geometry columns
+- GIST indexes for efficient spatial queries
+- Materialized views for common queries
+
+### **Caching**
+- Frequently accessed datasets cached in memory
+- Transformation results cached when possible
+- API response caching
+
+### **Scalability**
+- Horizontal scaling via multiple gaiaCore instances
+- Database connection pooling
+- Batch processing for large cohorts
+
+<br>
+
+## **Future Architecture Evolution**
+
+### **Planned Enhancements**
+1. **Real-time data streams** - Support for streaming geospatial data
+2. **ML integration** - Built-in support for geospatial ML models
+3. **Federation** - Multi-site data federation without data movement
+4. **Enhanced catalog** - Advanced search and recommendation
+5. **API gateway** - Unified REST API across components
+
+### **Research Directions**
+- Differential privacy implementations
+- Federated learning across sites
+- Advanced spatiotemporal modeling
+- Integration with additional OHDSI tools
+
+<br>
+
+## **Additional Resources**
+
+- [Package Status](developer-packages.html)
+- [Contributing Guidelines](developer-contributing.html)
+- [Deployment Strategies](developer-deployment.html)
+- [Schema Extensions](schema-extensions.html)
+- [Project Roadmaps](index.html#Roadmaps)
+
+<br>

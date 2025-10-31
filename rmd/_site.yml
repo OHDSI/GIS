@@ -28,12 +28,14 @@ navbar:
           href: gaia-principles.html                     # TODO add the architecture diagram
         - text: "Schema Extensions"
           href: schema-extensions.html
-        - text: "gaiaDB"
-          href: gaiaDB.html
+        - text: "gaiaDb"
+          href: gaiaDb.html
         - text: "gaiaCore"
           href: gaiaCore.html
-        - text: "gaiaOHDSI"
-          href: gaiaOHDSI.html
+        - text: "gaiaCatalog"
+          href: gaiaCatalog.html
+        - text: "gaiaDocker"
+          href: gaiaDocker.html
     - text: "Vocabulary"
       icon: fa-book
       href: vocabulary.html
@@ -46,3 +48,19 @@ navbar:
     - text: "Getting Involved"
       icon: fa-info
       href: getting-involved.html # MERGE gi-propose-usecase, gi-edit-docs, and start with a blurb about joining Workgroup meetings
+    - text: "Developer"
+      icon: fa-code
+      menu:
+        - text: "Overview"
+          href: developer.html
+        - text: "Package Status"
+          href: developer-packages.html
+        - text: "Contributing"
+          href: developer-contributing.html
+        - text: "Architecture"
+          href: developer-architecture.html
+        - text: "Deployment"
+          href: developer-deployment.html
+    - text: "Project Management"
+      icon: fa-tasks
+      href: project-management.html

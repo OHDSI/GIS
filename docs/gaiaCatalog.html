@@ -369,59 +369,64 @@ WG</h1>
 </div>
 
 
-<div id="gaiacore" class="section level1">
-<h1><strong>gaiaCore</strong></h1>
+<div id="gaiacatalog" class="section level1">
+<h1><strong>gaiaCatalog</strong></h1>
 <div id="description" class="section level2">
 <h2>Description</h2>
-<p>gaiaCore is a <strong>multi-language connector framework</strong>
-providing programmatic access to gaiaDb functionality. It serves as an
-access layer, orchestrating SQL functions and protocols defined within
-gaiaDb across multiple programming languages and access paradigms.</p>
+<p>gaiaCatalog is a <strong>metadata catalog</strong> for discovering
+and managing geospatial data sources. It provides a searchable,
+Schema.org-compliant interface for finding datasets relevant to OHDSI
+GIS research.</p>
 </div>
 <div id="key-features" class="section level2">
 <h2>Key Features</h2>
 <ul>
-<li><strong>RESTful API access</strong> via PostgREST with OpenAPI
-specification</li>
-<li><strong>Direct database connections</strong> for SQL-based
-workflows</li>
-<li><strong>Language-specific client libraries</strong> (R, Python, and
-more in development)</li>
-<li><strong>Multi-paradigm support</strong> for both API and database
-access patterns</li>
-<li><strong>Zero processing logic</strong> - all data operations
-performed in gaiaDb</li>
+<li><strong>Schema.org compliant metadata</strong> for standardized data
+description</li>
+<li><strong>Federated data source discovery</strong> across multiple
+catalogs</li>
+<li><strong>Variable-level documentation</strong> for understanding
+dataset contents</li>
+<li><strong>Integration with external catalogs</strong> for broader data
+discovery</li>
+<li><strong>Solr-powered search</strong> for fast, flexible
+querying</li>
 </ul>
 </div>
-<div id="architecture" class="section level2">
-<h2>Architecture</h2>
-<p>gaiaCore acts as a thin access layer that: - Routes requests to
-appropriate gaiaDb functions - Provides convenient language-specific
-abstractions - Handles authentication and connection management - Does
-NOT contain data processing or transformation logic</p>
+<div id="use-cases" class="section level2">
+<h2>Use Cases</h2>
+<ul>
+<li>Discover available geospatial datasets for research</li>
+<li>Understand dataset variables and temporal coverage</li>
+<li>Find data sources matching specific geographic regions</li>
+<li>Document and share institutional datasets</li>
+<li>Link data sources to gaiaDb transformation recipes</li>
+</ul>
 </div>
-<div id="development-status" class="section level2">
-<h2>Development Status</h2>
-<p>Active development is occurring at <a
-href="https://github.com/TuftsCTSI/gaiaCore">TuftsCTSI/gaiaCore</a>,
-with plans to migrate to <a
-href="https://github.com/OHDSI/gaiaCore">OHDSI/gaiaCore</a> upon
-reaching production readiness.</p>
+<div id="integration" class="section level2">
+<h2>Integration</h2>
+<p>gaiaCatalog integrates with the Gaia toolchain by: - Providing
+dataset metadata that informs gaiaDb ingestion - Linking to
+transformation recipes in gaiaDb - Enabling researchers to identify
+relevant exposures - Supporting reproducible research through data
+provenance</p>
 </div>
-<div id="usage" class="section level2">
-<h2>Usage</h2>
-<p>Access gaiaDb through gaiaCore using your preferred language: -
-<strong>R</strong>: Client library (in development) -
-<strong>Python</strong>: Client library (in development) - <strong>REST
-API</strong>: Direct HTTP requests to PostgREST endpoint -
-<strong>SQL</strong>: Standard PostgreSQL connections</p>
+<div id="access" class="section level2">
+<h2>Access</h2>
+<ul>
+<li><strong>Web Interface</strong>: Flask-based catalog browser (port
+5000 in gaiaDocker)</li>
+<li><strong>API</strong>: Solr REST API for programmatic access</li>
+<li><strong>Database</strong>: PostgreSQL backend for metadata
+storage</li>
+</ul>
 </div>
 <div id="documentation" class="section level2">
 <h2>Documentation</h2>
 <ul>
-<li><a href="https://github.com/TuftsCTSI/gaiaCore">Development
-Repository</a></li>
-<li><a href="developer-architecture.html">Architecture Details</a></li>
+<li><a href="https://github.com/OHDSI/gaiaCatalog">Repository</a></li>
+<li><a href="developer-deployment.html">Deployment via
+gaiaDocker</a></li>
 </ul>
 </div>
 </div>

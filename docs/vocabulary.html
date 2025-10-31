@@ -13,7 +13,7 @@
 
 <title> OHDSI GIS WG</title>
 
-<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -356,13 +356,16 @@ div.tocify {
       <a href="schema-extensions.html">Schema Extensions</a>
     </li>
     <li>
-      <a href="gaiaDB.html">gaiaDB</a>
+      <a href="gaiaDb.html">gaiaDb</a>
     </li>
     <li>
       <a href="gaiaCore.html">gaiaCore</a>
     </li>
     <li>
-      <a href="gaiaOHDSI.html">gaiaOHDSI</a>
+      <a href="gaiaCatalog.html">gaiaCatalog</a>
+    </li>
+    <li>
+      <a href="gaiaDocker.html">gaiaDocker</a>
     </li>
   </ul>
 </li>
@@ -385,6 +388,39 @@ div.tocify {
     <span class="fa fa-info"></span>
      
     Getting Involved
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-code"></span>
+     
+    Developer
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="developer.html">Overview</a>
+    </li>
+    <li>
+      <a href="developer-packages.html">Package Status</a>
+    </li>
+    <li>
+      <a href="developer-contributing.html">Contributing</a>
+    </li>
+    <li>
+      <a href="developer-architecture.html">Architecture</a>
+    </li>
+    <li>
+      <a href="developer-deployment.html">Deployment</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="project-management.html">
+    <span class="fa fa-tasks"></span>
+     
+    Project Management
   </a>
 </li>
       </ul>
@@ -1345,6 +1381,155 @@ combining semantic formalism with operational scalability, the
 implementation ensures that spatial and contextual vocabularies are
 conceptually aligned with the OMOP CDM and readily usable in real-world
 analytics environments.</p>
+<div id="custom-vocabulary-builder-cvb" class="section level2">
+<h2>Custom Vocabulary Builder (CVB)</h2>
+<p>The OMOP GIS Vocabulary Package is developed and maintained using the
+<strong>Custom Vocabulary Builder (CVB)</strong>, an automated workflow
+tool maintained by Tufts CTSI. CVB enables collaborative vocabulary
+development by bringing together clinicians, ontologists, and domain
+experts to validate mappings through a streamlined continuous
+integration process.</p>
+<div id="what-is-cvb" class="section level3">
+<h3>What is CVB?</h3>
+<p>CVB is an automated process that produces relational custom
+vocabulary (two billion range concepts) with relationships, ancestry,
+and mappings. It supports analytics in a provisional sense while
+vocabulary terms are evaluated and validated through broader review
+mechanisms within the OHDSI vocabulary team.</p>
+<p><strong>Key Features</strong>:</p>
+<ul>
+<li><strong>Collaborative validation</strong>: Google Sheets interface
+for clinician and ontology expert review</li>
+<li><strong>Automated pipeline</strong>: Continuous integration workflow
+from source mappings to delta vocabulary tables</li>
+<li><strong>SSSOM compliance</strong>: Uses the Simple Standard for
+Sharing Ontology Mappings (SSSOM) framework</li>
+<li><strong>Version control</strong>: Git-based tracking of vocabulary
+changes and mapping provenance</li>
+<li><strong>Mapping metadata</strong>: Captures who performed mappings,
+how they were done, and confidence levels</li>
+</ul>
+</div>
+<div id="cvb-workflow" class="section level3">
+<h3>CVB Workflow</h3>
+<p>The CVB workflow integrates several components:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Data Entry &amp; Validation</strong> (Google Sheets)
+<ul>
+<li>Clinicians and domain experts validate mappings in a familiar
+spreadsheet environment</li>
+<li>SSSOM-structured rows represent source-to-standard mappings with
+relationship identifiers</li>
+<li>Google Apps Script integration enables automated interactions with
+version control</li>
+</ul></li>
+<li><strong>Continuous Integration</strong> (GitHub + Azure)
+<ul>
+<li>Validated mappings automatically sync from Google Sheets to
+GitHub</li>
+<li>GitHub Actions trigger vocabulary build processes on self-hosted
+runners</li>
+<li>SQL-based build pipeline checks mappings against standard
+vocabularies (Athena)</li>
+<li>New concepts are assigned two billion range IDs with full OMOP
+vocabulary structure</li>
+</ul></li>
+<li><strong>Delta Vocabulary Output</strong>
+<ul>
+<li>Generated delta tables contain all custom concepts not in standard
+Athena vocabulary</li>
+<li>Includes: CONCEPT, CONCEPT_RELATIONSHIP, CONCEPT_ANCESTOR, DOMAIN,
+CONCEPT_CLASS tables</li>
+<li>Mapping metadata CSV preserves provenance and validation
+history</li>
+<li>Version-controlled release tags enable reproducible research</li>
+</ul></li>
+</ol>
+</div>
+<div id="cvb-and-gis-vocabularies" class="section level3">
+<h3>CVB and GIS Vocabularies</h3>
+<p>The OMOP GIS Vocabulary Package leverages CVB to create three
+interconnected vocabulary components:</p>
+<ul>
+<li><strong>OMOP GIS Vocabulary</strong>: Geographic entities, spatial
+relationships, and geometry types</li>
+<li><strong>OMOP Exposome Vocabulary</strong>: Environmental toxins,
+pollutants, and chemical exposures</li>
+<li><strong>OMOP SDoH Vocabulary</strong>: Social determinants of health
+from multiple authoritative sources (ADI, AHRQ, COI, EJI, SEDH, SVI,
+SDG, SDOHO)</li>
+</ul>
+<p>CVB enables the GIS Working Group to rapidly iterate on vocabulary
+development in response to specific use cases while maintaining:</p>
+<ul>
+<li>Traceability of mapping decisions</li>
+<li>Collaborative validation by domain experts</li>
+<li>Automated testing and integration</li>
+<li>Seamless updates as new data sources emerge</li>
+</ul>
+</div>
+<div id="technical-implementation" class="section level3">
+<h3>Technical Implementation</h3>
+<p><strong>Repository</strong>: <a
+href="https://github.com/TuftsCTSI/CVB">TuftsCTSI/CVB</a></p>
+<p>The CVB implementation for GIS vocabularies includes:</p>
+<ul>
+<li>Google Sheets validation workflows for each vocabulary
+component</li>
+<li>Automated nightly builds triggered by mapping updates</li>
+<li>SQL-based vocabulary construction using lightweight Ubuntu
+runners</li>
+<li>Delta vocabulary tables published to <a
+href="https://github.com/TuftsCTSI/CVB/tree/main/GIS/Ontology">CVB/GIS/Ontology</a></li>
+</ul>
+<p><strong>Build Pipeline</strong>:</p>
+<pre><code>Source Mappings (Google Sheets)
+    ↓ [App Script automation]
+GitHub (CSV mappings)
+    ↓ [GitHub Actions]
+Azure Runner (SQL build logic)
+    ↓ [Vocabulary construction]
+Delta Tables + Metadata
+    ↓ [Version control]
+GitHub Release (versioned vocabulary)</code></pre>
+</div>
+<div id="integration-with-ohdsi" class="section level3">
+<h3>Integration with OHDSI</h3>
+<p>CVB complements existing OHDSI vocabulary processes by:</p>
+<ul>
+<li>Enabling rapid prototyping of vocabularies for emerging use
+cases</li>
+<li>Providing provisional concepts while formal vocabulary review is
+underway</li>
+<li>Maintaining full OMOP vocabulary structure and relationships</li>
+<li>Supporting seamless integration with HADES analytics tools</li>
+<li>Facilitating eventual migration of validated concepts to standard
+vocabularies</li>
+</ul>
+<p>The GIS vocabulary package demonstrates CVB’s capability to handle
+complex, multi-domain vocabularies with extensive hierarchies and
+relationships, serving as a model for other specialized OHDSI vocabulary
+development efforts.</p>
+</div>
+<div id="resources" class="section level3">
+<h3>Resources</h3>
+<ul>
+<li><strong>CVB Repository</strong>: <a
+href="https://github.com/TuftsCTSI/CVB">github.com/TuftsCTSI/CVB</a></li>
+<li><strong>GIS Delta Vocabularies</strong>: <a
+href="https://github.com/TuftsCTSI/CVB/tree/main/GIS/Ontology">CVB/GIS/Ontology</a></li>
+<li><strong>SSSOM Framework Presentation</strong>: <a
+href="https://www.youtube.com/watch?v=bRxBrhCstj4">Youtube OHDSI Global
+2023</a></li>
+<li><strong>Validation Spreadsheet</strong>: <a
+href="https://docs.google.com/spreadsheets/d/1hMLjKokFCpoDqC_WsAd7ZXyBKDmnPif2rR9DlQ9X7cs/edit?usp=sharing">Google
+Sheets</a></li>
+<li><strong>DevCon Presentation</strong>: <a
+href="https://youtu.be/Jjbyb_Yvt0o?t=1244">Youtube DevCon</a></li>
+</ul>
+<p><br></p>
+</div>
+</div>
 <div id="omop-gis-ontology-design" class="section level2">
 <h2>3.1 OMOP GIS Ontology Design</h2>
 <p>The OMOP GIS Ontology utilizes the GIS Vocabulary Package as its

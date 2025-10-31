@@ -1,0 +1,64 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG </div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+
+# **Package Status & Maintainers**
+
+This page provides current status and maintainer information for all packages in the Gaia toolchain.
+
+<br>
+
+## **Package Overview**
+
+| Package | Release | Maintainer(s) | Category | Open Issues | Open PRs | Language | Documentation |
+|---------|---------|---------------|----------|-------------|----------|----------|---------------|
+| [gaiaDb](https://github.com/OHDSI/gaiaDb) | ![](https://img.shields.io/badge/status-beta-yellow) | [See repo](https://github.com/OHDSI/gaiaDb) | Core | ![](https://img.shields.io/github/issues/OHDSI/gaiaDb) | ![](https://img.shields.io/github/issues-pr/OHDSI/gaiaDb) | ![](https://img.shields.io/github/languages/top/OHDSI/gaiaDb) | [Docs](gaiaDb.html) |
+| [gaiaCore](https://github.com/TuftsCTSI/gaiaCore) | ![](https://img.shields.io/badge/status-development-orange) | [See repo](https://github.com/TuftsCTSI/gaiaCore) | Core | ![](https://img.shields.io/github/issues/TuftsCTSI/gaiaCore) | ![](https://img.shields.io/github/issues-pr/TuftsCTSI/gaiaCore) | ![](https://img.shields.io/github/languages/top/TuftsCTSI/gaiaCore) | [Docs](gaiaCore.html) |
+| [gaiaCatalog](https://github.com/OHDSI/gaiaCatalog) | ![](https://img.shields.io/badge/status-beta-yellow) | [See repo](https://github.com/OHDSI/gaiaCatalog) | Discovery | ![](https://img.shields.io/github/issues/OHDSI/gaiaCatalog) | ![](https://img.shields.io/github/issues-pr/OHDSI/gaiaCatalog) | ![](https://img.shields.io/github/languages/top/OHDSI/gaiaCatalog) | [Docs](gaiaCatalog.html) |
+| [gaiaDocker](https://github.com/OHDSI/gaiaDocker) | ![](https://img.shields.io/badge/status-active-green) | [See repo](https://github.com/OHDSI/gaiaDocker) | Deployment | ![](https://img.shields.io/github/issues/OHDSI/gaiaDocker) | ![](https://img.shields.io/github/issues-pr/OHDSI/gaiaDocker) | ![](https://img.shields.io/github/languages/top/OHDSI/gaiaDocker) | [Docs](gaiaDocker.html) |
+
+<br>
+
+## **Additional Resources**
+
+For detailed package information, installation instructions, and development roadmaps, see the individual package pages linked in the Documentation column above.
+
+### **Key Links**
+
+- [Architecture & Data Flows](developer-architecture.html) - Understanding how packages work together
+- [Contributing Guidelines](developer-contributing.html) - How to contribute to packages
+- [Deployment Strategies](developer-deployment.html) - Installing and deploying the toolchain
+- [Project Management](project-management.html) - Roadmaps and development process
+
+### **Quick Start**
+
+The fastest way to get started with the Gaia toolchain is via gaiaDocker:
+
+```bash
+git clone https://github.com/OHDSI/gaiaDocker.git
+cd gaiaDocker
+docker compose --profile gaia up -d
+```
+
+See the [Deployment guide](developer-deployment.html) for more options.
+
+<br>
+
+## **Vocabulary & Schema Extensions**
+
+**OMOP GIS Vocabulary Package** - [TuftsCTSI/CVB](https://github.com/TuftsCTSI/CVB)
+- Extensions to OMOP Vocabulary for geospatial entities, environmental exposures, and social determinants of health
+- Delta vocabulary files available in [CVB/GIS/Ontology](https://github.com/TuftsCTSI/CVB/tree/main/GIS/Ontology)
+- See [vocabulary documentation](vocabulary.html) and [Vocabulary Roadmap](https://github.com/OHDSI/GIS/issues/369)
+
+**OMOP GIS Schema Extensions**
+- External_Exposure and Location_History tables for place-based health determinants
+- See [Schema Extensions documentation](schema-extensions.html)
+
+<br>

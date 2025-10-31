@@ -451,152 +451,137 @@ WG</h1>
 </div>
 
 
-<div id="ohdsi-gis-process-for-new-use-cases" class="section level1">
-<h1><strong>OHDSI GIS Process for New Use Cases</strong></h1>
-<p>Development in the OHDSI GIS Workgroup is <strong>use case
-driven</strong>, meaning that specific needs to produce real world
-evidence determine the workgroup’s objectives and direct the groups
-members’ efforts.</p>
-<div id="proposing-a-new-use-case" class="section level2">
-<h2><strong>Proposing a new Use Case</strong></h2>
-<p>For other OHDSI workgroups, research projects, or individual
-researchers that are interested in proposing a new use case to drive
-OHDSI GIS Workgroup development, a <a
-href="https://github.com/OHDSI/GIS/issues/new?assignees=&amp;labels=Use+Case&amp;projects=&amp;template=use-case.yaml&amp;title=%5BUse+Case%5D%3A+">Use
-Case Issue</a> can be opened on the OHDSI GIS Workgroup GitHub.</p>
-<div id="project-deliverable" class="section level3">
-<h3>Project deliverable</h3>
-<p>The issue template focuses on your project’s, or this
-collaboration’s, hypothetical “Project Deliverable”: what exactly will
-the final output of this work be? On the issue template, interested
-parties should:</p>
-<ol style="list-style-type: decimal">
-<li><p><strong>Description</strong> What evidence based on a combination
-of place-related data and EHR data do you want generate? Provide enough
-information so that all parties can form a mental image of the final
-product and will be able to align their work towards a single
-goal.</p></li>
-<li><p><strong>Infrastructure</strong> What changes would need to be
-made to the OHDSI GIS infrastructure or tooling to help realize your
-project. How much would generation of this evidence rely on existing
-OHDSI GIS infrastructure vs. the development of new infrastructure? If
-it requires new infrastructure, how much could you/your team contribute
-to the needed development?</p></li>
-<li><p><strong>Timeline</strong> Provide any hard or soft deadlines that
-you have for your project deliverable. Would a development sprint for
-this work be able to start immediately, or need to wait until some
-future date? If you imagine your deliverable being completed in multiple
-steps, feel free to add detail to the order and timing in which they
-should be completed here. Finally, begin to think about desired cadence
-of development or progress meetings.</p></li>
-<li><p><strong>Credit</strong> Describe the way you and your team
-envision credit being attributed at the end of the development sprint.
-How does your team hope to be recognized for the collaborative effort
-with other OHDSI GIS Workgroup members?</p></li>
-<li><p><strong>Support</strong> What sort of support do you need from
-OHDSI GIS Workgroup? Are you looking for help with using existing OHDSI
-GIS tools, planning a development sprint, or integrating new
-features?</p></li>
-<li><p><strong>Datasets of Interest</strong> Are there any datasets that
-you need to use that are <em>not already in GaiaCatalog</em>? Include
-source dataset specifics like version and URLs, where applicable. Feel
-free to include links and descriptions of content, shape, and format of
-the data.</p></li>
-</ol>
-<p>These pieces of information will help to inform the OHDSI GIS
-Workgroup about the scope and goals of your project before scheduling a
-virtual meeting slot to have discuss. The more accurately and completely
-you provide this information, the more quickly and efficiently we can
-all collaborate to plan and execute a new development sprint and produce
-real world evidence.</p>
+<div id="package-status-maintainers" class="section level1">
+<h1><strong>Package Status &amp; Maintainers</strong></h1>
+<p>This page provides current status and maintainer information for all
+packages in the Gaia toolchain.</p>
+<p><br></p>
+<div id="package-overview" class="section level2">
+<h2><strong>Package Overview</strong></h2>
+<table style="width:100%;">
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="16%" />
+<col width="10%" />
+<col width="14%" />
+<col width="10%" />
+<col width="10%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Package</th>
+<th>Release</th>
+<th>Maintainer(s)</th>
+<th>Category</th>
+<th>Open Issues</th>
+<th>Open PRs</th>
+<th>Language</th>
+<th>Documentation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://github.com/OHDSI/gaiaDb">gaiaDb</a></td>
+<td><img src="https://img.shields.io/badge/status-beta-yellow" /></td>
+<td><a href="https://github.com/OHDSI/gaiaDb">See repo</a></td>
+<td>Core</td>
+<td><img src="https://img.shields.io/github/issues/OHDSI/gaiaDb" /></td>
+<td><img
+src="https://img.shields.io/github/issues-pr/OHDSI/gaiaDb" /></td>
+<td><img
+src="https://img.shields.io/github/languages/top/OHDSI/gaiaDb" /></td>
+<td><a href="gaiaDb.html">Docs</a></td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/TuftsCTSI/gaiaCore">gaiaCore</a></td>
+<td><img
+src="https://img.shields.io/badge/status-development-orange" /></td>
+<td><a href="https://github.com/TuftsCTSI/gaiaCore">See repo</a></td>
+<td>Core</td>
+<td><img
+src="https://img.shields.io/github/issues/TuftsCTSI/gaiaCore" /></td>
+<td><img
+src="https://img.shields.io/github/issues-pr/TuftsCTSI/gaiaCore" /></td>
+<td><img
+src="https://img.shields.io/github/languages/top/TuftsCTSI/gaiaCore" /></td>
+<td><a href="gaiaCore.html">Docs</a></td>
+</tr>
+<tr class="odd">
+<td><a href="https://github.com/OHDSI/gaiaCatalog">gaiaCatalog</a></td>
+<td><img src="https://img.shields.io/badge/status-beta-yellow" /></td>
+<td><a href="https://github.com/OHDSI/gaiaCatalog">See repo</a></td>
+<td>Discovery</td>
+<td><img
+src="https://img.shields.io/github/issues/OHDSI/gaiaCatalog" /></td>
+<td><img
+src="https://img.shields.io/github/issues-pr/OHDSI/gaiaCatalog" /></td>
+<td><img
+src="https://img.shields.io/github/languages/top/OHDSI/gaiaCatalog" /></td>
+<td><a href="gaiaCatalog.html">Docs</a></td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/OHDSI/gaiaDocker">gaiaDocker</a></td>
+<td><img src="https://img.shields.io/badge/status-active-green" /></td>
+<td><a href="https://github.com/OHDSI/gaiaDocker">See repo</a></td>
+<td>Deployment</td>
+<td><img
+src="https://img.shields.io/github/issues/OHDSI/gaiaDocker" /></td>
+<td><img
+src="https://img.shields.io/github/issues-pr/OHDSI/gaiaDocker" /></td>
+<td><img
+src="https://img.shields.io/github/languages/top/OHDSI/gaiaDocker" /></td>
+<td><a href="gaiaDocker.html">Docs</a></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
 </div>
-<div id="use-case-work-orders" class="section level3">
-<h3>Use Case Work Orders</h3>
-<p>The only remaining field in the form is for linking “work order”
-tickets. This field is used to create a checklist of discrete
-development work orders that will enable your project deliverable. There
-is generally <em>no reason to fill this field out at this time</em>,
-though if you are aware of existing work orders that you know your
-proposed use case would depend on, this would be the spot to link
-them.</p>
-<div id="building-a-checklist-in-the-work-orders-field"
-class="section level4">
-<h4>Building a checklist in the work orders field</h4>
-<blockquote>
-<p>Use a dash and brackets, and a link to the work order, to create a
-checklist item in GitHub Markdown:</p>
-<p><code>- [ ] https://github.com/OHDSI/GIS/issues/198</code></p>
-<p><code>- [ ] #198</code> (you can use this shorthand if the issue is
-in the OHDSI GIS repository)</p>
-</blockquote>
+<div id="additional-resources" class="section level2">
+<h2><strong>Additional Resources</strong></h2>
+<p>For detailed package information, installation instructions, and
+development roadmaps, see the individual package pages linked in the
+Documentation column above.</p>
+<div id="key-links" class="section level3">
+<h3><strong>Key Links</strong></h3>
+<ul>
+<li><a href="developer-architecture.html">Architecture &amp; Data
+Flows</a> - Understanding how packages work together</li>
+<li><a href="developer-contributing.html">Contributing Guidelines</a> -
+How to contribute to packages</li>
+<li><a href="developer-deployment.html">Deployment Strategies</a> -
+Installing and deploying the toolchain</li>
+<li><a href="project-management.html">Project Management</a> - Roadmaps
+and development process</li>
+</ul>
+</div>
+<div id="quick-start" class="section level3">
+<h3><strong>Quick Start</strong></h3>
+<p>The fastest way to get started with the Gaia toolchain is via
+gaiaDocker:</p>
+<pre class="bash"><code>git clone https://github.com/OHDSI/gaiaDocker.git
+cd gaiaDocker
+docker compose --profile gaia up -d</code></pre>
+<p>See the <a href="developer-deployment.html">Deployment guide</a> for
+more options.</p>
+<p><br></p>
 </div>
 </div>
-</div>
-</div>
-<div id="editing-the-ohdsi-gis-wg-documentation-website"
-class="section level1">
-<h1><strong>Editing the OHDSI GIS WG documentation website</strong></h1>
-<div id="overview" class="section level2">
-<h2>Overview</h2>
-<p>We encourage contributions to our software documentation and our
-website. Follow these guidelines for making and proposing changes.</p>
-</div>
-<div id="website" class="section level2">
-<h2>Website</h2>
-<p>This section explains how to edit the content of the website. In this
-context, the website refers to everything at <a
-href="https://ohdsi.github.io/GIS/"
-class="uri">https://ohdsi.github.io/GIS/</a> <em>except</em> for the <a
-href="https://ohdsi.github.io/GIS/gaiaCore"
-class="uri">https://ohdsi.github.io/GIS/gaiaCore</a> content which is
-covered in the next section.</p>
-<p>The source of the website’s content are contained in the ./rmd/
-directory at the root of this repository. Most of the content in the
-./rmd/ directory are RMarkdown files which are rendered to HTML, stored
-in the ./docs/ directory, and served as a website using GitHub Pages.
-Along with RMD files, there are images, stylesheets (CSS), and a file
-called _site.yml. The _site.yml file specifies the website structure and
-defines the elements on the site’s navbar.</p>
-<p>To edit existing pages on the website, simply find and edit the
-corresponding RMD file. To add new pages to the website, create an RMD
-file, fill it with content, and then add it to _site.yml in a fitting
-place. Whether you are editing existing pages or creating new ones, the
-function <code>RMarkdown::render_site()</code> can be run to regenerate
-the HTML files docs directory. More on rendering below.</p>
-</div>
-<div id="r-package-documentation" class="section level2">
-<h2>R Package Documentation</h2>
-<p>R Package documentation is created using ROxygen within R scripts.
-The ROxygen is rendered to .Rd files by running
-<code>devtools::document()</code>. After documentation is created, the
-function <code>pkgdown::build_site()</code> can be run to render the .Rd
-files into HTML, which automatically ends up in ./docs/gaiaCore/ and can
-be accessed from the website. More on rendering below.</p>
-</div>
-<div id="rendering" class="section level2">
-<h2>Rendering</h2>
-<p>If you’ve been keeping track, there are three functions which need to
-be called to generate the HTML for the website: 1.
-<code>devtools::document()</code> creates .Rd files from inline ROxygen
-2. <code>RMarkdown::render_site()</code> creates HTML for website
-content 3. <code>pkgdown::build_site()</code> creates HTML for the R
-Package documentation</p>
-<p>Running three functions each time you need to regenerate the website
-can be a drag. Even worse, the website won’t generate correctly if they
-are run out of order.</p>
-<p>To make things easier, there is a helper R script,
-<code>render_gaia_site.R</code>, that can be run using
-<code>source('./render_gaia_site.R')</code>. This simply calls those
-three functions in the correct order. It makes life just a bit
-easier.</p>
-</div>
-<div id="publishing" class="section level2">
-<h2>Publishing</h2>
-<p>Finally, after changes have been made to the website or documentation
-and the new HTML has been rendered, simply commit your changes and
-create a Pull Request on the OHDSI GIS WG repository. A maintainer will
-review your changes, provide feedback if necessary, and accept your
-changes when they are ready.</p>
+<div id="vocabulary-schema-extensions" class="section level2">
+<h2><strong>Vocabulary &amp; Schema Extensions</strong></h2>
+<p><strong>OMOP GIS Vocabulary Package</strong> - <a
+href="https://github.com/TuftsCTSI/CVB">TuftsCTSI/CVB</a> - Extensions
+to OMOP Vocabulary for geospatial entities, environmental exposures, and
+social determinants of health - Delta vocabulary files available in <a
+href="https://github.com/TuftsCTSI/CVB/tree/main/GIS/Ontology">CVB/GIS/Ontology</a>
+- See <a href="vocabulary.html">vocabulary documentation</a> and <a
+href="https://github.com/OHDSI/GIS/issues/369">Vocabulary
+Roadmap</a></p>
+<p><strong>OMOP GIS Schema Extensions</strong> - External_Exposure and
+Location_History tables for place-based health determinants - See <a
+href="schema-extensions.html">Schema Extensions documentation</a></p>
+<p><br></p>
 </div>
 </div>
 

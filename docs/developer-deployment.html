@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title> OHDSI GIS WG</title>
+
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+<link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><div><img src="ohdsi16x16.png"></img> OHDSI GIS </div></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="getting-started.html">
+    <span class="fa fa-home"></span>
+     
+    Getting Started
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-earth"></span>
+     
+    Gaia
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="gaia-intro.html">Overview</a>
+    </li>
+    <li>
+      <a href="gaia-principles.html">Design</a>
+    </li>
+    <li>
+      <a href="schema-extensions.html">Schema Extensions</a>
+    </li>
+    <li>
+      <a href="gaiaDb.html">gaiaDb</a>
+    </li>
+    <li>
+      <a href="gaiaCore.html">gaiaCore</a>
+    </li>
+    <li>
+      <a href="gaiaCatalog.html">gaiaCatalog</a>
+    </li>
+    <li>
+      <a href="gaiaDocker.html">gaiaDocker</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="vocabulary.html">
+    <span class="fa fa-book"></span>
+     
+    Vocabulary
+  </a>
+</li>
+<li>
+  <a href="how-to.html">
+    <span class="fa fa-question"></span>
+     
+    How to
+  </a>
+</li>
+<li>
+  <a href="getting-involved.html">
+    <span class="fa fa-info"></span>
+     
+    Getting Involved
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-code"></span>
+     
+    Developer
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="developer.html">Overview</a>
+    </li>
+    <li>
+      <a href="developer-packages.html">Package Status</a>
+    </li>
+    <li>
+      <a href="developer-contributing.html">Contributing</a>
+    </li>
+    <li>
+      <a href="developer-architecture.html">Architecture</a>
+    </li>
+    <li>
+      <a href="developer-deployment.html">Deployment</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="project-management.html">
+    <span class="fa fa-tasks"></span>
+     
+    Project Management
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/OHDSI/GIS">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore"><img src="ohdsi40x40.png"></img> OHDSI GIS
+WG</h1>
+
+</div>
+
+
+<div id="deployment-strategies" class="section level1">
+<h1><strong>Deployment Strategies</strong></h1>
+<p>This page describes various deployment strategies for the Gaia
+toolchain, addressing different institutional constraints and use
+cases.</p>
+<p><br></p>
+<div id="deployment-overview" class="section level2">
+<h2><strong>Deployment Overview</strong></h2>
+<p>The Gaia toolchain can be deployed in multiple ways to accommodate
+different institutional requirements, technical constraints, and use
+cases. This flexibility is essential given the diverse environments in
+which OHDSI network sites operate.</p>
+<div id="deployment-options" class="section level3">
+<h3><strong>Deployment Options</strong></h3>
+<ol style="list-style-type: decimal">
+<li><strong>Docker Compose</strong> - Local development and small-scale
+deployments</li>
+<li><strong>Podman</strong> - Daemonless container deployment (preferred
+by some IT departments)</li>
+<li><strong>Ansible</strong> - Infrastructure-as-code deployment on bare
+metal or VMs</li>
+<li><strong>Manual Installation</strong> - Traditional installation
+without containers</li>
+<li><strong>Kubernetes</strong> - Production-scale orchestration (in
+development)</li>
+<li><strong>Cloud Platforms</strong> - AWS, Azure, GCP deployments
+(planned)</li>
+</ol>
+<p><br></p>
+</div>
+</div>
+<div id="gaiadocker-deployment-recommended" class="section level2">
+<h2><strong>gaiaDocker Deployment (Recommended)</strong></h2>
+<p><strong>Recommended for</strong>: All deployment scenarios - local
+development, testing, and production</p>
+<p>gaiaDocker is the <strong>official deployment method</strong> for the
+Gaia toolchain, providing coordinated image builds and versioned
+releases.</p>
+<div id="prerequisites" class="section level3">
+<h3><strong>Prerequisites</strong></h3>
+<ul>
+<li>Docker Engine (&gt;= 20.10)</li>
+<li>Docker Compose (&gt;= 2.0) or Docker Compose V2</li>
+<li>8GB+ RAM available</li>
+<li>50GB+ disk space</li>
+</ul>
+</div>
+<div id="quick-start" class="section level3">
+<h3><strong>Quick Start</strong></h3>
+<pre class="bash"><code># Clone gaiaDocker repository
+git clone https://github.com/OHDSI/gaiaDocker.git
+cd gaiaDocker
+
+# Start the full Gaia stack
+docker compose --profile gaia up -d
+
+# Optional: Include degauss geocoding service
+docker compose --profile gaia --profile degauss up -d
+
+# Verify services are running
+docker compose ps
+
+# View logs
+docker compose logs -f
+
+# Check specific service
+docker compose logs -f gaia-db</code></pre>
+</div>
+<div id="configuration" class="section level3">
+<h3><strong>Configuration</strong></h3>
+<p>Review and customize <code>.env</code> file (create if needed):</p>
+<pre class="bash"><code># Database configuration
+POSTGRES_USER=gaia
+POSTGRES_PASSWORD=your_secure_password
+POSTGRES_DB=gaiadb
+
+# PostgREST API configuration
+PGRST_DB_URI=postgres://gaia:password@gaia-db:5432/gaiadb
+PGRST_DB_SCHEMA=working
+PGRST_DB_ANON_ROLE=web_anon
+
+# Service ports
+POSTGREST_PORT=3000
+CATALOG_PORT=5000
+SOLR_PORT=8983
+
+# Resource limits
+POSTGRES_MAX_CONNECTIONS=100
+POSTGRES_SHARED_BUFFERS=512MB</code></pre>
+</div>
+<div id="gaiadocker-stack" class="section level3">
+<h3><strong>gaiaDocker Stack</strong></h3>
+<p>The <code>docker-compose.yaml</code> orchestrates:</p>
+<pre class="yaml"><code>services:
+  gaia-db:
+    # PostgreSQL/PostGIS database (gaiaDb)
+    # Core data repository
+    # Persistent volume for data
+
+  gaia-core:
+    # PostgREST API service
+    # Exposes gaiaDb functions via REST
+    # Depends on gaia-db
+
+  gaia-catalog:
+    # Flask catalog interface
+    # Data source discovery
+    # Depends on gaia-solr and gaia-db
+
+  gaia-solr:
+    # Solr search engine
+    # Catalog indexing
+
+  gaia-osgeo:
+    # GDAL/OGR ETL tools
+
+  gaia-postgis:
+    # PostGIS-specific ETL tools
+
+  gaia-degauss:  # Optional profile
+    # Geocoding service
+
+volumes:
+  postgres_data:
+  solr_data:
+
+networks:
+  gaia_network:</code></pre>
+</div>
+<div id="testing-the-deployment" class="section level3">
+<h3><strong>Testing the Deployment</strong></h3>
+<pre class="bash"><code># Test PostgREST API
+curl http://localhost:3000/
+
+# Query a table via API (example)
+curl &quot;http://localhost:3000/external_exposure?limit=10&quot; \
+  -H &quot;Accept-Profile: working&quot;
+
+# Access catalog interface
+curl http://localhost:5000/
+
+# Connect to database
+docker compose exec gaia-db psql -U gaia -d gaiadb
+
+# Check service health
+docker compose ps
+docker compose logs gaia-db
+docker compose logs gaia-core</code></pre>
+</div>
+<div id="stopping-and-cleanup" class="section level3">
+<h3><strong>Stopping and Cleanup</strong></h3>
+<pre class="bash"><code># Stop services (preserves data)
+docker compose -f ./docker/docker-compose.yaml down
+
+# Stop and remove volumes (deletes data!)
+docker compose -f ./docker/docker-compose.yaml down -v
+
+# View resource usage
+docker stats</code></pre>
+</div>
+<div id="production-considerations" class="section level3">
+<h3><strong>Production Considerations</strong></h3>
+<p>For production Docker deployments: - Use secrets management (Docker
+secrets, vault) - Configure resource limits - Set up log aggregation -
+Implement backup strategy - Use reverse proxy (nginx, traefik) - Enable
+TLS/SSL - Configure monitoring</p>
+<p><br></p>
+</div>
+</div>
+<div id="podman-deployment" class="section level2">
+<h2><strong>Podman Deployment</strong></h2>
+<p><strong>Recommended for</strong>: Environments where daemonless
+containers are preferred</p>
+<div id="why-podman" class="section level3">
+<h3><strong>Why Podman?</strong></h3>
+<ul>
+<li>Daemonless architecture (no root daemon)</li>
+<li>Preferred by some IT/security departments</li>
+<li>Drop-in replacement for Docker</li>
+<li>Rootless containers by default</li>
+</ul>
+</div>
+<div id="installation" class="section level3">
+<h3><strong>Installation</strong></h3>
+<pre class="bash"><code># RHEL/CentOS/Fedora
+sudo dnf install podman podman-compose
+
+# Ubuntu/Debian
+sudo apt-get install podman podman-compose
+
+# macOS
+brew install podman</code></pre>
+</div>
+<div id="deployment" class="section level3">
+<h3><strong>Deployment</strong></h3>
+<p>Podman can use the same <code>docker-compose.yaml</code>:</p>
+<pre class="bash"><code># Initialize Podman machine (macOS/Windows)
+podman machine init
+podman machine start
+
+# Deploy with podman-compose
+podman-compose -f ./docker/docker-compose.yaml up -d
+
+# Or convert to pod
+podman play kube converted-compose.yaml</code></pre>
+</div>
+<div id="rootless-deployment" class="section level3">
+<h3><strong>Rootless Deployment</strong></h3>
+<pre class="bash"><code># Run as non-root user
+podman-compose -f ./docker/docker-compose.yaml up -d --userns=keep-id
+
+# Check rootless status
+podman info | grep -i rootless</code></pre>
+<p><br></p>
+</div>
+</div>
+<div id="ansible-deployment" class="section level2">
+<h2><strong>Ansible Deployment</strong></h2>
+<p><strong>Recommended for</strong>: Infrastructure-as-code, bare metal,
+air-gapped environments</p>
+<div id="prerequisites-1" class="section level3">
+<h3><strong>Prerequisites</strong></h3>
+<ul>
+<li>Ansible (&gt;= 2.9)</li>
+<li>Target systems: Ubuntu 20.04+ or RHEL 8+</li>
+<li>SSH access to target hosts</li>
+<li>Sudo privileges</li>
+</ul>
+</div>
+<div id="ansible-playbook-structure" class="section level3">
+<h3><strong>Ansible Playbook Structure</strong></h3>
+<pre><code>ansible/
+├── inventory/
+│   ├── production
+│   └── staging
+├── playbooks/
+│   ├── deploy-gaiadb.yml
+│   ├── deploy-gaiacore.yml
+│   └── deploy-full-stack.yml
+├── roles/
+│   ├── postgresql/
+│   ├── postgis/
+│   ├── r-environment/
+│   └── gaiacore/
+└── group_vars/
+    ├── all.yml
+    └── production.yml</code></pre>
+</div>
+<div id="example-playbook-gaiadb" class="section level3">
+<h3><strong>Example Playbook</strong> (gaiaDb)</h3>
+<pre class="yaml"><code>---
+- name: Deploy gaiaDb
+  hosts: database_servers
+  become: yes
+
+  roles:
+    - postgresql
+    - postgis
+    - gaiadb
+
+  tasks:
+    - name: Create gaiadb database
+      postgresql_db:
+        name: gaiadb
+        state: present
+
+    - name: Enable PostGIS extension
+      postgresql_ext:
+        name: postgis
+        db: gaiadb
+
+    - name: Load transformation recipes
+      include_role:
+        name: gaiadb
+        tasks_from: load_recipes</code></pre>
+</div>
+<div id="deployment-1" class="section level3">
+<h3><strong>Deployment</strong></h3>
+<pre class="bash"><code># Check connectivity
+ansible -i inventory/production all -m ping
+
+# Deploy gaiaDb
+ansible-playbook -i inventory/production playbooks/deploy-gaiadb.yml
+
+# Deploy gaiaCore
+ansible-playbook -i inventory/production playbooks/deploy-gaiacore.yml
+
+# Deploy full stack
+ansible-playbook -i inventory/production playbooks/deploy-full-stack.yml</code></pre>
+</div>
+<div id="configuration-management" class="section level3">
+<h3><strong>Configuration Management</strong></h3>
+<p>Use Ansible vault for secrets:</p>
+<pre class="bash"><code># Create encrypted vars file
+ansible-vault create group_vars/production/vault.yml
+
+# Edit encrypted file
+ansible-vault edit group_vars/production/vault.yml
+
+# Run playbook with vault
+ansible-playbook playbook.yml --ask-vault-pass</code></pre>
+</div>
+<div id="air-gapped-deployment" class="section level3">
+<h3><strong>Air-Gapped Deployment</strong></h3>
+<p>For air-gapped environments: 1. Download dependencies on
+internet-connected system 2. Create local package repository 3. Transfer
+to air-gapped network 4. Configure Ansible to use local repos</p>
+<p><br></p>
+</div>
+</div>
+<div id="manual-installation" class="section level2">
+<h2><strong>Manual Installation</strong></h2>
+<p><strong>Recommended for</strong>: Maximum control, institutional
+constraints, learning</p>
+<div id="system-requirements" class="section level3">
+<h3><strong>System Requirements</strong></h3>
+<ul>
+<li>Ubuntu 20.04+ or RHEL 8+</li>
+<li>8GB+ RAM</li>
+<li>50GB+ disk space</li>
+<li>PostgreSQL 12+ with PostGIS 3.0+</li>
+<li>R 4.0+</li>
+</ul>
+</div>
+<div id="step-1-install-postgresqlpostgis" class="section level3">
+<h3><strong>Step 1: Install PostgreSQL/PostGIS</strong></h3>
+<div id="ubuntudebian" class="section level4">
+<h4>Ubuntu/Debian</h4>
+<pre class="bash"><code>sudo apt-get update
+sudo apt-get install postgresql-14 postgresql-14-postgis-3
+sudo systemctl start postgresql
+sudo systemctl enable postgresql</code></pre>
+</div>
+<div id="rhelcentos" class="section level4">
+<h4>RHEL/CentOS</h4>
+<pre class="bash"><code>sudo dnf install postgresql14-server postgresql14-contrib postgis33_14
+sudo postgresql-14-setup initdb
+sudo systemctl start postgresql-14
+sudo systemctl enable postgresql-14</code></pre>
+</div>
+</div>
+<div id="step-2-configure-postgresql" class="section level3">
+<h3><strong>Step 2: Configure PostgreSQL</strong></h3>
+<pre class="bash"><code># Switch to postgres user
+sudo -u postgres psql
+
+-- Create database and user
+CREATE DATABASE gaiadb;
+CREATE USER gaia WITH PASSWORD &#39;your_password&#39;;
+GRANT ALL PRIVILEGES ON DATABASE gaiadb TO gaia;
+
+-- Enable PostGIS
+\c gaiadb
+CREATE EXTENSION postgis;
+CREATE EXTENSION postgis_topology;
+
+\q</code></pre>
+</div>
+<div id="step-3-install-r-and-dependencies" class="section level3">
+<h3><strong>Step 3: Install R and Dependencies</strong></h3>
+<pre class="bash"><code># Install R
+sudo apt-get install r-base r-base-dev
+
+# Install system dependencies for R packages
+sudo apt-get install \
+  libcurl4-openssl-dev \
+  libssl-dev \
+  libxml2-dev \
+  libgdal-dev \
+  libudunits2-dev \
+  libproj-dev \
+  libgeos-dev</code></pre>
+</div>
+<div id="step-4-install-gaiacore" class="section level3">
+<h3><strong>Step 4: Install gaiaCore</strong></h3>
+<pre class="r"><code># In R console
+install.packages(&quot;devtools&quot;)
+devtools::install_github(&quot;OHDSI/gaiaCore&quot;)</code></pre>
+</div>
+<div id="step-5-clone-gaiadb-recipes" class="section level3">
+<h3><strong>Step 5: Clone gaiaDb Recipes</strong></h3>
+<pre class="bash"><code>git clone https://github.com/OHDSI/gaiaDb.git
+cd gaiaDb
+
+# Run setup scripts
+psql -U gaia -d gaiadb -f schema/create_schema.sql
+psql -U gaia -d gaiadb -f transformations/load_recipes.sql</code></pre>
+</div>
+<div id="step-6-configure-connection" class="section level3">
+<h3><strong>Step 6: Configure Connection</strong></h3>
+<p>Create R script with connection details:</p>
+<pre class="r"><code># config.R
+library(gaiaCore)
+
+db_config &lt;- list(
+  host = &quot;localhost&quot;,
+  port = 5432,
+  dbname = &quot;gaiadb&quot;,
+  user = &quot;gaia&quot;,
+  password = Sys.getenv(&quot;GAIADB_PASSWORD&quot;)
+)
+
+# Test connection
+con &lt;- connectToGaiaDb(db_config)</code></pre>
+</div>
+<div id="step-7-verify-installation" class="section level3">
+<h3><strong>Step 7: Verify Installation</strong></h3>
+<pre class="r"><code># Test loading a variable
+library(gaiaCore)
+con &lt;- connectToGaiaDb(db_config)
+data &lt;- loadVariable(con, variable_id = 1)
+head(data)</code></pre>
+<p><br></p>
+</div>
+</div>
+<div id="kubernetes-deployment" class="section level2">
+<h2><strong>Kubernetes Deployment</strong></h2>
+<p><strong>Status</strong>: In development</p>
+<p><strong>Recommended for</strong>: Large-scale production, multi-site
+deployments</p>
+<div id="planned-features" class="section level3">
+<h3><strong>Planned Features</strong></h3>
+<ul>
+<li>Helm charts for easy deployment</li>
+<li>Horizontal pod autoscaling</li>
+<li>Persistent volume management</li>
+<li>Service mesh integration</li>
+<li>Multi-site federation</li>
+</ul>
+</div>
+<div id="architecture-planned" class="section level3">
+<h3><strong>Architecture</strong> (Planned)</h3>
+<pre><code>Kubernetes Cluster
+├── Namespace: gaia
+│   ├── gaiadb-statefulset
+│   │   ├── Persistent volumes
+│   │   └── Service (ClusterIP)
+│   ├── gaiacore-deployment
+│   │   ├── Horizontal pod autoscaler
+│   │   └── Service (LoadBalancer)
+│   └── Ingress
+│       └── TLS termination</code></pre>
+</div>
+<div id="current-status" class="section level3">
+<h3><strong>Current Status</strong></h3>
+<ul>
+<li>Helm charts under development</li>
+<li>Beta testing planned for Q2 2026</li>
+<li>Community contributions welcome</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="cloud-platform-deployments" class="section level2">
+<h2><strong>Cloud Platform Deployments</strong></h2>
+<p><strong>Status</strong>: Planned</p>
+<div id="aws" class="section level3">
+<h3><strong>AWS</strong></h3>
+<ul>
+<li>Terraform modules in development</li>
+<li>RDS for PostgreSQL with PostGIS</li>
+<li>ECS/Fargate for gaiaCore</li>
+<li>S3 for geospatial datasets</li>
+</ul>
+</div>
+<div id="azure" class="section level3">
+<h3><strong>Azure</strong></h3>
+<ul>
+<li>ARM templates planned</li>
+<li>Azure Database for PostgreSQL</li>
+<li>Container Instances or AKS</li>
+<li>Blob storage for datasets</li>
+</ul>
+</div>
+<div id="gcp" class="section level3">
+<h3><strong>GCP</strong></h3>
+<ul>
+<li>Deployment manager configs planned</li>
+<li>Cloud SQL with PostGIS</li>
+<li>Cloud Run or GKE</li>
+<li>Cloud Storage for datasets</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="deployment-decision-matrix" class="section level2">
+<h2><strong>Deployment Decision Matrix</strong></h2>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="52%" />
+<col width="22%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Scenario</th>
+<th>Recommended Approach</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Local development</td>
+<td>Docker Compose</td>
+<td>Easy setup, quick iteration</td>
+</tr>
+<tr class="even">
+<td>IT requires no Docker daemon</td>
+<td>Podman</td>
+<td>Daemonless, rootless</td>
+</tr>
+<tr class="odd">
+<td>Air-gapped environment</td>
+<td>Ansible + Manual</td>
+<td>No internet, full control</td>
+</tr>
+<tr class="even">
+<td>Production, small scale</td>
+<td>Docker Compose + monitoring</td>
+<td>Simple, proven</td>
+</tr>
+<tr class="odd">
+<td>Production, large scale</td>
+<td>Kubernetes</td>
+<td>Scalability, resilience</td>
+</tr>
+<tr class="even">
+<td>Multi-site research network</td>
+<td>Kubernetes + federation</td>
+<td>Distributed architecture</td>
+</tr>
+<tr class="odd">
+<td>Cloud-native</td>
+<td>Cloud platform</td>
+<td>Managed services, scalability</td>
+</tr>
+<tr class="even">
+<td>Learning/testing</td>
+<td>Manual</td>
+<td>Understand components</td>
+</tr>
+<tr class="odd">
+<td>Institutional restrictions</td>
+<td>Manual or Ansible</td>
+<td>Maximum compatibility</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+</div>
+<div id="security-considerations" class="section level2">
+<h2><strong>Security Considerations</strong></h2>
+<div id="all-deployments" class="section level3">
+<h3><strong>All Deployments</strong></h3>
+<ul>
+<li>Change default passwords</li>
+<li>Use strong authentication</li>
+<li>Enable SSL/TLS for database connections</li>
+<li>Restrict network access (firewall rules)</li>
+<li>Regular security updates</li>
+<li>Audit logging</li>
+<li>Backup and disaster recovery</li>
+</ul>
+</div>
+<div id="container-deployments" class="section level3">
+<h3><strong>Container Deployments</strong></h3>
+<ul>
+<li>Use official base images</li>
+<li>Scan images for vulnerabilities</li>
+<li>Run as non-root user</li>
+<li>Use secrets management</li>
+<li>Limit container capabilities</li>
+<li>Network segmentation</li>
+</ul>
+</div>
+<div id="cloud-deployments" class="section level3">
+<h3><strong>Cloud Deployments</strong></h3>
+<ul>
+<li>Use IAM roles and policies</li>
+<li>Enable encryption at rest</li>
+<li>Enable encryption in transit</li>
+<li>Use private subnets</li>
+<li>VPC peering for site connections</li>
+<li>Cloud-native secrets management</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="monitoring-and-observability" class="section level2">
+<h2><strong>Monitoring and Observability</strong></h2>
+<div id="recommended-tools" class="section level3">
+<h3><strong>Recommended Tools</strong></h3>
+<ul>
+<li><strong>Metrics</strong>: Prometheus + Grafana</li>
+<li><strong>Logs</strong>: ELK Stack or Loki</li>
+<li><strong>Tracing</strong>: Jaeger (for API)</li>
+<li><strong>Uptime</strong>: Uptime Kuma or similar</li>
+</ul>
+</div>
+<div id="key-metrics-to-monitor" class="section level3">
+<h3><strong>Key Metrics to Monitor</strong></h3>
+<ul>
+<li>Database connection pool utilization</li>
+<li>Query performance</li>
+<li>API response times</li>
+<li>Container resource usage</li>
+<li>Disk space</li>
+<li>Network throughput</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="backup-and-recovery" class="section level2">
+<h2><strong>Backup and Recovery</strong></h2>
+<div id="database-backups" class="section level3">
+<h3><strong>Database Backups</strong></h3>
+<pre class="bash"><code># PostgreSQL dump
+pg_dump -U gaia gaiadb &gt; gaiadb_backup_$(date +%Y%m%d).sql
+
+# Automated with cron
+0 2 * * * pg_dump -U gaia gaiadb | gzip &gt; /backups/gaiadb_$(date +\%Y\%m\%d).sql.gz</code></pre>
+</div>
+<div id="volume-backups-docker" class="section level3">
+<h3><strong>Volume Backups (Docker)</strong></h3>
+<pre class="bash"><code># Backup Docker volume
+docker run --rm -v gaiadb_data:/data -v /backup:/backup ubuntu tar czf /backup/gaiadb_data.tar.gz /data
+
+# Restore
+docker run --rm -v gaiadb_data:/data -v /backup:/backup ubuntu tar xzf /backup/gaiadb_data.tar.gz -C /</code></pre>
+</div>
+<div id="disaster-recovery" class="section level3">
+<h3><strong>Disaster Recovery</strong></h3>
+<ul>
+<li>Regular backup testing</li>
+<li>Documented recovery procedures</li>
+<li>Off-site backup storage</li>
+<li>RTO/RPO targets defined</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="performance-tuning" class="section level2">
+<h2><strong>Performance Tuning</strong></h2>
+<div id="postgresql-tuning" class="section level3">
+<h3><strong>PostgreSQL Tuning</strong></h3>
+<pre class="sql"><code>-- Increase shared buffers (25% of RAM)
+ALTER SYSTEM SET shared_buffers = &#39;2GB&#39;;
+
+-- Increase work_mem for complex queries
+ALTER SYSTEM SET work_mem = &#39;256MB&#39;;
+
+-- Enable parallel queries
+ALTER SYSTEM SET max_parallel_workers_per_gather = 4;
+
+-- Restart required
+SELECT pg_reload_conf();</code></pre>
+</div>
+<div id="postgis-optimization" class="section level3">
+<h3><strong>PostGIS Optimization</strong></h3>
+<pre class="sql"><code>-- Create spatial indexes
+CREATE INDEX idx_geometries_geom ON geometries USING GIST(geom);
+
+-- Analyze tables after bulk loads
+ANALYZE geometries;
+
+-- Vacuum regularly
+VACUUM ANALYZE geometries;</code></pre>
+</div>
+<div id="gaiacore-optimization" class="section level3">
+<h3><strong>gaiaCore Optimization</strong></h3>
+<ul>
+<li>Use parallel processing for large cohorts</li>
+<li>Cache frequently accessed datasets</li>
+<li>Batch database operations</li>
+<li>Profile R code for bottlenecks</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="troubleshooting" class="section level2">
+<h2><strong>Troubleshooting</strong></h2>
+<div id="common-issues" class="section level3">
+<h3><strong>Common Issues</strong></h3>
+<p><strong>Connection refused to database</strong></p>
+<pre class="bash"><code># Check database is running
+docker compose ps  # or systemctl status postgresql
+
+# Check network connectivity
+nc -zv localhost 5432
+
+# Check logs
+docker compose logs gaiadb</code></pre>
+<p><strong>Out of memory errors</strong></p>
+<pre class="bash"><code># Increase Docker memory limit
+# Edit Docker Desktop settings or daemon.json
+
+# Or reduce batch size in gaiaCore</code></pre>
+<p><strong>Slow spatial queries</strong></p>
+<pre class="sql"><code>-- Check if spatial indexes exist
+SELECT * FROM pg_indexes WHERE tablename = &#39;your_table&#39;;
+
+-- Create missing indexes
+CREATE INDEX idx_table_geom ON your_table USING GIST(geom);</code></pre>
+<p><br></p>
+</div>
+</div>
+<div id="migration-and-upgrades" class="section level2">
+<h2><strong>Migration and Upgrades</strong></h2>
+<div id="version-upgrades" class="section level3">
+<h3><strong>Version Upgrades</strong></h3>
+<ol style="list-style-type: decimal">
+<li>Backup database</li>
+<li>Test upgrade in staging</li>
+<li>Review changelog for breaking changes</li>
+<li>Schedule maintenance window</li>
+<li>Perform upgrade</li>
+<li>Verify functionality</li>
+<li>Monitor for issues</li>
+</ol>
+</div>
+<div id="data-migration" class="section level3">
+<h3><strong>Data Migration</strong></h3>
+<ul>
+<li>Use pg_dump/pg_restore for PostgreSQL</li>
+<li>Test migrations with subset of data</li>
+<li>Validate data integrity post-migration</li>
+<li>Document migration process</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="additional-resources" class="section level2">
+<h2><strong>Additional Resources</strong></h2>
+<ul>
+<li><a href="https://docs.docker.com/">Docker Documentation</a></li>
+<li><a href="https://podman.io/">Podman Documentation</a></li>
+<li><a href="https://docs.ansible.com/">Ansible Documentation</a></li>
+<li><a href="https://www.postgresql.org/docs/">PostgreSQL
+Documentation</a></li>
+<li><a href="https://postgis.net/documentation/">PostGIS
+Documentation</a></li>
+<li><a href="https://kubernetes.io/docs/">Kubernetes
+Documentation</a></li>
+</ul>
+<p><br></p>
+</div>
+<div id="getting-help" class="section level2">
+<h2><strong>Getting Help</strong></h2>
+<p>Deployment questions? Contact the working group: -
+<strong>Teams</strong>: GIS Working Group channel -
+<strong>GitHub</strong>: <a
+href="https://github.com/OHDSI/GIS/issues">Open an issue</a> -
+<strong>Meetings</strong>: Fridays 10 AM US Eastern -
+<strong>Email</strong>: zollovenecek[at]ohdsi[dot]org</p>
+<p><br></p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

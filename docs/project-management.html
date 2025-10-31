@@ -451,152 +451,304 @@ WG</h1>
 </div>
 
 
-<div id="ohdsi-gis-process-for-new-use-cases" class="section level1">
-<h1><strong>OHDSI GIS Process for New Use Cases</strong></h1>
-<p>Development in the OHDSI GIS Workgroup is <strong>use case
-driven</strong>, meaning that specific needs to produce real world
-evidence determine the workgroup’s objectives and direct the groups
-members’ efforts.</p>
-<div id="proposing-a-new-use-case" class="section level2">
-<h2><strong>Proposing a new Use Case</strong></h2>
-<p>For other OHDSI workgroups, research projects, or individual
-researchers that are interested in proposing a new use case to drive
-OHDSI GIS Workgroup development, a <a
-href="https://github.com/OHDSI/GIS/issues/new?assignees=&amp;labels=Use+Case&amp;projects=&amp;template=use-case.yaml&amp;title=%5BUse+Case%5D%3A+">Use
-Case Issue</a> can be opened on the OHDSI GIS Workgroup GitHub.</p>
-<div id="project-deliverable" class="section level3">
-<h3>Project deliverable</h3>
-<p>The issue template focuses on your project’s, or this
-collaboration’s, hypothetical “Project Deliverable”: what exactly will
-the final output of this work be? On the issue template, interested
-parties should:</p>
+<div id="project-management" class="section level1">
+<h1><strong>Project Management</strong></h1>
+<p>The OHDSI GIS Working Group follows an <strong>agile,
+use-case-driven</strong> development methodology emphasizing clear
+communication, task-oriented development, regular progress reviews, and
+transparent tracking.</p>
+<p><br></p>
+<div id="github-project-board" class="section level2">
+<h2><strong>GitHub Project Board</strong></h2>
+<p><strong>Primary Tool</strong>: <a
+href="https://github.com/orgs/OHDSI/projects/26">GIS Project
+Board</a></p>
+<div id="board-views" class="section level3">
+<h3><strong>Board Views</strong></h3>
+<ul>
+<li><strong>Status View</strong>: Backlog → To Do → In Progress →
+Blocked → Review → Done</li>
+<li><strong>Use Case View</strong>: Groups tasks by research use
+case</li>
+<li><strong>Priority View</strong>: High, Medium, Low priority
+items</li>
+</ul>
+</div>
+<div id="issue-types" class="section level3">
+<h3><strong>Issue Types</strong></h3>
+<ul>
+<li><strong>Use Cases</strong> (<code>Use Case</code> label):
+Research-driven proposals via <a
+href="https://github.com/OHDSI/GIS/issues/new?assignees=&amp;labels=Use+Case&amp;projects=&amp;template=use-case.yaml&amp;title=%5BUse+Case%5D%3A+">template</a></li>
+<li><strong>Work Orders</strong> (<code>task</code> label): Specific
+development tasks</li>
+<li><strong>Bugs</strong> (<code>bug</code> label): Software
+defects</li>
+<li><strong>Enhancements</strong> (<code>enhancement</code> label):
+Feature requests</li>
+<li><strong>Documentation</strong> (<code>documentation</code> label):
+Documentation updates</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="meetings" class="section level2">
+<h2><strong>Meetings</strong></h2>
+<div id="weekly-working-group-meeting" class="section level3">
+<h3><strong>Weekly Working Group Meeting</strong></h3>
+<p><strong>When</strong>: Fridays 10 AM US Eastern
+<strong>Where</strong>: <a
+href="https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d">MS
+Teams</a></p>
+<p><strong>Agenda</strong> (60 minutes): 1. Intros &amp; New Members (5
+min) 2. GitHub Ticket Review (10-15 min) - Review sprint tasks, update
+board, identify blockers 3. Standup Updates (2 min max per person) -
+Completed work, current work, blockers, discussion points 4. Discussion
+Topics (25-30 min) - Technical decisions, use cases, architecture 5.
+Action Items &amp; Next Steps (5 min)</p>
+<p><strong>Roles</strong>: Facilitator (enforces time), Note Taker
+(documents decisions), Timekeeper (optional)</p>
+</div>
+<div id="subgroup-meetings" class="section level3">
+<h3><strong>Subgroup Meetings</strong></h3>
+<p>Task-specific subgroups meet separately for focused work on use cases
+or components, reporting progress at Friday meetings.</p>
+<p><br></p>
+</div>
+</div>
+<div id="development-workflow" class="section level2">
+<h2><strong>Development Workflow</strong></h2>
+<div id="sprint-cycle-2-week-informal-iterations"
+class="section level3">
+<h3><strong>Sprint Cycle</strong> (2-week informal iterations)</h3>
+<ul>
+<li><strong>Week 1</strong>: Plan, assign from backlog, develop, Friday
+check-in</li>
+<li><strong>Week 2</strong>: Continue development, submit PRs, code
+review, Friday sprint review</li>
+</ul>
+</div>
+<div id="definition-of-done" class="section level3">
+<h3><strong>Definition of Done</strong></h3>
+<p>Code written and tested → Tests pass → Documentation updated → Code
+reviewed → Merged to main → Verified in deployment</p>
+<p><br></p>
+</div>
+</div>
+<div id="use-case-management" class="section level2">
+<h2><strong>Use Case Management</strong></h2>
 <ol style="list-style-type: decimal">
-<li><p><strong>Description</strong> What evidence based on a combination
-of place-related data and EHR data do you want generate? Provide enough
-information so that all parties can form a mental image of the final
-product and will be able to align their work towards a single
-goal.</p></li>
-<li><p><strong>Infrastructure</strong> What changes would need to be
-made to the OHDSI GIS infrastructure or tooling to help realize your
-project. How much would generation of this evidence rely on existing
-OHDSI GIS infrastructure vs. the development of new infrastructure? If
-it requires new infrastructure, how much could you/your team contribute
-to the needed development?</p></li>
-<li><p><strong>Timeline</strong> Provide any hard or soft deadlines that
-you have for your project deliverable. Would a development sprint for
-this work be able to start immediately, or need to wait until some
-future date? If you imagine your deliverable being completed in multiple
-steps, feel free to add detail to the order and timing in which they
-should be completed here. Finally, begin to think about desired cadence
-of development or progress meetings.</p></li>
-<li><p><strong>Credit</strong> Describe the way you and your team
-envision credit being attributed at the end of the development sprint.
-How does your team hope to be recognized for the collaborative effort
-with other OHDSI GIS Workgroup members?</p></li>
-<li><p><strong>Support</strong> What sort of support do you need from
-OHDSI GIS Workgroup? Are you looking for help with using existing OHDSI
-GIS tools, planning a development sprint, or integrating new
-features?</p></li>
-<li><p><strong>Datasets of Interest</strong> Are there any datasets that
-you need to use that are <em>not already in GaiaCatalog</em>? Include
-source dataset specifics like version and URLs, where applicable. Feel
-free to include links and descriptions of content, shape, and format of
-the data.</p></li>
+<li><a
+href="https://github.com/OHDSI/GIS/issues/new?assignees=&amp;labels=Use+Case&amp;projects=&amp;template=use-case.yaml&amp;title=%5BUse+Case%5D%3A+">Submit
+Use Case</a> (Description, Infrastructure needs, Timeline, Credit,
+Support, Datasets)</li>
+<li>Leaders review and schedule discussion</li>
+<li>Present in Friday meeting</li>
+<li>Decompose into work orders</li>
+<li>Prioritize and assign</li>
+<li>Execute development sprint</li>
+<li>Deliver results</li>
 </ol>
-<p>These pieces of information will help to inform the OHDSI GIS
-Workgroup about the scope and goals of your project before scheduling a
-virtual meeting slot to have discuss. The more accurately and completely
-you provide this information, the more quickly and efficiently we can
-all collaborate to plan and execute a new development sprint and produce
-real world evidence.</p>
+<p><br></p>
 </div>
-<div id="use-case-work-orders" class="section level3">
-<h3>Use Case Work Orders</h3>
-<p>The only remaining field in the form is for linking “work order”
-tickets. This field is used to create a checklist of discrete
-development work orders that will enable your project deliverable. There
-is generally <em>no reason to fill this field out at this time</em>,
-though if you are aware of existing work orders that you know your
-proposed use case would depend on, this would be the spot to link
-them.</p>
-<div id="building-a-checklist-in-the-work-orders-field"
-class="section level4">
-<h4>Building a checklist in the work orders field</h4>
-<blockquote>
-<p>Use a dash and brackets, and a link to the work order, to create a
-checklist item in GitHub Markdown:</p>
-<p><code>- [ ] https://github.com/OHDSI/GIS/issues/198</code></p>
-<p><code>- [ ] #198</code> (you can use this shorthand if the issue is
-in the OHDSI GIS repository)</p>
-</blockquote>
+<div id="repository-inventory" class="section level2">
+<h2><strong>Repository Inventory</strong></h2>
+<table>
+<colgroup>
+<col width="41%" />
+<col width="31%" />
+<col width="27%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Repository</th>
+<th>Purpose</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://github.com/OHDSI/GIS">OHDSI/GIS</a></td>
+<td>Central hub, docs, coordination</td>
+<td>Active</td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/OHDSI/gaiaDb">OHDSI/gaiaDb</a></td>
+<td>Core data repository</td>
+<td>Beta</td>
+</tr>
+<tr class="odd">
+<td><a href="https://github.com/OHDSI/gaiaCore">OHDSI/gaiaCore</a></td>
+<td>Multi-language connector</td>
+<td>Development</td>
+</tr>
+<tr class="even">
+<td><a
+href="https://github.com/OHDSI/gaiaCatalog">OHDSI/gaiaCatalog</a></td>
+<td>Data catalog</td>
+<td>Beta</td>
+</tr>
+<tr class="odd">
+<td><a
+href="https://github.com/OHDSI/gaiaDocker">OHDSI/gaiaDocker</a></td>
+<td>Deployment orchestration</td>
+<td>Active</td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/TuftsCTSI/CVB">TuftsCTSI/CVB</a></td>
+<td>Vocabulary builder</td>
+<td>Development</td>
+</tr>
+</tbody>
+</table>
+<p>See <a href="developer.html">Developer Resources</a> for detailed
+package information.</p>
+<p><br></p>
+</div>
+<div id="roadmaps" class="section level2">
+<h2><strong>Roadmaps</strong></h2>
+<p>Key component roadmaps maintained as GitHub issues: - <a
+href="https://github.com/OHDSI/GIS/issues/368">Gaia Toolchain</a> - <a
+href="https://github.com/OHDSI/GIS/issues/365">Gaia Catalog</a> - <a
+href="https://github.com/OHDSI/GIS/issues/366">Geocoding Guidance</a> -
+<a href="https://github.com/OHDSI/GIS/issues/369">Vocabulary</a></p>
+<p><br></p>
+</div>
+<div id="communication" class="section level2">
+<h2><strong>Communication</strong></h2>
+<div id="channels" class="section level3">
+<h3><strong>Channels</strong></h3>
+<ul>
+<li><strong>GitHub Issues/PRs</strong>: Technical discussion, tracking
+(primary)</li>
+<li><strong>MS Teams GIS Channel</strong>: Quick questions,
+announcements</li>
+<li><strong>Weekly Meetings</strong>: Collaborative decision-making</li>
+<li><strong>Email</strong>: Meeting agendas, summaries</li>
+<li><strong>OHDSI Forums</strong>: Community questions</li>
+</ul>
+</div>
+<div id="best-practices" class="section level3">
+<h3><strong>Best Practices</strong></h3>
+<ul>
+<li>Use GitHub for trackable technical discussions</li>
+<li>Use Teams for quick coordination</li>
+<li>Document major decisions in GitHub issues with <code>decision</code>
+label</li>
+<li>Over-communicate rather than under-communicate</li>
+</ul>
+<p><br></p>
 </div>
 </div>
+<div id="onboarding" class="section level2">
+<h2><strong>Onboarding</strong></h2>
+<p><strong>New Member Checklist</strong>: 1. <a
+href="https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUQ05MOU9BSzEwOThZVjNQVVFGTDNZRENONiQlQCN0PWcu">Sign
+up for OHDSI Teams</a> 2. <a
+href="https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu">Join
+GIS Working Group</a> 3. Attend Friday meeting and introduce yourself 4.
+Review <a href="developer.html">Developer Resources</a> 5. Pick a
+<code>good first issue</code> or join subgroup 6. Set up development
+environment (<a href="developer-deployment.html">Deployment Guide</a>)
+7. Make first contribution (<a
+href="developer-contributing.html">Contributing Guidelines</a>)</p>
+<p>New contributors are encouraged to pair with experienced members and
+start with documentation tasks.</p>
+<p><br></p>
+</div>
+<div id="quality-standards" class="section level2">
+<h2><strong>Quality Standards</strong></h2>
+<div id="code-review" class="section level3">
+<h3><strong>Code Review</strong></h3>
+<ul>
+<li>Pull request review by ≥1 developer</li>
+<li>Passing tests (when available)</li>
+<li>Updated documentation</li>
+<li>Adherence to coding standards</li>
+</ul>
+</div>
+<div id="testing" class="section level3">
+<h3><strong>Testing</strong></h3>
+<ul>
+<li>Unit tests for core functionality</li>
+<li>Integration tests for database operations</li>
+<li>Manual testing for UI/UX</li>
+<li>User acceptance testing for use cases</li>
+</ul>
+<p><br></p>
 </div>
 </div>
-<div id="editing-the-ohdsi-gis-wg-documentation-website"
-class="section level1">
-<h1><strong>Editing the OHDSI GIS WG documentation website</strong></h1>
-<div id="overview" class="section level2">
-<h2>Overview</h2>
-<p>We encourage contributions to our software documentation and our
-website. Follow these guidelines for making and proposing changes.</p>
+<div id="vision-okrs" class="section level2">
+<h2><strong>Vision &amp; OKRs</strong></h2>
+<p>The working group establishes quarterly <strong>Objectives and Key
+Results (OKRs)</strong> aligned with the mission to improve population
+health through integrated geospatial and clinical data analysis.</p>
+<p><strong>Example OKR</strong> (2023): - <strong>Objective</strong>:
+Advance Gaia toolchain to production-ready state - KR1: Complete 3
+validation use cases - KR2: Publish documentation for all components -
+KR3: Achieve &lt;2 minute load time for typical dataset</p>
+<p>OKRs are reviewed quarterly and linked to project board tasks.</p>
+<p><br></p>
 </div>
-<div id="website" class="section level2">
-<h2>Website</h2>
-<p>This section explains how to edit the content of the website. In this
-context, the website refers to everything at <a
-href="https://ohdsi.github.io/GIS/"
-class="uri">https://ohdsi.github.io/GIS/</a> <em>except</em> for the <a
-href="https://ohdsi.github.io/GIS/gaiaCore"
-class="uri">https://ohdsi.github.io/GIS/gaiaCore</a> content which is
-covered in the next section.</p>
-<p>The source of the website’s content are contained in the ./rmd/
-directory at the root of this repository. Most of the content in the
-./rmd/ directory are RMarkdown files which are rendered to HTML, stored
-in the ./docs/ directory, and served as a website using GitHub Pages.
-Along with RMD files, there are images, stylesheets (CSS), and a file
-called _site.yml. The _site.yml file specifies the website structure and
-defines the elements on the site’s navbar.</p>
-<p>To edit existing pages on the website, simply find and edit the
-corresponding RMD file. To add new pages to the website, create an RMD
-file, fill it with content, and then add it to _site.yml in a fitting
-place. Whether you are editing existing pages or creating new ones, the
-function <code>RMarkdown::render_site()</code> can be run to regenerate
-the HTML files docs directory. More on rendering below.</p>
+<div id="tools" class="section level2">
+<h2><strong>Tools</strong></h2>
+<table style="width:100%;">
+<colgroup>
+<col width="28%" />
+<col width="42%" />
+<col width="28%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tool</th>
+<th>Purpose</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>GitHub Projects</td>
+<td>Task tracking</td>
+<td><a href="https://github.com/orgs/OHDSI/projects/26">Project
+Board</a></td>
+</tr>
+<tr class="even">
+<td>GitHub Issues</td>
+<td>Work items, bugs, use cases</td>
+<td><a href="https://github.com/OHDSI/GIS/issues">Issues</a></td>
+</tr>
+<tr class="odd">
+<td>MS Teams</td>
+<td>Communication, meetings</td>
+<td><a
+href="https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu">Join</a></td>
+</tr>
+<tr class="even">
+<td>GitHub Pages</td>
+<td>Documentation</td>
+<td><a href="https://ohdsi.github.io/GIS">ohdsi.github.io/GIS</a></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
 </div>
-<div id="r-package-documentation" class="section level2">
-<h2>R Package Documentation</h2>
-<p>R Package documentation is created using ROxygen within R scripts.
-The ROxygen is rendered to .Rd files by running
-<code>devtools::document()</code>. After documentation is created, the
-function <code>pkgdown::build_site()</code> can be run to render the .Rd
-files into HTML, which automatically ends up in ./docs/gaiaCore/ and can
-be accessed from the website. More on rendering below.</p>
+<div id="continuous-improvement" class="section level2">
+<h2><strong>Continuous Improvement</strong></h2>
+<p>The working group regularly reflects on processes through quarterly
+retrospectives, solicits feedback in meetings, and adapts based on what
+works and OHDSI community best practices.</p>
+<p><br></p>
 </div>
-<div id="rendering" class="section level2">
-<h2>Rendering</h2>
-<p>If you’ve been keeping track, there are three functions which need to
-be called to generate the HTML for the website: 1.
-<code>devtools::document()</code> creates .Rd files from inline ROxygen
-2. <code>RMarkdown::render_site()</code> creates HTML for website
-content 3. <code>pkgdown::build_site()</code> creates HTML for the R
-Package documentation</p>
-<p>Running three functions each time you need to regenerate the website
-can be a drag. Even worse, the website won’t generate correctly if they
-are run out of order.</p>
-<p>To make things easier, there is a helper R script,
-<code>render_gaia_site.R</code>, that can be run using
-<code>source('./render_gaia_site.R')</code>. This simply calls those
-three functions in the correct order. It makes life just a bit
-easier.</p>
-</div>
-<div id="publishing" class="section level2">
-<h2>Publishing</h2>
-<p>Finally, after changes have been made to the website or documentation
-and the new HTML has been rendered, simply commit your changes and
-create a Pull Request on the OHDSI GIS WG repository. A maintainer will
-review your changes, provide feedback if necessary, and accept your
-changes when they are ready.</p>
+<div id="contact" class="section level2">
+<h2><strong>Contact</strong></h2>
+<ul>
+<li><strong>Teams</strong>: GIS Working Group channel</li>
+<li><strong>Meetings</strong>: Fridays 10 AM US Eastern</li>
+<li><strong>Email</strong>: zollovenecek[at]ohdsi[dot]org</li>
+<li><strong>GitHub</strong>: Tag <span
+class="citation">@OHDSI/GIS-leaders</span></li>
+</ul>
+<p><br></p>
 </div>
 </div>
 

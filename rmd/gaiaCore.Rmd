@@ -9,16 +9,37 @@ output:
 
 ## Description
 
-Gaia Core is the central functionality and storage of Gaia and consists of two main features: a **staging database** and an **execution engine**.
+gaiaCore is a **multi-language connector framework** providing programmatic access to gaiaDb functionality. It serves as an access layer, orchestrating SQL functions and protocols defined within gaiaDb across multiple programming languages and access paradigms.
 
-The staging database is a PostGIS database with a replica copy of the Gaia Catalog installed in a schema named "backbone". In this database, public datasets that are registered in Gaia Catalog can be "staged": transformed and then loaded as tables in a standardized Entity-Attribute-Value format. Other geospatial data, such as geocoded addresses, can also be loaded into the staging database for use in conjunction with the staged data.
+## Key Features
 
-All operations on the staging database (creating tables, inserting data, accessing data, etc.) are performed through the "execution engine". The execution engine can be any software package (e.g. R package, Python library, CLI) that connects to the database and functionalizes the logic required to write or read data to and from the standard format.
+- **RESTful API access** via PostgREST with OpenAPI specification
+- **Direct database connections** for SQL-based workflows
+- **Language-specific client libraries** (R, Python, and more in development)
+- **Multi-paradigm support** for both API and database access patterns
+- **Zero processing logic** - all data operations performed in gaiaDb
 
-## Scope
+## Architecture
 
-The **ultimate vision** of Gaia Core is support for multiple geospatial databases (particularly cloud-native), as well as execution engine interfaces for multiple popular data science programming languages (e.g. Python, Julia, R, Bash). **Currently**, the staging database has only been implemented in PostGIS and the execution engine has only been implemented in R.
+gaiaCore acts as a thin access layer that:
+- Routes requests to appropriate gaiaDb functions
+- Provides convenient language-specific abstractions
+- Handles authentication and connection management
+- Does NOT contain data processing or transformation logic
+
+## Development Status
+
+Active development is occurring at [TuftsCTSI/gaiaCore](https://github.com/TuftsCTSI/gaiaCore), with plans to migrate to [OHDSI/gaiaCore](https://github.com/OHDSI/gaiaCore) upon reaching production readiness.
+
+## Usage
+
+Access gaiaDb through gaiaCore using your preferred language:
+- **R**: Client library (in development)
+- **Python**: Client library (in development)
+- **REST API**: Direct HTTP requests to PostgREST endpoint
+- **SQL**: Standard PostgreSQL connections
 
 ## Documentation
 
-[gaiaCore (R Package)](gaiaCore/index.html)
+- [Development Repository](https://github.com/TuftsCTSI/gaiaCore)
+- [Architecture Details](developer-architecture.html)

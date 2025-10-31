@@ -13,7 +13,7 @@
 
 <title> OHDSI GIS WG</title>
 
-<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -279,13 +279,16 @@ $(document).ready(function () {
       <a href="schema-extensions.html">Schema Extensions</a>
     </li>
     <li>
-      <a href="gaiaDB.html">gaiaDB</a>
+      <a href="gaiaDb.html">gaiaDb</a>
     </li>
     <li>
       <a href="gaiaCore.html">gaiaCore</a>
     </li>
     <li>
-      <a href="gaiaOHDSI.html">gaiaOHDSI</a>
+      <a href="gaiaCatalog.html">gaiaCatalog</a>
+    </li>
+    <li>
+      <a href="gaiaDocker.html">gaiaDocker</a>
     </li>
   </ul>
 </li>
@@ -308,6 +311,39 @@ $(document).ready(function () {
     <span class="fa fa-info"></span>
      
     Getting Involved
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-code"></span>
+     
+    Developer
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="developer.html">Overview</a>
+    </li>
+    <li>
+      <a href="developer-packages.html">Package Status</a>
+    </li>
+    <li>
+      <a href="developer-contributing.html">Contributing</a>
+    </li>
+    <li>
+      <a href="developer-architecture.html">Architecture</a>
+    </li>
+    <li>
+      <a href="developer-deployment.html">Deployment</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="project-management.html">
+    <span class="fa fa-tasks"></span>
+     
+    Project Management
   </a>
 </li>
       </ul>
@@ -333,40 +369,54 @@ WG</h1>
 </div>
 
 
-<div id="gaiaohdsi" class="section level1">
-<h1><strong>gaiaOHDSI</strong></h1>
+<div id="gaiadocker" class="section level1">
+<h1><strong>gaiaDocker</strong></h1>
 <div id="description" class="section level2">
 <h2>Description</h2>
-<p>Gaia Core is the central functionality and storage of Gaia and
-consists of two main features: a <strong>staging database</strong> and
-an <strong>execution engine</strong>.</p>
-<p>The staging database is a PostGIS database with a replica copy of the
-Gaia Catalog installed in a schema named “backbone”. In this database,
-public datasets that are registered in Gaia Catalog can be “staged”:
-transformed and then loaded as tables in a standardized
-Entity-Attribute-Value format. Other geospatial data, such as geocoded
-addresses, can also be loaded into the staging database for use in
-conjunction with the staged data.</p>
-<p>All operations on the staging database (creating tables, inserting
-data, accessing data, etc.) are performed through the “execution
-engine”. The execution engine can be any software package (e.g. R
-package, Python library, CLI) that connects to the database and
-functionalizes the logic required to write or read data to and from the
-standard format.</p>
+<p>gaiaDocker provides <strong>containerized deployment
+orchestration</strong> for the complete Gaia toolchain. It coordinates
+image builds, manages versioned releases, and enables consistent
+deployment across development, testing, and production environments.</p>
 </div>
-<div id="scope" class="section level2">
-<h2>Scope</h2>
-<p>The <strong>ultimate vision</strong> of Gaia Core is support for
-multiple geospatial databases (particularly cloud-native), as well as
-execution engine interfaces for multiple popular data science
-programming languages (e.g. Python, Julia, R, Bash).
-<strong>Currently</strong>, the staging database has only been
-implemented in PostGIS and the execution engine has only been
-implemented in R.</p>
+<div id="key-features" class="section level2">
+<h2>Key Features</h2>
+<ul>
+<li><strong>Complete stack deployment</strong> with a single
+command</li>
+<li><strong>Profile-based configuration</strong> (gaia, degauss) for
+flexible deployments</li>
+<li><strong>Coordinated versioning</strong> across all Gaia
+components</li>
+<li><strong>Persistent data storage</strong> for databases and search
+indexes</li>
+<li><strong>Service orchestration</strong> via Docker Compose</li>
+<li><strong>OHDSI Broadsea integration</strong> for broader ecosystem
+compatibility</li>
+</ul>
+</div>
+<div id="services-managed" class="section level2">
+<h2>Services Managed</h2>
+<p>gaiaDocker orchestrates the following services: -
+<strong>gaia-db</strong>: PostgreSQL/PostGIS database (gaiaDb) -
+<strong>gaia-core</strong>: PostgREST API service -
+<strong>gaia-catalog</strong>: Flask catalog interface -
+<strong>gaia-solr</strong>: Solr search engine -
+<strong>gaia-osgeo</strong>: GDAL/OGR ETL tools -
+<strong>gaia-postgis</strong>: PostGIS-specific ETL tools -
+<strong>gaia-degauss</strong> (optional): Geocoding service</p>
+</div>
+<div id="quick-start" class="section level2">
+<h2>Quick Start</h2>
+<pre class="bash"><code>git clone https://github.com/OHDSI/gaiaDocker.git
+cd gaiaDocker
+docker compose --profile gaia up -d</code></pre>
 </div>
 <div id="documentation" class="section level2">
 <h2>Documentation</h2>
-<p><a href="gaiaOHDSI/index.html">gaiaOHDSI (R Package)</a></p>
+<ul>
+<li><a href="https://github.com/OHDSI/gaiaDocker">Repository</a></li>
+<li><a href="developer-deployment.html">Full Deployment Guide</a></li>
+</ul>
 </div>
 </div>
 
