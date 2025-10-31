@@ -4,44 +4,40 @@ The OHDSI GIS Working Group documentation is built using RMarkdown. The source f
 
 ## Quick Start
 
-### Option 1: Using the Build Script (Recommended)
+### Use Docker to build the site
 
-```bash
-Rscript build-site.R
+Here's a reference Dockerfile (for arm64 systems running Apple silicon)
+```
+FROM arm64v8/r-base
+
+RUN mkdir /GIS
+WORKDIR /GIS
+
+RUN apt update && \
+    apt install \
+    -y --no-install-recommends pandoc \
+                               libxml2-dev \
+							   libfontconfig1-dev \
+							   libharfbuzz-dev \
+							   libfribidi-dev
+							  
+
+RUN Rscript -e "install.packages('xml2')" && \
+    Rscript -e "install.packages('svglite')" && \
+	Rscript -e "install.packages('kableExtra')" && \
+	Rscript -e "install.packages('dplyr')" && \
+	Rscript -e "install.packages('readr')"
+
+
+CMD["Rscript", "build-site.R"]
 ```
 
-### Option 2: Using R Console
+Here's a Docker command for the above file - run in the directory where you clone the GIS repo:
 
-```r
-# From repository root
-setwd("rmd")
-rmarkdown::render_site(encoding = "UTF-8")
+```
+docker build -t gis-site-builder . && docker run --name build-site -v ./GIS:/GIS gis-site-builder
 ```
 
-### Option 3: Using RStudio
-
-1. Open RStudio
-2. Set working directory to `rmd/` folder
-3. Open any `.Rmd` file
-4. Click **Build** tab → **Build Website**
-
-## Prerequisites
-
-### Required R Packages
-
-```r
-install.packages("rmarkdown")
-install.packages("knitr")
-```
-
-## Site Configuration
-
-The site is configured via `rmd/_site.yml`:
-
-- **Output Directory**: `../docs` (for GitHub Pages)
-- **Theme**: Cosmo
-- **Custom CSS**: `style.css`
-- **Navbar**: Configured with Home, Getting Started, Gaia, Vocabulary, How to, Getting Involved, Developer, Project Management
 
 ## File Structure
 
@@ -59,41 +55,6 @@ GIS/
 │   └── ...
 └── build-site.R       # Build script
 ```
-
-## Building Individual Files
-
-To render a single RMarkdown file:
-
-```r
-rmarkdown::render("rmd/developer.Rmd", output_dir = "docs")
-```
-
-## Viewing the Site Locally
-
-After building, open `docs/index.html` in a web browser:
-
-```bash
-# macOS
-open docs/index.html
-
-# Linux
-xdg-open docs/index.html
-
-# Windows
-start docs/index.html
-```
-
-Or use a local web server:
-
-```bash
-# Python 3
-cd docs && python3 -m http.server 8000
-
-# R
-servr::httd("docs")
-```
-
-Then visit: http://localhost:8000
 
 ## Publishing to GitHub Pages
 
