@@ -196,117 +196,35 @@ Once approved:
 
 <br>
 
-## **Pull Request Guidelines**
+## **Pull Requests**
 
-### **PR Title Format**
-```
-[Component] Brief description
+**Title**: `[Component] Brief description` (e.g., `[gaiaDb] Fix spatial indexing bug`)
 
-Examples:
-[gaiaCore] Add support for new data source format
-[Docs] Update contributing guidelines
-[gaiaDb] Fix spatial indexing bug
-```
+**PR checklist**: Describe changes, link issues, specify type (bug/feature/docs), include tests, update docs
 
-### **PR Description Template**
-
-```markdown
-## Description
-Brief description of changes
-
-## Related Issues
-Closes #123
-Relates to #456
-
-## Type of Change
-- [ ] Bug fix
-- [ ] New feature
-- [ ] Documentation update
-- [ ] Refactoring
-- [ ] Other (please describe)
-
-## Testing
-Describe testing performed:
-- [ ] Unit tests added/updated
-- [ ] Integration tests pass
-- [ ] Manual testing completed
-
-## Checklist
-- [ ] Code follows project style guidelines
-- [ ] Documentation updated
-- [ ] Tests added/updated
-- [ ] All tests pass
-- [ ] No breaking changes (or documented if necessary)
-```
+See GitHub PR template for full checklist.
 
 <br>
 
-## **Working Group Coordination**
+## **Coordination**
 
-### **Weekly Meetings**
+**Weekly meetings** (Fridays 10 AM ET): 2-min updates - completed work, current tasks, blockers
 
-**Format** (2 minutes max per person):
-1. **What did you complete?** - Last week's accomplishments
-2. **What are you working on?** - Current tasks
-3. **What's blocking you?** - Obstacles or help needed
-4. **Discussion points** - Topics for group discussion (noted, discussed later)
+**Task tracking**: [GitHub Project Board](https://github.com/orgs/OHDSI/projects/26)
 
-### **Task Management**
+**Labels**: `good first issue`, `help wanted`, `bug`, `enhancement`, `documentation`, `Use Case`
 
-We use GitHub Projects for task tracking:
-- **Project Board**: https://github.com/orgs/OHDSI/projects/26
-- **Issues**: Task-oriented development work
-- **Use Cases**: Research-driven requirements
-
-**Issue Labels**:
-- `Use Case` - Research use cases
-- `good first issue` - Beginner-friendly
-- `help wanted` - Need contributors
-- `bug` - Bug reports
-- `enhancement` - Feature requests
-- `documentation` - Docs improvements
-- `priority: high` - High priority items
-
-### **Communication**
-
-- **Weekly meetings**: Primary coordination
-- **Teams channel**: Async discussion
-- **GitHub issues**: Technical discussion, tracking
-- **Email**: Working group announcements
+**Communication**: Meetings (primary), Teams (async), GitHub issues (technical), Email (announcements)
 
 <br>
 
-## **Types of Contributions**
+## **Contribution Types**
 
-### **Code Contributions**
-- New features
-- Bug fixes
-- Performance improvements
-- Test coverage
-
-### **Documentation**
-- Website content
-- API documentation
-- Tutorials and guides
-- Use case examples
-
-### **Data Sources**
-- New transformation recipes
-- Data source metadata
-- Vocabulary contributions
-- Quality improvements
-
-### **Research**
-- Use case proposals
-- Validation studies
-- Method development
-- Publications
-
-### **Community**
-- Answer questions on forums
-- Help onboard new contributors
-- Present at meetings
-- Review pull requests
+**Code**: Features, bug fixes, performance, tests
+**Docs**: Website, API docs, tutorials, examples
+**Data**: Transformation recipes, metadata, vocabularies
+**Research**: Use cases, validation, methods, publications
+**Community**: Forums, onboarding, presentations, reviews
 
 <br>
 

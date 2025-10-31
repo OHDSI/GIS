@@ -14,32 +14,22 @@ This page describes various deployment strategies for the Gaia toolchain, addres
 
 <br>
 
-## **Deployment Overview**
+## **Deployment Options**
 
-The Gaia toolchain can be deployed in multiple ways to accommodate different institutional requirements, technical constraints, and use cases. This flexibility is essential given the diverse environments in which OHDSI network sites operate.
-
-### **Deployment Options**
-
-1. **gaiaDocker (Docker Compose)** - Official deployment method for all scenarios
-2. **Podman** - Daemonless container deployment (preferred by some IT departments)
-3. **Ansible** - Infrastructure-as-code deployment on bare metal or VMs
-4. **Manual Installation** - Traditional installation without containers
-5. **Kubernetes** - Production-scale orchestration (in development)
-6. **Cloud Platforms** - AWS, Azure, GCP deployments (planned)
+1. **gaiaDocker (Docker Compose)** - Official deployment method (recommended)
+2. **Podman** - Daemonless alternative to Docker
+3. **Ansible** - Infrastructure-as-code for bare metal/VMs
+4. **Manual** - Traditional installation
+5. **Kubernetes** - Production-scale (in development)
+6. **Cloud** - AWS, Azure, GCP (planned)
 
 <br>
 
-## **gaiaDocker Deployment (Recommended)**
+## **gaiaDocker (Recommended)**
 
-**Recommended for**: All deployment scenarios - local development, testing, and production
+Official deployment method with coordinated image builds and versioned releases.
 
-gaiaDocker is the **official deployment method** for the Gaia toolchain, providing coordinated image builds and versioned releases.
-
-### **Prerequisites**
-- Docker Engine (>= 20.10)
-- Docker Compose (>= 2.0) or Docker Compose V2
-- 8GB+ RAM available
-- 50GB+ disk space
+**Prerequisites**: Docker Engine 20.10+, Docker Compose 2.0+, 8GB+ RAM, 50GB+ disk
 
 ### **Quick Start**
 
@@ -66,448 +56,113 @@ docker compose logs -f gaia-db
 
 ### **Configuration**
 
-Review and customize `.env` file (create if needed):
+Customize `.env` file for database credentials, service ports, and resource limits. See gaiaDocker repository for full example.
+
+### **Services**
+
+- **gaia-db**: PostgreSQL/PostGIS (core data repository)
+- **gaia-core**: PostgREST API (exposes gaiaDb functions)
+- **gaia-catalog**: Flask catalog interface (data discovery)
+- **gaia-solr**: Search engine (catalog indexing)
+- **gaia-osgeo**: GDAL/OGR ETL tools
+- **gaia-postgis**: PostGIS ETL tools
+- **gaia-degauss**: Geocoding service (optional profile)
+
+### **Testing**
 
 ```bash
-# Database configuration
-POSTGRES_USER=gaia
-POSTGRES_PASSWORD=your_secure_password
-POSTGRES_DB=gaiadb
-
-# PostgREST API configuration
-PGRST_DB_URI=postgres://gaia:password@gaia-db:5432/gaiadb
-PGRST_DB_SCHEMA=working
-PGRST_DB_ANON_ROLE=web_anon
-
-# Service ports
-POSTGREST_PORT=3000
-CATALOG_PORT=5000
-SOLR_PORT=8983
-
-# Resource limits
-POSTGRES_MAX_CONNECTIONS=100
-POSTGRES_SHARED_BUFFERS=512MB
+curl http://localhost:3000/  # Test PostgREST API
+docker compose exec gaia-db psql -U gaia -d gaiadb  # Connect to database
+docker compose ps  # Check service health
 ```
 
-### **gaiaDocker Stack**
-
-The `docker-compose.yaml` orchestrates:
-
-```yaml
-services:
-  gaia-db:
-    # PostgreSQL/PostGIS database (gaiaDb)
-    # Core data repository
-    # Persistent volume for data
-
-  gaia-core:
-    # PostgREST API service
-    # Exposes gaiaDb functions via REST
-    # Depends on gaia-db
-
-  gaia-catalog:
-    # Flask catalog interface
-    # Data source discovery
-    # Depends on gaia-solr and gaia-db
-
-  gaia-solr:
-    # Solr search engine
-    # Catalog indexing
-
-  gaia-osgeo:
-    # GDAL/OGR ETL tools
-
-  gaia-postgis:
-    # PostGIS-specific ETL tools
-
-  gaia-degauss:  # Optional profile
-    # Geocoding service
-
-volumes:
-  postgres_data:
-  solr_data:
-
-networks:
-  gaia_network:
-```
-
-### **Testing the Deployment**
+### **Stopping**
 
 ```bash
-# Test PostgREST API
-curl http://localhost:3000/
-
-# Query a table via API (example)
-curl "http://localhost:3000/external_exposure?limit=10" \
-  -H "Accept-Profile: working"
-
-# Access catalog interface
-curl http://localhost:5000/
-
-# Connect to database
-docker compose exec gaia-db psql -U gaia -d gaiadb
-
-# Check service health
-docker compose ps
-docker compose logs gaia-db
-docker compose logs gaia-core
+docker compose down     # Stop (preserves data)
+docker compose down -v  # Stop and remove volumes (deletes data!)
 ```
 
-### **Stopping and Cleanup**
+### **Production**
 
-```bash
-# Stop services (preserves data)
-docker compose -f ./docker/docker-compose.yaml down
-
-# Stop and remove volumes (deletes data!)
-docker compose -f ./docker/docker-compose.yaml down -v
-
-# View resource usage
-docker stats
-```
-
-### **Production Considerations**
-
-For production Docker deployments:
-- Use secrets management (Docker secrets, vault)
-- Configure resource limits
-- Set up log aggregation
-- Implement backup strategy
-- Use reverse proxy (nginx, traefik)
-- Enable TLS/SSL
-- Configure monitoring
+- Use secrets management, resource limits, log aggregation
+- Implement backup strategy, reverse proxy, TLS/SSL, monitoring
 
 <br>
 
-## **Podman Deployment**
+## **Podman**
 
-**Recommended for**: Environments where daemonless containers are preferred
-
-### **Why Podman?**
-- Daemonless architecture (no root daemon)
-- Preferred by some IT/security departments
-- Drop-in replacement for Docker
-- Rootless containers by default
-
-### **Installation**
+Daemonless alternative to Docker, preferred by some IT/security departments.
 
 ```bash
-# RHEL/CentOS/Fedora
-sudo dnf install podman podman-compose
+# Install
+sudo dnf install podman podman-compose  # RHEL/CentOS/Fedora
+brew install podman  # macOS
 
-# Ubuntu/Debian
-sudo apt-get install podman podman-compose
-
-# macOS
-brew install podman
-```
-
-### **Deployment with Podman**
-
-Podman can use the same gaiaDocker `docker-compose.yaml`:
-
-```bash
-# Initialize Podman machine (macOS/Windows)
-podman machine init
-podman machine start
-
-# Clone gaiaDocker repository
-git clone https://github.com/OHDSI/gaiaDocker.git
-cd gaiaDocker
-
-# Deploy with podman-compose
+# Deploy
+podman machine init && podman machine start  # macOS/Windows
+git clone https://github.com/OHDSI/gaiaDocker.git && cd gaiaDocker
 podman-compose --profile gaia up -d
-
-# Or convert to pod
-podman play kube converted-compose.yaml
-```
-
-### **Rootless Deployment**
-
-```bash
-# Run as non-root user
-podman-compose -f ./docker/docker-compose.yaml up -d --userns=keep-id
-
-# Check rootless status
-podman info | grep -i rootless
 ```
 
 <br>
 
-## **Ansible Deployment**
+## **Ansible**
 
-**Recommended for**: Infrastructure-as-code, bare metal, air-gapped environments
+Infrastructure-as-code for bare metal, VMs, and air-gapped environments.
 
-### **Prerequisites**
-- Ansible (>= 2.9)
-- Target systems: Ubuntu 20.04+ or RHEL 8+
-- SSH access to target hosts
-- Sudo privileges
-
-### **Ansible Playbook Structure**
-
-```
-ansible/
-├── inventory/
-│   ├── production
-│   └── staging
-├── playbooks/
-│   ├── deploy-gaiadb.yml
-│   ├── deploy-gaiacore.yml
-│   └── deploy-full-stack.yml
-├── roles/
-│   ├── postgresql/
-│   ├── postgis/
-│   ├── r-environment/
-│   └── gaiacore/
-└── group_vars/
-    ├── all.yml
-    └── production.yml
-```
-
-### **Example Playbook** (gaiaDb)
-
-```yaml
----
-- name: Deploy gaiaDb
-  hosts: database_servers
-  become: yes
-
-  roles:
-    - postgresql
-    - postgis
-    - gaiadb
-
-  tasks:
-    - name: Create gaiadb database
-      postgresql_db:
-        name: gaiadb
-        state: present
-
-    - name: Enable PostGIS extension
-      postgresql_ext:
-        name: postgis
-        db: gaiadb
-
-    - name: Load transformation recipes
-      include_role:
-        name: gaiadb
-        tasks_from: load_recipes
-```
-
-### **Deployment**
+**Prerequisites**: Ansible 2.9+, Ubuntu 20.04+/RHEL 8+, SSH access
 
 ```bash
-# Check connectivity
-ansible -i inventory/production all -m ping
-
-# Deploy gaiaDb
-ansible-playbook -i inventory/production playbooks/deploy-gaiadb.yml
-
-# Deploy gaiaCore
-ansible-playbook -i inventory/production playbooks/deploy-gaiacore.yml
-
-# Deploy full stack
+# Deploy
 ansible-playbook -i inventory/production playbooks/deploy-full-stack.yml
-```
 
-### **Configuration Management**
-
-Use Ansible vault for secrets:
-
-```bash
-# Create encrypted vars file
+# Use vault for secrets
 ansible-vault create group_vars/production/vault.yml
-
-# Edit encrypted file
-ansible-vault edit group_vars/production/vault.yml
-
-# Run playbook with vault
 ansible-playbook playbook.yml --ask-vault-pass
 ```
 
-### **Air-Gapped Deployment**
-
-For air-gapped environments:
-1. Download dependencies on internet-connected system
-2. Create local package repository
-3. Transfer to air-gapped network
-4. Configure Ansible to use local repos
+See gaiaDb repository for example playbooks and roles.
 
 <br>
 
 ## **Manual Installation**
 
-**Recommended for**: Maximum control, institutional constraints, learning
+For maximum control, institutional constraints, or learning.
 
-### **System Requirements**
-- Ubuntu 20.04+ or RHEL 8+
-- 8GB+ RAM
-- 50GB+ disk space
-- PostgreSQL 12+ with PostGIS 3.0+
-- R 4.0+
+**Requirements**: Ubuntu 20.04+/RHEL 8+, 8GB+ RAM, 50GB+ disk, PostgreSQL 12+, PostGIS 3.0+
 
-### **Step 1: Install PostgreSQL/PostGIS**
-
-#### Ubuntu/Debian
 ```bash
-sudo apt-get update
+# 1. Install PostgreSQL/PostGIS
 sudo apt-get install postgresql-14 postgresql-14-postgis-3
-sudo systemctl start postgresql
-sudo systemctl enable postgresql
-```
 
-#### RHEL/CentOS
-```bash
-sudo dnf install postgresql14-server postgresql14-contrib postgis33_14
-sudo postgresql-14-setup initdb
-sudo systemctl start postgresql-14
-sudo systemctl enable postgresql-14
-```
-
-### **Step 2: Configure PostgreSQL**
-
-```bash
-# Switch to postgres user
+# 2. Configure database
 sudo -u postgres psql
-
--- Create database and user
 CREATE DATABASE gaiadb;
 CREATE USER gaia WITH PASSWORD 'your_password';
 GRANT ALL PRIVILEGES ON DATABASE gaiadb TO gaia;
-
--- Enable PostGIS
 \c gaiadb
 CREATE EXTENSION postgis;
-CREATE EXTENSION postgis_topology;
 
-\q
-```
-
-### **Step 3: Install R and Dependencies**
-
-```bash
-# Install R
-sudo apt-get install r-base r-base-dev
-
-# Install system dependencies for R packages
-sudo apt-get install \
-  libcurl4-openssl-dev \
-  libssl-dev \
-  libxml2-dev \
-  libgdal-dev \
-  libudunits2-dev \
-  libproj-dev \
-  libgeos-dev
-```
-
-### **Step 4: Install gaiaCore**
-
-```r
-# In R console
-install.packages("devtools")
-devtools::install_github("OHDSI/gaiaCore")
-```
-
-### **Step 5: Clone gaiaDb Recipes**
-
-```bash
-git clone https://github.com/OHDSI/gaiaDb.git
-cd gaiaDb
-
-# Run setup scripts
+# 3. Clone gaiaDb
+git clone https://github.com/OHDSI/gaiaDb.git && cd gaiaDb
 psql -U gaia -d gaiadb -f schema/create_schema.sql
-psql -U gaia -d gaiadb -f transformations/load_recipes.sql
 ```
 
-### **Step 6: Configure Connection**
-
-Create R script with connection details:
-
-```r
-# config.R
-library(gaiaCore)
-
-db_config <- list(
-  host = "localhost",
-  port = 5432,
-  dbname = "gaiadb",
-  user = "gaia",
-  password = Sys.getenv("GAIADB_PASSWORD")
-)
-
-# Test connection
-con <- connectToGaiaDb(db_config)
-```
-
-### **Step 7: Verify Installation**
-
-```r
-# Test loading a variable
-library(gaiaCore)
-con <- connectToGaiaDb(db_config)
-data <- loadVariable(con, variable_id = 1)
-head(data)
-```
+See gaiaDb and gaiaCore repositories for detailed setup instructions.
 
 <br>
 
-## **Kubernetes Deployment**
+## **Kubernetes & Cloud**
 
 **Status**: In development
 
-**Recommended for**: Large-scale production, multi-site deployments
+- **Kubernetes**: Helm charts, horizontal autoscaling, multi-site federation (planned Q2 2026)
+- **AWS**: Terraform modules, RDS PostgreSQL, ECS/Fargate (in development)
+- **Azure**: ARM templates, Azure Database for PostgreSQL, AKS (planned)
+- **GCP**: Cloud SQL, Cloud Run/GKE (planned)
 
-### **Planned Features**
-- Helm charts for easy deployment
-- Horizontal pod autoscaling
-- Persistent volume management
-- Service mesh integration
-- Multi-site federation
-
-### **Architecture** (Planned)
-
-```
-Kubernetes Cluster
-├── Namespace: gaia
-│   ├── gaiadb-statefulset
-│   │   ├── Persistent volumes
-│   │   └── Service (ClusterIP)
-│   ├── gaiacore-deployment
-│   │   ├── Horizontal pod autoscaler
-│   │   └── Service (LoadBalancer)
-│   └── Ingress
-│       └── TLS termination
-```
-
-### **Current Status**
-- Helm charts under development
-- Beta testing planned for Q2 2026
-- Community contributions welcome
-
-<br>
-
-## **Cloud Platform Deployments**
-
-**Status**: Planned
-
-### **AWS**
-- Terraform modules in development
-- RDS for PostgreSQL with PostGIS
-- ECS/Fargate for gaiaCore
-- S3 for geospatial datasets
-
-### **Azure**
-- ARM templates planned
-- Azure Database for PostgreSQL
-- Container Instances or AKS
-- Blob storage for datasets
-
-### **GCP**
-- Deployment manager configs planned
-- Cloud SQL with PostGIS
-- Cloud Run or GKE
-- Cloud Storage for datasets
+Community contributions welcome.
 
 <br>
 
@@ -527,193 +182,65 @@ Kubernetes Cluster
 
 <br>
 
-## **Security Considerations**
+## **Security**
 
-### **All Deployments**
-- Change default passwords
-- Use strong authentication
-- Enable SSL/TLS for database connections
-- Restrict network access (firewall rules)
-- Regular security updates
-- Audit logging
-- Backup and disaster recovery
+**All deployments**: Change default passwords, enable SSL/TLS, restrict network access, regular updates, audit logging, backups
 
-### **Container Deployments**
-- Use official base images
-- Scan images for vulnerabilities
-- Run as non-root user
-- Use secrets management
-- Limit container capabilities
-- Network segmentation
+**Containers**: Official images, vulnerability scanning, non-root user, secrets management, limited capabilities
 
-### **Cloud Deployments**
-- Use IAM roles and policies
-- Enable encryption at rest
-- Enable encryption in transit
-- Use private subnets
-- VPC peering for site connections
-- Cloud-native secrets management
+**Cloud**: IAM roles, encryption at rest/transit, private subnets, VPC peering
 
 <br>
 
-## **Monitoring and Observability**
+## **Monitoring**
 
-### **Recommended Tools**
-- **Metrics**: Prometheus + Grafana
-- **Logs**: ELK Stack or Loki
-- **Tracing**: Jaeger (for API)
-- **Uptime**: Uptime Kuma or similar
+**Tools**: Prometheus/Grafana (metrics), ELK/Loki (logs), Jaeger (tracing)
 
-### **Key Metrics to Monitor**
-- Database connection pool utilization
-- Query performance
-- API response times
-- Container resource usage
-- Disk space
-- Network throughput
+**Key metrics**: Connection pool utilization, query performance, API response times, resource usage, disk space
 
 <br>
 
-## **Backup and Recovery**
-
-### **Database Backups**
+## **Backup & Recovery**
 
 ```bash
-# PostgreSQL dump
+# Database backup
 pg_dump -U gaia gaiadb > gaiadb_backup_$(date +%Y%m%d).sql
 
-# Automated with cron
-0 2 * * * pg_dump -U gaia gaiadb | gzip > /backups/gaiadb_$(date +\%Y\%m\%d).sql.gz
-```
-
-### **Volume Backups (Docker)**
-
-```bash
-# Backup Docker volume
+# Docker volume backup
 docker run --rm -v gaiadb_data:/data -v /backup:/backup ubuntu tar czf /backup/gaiadb_data.tar.gz /data
-
-# Restore
-docker run --rm -v gaiadb_data:/data -v /backup:/backup ubuntu tar xzf /backup/gaiadb_data.tar.gz -C /
 ```
 
-### **Disaster Recovery**
-- Regular backup testing
-- Documented recovery procedures
-- Off-site backup storage
-- RTO/RPO targets defined
+Test backups regularly, document recovery procedures, store off-site, define RTO/RPO targets.
 
 <br>
 
 ## **Performance Tuning**
 
-### **PostgreSQL Tuning**
+**PostgreSQL**: Increase shared_buffers (25% RAM), work_mem (256MB), enable parallel queries
+
+**PostGIS**: Create GIST spatial indexes, ANALYZE after bulk loads, VACUUM regularly
 
 ```sql
--- Increase shared buffers (25% of RAM)
-ALTER SYSTEM SET shared_buffers = '2GB';
-
--- Increase work_mem for complex queries
-ALTER SYSTEM SET work_mem = '256MB';
-
--- Enable parallel queries
-ALTER SYSTEM SET max_parallel_workers_per_gather = 4;
-
--- Restart required
-SELECT pg_reload_conf();
+CREATE INDEX idx_geom ON table USING GIST(geom);
+VACUUM ANALYZE table;
 ```
-
-### **PostGIS Optimization**
-
-```sql
--- Create spatial indexes
-CREATE INDEX idx_geometries_geom ON geometries USING GIST(geom);
-
--- Analyze tables after bulk loads
-ANALYZE geometries;
-
--- Vacuum regularly
-VACUUM ANALYZE geometries;
-```
-
-### **gaiaCore Optimization**
-- Use parallel processing for large cohorts
-- Cache frequently accessed datasets
-- Batch database operations
-- Profile R code for bottlenecks
 
 <br>
 
 ## **Troubleshooting**
 
-### **Common Issues**
+**Connection refused**: Check `docker compose ps` or `systemctl status postgresql`, verify network with `nc -zv localhost 5432`
 
-**Connection refused to database**
-```bash
-# Check database is running
-docker compose ps  # or systemctl status postgresql
+**Out of memory**: Increase Docker memory limit or reduce batch size
 
-# Check network connectivity
-nc -zv localhost 5432
-
-# Check logs
-docker compose logs gaiadb
-```
-
-**Out of memory errors**
-```bash
-# Increase Docker memory limit
-# Edit Docker Desktop settings or daemon.json
-
-# Or reduce batch size in gaiaCore
-```
-
-**Slow spatial queries**
-```sql
--- Check if spatial indexes exist
-SELECT * FROM pg_indexes WHERE tablename = 'your_table';
-
--- Create missing indexes
-CREATE INDEX idx_table_geom ON your_table USING GIST(geom);
-```
+**Slow queries**: Check spatial indexes exist (`pg_indexes`), create if missing (`CREATE INDEX ... USING GIST`)
 
 <br>
 
-## **Migration and Upgrades**
+## **Upgrades & Help**
 
-### **Version Upgrades**
-1. Backup database
-2. Test upgrade in staging
-3. Review changelog for breaking changes
-4. Schedule maintenance window
-5. Perform upgrade
-6. Verify functionality
-7. Monitor for issues
+**Upgrades**: Backup → test in staging → review changelog → deploy → verify → monitor
 
-### **Data Migration**
-- Use pg_dump/pg_restore for PostgreSQL
-- Test migrations with subset of data
-- Validate data integrity post-migration
-- Document migration process
-
-<br>
-
-## **Additional Resources**
-
-- [Docker Documentation](https://docs.docker.com/)
-- [Podman Documentation](https://podman.io/)
-- [Ansible Documentation](https://docs.ansible.com/)
-- [PostgreSQL Documentation](https://www.postgresql.org/docs/)
-- [PostGIS Documentation](https://postgis.net/documentation/)
-- [Kubernetes Documentation](https://kubernetes.io/docs/)
-
-<br>
-
-## **Getting Help**
-
-Deployment questions? Contact the working group:
-- **Teams**: GIS Working Group channel
-- **GitHub**: [Open an issue](https://github.com/OHDSI/GIS/issues)
-- **Meetings**: Fridays 10 AM US Eastern
-- **Email**: houghtaling[at]ohdsi[dot]org
+**Help**: [GIS Teams channel](https://teams.microsoft.com), [GitHub issues](https://github.com/OHDSI/GIS/issues), Friday meetings (10 AM ET), houghtaling@ohdsi.org
 
 <br>

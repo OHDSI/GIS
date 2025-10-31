@@ -16,16 +16,16 @@ navbar:
     - text: "Home"
       icon: fa-home
       href: index.html
-    - text: "Getting Started"
-      icon: fa-home
-      href: getting-started.html
+    - text: "Get Started"
+      icon: fa-play
+      href: get-started.html
     - text: "Gaia"
       icon: fa-earth
       menu:
         - text: "Overview"
           href: gaia-intro.html
         - text: "Design"
-          href: gaia-principles.html                     # TODO add the architecture diagram
+          href: gaia-principles.html
         - text: "Schema Extensions"
           href: schema-extensions.html
         - text: "gaiaDb"
@@ -39,15 +39,6 @@ navbar:
     - text: "Vocabulary"
       icon: fa-book
       href: vocabulary.html
-    ###- text: "Vocabulary Browser"
-    ###  icon: fa-search
-    ###  href: https://ohdsi.github.io/gaiaVocabulary/
-    - text: "How to"
-      icon: fa-question
-      href: how-to.html # MERGE ht-overview, ht-local-dataset, ht-add-data-source, ht-share-data-source
-    - text: "Getting Involved"
-      icon: fa-info
-      href: getting-involved.html # MERGE gi-propose-usecase, gi-edit-docs, and start with a blurb about joining Workgroup meetings
     - text: "Developer"
       icon: fa-code
       menu:

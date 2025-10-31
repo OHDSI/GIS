@@ -336,10 +336,10 @@ div.tocify {
   </a>
 </li>
 <li>
-  <a href="getting-started.html">
-    <span class="fa fa-home"></span>
+  <a href="get-started.html">
+    <span class="fa fa-play"></span>
      
-    Getting Started
+    Get Started
   </a>
 </li>
 <li class="dropdown">
@@ -379,20 +379,6 @@ div.tocify {
     <span class="fa fa-book"></span>
      
     Vocabulary
-  </a>
-</li>
-<li>
-  <a href="how-to.html">
-    <span class="fa fa-question"></span>
-     
-    How to
-  </a>
-</li>
-<li>
-  <a href="getting-involved.html">
-    <span class="fa fa-info"></span>
-     
-    Getting Involved
   </a>
 </li>
 <li class="dropdown">
@@ -517,85 +503,38 @@ Data Model.</p>
 <h2><strong>Component Details</strong></h2>
 <div id="gaiacatalog" class="section level3">
 <h3><strong>1. gaiaCatalog</strong></h3>
-<p><strong>Purpose</strong>: Discover and document available geospatial
-data sources</p>
-<p><strong>Inputs</strong>: - External data source URLs and metadata -
-Schema.org-compliant dataset descriptions - Variable-level
-documentation</p>
-<p><strong>Outputs</strong>: - Searchable catalog of geospatial datasets
-- Standardized metadata for each data source - Links to transformation
-recipes in gaiaDb</p>
-<p><strong>Key Features</strong>: - Federated metadata sharing -
-Integration with external catalogs - Version tracking for data sources -
-Variable-level documentation</p>
-<p><strong>Technology Stack</strong>: - Schema.org standards - JSON-LD
-metadata format - Web-accessible catalog interface</p>
+<p><strong>Purpose</strong>: Data source discovery and metadata
+management</p>
+<p><strong>Technology</strong>: Schema.org, JSON-LD</p>
+<p><strong>I/O</strong>: External data URLs/metadata → Searchable
+catalog with standardized metadata</p>
 <p><br></p>
 </div>
 <div id="gaiadb" class="section level3">
 <h3><strong>2. gaiaDb</strong></h3>
-<p><strong>Purpose</strong>: Core data repository housing all geospatial
-data, processing logic, and OMOP integration</p>
-<p><strong>Inputs</strong>: - Raw geospatial datasets (shapefiles,
-GeoJSON, raster, etc.) - Patient geocoded locations (lat/lon or
-geographic identifiers) - Variable specifications (which exposures to
-calculate) - Time periods of interest - Transformation recipe
-specifications</p>
-<p><strong>Processing</strong>: - SQL routines for spatial operations -
-PostGIS functions for geospatial analysis - Exposure calculation
-algorithms - OMOP CDM integration logic - Privacy-preserving aggregation
-- Temporal alignment of exposures</p>
-<p><strong>Outputs</strong>: - OMOP External_Exposure table records -
-OMOP Location_History table records - Privacy-preserved location data -
-Standardized spatial tables - Indexed geographic features</p>
-<p><strong>Key Features</strong>: - PostgreSQL/PostGIS spatial database
-- All data processing logic in SQL/PostGIS - LinkML/JSON-LD metadata
-support - Spatial indexing for performance - Support for multiple
-geometry types (points, polygons, rasters) - Transformation recipe
-library - Temporal versioning of datasets - OMOP CDM schema
-extensions</p>
-<p><strong>Technology Stack</strong>: - PostgreSQL (&gt;= 12) - PostGIS
-(&gt;= 3.0) - PostgREST (for API exposure) - LinkML (for metadata)</p>
-<p><strong>Schema Structure</strong>:</p>
-<pre><code>gaiaDb
-├── backbone/            # Core schema (LinkML-based)
-├── working/             # OMOP integration tables
-│   ├── external_exposure
-│   ├── location_history
-│   └── location
-├── data_sources/        # Raw data storage
-├── transformations/     # SQL transformation recipes
-├── functions/           # PostGIS functions
-└── api/                 # PostgREST API exposure</code></pre>
+<p><strong>Purpose</strong>: Core data repository with all geospatial
+processing logic and OMOP integration</p>
+<p><strong>Technology</strong>: PostgreSQL 12+, PostGIS 3.0+, PostgREST,
+LinkML</p>
+<p><strong>Processing</strong>: SQL routines, PostGIS functions,
+exposure calculations, privacy-preserving aggregation, temporal
+alignment</p>
+<p><strong>I/O</strong>: Raw geospatial data + patient locations → OMOP
+External_Exposure and Location_History tables</p>
+<p><strong>Schema</strong>: backbone/ (core), working/ (OMOP tables),
+data_sources/, transformations/, functions/, api/</p>
 <p><br></p>
 </div>
 <div id="gaiacore" class="section level3">
 <h3><strong>3. gaiaCore</strong></h3>
-<p><strong>Purpose</strong>: Multi-language connector framework
-providing access to gaiaDB functionality</p>
-<p><strong>Inputs</strong>: - API requests (RESTful via PostgREST) -
-Database connection requests - Function invocation parameters</p>
-<p><strong>Processing</strong>: - Routes requests to gaiaDb -
-Orchestrates SQL function calls - Provides language-specific
-abstractions - Handles authentication/authorization - Manages connection
-pooling</p>
-<p><strong>Outputs</strong>: - Query results to client applications -
-Exposure data in client-preferred format - API responses (JSON) -
-Database query results</p>
-<p><strong>Key Features</strong>: - RESTful API access via PostgREST -
-Direct database connection support - Language-specific client libraries
-(R, Python, etc.) - Does NOT contain data processing logic (lives in
-gaiaDb) - OpenAPI specification for endpoints - Multi-paradigm access
-(API and database)</p>
-<p><strong>Technology Stack</strong>: - PostgREST (automatic API
-generation) - Language-specific connector libraries: - R: httr, DBI,
-jsonlite - Python: requests, psycopg2 - (Additional languages in
-development)</p>
-<p><strong>Architecture Principle</strong>: gaiaCore is an
-<strong>access layer</strong>, not a processing layer. All geospatial
-processing, exposure calculation, and OMOP integration logic resides in
-gaiaDb. gaiaCore simply provides convenient, multi-language access to
-that functionality.</p>
+<p><strong>Purpose</strong>: Multi-language connector framework (access
+layer only - NO processing logic)</p>
+<p><strong>Technology</strong>: PostgREST, language-specific connectors
+(R, Python)</p>
+<p><strong>I/O</strong>: API/database requests → Routed to gaiaDb →
+Results in client format</p>
+<p><strong>Key</strong>: gaiaCore orchestrates access to gaiaDb
+functions. All processing happens in gaiaDb.</p>
 <p><br></p>
 </div>
 </div>
@@ -656,103 +595,37 @@ that functionality.</p>
 </div>
 <div id="privacy-architecture" class="section level2">
 <h2><strong>Privacy Architecture</strong></h2>
-<div id="privacy-preserving-design" class="section level3">
-<h3><strong>Privacy-Preserving Design</strong></h3>
-<p>The Gaia toolchain enables geospatial analysis <strong>without
-sharing sensitive patient addresses</strong>:</p>
+<p>Gaia enables geospatial analysis <strong>without sharing sensitive
+patient addresses</strong>:</p>
 <ol style="list-style-type: decimal">
-<li><strong>Geocoding at Site</strong>
-<ul>
-<li>Patient addresses geocoded locally</li>
-<li>Only geographic identifiers leave site (e.g., Census block
-group)</li>
-<li>Lat/lon coordinates stay at originating institution</li>
-</ul></li>
-<li><strong>Aggregated Geographic Units</strong>
-<ul>
-<li>Link patients to census blocks, ZIP codes, etc.</li>
-<li>Sufficient for exposure calculation</li>
-<li>Protects individual privacy</li>
-</ul></li>
-<li><strong>Exposure Calculation</strong>
-<ul>
-<li>External exposures calculated via spatial joins</li>
-<li>Results: numeric exposure values (e.g., PM2.5 concentration)</li>
-<li>No reverse geocoding possible from exposure values</li>
-</ul></li>
-<li><strong>OMOP Integration</strong>
-<ul>
-<li>Location table contains aggregated geography only</li>
-<li>External_Exposure links to Location (not raw addresses)</li>
-<li>Standard OMOP privacy protections apply</li>
-</ul></li>
+<li><strong>Geocoding at site</strong> - Patient addresses geocoded
+locally, only geographic IDs (e.g., Census block) leave site</li>
+<li><strong>Aggregated units</strong> - Link to census blocks/ZIP codes,
+sufficient for exposure calculation</li>
+<li><strong>Exposure values only</strong> - Numeric values (e.g.,
+PM2.5), no reverse geocoding possible</li>
+<li><strong>OMOP integration</strong> - Location table contains
+aggregated geography only</li>
 </ol>
-</div>
-<div id="privacy-workflow" class="section level3">
-<h3><strong>Privacy Workflow</strong></h3>
-<pre><code>Raw Address (Protected)
-    ↓ [Geocoding at site]
-Geographic ID (e.g., Census Block Group)
-    ↓ [Can leave site]
-gaiaCore Processing
-    ↓
-Exposure Values (e.g., air quality index)
-    ↓
-OMOP External_Exposure Table</code></pre>
+<p><strong>Workflow</strong>: Raw Address (protected) → Geographic ID
+(can leave site) → Exposure Values → OMOP External_Exposure</p>
 <p><br></p>
 </div>
-</div>
-<div id="technical-design-principles" class="section level2">
-<h2><strong>Technical Design Principles</strong></h2>
-<div id="separation-of-concerns" class="section level3">
-<h3><strong>1. Separation of Concerns</strong></h3>
-<ul>
-<li><strong>gaiaCatalog</strong>: Discovery and metadata management</li>
-<li><strong>gaiaDb</strong>: Storage, processing, and OMOP
-integration</li>
-<li><strong>gaiaCore</strong>: Multi-language access and
-orchestration</li>
-<li><strong>gaiaDocker</strong>: Deployment and orchestration</li>
-<li>Each component has clear responsibilities</li>
-</ul>
-</div>
-<div id="standards-compliance" class="section level3">
-<h3><strong>2. Standards Compliance</strong></h3>
-<ul>
-<li>OMOP CDM standards for clinical data</li>
-<li>Schema.org for metadata</li>
-<li>OGC standards for geospatial operations</li>
-<li>OHDSI vocabulary conventions</li>
-</ul>
-</div>
-<div id="privacy-by-design" class="section level3">
-<h3><strong>3. Privacy by Design</strong></h3>
-<ul>
-<li>No PHI in shared components</li>
-<li>Aggregated geographies</li>
-<li>Exposure values only</li>
-<li>Local geocoding</li>
-</ul>
-</div>
-<div id="modularity" class="section level3">
-<h3><strong>4. Modularity</strong></h3>
-<ul>
-<li>Components can be used independently</li>
-<li>Clear interfaces between components</li>
-<li>Pluggable data sources</li>
-<li>Extensible transformation recipes</li>
-</ul>
-</div>
-<div id="reproducibility" class="section level3">
-<h3><strong>5. Reproducibility</strong></h3>
-<ul>
-<li>Version-controlled transformation recipes</li>
-<li>Documented data provenance</li>
-<li>Standardized vocabularies</li>
-<li>Open source tools</li>
-</ul>
+<div id="design-principles" class="section level2">
+<h2><strong>Design Principles</strong></h2>
+<ol style="list-style-type: decimal">
+<li><strong>Separation of Concerns</strong>: gaiaCatalog (discovery),
+gaiaDb (processing), gaiaCore (access), gaiaDocker (deployment)</li>
+<li><strong>Standards</strong>: OMOP CDM, Schema.org, OGC geospatial,
+OHDSI vocabulary</li>
+<li><strong>Privacy</strong>: No PHI sharing, aggregated geographies,
+local geocoding, exposure values only</li>
+<li><strong>Modularity</strong>: Independent components, clear
+interfaces, pluggable sources</li>
+<li><strong>Reproducibility</strong>: Version-controlled recipes,
+documented provenance, open source</li>
+</ol>
 <p><br></p>
-</div>
 </div>
 <div id="inputs-and-outputs-by-component" class="section level2">
 <h2><strong>Inputs and Outputs by Component</strong></h2>
@@ -944,138 +817,36 @@ orchestration</li>
 <p><br></p>
 </div>
 </div>
-<div id="integration-points" class="section level2">
-<h2><strong>Integration Points</strong></h2>
-<div id="omop-cdm-integration" class="section level3">
-<h3><strong>OMOP CDM Integration</strong></h3>
-<p>The Gaia toolchain integrates with OMOP CDM through two extension
-tables:</p>
-<div id="location_history" class="section level4">
-<h4><strong>Location_History</strong></h4>
-<pre class="sql"><code>CREATE TABLE location_history (
-  location_history_id INTEGER,
-  person_id INTEGER,
-  location_id INTEGER,
-  start_date DATE,
-  end_date DATE,
-  -- Additional fields
-);</code></pre>
-<p>Links patients to locations over time.</p>
-</div>
-<div id="external_exposure" class="section level4">
-<h4><strong>External_Exposure</strong></h4>
-<pre class="sql"><code>CREATE TABLE external_exposure (
-  external_exposure_id INTEGER,
-  person_id INTEGER,
-  exposure_concept_id INTEGER,
-  exposure_date DATE,
-  exposure_value FLOAT,
-  location_id INTEGER,
-  -- Additional fields
-);</code></pre>
-<p>Stores place-based exposure values.</p>
+<div id="omop-integration" class="section level2">
+<h2><strong>OMOP Integration</strong></h2>
+<p><strong>Extension Tables</strong>: Location_History
+(patient-location-time), External_Exposure (place-based exposures)</p>
+<p><strong>HADES</strong>: Standard packages work with extended CDM,
+cohort definitions can include exposure criteria</p>
 <p>See <a href="schema-extensions.html">Schema Extensions</a> for
 complete DDL.</p>
-</div>
-</div>
-<div id="hades-integration" class="section level3">
-<h3><strong>HADES Integration</strong></h3>
-<ul>
-<li>Standard HADES packages work with extended OMOP CDM</li>
-<li>Cohort definitions can include External_Exposure criteria</li>
-<li>Patient-level prediction uses exposure features</li>
-<li>Population-level estimation accounts for geospatial confounders</li>
-</ul>
 <p><br></p>
 </div>
-</div>
-<div id="deployment-architecture" class="section level2">
-<h2><strong>Deployment Architecture</strong></h2>
+<div id="performance-scalability" class="section level2">
+<h2><strong>Performance &amp; Scalability</strong></h2>
+<ul>
+<li><strong>Indexing</strong>: GIST spatial indexes, materialized
+views</li>
+<li><strong>Caching</strong>: Datasets, transformations, API
+responses</li>
+<li><strong>Scaling</strong>: Horizontal gaiaCore instances, connection
+pooling, batch processing</li>
+</ul>
 <p>See <a href="developer-deployment.html">Deployment Strategies</a> for
-detailed deployment options.</p>
-<div id="containerized-deployment" class="section level3">
-<h3><strong>Containerized Deployment</strong></h3>
-<pre><code>Docker Compose Stack:
-├── gaiaDb container (PostgreSQL/PostGIS)
-├── gaiaCore container(s)
-└── Network configuration</code></pre>
-</div>
-<div id="cloud-deployment" class="section level3">
-<h3><strong>Cloud Deployment</strong></h3>
-<ul>
-<li>Terraform configurations (in development)</li>
-<li>Kubernetes/Helm charts (planned)</li>
-<li>Multi-site federation support (planned)</li>
-</ul>
+deployment options.</p>
 <p><br></p>
 </div>
-</div>
-<div id="performance-considerations" class="section level2">
-<h2><strong>Performance Considerations</strong></h2>
-<div id="spatial-indexing" class="section level3">
-<h3><strong>Spatial Indexing</strong></h3>
-<ul>
-<li>PostGIS spatial indexes on all geometry columns</li>
-<li>GIST indexes for efficient spatial queries</li>
-<li>Materialized views for common queries</li>
-</ul>
-</div>
-<div id="caching" class="section level3">
-<h3><strong>Caching</strong></h3>
-<ul>
-<li>Frequently accessed datasets cached in memory</li>
-<li>Transformation results cached when possible</li>
-<li>API response caching</li>
-</ul>
-</div>
-<div id="scalability" class="section level3">
-<h3><strong>Scalability</strong></h3>
-<ul>
-<li>Horizontal scaling via multiple gaiaCore instances</li>
-<li>Database connection pooling</li>
-<li>Batch processing for large cohorts</li>
-</ul>
-<p><br></p>
-</div>
-</div>
-<div id="future-architecture-evolution" class="section level2">
-<h2><strong>Future Architecture Evolution</strong></h2>
-<div id="planned-enhancements" class="section level3">
-<h3><strong>Planned Enhancements</strong></h3>
-<ol style="list-style-type: decimal">
-<li><strong>Real-time data streams</strong> - Support for streaming
-geospatial data</li>
-<li><strong>ML integration</strong> - Built-in support for geospatial ML
-models</li>
-<li><strong>Federation</strong> - Multi-site data federation without
-data movement</li>
-<li><strong>Enhanced catalog</strong> - Advanced search and
-recommendation</li>
-<li><strong>API gateway</strong> - Unified REST API across
-components</li>
-</ol>
-</div>
-<div id="research-directions" class="section level3">
-<h3><strong>Research Directions</strong></h3>
-<ul>
-<li>Differential privacy implementations</li>
-<li>Federated learning across sites</li>
-<li>Advanced spatiotemporal modeling</li>
-<li>Integration with additional OHDSI tools</li>
-</ul>
-<p><br></p>
-</div>
-</div>
-<div id="additional-resources" class="section level2">
-<h2><strong>Additional Resources</strong></h2>
-<ul>
-<li><a href="developer-packages.html">Package Status</a></li>
-<li><a href="developer-contributing.html">Contributing
-Guidelines</a></li>
-<li><a href="developer-deployment.html">Deployment Strategies</a></li>
-<li><a href="schema-extensions.html">Schema Extensions</a></li>
-<li><a href="index.html#Roadmaps">Project Roadmaps</a></li>
-</ul>
+<div id="future-enhancements" class="section level2">
+<h2><strong>Future Enhancements</strong></h2>
+<p><strong>Planned</strong>: Real-time data streams, ML integration,
+multi-site federation, enhanced catalog, unified API gateway</p>
+<p><strong>Research</strong>: Differential privacy, federated learning,
+spatiotemporal modeling</p>
 <p><br></p>
 </div>
 </div>
