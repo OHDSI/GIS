@@ -13,7 +13,7 @@
 
 <title> OHDSI GIS WG</title>
 
-<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -497,62 +497,62 @@ in the OHDSI GIS repository)</p>
 </div>
 </div>
 </div>
-<div id="editing-the-ohdsi-gis-wg-documentation-website"
-class="section level1">
-<h1><strong>Editing the OHDSI GIS WG documentation website</strong></h1>
+<div id="editing-the-ohdsi-gis-wg-website" class="section level1">
+<h1><strong>Editing the OHDSI GIS WG Website</strong></h1>
 <div id="overview" class="section level2">
 <h2>Overview</h2>
-<p>We encourage contributions to our software documentation and our
-website. Follow these guidelines for making and proposing changes.</p>
-</div>
-<div id="website" class="section level2">
-<h2>Website</h2>
-<p>This section explains how to edit the content of the website. In this
-context, the website refers to everything at <a
-href="https://ohdsi.github.io/GIS/"
-class="uri">https://ohdsi.github.io/GIS/</a> <em>except</em> for the <a
+<p>This section explains how to edit the content of this website (hosted
+at: <a href="https://ohdsi.github.io/GIS/"
+class="uri">https://ohdsi.github.io/GIS/</a>) <em>except</em> for the <a
 href="https://ohdsi.github.io/GIS/gaiaCore"
 class="uri">https://ohdsi.github.io/GIS/gaiaCore</a> content which is
 covered in the next section.</p>
-<p>The source of the website’s content are contained in the ./rmd/
-directory at the root of this repository. Most of the content in the
-./rmd/ directory are RMarkdown files which are rendered to HTML, stored
-in the ./docs/ directory, and served as a website using GitHub Pages.
-Along with RMD files, there are images, stylesheets (CSS), and a file
-called _site.yml. The _site.yml file specifies the website structure and
-defines the elements on the site’s navbar.</p>
-<p>To edit existing pages on the website, simply find and edit the
-corresponding RMD file. To add new pages to the website, create an RMD
-file, fill it with content, and then add it to _site.yml in a fitting
-place. Whether you are editing existing pages or creating new ones, the
-function <code>RMarkdown::render_site()</code> can be run to regenerate
-the HTML files docs directory. More on rendering below.</p>
+<p>To contribute to the website, add content into the <code>rmd/</code>
+folder. This is an overview of <code>rmd/</code>:</p>
+<ul>
+<li><code>rmd/</code> - the source of this website’s content;
+<ul>
+<li><code>.Rmd</code> files - the website documentation</li>
+<li><code>_site.yml</code> - specifies website structure and defines the
+elements on the site’s navbar.</li>
+<li>Images and stylesheets - assets for the website</li>
+</ul></li>
+</ul>
+<blockquote>
+<p>[!WARNING] Do <strong>NOT</strong> directly edit any HTML pages but
+<strong>ONLY</strong> <code>.Rmd</code> files. They will be overwritten
+in your contribution as <code>.Rmd</code> files are rendered to HTML,
+stored in the <code>docs/</code> directory, and then deployed via GitHub
+Pages.</p>
+</blockquote>
 </div>
-<div id="r-package-documentation" class="section level2">
-<h2>R Package Documentation</h2>
-<p>R Package documentation is created using ROxygen within R scripts.
-The ROxygen is rendered to .Rd files by running
-<code>devtools::document()</code>. After documentation is created, the
-function <code>pkgdown::build_site()</code> can be run to render the .Rd
-files into HTML, which automatically ends up in ./docs/gaiaCore/ and can
-be accessed from the website. More on rendering below.</p>
+<div id="editing-content-or-creating-new-pages" class="section level2">
+<h2>Editing Content or Creating New Pages</h2>
+<p>To edit existing pages on the website, find the corresponding
+<code>.Rmd</code> file. To add new pages to the website, create an
+<code>.Rmd</code> file, add content, and then include it to
+<code>_site.yml</code>.</p>
 </div>
-<div id="rendering" class="section level2">
-<h2>Rendering</h2>
-<p>If you’ve been keeping track, there are three functions which need to
-be called to generate the HTML for the website: 1.
-<code>devtools::document()</code> creates .Rd files from inline ROxygen
-2. <code>RMarkdown::render_site()</code> creates HTML for website
-content 3. <code>pkgdown::build_site()</code> creates HTML for the R
-Package documentation</p>
-<p>Running three functions each time you need to regenerate the website
-can be a drag. Even worse, the website won’t generate correctly if they
-are run out of order.</p>
-<p>To make things easier, there is a helper R script,
-<code>render_gaia_site.R</code>, that can be run using
-<code>source('./render_gaia_site.R')</code>. This simply calls those
-three functions in the correct order. It makes life just a bit
-easier.</p>
+<div id="rendering-website-changes" class="section level2">
+<h2>Rendering Website Changes</h2>
+<p>To generate the HTML for the website, activate R within the
+<code>rmd/</code> directory. If <code>renv</code> is not already
+installed, it will be installed into your R instance. Then perform the
+following commands:</p>
+<ol style="list-style-type: decimal">
+<li><code>renv::restore()</code> – downloads needed packages for
+rendering website (this may take some time)</li>
+<li><code>devtools::document()</code> – creates <code>.Rd</code> files
+from inline ROxygen</li>
+<li><code>RMarkdown::render_site()</code> – create HTML for website
+content</li>
+<li><code>pkgdown::build_site()</code> – create HTML for the R Package
+documentation and adds HTML into <code>docs/</code></li>
+</ol>
+<blockquote>
+<p>[!NOTE] Step 1 only needs to be ran once. After running this, you can
+skip step 1.</p>
+</blockquote>
 </div>
 <div id="publishing" class="section level2">
 <h2>Publishing</h2>

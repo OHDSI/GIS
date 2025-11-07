@@ -47,32 +47,43 @@ The only remaining field in the form is for linking "work order" tickets. This f
 > `- [ ] #198` (you can use this shorthand if the issue is in the OHDSI GIS repository)
 
 
-# **Editing the OHDSI GIS WG documentation website**
+# **Editing the OHDSI GIS WG Website**
 
 ## Overview
 
-We encourage contributions to our software documentation and our website. Follow these guidelines for making and proposing changes.
+This section explains how to edit the content of this website (hosted at: https://ohdsi.github.io/GIS/) *except* for the https://ohdsi.github.io/GIS/gaiaCore content which is covered in the next section.
 
-## Website
-This section explains how to edit the content of the website. In this context, the website refers to everything at https://ohdsi.github.io/GIS/ *except* for the https://ohdsi.github.io/GIS/gaiaCore content which is covered in the next section.
+To contribute to the website, add content into the `rmd/` folder.
+This is an overview of `rmd/`:
 
-The source of the website's content are contained in the ./rmd/ directory at the root of this repository. Most of the content in the ./rmd/ directory are RMarkdown files which are rendered to HTML, stored in the ./docs/ directory, and served as a website using GitHub Pages. Along with RMD files, there are images, stylesheets (CSS), and a file called _site.yml. The _site.yml file specifies the website structure and defines the elements on the site's navbar.
+- `rmd/` - the source of this website's content;
+  - `.Rmd` files - the website documentation
+  - `_site.yml` - specifies website structure and defines the elements on the site's navbar.
+  - Images and stylesheets - assets for the website
 
-To edit existing pages on the website, simply find and edit the corresponding RMD file. To add new pages to the website, create an RMD file, fill it with content, and then add it to _site.yml in a fitting place. Whether you are editing existing pages or creating new ones, the function `RMarkdown::render_site()` can be run to regenerate the HTML files docs directory. More on rendering below.
+> [!WARNING]
+> Do **NOT** directly edit any HTML pages but **ONLY** `.Rmd` files.
+> They will be overwritten in your contribution as `.Rmd` files are rendered to HTML, stored in the `docs/` directory, and then deployed via GitHub Pages.
 
-## R Package Documentation
-R Package documentation is created using ROxygen within R scripts. The ROxygen is rendered to .Rd files by running `devtools::document()`. After documentation is created, the function `pkgdown::build_site()` can be run to render the .Rd files into HTML, which automatically ends up in ./docs/gaiaCore/ and can be accessed from the website. More on rendering below.
+## Editing Content or Creating New Pages
 
-## Rendering
+To edit existing pages on the website, find the corresponding `.Rmd` file. 
+To add new pages to the website, create an `.Rmd` file, add content, and then include it to `_site.yml`. 
 
-If you've been keeping track, there are three functions which need to be called to generate the HTML for the website:
-1. `devtools::document()` creates .Rd files from inline ROxygen
-2. `RMarkdown::render_site()` creates HTML for website content
-3. `pkgdown::build_site()` creates HTML for the R Package documentation
+## Rendering Website Changes
 
-Running three functions each time you need to regenerate the website can be a drag. Even worse, the website won't generate correctly if they are run out of order.
+To generate the HTML for the website, activate R within the `rmd/` directory.
+If `renv` is not already installed, it will be installed into your R instance.
+Then perform the following commands:
 
-To make things easier, there is a helper R script, `render_gaia_site.R`, that can be run using `source('./render_gaia_site.R')`. This simply calls those three functions in the correct order. It makes life just a bit easier.
+1. `renv::restore()` -- downloads needed packages for rendering website (this may take some time)
+2. `devtools::document()` -- creates `.Rd` files from inline ROxygen
+3. `RMarkdown::render_site()` -- create HTML for website content
+4. `pkgdown::build_site()` -- create HTML for the R Package documentation and adds HTML into `docs/`
+
+> [!NOTE]
+> Step 1 only needs to be ran once.
+> After running this, you can skip step 1.
 
 ## Publishing
 
