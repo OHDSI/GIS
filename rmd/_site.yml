@@ -28,6 +28,10 @@ navbar:
           href: gaia-principles.html
         - text: "Schema Extensions"
           href: schema-extensions.html
+        - text: "Use Cases"
+          href: use-cases.html
+        - text: "Analysis"
+          href: analysis.html
         - text: "gaiaDb"
           href: gaiaDb.html
         - text: "gaiaCore"

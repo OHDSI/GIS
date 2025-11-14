@@ -43,6 +43,12 @@ script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
 ![OMOP GIS Schema Extensions - [Click here to download](https://github.com/OHDSI/GIS/raw/main/rmd/images/cdm_extension_erd.png)](images/cdm_extension_erd.png){width=150%}
 <br>
 
+## **Overview**
+
+The OMOP GIS Vocabulary Package extends the OMOP Common Data Model (CDM) to support geospatially-linked health determinants and environmental exposures. This extension is anchored by the **external_exposure** table, which serves as the foundational structure enabling integration of spatial, environmental, and sociodemographic data into observational health research workflows.
+
+<br>
+
 ```{r docLoopGaia, echo=FALSE, results='asis'}
 
 tableSpecs <- readr::read_csv("../inst/csv/Gaia_Table_Level.csv", show_col_types = FALSE)
@@ -94,4 +100,9 @@ for(tb in tables) {
            kable_styling(c("condensed","hover"), position = "center", full_width = T, font_size = 13))
 
   }
+```
+
+<br>
+
+```{r child="sections/6_cdm_extensions.Rmd"}
 ```
