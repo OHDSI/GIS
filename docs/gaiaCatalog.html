@@ -13,7 +13,7 @@
 
 <title> OHDSI GIS WG</title>
 
-<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -29,9 +29,6 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -226,75 +223,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
-
-</style>
-
-
 
 </head>
 
@@ -302,16 +230,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -336,10 +254,10 @@ div.tocify {
   </a>
 </li>
 <li>
-  <a href="getting-started.html">
-    <span class="fa fa-home"></span>
+  <a href="get-started.html">
+    <span class="fa fa-play"></span>
      
-    Getting Started
+    Get Started
   </a>
 </li>
 <li class="dropdown">
@@ -361,13 +279,22 @@ div.tocify {
       <a href="schema-extensions.html">Schema Extensions</a>
     </li>
     <li>
-      <a href="gaiaDB.html">gaiaDB</a>
+      <a href="use-cases.html">Use Cases</a>
+    </li>
+    <li>
+      <a href="analysis.html">Analysis</a>
+    </li>
+    <li>
+      <a href="gaiaDb.html">gaiaDb</a>
     </li>
     <li>
       <a href="gaiaCore.html">gaiaCore</a>
     </li>
     <li>
-      <a href="gaiaOHDSI.html">gaiaOHDSI</a>
+      <a href="gaiaCatalog.html">gaiaCatalog</a>
+    </li>
+    <li>
+      <a href="gaiaDocker.html">gaiaDocker</a>
     </li>
   </ul>
 </li>
@@ -378,18 +305,37 @@ div.tocify {
     Vocabulary
   </a>
 </li>
-<li>
-  <a href="how-to.html">
-    <span class="fa fa-question"></span>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-code"></span>
      
-    How to
+    Developer
+     
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="developer.html">Overview</a>
+    </li>
+    <li>
+      <a href="developer-packages.html">Package Status</a>
+    </li>
+    <li>
+      <a href="developer-contributing.html">Contributing</a>
+    </li>
+    <li>
+      <a href="developer-architecture.html">Architecture</a>
+    </li>
+    <li>
+      <a href="developer-deployment.html">Deployment</a>
+    </li>
+  </ul>
 </li>
 <li>
-  <a href="getting-involved.html">
-    <span class="fa fa-info"></span>
+  <a href="project-management.html">
+    <span class="fa fa-tasks"></span>
      
-    Getting Involved
+    Project Management
   </a>
 </li>
       </ul>
@@ -415,74 +361,70 @@ WG</h1>
 </div>
 
 
-<div id="getting-started-with-gaia" class="section level1">
-<h1><strong>Getting Started with Gaia</strong></h1>
-<p>For background information on Gaia, see the <a
-href="gaia-intro.html#Overview">Gaia Overview</a>. For an explanation of
-the Gaia architecture, see the <a href="framework.html">Framework
-Overview</a>.</p>
-<div id="installation" class="section level2">
-<h2>Installation</h2>
-<p>To get started with Gaia you’ll need to install <a
-href="gaia-core.html">gaiaCore (R Package)</a> from GitHub, create a
-PostGIS database and load the metadata source files, and then connect to
-the database from your R environment:</p>
-<p><br></p>
-<div id="gaiacore-r-package" class="section level3">
-<h3>gaiaCore (R Package)</h3>
-<ol style="list-style-type: decimal">
-<li><p>See the instructions <a
-href="https://ohdsi.github.io/Hades/rSetup.html">here</a> for
-configuring your R environment, including RTools and Java.</p></li>
-<li><p>You can install the latest version of <a
-href="gaia-core.html">gaiaCore (R Package)</a> from GitHub
-with:</p></li>
-</ol>
-<pre class="r"><code># install.packages(&quot;remotes&quot;)
-
-remotes::install_github(&quot;OHDSI/GIS&quot;)</code></pre>
-<p><br></p>
+<div id="gaiacatalog" class="section level1">
+<h1><strong>gaiaCatalog</strong></h1>
+<div id="description" class="section level2">
+<h2>Description</h2>
+<p>gaiaCatalog is a <strong>metadata catalog</strong> for discovering
+and managing geospatial data sources. It provides a searchable,
+Schema.org-compliant interface for finding datasets relevant to OHDSI
+GIS research.</p>
 </div>
-<div id="postgis-database-catalog-and-staging" class="section level3">
-<h3>PostGIS Database (Catalog and Staging)</h3>
-<p>Once you have a postgres database with PostGIS installed, the helper
-script <code>initialize.sql</code> in the <a
-href="https://github.com/OHDSI/GIS/tree/main/inst/">inst directory</a>
-will do the rest of the setup. This includes:</p>
-<ol style="list-style-type: decimal">
-<li>Creating a schema named “backbone”</li>
-<li>Creating the tables described in the <a
-href="gaia-datamodels.html#Backbone">backbone specification</a> and
-sequences for autoincrementing identifiers.</li>
-<li>Inserting <a href="gaia-catalog.html">Gaia Catalog</a> metadata
-(IMPORTANT: script assumes the files ‘./csv/data_source.csv’ and
-‘./csv/variable_source.csv’ exist relative to ‘initialize.sql’, as they
-do in the <a href="https://github.com/OHDSI/GIS/tree/main/inst/">inst
-directory</a>) 4.Populating the geom_index and attr_index</li>
-</ol>
+<div id="key-features" class="section level2">
+<h2>Key Features</h2>
+<ul>
+<li><strong>Schema.org compliant metadata</strong> for standardized data
+description</li>
+<li><strong>Federated data source discovery</strong> across multiple
+catalogs</li>
+<li><strong>Variable-level documentation</strong> for understanding
+dataset contents</li>
+<li><strong>Integration with external catalogs</strong> for broader data
+discovery</li>
+<li><strong>Solr-powered search</strong> for fast, flexible
+querying</li>
+</ul>
 </div>
-<div id="connecting-the-database-to-r" class="section level3">
-<h3>Connecting the Database to R</h3>
-<ol style="list-style-type: decimal">
-<li>Create a connection from your R environment to the PostGIS database.
-This can be done using the DatabaseConnector package:</li>
-</ol>
-<pre><code>library(gaiaCore)
-
-connectionDetails &lt;- DatabaseConnector::createConnectionDetails(
-  dbms = &quot;postgresql&quot;,
-  server = &quot;localhost/gaiaDB&quot;,
-  port = 5432,
-  user=&quot;postgres&quot;,
-  password = &quot;mysecretpassword&quot;) </code></pre>
+<div id="use-cases" class="section level2">
+<h2>Use Cases</h2>
+<ul>
+<li>Discover available geospatial datasets for research</li>
+<li>Understand dataset variables and temporal coverage</li>
+<li>Find data sources matching specific geographic regions</li>
+<li>Document and share institutional datasets</li>
+<li>Link data sources to gaiaDb transformation recipes</li>
+</ul>
 </div>
+<div id="integration" class="section level2">
+<h2>Integration</h2>
+<p>gaiaCatalog integrates with the Gaia toolchain by: - Providing
+dataset metadata that informs gaiaDb ingestion - Linking to
+transformation recipes in gaiaDb - Enabling researchers to identify
+relevant exposures - Supporting reproducible research through data
+provenance</p>
+</div>
+<div id="access" class="section level2">
+<h2>Access</h2>
+<ul>
+<li><strong>Web Interface</strong>: Flask-based catalog browser (port
+5000 in gaiaDocker)</li>
+<li><strong>API</strong>: Solr REST API for programmatic access</li>
+<li><strong>Database</strong>: PostgreSQL backend for metadata
+storage</li>
+</ul>
+</div>
+<div id="documentation" class="section level2">
+<h2>Documentation</h2>
+<ul>
+<li><a href="https://github.com/OHDSI/gaiaCatalog">Repository</a></li>
+<li><a href="developer-deployment.html">Deployment via
+gaiaDocker</a></li>
+</ul>
 </div>
 </div>
 
 
 
-</div>
-</div>
 
 </div>
 
@@ -515,35 +457,6 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
-<script>
-$(document).ready(function ()  {
-
-    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
-    $('.unlisted.unnumbered').addClass('toc-ignore')
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

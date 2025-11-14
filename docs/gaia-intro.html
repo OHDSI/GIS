@@ -13,7 +13,7 @@
 
 <title> OHDSI GIS WG</title>
 
-<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -336,10 +336,10 @@ div.tocify {
   </a>
 </li>
 <li>
-  <a href="getting-started.html">
-    <span class="fa fa-home"></span>
+  <a href="get-started.html">
+    <span class="fa fa-play"></span>
      
-    Getting Started
+    Get Started
   </a>
 </li>
 <li class="dropdown">
@@ -361,13 +361,22 @@ div.tocify {
       <a href="schema-extensions.html">Schema Extensions</a>
     </li>
     <li>
-      <a href="gaiaDB.html">gaiaDB</a>
+      <a href="use-cases.html">Use Cases</a>
+    </li>
+    <li>
+      <a href="analysis.html">Analysis</a>
+    </li>
+    <li>
+      <a href="gaiaDb.html">gaiaDb</a>
     </li>
     <li>
       <a href="gaiaCore.html">gaiaCore</a>
     </li>
     <li>
-      <a href="gaiaOHDSI.html">gaiaOHDSI</a>
+      <a href="gaiaCatalog.html">gaiaCatalog</a>
+    </li>
+    <li>
+      <a href="gaiaDocker.html">gaiaDocker</a>
     </li>
   </ul>
 </li>
@@ -378,18 +387,37 @@ div.tocify {
     Vocabulary
   </a>
 </li>
-<li>
-  <a href="how-to.html">
-    <span class="fa fa-question"></span>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-code"></span>
      
-    How to
+    Developer
+     
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="developer.html">Overview</a>
+    </li>
+    <li>
+      <a href="developer-packages.html">Package Status</a>
+    </li>
+    <li>
+      <a href="developer-contributing.html">Contributing</a>
+    </li>
+    <li>
+      <a href="developer-architecture.html">Architecture</a>
+    </li>
+    <li>
+      <a href="developer-deployment.html">Deployment</a>
+    </li>
+  </ul>
 </li>
 <li>
-  <a href="getting-involved.html">
-    <span class="fa fa-info"></span>
+  <a href="project-management.html">
+    <span class="fa fa-tasks"></span>
      
-    Getting Involved
+    Project Management
   </a>
 </li>
       </ul>
@@ -415,206 +443,331 @@ WG</h1>
 </div>
 
 
-<div id="gaia" class="section level1">
-<h1><strong>Gaia</strong></h1>
+<div id="gaia-toolchain" class="section level1">
+<h1><strong>Gaia Toolchain</strong></h1>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>TODO</p>
+<p><strong>Gaia</strong> is an integrated toolchain for combining
+geospatial data with OMOP Common Data Model (CDM) clinical data to
+enable population health research. Developed by the OHDSI GIS Working
+Group, Gaia provides infrastructure, software, standards, and workflows
+for integrating place-based datasets into patient-based health
+databases.</p>
+<p>The name “Gaia” refers to the Greek personification of Earth,
+reflecting the toolchain’s focus on place-based health determinants and
+the spatial context of human health.</p>
+<div id="mission" class="section level3">
+<h3>Mission</h3>
+<p>Improve the health of populations by generating reliable evidence
+from integrated geospatial and person-level health data.</p>
+</div>
 <div id="current-scope" class="section level3">
 <h3>Current Scope</h3>
-<p>TODO</p>
+<p>Gaia currently supports:</p>
+<ul>
+<li><strong>Geographic data sources</strong>: Environmental exposures,
+social determinants of health, demographic data, infrastructure</li>
+<li><strong>Spatial data types</strong>: Polygons (census tracts,
+counties), points (facilities, monitoring stations), rasters (climate,
+pollution)</li>
+<li><strong>Temporal coverage</strong>: Historical and current datasets
+with versioning support</li>
+<li><strong>Geographic coverage</strong>: Primarily US-focused with
+expanding international support</li>
+<li><strong>OMOP integration</strong>: External_Exposure and
+Location_History extension tables</li>
+<li><strong>Privacy preservation</strong>: Geocoding at site, aggregated
+geographies, exposure values only</li>
+</ul>
 </div>
 <div id="limitations" class="section level3">
 <h3>Limitations</h3>
-<p>TODO</p>
+<p>Current limitations being addressed:</p>
+<ul>
+<li><strong>Real-time data</strong>: Limited support for
+streaming/real-time geospatial data (planned enhancement)</li>
+<li><strong>Global coverage</strong>: Majority of cataloged datasets
+focus on United States (expanding)</li>
+<li><strong>Vocabulary coverage</strong>: Ongoing development of OMOP
+GIS, Exposome, and SDoH vocabularies</li>
+<li><strong>Federated analytics</strong>: Multi-site federation
+architecture in development</li>
+<li><strong>Machine learning</strong>: Limited built-in ML capabilities
+(planned integration)</li>
+</ul>
+<p><br></p>
 </div>
 </div>
 <div id="overview" class="section level2">
 <h2>Overview</h2>
-<p><strong>Gaia</strong> refers to the amalgamation of infrastructure,
-software, standards, tools, and the overall workflow that the OHDSI GIS
-Workgroup has developed to assist researchers with integrating
-place-based datasets into their patient-based health database and
-subsequent analyses.</p>
-<p><strong>Gaia</strong> includes multiple major elements: -
-gaiaCatalog: a functional metadata catalog containing references to
-publicly-hosted geospatial datasets and instructions for their download
-and standardization - gaiaCore: a Postgis database for managing
-harmonized data sources, the dockerized DeGauss geocoding tool, and
-gaiaR, an R package for managing interactions between gaiaCore,
-gaiaCatalog, and any of the Gaia “extensions” - Extensions: a broad
-suite of software packages that are powered by gaiaCore. The most
-relevant of these packages is gaiaOhdsi, an R package that contains
-operations specific to interacting with an OMOP CDM or external OHDSI
-software. Other example of extensions are the gaiaVis tools which
-provide a set of visualizations for data in gaiaCore.</p>
+<p>Gaia consists of multiple interconnected components:</p>
+<div id="core-infrastructure" class="section level3">
+<h3><strong>Core Infrastructure</strong></h3>
+<p><strong><a href="gaiaDb.html">gaiaDb</a></strong> -
+PostgreSQL/PostGIS database - Core data repository with all geospatial
+processing logic - SQL routines and PostGIS functions for spatial
+operations - OMOP CDM integration and exposure calculations -
+LinkML/JSON-LD metadata support - Transformation recipe library</p>
+<p><strong><a href="gaiaCore.html">gaiaCore</a></strong> -
+Multi-language connector framework - RESTful API access via PostgREST -
+Direct database connection support - Language-specific client libraries
+(R, Python) - Orchestrates functions defined in gaiaDb - Zero data
+processing logic (access layer only)</p>
+<p><strong><a href="gaiaCatalog.html">gaiaCatalog</a></strong> -
+Metadata catalog - Functional metadata for publicly-hosted geospatial
+datasets - Schema.org-compliant dataset descriptions - Automated
+retrieval, extraction, transformation, loading (ETL) instructions -
+Federated metadata sharing - Version tracking for data sources</p>
+<p><strong><a href="gaiaDocker.html">gaiaDocker</a></strong> -
+Deployment orchestration - Coordinated image builds for entire Gaia
+stack - Versioned releases with docker-compose profiles - Integration
+with OHDSI Broadsea ecosystem - Official deployment method for all
+environments</p>
+</div>
+<div id="vocabulary-resources" class="section level3">
+<h3><strong>Vocabulary Resources</strong></h3>
+<p><strong><a href="vocabulary.html">OMOP GIS Vocabulary
+Package</a></strong> - Custom vocabularies - OMOP GIS Vocabulary
+(geographic entities, spatial relationships) - OMOP Exposome Vocabulary
+(environmental toxins, pollutants) - OMOP SDoH Vocabulary (social
+determinants from ADI, AHRQ, COI, EJI, SEDH, SVI, SDG, SDOHO) -
+Developed via Custom Vocabulary Builder (CVB) - Delta files available in
+<a
+href="https://github.com/TuftsCTSI/CVB/tree/main/GIS/Ontology">TuftsCTSI/CVB</a></p>
+<p><br></p>
+</div>
 </div>
 <div id="purpose" class="section level2">
 <h2>Purpose</h2>
-<p>What is the purpose of Gaia? Why are we doing all of this?</p>
-<p>Gaia provides a standardized, automated, reproducible, and easily
-shareable means for integrating place-based datasets into a database of
-longitudinal patient health data.</p>
+<p>Gaia provides a <strong>standardized, automated, reproducible, and
+shareable</strong> means for integrating place-based datasets into
+longitudinal patient health databases.</p>
+<p><strong>Key capabilities</strong>: - Harmonize disparate geospatial
+datasets into common format - Link patient locations to environmental
+and social exposures - Calculate spatiotemporal exposure metrics while
+preserving privacy - Integrate exposures into OMOP CDM for analytics -
+Enable federated network studies with reproducible workflows</p>
+<p><br></p>
 </div>
-<div id="the-case-for-gaia" class="section level2">
-<h2>The Case for Gaia</h2>
-<div id="simplest-case" class="section level3">
-<h3>Simplest case</h3>
-<p>The <em>simplest case</em> for Gaia is a single researcher looking to
-leverage place-based data. After standing up a local or cloud instance
-of GaiaCore, any researcher now has access to a wealth of curated
-sources of geospatial data ranging from environmental toxin data to one
-of many Social Determinants of Health Indexes derived from the US Census
-data. Instead of the countless hours of work typical to munging multiple
-disparate geospatial datasets, the researcher can simply use the
-functions from the gaiaR package to load datasets into their Postgis
-database all in a harmonized geospatial data format. They’ve now quickly
-enabled datasets across many domains, years, and regions in a single
-Postgis database to which they connect using the software of their
-choice and begin performing ad hoc exploratory data analyses, creating
-visualizations, or even powering their own geospatial applications.</p>
+<div id="use-cases" class="section level2">
+<h2>Use Cases</h2>
+<div id="single-researcher" class="section level3">
+<h3><strong>Single Researcher</strong></h3>
+<p>A researcher deploys gaiaDocker locally and gains immediate access to
+curated geospatial data sources:</p>
+<pre class="bash"><code>docker compose --profile gaia up -d</code></pre>
+<p>They can now: - Load harmonized datasets across multiple domains
+(environment, demographics, SDoH) - Perform spatial joins and
+exploratory analyses - Create visualizations and geospatial applications
+- Access data via API or direct database connection</p>
+<p><strong>Example</strong>: Link air quality monitoring data (EPA) with
+social vulnerability index (CDC) to study environmental justice.</p>
 </div>
-<div id="using-gaiacore-with-an-omop-shaped-database"
-class="section level3">
-<h3>Using GaiaCore with an OMOP-shaped database</h3>
-<p>Taking this scenario a step further, a researcher with an established
-OMOP CDM database may wish to incorporate a subset of geospatial
-variables into their CDM database alongside their patient health data.
-The steps necessary to perform this ingestion, which requires geocoding
-of patient address and a spatiotemporal join, are all handled by
-GaiaCore and the gaiaOhdsi extension. Thehe DeGauss geocoder, a
-lightweight geocoder that operates fully locally to ensure that patient
-information is not transmitted, is easily utilized through a gaiaR
-wrapper. standardized spatiotemporal joins from the gaiaOhdsi extension
-relate patient addresses to polygon, line, or point geometries. By
-transforming the place-based data into patient-level information, it is
-now ready to be inserted into the CDM extension table
-“exposure_occurrence”. The DDL and insert scripts for this table are
-also contained in the gaiaOhdsi extension. Once the data has been added
-to the CDM, it can be used to create cohort definitions, develop
-predictive models, and generally utilized by all relevant external OHDSI
-tooling.</p>
+<div id="omop-cdm-integration" class="section level3">
+<h3><strong>OMOP CDM Integration</strong></h3>
+<p>A researcher with an OMOP CDM database integrates geospatial
+exposures:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Geocode patient addresses locally</strong> using DeGauss
+(containerized, privacy-preserving)</li>
+<li><strong>Spatial joins</strong> via gaiaDb SQL functions link
+locations to exposures</li>
+<li><strong>Calculate exposures</strong> for residence periods (e.g.,
+average PM2.5 during pregnancy)</li>
+<li><strong>Populate OMOP tables</strong>: External_Exposure and
+Location_History</li>
+<li><strong>Analytics</strong> using standard HADES tools (cohort
+definitions, patient-level prediction, population-level estimation)</li>
+</ol>
+<p>All processing happens in gaiaDb with privacy preservation: - Only
+aggregated geographic identifiers (census block, ZIP) leave site -
+Exposure values contain no reverse-geocoding information - Standard OMOP
+privacy protections apply</p>
+<p><strong>Example</strong>: Calculate neighborhood deprivation index
+exposure during critical developmental windows for pediatric asthma
+cohort.</p>
 </div>
-<div id="federated-networks-and-research" class="section level3">
-<h3>Federated networks and research</h3>
-<p>Finally, Gaia enables standardized and reproducible workflows for
-federated data networks and studies. The process highlighted above to
-retrieve and harmonize geospatial datasets, perform spatiotemporal joins
-to transform place-based data to person-level information, and insert
-person-level information into an OMOP CDM and define cohorts, is fully
-reproducible. Each step of the process contains detailed, structured
-metadata focused on provenance of source data and rationale for
-transformation methods. By scripting and containerizing an entire Gaia
-workflow, the process of pairing place-based data, often handled using
-undocumented ad-hoc methods unique to single sites, can be packaged and
-shipped across an entire network with minimal effort.</p>
-<p>The <em>simplest case</em> for Gaia is a single researcher looking to
-leverage place-based data. After standing up a local or cloud instance
-of gaiaCore, any researcher now has access to a wealth of curated
-sources of geospatial data ranging from environmental toxin data to one
-of many Social Determinants of Health Indexes derived from the US Census
-data. Instead of the countless hours of work typical to munging multiple
-disparate geospatial datasets, the researcher can simply use the
-functions from the gaiaR package to load datasets into their Postgis
-database all in a harmonized geospatial data format. They’ve now quickly
-enabled datasets across many domains, years, and regions in a single
-Postgis database to which they connect using the software of their
-choice and begin performing ad hoc exploratory data analyses, creating
-visualizations, or even powering their own geospatial applications.</p>
-<p>Taking this scenario a step further, a researcher with an established
-OMOP CDM database may wish to incorporate a subset of geospatial
-variables into their CDM database alongside their patient health data.
-The steps necessary to perform this ingestion, which requires geocoding
-of patient address and a spatiotemporal join, are all handled by
-gaiaCore and the gaiaOhdsi extension. Thehe DeGauss geocoder, a
-lightweight geocoder that operates fully locally to ensure that patient
-information is not transmitted, is easily utilized through a gaiaR
-wrapper. standardized spatiotemporal joins from the gaiaOhdsi extension
-relate patient addresses to polygon, line, or point geometries. By
-transforming the place-based data into patient-level information, it is
-now ready to be inserted into the CDM extension table
-“exposure_occurrence”. The DDL and insert scripts for this table are
-also contained in the gaiaOhdsi extension. Once the data has been added
-to the CDM, it can be used to create cohort definitions, develop
-predictive models, and generally utilized by all relevant external OHDSI
-tooling.</p>
-<p>Finally, Gaia enables standardized and reproducible workflows for
-federated data networks and studies. The process highlighted above to
-retrieve and harmonize geospatial datasets, perform spatiotemporal joins
-to transform place-based data to person-level information, and insert
-person-level information into an OMOP CDM and define cohorts, is fully
-reproducible. Each step of the process contains detailed, structured
-metadata focused on provenance of source data and rationale for
-transformation methods. By scripting and containerizing an entire Gaia
-workflow, the process of pairing place-based data, often handled using
-undocumented ad-hoc methods unique to single sites, can be packaged and
-shipped across an entire network with minimal effort.</p>
+<div id="federated-network-research" class="section level3">
+<h3><strong>Federated Network Research</strong></h3>
+<p>Gaia enables reproducible workflows across OHDSI data networks:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Package workflow</strong> - Script entire pipeline from
+geocoding → exposure calculation → OMOP integration</li>
+<li><strong>Containerize</strong> - Deploy via gaiaDocker with versioned
+releases</li>
+<li><strong>Distribute</strong> - Ship to network sites with minimal
+configuration</li>
+<li><strong>Execute</strong> - Sites run standardized workflow
+locally</li>
+<li><strong>Aggregate</strong> - Combine summary statistics without
+sharing PHI</li>
+</ol>
+<p>All steps include detailed provenance metadata and transformation
+documentation.</p>
+<p><strong>Example</strong>: Multi-site study examining association
+between greenspace exposure and mental health outcomes across diverse
+urban environments.</p>
+<p><br></p>
 </div>
 </div>
 </div>
-<div id="added-from-gaia-framework-overview-below"
-class="section level1">
-<h1>Added from Gaia Framework Overview (below)</h1>
-</div>
-<div id="gaia-framework-overview" class="section level1">
-<h1><strong>Gaia Framework Overview</strong></h1>
+<div id="gaia-framework" class="section level1">
+<h1><strong>Gaia Framework</strong></h1>
 <div>
 <img src="images/framework_overview.png"></img>
 </div>
-<p>The Gaia Framework provides the highest-level view of the components
-that compose Gaia; the framework is divided into three main parts, a
-functional metadata repository (Catalog), staging database and execution
-engine (Core), and ecosystem of Gaia-compatible software packages
-(Extensions):</p>
-<hr />
-<p><br></p>
-<div id="gaia-catalog" class="section level2">
-<h2><a href="gaia-catalog.html">Gaia Catalog</a></h2>
-<p>A readily-extensible catalog of source datasets. Gaia Catalog
-contains metadata for public geospatial datasets. Descriptive metadata
-facilitates search and discovery of relevant datasets. Functional
-metadata (machine-actionable instructions) enables automated retrieval,
-extraction, transformation, and loading of public datasets and their
-constituent variables.</p>
-<hr />
+<p>The Gaia Framework consists of three main components working
+together:</p>
+<div id="catalog-layer" class="section level2">
+<h2><strong>1. Catalog Layer</strong></h2>
+<p><strong><a href="gaiaCatalog.html">gaiaCatalog</a></strong> provides
+data discovery and metadata management:</p>
+<ul>
+<li><strong>Descriptive metadata</strong>: Facilitates search and
+discovery of datasets</li>
+<li><strong>Functional metadata</strong>: Machine-actionable ETL
+instructions</li>
+<li><strong>Schema.org compliance</strong>: Standard metadata format for
+interoperability</li>
+<li><strong>Centralized repository</strong>: Reduces duplication of ETL
+development effort</li>
+<li><strong>Version control</strong>: Track dataset versions and
+transformation recipes</li>
+</ul>
+<p><strong>Data flow</strong>: External data sources → Catalog metadata
+→ Automated ingestion</p>
+</div>
+<div id="core-layer" class="section level2">
+<h2><strong>2. Core Layer</strong></h2>
+<p><strong><a href="gaiaDb.html">gaiaDb</a></strong> provides storage
+and processing:</p>
+<ul>
+<li><strong>Staging database</strong>: PostgreSQL/PostGIS with
+LinkML-based backbone schema</li>
+<li><strong>Processing engine</strong>: All SQL routines and PostGIS
+functions for spatial operations</li>
+<li><strong>Standardized format</strong>: Entity-Attribute-Value (EAV)
+structure for harmonized data</li>
+<li><strong>OMOP integration</strong>: Direct integration with CDM
+extension tables</li>
+<li><strong>API exposure</strong>: PostgREST automatically generates
+RESTful API</li>
+</ul>
+<p><strong><a href="gaiaCore.html">gaiaCore</a></strong> provides
+multi-language access:</p>
+<ul>
+<li><strong>Access layer</strong>: Routes requests to gaiaDb functions
+(zero processing logic)</li>
+<li><strong>RESTful API</strong>: PostgREST-based HTTP interface</li>
+<li><strong>Database connections</strong>: Direct PostgreSQL access</li>
+<li><strong>Language connectors</strong>: R and Python client
+libraries</li>
+<li><strong>OpenAPI specification</strong>: Documented API
+endpoints</li>
+</ul>
+<p><strong>Data flow</strong>: Raw geospatial data → gaiaDb processing →
+gaiaCore access → Client applications</p>
+</div>
+<div id="extension-layer" class="section level2">
+<h2><strong>3. Extension Layer</strong></h2>
+<p>Specialized functionality beyond core CRUD operations:</p>
+<ul>
+<li><strong>Visualization</strong>: Spatial data visualization tools
+(gaiaVis - planned)</li>
+<li><strong>Analytics</strong>: Integration with HADES ecosystem</li>
+<li><strong>Geocoding</strong>: DeGauss containerized geocoder
+integration</li>
+<li><strong>Domain-specific</strong>: Custom workflows for specific
+research domains</li>
+</ul>
+<p>Extensions interface with gaiaCore to leverage gaiaDb
+functionality.</p>
 <p><br></p>
 </div>
-<div id="gaia-core" class="section level2">
-<h2><a href="gaia-core.html">Gaia Core</a></h2>
-<p>Gaia Core is the central functionality and storage of Gaia and itself
-consists of two main features: a <strong>staging database</strong> and
-an <strong>execution engine</strong>.</p>
-<p>The staging database is a PostGIS database with a replica copy of the
-Gaia Catalog installed in a schema named “backbone”. In this database,
-public datasets that are registered in Gaia Catalog can be “staged”:
-transformed and then loaded as tables in a standardized
-Entity-Attribute-Value format. Other geospatial data, such as geocoded
-addresses, can also be loaded into the staging database for use in
-conjunction with the staged data.</p>
-<p>All operations on the staging database (creating tables, inserting
-data, accessing data, etc.) are performed through the “execution
-engine”. The execution engine can be any software package (e.g. R
-package, Python library, CLI) that connects to the database and
-functionalizes the logic required to write or read data to and from the
-standard format. Currently, there is one execution engine: an R Package
-named <a href="gaiaCore/index.html">gaiaCore</a>.</p>
-<hr />
+<div id="architecture-principles" class="section level2">
+<h2><strong>Architecture Principles</strong></h2>
+<div id="separation-of-concerns" class="section level3">
+<h3><strong>Separation of Concerns</strong></h3>
+<ul>
+<li><strong>gaiaCatalog</strong>: Discovery and metadata</li>
+<li><strong>gaiaDb</strong>: Storage and processing</li>
+<li><strong>gaiaCore</strong>: Multi-language access</li>
+<li><strong>gaiaDocker</strong>: Deployment</li>
+</ul>
+</div>
+<div id="privacy-by-design" class="section level3">
+<h3><strong>Privacy by Design</strong></h3>
+<ul>
+<li>Geocoding happens at originating institution</li>
+<li>Only aggregated geographic identifiers shared</li>
+<li>Exposure values contain no location information</li>
+<li>OMOP privacy protections maintained</li>
+</ul>
+</div>
+<div id="standards-compliance" class="section level3">
+<h3><strong>Standards Compliance</strong></h3>
+<ul>
+<li>OMOP CDM for clinical data</li>
+<li>Schema.org for metadata</li>
+<li>OGC standards for geospatial operations</li>
+<li>OHDSI vocabulary conventions</li>
+</ul>
+</div>
+<div id="reproducibility" class="section level3">
+<h3><strong>Reproducibility</strong></h3>
+<ul>
+<li>Version-controlled transformation recipes</li>
+<li>Documented data provenance</li>
+<li>Containerized deployments</li>
+<li>Open source tooling</li>
+</ul>
+</div>
+<div id="extensibility" class="section level3">
+<h3><strong>Extensibility</strong></h3>
+<ul>
+<li>Common data model enables stable tooling</li>
+<li>Pluggable data sources</li>
+<li>Language-agnostic API access</li>
+<li>Modular component architecture</li>
+</ul>
 <p><br></p>
 </div>
-<div id="extensions" class="section level2">
-<h2><a href="gaia-extensions.html">Extensions</a></h2>
-<p>Any functionality that falls outside of Gaia Core’s scope (basic
-Create, Read, Update and Delete operations) can be encapsulated in an
-Extension. An extension can be thought of as a software package or
-library that interfaces with Gaia Core (through the execution engine)
-that collects similar functionality. Extensions can be grouped by the
-communities they serve or by the functionality they provide. For
-example, the <a href="gaia-extensions-ohdsi.html">gaiaOHDSI
-extension</a> is built to provide members of the OHDSI community useful
-connectors between Gaia Core and an OMOP database and various OHDSI
-tools. On the other hand, general (hypothetical) extensions like gaiaVis
-or gaiaLayer provide visualization and layer building software to Gaia
-Core, respectively.</p>
+</div>
+<div id="getting-started" class="section level2">
+<h2><strong>Getting Started</strong></h2>
+<div id="quick-deploy" class="section level3">
+<h3><strong>Quick Deploy</strong></h3>
+<pre class="bash"><code>git clone https://github.com/OHDSI/gaiaDocker.git &amp;&amp; cd gaiaDocker
+docker compose --profile gaia up -d</code></pre>
+<p>See <a href="get-started.html">Get Started</a> for detailed
+deployment and onboarding instructions.</p>
+</div>
+<div id="learn-more" class="section level3">
+<h3><strong>Learn More</strong></h3>
+<ul>
+<li><strong><a
+href="developer-architecture.html">Architecture</a></strong>: Technical
+details and data flows</li>
+<li><strong><a href="gaia-principles.html">Design
+Principles</a></strong>: Schema design and functional metadata</li>
+<li><strong><a href="vocabulary.html">Vocabulary</a></strong>: OMOP GIS
+vocabulary package</li>
+<li><strong><a href="schema-extensions.html">Schema
+Extensions</a></strong>: OMOP CDM extensions</li>
+</ul>
+</div>
+<div id="get-involved" class="section level3">
+<h3><strong>Get Involved</strong></h3>
+<ul>
+<li><a href="get-started.html#join-the-working-group">Join the working
+group</a></li>
+<li><a href="get-started.html#propose-a-use-case">Propose a use
+case</a></li>
+<li><a href="developer-contributing.html">Contribute code</a></li>
+<li>Attend Friday meetings (10 AM ET)</li>
+</ul>
+<p><br></p>
+</div>
 </div>
 </div>
 

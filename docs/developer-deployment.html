@@ -443,196 +443,289 @@ WG</h1>
 </div>
 
 
-<div id="ohdsi-geographic-informations-systems-gis"
-class="section level1">
-<h1><strong>OHDSI Geographic Informations Systems (GIS)</strong></h1>
+<div id="deployment-strategies" class="section level1">
+<h1><strong>Deployment Strategies</strong></h1>
+<p>This page describes various deployment strategies for the Gaia
+toolchain, addressing different institutional constraints and use
+cases.</p>
 <p><br></p>
-<div id="mission" class="section level2">
-<h2><strong>Mission</strong></h2>
-<p>Improve the health of populations by generating reliable evidence
-from integrated geospatial and person-level health data.</p>
-<p><br></p>
-</div>
-<div id="collaboration-approach" class="section level2">
-<h2><strong>Collaboration Approach</strong></h2>
-<p>Like most of OHDSI, we use Github and MS Teams for collaboration,
-version control, etc. There are no perfect options for supporting
-collaboration. We’ll help you accomodate to ours as best we can. In
-particular, we use Github for managing tasks like defining and
-monitoring progress on OHDSI studies, infrastructure roadmaps, technical
-issues, etc.</p>
-<p>We review progress and get input from the broader group at weekly
-meetings on Fridays. Leaders of specific projects within the GIS
-workgroup schedule and hold meetings with subgroups outside the main
-Friday meeting. Those other meetings are where most of the work on use
-cases and advancing technical infrastructure gets done.</p>
-<p>Apart from the groups’ offical leadership, many members make
-fundamental contributions to the group’s decisions, strategies, and
-products.</p>
-<p>All are welcome. We’d love to work with you. Please see our page on
-<a href="getting-involved.html#Proposing_a_new_Use_Case">proposing new
-use cases</a>. If you are new and are considering using the GIS
-toolchain to do research or contibuting to the group’s work, we will
-schedule a separate meeting with you to help you figure out what manner
-of participation makes sense for you.</p>
-<p>New to OHDSI? First sign up for an OHDSI MS Teams account <a
-href="https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUQ05MOU9BSzEwOThZVjNQVVFGTDNZRENONiQlQCN0PWcu">here</a>.
-It’s easy peasy. Already have an OHDSI Teams account? Great. Just sign
-up for the GIS Workgroup <a
-href="https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu">here</a>.</p>
-<p>The main workgroup call is on MS Teams every Friday at 10 AM US
-Eastern Time (<a
-href="https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d">Meeting
-Link</a>). We are always looking for better ways to accomodate the time
-constraints of valued members around the world. Please let us know if
-this schedule is an obstacle.</p>
+<div id="deployment-options" class="section level2">
+<h2><strong>Deployment Options</strong></h2>
+<ol style="list-style-type: decimal">
+<li><strong>gaiaDocker (Docker Compose)</strong> - Official deployment
+method (recommended)</li>
+<li><strong>Podman</strong> - Daemonless alternative to Docker</li>
+<li><strong>Ansible</strong> - Infrastructure-as-code for bare
+metal/VMs</li>
+<li><strong>Manual</strong> - Traditional installation</li>
+<li><strong>Kubernetes</strong> - Production-scale (in development)</li>
+<li><strong>Cloud</strong> - AWS, Azure, GCP (planned)</li>
+</ol>
 <p><br></p>
 </div>
-<div id="gis-toolchain" class="section level2">
-<h2><strong>GIS Toolchain</strong></h2>
-<p>The GIS toolchain consists of extensions to the OMOP schema,
-extensions to the OMOP Vocabulary, and GIS-specific software for
-acquiring and working with geospatial data. Together, these enable
-researchers to use health-related attributes of the regions where
-patients live in OHDSI study cohort definitions. For example, you can
-use the GIS toolchain to define cohorts that include regional data on
-exposure to toxicants or social deprivation along with EHR data on
-relevant health outcomes. The toolchain also includes informatics
-resources that support integration with the main OHDSI tool stack
-(HADES) and integration with externally supported solutions for
-geocoding and for finding and deriving relevant data sources from
-catalogs of available data sources.</p>
-<p>Importantly, the toolchain allows integrated analysis of geospatial
-and EHR data without sharing any sensitive patient location data.</p>
-<div id="omop-gis-schema-extensions" class="section level4">
-<h4><strong>OMOP GIS schema extensions</strong></h4>
-<p>The External_Exposure table is an extension to the main OMOP schema.
-It holds data on things that can affect health that are associated with
-the places where patients live. The Location_History table contains
-information on patient’s residence and the dates during which they lived
-in that location. The DDLs and associated documentation for the
-External_Exposure table and the Location_History table are <a
-href="schema-extensions.html#external_exposure">here</a> and <a
-href="schema-extensions.html#location_history">here</a> respectively.
-The entity-relationship diagram showing the joins between these tables
-and the main OMOP schema is <a
-href="schema-extensions.html#OMOP_GIS_Schema_Extensions">here</a>.</p>
+<div id="gaiadocker-recommended" class="section level2">
+<h2><strong>gaiaDocker (Recommended)</strong></h2>
+<p>Official deployment method with coordinated image builds and
+versioned releases.</p>
+<p><strong>Prerequisites</strong>: Docker Engine 20.10+, Docker Compose
+2.0+, 8GB+ RAM, 50GB+ disk</p>
+<div id="quick-start" class="section level3">
+<h3><strong>Quick Start</strong></h3>
+<pre class="bash"><code># Clone gaiaDocker repository
+git clone https://github.com/OHDSI/gaiaDocker.git
+cd gaiaDocker
+
+# Start the full Gaia stack
+docker compose --profile gaia up -d
+
+# Optional: Include degauss geocoding service
+docker compose --profile gaia --profile degauss up -d
+
+# Verify services are running
+docker compose ps
+
+# View logs
+docker compose logs -f
+
+# Check specific service
+docker compose logs -f gaia-db</code></pre>
 </div>
-<div id="omop-vocabulary-extensions" class="section level4">
-<h4><strong>OMOP Vocabulary extensions</strong></h4>
-<p>The GIS extensions to the OMOP Vocabulary cover geometries,
-toxicants, and social determinants. They are used to represent a very
-large set of entities that can affect health and their relationships.
-The draft versions of these vocabularies are available <a
-href="https://github.com/OHDSI/GIS/tree/main/vocabularies">here</a>.
-They are based on mature existing ontologies and were developed by GIS
-workgroup members who are part of the OHDSI Core Vocabulary team in
-accordance with the guiding principles for OMOP vocabulary development,
-quality assurance, and integration. Current work on their validation in
-real use cases is expected to support their eventual acceptance as
-versioned community-maintained extensions of the core OMOP
-Vocabulary.</p>
+<div id="configuration" class="section level3">
+<h3><strong>Configuration</strong></h3>
+<p>Customize <code>.env</code> file for database credentials, service
+ports, and resource limits. See gaiaDocker repository for full
+example.</p>
 </div>
-<div id="gaiacore" class="section level4">
-<h4><strong>gaiaCore</strong></h4>
-<p>The gaiaCore software and associated gaiaDB schema support
-specification of attributes and geographic shapes in publicly available
-datasets. This specification allows the tables in the GIS schema
-extension to be joined with patient-level clinical data stored in the
-main OMOP schema. The current Beta release of gaiaCore software and its
-documentation are <a
-href="https://github.com/OHDSI/gaiaCore">here</a>.</p>
-</div>
-<div id="guidance" class="section level4">
-<h4><strong>Guidance</strong></h4>
-<p>The GIS toolchain requires patient addresses to be geocoded into
-representations that GIS software expects; for example, the latitude and
-longitude coordinates of street addresses or the coordinates of the
-lines that define a postal region. The OHDSI GIS workgroup does not
-provide or maintain software that does this geocoding. The GIS Workgroup
-does provide guidance about privacy-preserving options for geocoding
-address information and considerations for using available open-source
-and comercial geocoding approaches. The workgroup is also developing
-guidance to aid researchers in making informed decisions about selecting
-and working with alternative geospatial data sources that are relevant
-to addressing a research question.</p>
-</div>
-<div id="support-for-integration-with-ohdsis-technical-ecosytem"
-class="section level4">
-<h4><strong>Support for integration with OHDSI’s technical
-ecosytem</strong></h4>
-<p>The GIS Workgroup provides modified versions of the BroadSea
-container that inlcudes versions of the OHDSI Vocabulary that include
-draft the GIS vocabularies and the other components of the toolchain.
-Modified versions of the Tufts Synthetic Data and associated for
-demonstrating the use of the HADES PLP package to predict incident
-respiratory conditions using regional air quality data are included in
-the container. The workgroup is developing a robust approach to working
-with available geospatial data sources via catalogs. The approach uses
-schema.org-compliant standards and federated metadata sharing methods
-widely used in the GIS community to share information about available
-datasets.</p>
-<p><br></p>
-<p><img src="images/ohdsi_gis_overview.png" style="width:150.0%" /></p>
-<p>The green and black elements at the top of the figure above show the
-production of reliable evidence by applying standardized analytics to
-standardized person-level clinical data. The extension of this approach
-by the GIS toolchain is shown below that. Geocoded patient addresses are
-linked to geospatial datasets and standardized in the OMOP GIS
-extension. The GIS toolchain uses the same modeling approach as the main
-OMOP CDM and vocabulary. This allows the same best practice analytics to
-be applied simultaneously to both person-level clinical data and
-geospatial data on exposures outside the clinic. As with OHDSI’s use of
-clinical data, analyses of external exposures are done without sharing
-patient address information.</p>
-<p><br></p>
-</div>
-</div>
-<div id="goals" class="section level2">
-<h2><strong>Goals</strong></h2>
-<p>The OHDSI GIS Workgroup carries out work in support of its mission by
-pursuing the following goals:</p>
+<div id="services" class="section level3">
+<h3><strong>Services</strong></h3>
 <ul>
-<li>Support OHDSI studies that use the GIS toolchain</li>
-<li>Conduct studies that use the GIS toolchain</li>
-<li>Advance the development of the GIS toolchain</li>
-<li>Facilitate the use of externally supported privacy-protecting
-geocoding software</li>
-<li>Develop data cataloging resources and guidance that enable reuse of
-specific geospatial datasets in OHDSI studies</li>
+<li><strong>gaia-db</strong>: PostgreSQL/PostGIS (core data
+repository)</li>
+<li><strong>gaia-core</strong>: PostgREST API (exposes gaiaDb
+functions)</li>
+<li><strong>gaia-catalog</strong>: Flask catalog interface (data
+discovery)</li>
+<li><strong>gaia-solr</strong>: Search engine (catalog indexing)</li>
+<li><strong>gaia-osgeo</strong>: GDAL/OGR ETL tools</li>
+<li><strong>gaia-postgis</strong>: PostGIS ETL tools</li>
+<li><strong>gaia-degauss</strong>: Geocoding service (optional
+profile)</li>
+</ul>
+</div>
+<div id="testing" class="section level3">
+<h3><strong>Testing</strong></h3>
+<pre class="bash"><code>curl http://localhost:3000/  # Test PostgREST API
+docker compose exec gaia-db psql -U gaia -d gaiadb  # Connect to database
+docker compose ps  # Check service health</code></pre>
+</div>
+<div id="stopping" class="section level3">
+<h3><strong>Stopping</strong></h3>
+<pre class="bash"><code>docker compose down     # Stop (preserves data)
+docker compose down -v  # Stop and remove volumes (deletes data!)</code></pre>
+</div>
+<div id="production" class="section level3">
+<h3><strong>Production</strong></h3>
+<ul>
+<li>Use secrets management, resource limits, log aggregation</li>
+<li>Implement backup strategy, reverse proxy, TLS/SSL, monitoring</li>
 </ul>
 <p><br></p>
 </div>
-<div id="roadmaps" class="section level2">
-<h2><strong>Roadmaps</strong></h2>
-<ul>
-<li><a href="https://github.com/OHDSI/GIS/issues/368">Gaia</a></li>
-<li><a href="https://github.com/OHDSI/GIS/issues/365">Gaia
-Catalog</a></li>
-<li><a href="https://github.com/OHDSI/GIS/issues/366">Geocoding</a></li>
-<li><a
-href="https://github.com/OHDSI/GIS/issues/369">Vocabulary</a></li>
-</ul>
+</div>
+<div id="podman" class="section level2">
+<h2><strong>Podman</strong></h2>
+<p>Daemonless alternative to Docker, preferred by some IT/security
+departments.</p>
+<pre class="bash"><code># Install
+sudo dnf install podman podman-compose  # RHEL/CentOS/Fedora
+brew install podman  # macOS
+
+# Deploy
+podman machine init &amp;&amp; podman machine start  # macOS/Windows
+git clone https://github.com/OHDSI/gaiaDocker.git &amp;&amp; cd gaiaDocker
+podman-compose --profile gaia up -d</code></pre>
 <p><br></p>
 </div>
-<div id="publicationspresentations" class="section level2">
-<h2><strong>Publications/Presentations</strong></h2>
-<p>OHDSI GIS Toolchain Live Demonstration (2024 OHDSI Symposium <a
-href="https://www.youtube.com/watch?v=NLfWvuZJVK4">Video</a>)</p>
-<p>OHDSI GIS Infrastructure (2023 OHDSI Symposium <a
-href="https://www.ohdsi.org/2023showcase-19/">Poster</a>, <a
-href="https://www.ohdsi.org/wp-content/uploads/2023/10/19-zollovenecek-BriefReport.pdf">Abstract</a>)</p>
-<p>Toxins Vocabulary (2023 OHDSI Symposium <a
-href="https://www.ohdsi.org/2023showcase-11/">Poster</a>, <a
-href="https://www.ohdsi.org/wp-content/uploads/2023/10/Talapova-Polina_A_Toxin_Vocabulary_for_the_OMOP_CDM_2023symposium-Polina-Talapova.pdf">Abstract</a>)</p>
-<p>OHDSI GIS Workgroup October 10, 2023 Update (<a
-href="https://youtu.be/QZY-slWdsMs?si=UxMT39rqWTAW_AMx&amp;t=2178">Video</a>)</p>
-<p>OHDSI GIS Workgroup 2023 Objectives and Key Results (<a
-href="https://www.youtube.com/watch?v=bd0htzO1hx4&amp;t=1103s">Video</a>,
-<a
-href="https://www.ohdsi.org/wp-content/uploads/2023/02/GIS-OKRs2023Q1.pdf">slides</a>)</p>
-<p>OHDSI GIS Workgroup August 23, 2022 Update (<a
-href="https://youtu.be/d8jIAm9cssM">Video</a>)</p>
+<div id="ansible" class="section level2">
+<h2><strong>Ansible</strong></h2>
+<p>Infrastructure-as-code for bare metal, VMs, and air-gapped
+environments.</p>
+<p><strong>Prerequisites</strong>: Ansible 2.9+, Ubuntu 20.04+/RHEL 8+,
+SSH access</p>
+<pre class="bash"><code># Deploy
+ansible-playbook -i inventory/production playbooks/deploy-full-stack.yml
+
+# Use vault for secrets
+ansible-vault create group_vars/production/vault.yml
+ansible-playbook playbook.yml --ask-vault-pass</code></pre>
+<p>See gaiaDb repository for example playbooks and roles.</p>
+<p><br></p>
+</div>
+<div id="manual-installation" class="section level2">
+<h2><strong>Manual Installation</strong></h2>
+<p>For maximum control, institutional constraints, or learning.</p>
+<p><strong>Requirements</strong>: Ubuntu 20.04+/RHEL 8+, 8GB+ RAM, 50GB+
+disk, PostgreSQL 12+, PostGIS 3.0+</p>
+<pre class="bash"><code># 1. Install PostgreSQL/PostGIS
+sudo apt-get install postgresql-14 postgresql-14-postgis-3
+
+# 2. Configure database
+sudo -u postgres psql
+CREATE DATABASE gaiadb;
+CREATE USER gaia WITH PASSWORD &#39;your_password&#39;;
+GRANT ALL PRIVILEGES ON DATABASE gaiadb TO gaia;
+\c gaiadb
+CREATE EXTENSION postgis;
+
+# 3. Clone gaiaDb
+git clone https://github.com/OHDSI/gaiaDb.git &amp;&amp; cd gaiaDb
+psql -U gaia -d gaiadb -f schema/create_schema.sql</code></pre>
+<p>See gaiaDb and gaiaCore repositories for detailed setup
+instructions.</p>
+<p><br></p>
+</div>
+<div id="kubernetes-cloud" class="section level2">
+<h2><strong>Kubernetes &amp; Cloud</strong></h2>
+<p><strong>Status</strong>: In development</p>
+<ul>
+<li><strong>Kubernetes</strong>: Helm charts, horizontal autoscaling,
+multi-site federation (planned Q2 2026)</li>
+<li><strong>AWS</strong>: Terraform modules, RDS PostgreSQL, ECS/Fargate
+(in development)</li>
+<li><strong>Azure</strong>: ARM templates, Azure Database for
+PostgreSQL, AKS (planned)</li>
+<li><strong>GCP</strong>: Cloud SQL, Cloud Run/GKE (planned)</li>
+</ul>
+<p>Community contributions welcome.</p>
+<p><br></p>
+</div>
+<div id="deployment-decision-matrix" class="section level2">
+<h2><strong>Deployment Decision Matrix</strong></h2>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="52%" />
+<col width="22%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Scenario</th>
+<th>Recommended Approach</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Local development</td>
+<td>gaiaDocker</td>
+<td>Easy setup, quick iteration</td>
+</tr>
+<tr class="even">
+<td>IT requires no Docker daemon</td>
+<td>Podman + gaiaDocker</td>
+<td>Daemonless, rootless</td>
+</tr>
+<tr class="odd">
+<td>Air-gapped environment</td>
+<td>Ansible + Manual</td>
+<td>No internet, full control</td>
+</tr>
+<tr class="even">
+<td>Production, small scale</td>
+<td>gaiaDocker + monitoring</td>
+<td>Simple, proven, versioned</td>
+</tr>
+<tr class="odd">
+<td>Production, large scale</td>
+<td>Kubernetes</td>
+<td>Scalability, resilience</td>
+</tr>
+<tr class="even">
+<td>Multi-site research network</td>
+<td>Kubernetes + federation</td>
+<td>Distributed architecture</td>
+</tr>
+<tr class="odd">
+<td>Cloud-native</td>
+<td>Cloud platform</td>
+<td>Managed services, scalability</td>
+</tr>
+<tr class="even">
+<td>Learning/testing</td>
+<td>Manual</td>
+<td>Understand components</td>
+</tr>
+<tr class="odd">
+<td>Institutional restrictions</td>
+<td>Manual or Ansible</td>
+<td>Maximum compatibility</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+</div>
+<div id="security" class="section level2">
+<h2><strong>Security</strong></h2>
+<p><strong>All deployments</strong>: Change default passwords, enable
+SSL/TLS, restrict network access, regular updates, audit logging,
+backups</p>
+<p><strong>Containers</strong>: Official images, vulnerability scanning,
+non-root user, secrets management, limited capabilities</p>
+<p><strong>Cloud</strong>: IAM roles, encryption at rest/transit,
+private subnets, VPC peering</p>
+<p><br></p>
+</div>
+<div id="monitoring" class="section level2">
+<h2><strong>Monitoring</strong></h2>
+<p><strong>Tools</strong>: Prometheus/Grafana (metrics), ELK/Loki
+(logs), Jaeger (tracing)</p>
+<p><strong>Key metrics</strong>: Connection pool utilization, query
+performance, API response times, resource usage, disk space</p>
+<p><br></p>
+</div>
+<div id="backup-recovery" class="section level2">
+<h2><strong>Backup &amp; Recovery</strong></h2>
+<pre class="bash"><code># Database backup
+pg_dump -U gaia gaiadb &gt; gaiadb_backup_$(date +%Y%m%d).sql
+
+# Docker volume backup
+docker run --rm -v gaiadb_data:/data -v /backup:/backup ubuntu tar czf /backup/gaiadb_data.tar.gz /data</code></pre>
+<p>Test backups regularly, document recovery procedures, store off-site,
+define RTO/RPO targets.</p>
+<p><br></p>
+</div>
+<div id="performance-tuning" class="section level2">
+<h2><strong>Performance Tuning</strong></h2>
+<p><strong>PostgreSQL</strong>: Increase shared_buffers (25% RAM),
+work_mem (256MB), enable parallel queries</p>
+<p><strong>PostGIS</strong>: Create GIST spatial indexes, ANALYZE after
+bulk loads, VACUUM regularly</p>
+<pre class="sql"><code>CREATE INDEX idx_geom ON table USING GIST(geom);
+VACUUM ANALYZE table;</code></pre>
+<p><br></p>
+</div>
+<div id="troubleshooting" class="section level2">
+<h2><strong>Troubleshooting</strong></h2>
+<p><strong>Connection refused</strong>: Check
+<code>docker compose ps</code> or
+<code>systemctl status postgresql</code>, verify network with
+<code>nc -zv localhost 5432</code></p>
+<p><strong>Out of memory</strong>: Increase Docker memory limit or
+reduce batch size</p>
+<p><strong>Slow queries</strong>: Check spatial indexes exist
+(<code>pg_indexes</code>), create if missing
+(<code>CREATE INDEX ... USING GIST</code>)</p>
+<p><br></p>
+</div>
+<div id="upgrades-help" class="section level2">
+<h2><strong>Upgrades &amp; Help</strong></h2>
+<p><strong>Upgrades</strong>: Backup → test in staging → review
+changelog → deploy → verify → monitor</p>
+<p><strong>Help</strong>: <a href="https://teams.microsoft.com">GIS
+Teams channel</a>, <a href="https://github.com/OHDSI/GIS/issues">GitHub
+issues</a>, Friday meetings (10 AM ET), <a
+href="mailto:houghtaling@ohdsi.org"
+class="email">houghtaling@ohdsi.org</a></p>
 <p><br></p>
 </div>
 </div>

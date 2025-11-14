@@ -13,7 +13,7 @@
 
 <title> OHDSI GIS WG</title>
 
-<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -254,10 +254,10 @@ $(document).ready(function () {
   </a>
 </li>
 <li>
-  <a href="getting-started.html">
-    <span class="fa fa-home"></span>
+  <a href="get-started.html">
+    <span class="fa fa-play"></span>
      
-    Getting Started
+    Get Started
   </a>
 </li>
 <li class="dropdown">
@@ -279,13 +279,22 @@ $(document).ready(function () {
       <a href="schema-extensions.html">Schema Extensions</a>
     </li>
     <li>
-      <a href="gaiaDB.html">gaiaDB</a>
+      <a href="use-cases.html">Use Cases</a>
+    </li>
+    <li>
+      <a href="analysis.html">Analysis</a>
+    </li>
+    <li>
+      <a href="gaiaDb.html">gaiaDb</a>
     </li>
     <li>
       <a href="gaiaCore.html">gaiaCore</a>
     </li>
     <li>
-      <a href="gaiaOHDSI.html">gaiaOHDSI</a>
+      <a href="gaiaCatalog.html">gaiaCatalog</a>
+    </li>
+    <li>
+      <a href="gaiaDocker.html">gaiaDocker</a>
     </li>
   </ul>
 </li>
@@ -296,18 +305,37 @@ $(document).ready(function () {
     Vocabulary
   </a>
 </li>
-<li>
-  <a href="how-to.html">
-    <span class="fa fa-question"></span>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-code"></span>
      
-    How to
+    Developer
+     
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="developer.html">Overview</a>
+    </li>
+    <li>
+      <a href="developer-packages.html">Package Status</a>
+    </li>
+    <li>
+      <a href="developer-contributing.html">Contributing</a>
+    </li>
+    <li>
+      <a href="developer-architecture.html">Architecture</a>
+    </li>
+    <li>
+      <a href="developer-deployment.html">Deployment</a>
+    </li>
+  </ul>
 </li>
 <li>
-  <a href="getting-involved.html">
-    <span class="fa fa-info"></span>
+  <a href="project-management.html">
+    <span class="fa fa-tasks"></span>
      
-    Getting Involved
+    Project Management
   </a>
 </li>
       </ul>
@@ -337,36 +365,56 @@ WG</h1>
 <h1><strong>gaiaCore</strong></h1>
 <div id="description" class="section level2">
 <h2>Description</h2>
-<p>Gaia Core is the central functionality and storage of Gaia and
-consists of two main features: a <strong>staging database</strong> and
-an <strong>execution engine</strong>.</p>
-<p>The staging database is a PostGIS database with a replica copy of the
-Gaia Catalog installed in a schema named “backbone”. In this database,
-public datasets that are registered in Gaia Catalog can be “staged”:
-transformed and then loaded as tables in a standardized
-Entity-Attribute-Value format. Other geospatial data, such as geocoded
-addresses, can also be loaded into the staging database for use in
-conjunction with the staged data.</p>
-<p>All operations on the staging database (creating tables, inserting
-data, accessing data, etc.) are performed through the “execution
-engine”. The execution engine can be any software package (e.g. R
-package, Python library, CLI) that connects to the database and
-functionalizes the logic required to write or read data to and from the
-standard format.</p>
+<p>gaiaCore is a <strong>multi-language connector framework</strong>
+providing programmatic access to gaiaDb functionality. It serves as an
+access layer, orchestrating SQL functions and protocols defined within
+gaiaDb across multiple programming languages and access paradigms.</p>
 </div>
-<div id="scope" class="section level2">
-<h2>Scope</h2>
-<p>The <strong>ultimate vision</strong> of Gaia Core is support for
-multiple geospatial databases (particularly cloud-native), as well as
-execution engine interfaces for multiple popular data science
-programming languages (e.g. Python, Julia, R, Bash).
-<strong>Currently</strong>, the staging database has only been
-implemented in PostGIS and the execution engine has only been
-implemented in R.</p>
+<div id="key-features" class="section level2">
+<h2>Key Features</h2>
+<ul>
+<li><strong>RESTful API access</strong> via PostgREST with OpenAPI
+specification</li>
+<li><strong>Direct database connections</strong> for SQL-based
+workflows</li>
+<li><strong>Language-specific client libraries</strong> (R, Python, and
+more in development)</li>
+<li><strong>Multi-paradigm support</strong> for both API and database
+access patterns</li>
+<li><strong>Zero processing logic</strong> - all data operations
+performed in gaiaDb</li>
+</ul>
+</div>
+<div id="architecture" class="section level2">
+<h2>Architecture</h2>
+<p>gaiaCore acts as a thin access layer that: - Routes requests to
+appropriate gaiaDb functions - Provides convenient language-specific
+abstractions - Handles authentication and connection management - Does
+NOT contain data processing or transformation logic</p>
+</div>
+<div id="development-status" class="section level2">
+<h2>Development Status</h2>
+<p>Active development is occurring at <a
+href="https://github.com/TuftsCTSI/gaiaCore">TuftsCTSI/gaiaCore</a>,
+with plans to migrate to <a
+href="https://github.com/OHDSI/gaiaCore">OHDSI/gaiaCore</a> upon
+reaching production readiness.</p>
+</div>
+<div id="usage" class="section level2">
+<h2>Usage</h2>
+<p>Access gaiaDb through gaiaCore using your preferred language: -
+<strong>R</strong>: Client library (in development) -
+<strong>Python</strong>: Client library (in development) - <strong>REST
+API</strong>: Direct HTTP requests to PostgREST endpoint -
+<strong>SQL</strong>: Standard PostgreSQL connections</p>
 </div>
 <div id="documentation" class="section level2">
 <h2>Documentation</h2>
-<p><a href="gaiaCore/index.html">gaiaCore (R Package)</a></p>
+<ul>
+<li><a href="https://github.com/TuftsCTSI/gaiaCore">Development
+Repository</a></li>
+<li><a href="developer-architecture.html">Architecture Details</a></li>
+</ul>
 </div>
 </div>
 

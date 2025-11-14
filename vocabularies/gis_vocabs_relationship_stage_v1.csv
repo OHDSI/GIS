@@ -1,9 +1,0 @@
-relationship_id, relationship_name, is_hierarchical, defines_ancestry, reverse_relationship_id, relationship_concept_id
-Has component,Has component,0,0,Component of,44818767
-Component of,Component of,0,0,Has component,44818865
-Is a,Is a,0,0,Subsumes,44818821
-Subsumes,Subsumes,1,1,Is a,44818723
-Is geometry of,Is geometry of,0,0,Has geometry,2147483620
-Has geometry,Has geometry,0,0,Is geometry of,2147483619
-Maps to,Non-standard to Standard map (OMOP),0,0,Mapped from,44818977
-Mapped from,Standard to Non-standard map (OMOP),0,0,Maps to,44818976

@@ -13,7 +13,7 @@
 
 <title> OHDSI GIS WG</title>
 
-<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -29,9 +29,6 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -226,75 +223,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
-
-</style>
-
-
 
 </head>
 
@@ -302,16 +230,6 @@ div.tocify {
 
 
 <div class="container-fluid main-container">
-
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -336,10 +254,10 @@ div.tocify {
   </a>
 </li>
 <li>
-  <a href="getting-started.html">
-    <span class="fa fa-home"></span>
+  <a href="get-started.html">
+    <span class="fa fa-play"></span>
      
-    Getting Started
+    Get Started
   </a>
 </li>
 <li class="dropdown">
@@ -361,13 +279,22 @@ div.tocify {
       <a href="schema-extensions.html">Schema Extensions</a>
     </li>
     <li>
-      <a href="gaiaDB.html">gaiaDB</a>
+      <a href="use-cases.html">Use Cases</a>
+    </li>
+    <li>
+      <a href="analysis.html">Analysis</a>
+    </li>
+    <li>
+      <a href="gaiaDb.html">gaiaDb</a>
     </li>
     <li>
       <a href="gaiaCore.html">gaiaCore</a>
     </li>
     <li>
-      <a href="gaiaOHDSI.html">gaiaOHDSI</a>
+      <a href="gaiaCatalog.html">gaiaCatalog</a>
+    </li>
+    <li>
+      <a href="gaiaDocker.html">gaiaDocker</a>
     </li>
   </ul>
 </li>
@@ -378,18 +305,37 @@ div.tocify {
     Vocabulary
   </a>
 </li>
-<li>
-  <a href="how-to.html">
-    <span class="fa fa-question"></span>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-code"></span>
      
-    How to
+    Developer
+     
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="developer.html">Overview</a>
+    </li>
+    <li>
+      <a href="developer-packages.html">Package Status</a>
+    </li>
+    <li>
+      <a href="developer-contributing.html">Contributing</a>
+    </li>
+    <li>
+      <a href="developer-architecture.html">Architecture</a>
+    </li>
+    <li>
+      <a href="developer-deployment.html">Deployment</a>
+    </li>
+  </ul>
 </li>
 <li>
-  <a href="getting-involved.html">
-    <span class="fa fa-info"></span>
+  <a href="project-management.html">
+    <span class="fa fa-tasks"></span>
      
-    Getting Involved
+    Project Management
   </a>
 </li>
       </ul>
@@ -415,100 +361,59 @@ WG</h1>
 </div>
 
 
-<div id="adding-a-data-source" class="section level1">
-<h1><strong>Adding a Data Source</strong></h1>
-<div id="background" class="section level2">
-<h2>Background</h2>
-<p>Data sources in gaiaDB are stored in the gaiaDB.backbone.data_source
-table in a Postgres database. Each row in this table is a single “data
-source”, though the name may be a bit misleading. All “data sources” in
-gaiaDB are actually bits of descriptive, technical, and operational
-metadata that refer to an externally hosted dataset. For example, the
-gaiaDB data source “daily_aqi_by_county_2020” is actually just a single
-row of data that contains information on how to extract, transform, and
-load (ETL) the EPA dataset located on their data catalog. The gaiaDB
-data source includes all the information necessary to acquire and use
-this dataset (including the dataset URL, documentation URL, and R code
-to transform it to gaia’s own data standard), without actually storing
-the dataset itself. Not only does this keep gaiaDB very lightweight (a
-data source takes only about 1 KB of storage), it also allows gaiaDB to
-handle a boundless amount of variability in source datasets.</p>
-<p>The trade-off to this design is that each data source requires a
-certain degree of custom tailoring. Fortunately, many well-curated
-sources of geospatial data publish all of their own datasets with the
-same schema. So, while it may take a bit of effort to create the gaiaDB
-data source for “daily_aqi_by_county_2020”, the gaiaDB data source for
-“daily_aqi_by_county_2019”, and any other years, can be created in a
-matter of minutes by simply redirecting the data source to other years’
-data.</p>
+<div id="gaiadocker" class="section level1">
+<h1><strong>gaiaDocker</strong></h1>
+<div id="description" class="section level2">
+<h2>Description</h2>
+<p>gaiaDocker provides <strong>containerized deployment
+orchestration</strong> for the complete Gaia toolchain. It coordinates
+image builds, manages versioned releases, and enables consistent
+deployment across development, testing, and production environments.</p>
 </div>
-<div id="creating-a-data-source" class="section level2">
-<h2>Creating a Data Source</h2>
-<p>As of now, there are two main ways that gaiaDB data sources can be
-created:</p>
-<ol style="list-style-type: decimal">
-<li>Manually, by writing <code>INSERT INTO</code> SQL statements.
-Usually this is most easily done with a combination of spreadsheet
-software like MS Excel (for writing the original record), an R
-environment for creating the geom_spec (detailed below), and some sort
-of automation tool for recycling the original data source across
-multiple datasets.</li>
-<li>Using the gaiaSourceCreator RShiny form, which can help guide the
-creation of data sources.</li>
-</ol>
+<div id="key-features" class="section level2">
+<h2>Key Features</h2>
+<ul>
+<li><strong>Complete stack deployment</strong> with a single
+command</li>
+<li><strong>Profile-based configuration</strong> (gaia, degauss) for
+flexible deployments</li>
+<li><strong>Coordinated versioning</strong> across all Gaia
+components</li>
+<li><strong>Persistent data storage</strong> for databases and search
+indexes</li>
+<li><strong>Service orchestration</strong> via Docker Compose</li>
+<li><strong>OHDSI Broadsea integration</strong> for broader ecosystem
+compatibility</li>
+</ul>
 </div>
-<div id="creating-the-geom_spec" class="section level2">
-<h2>Creating the <em>geom_spec</em></h2>
-<p>TODO</p>
+<div id="services-managed" class="section level2">
+<h2>Services Managed</h2>
+<p>gaiaDocker orchestrates the following services: -
+<strong>gaia-db</strong>: PostgreSQL/PostGIS database (gaiaDb) -
+<strong>gaia-core</strong>: PostgREST API service -
+<strong>gaia-catalog</strong>: Flask catalog interface -
+<strong>gaia-solr</strong>: Solr search engine -
+<strong>gaia-osgeo</strong>: GDAL/OGR ETL tools -
+<strong>gaia-postgis</strong>: PostGIS-specific ETL tools -
+<strong>gaia-degauss</strong> (optional): Geocoding service</p>
 </div>
+<div id="quick-start" class="section level2">
+<h2>Quick Start</h2>
+<pre class="bash"><code>git clone https://github.com/OHDSI/gaiaDocker.git
+cd gaiaDocker
+docker compose --profile gaia up -d</code></pre>
 </div>
-<div id="sharing-a-data-source" class="section level1">
-<h1><strong>Sharing a Data Source</strong></h1>
-<div id="motivation" class="section level2">
-<h2>Motivation</h2>
-<p>If you have taken the time and effort to add a data source to your
-own local instance of gaiaDB, consider sharing it back to the rest of
-OHDSI GIS community. By sharing your data source you effectively reduce
-the duplication of effort, help to canonize a single “gaia version” of a
-web-hosted resource and increase the size of the public gaiaDB
-repository. All of this helps to nourish the OHDSI GIS system of tools
-and data sources.</p>
+<div id="documentation" class="section level2">
+<h2>Documentation</h2>
+<ul>
+<li><a href="https://github.com/OHDSI/gaiaDocker">Repository</a></li>
+<li><a href="developer-deployment.html">Full Deployment Guide</a></li>
+</ul>
 </div>
-<div id="github-pull-request" class="section level2">
-<h2>GitHub Pull Request</h2>
-<p>At this time, the most straightforward way to share your local data
-source is via a GitHub Pull Request:</p>
-<ol style="list-style-type: decimal">
-<li>The source file for the gaiaDB.backbone.data_source table is on the
-OHDSI Github <a
-href="https://github.com/OHDSI/GIS/tree/main/source">GIS/source</a>.
-Make sure that your local gaiaDB instance reflects this source when you
-add data sources locally.</li>
-<li>After you have added one or more data sources to your local gaiaDB
-instance, export the gaiaDB.backbone.data_source table as a CSV
-file.</li>
-<li>Create a pull request using <a
-href="https://github.com/OHDSI/GIS/issues/new?assignees=&amp;labels=&amp;template=share_data_source.yaml&amp;title=%5BShare+New+Data+Source%28s%29+Request%5D">this
-template</a>, attaching the CSV file that should replace the current
-source csv.</li>
-<li>The gaiaDB software maintainers will accept and merge your
-contributions or reply to your issue with feedback.</li>
-</ol>
-</div>
-</div>
-<div id="geocoding" class="section level1">
-<h1><strong>Geocoding</strong></h1>
-<p>TODO</p>
-</div>
-<div id="using-a-local-dataset" class="section level1">
-<h1><strong>Using a Local Dataset</strong></h1>
-<p>TODO</p>
 </div>
 
 
 
-</div>
-</div>
 
 </div>
 
@@ -541,35 +446,6 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
-<script>
-$(document).ready(function ()  {
-
-    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
-    $('.unlisted.unnumbered').addClass('toc-ignore')
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

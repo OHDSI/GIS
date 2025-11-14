@@ -1,0 +1,116 @@
+[
+  {
+    "title": "Leadership: Jared joining as co-leader",
+    "body": "**Meeting**: October 31, 2025\n\n**Decision**: Jared Houghtaling joining Robert Miller as GIS Working Group co-leader.\n\n**Action**: Approved by working group.\n\n**Status**: Complete - announce in next meeting and update documentation.\n\n**Labels**: management, decision",
+    "labels": ["management", "decision"],
+    "assignees": []
+  },
+  {
+    "title": "Leadership: Call for additional co-leaders",
+    "body": "**Meeting**: October 31, 2025\n\n**Action**: Others interested in co-leadership roles should express interest to current co-leaders.\n\n**How to Express Interest**:\n- Attend Friday meeting and express interest\n- Message co-leaders on Teams\n- Email houghtaling@ohdsi.org\n\n**Labels**: management",
+    "labels": ["management"],
+    "assignees": []
+  },
+  {
+    "title": "Poll group about alternative meeting times",
+    "body": "**Meeting**: October 31, 2025\n\n**Action**: Robert to poll the working group about alternative meeting times to better accommodate members in different time zones.\n\n**Method**: Asynchronously via Teams poll\n\n**Timeline**: Before next meeting\n\n**Labels**: meeting, coordination",
+    "labels": ["meeting", "coordination"],
+    "assignees": []
+  },
+  {
+    "title": "Restart task-oriented GitHub project management",
+    "body": "**Meeting**: October 31, 2025\n\n**Action**: Restart task-oriented structure on GitHub Project Board\n\n**Details**:\n- Allocate 10-15 minutes at start of each Friday meeting for ticket review\n- Review current sprint tasks\n- Update status on project board\n- Identify blockers\n- Assign new tasks\n\n**Related**: https://github.com/orgs/OHDSI/projects/26\n\n**Labels**: project-management, task",
+    "labels": ["project-management", "task"],
+    "assignees": []
+  },
+  {
+    "title": "Jay to help coordinate project board structure",
+    "body": "**Meeting**: October 31, 2025\n\n**Action**: Jay to help coordinate GitHub Project Board structure and workflows\n\n**Related**: https://github.com/orgs/OHDSI/projects/26\n\n**Labels**: project-management, task",
+    "labels": ["project-management", "task"],
+    "assignees": []
+  },
+  {
+    "title": "Create repository inventory spreadsheet",
+    "body": "**Meeting**: October 31, 2025\n\n**Action**: Robert to create spreadsheet listing all GIS Working Group repositories and branches\n\n**Spreadsheet Contents**:\n- Repository name and URL\n- Active branches\n- Current contents description\n- Future vision for each repo\n- Cleanup needs (old branches, etc.)\n\n**Distribution**: Share via Teams and email link\n\n**Repositories to include**:\n- OHDSI/GIS\n- OHDSI/gaiaDb\n- OHDSI/gaiaCore\n- OHDSI/gaiaCatalog\n- OHDSI/gaiaDocker\n- TuftsCTSI/CVB\n- Any other related repos\n\n**Labels**: documentation, coordination, task",
+    "labels": ["documentation", "coordination", "task"],
+    "assignees": []
+  },
+  {
+    "title": "Team to collaboratively document repo contents in inventory",
+    "body": "**Meeting**: October 31, 2025\n\n**Action**: Once repository inventory spreadsheet is created, team members to collaboratively document current contents of each repo\n\n**Depends on**: Repository inventory spreadsheet being created\n\n**Labels**: documentation, task",
+    "labels": ["documentation", "task"],
+    "assignees": []
+  },
+  {
+    "title": "Define future vision for each repository",
+    "body": "**Meeting**: October 31, 2025\n\n**Action**: Define future vision for each GIS Working Group repository in the inventory spreadsheet\n\n**Questions to answer**:\n- What should this repository contain?\n- What is its role in the toolchain?\n- What are the inputs and outputs?\n- How does it relate to other repos?\n\n**Depends on**: Repository inventory spreadsheet being created\n\n**Labels**: documentation, architecture, task",
+    "labels": ["documentation", "architecture", "task"],
+    "assignees": []
+  },
+  {
+    "title": "Create lightweight tickets for technical stack alignment",
+    "body": "**Meeting**: October 31, 2025\n\n**Action**: Create lightweight GitHub issues for key technical questions to discuss asynchronously\n\n**Key Questions to Address**:\n1. What is Gaia Core? (inputs/outputs, role in toolchain)\n2. Where does data get stored? (gaiaDb architecture)\n3. How do repos fit together? (data flows, dependencies)\n\n**Process**:\n- Create individual issues for each question\n- Discuss asynchronously via GitHub comments\n- Decide in upcoming meetings\n- Link to architecture documentation\n\n**Labels**: architecture, discussion, task",
+    "labels": ["architecture", "discussion", "task"],
+    "assignees": []
+  },
+  {
+    "title": "Schedule vision workshop",
+    "body": "**Meeting**: October 31, 2025\n\n**Action**: Schedule dedicated meeting to workshop GIS Working Group vision\n\n**Agenda Items**:\n- Revisit and refine mission statement\n- Workshop group vision\n- Define success criteria\n- Ensure team alignment across all members\n\n**Timing**: When Tim is available\n\n**Duration**: Likely 90-120 minutes\n\n**Labels**: vision, meeting, coordination",
+    "labels": ["vision", "meeting", "coordination"],
+    "assignees": []
+  },
+  {
+    "title": "Specify minimum viable products (MVPs) across toolchain",
+    "body": "**Meeting**: October 31, 2025\n\n**Action**: Define minimum viable products for each component of the Gaia toolchain\n\n**Components to Define MVPs for**:\n- gaiaDb\n- gaiaCore\n- gaiaCatalog\n- gaiaDocker\n- Vocabulary Package\n\n**For Each MVP, Document**:\n- Core features required\n- Dependencies on other components\n- Success criteria\n- Timeline estimate\n\n**Related**: Roadmap issues #365, #366, #368, #369\n\n**Labels**: architecture, planning, task",
+    "labels": ["architecture", "planning", "task"],
+    "assignees": []
+  },
+  {
+    "title": "Document dependencies between MVPs",
+    "body": "**Meeting**: October 31, 2025\n\n**Action**: Document dependencies between minimum viable products across the toolchain\n\n**Create Dependency Diagram**:\n- Which MVPs depend on which others?\n- What is the critical path?\n- What can be developed in parallel?\n\n**Depends on**: MVP definitions being completed\n\n**Labels**: architecture, planning, documentation",
+    "labels": ["architecture", "planning", "documentation"],
+    "assignees": []
+  },
+  {
+    "title": "Document deployment strategies (Docker, Podman, Ansible, manual)",
+    "body": "**Meeting**: October 31, 2025\n\n**Action**: Ensure all deployment strategies are documented\n\n**Deployment Methods to Document**:\n- gaiaDocker (primary)\n- Podman (daemonless)\n- Ansible (infrastructure-as-code)\n- Manual installation\n\n**Status**: Already documented in developer-deployment.html\n\n**Next Step**: Review for completeness and accuracy\n\n**Labels**: documentation, deployment, task",
+    "labels": ["documentation", "deployment", "task"],
+    "assignees": []
+  },
+  {
+    "title": "Hayden to integrate Hopkins deployment work",
+    "body": "**Meeting**: October 31, 2025\n\n**Action**: Hayden to integrate Hopkins deployment work into GIS documentation and/or gaiaDocker\n\n**Details**: Hopkins has deployment strategies that should be incorporated into the broader GIS toolchain deployment documentation\n\n**Labels**: deployment, task",
+    "labels": ["deployment", "task"],
+    "assignees": []
+  },
+  {
+    "title": "Jacob to contribute onboarding documentation",
+    "body": "**Meeting**: October 31, 2025\n\n**Action**: Jacob to contribute onboarding documentation based on new member experience\n\n**Focus Areas**:\n- New member experience\n- Common questions from newcomers\n- Setup challenges and solutions\n- Onboarding improvements\n\n**Framework**: Developer contributing guide already exists to build upon\n\n**Labels**: documentation, onboarding, task",
+    "labels": ["documentation", "onboarding", "task"],
+    "assignees": []
+  },
+  {
+    "title": "Update 'Getting Involved' page",
+    "body": "**Meeting**: October 31, 2025\n\n**Action**: Update the 'Getting Involved' page with latest information\n\n**Page**: rmd/getting-involved.Rmd\n\n**Updates Needed**:\n- Current leadership (co-leaders)\n- Latest meeting information\n- Updated processes\n- Links to new developer resources\n\n**Labels**: documentation, task",
+    "labels": ["documentation", "task"],
+    "assignees": []
+  },
+  {
+    "title": "Jared to meet with Sarah Khalid re: scientific data submission",
+    "body": "**Meeting**: October 31, 2025\n\n**Action**: Jared to meet with Sarah Khalid regarding scientific data journal submission\n\n**Context**: GIS Working Group manuscript development\n\n**Labels**: publication, coordination",
+    "labels": ["publication", "coordination"],
+    "assignees": ["jshoughtaling"]
+  },
+  {
+    "title": "Continue developing independent GIS manuscript",
+    "body": "**Meeting**: October 31, 2025\n\n**Action**: Continue developing independent GIS Working Group manuscript\n\n**Decision**: GIS group will publish separately (not as part of Florida study)\n\n**Next Steps**:\n- Define manuscript scope and outline\n- Identify co-authors\n- Establish writing timeline\n- Determine target journal\n\n**Labels**: publication, task",
+    "labels": ["publication", "task"],
+    "assignees": []
+  },
+  {
+    "title": "Respond to Florida team: GIS publishing separately",
+    "body": "**Meeting**: October 31, 2025\n\n**Action**: Communicate to Florida team that GIS Working Group will publish manuscript separately\n\n**Message**: GIS group appreciates the collaboration opportunity but will pursue an independent publication focused on the GIS toolchain and methodology\n\n**Labels**: publication, communication",
+    "labels": ["publication", "communication"],
+    "assignees": []
+  }
+]

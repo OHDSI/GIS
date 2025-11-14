@@ -1,0 +1,16 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG</div>'
+output:
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float:
+      collapsed: true
+    includes:
+      in_header: assets/include-header.html
+---
+
+# **Analysis Capabilities and Future Directions**
+
+```{r child="sections/8_analysis.Rmd"}
+```

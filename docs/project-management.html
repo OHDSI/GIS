@@ -443,196 +443,303 @@ WG</h1>
 </div>
 
 
-<div id="ohdsi-geographic-informations-systems-gis"
-class="section level1">
-<h1><strong>OHDSI Geographic Informations Systems (GIS)</strong></h1>
+<div id="project-management" class="section level1">
+<h1><strong>Project Management</strong></h1>
+<p>The OHDSI GIS Working Group follows an <strong>agile,
+use-case-driven</strong> development methodology emphasizing clear
+communication, task-oriented development, regular progress reviews, and
+transparent tracking.</p>
 <p><br></p>
-<div id="mission" class="section level2">
-<h2><strong>Mission</strong></h2>
-<p>Improve the health of populations by generating reliable evidence
-from integrated geospatial and person-level health data.</p>
-<p><br></p>
-</div>
-<div id="collaboration-approach" class="section level2">
-<h2><strong>Collaboration Approach</strong></h2>
-<p>Like most of OHDSI, we use Github and MS Teams for collaboration,
-version control, etc. There are no perfect options for supporting
-collaboration. We’ll help you accomodate to ours as best we can. In
-particular, we use Github for managing tasks like defining and
-monitoring progress on OHDSI studies, infrastructure roadmaps, technical
-issues, etc.</p>
-<p>We review progress and get input from the broader group at weekly
-meetings on Fridays. Leaders of specific projects within the GIS
-workgroup schedule and hold meetings with subgroups outside the main
-Friday meeting. Those other meetings are where most of the work on use
-cases and advancing technical infrastructure gets done.</p>
-<p>Apart from the groups’ offical leadership, many members make
-fundamental contributions to the group’s decisions, strategies, and
-products.</p>
-<p>All are welcome. We’d love to work with you. Please see our page on
-<a href="getting-involved.html#Proposing_a_new_Use_Case">proposing new
-use cases</a>. If you are new and are considering using the GIS
-toolchain to do research or contibuting to the group’s work, we will
-schedule a separate meeting with you to help you figure out what manner
-of participation makes sense for you.</p>
-<p>New to OHDSI? First sign up for an OHDSI MS Teams account <a
-href="https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUQ05MOU9BSzEwOThZVjNQVVFGTDNZRENONiQlQCN0PWcu">here</a>.
-It’s easy peasy. Already have an OHDSI Teams account? Great. Just sign
-up for the GIS Workgroup <a
-href="https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu">here</a>.</p>
-<p>The main workgroup call is on MS Teams every Friday at 10 AM US
-Eastern Time (<a
-href="https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d">Meeting
-Link</a>). We are always looking for better ways to accomodate the time
-constraints of valued members around the world. Please let us know if
-this schedule is an obstacle.</p>
-<p><br></p>
-</div>
-<div id="gis-toolchain" class="section level2">
-<h2><strong>GIS Toolchain</strong></h2>
-<p>The GIS toolchain consists of extensions to the OMOP schema,
-extensions to the OMOP Vocabulary, and GIS-specific software for
-acquiring and working with geospatial data. Together, these enable
-researchers to use health-related attributes of the regions where
-patients live in OHDSI study cohort definitions. For example, you can
-use the GIS toolchain to define cohorts that include regional data on
-exposure to toxicants or social deprivation along with EHR data on
-relevant health outcomes. The toolchain also includes informatics
-resources that support integration with the main OHDSI tool stack
-(HADES) and integration with externally supported solutions for
-geocoding and for finding and deriving relevant data sources from
-catalogs of available data sources.</p>
-<p>Importantly, the toolchain allows integrated analysis of geospatial
-and EHR data without sharing any sensitive patient location data.</p>
-<div id="omop-gis-schema-extensions" class="section level4">
-<h4><strong>OMOP GIS schema extensions</strong></h4>
-<p>The External_Exposure table is an extension to the main OMOP schema.
-It holds data on things that can affect health that are associated with
-the places where patients live. The Location_History table contains
-information on patient’s residence and the dates during which they lived
-in that location. The DDLs and associated documentation for the
-External_Exposure table and the Location_History table are <a
-href="schema-extensions.html#external_exposure">here</a> and <a
-href="schema-extensions.html#location_history">here</a> respectively.
-The entity-relationship diagram showing the joins between these tables
-and the main OMOP schema is <a
-href="schema-extensions.html#OMOP_GIS_Schema_Extensions">here</a>.</p>
-</div>
-<div id="omop-vocabulary-extensions" class="section level4">
-<h4><strong>OMOP Vocabulary extensions</strong></h4>
-<p>The GIS extensions to the OMOP Vocabulary cover geometries,
-toxicants, and social determinants. They are used to represent a very
-large set of entities that can affect health and their relationships.
-The draft versions of these vocabularies are available <a
-href="https://github.com/OHDSI/GIS/tree/main/vocabularies">here</a>.
-They are based on mature existing ontologies and were developed by GIS
-workgroup members who are part of the OHDSI Core Vocabulary team in
-accordance with the guiding principles for OMOP vocabulary development,
-quality assurance, and integration. Current work on their validation in
-real use cases is expected to support their eventual acceptance as
-versioned community-maintained extensions of the core OMOP
-Vocabulary.</p>
-</div>
-<div id="gaiacore" class="section level4">
-<h4><strong>gaiaCore</strong></h4>
-<p>The gaiaCore software and associated gaiaDB schema support
-specification of attributes and geographic shapes in publicly available
-datasets. This specification allows the tables in the GIS schema
-extension to be joined with patient-level clinical data stored in the
-main OMOP schema. The current Beta release of gaiaCore software and its
-documentation are <a
-href="https://github.com/OHDSI/gaiaCore">here</a>.</p>
-</div>
-<div id="guidance" class="section level4">
-<h4><strong>Guidance</strong></h4>
-<p>The GIS toolchain requires patient addresses to be geocoded into
-representations that GIS software expects; for example, the latitude and
-longitude coordinates of street addresses or the coordinates of the
-lines that define a postal region. The OHDSI GIS workgroup does not
-provide or maintain software that does this geocoding. The GIS Workgroup
-does provide guidance about privacy-preserving options for geocoding
-address information and considerations for using available open-source
-and comercial geocoding approaches. The workgroup is also developing
-guidance to aid researchers in making informed decisions about selecting
-and working with alternative geospatial data sources that are relevant
-to addressing a research question.</p>
-</div>
-<div id="support-for-integration-with-ohdsis-technical-ecosytem"
-class="section level4">
-<h4><strong>Support for integration with OHDSI’s technical
-ecosytem</strong></h4>
-<p>The GIS Workgroup provides modified versions of the BroadSea
-container that inlcudes versions of the OHDSI Vocabulary that include
-draft the GIS vocabularies and the other components of the toolchain.
-Modified versions of the Tufts Synthetic Data and associated for
-demonstrating the use of the HADES PLP package to predict incident
-respiratory conditions using regional air quality data are included in
-the container. The workgroup is developing a robust approach to working
-with available geospatial data sources via catalogs. The approach uses
-schema.org-compliant standards and federated metadata sharing methods
-widely used in the GIS community to share information about available
-datasets.</p>
-<p><br></p>
-<p><img src="images/ohdsi_gis_overview.png" style="width:150.0%" /></p>
-<p>The green and black elements at the top of the figure above show the
-production of reliable evidence by applying standardized analytics to
-standardized person-level clinical data. The extension of this approach
-by the GIS toolchain is shown below that. Geocoded patient addresses are
-linked to geospatial datasets and standardized in the OMOP GIS
-extension. The GIS toolchain uses the same modeling approach as the main
-OMOP CDM and vocabulary. This allows the same best practice analytics to
-be applied simultaneously to both person-level clinical data and
-geospatial data on exposures outside the clinic. As with OHDSI’s use of
-clinical data, analyses of external exposures are done without sharing
-patient address information.</p>
-<p><br></p>
-</div>
-</div>
-<div id="goals" class="section level2">
-<h2><strong>Goals</strong></h2>
-<p>The OHDSI GIS Workgroup carries out work in support of its mission by
-pursuing the following goals:</p>
+<div id="github-project-board" class="section level2">
+<h2><strong>GitHub Project Board</strong></h2>
+<p><strong>Primary Tool</strong>: <a
+href="https://github.com/orgs/OHDSI/projects/26">GIS Project
+Board</a></p>
+<div id="board-views" class="section level3">
+<h3><strong>Board Views</strong></h3>
 <ul>
-<li>Support OHDSI studies that use the GIS toolchain</li>
-<li>Conduct studies that use the GIS toolchain</li>
-<li>Advance the development of the GIS toolchain</li>
-<li>Facilitate the use of externally supported privacy-protecting
-geocoding software</li>
-<li>Develop data cataloging resources and guidance that enable reuse of
-specific geospatial datasets in OHDSI studies</li>
+<li><strong>Status View</strong>: Backlog → To Do → In Progress →
+Blocked → Review → Done</li>
+<li><strong>Use Case View</strong>: Groups tasks by research use
+case</li>
+<li><strong>Priority View</strong>: High, Medium, Low priority
+items</li>
 </ul>
+</div>
+<div id="issue-types" class="section level3">
+<h3><strong>Issue Types</strong></h3>
+<ul>
+<li><strong>Use Cases</strong> (<code>Use Case</code> label):
+Research-driven proposals via <a
+href="https://github.com/OHDSI/GIS/issues/new?assignees=&amp;labels=Use+Case&amp;projects=&amp;template=use-case.yaml&amp;title=%5BUse+Case%5D%3A+">template</a></li>
+<li><strong>Work Orders</strong> (<code>task</code> label): Specific
+development tasks</li>
+<li><strong>Bugs</strong> (<code>bug</code> label): Software
+defects</li>
+<li><strong>Enhancements</strong> (<code>enhancement</code> label):
+Feature requests</li>
+<li><strong>Documentation</strong> (<code>documentation</code> label):
+Documentation updates</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="meetings" class="section level2">
+<h2><strong>Meetings</strong></h2>
+<div id="weekly-working-group-meeting" class="section level3">
+<h3><strong>Weekly Working Group Meeting</strong></h3>
+<p><strong>When</strong>: Fridays 10 AM US Eastern
+<strong>Where</strong>: <a
+href="https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d">MS
+Teams</a></p>
+<p><strong>Agenda</strong> (60 minutes): 1. Intros &amp; New Members (5
+min) 2. GitHub Ticket Review (10-15 min) - Review sprint tasks, update
+board, identify blockers 3. Standup Updates (2 min max per person) -
+Completed work, current work, blockers, discussion points 4. Discussion
+Topics (25-30 min) - Technical decisions, use cases, architecture 5.
+Action Items &amp; Next Steps (5 min)</p>
+<p><strong>Roles</strong>: Facilitator (enforces time), Note Taker
+(documents decisions), Timekeeper (optional)</p>
+</div>
+<div id="subgroup-meetings" class="section level3">
+<h3><strong>Subgroup Meetings</strong></h3>
+<p>Task-specific subgroups meet separately for focused work on use cases
+or components, reporting progress at Friday meetings.</p>
+<p><br></p>
+</div>
+</div>
+<div id="development-workflow" class="section level2">
+<h2><strong>Development Workflow</strong></h2>
+<div id="sprint-cycle-2-week-informal-iterations"
+class="section level3">
+<h3><strong>Sprint Cycle</strong> (2-week informal iterations)</h3>
+<ul>
+<li><strong>Week 1</strong>: Plan, assign from backlog, develop, Friday
+check-in</li>
+<li><strong>Week 2</strong>: Continue development, submit PRs, code
+review, Friday sprint review</li>
+</ul>
+</div>
+<div id="definition-of-done" class="section level3">
+<h3><strong>Definition of Done</strong></h3>
+<p>Code written and tested → Tests pass → Documentation updated → Code
+reviewed → Merged to main → Verified in deployment</p>
+<p><br></p>
+</div>
+</div>
+<div id="use-case-management" class="section level2">
+<h2><strong>Use Case Management</strong></h2>
+<ol style="list-style-type: decimal">
+<li><a
+href="https://github.com/OHDSI/GIS/issues/new?assignees=&amp;labels=Use+Case&amp;projects=&amp;template=use-case.yaml&amp;title=%5BUse+Case%5D%3A+">Submit
+Use Case</a> (Description, Infrastructure needs, Timeline, Credit,
+Support, Datasets)</li>
+<li>Leaders review and schedule discussion</li>
+<li>Present in Friday meeting</li>
+<li>Decompose into work orders</li>
+<li>Prioritize and assign</li>
+<li>Execute development sprint</li>
+<li>Deliver results</li>
+</ol>
+<p><br></p>
+</div>
+<div id="repository-inventory" class="section level2">
+<h2><strong>Repository Inventory</strong></h2>
+<table>
+<colgroup>
+<col width="41%" />
+<col width="31%" />
+<col width="27%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Repository</th>
+<th>Purpose</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://github.com/OHDSI/GIS">OHDSI/GIS</a></td>
+<td>Central hub, docs, coordination</td>
+<td>Active</td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/OHDSI/gaiaDb">OHDSI/gaiaDb</a></td>
+<td>Core data repository</td>
+<td>Beta</td>
+</tr>
+<tr class="odd">
+<td><a href="https://github.com/OHDSI/gaiaCore">OHDSI/gaiaCore</a></td>
+<td>Multi-language connector</td>
+<td>Development</td>
+</tr>
+<tr class="even">
+<td><a
+href="https://github.com/OHDSI/gaiaCatalog">OHDSI/gaiaCatalog</a></td>
+<td>Data catalog</td>
+<td>Beta</td>
+</tr>
+<tr class="odd">
+<td><a
+href="https://github.com/OHDSI/gaiaDocker">OHDSI/gaiaDocker</a></td>
+<td>Deployment orchestration</td>
+<td>Active</td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/TuftsCTSI/CVB">TuftsCTSI/CVB</a></td>
+<td>Vocabulary builder</td>
+<td>Development</td>
+</tr>
+</tbody>
+</table>
+<p>See <a href="developer.html">Developer Resources</a> for detailed
+package information.</p>
 <p><br></p>
 </div>
 <div id="roadmaps" class="section level2">
 <h2><strong>Roadmaps</strong></h2>
+<p>Key component roadmaps maintained as GitHub issues: - <a
+href="https://github.com/OHDSI/GIS/issues/368">Gaia Toolchain</a> - <a
+href="https://github.com/OHDSI/GIS/issues/365">Gaia Catalog</a> - <a
+href="https://github.com/OHDSI/GIS/issues/366">Geocoding Guidance</a> -
+<a href="https://github.com/OHDSI/GIS/issues/369">Vocabulary</a></p>
+<p><br></p>
+</div>
+<div id="communication" class="section level2">
+<h2><strong>Communication</strong></h2>
+<div id="channels" class="section level3">
+<h3><strong>Channels</strong></h3>
 <ul>
-<li><a href="https://github.com/OHDSI/GIS/issues/368">Gaia</a></li>
-<li><a href="https://github.com/OHDSI/GIS/issues/365">Gaia
-Catalog</a></li>
-<li><a href="https://github.com/OHDSI/GIS/issues/366">Geocoding</a></li>
-<li><a
-href="https://github.com/OHDSI/GIS/issues/369">Vocabulary</a></li>
+<li><strong>GitHub Issues/PRs</strong>: Technical discussion, tracking
+(primary)</li>
+<li><strong>MS Teams GIS Channel</strong>: Quick questions,
+announcements</li>
+<li><strong>Weekly Meetings</strong>: Collaborative decision-making</li>
+<li><strong>Email</strong>: Meeting agendas, summaries</li>
+<li><strong>OHDSI Forums</strong>: Community questions</li>
+</ul>
+</div>
+<div id="best-practices" class="section level3">
+<h3><strong>Best Practices</strong></h3>
+<ul>
+<li>Use GitHub for trackable technical discussions</li>
+<li>Use Teams for quick coordination</li>
+<li>Document major decisions in GitHub issues with <code>decision</code>
+label</li>
+<li>Over-communicate rather than under-communicate</li>
 </ul>
 <p><br></p>
 </div>
-<div id="publicationspresentations" class="section level2">
-<h2><strong>Publications/Presentations</strong></h2>
-<p>OHDSI GIS Toolchain Live Demonstration (2024 OHDSI Symposium <a
-href="https://www.youtube.com/watch?v=NLfWvuZJVK4">Video</a>)</p>
-<p>OHDSI GIS Infrastructure (2023 OHDSI Symposium <a
-href="https://www.ohdsi.org/2023showcase-19/">Poster</a>, <a
-href="https://www.ohdsi.org/wp-content/uploads/2023/10/19-zollovenecek-BriefReport.pdf">Abstract</a>)</p>
-<p>Toxins Vocabulary (2023 OHDSI Symposium <a
-href="https://www.ohdsi.org/2023showcase-11/">Poster</a>, <a
-href="https://www.ohdsi.org/wp-content/uploads/2023/10/Talapova-Polina_A_Toxin_Vocabulary_for_the_OMOP_CDM_2023symposium-Polina-Talapova.pdf">Abstract</a>)</p>
-<p>OHDSI GIS Workgroup October 10, 2023 Update (<a
-href="https://youtu.be/QZY-slWdsMs?si=UxMT39rqWTAW_AMx&amp;t=2178">Video</a>)</p>
-<p>OHDSI GIS Workgroup 2023 Objectives and Key Results (<a
-href="https://www.youtube.com/watch?v=bd0htzO1hx4&amp;t=1103s">Video</a>,
-<a
-href="https://www.ohdsi.org/wp-content/uploads/2023/02/GIS-OKRs2023Q1.pdf">slides</a>)</p>
-<p>OHDSI GIS Workgroup August 23, 2022 Update (<a
-href="https://youtu.be/d8jIAm9cssM">Video</a>)</p>
+</div>
+<div id="onboarding" class="section level2">
+<h2><strong>Onboarding</strong></h2>
+<p><strong>New Member Checklist</strong>: 1. <a
+href="https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUQ05MOU9BSzEwOThZVjNQVVFGTDNZRENONiQlQCN0PWcu">Sign
+up for OHDSI Teams</a> 2. <a
+href="https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu">Join
+GIS Working Group</a> 3. Attend Friday meeting and introduce yourself 4.
+Review <a href="developer.html">Developer Resources</a> 5. Pick a
+<code>good first issue</code> or join subgroup 6. Set up development
+environment (<a href="developer-deployment.html">Deployment Guide</a>)
+7. Make first contribution (<a
+href="developer-contributing.html">Contributing Guidelines</a>)</p>
+<p>New contributors are encouraged to pair with experienced members and
+start with documentation tasks.</p>
+<p><br></p>
+</div>
+<div id="quality-standards" class="section level2">
+<h2><strong>Quality Standards</strong></h2>
+<div id="code-review" class="section level3">
+<h3><strong>Code Review</strong></h3>
+<ul>
+<li>Pull request review by ≥1 developer</li>
+<li>Passing tests (when available)</li>
+<li>Updated documentation</li>
+<li>Adherence to coding standards</li>
+</ul>
+</div>
+<div id="testing" class="section level3">
+<h3><strong>Testing</strong></h3>
+<ul>
+<li>Unit tests for core functionality</li>
+<li>Integration tests for database operations</li>
+<li>Manual testing for UI/UX</li>
+<li>User acceptance testing for use cases</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="vision-okrs" class="section level2">
+<h2><strong>Vision &amp; OKRs</strong></h2>
+<p>The working group establishes quarterly <strong>Objectives and Key
+Results (OKRs)</strong> aligned with the mission to improve population
+health through integrated geospatial and clinical data analysis.</p>
+<p><strong>Example OKR</strong> (2023): - <strong>Objective</strong>:
+Advance Gaia toolchain to production-ready state - KR1: Complete 3
+validation use cases - KR2: Publish documentation for all components -
+KR3: Achieve &lt;2 minute load time for typical dataset</p>
+<p>OKRs are reviewed quarterly and linked to project board tasks.</p>
+<p><br></p>
+</div>
+<div id="tools" class="section level2">
+<h2><strong>Tools</strong></h2>
+<table style="width:100%;">
+<colgroup>
+<col width="28%" />
+<col width="42%" />
+<col width="28%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tool</th>
+<th>Purpose</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>GitHub Projects</td>
+<td>Task tracking</td>
+<td><a href="https://github.com/orgs/OHDSI/projects/26">Project
+Board</a></td>
+</tr>
+<tr class="even">
+<td>GitHub Issues</td>
+<td>Work items, bugs, use cases</td>
+<td><a href="https://github.com/OHDSI/GIS/issues">Issues</a></td>
+</tr>
+<tr class="odd">
+<td>MS Teams</td>
+<td>Communication, meetings</td>
+<td><a
+href="https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu">Join</a></td>
+</tr>
+<tr class="even">
+<td>GitHub Pages</td>
+<td>Documentation</td>
+<td><a href="https://ohdsi.github.io/GIS">ohdsi.github.io/GIS</a></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+</div>
+<div id="continuous-improvement" class="section level2">
+<h2><strong>Continuous Improvement</strong></h2>
+<p>The working group regularly reflects on processes through quarterly
+retrospectives, solicits feedback in meetings, and adapts based on what
+works and OHDSI community best practices.</p>
+<p><br></p>
+</div>
+<div id="contact" class="section level2">
+<h2><strong>Contact</strong></h2>
+<ul>
+<li><strong>Teams</strong>: GIS Working Group channel</li>
+<li><strong>Meetings</strong>: Fridays 10 AM US Eastern</li>
+<li><strong>Email</strong>: zollovenecek[at]ohdsi[dot]org</li>
+<li><strong>GitHub</strong>: Tag <span
+class="citation">@OHDSI/GIS-leaders</span></li>
+</ul>
 <p><br></p>
 </div>
 </div>

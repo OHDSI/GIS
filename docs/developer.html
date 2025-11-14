@@ -443,196 +443,287 @@ WG</h1>
 </div>
 
 
-<div id="ohdsi-geographic-informations-systems-gis"
-class="section level1">
-<h1><strong>OHDSI Geographic Informations Systems (GIS)</strong></h1>
+<div id="developer-resources" class="section level1">
+<h1><strong>Developer Resources</strong></h1>
+<p>Welcome to the OHDSI GIS Working Group developer hub. This section
+provides comprehensive information for developers contributing to the
+Gaia toolchain and related GIS infrastructure.</p>
 <p><br></p>
-<div id="mission" class="section level2">
-<h2><strong>Mission</strong></h2>
-<p>Improve the health of populations by generating reliable evidence
-from integrated geospatial and person-level health data.</p>
-<p><br></p>
-</div>
-<div id="collaboration-approach" class="section level2">
-<h2><strong>Collaboration Approach</strong></h2>
-<p>Like most of OHDSI, we use Github and MS Teams for collaboration,
-version control, etc. There are no perfect options for supporting
-collaboration. We’ll help you accomodate to ours as best we can. In
-particular, we use Github for managing tasks like defining and
-monitoring progress on OHDSI studies, infrastructure roadmaps, technical
-issues, etc.</p>
-<p>We review progress and get input from the broader group at weekly
-meetings on Fridays. Leaders of specific projects within the GIS
-workgroup schedule and hold meetings with subgroups outside the main
-Friday meeting. Those other meetings are where most of the work on use
-cases and advancing technical infrastructure gets done.</p>
-<p>Apart from the groups’ offical leadership, many members make
-fundamental contributions to the group’s decisions, strategies, and
-products.</p>
-<p>All are welcome. We’d love to work with you. Please see our page on
-<a href="getting-involved.html#Proposing_a_new_Use_Case">proposing new
-use cases</a>. If you are new and are considering using the GIS
-toolchain to do research or contibuting to the group’s work, we will
-schedule a separate meeting with you to help you figure out what manner
-of participation makes sense for you.</p>
-<p>New to OHDSI? First sign up for an OHDSI MS Teams account <a
-href="https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUQ05MOU9BSzEwOThZVjNQVVFGTDNZRENONiQlQCN0PWcu">here</a>.
-It’s easy peasy. Already have an OHDSI Teams account? Great. Just sign
-up for the GIS Workgroup <a
-href="https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu">here</a>.</p>
-<p>The main workgroup call is on MS Teams every Friday at 10 AM US
-Eastern Time (<a
-href="https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d">Meeting
-Link</a>). We are always looking for better ways to accomodate the time
-constraints of valued members around the world. Please let us know if
-this schedule is an obstacle.</p>
+<div id="overview" class="section level2">
+<h2><strong>Overview</strong></h2>
+<p>The OHDSI GIS Working Group develops and maintains a suite of tools
+collectively known as the <strong>Gaia toolchain</strong>. These tools
+enable the integration of geospatial data with OMOP Common Data Model
+(CDM) for population health research.</p>
 <p><br></p>
 </div>
-<div id="gis-toolchain" class="section level2">
-<h2><strong>GIS Toolchain</strong></h2>
-<p>The GIS toolchain consists of extensions to the OMOP schema,
-extensions to the OMOP Vocabulary, and GIS-specific software for
-acquiring and working with geospatial data. Together, these enable
-researchers to use health-related attributes of the regions where
-patients live in OHDSI study cohort definitions. For example, you can
-use the GIS toolchain to define cohorts that include regional data on
-exposure to toxicants or social deprivation along with EHR data on
-relevant health outcomes. The toolchain also includes informatics
-resources that support integration with the main OHDSI tool stack
-(HADES) and integration with externally supported solutions for
-geocoding and for finding and deriving relevant data sources from
-catalogs of available data sources.</p>
-<p>Importantly, the toolchain allows integrated analysis of geospatial
-and EHR data without sharing any sensitive patient location data.</p>
-<div id="omop-gis-schema-extensions" class="section level4">
-<h4><strong>OMOP GIS schema extensions</strong></h4>
-<p>The External_Exposure table is an extension to the main OMOP schema.
-It holds data on things that can affect health that are associated with
-the places where patients live. The Location_History table contains
-information on patient’s residence and the dates during which they lived
-in that location. The DDLs and associated documentation for the
-External_Exposure table and the Location_History table are <a
-href="schema-extensions.html#external_exposure">here</a> and <a
-href="schema-extensions.html#location_history">here</a> respectively.
-The entity-relationship diagram showing the joins between these tables
-and the main OMOP schema is <a
-href="schema-extensions.html#OMOP_GIS_Schema_Extensions">here</a>.</p>
-</div>
-<div id="omop-vocabulary-extensions" class="section level4">
-<h4><strong>OMOP Vocabulary extensions</strong></h4>
-<p>The GIS extensions to the OMOP Vocabulary cover geometries,
-toxicants, and social determinants. They are used to represent a very
-large set of entities that can affect health and their relationships.
-The draft versions of these vocabularies are available <a
-href="https://github.com/OHDSI/GIS/tree/main/vocabularies">here</a>.
-They are based on mature existing ontologies and were developed by GIS
-workgroup members who are part of the OHDSI Core Vocabulary team in
-accordance with the guiding principles for OMOP vocabulary development,
-quality assurance, and integration. Current work on their validation in
-real use cases is expected to support their eventual acceptance as
-versioned community-maintained extensions of the core OMOP
-Vocabulary.</p>
-</div>
-<div id="gaiacore" class="section level4">
-<h4><strong>gaiaCore</strong></h4>
-<p>The gaiaCore software and associated gaiaDB schema support
-specification of attributes and geographic shapes in publicly available
-datasets. This specification allows the tables in the GIS schema
-extension to be joined with patient-level clinical data stored in the
-main OMOP schema. The current Beta release of gaiaCore software and its
-documentation are <a
-href="https://github.com/OHDSI/gaiaCore">here</a>.</p>
-</div>
-<div id="guidance" class="section level4">
-<h4><strong>Guidance</strong></h4>
-<p>The GIS toolchain requires patient addresses to be geocoded into
-representations that GIS software expects; for example, the latitude and
-longitude coordinates of street addresses or the coordinates of the
-lines that define a postal region. The OHDSI GIS workgroup does not
-provide or maintain software that does this geocoding. The GIS Workgroup
-does provide guidance about privacy-preserving options for geocoding
-address information and considerations for using available open-source
-and comercial geocoding approaches. The workgroup is also developing
-guidance to aid researchers in making informed decisions about selecting
-and working with alternative geospatial data sources that are relevant
-to addressing a research question.</p>
-</div>
-<div id="support-for-integration-with-ohdsis-technical-ecosytem"
-class="section level4">
-<h4><strong>Support for integration with OHDSI’s technical
-ecosytem</strong></h4>
-<p>The GIS Workgroup provides modified versions of the BroadSea
-container that inlcudes versions of the OHDSI Vocabulary that include
-draft the GIS vocabularies and the other components of the toolchain.
-Modified versions of the Tufts Synthetic Data and associated for
-demonstrating the use of the HADES PLP package to predict incident
-respiratory conditions using regional air quality data are included in
-the container. The workgroup is developing a robust approach to working
-with available geospatial data sources via catalogs. The approach uses
-schema.org-compliant standards and federated metadata sharing methods
-widely used in the GIS community to share information about available
-datasets.</p>
-<p><br></p>
-<p><img src="images/ohdsi_gis_overview.png" style="width:150.0%" /></p>
-<p>The green and black elements at the top of the figure above show the
-production of reliable evidence by applying standardized analytics to
-standardized person-level clinical data. The extension of this approach
-by the GIS toolchain is shown below that. Geocoded patient addresses are
-linked to geospatial datasets and standardized in the OMOP GIS
-extension. The GIS toolchain uses the same modeling approach as the main
-OMOP CDM and vocabulary. This allows the same best practice analytics to
-be applied simultaneously to both person-level clinical data and
-geospatial data on exposures outside the clinic. As with OHDSI’s use of
-clinical data, analyses of external exposures are done without sharing
-patient address information.</p>
-<p><br></p>
-</div>
-</div>
-<div id="goals" class="section level2">
-<h2><strong>Goals</strong></h2>
-<p>The OHDSI GIS Workgroup carries out work in support of its mission by
-pursuing the following goals:</p>
+<div id="repository-ecosystem" class="section level2">
+<h2><strong>Repository Ecosystem</strong></h2>
+<div id="central-hub" class="section level3">
+<h3><strong>Central Hub</strong></h3>
 <ul>
-<li>Support OHDSI studies that use the GIS toolchain</li>
-<li>Conduct studies that use the GIS toolchain</li>
-<li>Advance the development of the GIS toolchain</li>
-<li>Facilitate the use of externally supported privacy-protecting
-geocoding software</li>
-<li>Develop data cataloging resources and guidance that enable reuse of
-specific geospatial datasets in OHDSI studies</li>
+<li><strong><a
+href="https://github.com/OHDSI/GIS">OHDSI/GIS</a></strong> - This
+repository serves as the central coordination point
+<ul>
+<li>Documentation website (<a href="https://ohdsi.github.io/GIS/"
+class="uri">https://ohdsi.github.io/GIS/</a>)</li>
+<li>Use case tracking</li>
+<li>Project management via <a
+href="https://github.com/orgs/OHDSI/projects/26">GitHub
+Projects</a></li>
+<li>Contributing guidelines</li>
+</ul></li>
+</ul>
+</div>
+<div id="core-packages" class="section level3">
+<h3><strong>Core Packages</strong></h3>
+<p><strong><a href="https://github.com/OHDSI/gaiaDb">gaiaDb</a></strong>
+<img src="https://img.shields.io/badge/status-beta-yellow"
+alt="Status: Beta" /> - <strong>Technology</strong>: PostgreSQL/PostGIS
+- <strong>Purpose</strong>: Core data repository with geospatial
+processing capabilities - <strong>Maintainers</strong>: <a
+href="https://github.com/OHDSI/gaiaDb">See repository</a> - <strong>Key
+Features</strong>: - Geospatial data ingestion, management, and analysis
+- SQL routines and PostGIS functionality - OMOP CDM integration -
+LinkML/JSON-LD metadata support - Spatial indexing and optimization</p>
+<p><strong><a
+href="https://github.com/OHDSI/gaiaCore">gaiaCore</a></strong> <img
+src="https://img.shields.io/badge/status-development-orange"
+alt="Status: Development" /> - <strong>Development</strong>: <a
+href="https://github.com/TuftsCTSI/gaiaCore">TuftsCTSI/gaiaCore</a> -
+<strong>Technology</strong>: Multi-language connector framework -
+<strong>Purpose</strong>: Provides access to gaiaDB functionality across
+multiple languages and paradigms - <strong>Maintainers</strong>: <a
+href="https://github.com/OHDSI/gaiaCore">See repository</a> -
+<strong>Key Features</strong>: - RESTful API access via PostgREST -
+Direct database connection support - Language-specific client libraries
+(R, Python, etc.) - Orchestrates functions defined in gaiaDB - OpenAPI
+specification for API endpoints</p>
+<p><strong><a
+href="https://github.com/OHDSI/gaiaCatalog">gaiaCatalog</a></strong>
+<img src="https://img.shields.io/badge/status-beta-yellow"
+alt="Status: Beta" /> - <strong>Technology</strong>: Schema.org
+compliant metadata - <strong>Purpose</strong>: Data source discovery and
+cataloging - <strong>Maintainers</strong>: <a
+href="https://github.com/OHDSI/gaiaCatalog">See repository</a> -
+<strong>Key Features</strong>: - Metadata management - Federated data
+source discovery - Schema.org compliance - Integration with external
+catalogs</p>
+<p><strong><a
+href="https://github.com/OHDSI/gaiaDocker">gaiaDocker</a></strong> <img
+src="https://img.shields.io/badge/status-active-green"
+alt="Status: Active" /> - <strong>Technology</strong>: Docker Compose
+orchestration - <strong>Purpose</strong>: Coordinated deployment and
+versioned releases of the Gaia toolchain - <strong>Maintainers</strong>:
+<a href="https://github.com/OHDSI/gaiaDocker">See repository</a> -
+<strong>Key Features</strong>: - Complete GIS stack containerization -
+Coordinated image builds across all components - Version management and
+releases - Profile-based deployment (gaia, degauss) - Integration with
+OHDSI Broadsea ecosystem</p>
+</div>
+<div id="vocabulary-resources" class="section level3">
+<h3><strong>Vocabulary Resources</strong></h3>
+<p><strong><a
+href="https://github.com/TuftsCTSI/CVB">TuftsCTSI/CVB</a></strong> -
+<strong>Purpose</strong>: OMOP vocabulary extensions for GIS -
+<strong>Key Vocabularies</strong>: - OMOP GIS Vocabulary - OMOP Exposome
+Vocabulary - OMOP SDoH Vocabulary - Toxins Vocabulary -
+<strong>Location</strong>: Delta files in <a
+href="https://github.com/TuftsCTSI/CVB/tree/main/GIS/Ontology">CVB/GIS/Ontology</a></p>
+<p><br></p>
+</div>
+</div>
+<div id="architecture-overview" class="section level2">
+<h2><strong>Architecture Overview</strong></h2>
+<div id="data-flow" class="section level3">
+<h3><strong>Data Flow</strong></h3>
+<pre><code>External Geospatial Data → gaiaCatalog (Discovery)
+                                ↓
+                           gaiaDb (Backend Repository)
+                           ├── Data Ingestion
+                           ├── SQL Routines &amp; PostGIS Functions
+                           ├── OMOP Integration
+                           └── Exposure Calculation
+                                ↓
+                           gaiaCore (Access Layer)
+                           ├── RESTful API (PostgREST)
+                           └── Language Connectors (R, Python, etc.)
+                                ↓
+                      OMOP CDM + GIS Extensions
+                                ↓
+                           HADES Analytics</code></pre>
+</div>
+<div id="tool-chain-components" class="section level3">
+<h3><strong>Tool Chain Components</strong></h3>
+<ol style="list-style-type: decimal">
+<li><strong>Data Discovery</strong> (gaiaCatalog)
+<ul>
+<li>Input: External data source metadata</li>
+<li>Output: Cataloged, discoverable datasets</li>
+</ul></li>
+<li><strong>Backend Engine</strong> (gaiaDb)
+<ul>
+<li>Input: Raw geospatial datasets, patient locations</li>
+<li>Processing: SQL routines, PostGIS functions, spatial operations</li>
+<li>Output: OMOP-compliant external exposure data, standardized spatial
+tables</li>
+</ul></li>
+<li><strong>Access Layer</strong> (gaiaCore)
+<ul>
+<li>Input: Requests via API or database connections</li>
+<li>Processing: Orchestrates gaiaDB functions, provides multi-language
+access</li>
+<li>Output: Data and function access through RESTful API or direct
+database connections</li>
+</ul></li>
+<li><strong>Deployment</strong> (gaiaDocker)
+<ul>
+<li>Input: Component configurations</li>
+<li>Processing: Orchestrated container deployment</li>
+<li>Output: Running Gaia toolchain with versioned releases</li>
+</ul></li>
+<li><strong>Analytics</strong> (HADES integration)
+<ul>
+<li>Input: OMOP CDM + GIS extensions</li>
+<li>Output: Evidence generation</li>
+</ul></li>
+</ol>
+<p><br></p>
+</div>
+</div>
+<div id="getting-started-as-a-developer" class="section level2">
+<h2><strong>Getting Started as a Developer</strong></h2>
+<div id="prerequisites" class="section level3">
+<h3><strong>Prerequisites</strong></h3>
+<ul>
+<li>PostgreSQL/PostGIS (&gt;= 12/3.0) for gaiaDb</li>
+<li>Docker and Docker Compose (recommended for coordinated
+deployment)</li>
+<li>Git and GitHub account</li>
+<li>OHDSI Teams access (<a
+href="https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUQ05MOU9BSzEwOThZVjNQVVFGTDNZRENONiQlQCN0PWcu">sign
+up</a>)</li>
+<li>Programming environment of choice (R, Python, etc.) for using
+gaiaCore connectors</li>
+</ul>
+</div>
+<div id="development-environment-setup" class="section level3">
+<h3><strong>Development Environment Setup</strong></h3>
+<div id="option-1-gaiadocker-recommended" class="section level4">
+<h4><strong>Option 1: gaiaDocker (Recommended)</strong></h4>
+<pre class="bash"><code># Clone gaiaDocker repository
+git clone https://github.com/OHDSI/gaiaDocker.git
+cd gaiaDocker
+
+# Start the full Gaia stack
+docker compose --profile gaia up -d
+
+# Verify services
+docker compose ps</code></pre>
+</div>
+<div id="option-2-local-development" class="section level4">
+<h4><strong>Option 2: Local Development</strong></h4>
+<ol style="list-style-type: decimal">
+<li>Clone the gaiaDb repository and set up PostgreSQL/PostGIS</li>
+<li>Configure PostgREST for API access</li>
+<li>Install language-specific connectors (R, Python, etc.)</li>
+<li>Configure connection parameters</li>
+</ol>
+<p>See <a href="developer-deployment.html">Deployment Strategies</a> for
+detailed setup instructions.</p>
+</div>
+</div>
+<div id="first-contribution" class="section level3">
+<h3><strong>First Contribution</strong></h3>
+<ol style="list-style-type: decimal">
+<li>Join the <a
+href="https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu">GIS
+Working Group on Teams</a></li>
+<li>Attend the weekly Friday meeting (10 AM US Eastern)</li>
+<li>Review the <a
+href="https://github.com/orgs/OHDSI/projects/26">Project Board</a></li>
+<li>Pick a task or propose a new one</li>
+<li>Read <a href="developer-contributing.html">Contributing
+Guidelines</a></li>
+</ol>
+<p><br></p>
+</div>
+</div>
+<div id="development-workflow" class="section level2">
+<h2><strong>Development Workflow</strong></h2>
+<p>The GIS Working Group follows an <strong>agile,
+use-case-driven</strong> development approach:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Use Case Identification</strong> - Real-world research needs
+drive development</li>
+<li><strong>Task Breakdown</strong> - Use cases decomposed into GitHub
+issues</li>
+<li><strong>Sprint Planning</strong> - Tasks assigned and tracked via
+GitHub Projects</li>
+<li><strong>Weekly Standups</strong> - Friday meetings (2 min max per
+person):
+<ul>
+<li>What did you complete last week?</li>
+<li>What are you working on now?</li>
+<li>What’s blocking you?</li>
+<li>Discussion points for later</li>
+</ul></li>
+<li><strong>Development</strong> - Feature branches, pull requests, code
+review</li>
+<li><strong>Integration</strong> - Merge to main, deploy, document</li>
+</ol>
+<p><br></p>
+</div>
+<div id="key-resources" class="section level2">
+<h2><strong>Key Resources</strong></h2>
+<ul>
+<li><a href="developer-packages.html">Package Status &amp;
+Maintainers</a></li>
+<li><a href="developer-contributing.html">Contributing
+Guidelines</a></li>
+<li><a href="developer-architecture.html">Architecture &amp; Data
+Flows</a></li>
+<li><a href="developer-deployment.html">Deployment Strategies</a></li>
+<li><a href="https://github.com/orgs/OHDSI/projects/26">Project
+Board</a></li>
 </ul>
 <p><br></p>
 </div>
-<div id="roadmaps" class="section level2">
-<h2><strong>Roadmaps</strong></h2>
+<div id="working-group-leadership" class="section level2">
+<h2><strong>Working Group Leadership</strong></h2>
+<p><strong>Co-Leaders</strong>: - Robert Miller - Jared Houghtaling</p>
+<p><strong>Contributing to Leadership</strong>: The working group
+welcomes members who want to take on additional responsibilities.
+Express interest during weekly meetings or via Teams.</p>
+<p><br></p>
+</div>
+<div id="communication-channels" class="section level2">
+<h2><strong>Communication Channels</strong></h2>
 <ul>
-<li><a href="https://github.com/OHDSI/GIS/issues/368">Gaia</a></li>
-<li><a href="https://github.com/OHDSI/GIS/issues/365">Gaia
-Catalog</a></li>
-<li><a href="https://github.com/OHDSI/GIS/issues/366">Geocoding</a></li>
-<li><a
-href="https://github.com/OHDSI/GIS/issues/369">Vocabulary</a></li>
+<li><strong>Weekly Meetings</strong>: Fridays 10 AM US Eastern (<a
+href="https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d">Teams
+Link</a>)</li>
+<li><strong>MS Teams</strong>: GIS Working Group channel</li>
+<li><strong>GitHub Issues</strong>: Bug reports, feature requests, use
+cases</li>
+<li><strong>OHDSI Forums</strong>: <a
+href="http://forums.ohdsi.org/c/developers">Developers section</a></li>
+<li><strong>Email</strong>: zollovenecek[at]ohdsi[dot]org</li>
 </ul>
 <p><br></p>
 </div>
-<div id="publicationspresentations" class="section level2">
-<h2><strong>Publications/Presentations</strong></h2>
-<p>OHDSI GIS Toolchain Live Demonstration (2024 OHDSI Symposium <a
-href="https://www.youtube.com/watch?v=NLfWvuZJVK4">Video</a>)</p>
-<p>OHDSI GIS Infrastructure (2023 OHDSI Symposium <a
-href="https://www.ohdsi.org/2023showcase-19/">Poster</a>, <a
-href="https://www.ohdsi.org/wp-content/uploads/2023/10/19-zollovenecek-BriefReport.pdf">Abstract</a>)</p>
-<p>Toxins Vocabulary (2023 OHDSI Symposium <a
-href="https://www.ohdsi.org/2023showcase-11/">Poster</a>, <a
-href="https://www.ohdsi.org/wp-content/uploads/2023/10/Talapova-Polina_A_Toxin_Vocabulary_for_the_OMOP_CDM_2023symposium-Polina-Talapova.pdf">Abstract</a>)</p>
-<p>OHDSI GIS Workgroup October 10, 2023 Update (<a
-href="https://youtu.be/QZY-slWdsMs?si=UxMT39rqWTAW_AMx&amp;t=2178">Video</a>)</p>
-<p>OHDSI GIS Workgroup 2023 Objectives and Key Results (<a
-href="https://www.youtube.com/watch?v=bd0htzO1hx4&amp;t=1103s">Video</a>,
-<a
-href="https://www.ohdsi.org/wp-content/uploads/2023/02/GIS-OKRs2023Q1.pdf">slides</a>)</p>
-<p>OHDSI GIS Workgroup August 23, 2022 Update (<a
-href="https://youtu.be/d8jIAm9cssM">Video</a>)</p>
+<div id="support" class="section level2">
+<h2><strong>Support</strong></h2>
+<ul>
+<li><strong>General Questions</strong>: OHDSI Forums</li>
+<li><strong>Bug Reports</strong>: GitHub Issues
+(repository-specific)</li>
+<li><strong>Development Help</strong>: GIS Teams channel or weekly
+meetings</li>
+<li><strong>Use Case Discussion</strong>: Schedule with working group
+leaders</li>
+</ul>
 <p><br></p>
 </div>
 </div>

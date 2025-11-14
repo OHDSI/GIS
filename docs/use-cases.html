@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title> OHDSI GIS WG</title>
+
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="assets/accordion-toc.css">
+<script src="assets/accordion-toc.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><div><img src="ohdsi16x16.png"></img> OHDSI GIS </div></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="get-started.html">
+    <span class="fa fa-play"></span>
+     
+    Get Started
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-earth"></span>
+     
+    Gaia
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="gaia-intro.html">Overview</a>
+    </li>
+    <li>
+      <a href="gaia-principles.html">Design</a>
+    </li>
+    <li>
+      <a href="schema-extensions.html">Schema Extensions</a>
+    </li>
+    <li>
+      <a href="use-cases.html">Use Cases</a>
+    </li>
+    <li>
+      <a href="analysis.html">Analysis</a>
+    </li>
+    <li>
+      <a href="gaiaDb.html">gaiaDb</a>
+    </li>
+    <li>
+      <a href="gaiaCore.html">gaiaCore</a>
+    </li>
+    <li>
+      <a href="gaiaCatalog.html">gaiaCatalog</a>
+    </li>
+    <li>
+      <a href="gaiaDocker.html">gaiaDocker</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="vocabulary.html">
+    <span class="fa fa-book"></span>
+     
+    Vocabulary
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-code"></span>
+     
+    Developer
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="developer.html">Overview</a>
+    </li>
+    <li>
+      <a href="developer-packages.html">Package Status</a>
+    </li>
+    <li>
+      <a href="developer-contributing.html">Contributing</a>
+    </li>
+    <li>
+      <a href="developer-architecture.html">Architecture</a>
+    </li>
+    <li>
+      <a href="developer-deployment.html">Deployment</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="project-management.html">
+    <span class="fa fa-tasks"></span>
+     
+    Project Management
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/OHDSI/GIS">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore"><img src="ohdsi40x40.png"></img> OHDSI GIS
+WG</h1>
+
+</div>
+
+
+<div id="use-cases-inventory" class="section level1">
+<h1><strong>Use Cases Inventory</strong></h1>
+<p>The OMOP GIS Vocabulary Package and its associated CDM extensions are
+developed iteratively in response to real-world research needs. This
+section inventories active and proposed <strong>use cases</strong> that
+drive the evolution of the GIS toolchain, including vocabulary
+enrichment, CDM schema extensions, analytical methods, and
+infrastructure improvements.</p>
+<p>Each use case represents a specific research question, population
+health initiative, or analytical workflow that requires geospatial,
+environmental, or sociodemographic data integration within the OMOP
+framework.</p>
+<hr />
+<div id="role-of-use-cases-in-toolchain-development"
+class="section level2">
+<h2>7.1. Role of Use Cases in Toolchain Development</h2>
+<p>Use cases serve multiple functions within the GIS Working Group
+ecosystem:</p>
+<div id="vocabulary-development" class="section level3">
+<h3>7.1.1. Vocabulary Development</h3>
+<p>Use cases identify: - <strong>Missing concepts</strong> not currently
+represented in GIS vocabularies - <strong>Mapping gaps</strong> where
+source data lacks standardized OMOP equivalents - <strong>Hierarchical
+needs</strong> for aggregating or disaggregating spatial or
+environmental variables - <strong>Synonym requirements</strong> to
+improve discoverability of domain-specific terminology</p>
+<p><strong>Example:</strong> A childhood asthma study requiring fine
+particulate matter (PM2.5) exposure data at the Census tract level
+identified the need for granular air quality concepts and temporal
+aggregation indicators.</p>
+</div>
+<div id="cdm-extension-priorities" class="section level3">
+<h3>7.1.2. CDM Extension Priorities</h3>
+<p>Use cases inform: - <strong>Auxiliary table design</strong> for
+specialized analytical needs (e.g., time-series exposure modeling) -
+<strong>Field additions</strong> to <code>external_exposure</code> or
+related tables - <strong>Index and performance optimizations</strong>
+for large-scale spatial queries - <strong>Data linkage patterns</strong>
+between OMOP clinical data and external geospatial sources</p>
+<p><strong>Example:</strong> A life-course epidemiology study tracking
+residential mobility and environmental exposures over decades motivated
+the development of temporal location history extensions.</p>
+</div>
+<div id="analytical-method-development" class="section level3">
+<h3>7.1.3. Analytical Method Development</h3>
+<p>Use cases drive: - <strong>HADES package enhancements</strong> for
+spatial statistics and environmental epidemiology - <strong>Custom
+R/Python libraries</strong> for geospatial data processing and
+visualization - <strong>Federated analysis protocols</strong> for
+privacy-preserving spatial analyses across networks - <strong>Validation
+frameworks</strong> for assessing exposure measurement quality</p>
+<p><strong>Example:</strong> A multi-site study of socioeconomic
+determinants of health outcomes required development of federated
+spatial regression methods compatible with OHDSI network study
+protocols.</p>
+<hr />
+</div>
+</div>
+<div id="use-case-inventory" class="section level2">
+<h2>7.2. Use Case Inventory</h2>
+<p>The following table inventories current and proposed use cases,
+categorized by research domain and development status.</p>
+<table>
+<colgroup>
+<col width="15%" />
+<col width="9%" />
+<col width="11%" />
+<col width="10%" />
+<col width="14%" />
+<col width="20%" />
+<col width="18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Use Case ID</strong></th>
+<th><strong>Title</strong></th>
+<th><strong>Domain</strong></th>
+<th><strong>Status</strong></th>
+<th><strong>CDM Impact</strong></th>
+<th><strong>Vocabulary Impact</strong></th>
+<th><strong>Analysis Impact</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>UC-001</td>
+<td>Childhood Asthma and Air Quality</td>
+<td>Environmental Epidemiology</td>
+<td>Active</td>
+<td>MVP 1 validation</td>
+<td>PM2.5, O3 concepts</td>
+<td>Spatial regression</td>
+</tr>
+<tr class="even">
+<td>UC-002</td>
+<td>Social Vulnerability and COVID-19 Outcomes</td>
+<td>Sociodemographic Epidemiology</td>
+<td>Active</td>
+<td>MVP 1 validation</td>
+<td>SVI indices</td>
+<td>Multilevel modeling</td>
+</tr>
+<tr class="odd">
+<td>UC-003</td>
+<td>Built Environment and Physical Activity</td>
+<td>Behavioral Epidemiology</td>
+<td>Proposed</td>
+<td>Auxiliary tables needed</td>
+<td>Walkability, green space</td>
+<td>Network analysis</td>
+</tr>
+<tr class="even">
+<td>UC-004</td>
+<td>Environmental Justice and Cancer Disparities</td>
+<td>Environmental + Social Epidemiology</td>
+<td>Proposed</td>
+<td>MVP 2 requirements</td>
+<td>EJI, SEDH integration</td>
+<td>Co-exposure modeling</td>
+</tr>
+<tr class="odd">
+<td>UC-005</td>
+<td>Residential History and Cardiovascular Disease</td>
+<td>Life-Course Epidemiology</td>
+<td>Proposed</td>
+<td>Location history extension</td>
+<td>Historical exposure reconstruction</td>
+<td>Survival analysis</td>
+</tr>
+<tr class="even">
+<td>UC-006</td>
+<td>Noise Pollution and Mental Health</td>
+<td>Environmental Epidemiology</td>
+<td>Proposed</td>
+<td>Sound level concepts</td>
+<td>WHO noise indicators</td>
+<td>Time-series analysis</td>
+</tr>
+<tr class="odd">
+<td>UC-007</td>
+<td>Food Desert Mapping and Diabetes</td>
+<td>Sociodemographic Epidemiology</td>
+<td>Proposed</td>
+<td>Food access metrics</td>
+<td>USDA Food Atlas</td>
+<td>Spatial clustering</td>
+</tr>
+<tr class="even">
+<td>UC-008</td>
+<td>Climate Change and Heat-Related Illness</td>
+<td>Climate Epidemiology</td>
+<td>Proposed</td>
+<td>Temperature exposure data</td>
+<td>Heat index, extreme weather</td>
+<td>Extreme value analysis</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Note:</strong> This inventory is maintained collaboratively
+through the <a href="https://github.com/OHDSI/GIS/issues">GIS Working
+Group GitHub repository</a>. Community members are encouraged to propose
+new use cases via GitHub issues using the “Use Case Proposal”
+template.</p>
+</blockquote>
+<hr />
+</div>
+<div id="use-case-contributions-to-the-toolchain"
+class="section level2">
+<h2>7.3. Use Case Contributions to the Toolchain</h2>
+<p>Each use case contributes to one or more components of the GIS
+toolchain:</p>
+<div id="vocabulary-enrichment" class="section level3">
+<h3>7.3.1. Vocabulary Enrichment</h3>
+<p><strong>UC-001 (Childhood Asthma and Air Quality)</strong>
+contributed: - Standardized concepts for EPA air quality indices -
+Temporal aggregation categories (daily, seasonal, annual averages) -
+Mappings from EPA AirNow data to OMOP Exposome vocabulary - Hierarchical
+relationships for pollutant subcategories</p>
+</div>
+<div id="cdm-schema-validation" class="section level3">
+<h3>7.3.2. CDM Schema Validation</h3>
+<p><strong>UC-002 (Social Vulnerability and COVID-19)</strong>
+validated: - <code>external_exposure</code> table design for SVI index
+integration - Linkage patterns between Census tract identifiers and OMOP
+locations - Support for multi-component indices (SVI themes and overall
+ranking) - Temporal alignment of exposure periods with infection
+episodes</p>
+</div>
+<div id="analytical-infrastructure" class="section level3">
+<h3>7.3.3. Analytical Infrastructure</h3>
+<p><strong>UC-004 (Environmental Justice and Cancer
+Disparities)</strong> proposes: - HADES extensions for environmental
+justice metrics - Co-exposure network construction algorithms -
+Federated analysis protocols for sensitive geographic data -
+Visualization tools for spatial disparity assessment</p>
+<hr />
+</div>
+</div>
+<div id="use-case-driven-mvp-roadmap" class="section level2">
+<h2>7.4. Use Case-Driven MVP Roadmap</h2>
+<p>Future OMOP CDM MVPs will be explicitly tied to validated use case
+requirements:</p>
+<div id="mvp-2-time-series-exposure-modeling" class="section level3">
+<h3>MVP 2: Time-Series Exposure Modeling</h3>
+<p><strong>Driven by:</strong> UC-005 (Residential History and CVD),
+UC-006 (Noise and Mental Health) <strong>Requirements:</strong> -
+Temporal sequence representation for repeated exposures - Support for
+moving window aggregations (e.g., 5-year average prior to diagnosis) -
+Integration with OMOP observation_period for longitudinal cohorts</p>
+</div>
+<div id="mvp-3-multi-level-spatial-aggregation" class="section level3">
+<h3>MVP 3: Multi-Level Spatial Aggregation</h3>
+<p><strong>Driven by:</strong> UC-007 (Food Deserts and Diabetes),
+UC-008 (Climate and Heat Illness) <strong>Requirements:</strong> -
+Hierarchical location relationships (tract → county → state) - Spatial
+aggregation functions (e.g., population-weighted averages) - Support for
+irregular geographic boundaries (school districts, hospital service
+areas)</p>
+</div>
+<div id="mvp-4-co-exposure-network-modeling" class="section level3">
+<h3>MVP 4: Co-Exposure Network Modeling</h3>
+<p><strong>Driven by:</strong> UC-004 (Environmental Justice and Cancer)
+<strong>Requirements:</strong> - Multi-exposure correlation structures -
+Joint distribution modeling for concurrent environmental and social
+factors - Network-based visualization and analysis tools</p>
+<hr />
+</div>
+</div>
+<div id="emerging-research-domains" class="section level2">
+<h2>7.5. Emerging Research Domains</h2>
+<p>The GIS extension enables OMOP adoption in research domains that have
+historically lacked standardized observational data frameworks:</p>
+<div id="environmental-epidemiology" class="section level3">
+<h3>7.5.1. Environmental Epidemiology</h3>
+<p><strong>Focus:</strong> Quantifying health impacts of air, water,
+soil, and noise pollution <strong>Key Challenges:</strong> -
+Spatiotemporal exposure assessment - Measurement error and uncertainty
+quantification - Integration of sensor data and modeled exposures -
+Multi-scale analysis (individual, neighborhood, regional)</p>
+<p><strong>Use Cases:</strong> UC-001, UC-004, UC-006, UC-008</p>
+</div>
+<div id="sociodemographic-epidemiology" class="section level3">
+<h3>7.5.2. Sociodemographic Epidemiology</h3>
+<p><strong>Focus:</strong> Understanding how social determinants
+influence health outcomes <strong>Key Challenges:</strong> - Multilevel
+modeling of individual and area-level factors - Addressing structural
+confounding and selection bias - Privacy protection for sensitive
+geographic information - Intersectionality and interaction effects</p>
+<p><strong>Use Cases:</strong> UC-002, UC-007</p>
+</div>
+<div id="spatial-epidemiology" class="section level3">
+<h3>7.5.3. Spatial Epidemiology</h3>
+<p><strong>Focus:</strong> Analyzing geographic patterns and spatial
+clustering of health events <strong>Key Challenges:</strong> - Spatial
+autocorrelation and dependency - Boundary effects and modifiable areal
+unit problem (MAUP) - Visualization of spatial patterns while protecting
+privacy - Federated analysis across geographically distributed
+networks</p>
+<p><strong>Use Cases:</strong> UC-003, UC-004, UC-007</p>
+</div>
+<div id="life-course-epidemiology" class="section level3">
+<h3>7.5.4. Life-Course Epidemiology</h3>
+<p><strong>Focus:</strong> Examining cumulative and time-varying
+exposures across the lifespan <strong>Key Challenges:</strong> -
+Residential mobility tracking - Historical exposure reconstruction -
+Critical period and sensitive window identification - Intergenerational
+exposure effects</p>
+<p><strong>Use Cases:</strong> UC-005</p>
+<hr />
+</div>
+</div>
+<div id="contributing-use-cases" class="section level2">
+<h2>7.6. Contributing Use Cases</h2>
+<p>The GIS Working Group welcomes use case contributions from
+researchers, public health practitioners, and data scientists working
+with OMOP CDM implementations.</p>
+<div id="use-case-proposal-process" class="section level3">
+<h3>7.6.1. Use Case Proposal Process</h3>
+<ol style="list-style-type: decimal">
+<li><strong>Submit a GitHub Issue</strong> using the “Use Case Proposal”
+template at <a
+href="https://github.com/OHDSI/GIS/issues">github.com/OHDSI/GIS/issues</a></li>
+<li><strong>Describe the research question</strong> and target
+population</li>
+<li><strong>Identify data requirements</strong> (geospatial datasets,
+exposure variables, temporal granularity)</li>
+<li><strong>Specify analytical needs</strong> (statistical methods,
+visualization, federated analysis)</li>
+<li><strong>Outline expected impact</strong> on vocabulary, CDM schema,
+or analytical tools</li>
+</ol>
+</div>
+<div id="use-case-review-criteria" class="section level3">
+<h3>7.6.2. Use Case Review Criteria</h3>
+<p>Proposed use cases are evaluated based on: - <strong>Scientific
+rigor</strong>: Clear hypothesis and study design -
+<strong>Generalizability</strong>: Applicability beyond a single
+institution or dataset - <strong>Technical feasibility</strong>:
+Availability of required geospatial data sources - <strong>Community
+benefit</strong>: Contribution to shared toolchain components -
+<strong>Alignment with OHDSI principles</strong>: Open science,
+reproducibility, collaboration</p>
+</div>
+<div id="use-case-lifecycle" class="section level3">
+<h3>7.6.3. Use Case Lifecycle</h3>
+<ol style="list-style-type: decimal">
+<li><strong>Proposed</strong>: Initial submission and community
+review</li>
+<li><strong>Active</strong>: Actively being used to drive
+development</li>
+<li><strong>Validated</strong>: Successfully implemented and results
+published</li>
+<li><strong>Reference</strong>: Serves as exemplar for similar future
+use cases</li>
+</ol>
+<hr />
+</div>
+</div>
+<div id="use-case-resources" class="section level2">
+<h2>7.7. Use Case Resources</h2>
+<p>Each validated use case should include: - <strong>Study
+protocol</strong> describing research question and methods -
+<strong>Data sources</strong> with access information and licensing
+requirements - <strong>ETL scripts</strong> for integrating geospatial
+data with OMOP CDM - <strong>Analysis code</strong> (R/Python)
+demonstrating analytical workflows - <strong>Documentation</strong>
+including data dictionaries and validation results -
+<strong>Publications</strong> or reports disseminating findings</p>
+<p>These resources are maintained in the <a
+href="https://github.com/OHDSI/GIS">GIS Working Group repository</a> and
+linked from individual use case issues.</p>
+<hr />
+</div>
+<div id="future-directions" class="section level2">
+<h2>7.8. Future Directions</h2>
+<p>The use case inventory will continue to evolve as: - New research
+domains emerge (e.g., planetary health, urban health informatics) - Data
+sources expand (e.g., satellite imagery, mobile sensor networks, social
+media) - Analytical methods advance (e.g., causal inference for spatial
+exposures, machine learning for exposure prediction) - Policy needs
+shift (e.g., climate adaptation, health equity monitoring)</p>
+<p>The GIS Working Group is committed to maintaining this inventory as a
+living document that reflects the dynamic landscape of
+geospatially-informed health research and ensures that the OMOP GIS
+extension remains responsive to community needs.</p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

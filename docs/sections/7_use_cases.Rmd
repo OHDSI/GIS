@@ -1,0 +1,226 @@
+---
+title: "7_use_cases"
+output: html_document
+---
+
+The OMOP GIS Vocabulary Package and its associated CDM extensions are developed iteratively in response to real-world research needs. This section inventories active and proposed **use cases** that drive the evolution of the GIS toolchain, including vocabulary enrichment, CDM schema extensions, analytical methods, and infrastructure improvements.
+
+Each use case represents a specific research question, population health initiative, or analytical workflow that requires geospatial, environmental, or sociodemographic data integration within the OMOP framework.
+
+---
+
+## 7.1. Role of Use Cases in Toolchain Development
+
+Use cases serve multiple functions within the GIS Working Group ecosystem:
+
+### 7.1.1. Vocabulary Development
+
+Use cases identify:
+- **Missing concepts** not currently represented in GIS vocabularies
+- **Mapping gaps** where source data lacks standardized OMOP equivalents
+- **Hierarchical needs** for aggregating or disaggregating spatial or environmental variables
+- **Synonym requirements** to improve discoverability of domain-specific terminology
+
+**Example:** A childhood asthma study requiring fine particulate matter (PM2.5) exposure data at the Census tract level identified the need for granular air quality concepts and temporal aggregation indicators.
+
+### 7.1.2. CDM Extension Priorities
+
+Use cases inform:
+- **Auxiliary table design** for specialized analytical needs (e.g., time-series exposure modeling)
+- **Field additions** to `external_exposure` or related tables
+- **Index and performance optimizations** for large-scale spatial queries
+- **Data linkage patterns** between OMOP clinical data and external geospatial sources
+
+**Example:** A life-course epidemiology study tracking residential mobility and environmental exposures over decades motivated the development of temporal location history extensions.
+
+### 7.1.3. Analytical Method Development
+
+Use cases drive:
+- **HADES package enhancements** for spatial statistics and environmental epidemiology
+- **Custom R/Python libraries** for geospatial data processing and visualization
+- **Federated analysis protocols** for privacy-preserving spatial analyses across networks
+- **Validation frameworks** for assessing exposure measurement quality
+
+**Example:** A multi-site study of socioeconomic determinants of health outcomes required development of federated spatial regression methods compatible with OHDSI network study protocols.
+
+---
+
+## 7.2. Use Case Inventory
+
+The following table inventories current and proposed use cases, categorized by research domain and development status.
+
+| **Use Case ID** | **Title** | **Domain** | **Status** | **CDM Impact** | **Vocabulary Impact** | **Analysis Impact** |
+|----------------|----------|------------|-----------|---------------|---------------------|-------------------|
+| UC-001 | Childhood Asthma and Air Quality | Environmental Epidemiology | Active | MVP 1 validation | PM2.5, O3 concepts | Spatial regression |
+| UC-002 | Social Vulnerability and COVID-19 Outcomes | Sociodemographic Epidemiology | Active | MVP 1 validation | SVI indices | Multilevel modeling |
+| UC-003 | Built Environment and Physical Activity | Behavioral Epidemiology | Proposed | Auxiliary tables needed | Walkability, green space | Network analysis |
+| UC-004 | Environmental Justice and Cancer Disparities | Environmental + Social Epidemiology | Proposed | MVP 2 requirements | EJI, SEDH integration | Co-exposure modeling |
+| UC-005 | Residential History and Cardiovascular Disease | Life-Course Epidemiology | Proposed | Location history extension | Historical exposure reconstruction | Survival analysis |
+| UC-006 | Noise Pollution and Mental Health | Environmental Epidemiology | Proposed | Sound level concepts | WHO noise indicators | Time-series analysis |
+| UC-007 | Food Desert Mapping and Diabetes | Sociodemographic Epidemiology | Proposed | Food access metrics | USDA Food Atlas | Spatial clustering |
+| UC-008 | Climate Change and Heat-Related Illness | Climate Epidemiology | Proposed | Temperature exposure data | Heat index, extreme weather | Extreme value analysis |
+
+> **Note:** This inventory is maintained collaboratively through the [GIS Working Group GitHub repository](https://github.com/OHDSI/GIS/issues). Community members are encouraged to propose new use cases via GitHub issues using the "Use Case Proposal" template.
+
+---
+
+## 7.3. Use Case Contributions to the Toolchain
+
+Each use case contributes to one or more components of the GIS toolchain:
+
+### 7.3.1. Vocabulary Enrichment
+
+**UC-001 (Childhood Asthma and Air Quality)** contributed:
+- Standardized concepts for EPA air quality indices
+- Temporal aggregation categories (daily, seasonal, annual averages)
+- Mappings from EPA AirNow data to OMOP Exposome vocabulary
+- Hierarchical relationships for pollutant subcategories
+
+### 7.3.2. CDM Schema Validation
+
+**UC-002 (Social Vulnerability and COVID-19)** validated:
+- `external_exposure` table design for SVI index integration
+- Linkage patterns between Census tract identifiers and OMOP locations
+- Support for multi-component indices (SVI themes and overall ranking)
+- Temporal alignment of exposure periods with infection episodes
+
+### 7.3.3. Analytical Infrastructure
+
+**UC-004 (Environmental Justice and Cancer Disparities)** proposes:
+- HADES extensions for environmental justice metrics
+- Co-exposure network construction algorithms
+- Federated analysis protocols for sensitive geographic data
+- Visualization tools for spatial disparity assessment
+
+---
+
+## 7.4. Use Case-Driven MVP Roadmap
+
+Future OMOP CDM MVPs will be explicitly tied to validated use case requirements:
+
+### MVP 2: Time-Series Exposure Modeling
+**Driven by:** UC-005 (Residential History and CVD), UC-006 (Noise and Mental Health)
+**Requirements:**
+- Temporal sequence representation for repeated exposures
+- Support for moving window aggregations (e.g., 5-year average prior to diagnosis)
+- Integration with OMOP observation_period for longitudinal cohorts
+
+### MVP 3: Multi-Level Spatial Aggregation
+**Driven by:** UC-007 (Food Deserts and Diabetes), UC-008 (Climate and Heat Illness)
+**Requirements:**
+- Hierarchical location relationships (tract → county → state)
+- Spatial aggregation functions (e.g., population-weighted averages)
+- Support for irregular geographic boundaries (school districts, hospital service areas)
+
+### MVP 4: Co-Exposure Network Modeling
+**Driven by:** UC-004 (Environmental Justice and Cancer)
+**Requirements:**
+- Multi-exposure correlation structures
+- Joint distribution modeling for concurrent environmental and social factors
+- Network-based visualization and analysis tools
+
+---
+
+## 7.5. Emerging Research Domains
+
+The GIS extension enables OMOP adoption in research domains that have historically lacked standardized observational data frameworks:
+
+### 7.5.1. Environmental Epidemiology
+
+**Focus:** Quantifying health impacts of air, water, soil, and noise pollution
+**Key Challenges:**
+- Spatiotemporal exposure assessment
+- Measurement error and uncertainty quantification
+- Integration of sensor data and modeled exposures
+- Multi-scale analysis (individual, neighborhood, regional)
+
+**Use Cases:** UC-001, UC-004, UC-006, UC-008
+
+### 7.5.2. Sociodemographic Epidemiology
+
+**Focus:** Understanding how social determinants influence health outcomes
+**Key Challenges:**
+- Multilevel modeling of individual and area-level factors
+- Addressing structural confounding and selection bias
+- Privacy protection for sensitive geographic information
+- Intersectionality and interaction effects
+
+**Use Cases:** UC-002, UC-007
+
+### 7.5.3. Spatial Epidemiology
+
+**Focus:** Analyzing geographic patterns and spatial clustering of health events
+**Key Challenges:**
+- Spatial autocorrelation and dependency
+- Boundary effects and modifiable areal unit problem (MAUP)
+- Visualization of spatial patterns while protecting privacy
+- Federated analysis across geographically distributed networks
+
+**Use Cases:** UC-003, UC-004, UC-007
+
+### 7.5.4. Life-Course Epidemiology
+
+**Focus:** Examining cumulative and time-varying exposures across the lifespan
+**Key Challenges:**
+- Residential mobility tracking
+- Historical exposure reconstruction
+- Critical period and sensitive window identification
+- Intergenerational exposure effects
+
+**Use Cases:** UC-005
+
+---
+
+## 7.6. Contributing Use Cases
+
+The GIS Working Group welcomes use case contributions from researchers, public health practitioners, and data scientists working with OMOP CDM implementations.
+
+### 7.6.1. Use Case Proposal Process
+
+1. **Submit a GitHub Issue** using the "Use Case Proposal" template at [github.com/OHDSI/GIS/issues](https://github.com/OHDSI/GIS/issues)
+2. **Describe the research question** and target population
+3. **Identify data requirements** (geospatial datasets, exposure variables, temporal granularity)
+4. **Specify analytical needs** (statistical methods, visualization, federated analysis)
+5. **Outline expected impact** on vocabulary, CDM schema, or analytical tools
+
+### 7.6.2. Use Case Review Criteria
+
+Proposed use cases are evaluated based on:
+- **Scientific rigor**: Clear hypothesis and study design
+- **Generalizability**: Applicability beyond a single institution or dataset
+- **Technical feasibility**: Availability of required geospatial data sources
+- **Community benefit**: Contribution to shared toolchain components
+- **Alignment with OHDSI principles**: Open science, reproducibility, collaboration
+
+### 7.6.3. Use Case Lifecycle
+
+1. **Proposed**: Initial submission and community review
+2. **Active**: Actively being used to drive development
+3. **Validated**: Successfully implemented and results published
+4. **Reference**: Serves as exemplar for similar future use cases
+
+---
+
+## 7.7. Use Case Resources
+
+Each validated use case should include:
+- **Study protocol** describing research question and methods
+- **Data sources** with access information and licensing requirements
+- **ETL scripts** for integrating geospatial data with OMOP CDM
+- **Analysis code** (R/Python) demonstrating analytical workflows
+- **Documentation** including data dictionaries and validation results
+- **Publications** or reports disseminating findings
+
+These resources are maintained in the [GIS Working Group repository](https://github.com/OHDSI/GIS) and linked from individual use case issues.
+
+---
+
+## 7.8. Future Directions
+
+The use case inventory will continue to evolve as:
+- New research domains emerge (e.g., planetary health, urban health informatics)
+- Data sources expand (e.g., satellite imagery, mobile sensor networks, social media)
+- Analytical methods advance (e.g., causal inference for spatial exposures, machine learning for exposure prediction)
+- Policy needs shift (e.g., climate adaptation, health equity monitoring)
+
+The GIS Working Group is committed to maintaining this inventory as a living document that reflects the dynamic landscape of geospatially-informed health research and ensures that the OMOP GIS extension remains responsive to community needs.

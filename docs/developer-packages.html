@@ -13,7 +13,7 @@
 
 <title> OHDSI GIS WG</title>
 
-<script src="site_libs/header-attrs-2.29/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -29,6 +29,9 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -223,6 +226,75 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
 
 </head>
 
@@ -230,6 +302,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -254,10 +336,10 @@ $(document).ready(function () {
   </a>
 </li>
 <li>
-  <a href="getting-started.html">
-    <span class="fa fa-home"></span>
+  <a href="get-started.html">
+    <span class="fa fa-play"></span>
      
-    Getting Started
+    Get Started
   </a>
 </li>
 <li class="dropdown">
@@ -279,13 +361,22 @@ $(document).ready(function () {
       <a href="schema-extensions.html">Schema Extensions</a>
     </li>
     <li>
-      <a href="gaiaDB.html">gaiaDB</a>
+      <a href="use-cases.html">Use Cases</a>
+    </li>
+    <li>
+      <a href="analysis.html">Analysis</a>
+    </li>
+    <li>
+      <a href="gaiaDb.html">gaiaDb</a>
     </li>
     <li>
       <a href="gaiaCore.html">gaiaCore</a>
     </li>
     <li>
-      <a href="gaiaOHDSI.html">gaiaOHDSI</a>
+      <a href="gaiaCatalog.html">gaiaCatalog</a>
+    </li>
+    <li>
+      <a href="gaiaDocker.html">gaiaDocker</a>
     </li>
   </ul>
 </li>
@@ -296,18 +387,37 @@ $(document).ready(function () {
     Vocabulary
   </a>
 </li>
-<li>
-  <a href="how-to.html">
-    <span class="fa fa-question"></span>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-code"></span>
      
-    How to
+    Developer
+     
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="developer.html">Overview</a>
+    </li>
+    <li>
+      <a href="developer-packages.html">Package Status</a>
+    </li>
+    <li>
+      <a href="developer-contributing.html">Contributing</a>
+    </li>
+    <li>
+      <a href="developer-architecture.html">Architecture</a>
+    </li>
+    <li>
+      <a href="developer-deployment.html">Deployment</a>
+    </li>
+  </ul>
 </li>
 <li>
-  <a href="getting-involved.html">
-    <span class="fa fa-info"></span>
+  <a href="project-management.html">
+    <span class="fa fa-tasks"></span>
      
-    Getting Involved
+    Project Management
   </a>
 </li>
       </ul>
@@ -333,45 +443,144 @@ WG</h1>
 </div>
 
 
-<div id="gaiaohdsi" class="section level1">
-<h1><strong>gaiaOHDSI</strong></h1>
-<div id="description" class="section level2">
-<h2>Description</h2>
-<p>Gaia Core is the central functionality and storage of Gaia and
-consists of two main features: a <strong>staging database</strong> and
-an <strong>execution engine</strong>.</p>
-<p>The staging database is a PostGIS database with a replica copy of the
-Gaia Catalog installed in a schema named “backbone”. In this database,
-public datasets that are registered in Gaia Catalog can be “staged”:
-transformed and then loaded as tables in a standardized
-Entity-Attribute-Value format. Other geospatial data, such as geocoded
-addresses, can also be loaded into the staging database for use in
-conjunction with the staged data.</p>
-<p>All operations on the staging database (creating tables, inserting
-data, accessing data, etc.) are performed through the “execution
-engine”. The execution engine can be any software package (e.g. R
-package, Python library, CLI) that connects to the database and
-functionalizes the logic required to write or read data to and from the
-standard format.</p>
+<div id="package-status-maintainers" class="section level1">
+<h1><strong>Package Status &amp; Maintainers</strong></h1>
+<p>This page provides current status and maintainer information for all
+packages in the Gaia toolchain.</p>
+<p><br></p>
+<div id="package-overview" class="section level2">
+<h2><strong>Package Overview</strong></h2>
+<table style="width:100%;">
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="16%" />
+<col width="10%" />
+<col width="14%" />
+<col width="10%" />
+<col width="10%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Package</th>
+<th>Release</th>
+<th>Maintainer(s)</th>
+<th>Category</th>
+<th>Open Issues</th>
+<th>Open PRs</th>
+<th>Language</th>
+<th>Documentation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://github.com/OHDSI/gaiaDb">gaiaDb</a></td>
+<td><img src="https://img.shields.io/badge/status-beta-yellow" /></td>
+<td><a href="https://github.com/OHDSI/gaiaDb">See repo</a></td>
+<td>Core</td>
+<td><img src="https://img.shields.io/github/issues/OHDSI/gaiaDb" /></td>
+<td><img
+src="https://img.shields.io/github/issues-pr/OHDSI/gaiaDb" /></td>
+<td><img
+src="https://img.shields.io/github/languages/top/OHDSI/gaiaDb" /></td>
+<td><a href="gaiaDb.html">Docs</a></td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/TuftsCTSI/gaiaCore">gaiaCore</a></td>
+<td><img
+src="https://img.shields.io/badge/status-development-orange" /></td>
+<td><a href="https://github.com/TuftsCTSI/gaiaCore">See repo</a></td>
+<td>Core</td>
+<td><img
+src="https://img.shields.io/github/issues/TuftsCTSI/gaiaCore" /></td>
+<td><img
+src="https://img.shields.io/github/issues-pr/TuftsCTSI/gaiaCore" /></td>
+<td><img
+src="https://img.shields.io/github/languages/top/TuftsCTSI/gaiaCore" /></td>
+<td><a href="gaiaCore.html">Docs</a></td>
+</tr>
+<tr class="odd">
+<td><a href="https://github.com/OHDSI/gaiaCatalog">gaiaCatalog</a></td>
+<td><img src="https://img.shields.io/badge/status-beta-yellow" /></td>
+<td><a href="https://github.com/OHDSI/gaiaCatalog">See repo</a></td>
+<td>Discovery</td>
+<td><img
+src="https://img.shields.io/github/issues/OHDSI/gaiaCatalog" /></td>
+<td><img
+src="https://img.shields.io/github/issues-pr/OHDSI/gaiaCatalog" /></td>
+<td><img
+src="https://img.shields.io/github/languages/top/OHDSI/gaiaCatalog" /></td>
+<td><a href="gaiaCatalog.html">Docs</a></td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/OHDSI/gaiaDocker">gaiaDocker</a></td>
+<td><img src="https://img.shields.io/badge/status-active-green" /></td>
+<td><a href="https://github.com/OHDSI/gaiaDocker">See repo</a></td>
+<td>Deployment</td>
+<td><img
+src="https://img.shields.io/github/issues/OHDSI/gaiaDocker" /></td>
+<td><img
+src="https://img.shields.io/github/issues-pr/OHDSI/gaiaDocker" /></td>
+<td><img
+src="https://img.shields.io/github/languages/top/OHDSI/gaiaDocker" /></td>
+<td><a href="gaiaDocker.html">Docs</a></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
 </div>
-<div id="scope" class="section level2">
-<h2>Scope</h2>
-<p>The <strong>ultimate vision</strong> of Gaia Core is support for
-multiple geospatial databases (particularly cloud-native), as well as
-execution engine interfaces for multiple popular data science
-programming languages (e.g. Python, Julia, R, Bash).
-<strong>Currently</strong>, the staging database has only been
-implemented in PostGIS and the execution engine has only been
-implemented in R.</p>
+<div id="additional-resources" class="section level2">
+<h2><strong>Additional Resources</strong></h2>
+<p>For detailed package information, installation instructions, and
+development roadmaps, see the individual package pages linked in the
+Documentation column above.</p>
+<div id="key-links" class="section level3">
+<h3><strong>Key Links</strong></h3>
+<ul>
+<li><a href="developer-architecture.html">Architecture &amp; Data
+Flows</a> - Understanding how packages work together</li>
+<li><a href="developer-contributing.html">Contributing Guidelines</a> -
+How to contribute to packages</li>
+<li><a href="developer-deployment.html">Deployment Strategies</a> -
+Installing and deploying the toolchain</li>
+<li><a href="project-management.html">Project Management</a> - Roadmaps
+and development process</li>
+</ul>
 </div>
-<div id="documentation" class="section level2">
-<h2>Documentation</h2>
-<p><a href="gaiaOHDSI/index.html">gaiaOHDSI (R Package)</a></p>
+<div id="quick-start" class="section level3">
+<h3><strong>Quick Start</strong></h3>
+<p>The fastest way to get started with the Gaia toolchain is via
+gaiaDocker:</p>
+<pre class="bash"><code>git clone https://github.com/OHDSI/gaiaDocker.git
+cd gaiaDocker
+docker compose --profile gaia up -d</code></pre>
+<p>See the <a href="developer-deployment.html">Deployment guide</a> for
+more options.</p>
+<p><br></p>
+</div>
+</div>
+<div id="vocabulary-schema-extensions" class="section level2">
+<h2><strong>Vocabulary &amp; Schema Extensions</strong></h2>
+<p><strong>OMOP GIS Vocabulary Package</strong> - <a
+href="https://github.com/TuftsCTSI/CVB">TuftsCTSI/CVB</a> - Extensions
+to OMOP Vocabulary for geospatial entities, environmental exposures, and
+social determinants of health - Delta vocabulary files available in <a
+href="https://github.com/TuftsCTSI/CVB/tree/main/GIS/Ontology">CVB/GIS/Ontology</a>
+- See <a href="vocabulary.html">vocabulary documentation</a> and <a
+href="https://github.com/OHDSI/GIS/issues/369">Vocabulary
+Roadmap</a></p>
+<p><strong>OMOP GIS Schema Extensions</strong> - External_Exposure and
+Location_History tables for place-based health determinants - See <a
+href="schema-extensions.html">Schema Extensions documentation</a></p>
+<p><br></p>
 </div>
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -404,6 +613,35 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
