@@ -1,0 +1,93 @@
+name: Build RMarkdown Site
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'rmd/**'
+      - 'build-site.R'
+      - '.github/workflows/build-rmarkdown-site.yml'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  build-site:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Dockerfile
+        run: |
+          cat > Dockerfile.build << 'EOF'
+          FROM r-base:latest
+
+          RUN mkdir /GIS
+          WORKDIR /GIS
+
+          RUN apt update && \
+              apt install \
+              -y --no-install-recommends pandoc \
+                                         libxml2-dev \
+                                         libfontconfig1-dev \
+                                         libharfbuzz-dev \
+                                         libfribidi-dev
+
+          RUN Rscript -e "install.packages('rmarkdown')" && \
+              Rscript -e "install.packages('xml2')" && \
+              Rscript -e "install.packages('svglite')" && \
+              Rscript -e "install.packages('kableExtra')" && \
+              Rscript -e "install.packages('dplyr')" && \
+              Rscript -e "install.packages('readr')"
+
+          CMD ["Rscript", "build-site.R"]
+          EOF
+
+      - name: Build Docker image
+        run: docker build -f Dockerfile.build -t gis-site-builder .
+
+      - name: Run RMarkdown build
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:/GIS \
+            gis-site-builder
+
+      - name: Check for changes
+        id: verify_diff
+        run: |
+          git diff --quiet docs/ || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push changes
+        if: steps.verify_diff.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/
+          git commit -m "Auto-build: Render RMarkdown site to HTML
+
+          Generated from RMD files by GitHub Actions
+          Workflow: ${{ github.workflow }}
+          Run: ${{ github.run_number }}"
+          git push
+
+      - name: Comment on PR
+        if: steps.verify_diff.outputs.changed == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '**Documentation site built successfully**\n\nThe RMarkdown files have been rendered to HTML and committed to this PR.\n\nYou can preview the changes in the `docs/` directory.'
+            })
+
+      - name: No changes needed
+        if: steps.verify_diff.outputs.changed != 'true'
+        run: echo "No changes to docs/ directory - HTML is already up to date"
