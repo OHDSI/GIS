@@ -254,10 +254,10 @@ $(document).ready(function () {
   </a>
 </li>
 <li>
-  <a href="get-started.html">
-    <span class="fa fa-play"></span>
+  <a href="getting-started.html">
+    <span class="fa fa-home"></span>
      
-    Get Started
+    Getting Started
   </a>
 </li>
 <li class="dropdown">
@@ -279,22 +279,13 @@ $(document).ready(function () {
       <a href="schema-extensions.html">Schema Extensions</a>
     </li>
     <li>
-      <a href="use-cases.html">Use Cases</a>
-    </li>
-    <li>
-      <a href="analysis.html">Analysis</a>
-    </li>
-    <li>
       <a href="gaiaDB.html">gaiaDB</a>
     </li>
     <li>
       <a href="gaiaCore.html">gaiaCore</a>
     </li>
     <li>
-      <a href="gaiaCatalog.html">gaiaCatalog</a>
-    </li>
-    <li>
-      <a href="gaiaDocker.html">gaiaDocker</a>
+      <a href="gaiaOHDSI.html">gaiaOHDSI</a>
     </li>
   </ul>
 </li>
@@ -305,37 +296,18 @@ $(document).ready(function () {
     Vocabulary
   </a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <span class="fa fa-code"></span>
+<li>
+  <a href="how-to.html">
+    <span class="fa fa-question"></span>
      
-    Developer
-     
-    <span class="caret"></span>
+    How to
   </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="developer.html">Overview</a>
-    </li>
-    <li>
-      <a href="developer-packages.html">Package Status</a>
-    </li>
-    <li>
-      <a href="developer-contributing.html">Contributing</a>
-    </li>
-    <li>
-      <a href="developer-architecture.html">Architecture</a>
-    </li>
-    <li>
-      <a href="developer-deployment.html">Deployment</a>
-    </li>
-  </ul>
 </li>
 <li>
-  <a href="project-management.html">
-    <span class="fa fa-tasks"></span>
+  <a href="getting-involved.html">
+    <span class="fa fa-info"></span>
      
-    Project Management
+    Getting Involved
   </a>
 </li>
       </ul>
@@ -362,54 +334,39 @@ WG</h1>
 
 
 <div id="gaiadb" class="section level1">
-<h1><strong>gaiaDb</strong></h1>
+<h1><strong>gaiaDB</strong></h1>
 <div id="description" class="section level2">
 <h2>Description</h2>
-<p>gaiaDb is the <strong>core data repository</strong> for the Gaia
-toolchain, implemented as a PostgreSQL/PostGIS database. It contains all
-geospatial data processing logic, SQL routines, and OMOP CDM integration
-functionality.</p>
+<p>gaiaDB is the central functionality and storage of Gaia and consists
+of two main features: a <strong>staging database</strong> and an
+<strong>execution engine</strong>.</p>
+<p>The staging database is a PostGIS database with a replica copy of the
+Gaia Catalog installed in a schema named “backbone”. In this database,
+public datasets that are registered in Gaia Catalog can be “staged”:
+transformed and then loaded as tables in a standardized
+Entity-Attribute-Value format. Other geospatial data, such as geocoded
+addresses, can also be loaded into the staging database for use in
+conjunction with the staged data.</p>
+<p>All operations on the staging database (creating tables, inserting
+data, accessing data, etc.) are performed through the “execution
+engine”. The execution engine can be any software package (e.g. R
+package, Python library, CLI) that connects to the database and
+functionalizes the logic required to write or read data to and from the
+standard format.</p>
 </div>
-<div id="key-features" class="section level2">
-<h2>Key Features</h2>
-<ul>
-<li><strong>PostgreSQL/PostGIS backend</strong> for spatial data storage
-and operations</li>
-<li><strong>SQL routines and PostGIS functions</strong> for geospatial
-analysis and exposure calculations</li>
-<li><strong>OMOP CDM integration</strong> via External_Exposure and
-Location_History tables</li>
-<li><strong>LinkML/JSON-LD metadata</strong> support for standardized
-data representation</li>
-<li><strong>RESTful API exposure</strong> via PostgREST for
-multi-language access</li>
-</ul>
-</div>
-<div id="architecture" class="section level2">
-<h2>Architecture</h2>
-<p>gaiaDb uses a dual-schema approach: - <strong>backbone
-schema</strong>: Core LinkML-based metadata and data catalog -
-<strong>working schema</strong>: OMOP integration tables
-(external_exposure, location_history, location)</p>
-<p>All data transformation, spatial operations, and exposure
-calculations are performed within the database using SQL and PostGIS
-functions.</p>
-</div>
-<div id="access" class="section level2">
-<h2>Access</h2>
-<p>gaiaDb is accessed through: - <strong>PostgREST API</strong>: RESTful
-interface to database functions and tables - <strong>Direct database
-connections</strong>: Standard PostgreSQL client connections -
-<strong>gaiaCore connectors</strong>: Language-specific client libraries
-(R, Python, etc.)</p>
+<div id="scope" class="section level2">
+<h2>Scope</h2>
+<p>The <strong>ultimate vision</strong> of Gaia DB is support for
+multiple geospatial databases (particularly cloud-native), as well as
+execution engine interfaces for multiple popular data science
+programming languages (e.g. Python, Julia, R, Bash).
+<strong>Currently</strong>, the staging database has only been
+implemented in PostGIS and the execution engine has only been
+implemented in R.</p>
 </div>
 <div id="documentation" class="section level2">
 <h2>Documentation</h2>
-<ul>
-<li><a href="https://github.com/OHDSI/gaiaDb">Repository</a></li>
-<li><a href="developer-deployment.html">Deployment via
-gaiaDocker</a></li>
-</ul>
+<p><a href="gaiaDB/index.html">gaiaDB (R Package)</a></p>
 </div>
 </div>
 

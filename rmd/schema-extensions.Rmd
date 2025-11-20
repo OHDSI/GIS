@@ -43,12 +43,6 @@ script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
 ![OMOP GIS Schema Extensions - [Click here to download](https://github.com/OHDSI/GIS/raw/main/rmd/images/cdm_extension_erd.png)](images/cdm_extension_erd.png){width=150%}
 <br>
 
-## **Overview**
-
-The OMOP GIS Vocabulary Package extends the OMOP Common Data Model (CDM) to support geospatially-linked health determinants and environmental exposures. This extension is anchored by the **external_exposure** table, which serves as the foundational structure enabling integration of spatial, environmental, and sociodemographic data into observational health research workflows.
-
-<br>
-
 ```{r docLoopGaia, echo=FALSE, results='asis'}
 
 tableSpecs <- readr::read_csv("../inst/csv/Gaia_Table_Level.csv", show_col_types = FALSE)
@@ -74,35 +68,30 @@ gaiaSpecsClean[is.na(gaiaSpecsClean)] <- ""
 for(tb in tables) {
 
   cat("##", tb, "{.tabset .tabset-pills} \n\n")
-
+  
   cat("Access DDL scripts [here](https://github.com/OHDSI/GIS/tree/main/inst/ddl/)\n\n")
 
   tableInfo <- subset(tableSpecs, cdmTableName == tb)
-  cat("**Table Description**\n\n", tableInfo$tableDescription[1], "\n\n")
-
-  # Get table-level user guidance and ETL conventions if they exist
-  if(nrow(tableInfo) > 0 && !is.na(tableInfo$userGuidance[1]) && tableInfo$userGuidance[1] != ""){
-    cat("**User Guide**\n\n", tableInfo$userGuidance[1], "\n\n")
+  cat("**Table Description**\n\n",tableInfo[,"tableDescription"][[1]], "\n\n")
+  
+  fieldInfo <- subset(cdmSpecs, cdmTableName == tb)
+  if(!isTRUE(fieldInfo[,"userGuidance"][[1]]=="")){
+    cat("**User Guide**\n\n",fieldInfo[,"userGuidance"][[1]],"\n\n")
   }
-
-  if(nrow(tableInfo) > 0 && !is.na(tableInfo$etlConventions[1]) && tableInfo$etlConventions[1] != ""){
-    cat("**ETL Conventions**\n\n", tableInfo$etlConventions[1], "\n\n")
+  
+  if(!isTRUE(fieldInfo[,"etlConventions"][[1]]=="")){
+    cat("**ETL Conventions**\n\n",fieldInfo[,"etlConventions"][[1]],"\n\n")
   }
-
+  
   loopTable <- subset(gaiaSpecsClean, `Gaia Table` == tb)
   loopTable <- subset(loopTable, select = -c(1))
-
+ 
   cat(knitr::kable(x = loopTable, align = "l", row.names = FALSE, format = "html", escape = FALSE) %>%
            column_spec(1, bold = T) %>%
            # column_spec(2, width = "3in", include_thead = T) %>%
            # column_spec(3, width = "4in", include_thead = T) %>%
            # column_spec(4:9, width = "1in", include_thead = T) %>%
            kable_styling(c("condensed","hover"), position = "center", full_width = T, font_size = 13))
-
+    
   }
-```
-
-<br>
-
-```{r child="sections/6_cdm_extensions.Rmd"}
 ```

@@ -330,10 +330,10 @@ div.tocify {
   </a>
 </li>
 <li>
-  <a href="get-started.html">
-    <span class="fa fa-play"></span>
+  <a href="getting-started.html">
+    <span class="fa fa-home"></span>
      
-    Get Started
+    Getting Started
   </a>
 </li>
 <li class="dropdown">
@@ -355,22 +355,13 @@ div.tocify {
       <a href="schema-extensions.html">Schema Extensions</a>
     </li>
     <li>
-      <a href="use-cases.html">Use Cases</a>
-    </li>
-    <li>
-      <a href="analysis.html">Analysis</a>
-    </li>
-    <li>
       <a href="gaiaDB.html">gaiaDB</a>
     </li>
     <li>
       <a href="gaiaCore.html">gaiaCore</a>
     </li>
     <li>
-      <a href="gaiaCatalog.html">gaiaCatalog</a>
-    </li>
-    <li>
-      <a href="gaiaDocker.html">gaiaDocker</a>
+      <a href="gaiaOHDSI.html">gaiaOHDSI</a>
     </li>
   </ul>
 </li>
@@ -381,37 +372,18 @@ div.tocify {
     Vocabulary
   </a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <span class="fa fa-code"></span>
+<li>
+  <a href="how-to.html">
+    <span class="fa fa-question"></span>
      
-    Developer
-     
-    <span class="caret"></span>
+    How to
   </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="developer.html">Overview</a>
-    </li>
-    <li>
-      <a href="developer-packages.html">Package Status</a>
-    </li>
-    <li>
-      <a href="developer-contributing.html">Contributing</a>
-    </li>
-    <li>
-      <a href="developer-architecture.html">Architecture</a>
-    </li>
-    <li>
-      <a href="developer-deployment.html">Deployment</a>
-    </li>
-  </ul>
 </li>
 <li>
-  <a href="project-management.html">
-    <span class="fa fa-tasks"></span>
+  <a href="getting-involved.html">
+    <span class="fa fa-info"></span>
      
-    Project Management
+    Getting Involved
   </a>
 </li>
       </ul>
@@ -458,17 +430,6 @@ script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
 <h1><strong>OMOP GIS Schema Extensions</strong></h1>
 <p><img src="images/cdm_extension_erd.png" style="width:150.0%"
 alt="OMOP GIS Schema Extensions - Click here to download" /> <br></p>
-<div id="overview" class="section level2">
-<h2><strong>Overview</strong></h2>
-<p>The OMOP GIS Vocabulary Package extends the OMOP Common Data Model
-(CDM) to support geospatially-linked health determinants and
-environmental exposures. This extension is anchored by the
-<strong>external_exposure</strong> table, which serves as the
-foundational structure enabling integration of spatial, environmental,
-and sociodemographic data into observational health research
-workflows.</p>
-<p><br></p>
-</div>
 <div id="location_history" class="section level2 tabset tabset-pills">
 <h2 class="tabset tabset-pills">location_history</h2>
 <p>Access DDL scripts <a
@@ -476,11 +437,9 @@ href="https://github.com/OHDSI/GIS/tree/main/inst/ddl/">here</a></p>
 <p><strong>Table Description</strong></p>
 <p>This table is a copy of the OMOP Location_History table.</p>
 <p><strong>User Guide</strong></p>
-<p>Copy the OMOP Location_History table to Gaia to facilitate creation
-of CDM Extension tables</p>
+<p>NA NA NA NA NA NA</p>
 <p><strong>ETL Conventions</strong></p>
-<p>This table should be an exact duplicate of the OMOP Location_History
-table.</p>
+<p>NA NA NA NA NA NA</p>
 <table class="table table-condensed table-hover" style="font-size: 13px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -677,6 +636,54 @@ href="https://github.com/OHDSI/GIS/tree/main/inst/ddl/">here</a></p>
 <p>This CDM Extension table is used to represent person-related
 transformations of data from Gaia and to interface with ATLAS and OHDSI
 tool stack from an OMOP CDM database.</p>
+<p><strong>User Guide</strong></p>
+<p>The unique key given to a social or environmental exposure for a
+Person The LOCATION_ID of the Person for whom the exposure is
+associated. The PERSON_ID of the Person for whom the exposure is
+associated. The EXPOSURE_CONCEPT_ID field is recommended for primary use
+in analyses, and must be used for network studies. This is the standard
+concept mapped from the source value which represents a exposure. Use
+this date to determine the start date of the exposure. NA Use this date
+to determine the end date of the exposure. NA This field identifies the
+origin of the exposure record (e.g. Census, EHR, Environmental data,
+Geospatial data, Satellite imagery, GIS mapping, Sensor network, Mobile
+device geolocation, LiDAR) This field can be used to determine the
+spatiotemporal relationship between the source Exposure and the Person
+This field can be used to determine the original source of place-based
+exposure data This field houses the verbatim name of the original source
+of place-based exposure data. NA NA NA NA The meaning of
+Concept?4172703?for ?=? is identical to omission of a
+OPERATOR_CONCEPT_ID value. Since the use of this field is rare, it?s
+important when devising analyses to not to forget testing for the
+content of this field for values different from =. This is the numerical
+value of the Exposure, if available. If the raw data gives a categorial
+result for exposures those values are captured and mapped to standard
+concepts in the ?Exposure Value? domain. UNIT_SOURCE_VALUES should be
+mapped to a Standard Concept in the Unit domain that best represents the
+unit as given in the source data.</p>
+<p><strong>ETL Conventions</strong></p>
+<p>Each derived instance of an exposure should be assigned this unique
+key. NA NA The CONCEPT_ID to which the source exposure is mapped. This
+mapping should be integrated into the variable_source record and
+automatically populated in this record. The date range of the exposure
+should represent the temporal overlap between the place-based exposure
+data point and the LOCATION_ID’s location_history record. NA The date
+range of the exposure should represent the temporal overlap between the
+place-based exposure data point and the LOCATION_ID’s location_history
+record. NA The CONCEPT_ID to which the exposure’s data source type is
+mapped. This mapping should be integrated into the data_source record
+and automatically populated in this record. The CONCEPT_ID to which the
+relationship between the Exposure and the Person is mapped. This mapping
+should be automatically populated in this record. The CONCEPT_ID to
+which the exposure’s data source is mapped. This mapping should be
+integrated into the data_source record and automatically populated in
+this record. This name is mapped to a Standard Exposure Source Concept
+and the original name is stored here for reference. NA NA NA NA NA This
+value should be integrated into the variable_source record and
+automatically populated in this record. This mapping should be
+integrated into the variable_source record and automatically populated
+in this record. This mapping should be integrated into the
+variable_source record and automatically populated in this record.</p>
 <table class="table table-condensed table-hover" style="font-size: 13px; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1276,307 +1283,6 @@ Unit
 </tr>
 </tbody>
 </table>
-<p><br></p>
-<p>The OMOP GIS Vocabulary Package extends the OMOP Common Data Model
-(CDM) to support geospatially-linked health determinants and
-environmental exposures. This extension is anchored by the
-<strong>external_exposure</strong> table, which serves as the
-foundational structure enabling integration of spatial, environmental,
-and sociodemographic data into observational health research
-workflows.</p>
-<hr />
-</div>
-<div id="the-external_exposure-table" class="section level2">
-<h2>6.1. The external_exposure Table</h2>
-<p>The <code>external_exposure</code> table is the central data
-structure that connects patient-level health data to environmental,
-geographic, and social determinants captured through the GIS vocabulary.
-All other components of the GIS extension—vocabularies, mappings,
-hierarchies, and relationships—depend on this table’s definition and
-implementation.</p>
-<div id="purpose-and-scope" class="section level3">
-<h3>6.1.1. Purpose and Scope</h3>
-<p>The <code>external_exposure</code> table enables:</p>
-<ul>
-<li><strong>Linkage of environmental exposures to persons</strong> via
-standardized location identifiers</li>
-<li><strong>Temporal alignment</strong> of exposure periods with
-clinical observation periods</li>
-<li><strong>Standardized representation</strong> of exposure types,
-intensities, and measurement units</li>
-<li><strong>Integration with OMOP analytic tools</strong> for cohort
-construction and outcome assessment</li>
-<li><strong>Support for multi-domain exposures</strong> including air
-quality, noise pollution, socioeconomic indices, and built environment
-characteristics</li>
-</ul>
-</div>
-<div id="current-definition" class="section level3">
-<h3>6.1.2. Current Definition</h3>
-<p>The foundational schema for <code>external_exposure</code> has been
-developed through collaboration within the GIS Working Group. This
-initial definition represents the <strong>first OMOP CDM MVP</strong>
-for geospatial health determinants.</p>
-<p><strong>Key Fields:</strong></p>
-<table>
-<colgroup>
-<col width="37%" />
-<col width="23%" />
-<col width="39%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Field Name</strong></th>
-<th><strong>Type</strong></th>
-<th><strong>Description</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>exposure_occurrence_id</code></td>
-<td>Integer</td>
-<td>Unique identifier for each exposure record</td>
-</tr>
-<tr class="even">
-<td><code>person_id</code></td>
-<td>Integer</td>
-<td>Foreign key to PERSON table</td>
-</tr>
-<tr class="odd">
-<td><code>location_id</code></td>
-<td>Integer</td>
-<td>Foreign key to LOCATION table, indicating where exposure
-occurred</td>
-</tr>
-<tr class="even">
-<td><code>exposure_concept_id</code></td>
-<td>Integer</td>
-<td>Standard concept representing the type of exposure (from GIS
-vocabularies)</td>
-</tr>
-<tr class="odd">
-<td><code>exposure_start_date</code></td>
-<td>Date</td>
-<td>Date when the exposure event started</td>
-</tr>
-<tr class="even">
-<td><code>exposure_end_date</code></td>
-<td>Date</td>
-<td>Date when the exposure event ended (NULL if ongoing)</td>
-</tr>
-<tr class="odd">
-<td><code>exposure_type_concept_id</code></td>
-<td>Integer</td>
-<td>Concept defining the origin of the exposure record</td>
-</tr>
-<tr class="even">
-<td><code>value_as_number</code></td>
-<td>Float</td>
-<td>Numerical value of the exposure (e.g., concentration, index
-score)</td>
-</tr>
-<tr class="odd">
-<td><code>value_as_concept_id</code></td>
-<td>Integer</td>
-<td>Concept for categorical exposure values</td>
-</tr>
-<tr class="even">
-<td><code>unit_concept_id</code></td>
-<td>Integer</td>
-<td>Concept representing the measurement unit</td>
-</tr>
-<tr class="odd">
-<td><code>operator_concept_id</code></td>
-<td>Integer</td>
-<td>Concept defining operator logic (e.g., &lt;, &gt;, =)</td>
-</tr>
-<tr class="even">
-<td><code>quantity</code></td>
-<td>Integer</td>
-<td>Number of exposure occurrences (if applicable)</td>
-</tr>
-<tr class="odd">
-<td><code>exposure_source_value</code></td>
-<td>String</td>
-<td>Raw exposure value from source data</td>
-</tr>
-<tr class="even">
-<td><code>exposure_source_concept_id</code></td>
-<td>Integer</td>
-<td>Source-specific concept before standardization</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p><strong>Note:</strong> This schema is subject to refinement through
-community feedback and use case validation. Implementers should consult
-the latest <a href="https://ohdsi.github.io/CommonDataModel/">OMOP CDM
-specifications</a> and GIS Working Group discussions.</p>
-</blockquote>
-</div>
-<div id="design-principles" class="section level3">
-<h3>6.1.3. Design Principles</h3>
-<p>The <code>external_exposure</code> table design prioritizes:</p>
-<ol style="list-style-type: decimal">
-<li><strong>CDM Conformance</strong>: Aligns with OMOP architectural
-patterns and naming conventions</li>
-<li><strong>Semantic Precision</strong>: Uses standardized concept IDs
-from GIS vocabularies to ensure interoperability</li>
-<li><strong>Temporal Granularity</strong>: Supports both point-in-time
-and interval-based exposure assessments</li>
-<li><strong>Spatial Linkage</strong>: Leverages LOCATION table to enable
-geographic joins and spatial analyses</li>
-<li><strong>Extensibility</strong>: Accommodates diverse exposure types
-without requiring schema modifications</li>
-</ol>
-<hr />
-</div>
-</div>
-<div id="auxiliary-tables-and-extensions" class="section level2">
-<h2>6.2. Auxiliary Tables and Extensions</h2>
-<p>While the initial <code>external_exposure</code> definition provides
-a foundational structure, <strong>auxiliary tables</strong> may be
-developed to support specific analytical needs and temporal modeling
-requirements.</p>
-<div id="proposed-auxiliary-structures" class="section level3">
-<h3>6.2.1. Proposed Auxiliary Structures</h3>
-<p>Future CDM extensions may include:</p>
-<ul>
-<li><strong>exposure_time_series</strong>: Captures temporally-ordered
-exposure sequences for longitudinal analysis</li>
-<li><strong>exposure_aggregation</strong>: Stores pre-computed exposure
-summaries at various spatial and temporal granularities</li>
-<li><strong>location_exposure_profile</strong>: Links locations to
-characteristic exposure patterns and risk indices</li>
-<li><strong>exposure_co_occurrence</strong>: Tracks concurrent exposures
-to multiple environmental factors</li>
-</ul>
-</div>
-<div id="use-case-driven-development" class="section level3">
-<h3>6.2.2. Use Case-Driven Development</h3>
-<p>The development of auxiliary tables will be guided by specific
-research use cases, ensuring that extensions address real-world
-analytical requirements rather than speculative needs. Each proposed
-auxiliary table should:</p>
-<ul>
-<li><strong>Reference a validated use case</strong> from the Use Cases
-Inventory (Section 7)</li>
-<li><strong>Demonstrate analytical necessity</strong> beyond what
-<code>external_exposure</code> can support</li>
-<li><strong>Maintain CDM conformance</strong> and avoid duplication of
-existing OMOP structures</li>
-<li><strong>Include example implementations</strong> with sample data
-and ETL logic</li>
-</ul>
-<hr />
-</div>
-</div>
-<div id="mvp-roadmap" class="section level2">
-<h2>6.3. MVP Roadmap</h2>
-<p>The OMOP GIS CDM extension follows a Minimum Viable Product (MVP)
-approach, enabling iterative development aligned with community needs
-and validation outcomes.</p>
-<div id="mvp-1-core-external_exposure-table" class="section level3">
-<h3>6.3.1. MVP 1: Core external_exposure Table</h3>
-<p><strong>Status:</strong> Initial definition complete
-<strong>Scope:</strong> Basic exposure linkage with person, location,
-and temporal attributes <strong>Validation:</strong> Section 5
-(Validation) describes usability testing with real-world datasets
-<strong>Next Steps:</strong> Community review, pilot implementations,
-refinement based on feedback</p>
-</div>
-<div id="future-mvps" class="section level3">
-<h3>6.3.2. Future MVPs</h3>
-<p>Subsequent MVPs will be <strong>use case-driven</strong>, with each
-iteration addressing specific analytical requirements identified by GIS
-Working Group members and broader OHDSI community stakeholders.</p>
-<p><strong>Potential Future MVPs:</strong></p>
-<ul>
-<li><strong>MVP 2</strong>: Time-series exposure modeling (supporting
-longitudinal environmental epidemiology)</li>
-<li><strong>MVP 3</strong>: Multi-level spatial aggregation (supporting
-neighborhood-level and regional analyses)</li>
-<li><strong>MVP 4</strong>: Co-exposure network modeling (supporting
-exposome research)</li>
-<li><strong>MVP 5</strong>: Historical exposure reconstruction
-(supporting life-course epidemiology)</li>
-</ul>
-<p>Each MVP will be documented with: - <strong>Motivating use
-case(s)</strong> - <strong>Schema definitions</strong> (DDL and data
-dictionary) - <strong>Example ETL workflows</strong> -
-<strong>Validation criteria</strong> and test datasets -
-<strong>Integration guidance</strong> for existing OMOP
-implementations</p>
-<hr />
-</div>
-</div>
-<div id="relationship-to-gis-vocabularies" class="section level2">
-<h2>6.4. Relationship to GIS Vocabularies</h2>
-<p>All CDM extensions depend on the GIS Vocabulary Package to ensure
-semantic standardization:</p>
-<ul>
-<li><strong>exposure_concept_id</strong> values come from OMOP GIS, OMOP
-SDOH, and OMOP Exposome vocabularies</li>
-<li><strong>Hierarchical relationships</strong> enable aggregation
-across exposure categories (e.g., all air quality metrics)</li>
-<li><strong>Mapping relationships</strong> connect source-specific
-exposure codes to OMOP standard concepts</li>
-<li><strong>Custom relationships</strong> (e.g., “Has geometry”,
-“Locates in tissue”) support domain-specific reasoning</li>
-</ul>
-<p>This bidirectional dependency ensures that: - Vocabulary development
-is informed by practical CDM implementation needs - CDM schema evolution
-drives vocabulary enrichment and refinement - Use cases validate both
-vocabulary coverage and table design adequacy</p>
-<hr />
-</div>
-<div id="implementation-considerations" class="section level2">
-<h2>6.5. Implementation Considerations</h2>
-<div id="spatial-identifier-management" class="section level3">
-<h3>6.5.1. Spatial Identifier Management</h3>
-<p>Effective use of <code>external_exposure</code> requires: -
-<strong>Consistent location coding</strong> using standardized
-identifiers (GEOID, ZIP, lat/lon) - <strong>Geocoding workflows</strong>
-to assign location_id values to persons - <strong>Temporal location
-tracking</strong> if persons move between observation periods</p>
-</div>
-<div id="data-integration-patterns" class="section level3">
-<h3>6.5.2. Data Integration Patterns</h3>
-<p>Common ETL patterns include: - <strong>Batch loading</strong> of
-exposure datasets (e.g., annual EPA air quality data) - <strong>Spatial
-joins</strong> between person locations and environmental monitoring
-data - <strong>Temporal interpolation</strong> when exposure
-measurements are sparse or interval-based</p>
-</div>
-<div id="performance-optimization" class="section level3">
-<h3>6.5.3. Performance Optimization</h3>
-<p>For large-scale implementations: - <strong>Index location_id and
-exposure_start_date</strong> for efficient temporal queries -
-<strong>Partition by year or region</strong> to improve query
-performance - <strong>Pre-aggregate</strong> common exposure metrics to
-reduce computational overhead</p>
-<hr />
-</div>
-</div>
-<div id="governance-and-versioning" class="section level2">
-<h2>6.6. Governance and Versioning</h2>
-<p>CDM extensions are managed through OHDSI governance processes:</p>
-<ul>
-<li><strong>Proposals</strong> are submitted to the GIS Working Group
-for review</li>
-<li><strong>Community feedback</strong> is collected through GitHub
-discussions and WG meetings</li>
-<li><strong>Validation</strong> is conducted through pilot
-implementations and use case testing</li>
-<li><strong>Versioning</strong> follows OMOP CDM release cycles (e.g.,
-CDM v6.1 + GIS Extension v1.0)</li>
-</ul>
-<p>For the latest schema definitions, implementation guidance, and
-community discussions, see: - <a
-href="https://ohdsi.github.io/GIS/">OHDSI GIS Working Group</a> - <a
-href="https://github.com/OHDSI/CommonDataModel">OMOP CDM GitHub</a> - <a
-href="https://github.com/TuftsCTSI/CVB/tree/main/GIS/Ontology">GIS
-Vocabulary Package</a></p>
 </div>
 </div>
 

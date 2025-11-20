@@ -40,7 +40,7 @@ output:
 ```{r child="sections/4_qa.Rmd"}
 ```
 
-# 5. Vocabulary Usability Validation
+# 5. Vocabulary Usability Validation  
 
 ```{r child="sections/5_validation.Rmd"}
 ```

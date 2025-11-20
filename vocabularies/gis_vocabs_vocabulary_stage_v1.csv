@@ -1,0 +1,9 @@
+"vocabulary_id","vocabulary_name","vocabulary_reference","vocabulary_version","vocabulary_concept_id"
+"None","OMOP Standardized Vocabularies","OMOP generated","v5.0 23-JAN-23","44819096"
+"OMOP GIS","OMOP GIS","OMOP GIS","OMOP GIS version 2023-09-29",2147483646
+"SDOH","SDOH","SDOH","SDOH version 2023-09-29",2147483645
+"Domain","OMOP Domain","OMOP generated","OMOP GIS version 2023-09-29",44819147
+"Concept Class","OMOP Concept Class","OMOP generated",,44819233
+"Metadata","OMOP Metadata","OMOP generated",,32675
+"Vocabulary","OMOP Vocabulary","OMOP generated",,44819232
+"Relationship","OMOP Relationship","OMOP generated",,44819235

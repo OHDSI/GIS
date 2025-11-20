@@ -5,11 +5,11 @@ output:
         toc: FALSE
 ---
 
-# **gaiaDB**
+# **gaiaOHDSI**
 
 ## Description
 
-gaiaDB is the central functionality and storage of Gaia and consists of two main features: a **staging database** and an **execution engine**.
+Gaia Core is the central functionality and storage of Gaia and consists of two main features: a **staging database** and an **execution engine**.
 
 The staging database is a PostGIS database with a replica copy of the Gaia Catalog installed in a schema named "backbone". In this database, public datasets that are registered in Gaia Catalog can be "staged": transformed and then loaded as tables in a standardized Entity-Attribute-Value format. Other geospatial data, such as geocoded addresses, can also be loaded into the staging database for use in conjunction with the staged data.
 
@@ -17,8 +17,8 @@ All operations on the staging database (creating tables, inserting data, accessi
 
 ## Scope
 
-The **ultimate vision** of Gaia DB is support for multiple geospatial databases (particularly cloud-native), as well as execution engine interfaces for multiple popular data science programming languages (e.g. Python, Julia, R, Bash). **Currently**, the staging database has only been implemented in PostGIS and the execution engine has only been implemented in R.
+The **ultimate vision** of Gaia Core is support for multiple geospatial databases (particularly cloud-native), as well as execution engine interfaces for multiple popular data science programming languages (e.g. Python, Julia, R, Bash). **Currently**, the staging database has only been implemented in PostGIS and the execution engine has only been implemented in R.
 
 ## Documentation
 
-[gaiaDB (R Package)](gaiaDB/index.html)
+[gaiaOHDSI (R Package)](gaiaOHDSI/index.html)
