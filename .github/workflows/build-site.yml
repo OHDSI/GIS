@@ -60,7 +60,7 @@ jobs:
 
     - name: Install R packages
       run: |
-        Rscript -e 'install.packages(c("rmarkdown", "textshaping", "systemfonts",  "svglite", "kableExtra"), dependencies=TRUE, repos="https://cloud.r-project.org")'
+        Rscript -e 'install.packages(c("rmarkdown", "textshaping", "systemfonts",  "svglite", "kableExtra", "xml2", "dplyr", "readr"), repos="https://cloud.r-project.org")'
 
     - name: Cache Pandoc
       uses: actions/cache@v3
