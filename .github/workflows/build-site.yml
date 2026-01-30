@@ -45,7 +45,10 @@ jobs:
           libcurl4-openssl-dev \
           libssl-dev \
           libxml2-dev \
-          pandoc
+          pandoc \
+          libharfbuzz-dev \
+          libfribidi-dev \
+          libfontconfig1-dev
 
     - name: Cache R packages
       uses: actions/cache@v3
@@ -57,7 +60,7 @@ jobs:
 
     - name: Install R packages
       run: |
-        Rscript -e 'install.packages(c("rmarkdown", "svglite", "kableExtra"), repos="https://cloud.r-project.org")'
+        Rscript -e 'install.packages(c("rmarkdown", "textshaping", "systemfonts",  "svglite", "kableExtra"), dependencies=TRUE, repos="https://cloud.r-project.org")'
 
     - name: Cache Pandoc
       uses: actions/cache@v3
