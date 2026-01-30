@@ -1,0 +1,5 @@
+vocabulary_id,vocabulary_name,vocabulary_reference,vocabulary_version,vocabulary_concept_id
+None,OMOP Standardized Vocabularies,OMOP generated,GIS_2025-04-18_11:05:01.716409,44819096
+OMOP Exposome,OMOP Exposome,OMOP generated,2025-04-18,2052499998
+OMOP GIS,OMOP Geographic Information System,OMOP generated,2025-04-18,2052499997
+OMOP SDOH,OMOP Social Determinants of Health,OMOP generated,2025-04-18,2052499999
