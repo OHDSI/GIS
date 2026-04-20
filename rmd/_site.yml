@@ -32,6 +32,8 @@ navbar:
           href: use-cases.html
         - text: "Analysis"
           href: analysis.html
+        - text: "Algorithms"
+          href: algorithms.html
         - text: "gaiaDB"
           href: gaiaDB.html
         - text: "gaiaCore"

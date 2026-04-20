@@ -1,0 +1,403 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> Algorithms</div>'
+output:
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float:
+      collapsed: false
+    includes:
+      in_header: assets/include-header.html
+---
+
+<br>
+
+# **Distance from Care Algorithms**
+
+This page documents the canonical algorithms used to compute **distance from care** metrics within the Gaia toolchain. These metrics quantify how far a patient resides from a healthcare facility and how long it takes to travel there — key inputs for access-to-care, health equity, and spatial epidemiology analyses.
+
+Two metrics are defined:
+
+| Metric | Definition |
+|:-------|:-----------|
+| **Travel Distance** | Straight-line (geodesic) distance in kilometers between a patient's geocoded residence and the nearest qualifying care facility |
+| **Travel Time** | Estimated travel time in minutes, derived from travel distance using a mode-specific speed model |
+
+---
+
+## Data Prerequisites
+
+The algorithm requires the following OMOP CDM / Gaia tables to be populated:
+
+| Table | Required Fields | Notes |
+|:------|:----------------|:------|
+| `LOCATION` | `location_id`, `latitude`, `longitude` | Both coordinates must be non-NULL |
+| `PERSON` | `person_id`, `location_id` | Current residence linkage |
+| `LOCATION_HISTORY` | `entity_id`, `location_id`, `start_date`, `end_date`, `relationship_type_concept_id` | Optional; enables point-in-time lookups (concept 581476 = "Lives at") |
+| `CARE_SITE` | `care_site_id`, `location_id` | Facility registry; requires geocoded `LOCATION` rows |
+
+> **Sufficient location data** is defined as a `LOCATION` record for the patient (via `PERSON.location_id` or active `LOCATION_HISTORY` row) with both `latitude` and `longitude` populated and within plausible geographic bounds (latitude −90 to 90, longitude −180 to 180).
+
+---
+
+## Algorithm 1: Haversine Geodesic Distance {#haversine}
+
+### Overview
+
+The **Haversine formula** computes the great-circle distance between two points on a sphere given their latitudes and longitudes. It is accurate to within ~0.5% for distances under 500 km and requires no PostGIS extension, making it portable across all supported databases (PostgreSQL, SQL Server, BigQuery, Oracle).
+
+### Formula
+
+Given patient location *(φ₁, λ₁)* and facility location *(φ₂, λ₂)* in decimal degrees:
+
+```
+Δφ = φ₂ − φ₁   (difference in latitude, radians)
+Δλ = λ₂ − λ₁   (difference in longitude, radians)
+
+a = sin²(Δφ/2) + cos(φ₁) · cos(φ₂) · sin²(Δλ/2)
+c = 2 · atan2(√a, √(1−a))
+d = R · c        (R = 6371 km, Earth mean radius)
+```
+
+### SQL Implementation (PostgreSQL)
+
+The function below is designed to operate entirely within the `omopgis` schema and is compatible with the synthetic dataset structure.
+
+```sql
+-- ============================================================
+-- Function: calculate_haversine_distance_km
+-- Returns geodesic distance in kilometers between two lat/lon
+-- coordinate pairs using the Haversine formula.
+-- ============================================================
+CREATE OR REPLACE FUNCTION omopgis.calculate_haversine_distance_km(
+    lat1 DOUBLE PRECISION,
+    lon1 DOUBLE PRECISION,
+    lat2 DOUBLE PRECISION,
+    lon2 DOUBLE PRECISION
+)
+RETURNS DOUBLE PRECISION
+LANGUAGE SQL
+IMMUTABLE STRICT
+AS $$
+    SELECT
+        6371.0 * 2.0 * ATAN2(
+            SQRT(
+                POWER(SIN(RADIANS(lat2 - lat1) / 2.0), 2)
+                + COS(RADIANS(lat1))
+                  * COS(RADIANS(lat2))
+                  * POWER(SIN(RADIANS(lon2 - lon1) / 2.0), 2)
+            ),
+            SQRT(1.0 - (
+                POWER(SIN(RADIANS(lat2 - lat1) / 2.0), 2)
+                + COS(RADIANS(lat1))
+                  * COS(RADIANS(lat2))
+                  * POWER(SIN(RADIANS(lon2 - lon1) / 2.0), 2)
+            ))
+        )
+$$;
+```
+
+### PostGIS Alternative
+
+When PostGIS is available (default gaiaDb deployment), `ST_DistanceSphere` provides equivalent accuracy with better performance on large datasets via spatial indexing:
+
+```sql
+-- PostGIS equivalent — requires geography cast
+SELECT ST_DistanceSphere(
+    ST_MakePoint(lon1, lat1),   -- (longitude first in PostGIS)
+    ST_MakePoint(lon2, lat2)
+) / 1000.0 AS distance_km;     -- convert meters → km
+```
+
+---
+
+## Algorithm 2: Travel Time Estimation {#travel-time}
+
+### Overview
+
+Travel time is estimated from geodesic distance using a **piecewise linear speed model** stratified by assumed travel mode. This approach does not require a routing engine (e.g., OSRM, Google Maps) and is reproducible across federated sites.
+
+### Speed Model Parameters
+
+| Travel Mode | Assumed Speed | Rationale |
+|:------------|:--------------|:----------|
+| **Driving (urban, < 5 km)** | 25 km/h | Urban traffic, parking |
+| **Driving (suburban, 5–30 km)** | 55 km/h | Mixed roads |
+| **Driving (rural, > 30 km)** | 85 km/h | Highway-dominated |
+| **Walking (< 3 km)** | 4.8 km/h | Average walking speed |
+| **Public transit** | 20 km/h | Door-to-door average |
+
+> These defaults reflect national US averages and should be calibrated to local geographies when site-specific data are available. Researchers may substitute a routing API estimate stored in `EXTERNAL_EXPOSURE` (using an appropriate vocabulary concept) in place of this model.
+
+### SQL Implementation (PostgreSQL)
+
+```sql
+-- ============================================================
+-- Function: estimate_travel_time_minutes
+-- Returns estimated driving travel time in minutes given a
+-- geodesic distance in kilometers, using a piecewise speed
+-- model appropriate for US geographies.
+-- ============================================================
+CREATE OR REPLACE FUNCTION omopgis.estimate_travel_time_minutes(
+    distance_km DOUBLE PRECISION
+)
+RETURNS DOUBLE PRECISION
+LANGUAGE SQL
+IMMUTABLE STRICT
+AS $$
+    SELECT CASE
+        WHEN distance_km < 5.0  THEN (distance_km / 25.0)  * 60.0
+        WHEN distance_km < 30.0 THEN (distance_km / 55.0)  * 60.0
+        ELSE                         (distance_km / 85.0)  * 60.0
+    END
+$$;
+```
+
+---
+
+## Routine: Compute Distance-from-Care for All Eligible Patients {#routine}
+
+### Logic Overview
+
+The routine:
+
+1. **Identifies eligible patients** — those with a geocoded `LOCATION` record containing valid latitude and longitude.
+2. **Resolves the patient's location** — preferring an active `LOCATION_HISTORY` record (concept 581476, "Lives at") at the index date; falling back to `PERSON.location_id`.
+3. **Identifies care facilities** — all `CARE_SITE` records with geocoded `LOCATION` rows.
+4. **Finds the nearest facility** per patient using the Haversine distance.
+5. **Computes travel time** for the nearest facility.
+6. **Writes results** to the `EXTERNAL_EXPOSURE` table using the standard Gaia vocabulary concepts.
+
+### SQL Routine (PostgreSQL)
+
+```sql
+-- ============================================================
+-- Routine: compute_distance_from_care
+-- Computes nearest-facility travel distance and estimated
+-- travel time for all patients with sufficient location data.
+-- Results are inserted into omopgis.EXTERNAL_EXPOSURE.
+--
+-- Parameters (set as session variables before calling):
+--   index_date        DATE   — reference date for active
+--                              LOCATION_HISTORY lookup
+--   distance_concept  BIGINT — OMOP concept_id for
+--                              "Distance to nearest care site"
+--   time_concept      BIGINT — OMOP concept_id for
+--                              "Estimated travel time to care"
+--   km_unit_concept   BIGINT — OMOP concept_id for kilometers
+--   min_unit_concept  BIGINT — OMOP concept_id for minutes
+-- ============================================================
+
+DO $$
+DECLARE
+    v_index_date      DATE    := CURRENT_DATE;
+    v_distance_cid    BIGINT  := 2000000100;  -- placeholder concept
+    v_time_cid        BIGINT  := 2000000101;  -- placeholder concept
+    v_km_unit         BIGINT  := 8582;         -- OMOP: kilometer
+    v_min_unit        BIGINT  := 8550;         -- OMOP: minute
+BEGIN
+
+-- ── Step 1: Resolve patient locations ─────────────────────────────────────────
+-- Use LOCATION_HISTORY "Lives at" record active on index_date when available;
+-- fall back to PERSON.location_id.
+
+CREATE TEMP TABLE IF NOT EXISTS _patient_locations AS
+WITH history_loc AS (
+    SELECT
+        lh.entity_id                  AS person_id,
+        lh.location_id,
+        ROW_NUMBER() OVER (
+            PARTITION BY lh.entity_id
+            ORDER BY lh.start_date DESC
+        )                             AS rn
+    FROM omopgis.LOCATION_HISTORY lh
+    JOIN omopgis.LOCATION          l  ON l.location_id = lh.location_id
+    WHERE lh.domain_id                    = 'Person'
+      AND lh.relationship_type_concept_id = 581476        -- "Lives at"
+      AND lh.start_date                  <= v_index_date
+      AND (lh.end_date IS NULL OR lh.end_date >= v_index_date)
+      AND l.latitude  IS NOT NULL
+      AND l.longitude IS NOT NULL
+      AND l.latitude  BETWEEN -90  AND 90
+      AND l.longitude BETWEEN -180 AND 180
+),
+person_loc AS (
+    SELECT
+        p.person_id,
+        p.location_id
+    FROM omopgis.PERSON   p
+    JOIN omopgis.LOCATION l ON l.location_id = p.location_id
+    WHERE l.latitude  IS NOT NULL
+      AND l.longitude IS NOT NULL
+      AND l.latitude  BETWEEN -90  AND 90
+      AND l.longitude BETWEEN -180 AND 180
+)
+SELECT
+    COALESCE(hl.person_id,   pl.person_id)   AS person_id,
+    COALESCE(hl.location_id, pl.location_id) AS location_id
+FROM person_loc pl
+LEFT JOIN (SELECT * FROM history_loc WHERE rn = 1) hl
+       ON hl.person_id = pl.person_id;
+
+-- ── Step 2: Build care facility coordinate table ───────────────────────────────
+CREATE TEMP TABLE IF NOT EXISTS _facility_locations AS
+SELECT
+    cs.care_site_id,
+    l.location_id,
+    l.latitude,
+    l.longitude
+FROM omopgis.CARE_SITE cs
+JOIN omopgis.LOCATION  l  ON l.location_id = cs.location_id
+WHERE l.latitude  IS NOT NULL
+  AND l.longitude IS NOT NULL
+  AND l.latitude  BETWEEN -90  AND 90
+  AND l.longitude BETWEEN -180 AND 180;
+
+-- ── Step 3: Compute nearest facility per patient ───────────────────────────────
+CREATE TEMP TABLE IF NOT EXISTS _nearest_facility AS
+WITH distances AS (
+    SELECT
+        pl.person_id,
+        fl.care_site_id,
+        omopgis.calculate_haversine_distance_km(
+            lp.latitude,  lp.longitude,
+            fl.latitude,  fl.longitude
+        )                                           AS distance_km
+    FROM _patient_locations          pl
+    JOIN omopgis.LOCATION            lp ON lp.location_id = pl.location_id
+    CROSS JOIN _facility_locations   fl
+),
+ranked AS (
+    SELECT *,
+           ROW_NUMBER() OVER (
+               PARTITION BY person_id
+               ORDER BY distance_km ASC
+           ) AS rn
+    FROM distances
+)
+SELECT
+    person_id,
+    care_site_id,
+    distance_km,
+    omopgis.estimate_travel_time_minutes(distance_km) AS travel_time_minutes
+FROM ranked
+WHERE rn = 1;
+
+-- ── Step 4: Write distance results to EXTERNAL_EXPOSURE ──────────────────────
+INSERT INTO omopgis.EXTERNAL_EXPOSURE (
+    external_exposure_id,
+    person_id,
+    location_id,
+    exposure_concept_id,
+    exposure_start_date,
+    exposure_end_date,
+    value_as_number,
+    unit_concept_id,
+    exposure_relationship_concept_id
+)
+SELECT
+    nextval('omopgis.external_exposure_id_seq'),  -- adjust to site sequence
+    nf.person_id,
+    pl.location_id,
+    v_distance_cid,
+    v_index_date,
+    v_index_date,
+    nf.distance_km,
+    v_km_unit,
+    44818800                                       -- SNOMED: "Exposed to"
+FROM _nearest_facility nf
+JOIN _patient_locations pl ON pl.person_id = nf.person_id;
+
+-- ── Step 5: Write travel time results to EXTERNAL_EXPOSURE ───────────────────
+INSERT INTO omopgis.EXTERNAL_EXPOSURE (
+    external_exposure_id,
+    person_id,
+    location_id,
+    exposure_concept_id,
+    exposure_start_date,
+    exposure_end_date,
+    value_as_number,
+    unit_concept_id,
+    exposure_relationship_concept_id
+)
+SELECT
+    nextval('omopgis.external_exposure_id_seq'),
+    nf.person_id,
+    pl.location_id,
+    v_time_cid,
+    v_index_date,
+    v_index_date,
+    nf.travel_time_minutes,
+    v_min_unit,
+    44818800
+FROM _nearest_facility nf
+JOIN _patient_locations pl ON pl.person_id = nf.person_id;
+
+-- ── Cleanup ───────────────────────────────────────────────────────────────────
+DROP TABLE IF EXISTS _patient_locations;
+DROP TABLE IF EXISTS _facility_locations;
+DROP TABLE IF EXISTS _nearest_facility;
+
+RAISE NOTICE 'Distance-from-care computation complete.';
+
+END $$;
+```
+
+---
+
+## Eligibility Criteria Summary {#eligibility}
+
+A patient is considered to have **sufficient location data** when all of the following conditions are met:
+
+| Criterion | Check |
+|:----------|:------|
+| `LOCATION` record exists | `PERSON.location_id IS NOT NULL` or active `LOCATION_HISTORY` row |
+| Latitude is populated | `latitude IS NOT NULL` |
+| Longitude is populated | `longitude IS NOT NULL` |
+| Coordinates are in range | `latitude BETWEEN -90 AND 90` AND `longitude BETWEEN -180 AND 180` |
+| Facility registry available | At least one `CARE_SITE` with geocoded `LOCATION` exists |
+
+Patients failing any criterion are **excluded** from results (no row written to `EXTERNAL_EXPOSURE`) to prevent silent errors from propagating into downstream analyses.
+
+---
+
+## Output: EXTERNAL_EXPOSURE Schema Mapping {#output-mapping}
+
+Results are written to `omopgis.EXTERNAL_EXPOSURE` using the following field mapping:
+
+| EXTERNAL_EXPOSURE Field | Distance Record | Travel Time Record |
+|:------------------------|:----------------|:-------------------|
+| `person_id` | patient | patient |
+| `location_id` | patient's resolved location | patient's resolved location |
+| `exposure_concept_id` | "Distance to nearest care site" | "Estimated travel time to care" |
+| `exposure_start_date` | index date | index date |
+| `exposure_end_date` | index date | index date |
+| `value_as_number` | distance in km | time in minutes |
+| `unit_concept_id` | 8582 (kilometer) | 8550 (minute) |
+| `exposure_relationship_concept_id` | 44818800 (Exposed to) | 44818800 (Exposed to) |
+
+> **Vocabulary note**: The concept IDs for "Distance to nearest care site" (placeholder 2000000100) and "Estimated travel time to care" (placeholder 2000000101) should be requested from the OMOP GIS Vocabulary. Pending formal registration, sites should use local extension concepts with negative IDs per OMOP convention.
+
+---
+
+## Limitations and Extensions {#limitations}
+
+### Current Limitations
+
+- **Straight-line distance** — Haversine does not account for road network topology, geographic barriers (rivers, mountains), or actual driving routes. Bias is largest in mountainous or water-fragmented regions.
+- **Single travel mode** — The piecewise speed model defaults to driving. Patients without vehicle access or in transit-dependent urban areas may have materially longer travel times.
+- **Static index date** — The routine calculates distance at a single point in time. Residential mobility (captured in `LOCATION_HISTORY`) is not yet aggregated into longitudinal exposure windows.
+- **Nearest single facility** — Results reflect the closest facility regardless of type, specialty, or whether the patient actually uses that facility.
+
+### Suggested Additions to the content above
+
+| Extension | Approach |
+|:----------|:---------|
+| **Road-network routing** | Store OSRM or routing-API estimates in `EXTERNAL_EXPOSURE`; use vocabulary concept to flag source |
+| **Mode-stratified time** | Add separate records per mode (drive, walk, transit) using distinct `exposure_concept_id` values |
+| **Longitudinal distance** | Join `LOCATION_HISTORY` periods to compute time-weighted mean distance over a study window |
+| **Facility-type filtering** | Restrict `_facility_locations` by `CARE_SITE.place_of_service_concept_id` (e.g., primary care only) |
+| **Two-step floating catchment area** | Extend to supply-demand ratio analysis for access equity studies |
+
+
+<br>
