@@ -14,7 +14,7 @@ output:
 
 # **Distance from Care Algorithms**
 
-This page documents the canonical algorithms used to compute **distance from care** metrics within the Gaia toolchain. These metrics quantify how far a patient resides from a healthcare facility and how long it takes to travel there — key inputs for access-to-care, health equity, and spatial epidemiology analyses.
+This page documents some canonical algorithms used to compute **distance from care** metrics within the Gaia toolchain. These metrics quantify how far a patient resides from a healthcare facility and how long it takes to travel there — key inputs for access-to-care, health equity, and spatial epidemiology analyses.
 
 Two metrics are defined:
 
