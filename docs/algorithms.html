@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title> Algorithms</title>
+
+<script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="assets/accordion-toc.css">
+<script src="assets/accordion-toc.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><div><img src="ohdsi16x16.png"></img> OHDSI GIS </div></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="get-started.html">
+    <span class="fa fa-play"></span>
+     
+    Get Started
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-earth"></span>
+     
+    Gaia
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="gaia-intro.html">Overview</a>
+    </li>
+    <li>
+      <a href="gaia-principles.html">Design</a>
+    </li>
+    <li>
+      <a href="schema-extensions.html">Schema Extensions</a>
+    </li>
+    <li>
+      <a href="use-cases.html">Use Cases</a>
+    </li>
+    <li>
+      <a href="analysis.html">Analysis</a>
+    </li>
+    <li>
+      <a href="algorithms.html">Algorithms</a>
+    </li>
+    <li>
+      <a href="gaiaDB.html">gaiaDB</a>
+    </li>
+    <li>
+      <a href="gaiaCore.html">gaiaCore</a>
+    </li>
+    <li>
+      <a href="gaiaCatalog.html">gaiaCatalog</a>
+    </li>
+    <li>
+      <a href="gaiaDocker.html">gaiaDocker</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="vocabulary.html">
+    <span class="fa fa-book"></span>
+     
+    Vocabulary
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-code"></span>
+     
+    Developer
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="developer.html">Overview</a>
+    </li>
+    <li>
+      <a href="developer-packages.html">Package Status</a>
+    </li>
+    <li>
+      <a href="developer-contributing.html">Contributing</a>
+    </li>
+    <li>
+      <a href="developer-architecture.html">Architecture</a>
+    </li>
+    <li>
+      <a href="developer-deployment.html">Deployment</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="project-management.html">
+    <span class="fa fa-tasks"></span>
+     
+    Project Management
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/OHDSI/GIS">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore"><img src="ohdsi40x40.png"></img>
+Algorithms</h1>
+
+</div>
+
+
+<p><br></p>
+<div id="distance-from-care-algorithms" class="section level1">
+<h1><strong>Distance from Care Algorithms</strong></h1>
+<p>This page documents some canonical algorithms used to compute
+<strong>distance from care</strong> metrics within the Gaia toolchain.
+These metrics quantify how far a patient resides from a healthcare
+facility and how long it takes to travel there — key inputs for
+access-to-care, health equity, and spatial epidemiology analyses.</p>
+<p>Two metrics are defined:</p>
+<table>
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Metric</th>
+<th align="left">Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Travel Distance</strong></td>
+<td align="left">Straight-line (geodesic) distance in kilometers between
+a patient’s geocoded residence and the nearest qualifying care
+facility</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Travel Time</strong></td>
+<td align="left">Estimated travel time in minutes, derived from travel
+distance using a mode-specific speed model</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<div id="data-prerequisites" class="section level2">
+<h2>Data Prerequisites</h2>
+<p>The algorithm requires the following OMOP CDM / Gaia tables to be
+populated:</p>
+<table>
+<colgroup>
+<col width="22%" />
+<col width="54%" />
+<col width="22%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Table</th>
+<th align="left">Required Fields</th>
+<th align="left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>LOCATION</code></td>
+<td align="left"><code>location_id</code>, <code>latitude</code>,
+<code>longitude</code></td>
+<td align="left">Both coordinates must be non-NULL</td>
+</tr>
+<tr class="even">
+<td align="left"><code>PERSON</code></td>
+<td align="left"><code>person_id</code>, <code>location_id</code></td>
+<td align="left">Current residence linkage</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>LOCATION_HISTORY</code></td>
+<td align="left"><code>entity_id</code>, <code>location_id</code>,
+<code>start_date</code>, <code>end_date</code>,
+<code>relationship_type_concept_id</code></td>
+<td align="left">Optional; enables point-in-time lookups (concept 581476
+= “Lives at”)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>CARE_SITE</code></td>
+<td align="left"><code>care_site_id</code>,
+<code>location_id</code></td>
+<td align="left">Facility registry; requires geocoded
+<code>LOCATION</code> rows</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Sufficient location data</strong> is defined as a
+<code>LOCATION</code> record for the patient (via
+<code>PERSON.location_id</code> or active <code>LOCATION_HISTORY</code>
+row) with both <code>latitude</code> and <code>longitude</code>
+populated and within plausible geographic bounds (latitude −90 to 90,
+longitude −180 to 180).</p>
+</blockquote>
+<hr />
+</div>
+<div id="haversine" class="section level2">
+<h2>Algorithm 1: Haversine Geodesic Distance</h2>
+<div id="overview" class="section level3">
+<h3>Overview</h3>
+<p>The <strong>Haversine formula</strong> computes the great-circle
+distance between two points on a sphere given their latitudes and
+longitudes. It is accurate to within ~0.5% for distances under 500 km
+and requires no PostGIS extension, making it portable across all
+supported databases (PostgreSQL, SQL Server, BigQuery, Oracle).</p>
+</div>
+<div id="formula" class="section level3">
+<h3>Formula</h3>
+<p>Given patient location <em>(φ₁, λ₁)</em> and facility location
+<em>(φ₂, λ₂)</em> in decimal degrees:</p>
+<pre><code>Δφ = φ₂ − φ₁   (difference in latitude, radians)
+Δλ = λ₂ − λ₁   (difference in longitude, radians)
+
+a = sin²(Δφ/2) + cos(φ₁) · cos(φ₂) · sin²(Δλ/2)
+c = 2 · atan2(√a, √(1−a))
+d = R · c        (R = 6371 km, Earth mean radius)</code></pre>
+</div>
+<div id="sql-implementation-postgresql" class="section level3">
+<h3>SQL Implementation (PostgreSQL)</h3>
+<p>The function below is designed to operate entirely within the
+<code>omopgis</code> schema and is compatible with the synthetic dataset
+structure.</p>
+<pre class="sql"><code>-- ============================================================
+-- Function: calculate_haversine_distance_km
+-- Returns geodesic distance in kilometers between two lat/lon
+-- coordinate pairs using the Haversine formula.
+-- ============================================================
+CREATE OR REPLACE FUNCTION omopgis.calculate_haversine_distance_km(
+    lat1 DOUBLE PRECISION,
+    lon1 DOUBLE PRECISION,
+    lat2 DOUBLE PRECISION,
+    lon2 DOUBLE PRECISION
+)
+RETURNS DOUBLE PRECISION
+LANGUAGE SQL
+IMMUTABLE STRICT
+AS $$
+    SELECT
+        6371.0 * 2.0 * ATAN2(
+            SQRT(
+                POWER(SIN(RADIANS(lat2 - lat1) / 2.0), 2)
+                + COS(RADIANS(lat1))
+                  * COS(RADIANS(lat2))
+                  * POWER(SIN(RADIANS(lon2 - lon1) / 2.0), 2)
+            ),
+            SQRT(1.0 - (
+                POWER(SIN(RADIANS(lat2 - lat1) / 2.0), 2)
+                + COS(RADIANS(lat1))
+                  * COS(RADIANS(lat2))
+                  * POWER(SIN(RADIANS(lon2 - lon1) / 2.0), 2)
+            ))
+        )
+$$;</code></pre>
+</div>
+<div id="postgis-alternative" class="section level3">
+<h3>PostGIS Alternative</h3>
+<p>When PostGIS is available (default gaiaDb deployment),
+<code>ST_DistanceSphere</code> provides equivalent accuracy with better
+performance on large datasets via spatial indexing:</p>
+<pre class="sql"><code>-- PostGIS equivalent — requires geography cast
+SELECT ST_DistanceSphere(
+    ST_MakePoint(lon1, lat1),   -- (longitude first in PostGIS)
+    ST_MakePoint(lon2, lat2)
+) / 1000.0 AS distance_km;     -- convert meters → km</code></pre>
+<hr />
+</div>
+</div>
+<div id="travel-time" class="section level2">
+<h2>Algorithm 2: Travel Time Estimation</h2>
+<div id="overview-1" class="section level3">
+<h3>Overview</h3>
+<p>Travel time is estimated from geodesic distance using a
+<strong>piecewise linear speed model</strong> stratified by assumed
+travel mode. This approach does not require a routing engine (e.g.,
+OSRM, Google Maps) and is reproducible across federated sites.</p>
+</div>
+<div id="speed-model-parameters" class="section level3">
+<h3>Speed Model Parameters</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Travel Mode</th>
+<th align="left">Assumed Speed</th>
+<th align="left">Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Driving (urban, &lt; 5 km)</strong></td>
+<td align="left">25 km/h</td>
+<td align="left">Urban traffic, parking</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Driving (suburban, 5–30 km)</strong></td>
+<td align="left">55 km/h</td>
+<td align="left">Mixed roads</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Driving (rural, &gt; 30 km)</strong></td>
+<td align="left">85 km/h</td>
+<td align="left">Highway-dominated</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Walking (&lt; 3 km)</strong></td>
+<td align="left">4.8 km/h</td>
+<td align="left">Average walking speed</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Public transit</strong></td>
+<td align="left">20 km/h</td>
+<td align="left">Door-to-door average</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>These defaults reflect national US averages and should be calibrated
+to local geographies when site-specific data are available. Researchers
+may substitute a routing API estimate stored in
+<code>EXTERNAL_EXPOSURE</code> (using an appropriate vocabulary concept)
+in place of this model.</p>
+</blockquote>
+</div>
+<div id="sql-implementation-postgresql-1" class="section level3">
+<h3>SQL Implementation (PostgreSQL)</h3>
+<pre class="sql"><code>-- ============================================================
+-- Function: estimate_travel_time_minutes
+-- Returns estimated driving travel time in minutes given a
+-- geodesic distance in kilometers, using a piecewise speed
+-- model appropriate for US geographies.
+-- ============================================================
+CREATE OR REPLACE FUNCTION omopgis.estimate_travel_time_minutes(
+    distance_km DOUBLE PRECISION
+)
+RETURNS DOUBLE PRECISION
+LANGUAGE SQL
+IMMUTABLE STRICT
+AS $$
+    SELECT CASE
+        WHEN distance_km &lt; 5.0  THEN (distance_km / 25.0)  * 60.0
+        WHEN distance_km &lt; 30.0 THEN (distance_km / 55.0)  * 60.0
+        ELSE                         (distance_km / 85.0)  * 60.0
+    END
+$$;</code></pre>
+<hr />
+</div>
+</div>
+<div id="routine" class="section level2">
+<h2>Routine: Compute Distance-from-Care for All Eligible Patients</h2>
+<div id="logic-overview" class="section level3">
+<h3>Logic Overview</h3>
+<p>The routine:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Identifies eligible patients</strong> — those with a
+geocoded <code>LOCATION</code> record containing valid latitude and
+longitude.</li>
+<li><strong>Resolves the patient’s location</strong> — preferring an
+active <code>LOCATION_HISTORY</code> record (concept 581476, “Lives at”)
+at the index date; falling back to <code>PERSON.location_id</code>.</li>
+<li><strong>Identifies care facilities</strong> — all
+<code>CARE_SITE</code> records with geocoded <code>LOCATION</code>
+rows.</li>
+<li><strong>Finds the nearest facility</strong> per patient using the
+Haversine distance.</li>
+<li><strong>Computes travel time</strong> for the nearest facility.</li>
+<li><strong>Writes results</strong> to the
+<code>EXTERNAL_EXPOSURE</code> table using the standard Gaia vocabulary
+concepts.</li>
+</ol>
+</div>
+<div id="sql-routine-postgresql" class="section level3">
+<h3>SQL Routine (PostgreSQL)</h3>
+<pre class="sql"><code>-- ============================================================
+-- Routine: compute_distance_from_care
+-- Computes nearest-facility travel distance and estimated
+-- travel time for all patients with sufficient location data.
+-- Results are inserted into omopgis.EXTERNAL_EXPOSURE.
+--
+-- Parameters (set as session variables before calling):
+--   index_date        DATE   — reference date for active
+--                              LOCATION_HISTORY lookup
+--   distance_concept  BIGINT — OMOP concept_id for
+--                              &quot;Distance to nearest care site&quot;
+--   time_concept      BIGINT — OMOP concept_id for
+--                              &quot;Estimated travel time to care&quot;
+--   km_unit_concept   BIGINT — OMOP concept_id for kilometers
+--   min_unit_concept  BIGINT — OMOP concept_id for minutes
+-- ============================================================
+
+DO $$
+DECLARE
+    v_index_date      DATE    := CURRENT_DATE;
+    v_distance_cid    BIGINT  := 2000000100;  -- placeholder concept
+    v_time_cid        BIGINT  := 2000000101;  -- placeholder concept
+    v_km_unit         BIGINT  := 8582;         -- OMOP: kilometer
+    v_min_unit        BIGINT  := 8550;         -- OMOP: minute
+BEGIN
+
+-- ── Step 1: Resolve patient locations ─────────────────────────────────────────
+-- Use LOCATION_HISTORY &quot;Lives at&quot; record active on index_date when available;
+-- fall back to PERSON.location_id.
+
+CREATE TEMP TABLE IF NOT EXISTS _patient_locations AS
+WITH history_loc AS (
+    SELECT
+        lh.entity_id                  AS person_id,
+        lh.location_id,
+        ROW_NUMBER() OVER (
+            PARTITION BY lh.entity_id
+            ORDER BY lh.start_date DESC
+        )                             AS rn
+    FROM omopgis.LOCATION_HISTORY lh
+    JOIN omopgis.LOCATION          l  ON l.location_id = lh.location_id
+    WHERE lh.domain_id                    = &#39;Person&#39;
+      AND lh.relationship_type_concept_id = 581476        -- &quot;Lives at&quot;
+      AND lh.start_date                  &lt;= v_index_date
+      AND (lh.end_date IS NULL OR lh.end_date &gt;= v_index_date)
+      AND l.latitude  IS NOT NULL
+      AND l.longitude IS NOT NULL
+      AND l.latitude  BETWEEN -90  AND 90
+      AND l.longitude BETWEEN -180 AND 180
+),
+person_loc AS (
+    SELECT
+        p.person_id,
+        p.location_id
+    FROM omopgis.PERSON   p
+    JOIN omopgis.LOCATION l ON l.location_id = p.location_id
+    WHERE l.latitude  IS NOT NULL
+      AND l.longitude IS NOT NULL
+      AND l.latitude  BETWEEN -90  AND 90
+      AND l.longitude BETWEEN -180 AND 180
+)
+SELECT
+    COALESCE(hl.person_id,   pl.person_id)   AS person_id,
+    COALESCE(hl.location_id, pl.location_id) AS location_id
+FROM person_loc pl
+LEFT JOIN (SELECT * FROM history_loc WHERE rn = 1) hl
+       ON hl.person_id = pl.person_id;
+
+-- ── Step 2: Build care facility coordinate table ───────────────────────────────
+CREATE TEMP TABLE IF NOT EXISTS _facility_locations AS
+SELECT
+    cs.care_site_id,
+    l.location_id,
+    l.latitude,
+    l.longitude
+FROM omopgis.CARE_SITE cs
+JOIN omopgis.LOCATION  l  ON l.location_id = cs.location_id
+WHERE l.latitude  IS NOT NULL
+  AND l.longitude IS NOT NULL
+  AND l.latitude  BETWEEN -90  AND 90
+  AND l.longitude BETWEEN -180 AND 180;
+
+-- ── Step 3: Compute nearest facility per patient ───────────────────────────────
+CREATE TEMP TABLE IF NOT EXISTS _nearest_facility AS
+WITH distances AS (
+    SELECT
+        pl.person_id,
+        fl.care_site_id,
+        omopgis.calculate_haversine_distance_km(
+            lp.latitude,  lp.longitude,
+            fl.latitude,  fl.longitude
+        )                                           AS distance_km
+    FROM _patient_locations          pl
+    JOIN omopgis.LOCATION            lp ON lp.location_id = pl.location_id
+    CROSS JOIN _facility_locations   fl
+),
+ranked AS (
+    SELECT *,
+           ROW_NUMBER() OVER (
+               PARTITION BY person_id
+               ORDER BY distance_km ASC
+           ) AS rn
+    FROM distances
+)
+SELECT
+    person_id,
+    care_site_id,
+    distance_km,
+    omopgis.estimate_travel_time_minutes(distance_km) AS travel_time_minutes
+FROM ranked
+WHERE rn = 1;
+
+-- ── Step 4: Write distance results to EXTERNAL_EXPOSURE ──────────────────────
+INSERT INTO omopgis.EXTERNAL_EXPOSURE (
+    external_exposure_id,
+    person_id,
+    location_id,
+    exposure_concept_id,
+    exposure_start_date,
+    exposure_end_date,
+    value_as_number,
+    unit_concept_id,
+    exposure_relationship_concept_id
+)
+SELECT
+    nextval(&#39;omopgis.external_exposure_id_seq&#39;),  -- adjust to site sequence
+    nf.person_id,
+    pl.location_id,
+    v_distance_cid,
+    v_index_date,
+    v_index_date,
+    nf.distance_km,
+    v_km_unit,
+    44818800                                       -- SNOMED: &quot;Exposed to&quot;
+FROM _nearest_facility nf
+JOIN _patient_locations pl ON pl.person_id = nf.person_id;
+
+-- ── Step 5: Write travel time results to EXTERNAL_EXPOSURE ───────────────────
+INSERT INTO omopgis.EXTERNAL_EXPOSURE (
+    external_exposure_id,
+    person_id,
+    location_id,
+    exposure_concept_id,
+    exposure_start_date,
+    exposure_end_date,
+    value_as_number,
+    unit_concept_id,
+    exposure_relationship_concept_id
+)
+SELECT
+    nextval(&#39;omopgis.external_exposure_id_seq&#39;),
+    nf.person_id,
+    pl.location_id,
+    v_time_cid,
+    v_index_date,
+    v_index_date,
+    nf.travel_time_minutes,
+    v_min_unit,
+    44818800
+FROM _nearest_facility nf
+JOIN _patient_locations pl ON pl.person_id = nf.person_id;
+
+-- ── Cleanup ───────────────────────────────────────────────────────────────────
+DROP TABLE IF EXISTS _patient_locations;
+DROP TABLE IF EXISTS _facility_locations;
+DROP TABLE IF EXISTS _nearest_facility;
+
+RAISE NOTICE &#39;Distance-from-care computation complete.&#39;;
+
+END $$;</code></pre>
+<hr />
+</div>
+</div>
+<div id="eligibility" class="section level2">
+<h2>Eligibility Criteria Summary</h2>
+<p>A patient is considered to have <strong>sufficient location
+data</strong> when all of the following conditions are met:</p>
+<table>
+<colgroup>
+<col width="61%" />
+<col width="38%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Criterion</th>
+<th align="left">Check</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>LOCATION</code> record exists</td>
+<td align="left"><code>PERSON.location_id IS NOT NULL</code> or active
+<code>LOCATION_HISTORY</code> row</td>
+</tr>
+<tr class="even">
+<td align="left">Latitude is populated</td>
+<td align="left"><code>latitude IS NOT NULL</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Longitude is populated</td>
+<td align="left"><code>longitude IS NOT NULL</code></td>
+</tr>
+<tr class="even">
+<td align="left">Coordinates are in range</td>
+<td align="left"><code>latitude BETWEEN -90 AND 90</code> AND
+<code>longitude BETWEEN -180 AND 180</code></td>
+</tr>
+<tr class="odd">
+<td align="left">Facility registry available</td>
+<td align="left">At least one <code>CARE_SITE</code> with geocoded
+<code>LOCATION</code> exists</td>
+</tr>
+</tbody>
+</table>
+<p>Patients failing any criterion are <strong>excluded</strong> from
+results (no row written to <code>EXTERNAL_EXPOSURE</code>) to prevent
+silent errors from propagating into downstream analyses.</p>
+<hr />
+</div>
+<div id="output-mapping" class="section level2">
+<h2>Output: EXTERNAL_EXPOSURE Schema Mapping</h2>
+<p>Results are written to <code>omopgis.EXTERNAL_EXPOSURE</code> using
+the following field mapping:</p>
+<table>
+<colgroup>
+<col width="40%" />
+<col width="27%" />
+<col width="32%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">EXTERNAL_EXPOSURE Field</th>
+<th align="left">Distance Record</th>
+<th align="left">Travel Time Record</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>person_id</code></td>
+<td align="left">patient</td>
+<td align="left">patient</td>
+</tr>
+<tr class="even">
+<td align="left"><code>location_id</code></td>
+<td align="left">patient’s resolved location</td>
+<td align="left">patient’s resolved location</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>exposure_concept_id</code></td>
+<td align="left">“Distance to nearest care site”</td>
+<td align="left">“Estimated travel time to care”</td>
+</tr>
+<tr class="even">
+<td align="left"><code>exposure_start_date</code></td>
+<td align="left">index date</td>
+<td align="left">index date</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>exposure_end_date</code></td>
+<td align="left">index date</td>
+<td align="left">index date</td>
+</tr>
+<tr class="even">
+<td align="left"><code>value_as_number</code></td>
+<td align="left">distance in km</td>
+<td align="left">time in minutes</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>unit_concept_id</code></td>
+<td align="left">8582 (kilometer)</td>
+<td align="left">8550 (minute)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>exposure_relationship_concept_id</code></td>
+<td align="left">44818800 (Exposed to)</td>
+<td align="left">44818800 (Exposed to)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Vocabulary note</strong>: The concept IDs for “Distance to
+nearest care site” (placeholder 2000000100) and “Estimated travel time
+to care” (placeholder 2000000101) should be requested from the OMOP GIS
+Vocabulary. Pending formal registration, sites should use local
+extension concepts with negative IDs per OMOP convention.</p>
+</blockquote>
+<hr />
+</div>
+<div id="limitations" class="section level2">
+<h2>Limitations and Extensions</h2>
+<div id="current-limitations" class="section level3">
+<h3>Current Limitations</h3>
+<ul>
+<li><strong>Straight-line distance</strong> — Haversine does not account
+for road network topology, geographic barriers (rivers, mountains), or
+actual driving routes. Bias is largest in mountainous or
+water-fragmented regions.</li>
+<li><strong>Single travel mode</strong> — The piecewise speed model
+defaults to driving. Patients without vehicle access or in
+transit-dependent urban areas may have materially longer travel
+times.</li>
+<li><strong>Static index date</strong> — The routine calculates distance
+at a single point in time. Residential mobility (captured in
+<code>LOCATION_HISTORY</code>) is not yet aggregated into longitudinal
+exposure windows.</li>
+<li><strong>Nearest single facility</strong> — Results reflect the
+closest facility regardless of type, specialty, or whether the patient
+actually uses that facility.</li>
+</ul>
+</div>
+<div id="suggested-additions-to-the-content-above"
+class="section level3">
+<h3>Suggested Additions to the content above</h3>
+<table>
+<colgroup>
+<col width="52%" />
+<col width="47%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Extension</th>
+<th align="left">Approach</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>Road-network routing</strong></td>
+<td align="left">Store OSRM or routing-API estimates in
+<code>EXTERNAL_EXPOSURE</code>; use vocabulary concept to flag
+source</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Mode-stratified time</strong></td>
+<td align="left">Add separate records per mode (drive, walk, transit)
+using distinct <code>exposure_concept_id</code> values</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Longitudinal distance</strong></td>
+<td align="left">Join <code>LOCATION_HISTORY</code> periods to compute
+time-weighted mean distance over a study window</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Facility-type filtering</strong></td>
+<td align="left">Restrict <code>_facility_locations</code> by
+<code>CARE_SITE.place_of_service_concept_id</code> (e.g., primary care
+only)</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>Two-step floating catchment area</strong></td>
+<td align="left">Extend to supply-demand ratio analysis for access
+equity studies</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
