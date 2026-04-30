@@ -48,7 +48,8 @@ jobs:
           pandoc \
           libharfbuzz-dev \
           libfribidi-dev \
-          libfontconfig1-dev
+          libfontconfig1-dev \
+          libuv1-dev
 
     - name: Cache R packages
       uses: actions/cache@v3
