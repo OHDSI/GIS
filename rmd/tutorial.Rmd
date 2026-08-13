@@ -1,0 +1,41 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG</div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+
+# **Tutorial**
+
+Welcome to the OHDSI GIS tutorial materials. This section walks through hands-on exercises for working with the Gaia toolchain and GIS-related OMOP CDM extensions.
+
+<br>
+
+## **Overview**
+
+_TODO: describe who this tutorial is for, what background is assumed, and what learners will be able to do by the end._
+
+## **Prerequisites**
+
+- [ ] Review the [Get Started](get-started.html) page
+- [ ] Deploy the Gaia toolchain (see [Quick Start: Deploy Gaia](get-started.html#quick-start-deploy-gaia))
+- [ ] _TODO: add any additional setup steps_
+
+<br>
+
+## **Exercises**
+
+1. [Exercise 1](tutorial-exercise-1.html) - _TODO: short description_
+2. [Exercise 2](tutorial-exercise-2.html) - _TODO: short description_
+3. [Exercise 3](tutorial-exercise-3.html) - _TODO: short description_
+
+<br>
+
+## **Getting Help**
+
+If you get stuck, see [Getting Help](get-started.html#getting-help) or reach out on the GIS Working Group Teams channel.
+
+<br>

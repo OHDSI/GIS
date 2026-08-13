@@ -1,0 +1,31 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG</div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+
+# **Exercise 2: _TODO title_**
+
+## **Goal**
+
+_TODO: what will the learner accomplish in this exercise?_
+
+## **Steps**
+
+1. _TODO_
+2. _TODO_
+3. _TODO_
+
+## **Check Your Work**
+
+_TODO: how does the learner verify they completed the exercise correctly?_
+
+<br>
+
+Previous: [Exercise 1](tutorial-exercise-1.html) | Next: [Exercise 3](tutorial-exercise-3.html)
+
+<br>
