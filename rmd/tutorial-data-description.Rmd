@@ -1,0 +1,127 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG</div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+
+# **Data Description**
+
+The tutorial uses two datasets: a synthetic OMOP CDM population (source code lives in this repository) and a public PM2.5 dataset for Massachusetts (an external source, used to demonstrate cataloging and ingestion of a real dataset). Session 1 catalogs the public dataset; Sessions 2-4 link it against the synthetic OMOP population.
+
+<br>
+
+## **Privacy statement**
+
+No real addresses or coordinates are used anywhere in the tutorial. All person locations in the synthetic OMOP dataset are randomly generated within real regional bounding boxes (Boston area, suburban Massachusetts, Vermont); they do not correspond to real people or real residences.
+
+<br>
+
+## **1. OMOP synthetic dataset**
+
+Source: [`syntheticDataGIS/createSimpleSyntheticSet.sql`](https://github.com/OHDSI/GIS/blob/main/syntheticDataGIS/createSimpleSyntheticSet.sql) in this repository.
+
+### Overview
+
+_TODO: one-paragraph summary of the demo cohort and what it's meant to demonstrate._
+
+The script builds a standard OMOP CDM v5.4 schema (`omopgis`) plus the Gaia CDM extension tables (`LOCATION_HISTORY`, `EXTERNAL_EXPOSURE`), then populates it with 10,000 synthetic patients, of whom roughly 3,000 have an asthma diagnosis. Patients are distributed across three regions with different synthetic pollution levels:
+
+- Patients 1-3,000: Boston area (high pollution)
+- Patients 3,001-7,000: suburban Massachusetts (moderate pollution)
+- Patients 7,001-10,000: Vermont (low pollution)
+
+Respiratory conditions (asthma, COPD, chronic bronchitis, allergic rhinitis, pneumonia) are recorded in `CONDITION_OCCURRENCE`, correlated with the synthetic PM2.5/PM10/ozone exposure levels assigned to each region. `LOCATION_HISTORY` records each person's "lives at" interval (SNOMED concept `581476`) at their location; `EXTERNAL_EXPOSURE` records the place-based PM2.5, PM10, and ozone values linked to those locations.
+
+_TODO: confirm whether the exposure values populated by this script are fully synthetic (generated to correlate with asthma) or intended to be replaced/joined with the public PM2.5 dataset described in Section 2 for the tutorial exercises._
+
+### Scenario
+
+- adults with two possible residential intervals (one residential move)
+- respiratory condition cohort (asthma, COPD, chronic bronchitis, allergic rhinitis, pneumonia)
+- synthetic PM2.5, PM10, and ozone exposure by region
+- _TODO: confirm whether SVI/ADI/distance-to-hazard variables are included in this script or added separately_
+
+The data intentionally contain known edge cases for the exercises to catch:
+
+- one residential move
+- one missing SVI value
+- one duplicate source row caught before final insertion
+- one unit mismatch in a rejected staging row
+- one non-overlapping exposure source record
+
+_TODO: confirm these edge cases are present in the current script version, or note where they still need to be added._
+
+### Grain and uniqueness
+
+Recommended logical key for the demo:
+
+`person_id + location_id + exposure_concept_id + exposure_start_date + exposure_end_date + exposure_type_concept_id + exposure_source_value`
+
+_TODO: confirm/finalize the logical key used for the demo._
+
+### Tables
+
+**Standard OMOP**
+
+- `person`
+- `location`
+- `observation_period`
+- `condition_occurrence`
+- `concept`
+- `concept_relationship`
+- `concept_ancestor`
+
+**GIS extension**
+
+- `location_history`
+- `external_exposure`
+
+**Tutorial-only**
+
+- `demo.rejected_exposure_row`
+- `demo.expected_result`
+
+### Provenance and versioning
+
+_TODO: dataset UUID, version, algorithm version, processing timestamp, and pinned vocabulary release used to build this synthetic dataset._
+
+<br>
+
+## **2. Public GIS PM2.5 dataset (Massachusetts)**
+
+_TODO: this is the public source dataset participants catalog in Exercise 1 and ingest in Exercise 2. Fill in once the specific source is finalized._
+
+### Overview
+
+_TODO: one-paragraph summary — what the dataset measures, who publishes it, and why it was chosen for this tutorial._
+
+### Source
+
+_TODO: publisher/provider (e.g., EPA), dataset name and URL, version or vintage._
+
+### Coverage
+
+- **Spatial coverage:** _TODO — statewide MA, county, or monitor-level; resolution (point monitors, tract, grid cell, etc.)_
+- **Temporal coverage:** _TODO — years covered, update cadence_
+- **Variable definition and unit:** _TODO — PM2.5 concentration, µg/m³, averaging period (daily/annual)_
+
+### Access and license
+
+- **Retrieval method:** _TODO — API, bulk download, URL_
+- **License:** _TODO — confirm license permits tutorial use_
+
+### Role in the tutorial
+
+This is the dataset participants evaluate against the fitness rubric and catalog with a metadata record in [Exercise 1](tutorial-exercise-1.html), then ingest and spatially/temporally link to the synthetic OMOP population (Section 1 above) in [Exercise 2](tutorial-exercise-2.html).
+
+**GAIA metadata/source tables**
+
+- `backbone.data_source`
+- `backbone.variable_source`
+- optional source geometry/attribute tables
+
+<br>

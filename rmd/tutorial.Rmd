@@ -40,7 +40,7 @@ Each session builds directly on the output of the one before it. The metadata re
 
 ## **Demo dataset**
 
-All exercises run against a synthetic cohort designed for this tutorial. **No real addresses or coordinates are used** — all locations are synthetic points in a fictionalized study area. The dataset deliberately includes a residential move, a pregnancy episode that partially overlaps an exposure interval, a missing SVI value, a duplicate source row, a unit mismatch, and a non-overlapping exposure record, so that each session's checks have something real to catch.
+All exercises run against a synthetic cohort designed for this tutorial. **No real addresses or coordinates are used** — all locations are synthetic points in a fictionalized study area. The dataset deliberately includes a residential move, a pregnancy episode that partially overlaps an exposure interval, a missing SVI value, a duplicate source row, a unit mismatch, and a non-overlapping exposure record, so that each session's checks have something real to catch. See the [Data Description](tutorial-data-description.html) page for details.
 
 <br>
 

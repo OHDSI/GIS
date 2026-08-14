@@ -24,6 +24,8 @@ navbar:
       menu:
         - text: "Overview"
           href: tutorial.html
+        - text: "Data Description"
+          href: tutorial-data-description.html
         - text: "Exercise 1"
           href: tutorial-exercise-1.html
         - text: "Exercise 2"
