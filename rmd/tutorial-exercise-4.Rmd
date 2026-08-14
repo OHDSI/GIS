@@ -1,0 +1,48 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG</div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+
+# **Exercise 4: Analytical applications**
+
+## **Goal**
+
+Design an analysis-ready exposure feature and identify threats to validity and federated execution requirements. Exposure records are longitudinal facts; models require index-aligned covariates, and turning one into the other requires deliberate choices that can be gotten wrong in specific, checkable ways.
+
+## **Steps**
+
+1. Choose a research question that uses the exposure metric you calculated in Exercise 3 (or a similar one).
+2. Specify the feature: lookback window, lag, aggregation method, missingness handling, unit harmonization, geography, and update frequency.
+3. Decide whether this feature belongs in cohort eligibility or as a post-index predictor — these must stay separate. If your feature involves a spatially informed cohort, check it against appropriate vs. inappropriate uses.
+4. Identify three specific threats to validity for your feature, drawn from: ecological fallacy, exposure misclassification, residential mobility, MAUP (modifiable areal unit problem), temporal mismatch, collider/selection bias, spatial autocorrelation/clustering, site effects, or region-level confounding. For each, state concretely how it could bias your result, not just name it.
+5. Note what would need to stay local vs. what could travel in a federated setting: standardized concepts and code travel; precise locations and patient-level geographies remain local; only diagnostics and aggregate estimates are shared.
+6. Write the feature definition as reproducible SQL (or pseudocode if SQL access isn't available in your environment).
+
+## **Deliverable**
+
+One feature specification, plus three anticipated biases (with the concrete mechanism for each, not just the name).
+
+## **Check Your Work**
+
+- [ ] SQL (or equivalent logic) is reproducible from the specification alone
+- [ ] Vocabulary release used is fixed/pinned, not "whatever is currently installed"
+- [ ] Temporal alignment to the index date is explicit and correct
+- [ ] Missingness policy is stated
+- [ ] Output is privacy-safe — no exact coordinates or other re-identifying detail in participant-facing output
+
+<br>
+
+## **Closing synthesis**
+
+Dataset → metadata → source layer → location interval → exposure fact → covariate → evidence. Each session in this tutorial produced one link in that chain; the chain only holds if every link stays traceable back to its source.
+
+<br>
+
+Previous: [Exercise 3](tutorial-exercise-3.html)
+
+<br>

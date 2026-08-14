@@ -8,21 +8,38 @@ output:
           collapsed: false
 ---
 
-# **Exercise 2: _TODO title_**
+# **Exercise 2: The Gaia pipeline**
 
 ## **Goal**
 
-_TODO: what will the learner accomplish in this exercise?_
+Run a known-good ingestion and spatial-temporal linkage using the frozen Gaia pipeline, then inspect and explain one resulting derived exposure row and its provenance.
+
+The session artifact you are tracing is: **raw dataset → source geometry/attribute tables → location interval → derived exposure row.** `gaiaDocker` orchestrates the stack, `gaiaDB`/PostGIS stores and transforms data, `gaiaCore` connects to it, and the catalog metadata from Exercise 1 drives retrieval. Identifiable addresses never leave the data custodian's boundary — geocoding and patient-level linkage happen locally, behind that boundary.
 
 ## **Steps**
 
-1. _TODO_
-2. _TODO_
-3. _TODO_
+1. Deploy the stack: start the pre-pulled/pinned containers, and confirm health checks pass for the schemas, PostGIS, and the API profile.
+2. Ingest the PM2.5 demo dataset using the frozen metadata record (your own from Exercise 1, or the provided fallback). Load the metadata and source data, then inspect the resulting variable and geometry tables.
+3. Run the spatial join and identify which spatial assignment pattern was used (point-in-polygon, nearest feature, buffer/intersection, raster extraction, or areal aggregation) and which temporal assignment pattern was used (interval overlap, calendar aggregation, moving window, lag, or cumulative exposure).
+4. Pick one resulting exposure record and trace its full lineage: the source dataset variable and geometry it came from, the location history interval it was assigned to, and the derived exposure row itself.
+5. Write a short explanation of that one row: what it represents, where its value came from, and what interval it applies to.
+
+## **Deliverable**
+
+One row's lineage, traced end-to-end: dataset variable and geometry → location history interval → derived exposure row.
 
 ## **Check Your Work**
 
-_TODO: how does the learner verify they completed the exercise correctly?_
+- [ ] Row counts match expectations for the ingested source
+- [ ] Spatial overlap/assignment is correct for the pattern used
+- [ ] Unit matches the source variable's declared unit
+- [ ] Source dataset and geometry are correctly attributed
+- [ ] Geometry relationship (point-in-polygon, nearest feature, etc.) is correctly identified
+- [ ] No duplicated person-period-variable rows exist for your traced record
+
+<br>
+
+**Bridge to Session 3:** a computed value is not interoperable until its semantics are standardized — that's what OMOP integration does next.
 
 <br>
 

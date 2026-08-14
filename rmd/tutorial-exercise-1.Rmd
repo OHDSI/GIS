@@ -8,21 +8,45 @@ output:
           collapsed: false
 ---
 
-# **Exercise 1: _TODO title_**
+# **Exercise 1: Cataloging and data discovery**
 
 ## **Goal**
 
-_TODO: what will the learner accomplish in this exercise?_
+Produce one valid, machine-actionable metadata record and a dataset-fitness decision, tied to a specific research question, for a dataset you choose from the GAIA catalog.
+
+Discovery fails in predictable ways: the same label attached to a different variable, mismatched geography, incomplete temporal coverage, an unclear unit, an unstable URL, or a restrictive license. Treat the GAIA catalog as an **executable contract between discovery and ingestion**, not a bibliography — the record you produce here has to be precise enough that Session 2's pipeline can act on it directly.
 
 ## **Steps**
 
-1. _TODO_
-2. _TODO_
-3. _TODO_
+1. Start from a research question and decompose it into its computable requirements: population, index time, exposure window, lag, geography, variable, unit, resolution, provenance, and permissible missingness.
+2. Search the GAIA catalog for a candidate dataset (e.g., an air-quality dataset) that could answer your decomposed question.
+3. Inspect the candidate's spatial coverage, temporal coverage, variable definition, unit, and access URL.
+4. Score the candidate against the fitness rubric: scientific relevance, spatial fit, temporal fit, semantic clarity, access, and reproducibility (green/amber/red per criterion).
+5. Complete the functional metadata template for your chosen dataset, keeping dataset-level properties (identity, version, provider, license, URL, spatial/temporal coverage, geometry, retrieval method, update cadence) separate from variable-level properties (definition, unit).
+6. Record your overall fitness decision and, if any criterion scored amber or red, document the limitation rather than silently proceeding.
+
+If you get stuck on a step, faculty will circulate and a fallback dataset/metadata record is available.
+
+## **Deliverable**
+
+- One metadata record in JSON-LD, aligned to schema.org for interoperability and machine actionability
+- One fitness decision (green/amber/red per rubric criterion, plus an overall call)
 
 ## **Check Your Work**
 
-_TODO: how does the learner verify they completed the exercise correctly?_
+Faculty will validate your submission against the following, and so should you before calling it done:
+
+- [ ] Dataset and version are identifiable
+- [ ] Variable definition and unit are explicit
+- [ ] Spatial and temporal coverage are sufficient, or limitations are explicitly documented
+- [ ] Retrieval URL/method is reproducible
+- [ ] License permits tutorial use
+- [ ] Metadata separates dataset-level from variable-level properties
+- [ ] Required JSON-LD keys, URL, dates, geometry, variable, unit, and license all validate
+
+<br>
+
+**Bridge to Session 2:** your frozen metadata record and its downloadable source become the input to the ingestion pipeline.
 
 <br>
 

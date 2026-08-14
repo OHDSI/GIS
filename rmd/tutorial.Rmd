@@ -16,21 +16,40 @@ Welcome to the OHDSI GIS tutorial materials. This section walks through hands-on
 
 ## **Overview**
 
-_TODO: describe who this tutorial is for, what background is assumed, and what learners will be able to do by the end._
+This tutorial takes a single research question — the relationship between an environmental exposure and a clinical outcome — and carries it through four stages: finding and evaluating a source dataset, ingesting and spatially/temporally linking it with Gaia, integrating the result into the OMOP CDM, and turning the validated exposure fact into an analysis-ready covariate.
+
+Each session builds directly on the output of the one before it. The metadata record you produce in Session 1 is the input to the ingestion you run in Session 2; the exposure row you trace in Session 2 is the row you query and validate in Session 3; the validated exposure fact from Session 3 becomes the feature you specify in Session 4.
+
+| Session | Focus | Learning outcome |
+|---|---|---|
+| 1. Cataloging and data discovery | Turning a research question into a computable data requirement | Produce one valid, machine-actionable metadata record and a dataset-fitness decision |
+| 2. The Gaia pipeline | Ingestion and spatial-temporal linkage | Execute a known-good ingestion and explain a derived exposure row and its provenance |
+| 3. OMOP integration | The person-place-time model | Query the model, validate vocabulary roles, and calculate a temporally aligned exposure metric |
+| 4. Analytical applications | From exposure fact to covariate | Design an analysis-ready exposure feature and identify threats to validity |
+
+<br>
 
 ## **Prerequisites**
 
 - [ ] Review the [Get Started](get-started.html) page
 - [ ] Deploy the Gaia toolchain (see [Quick Start: Deploy Gaia](get-started.html#quick-start-deploy-gaia))
-- [ ] _TODO: add any additional setup steps_
+- [ ] Confirm you can reach the pinned Gaia containers (or offline bundle) and the synthetic demo dataset provided by faculty
+- [ ] No prior GIS or spatial-analysis experience is assumed; familiarity with the OMOP CDM (PERSON, OBSERVATION_PERIOD, CONCEPT) is helpful for Sessions 3-4
+
+<br>
+
+## **Demo dataset**
+
+All exercises run against a synthetic cohort designed for this tutorial. **No real addresses or coordinates are used** — all locations are synthetic points in a fictionalized study area. The dataset deliberately includes a residential move, a pregnancy episode that partially overlaps an exposure interval, a missing SVI value, a duplicate source row, a unit mismatch, and a non-overlapping exposure record, so that each session's checks have something real to catch.
 
 <br>
 
 ## **Exercises**
 
-1. [Exercise 1](tutorial-exercise-1.html) - _TODO: short description_
-2. [Exercise 2](tutorial-exercise-2.html) - _TODO: short description_
-3. [Exercise 3](tutorial-exercise-3.html) - _TODO: short description_
+1. [Exercise 1: Cataloging and data discovery](tutorial-exercise-1.html) - Evaluate a source dataset and produce a dataset-level and variable-level metadata record with a fitness decision.
+2. [Exercise 2: The Gaia pipeline](tutorial-exercise-2.html) - Run the frozen ingestion pipeline and trace one exposure row back to its source dataset and geometry.
+3. [Exercise 3: OMOP integration](tutorial-exercise-3.html) - Query the person-place-time model and calculate a temporally aligned exposure metric.
+4. [Exercise 4: Analytical applications](tutorial-exercise-4.html) - Draft an analysis-ready feature specification and its validity/QA checklist.
 
 <br>
 
