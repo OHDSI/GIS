@@ -72,7 +72,7 @@ Customize `.env` file for database credentials, service ports, and resource limi
 
 ```bash
 curl http://localhost:3000/  # Test PostgREST API
-docker compose exec gaia-db psql -U gaia -d gaiadb  # Connect to database
+docker compose exec gaia-db psql -U postgres -d gaiacore  # Connect to database
 docker compose ps  # Check service health
 ```
 

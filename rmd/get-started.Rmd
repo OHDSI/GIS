@@ -1,3 +1,4 @@
+
 ---
 title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG </div>'
 output:
@@ -33,16 +34,15 @@ docker compose ps
 **Prerequisites**: Docker Engine 20.10+, Docker Compose 2.0+, 8GB+ RAM, 50GB+ disk
 
 **What's deployed**:
-- **gaia-db**: PostgreSQL/PostGIS (core data repository)
-- **gaia-core**: PostgREST API (exposes gaiaDb functions)
-- **gaia-catalog**: Data source discovery interface
-- **gaia-solr**: Search engine for catalog
-- **gaia-osgeo** & **gaia-postgis**: ETL tools
+- **gaia-db**: PostgreSQL/PostGIS (core data repository)  
+- **gaia-postgrest**: PostgREST API (exposes gaiaDb functions)  
+- **gaia-catalog**: Data source discovery interface  
+- **gaia-solr**: Search engine for catalog  
 
 **Testing**:
 ```bash
 curl http://localhost:3000/  # Test PostgREST API
-docker compose exec gaia-db psql -U gaia -d gaiadb  # Connect to database
+docker compose exec gaia-db psql -U postgres -d gaiacore  # Connect to database
 ```
 
 See [Deployment Strategies](developer-deployment.html) for alternative deployment options (Podman, Ansible, manual, Kubernetes).
