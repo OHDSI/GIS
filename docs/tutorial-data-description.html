@@ -478,288 +478,223 @@ WG</h1>
 </div>
 
 
-<div id="developer-resources" class="section level1">
-<h1><strong>Developer Resources</strong></h1>
-<p>Welcome to the OHDSI GIS Working Group developer hub. This section
-provides comprehensive information for developers contributing to the
-Gaia toolchain and related GIS infrastructure.</p>
+<div id="data-description" class="section level1">
+<h1><strong>Data Description</strong></h1>
+<p>The tutorial uses two datasets: a synthetic OMOP CDM population
+(source code lives in this repository) and a public PM2.5 dataset for
+Massachusetts (an external source, used to demonstrate cataloging and
+ingestion of a real dataset). Session 1 catalogs the public dataset;
+Sessions 2-4 link it against the synthetic OMOP population.</p>
 <p><br></p>
-<div id="overview" class="section level2">
-<h2><strong>Overview</strong></h2>
-<p>The OHDSI GIS Working Group develops and maintains a suite of tools
-collectively known as the <strong>Gaia toolchain</strong>. These tools
-enable the integration of geospatial data with OMOP Common Data Model
-(CDM) for population health research.</p>
+<div id="privacy-statement" class="section level2">
+<h2><strong>Privacy statement</strong></h2>
+<p>No real addresses or coordinates are used anywhere in the tutorial.
+Person locations in the synthetic OMOP dataset are randomly generated
+within real per-state lat/lon bounding boxes covering all 50 states plus
+DC; they do not correspond to real people or real residences. County
+identities (<code>county_fips</code>, names) are synthetic (FIPS-shaped,
+not real FIPS codes) and are not intended to be joined against real
+county-level datasets as if they were authoritative.</p>
 <p><br></p>
 </div>
-<div id="repository-ecosystem" class="section level2">
-<h2><strong>Repository Ecosystem</strong></h2>
-<div id="central-hub" class="section level3">
-<h3><strong>Central Hub</strong></h3>
+<div id="omop-synthetic-dataset" class="section level2">
+<h2><strong>1. OMOP synthetic dataset</strong></h2>
+<p>Source: <a
+href="https://github.com/OHDSI/GIS/blob/main/syntheticDataGIS/createSimpleSyntheticSet.sql"><code>syntheticDataGIS/createSimpleSyntheticSet.sql</code></a>
+in this repository. See <a
+href="tutorial-data-visualization.html">Dataset Visualizations</a> for
+charts of the cohort’s condition prevalence, PM2.5/SES distribution, and
+SDOH observations, each paired with the SQL query that produced it.</p>
+<div id="overview" class="section level3">
+<h3>Overview</h3>
+<p>The script builds a standard OMOP CDM v5.4 schema
+(<code>omopgis</code>) plus the Gaia CDM extension tables
+(<code>LOCATION_HISTORY</code>, <code>EXTERNAL_EXPOSURE</code>) and one
+non-OMOP-standard demo dimension table, <code>COUNTY_REFERENCE</code>.
+It then populates 10,000 synthetic patients drawn from a synthetic
+nationwide population of ~3,103 US counties/county-equivalents (covering
+every state plus DC).</p>
+<p>Each county in <code>COUNTY_REFERENCE</code> carries an urban-density
+category (Urban Core / Suburban / Small Town / Rural) and a composite
+socioeconomic status (SES) index (0-100, higher = more affluent). These
+two county attributes are the dataset’s two independent drivers:</p>
 <ul>
-<li><strong><a
-href="https://github.com/OHDSI/GIS">OHDSI/GIS</a></strong> - This
-repository serves as the central coordination point
+<li><strong>Urban density → PM2.5</strong> (and PM10, Ozone, NO2, Noise,
+Tree Canopy): denser counties get systematically higher pollution
+baselines. See <code>EXTERNAL_EXPOSURE</code>.</li>
+<li><strong>County SES → SDOH observations</strong>: poverty rate,
+education, housing cost burden, employment, neighborhood disadvantage,
+food insecurity, PCP access, social isolation, uninsured rate, broadband
+access, violent crime rate, and AQI category — 12 observations total,
+all derived directly from the same <code>ses_index</code>. See
+<code>OBSERVATION</code>.</li>
+</ul>
+<p>Each patient is assigned to one county via
+<code>LOCATION.county_ref_id</code>, and inherits that county’s PM2.5
+exposure and SES for the purposes of comorbidity risk. 14 conditions are
+generated in <code>CONDITION_OCCURRENCE</code> — 5 respiratory (asthma,
+COPD, chronic bronchitis, allergic rhinitis, pneumonia) and 9
+cardiometabolic (hypertension, coronary artery disease, congestive heart
+failure, myocardial infarction, stroke, type 2 diabetes, obesity,
+hyperlipidemia, chronic kidney disease) — each with its own risk formula
+blending the patient’s PM2.5 exposure and county SES (respiratory
+conditions weight PM2.5 more heavily; metabolic/renal conditions weight
+SES more heavily; cardiovascular conditions weight both). Condition
+cohorts in turn drive 15 drugs, 7 procedures, and 16 measurements in
+<code>DRUG_EXPOSURE</code>, <code>PROCEDURE_OCCURRENCE</code>, and
+<code>MEASUREMENT</code> (e.g. an asthma diagnosis makes a patient
+eligible for an albuterol prescription and a spirometry procedure at a
+fixed probability).</p>
+<p><code>LOCATION_HISTORY</code> records each person’s single “lives at”
+interval (SNOMED concept <code>581476</code>, 2014-01-01 to 2019-12-31)
+at their assigned location; <code>EXTERNAL_EXPOSURE</code> records the
+place-based PM2.5/PM10/Ozone/NO2/Noise/Tree-Canopy values linked to that
+location.</p>
+<p>The exposure values populated by this script are fully synthetic
+(generated from the county’s <code>pm25_baseline_mean</code> plus noise,
+not derived from or joined to the public PM2.5 dataset in Section 2).
+The public dataset is a separate real-world source that participants
+catalog and ingest independently in Exercises 1-2; linking it against
+this synthetic population is part of the exercise, not something the
+generator script pre-does for you.</p>
+</div>
+<div id="scenario" class="section level3">
+<h3>Scenario</h3>
 <ul>
-<li>Documentation website (<a href="https://ohdsi.github.io/GIS/"
-class="uri">https://ohdsi.github.io/GIS/</a>)</li>
-<li>Use case tracking</li>
-<li>Project management via <a
-href="https://github.com/orgs/OHDSI/projects/26">GitHub
-Projects</a></li>
-<li>Contributing guidelines</li>
-</ul></li>
+<li>adults, one residential interval per patient (2014-01-01 to
+2019-12-31); the script does <strong>not</strong> currently generate a
+residential move — every patient has exactly one
+<code>LOCATION_HISTORY</code> row</li>
+<li>respiratory + cardiometabolic condition cohort (14 conditions — see
+Overview)</li>
+<li>synthetic PM2.5, PM10, Ozone, NO2, Noise, and Tree Canopy exposure
+by county, driven by county urban density</li>
+<li>county-level SDOH indicators (12 observations, listed above) driven
+by county SES — no SVI/ADI variable specifically;
+<code>NEIGHBORHOOD_CONCENTRATED_DISADVANTAGE</code> (0-1 index) is the
+closest analog currently in the script</li>
+</ul>
+<p><strong>Known edge cases the exercises may expect are not yet in the
+script.</strong> Checked directly against the current generator: there
+is no residential move, no missing SDOH/exposure value, no duplicate
+source row, no unit-mismatch staging row, and no non-overlapping
+exposure record. If an exercise depends on catching one of these, it
+still needs to be added to the generator (or introduced as a separate
+exercise-specific fixture) — this is open work, not yet scheduled.</p>
+</div>
+<div id="grain-and-uniqueness" class="section level3">
+<h3>Grain and uniqueness</h3>
+<p>Recommended logical key for the demo:</p>
+<p><code>person_id + location_id + exposure_concept_id + exposure_start_date + exposure_end_date + exposure_type_concept_id + exposure_source_value</code></p>
+<p><em>TODO: confirm/finalize the logical key used for the
+demo.</em></p>
+</div>
+<div id="tables" class="section level3">
+<h3>Tables</h3>
+<p><strong>Standard OMOP</strong></p>
+<ul>
+<li><code>person</code></li>
+<li><code>location</code></li>
+<li><code>observation_period</code></li>
+<li><code>condition_occurrence</code></li>
+<li><code>drug_exposure</code></li>
+<li><code>procedure_occurrence</code></li>
+<li><code>measurement</code></li>
+<li><code>observation</code></li>
+<li><code>cdm_source</code></li>
+<li><code>concept</code></li>
+<li><code>concept_relationship</code></li>
+<li><code>concept_ancestor</code></li>
+</ul>
+<p><strong>GIS extension</strong></p>
+<ul>
+<li><code>location_history</code></li>
+<li><code>external_exposure</code></li>
+</ul>
+<p><strong>Demo-only (not part of standard OMOP or the Gaia
+extension)</strong></p>
+<ul>
+<li><code>county_reference</code> — one row per synthetic county;
+carries <code>urban_density_category</code>,
+<code>pm25_baseline_mean</code>, <code>ses_index</code>, and centroid
+lat/lon. <code>location.county_ref_id</code> is a foreign key into this
+table.</li>
+</ul>
+<p><strong>Tutorial-only, not yet in the script</strong></p>
+<ul>
+<li><code>demo.rejected_exposure_row</code></li>
+<li><code>demo.expected_result</code></li>
+</ul>
+<p>These two are referenced by the tutorial exercises but are not
+created or populated by <code>createSimpleSyntheticSet.sql</code> — they
+still need to be added (see the edge-cases note in Scenario above; these
+tables presumably exist to hold the rejected/expected rows from those
+edge cases).</p>
+</div>
+<div id="provenance-and-versioning" class="section level3">
+<h3>Provenance and versioning</h3>
+<p>The script populates one <code>cdm_source</code> row with
+<code>cdm_version</code> (‘5.4’),
+<code>source_release_date</code>/<code>cdm_release_date</code>, and
+<code>vocabulary_version</code> (‘GIS v1.0’ — a label for this demo, not
+a real OMOP vocabulary release). There is no dataset UUID, no
+algorithm-version field, and no record of which real OMOP vocabulary
+tables (if any) were loaded alongside it — those remain open items if
+the tutorial needs to pin a specific run.</p>
+<p><br></p>
+</div>
+</div>
+<div id="public-gis-pm2.5-dataset-massachusetts" class="section level2">
+<h2><strong>2. Public GIS PM2.5 dataset (Massachusetts)</strong></h2>
+<p><em>TODO: this is the public source dataset participants catalog in
+Exercise 1 and ingest in Exercise 2. Fill in once the specific source is
+finalized.</em></p>
+<div id="overview-1" class="section level3">
+<h3>Overview</h3>
+<p><em>TODO: one-paragraph summary — what the dataset measures, who
+publishes it, and why it was chosen for this tutorial.</em></p>
+</div>
+<div id="source" class="section level3">
+<h3>Source</h3>
+<p><em>TODO: publisher/provider (e.g., EPA), dataset name and URL,
+version or vintage.</em></p>
+</div>
+<div id="coverage" class="section level3">
+<h3>Coverage</h3>
+<ul>
+<li><strong>Spatial coverage:</strong> <em>TODO — statewide MA, county,
+or monitor-level; resolution (point monitors, tract, grid cell,
+etc.)</em></li>
+<li><strong>Temporal coverage:</strong> <em>TODO — years covered, update
+cadence</em></li>
+<li><strong>Variable definition and unit:</strong> <em>TODO — PM2.5
+concentration, µg/m³, averaging period (daily/annual)</em></li>
 </ul>
 </div>
-<div id="core-packages" class="section level3">
-<h3><strong>Core Packages</strong></h3>
-<p><strong><a href="https://github.com/OHDSI/gaiaDb">gaiaDb</a></strong>
-<img src="https://img.shields.io/badge/status-beta-yellow"
-alt="Status: Beta" /> - <strong>Technology</strong>: PostgreSQL/PostGIS
-- <strong>Purpose</strong>: Core data repository with geospatial
-processing capabilities - <strong>Maintainers</strong>: <a
-href="https://github.com/OHDSI/gaiaDb">See repository</a> - <strong>Key
-Features</strong>: - Geospatial data ingestion, management, and analysis
-- SQL routines and PostGIS functionality - OMOP CDM integration -
-LinkML/JSON-LD metadata support - Spatial indexing and optimization</p>
-<p><strong><a
-href="https://github.com/OHDSI/gaiaCore">gaiaCore</a></strong> <img
-src="https://img.shields.io/badge/status-development-orange"
-alt="Status: Development" /> - <strong>Development</strong>: <a
-href="https://github.com/TuftsCTSI/gaiaCore">TuftsCTSI/gaiaCore</a> -
-<strong>Technology</strong>: Multi-language connector framework -
-<strong>Purpose</strong>: Provides access to gaiaDB functionality across
-multiple languages and paradigms - <strong>Maintainers</strong>: <a
-href="https://github.com/OHDSI/gaiaCore">See repository</a> -
-<strong>Key Features</strong>: - RESTful API access via PostgREST -
-Direct database connection support - Language-specific client libraries
-(R, Python, etc.) - Orchestrates functions defined in gaiaDB - OpenAPI
-specification for API endpoints</p>
-<p><strong><a
-href="https://github.com/OHDSI/gaiaCatalog">gaiaCatalog</a></strong>
-<img src="https://img.shields.io/badge/status-beta-yellow"
-alt="Status: Beta" /> - <strong>Technology</strong>: Schema.org
-compliant metadata - <strong>Purpose</strong>: Data source discovery and
-cataloging - <strong>Maintainers</strong>: <a
-href="https://github.com/OHDSI/gaiaCatalog">See repository</a> -
-<strong>Key Features</strong>: - Metadata management - Federated data
-source discovery - Schema.org compliance - Integration with external
-catalogs</p>
-<p><strong><a
-href="https://github.com/OHDSI/gaiaDocker">gaiaDocker</a></strong> <img
-src="https://img.shields.io/badge/status-active-green"
-alt="Status: Active" /> - <strong>Technology</strong>: Docker Compose
-orchestration - <strong>Purpose</strong>: Coordinated deployment and
-versioned releases of the Gaia toolchain - <strong>Maintainers</strong>:
-<a href="https://github.com/OHDSI/gaiaDocker">See repository</a> -
-<strong>Key Features</strong>: - Complete GIS stack containerization -
-Coordinated image builds across all components - Version management and
-releases - Profile-based deployment (gaia, degauss) - Integration with
-OHDSI Broadsea ecosystem</p>
-</div>
-<div id="vocabulary-resources" class="section level3">
-<h3><strong>Vocabulary Resources</strong></h3>
-<p><strong><a
-href="https://github.com/TuftsCTSI/CVB">TuftsCTSI/CVB</a></strong> -
-<strong>Purpose</strong>: OMOP vocabulary extensions for GIS -
-<strong>Key Vocabularies</strong>: - OMOP GIS Vocabulary - OMOP Exposome
-Vocabulary - OMOP SDoH Vocabulary - Toxins Vocabulary -
-<strong>Location</strong>: Delta files in <a
-href="https://github.com/TuftsCTSI/CVB/tree/main/GIS/Ontology">CVB/GIS/Ontology</a></p>
-<p><br></p>
-</div>
-</div>
-<div id="architecture-overview" class="section level2">
-<h2><strong>Architecture Overview</strong></h2>
-<div id="data-flow" class="section level3">
-<h3><strong>Data Flow</strong></h3>
-<pre><code>External Geospatial Data → gaiaCatalog (Discovery)
-                                ↓
-                           gaiaDb (Backend Repository)
-                           ├── Data Ingestion
-                           ├── SQL Routines &amp; PostGIS Functions
-                           ├── OMOP Integration
-                           └── Exposure Calculation
-                                ↓
-                           gaiaCore (Access Layer)
-                           ├── RESTful API (PostgREST)
-                           └── Language Connectors (R, Python, etc.)
-                                ↓
-                      OMOP CDM + GIS Extensions
-                                ↓
-                           HADES Analytics</code></pre>
-</div>
-<div id="tool-chain-components" class="section level3">
-<h3><strong>Tool Chain Components</strong></h3>
-<ol style="list-style-type: decimal">
-<li><strong>Data Discovery</strong> (gaiaCatalog)
+<div id="access-and-license" class="section level3">
+<h3>Access and license</h3>
 <ul>
-<li>Input: External data source metadata</li>
-<li>Output: Cataloged, discoverable datasets</li>
-</ul></li>
-<li><strong>Backend Engine</strong> (gaiaDb)
-<ul>
-<li>Input: Raw geospatial datasets, patient locations</li>
-<li>Processing: SQL routines, PostGIS functions, spatial operations</li>
-<li>Output: OMOP-compliant external exposure data, standardized spatial
-tables</li>
-</ul></li>
-<li><strong>Access Layer</strong> (gaiaCore)
-<ul>
-<li>Input: Requests via API or database connections</li>
-<li>Processing: Orchestrates gaiaDB functions, provides multi-language
-access</li>
-<li>Output: Data and function access through RESTful API or direct
-database connections</li>
-</ul></li>
-<li><strong>Deployment</strong> (gaiaDocker)
-<ul>
-<li>Input: Component configurations</li>
-<li>Processing: Orchestrated container deployment</li>
-<li>Output: Running Gaia toolchain with versioned releases</li>
-</ul></li>
-<li><strong>Analytics</strong> (HADES integration)
-<ul>
-<li>Input: OMOP CDM + GIS extensions</li>
-<li>Output: Evidence generation</li>
-</ul></li>
-</ol>
-<p><br></p>
-</div>
-</div>
-<div id="getting-started-as-a-developer" class="section level2">
-<h2><strong>Getting Started as a Developer</strong></h2>
-<div id="prerequisites" class="section level3">
-<h3><strong>Prerequisites</strong></h3>
-<ul>
-<li>PostgreSQL/PostGIS (&gt;= 12/3.0) for gaiaDb</li>
-<li>Docker and Docker Compose (recommended for coordinated
-deployment)</li>
-<li>Git and GitHub account</li>
-<li>OHDSI Teams access (<a
-href="https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUQ05MOU9BSzEwOThZVjNQVVFGTDNZRENONiQlQCN0PWcu">sign
-up</a>)</li>
-<li>Programming environment of choice (R, Python, etc.) for using
-gaiaCore connectors</li>
+<li><strong>Retrieval method:</strong> <em>TODO — API, bulk download,
+URL</em></li>
+<li><strong>License:</strong> <em>TODO — confirm license permits
+tutorial use</em></li>
 </ul>
 </div>
-<div id="development-environment-setup" class="section level3">
-<h3><strong>Development Environment Setup</strong></h3>
-<div id="option-1-gaiadocker-recommended" class="section level4">
-<h4><strong>Option 1: gaiaDocker (Recommended)</strong></h4>
-<pre class="bash"><code># Clone gaiaDocker repository
-git clone https://github.com/OHDSI/gaiaDocker.git
-cd gaiaDocker
-
-# Start the full Gaia stack
-docker compose --profile gaia up -d
-
-# Verify services
-docker compose ps</code></pre>
-</div>
-<div id="option-2-local-development" class="section level4">
-<h4><strong>Option 2: Local Development</strong></h4>
-<ol style="list-style-type: decimal">
-<li>Clone the gaiaDb repository and set up PostgreSQL/PostGIS</li>
-<li>Configure PostgREST for API access</li>
-<li>Install language-specific connectors (R, Python, etc.)</li>
-<li>Configure connection parameters</li>
-</ol>
-<p>See <a href="developer-deployment.html">Deployment Strategies</a> for
-detailed setup instructions.</p>
-</div>
-</div>
-<div id="first-contribution" class="section level3">
-<h3><strong>First Contribution</strong></h3>
-<ol style="list-style-type: decimal">
-<li>Join the <a
-href="https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu">GIS
-Working Group on Teams</a></li>
-<li>Attend the weekly Friday meeting (10 AM US Eastern)</li>
-<li>Review the <a
-href="https://github.com/orgs/OHDSI/projects/26">Project Board</a></li>
-<li>Pick a task or propose a new one</li>
-<li>Read <a href="developer-contributing.html">Contributing
-Guidelines</a></li>
-</ol>
-<p><br></p>
-</div>
-</div>
-<div id="development-workflow" class="section level2">
-<h2><strong>Development Workflow</strong></h2>
-<p>The GIS Working Group follows an <strong>agile,
-use-case-driven</strong> development approach:</p>
-<ol style="list-style-type: decimal">
-<li><strong>Use Case Identification</strong> - Real-world research needs
-drive development</li>
-<li><strong>Task Breakdown</strong> - Use cases decomposed into GitHub
-issues</li>
-<li><strong>Sprint Planning</strong> - Tasks assigned and tracked via
-GitHub Projects</li>
-<li><strong>Weekly Standups</strong> - Friday meetings (2 min max per
-person):
+<div id="role-in-the-tutorial" class="section level3">
+<h3>Role in the tutorial</h3>
+<p>This is the dataset participants evaluate against the fitness rubric
+and catalog with a metadata record in <a
+href="tutorial-exercise-1.html">Exercise 1</a>, then ingest and
+spatially/temporally link to the synthetic OMOP population (Section 1
+above) in <a href="tutorial-exercise-2.html">Exercise 2</a>.</p>
+<p><strong>GAIA metadata/source tables</strong></p>
 <ul>
-<li>What did you complete last week?</li>
-<li>What are you working on now?</li>
-<li>What’s blocking you?</li>
-<li>Discussion points for later</li>
-</ul></li>
-<li><strong>Development</strong> - Feature branches, pull requests, code
-review</li>
-<li><strong>Integration</strong> - Merge to main, deploy, document</li>
-</ol>
-<p><br></p>
-</div>
-<div id="key-resources" class="section level2">
-<h2><strong>Key Resources</strong></h2>
-<ul>
-<li><a href="developer-packages.html">Package Status &amp;
-Maintainers</a></li>
-<li><a href="developer-contributing.html">Contributing
-Guidelines</a></li>
-<li><a href="developer-architecture.html">Architecture &amp; Data
-Flows</a></li>
-<li><a href="developer-deployment.html">Deployment Strategies</a></li>
-<li><a href="https://github.com/orgs/OHDSI/projects/26">Project
-Board</a></li>
+<li><code>backbone.data_source</code></li>
+<li><code>backbone.variable_source</code></li>
+<li>optional source geometry/attribute tables</li>
 </ul>
 <p><br></p>
 </div>
-<div id="working-group-leadership" class="section level2">
-<h2><strong>Working Group Leadership</strong></h2>
-<p><strong>Co-Leaders</strong>: - Robert Miller - Jared Houghtaling</p>
-<p><strong>Contributing to Leadership</strong>: The working group
-welcomes members who want to take on additional responsibilities.
-Express interest during weekly meetings or via Teams.</p>
-<p><br></p>
-</div>
-<div id="communication-channels" class="section level2">
-<h2><strong>Communication Channels</strong></h2>
-<ul>
-<li><strong>Weekly Meetings</strong>: Fridays 10 AM US Eastern (<a
-href="https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d">Teams
-Link</a>)</li>
-<li><strong>MS Teams</strong>: GIS Working Group channel</li>
-<li><strong>GitHub Issues</strong>: Bug reports, feature requests, use
-cases</li>
-<li><strong>OHDSI Forums</strong>: <a
-href="http://forums.ohdsi.org/c/developers">Developers section</a></li>
-<li><strong>Email</strong>: zollovenecek[at]ohdsi[dot]org</li>
-</ul>
-<p><br></p>
-</div>
-<div id="support" class="section level2">
-<h2><strong>Support</strong></h2>
-<ul>
-<li><strong>General Questions</strong>: OHDSI Forums</li>
-<li><strong>Bug Reports</strong>: GitHub Issues
-(repository-specific)</li>
-<li><strong>Development Help</strong>: GIS Teams channel or weekly
-meetings</li>
-<li><strong>Use Case Discussion</strong>: Schedule with working group
-leaders</li>
-</ul>
-<p><br></p>
 </div>
 </div>
 

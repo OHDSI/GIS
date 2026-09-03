@@ -13,7 +13,7 @@
 
 <title> OHDSI GIS WG</title>
 
-<script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.32/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -344,6 +344,38 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-graduation-cap"></span>
+     
+    Tutorial
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="tutorial.html">Overview</a>
+    </li>
+    <li>
+      <a href="tutorial-data-description.html">Data Description</a>
+    </li>
+    <li>
+      <a href="tutorial-data-visualization.html">Dataset Visualizations</a>
+    </li>
+    <li>
+      <a href="tutorial-exercise-1.html">Exercise 1</a>
+    </li>
+    <li>
+      <a href="tutorial-exercise-2.html">Exercise 2</a>
+    </li>
+    <li>
+      <a href="tutorial-exercise-3.html">Exercise 3</a>
+    </li>
+    <li>
+      <a href="tutorial-exercise-4.html">Exercise 4</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-earth"></span>
      
     Gaia
@@ -518,7 +550,7 @@ profile)</li>
 <div id="testing" class="section level3">
 <h3><strong>Testing</strong></h3>
 <pre class="bash"><code>curl http://localhost:3000/  # Test PostgREST API
-docker compose exec gaia-db psql -U gaia -d gaiadb  # Connect to database
+docker compose exec gaia-db psql -U postgres -d gaiacore  # Connect to database
 docker compose ps  # Check service health</code></pre>
 </div>
 <div id="stopping" class="section level3">

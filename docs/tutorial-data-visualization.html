@@ -478,287 +478,178 @@ WG</h1>
 </div>
 
 
-<div id="developer-resources" class="section level1">
-<h1><strong>Developer Resources</strong></h1>
-<p>Welcome to the OHDSI GIS Working Group developer hub. This section
-provides comprehensive information for developers contributing to the
-Gaia toolchain and related GIS infrastructure.</p>
+<div id="dataset-visualizations" class="section level1">
+<h1><strong>Dataset Visualizations</strong></h1>
+<p>This page renders the contents of the synthetic OMOP + GIS/SDOH
+dataset described in <a href="tutorial-data-description.html">Data
+Description</a>. Source: <a
+href="https://github.com/OHDSI/GIS/blob/main/syntheticDataGIS/createSimpleSyntheticSet.sql"><code>syntheticDataGIS/createSimpleSyntheticSet.sql</code></a>.</p>
+<p>Each chart below is paired with the SQL query used to produce it, so
+you can run the same query yourself against a database loaded from the
+script and confirm the numbers, or adapt the query to explore something
+else. The charts read from small, precomputed CSV extracts in <a
+href="https://github.com/OHDSI/GIS/tree/main/rmd/data/synthetic-dataset"><code>rmd/data/synthetic-dataset/</code></a>
+rather than querying a live database — this is a static site with no
+database behind it. To regenerate the extracts after changing the
+generator script, load the script into PostgreSQL and re-run the queries
+on this page with
+<code>psql \copy ... TO '&lt;file&gt;.csv' WITH CSV HEADER</code>.</p>
 <p><br></p>
-<div id="overview" class="section level2">
-<h2><strong>Overview</strong></h2>
-<p>The OHDSI GIS Working Group develops and maintains a suite of tools
-collectively known as the <strong>Gaia toolchain</strong>. These tools
-enable the integration of geospatial data with OMOP Common Data Model
-(CDM) for population health research.</p>
-<p><br></p>
-</div>
-<div id="repository-ecosystem" class="section level2">
-<h2><strong>Repository Ecosystem</strong></h2>
-<div id="central-hub" class="section level3">
-<h3><strong>Central Hub</strong></h3>
+<div id="cohort-overview" class="section level2">
+<h2><strong>Cohort overview</strong></h2>
 <ul>
-<li><strong><a
-href="https://github.com/OHDSI/GIS">OHDSI/GIS</a></strong> - This
-repository serves as the central coordination point
-<ul>
-<li>Documentation website (<a href="https://ohdsi.github.io/GIS/"
-class="uri">https://ohdsi.github.io/GIS/</a>)</li>
-<li>Use case tracking</li>
-<li>Project management via <a
-href="https://github.com/orgs/OHDSI/projects/26">GitHub
-Projects</a></li>
-<li>Contributing guidelines</li>
-</ul></li>
+<li><strong>10,000</strong> synthetic patients</li>
+<li><strong>3,103</strong> US counties/county-equivalents
+(<code>COUNTY_REFERENCE</code>), each with an urban-density category, a
+baseline PM2.5 level, and a composite SES index</li>
+<li><strong>14</strong> conditions (5 respiratory, 9 cardiometabolic),
+each with its incidence driven by a combination of the patient’s
+county-level PM2.5 exposure and SES</li>
+<li><strong>15</strong> drugs, <strong>7</strong> procedures,
+<strong>16</strong> measurements, tied to the relevant condition
+cohorts</li>
+<li><strong>12</strong> county-level socioeconomic (SDOH) observations,
+all derived from the same SES index that drives comorbidity risk</li>
 </ul>
-</div>
-<div id="core-packages" class="section level3">
-<h3><strong>Core Packages</strong></h3>
-<p><strong><a href="https://github.com/OHDSI/gaiaDb">gaiaDb</a></strong>
-<img src="https://img.shields.io/badge/status-beta-yellow"
-alt="Status: Beta" /> - <strong>Technology</strong>: PostgreSQL/PostGIS
-- <strong>Purpose</strong>: Core data repository with geospatial
-processing capabilities - <strong>Maintainers</strong>: <a
-href="https://github.com/OHDSI/gaiaDb">See repository</a> - <strong>Key
-Features</strong>: - Geospatial data ingestion, management, and analysis
-- SQL routines and PostGIS functionality - OMOP CDM integration -
-LinkML/JSON-LD metadata support - Spatial indexing and optimization</p>
-<p><strong><a
-href="https://github.com/OHDSI/gaiaCore">gaiaCore</a></strong> <img
-src="https://img.shields.io/badge/status-development-orange"
-alt="Status: Development" /> - <strong>Development</strong>: <a
-href="https://github.com/TuftsCTSI/gaiaCore">TuftsCTSI/gaiaCore</a> -
-<strong>Technology</strong>: Multi-language connector framework -
-<strong>Purpose</strong>: Provides access to gaiaDB functionality across
-multiple languages and paradigms - <strong>Maintainers</strong>: <a
-href="https://github.com/OHDSI/gaiaCore">See repository</a> -
-<strong>Key Features</strong>: - RESTful API access via PostgREST -
-Direct database connection support - Language-specific client libraries
-(R, Python, etc.) - Orchestrates functions defined in gaiaDB - OpenAPI
-specification for API endpoints</p>
-<p><strong><a
-href="https://github.com/OHDSI/gaiaCatalog">gaiaCatalog</a></strong>
-<img src="https://img.shields.io/badge/status-beta-yellow"
-alt="Status: Beta" /> - <strong>Technology</strong>: Schema.org
-compliant metadata - <strong>Purpose</strong>: Data source discovery and
-cataloging - <strong>Maintainers</strong>: <a
-href="https://github.com/OHDSI/gaiaCatalog">See repository</a> -
-<strong>Key Features</strong>: - Metadata management - Federated data
-source discovery - Schema.org compliance - Integration with external
-catalogs</p>
-<p><strong><a
-href="https://github.com/OHDSI/gaiaDocker">gaiaDocker</a></strong> <img
-src="https://img.shields.io/badge/status-active-green"
-alt="Status: Active" /> - <strong>Technology</strong>: Docker Compose
-orchestration - <strong>Purpose</strong>: Coordinated deployment and
-versioned releases of the Gaia toolchain - <strong>Maintainers</strong>:
-<a href="https://github.com/OHDSI/gaiaDocker">See repository</a> -
-<strong>Key Features</strong>: - Complete GIS stack containerization -
-Coordinated image builds across all components - Version management and
-releases - Profile-based deployment (gaia, degauss) - Integration with
-OHDSI Broadsea ecosystem</p>
-</div>
-<div id="vocabulary-resources" class="section level3">
-<h3><strong>Vocabulary Resources</strong></h3>
-<p><strong><a
-href="https://github.com/TuftsCTSI/CVB">TuftsCTSI/CVB</a></strong> -
-<strong>Purpose</strong>: OMOP vocabulary extensions for GIS -
-<strong>Key Vocabularies</strong>: - OMOP GIS Vocabulary - OMOP Exposome
-Vocabulary - OMOP SDoH Vocabulary - Toxins Vocabulary -
-<strong>Location</strong>: Delta files in <a
-href="https://github.com/TuftsCTSI/CVB/tree/main/GIS/Ontology">CVB/GIS/Ontology</a></p>
 <p><br></p>
 </div>
+<div id="condition-prevalence" class="section level2">
+<h2><strong>Condition prevalence</strong></h2>
+<p>Percent of the 10,000-patient cohort carrying each condition, split
+into respiratory and cardiometabolic groups.</p>
+<pre class="sql"><code>SELECT co.condition_concept_id,
+       co.condition_source_value AS condition_name,
+       CASE WHEN co.condition_concept_id IN (317009,255573,258780,4170143,255848)
+            THEN &#39;Respiratory&#39; ELSE &#39;Cardiometabolic&#39; END AS category,
+       COUNT(DISTINCT co.person_id) AS patient_count,
+       ROUND(100.0 * COUNT(DISTINCT co.person_id) / 10000, 2) AS pct_of_population
+FROM omopgis.condition_occurrence co
+GROUP BY 1,2,3
+ORDER BY category, patient_count DESC;</code></pre>
+<div class="chart-wrap">
+<canvas id="chartConditions">
+</canvas>
 </div>
-<div id="architecture-overview" class="section level2">
-<h2><strong>Architecture Overview</strong></h2>
-<div id="data-flow" class="section level3">
-<h3><strong>Data Flow</strong></h3>
-<pre><code>External Geospatial Data → gaiaCatalog (Discovery)
-                                ↓
-                           gaiaDb (Backend Repository)
-                           ├── Data Ingestion
-                           ├── SQL Routines &amp; PostGIS Functions
-                           ├── OMOP Integration
-                           └── Exposure Calculation
-                                ↓
-                           gaiaCore (Access Layer)
-                           ├── RESTful API (PostgREST)
-                           └── Language Connectors (R, Python, etc.)
-                                ↓
-                      OMOP CDM + GIS Extensions
-                                ↓
-                           HADES Analytics</code></pre>
-</div>
-<div id="tool-chain-components" class="section level3">
-<h3><strong>Tool Chain Components</strong></h3>
-<ol style="list-style-type: decimal">
-<li><strong>Data Discovery</strong> (gaiaCatalog)
-<ul>
-<li>Input: External data source metadata</li>
-<li>Output: Cataloged, discoverable datasets</li>
-</ul></li>
-<li><strong>Backend Engine</strong> (gaiaDb)
-<ul>
-<li>Input: Raw geospatial datasets, patient locations</li>
-<li>Processing: SQL routines, PostGIS functions, spatial operations</li>
-<li>Output: OMOP-compliant external exposure data, standardized spatial
-tables</li>
-</ul></li>
-<li><strong>Access Layer</strong> (gaiaCore)
-<ul>
-<li>Input: Requests via API or database connections</li>
-<li>Processing: Orchestrates gaiaDB functions, provides multi-language
-access</li>
-<li>Output: Data and function access through RESTful API or direct
-database connections</li>
-</ul></li>
-<li><strong>Deployment</strong> (gaiaDocker)
-<ul>
-<li>Input: Component configurations</li>
-<li>Processing: Orchestrated container deployment</li>
-<li>Output: Running Gaia toolchain with versioned releases</li>
-</ul></li>
-<li><strong>Analytics</strong> (HADES integration)
-<ul>
-<li>Input: OMOP CDM + GIS extensions</li>
-<li>Output: Evidence generation</li>
-</ul></li>
-</ol>
 <p><br></p>
 </div>
+<div id="pm2.5-and-ses-by-urban-density" class="section level2">
+<h2><strong>PM2.5 and SES by urban density</strong></h2>
+<p>County-level PM2.5 baseline and average SES index, grouped by the
+urban-density category assigned at county-generation time. This is the
+key discriminative feature the dataset is built around: denser counties
+get systematically higher PM2.5.</p>
+<pre class="sql"><code>SELECT urban_density_category,
+       COUNT(*) AS n_counties,
+       ROUND(AVG(pm25_baseline_mean)::numeric, 2) AS avg_pm25,
+       ROUND(AVG(ses_index)::numeric, 1) AS avg_ses
+FROM omopgis.county_reference
+GROUP BY 1
+ORDER BY avg_pm25 DESC;</code></pre>
+<div class="chart-wrap">
+<canvas id="chartDensity">
+</canvas>
 </div>
-<div id="getting-started-as-a-developer" class="section level2">
-<h2><strong>Getting Started as a Developer</strong></h2>
-<div id="prerequisites" class="section level3">
-<h3><strong>Prerequisites</strong></h3>
-<ul>
-<li>PostgreSQL/PostGIS (&gt;= 12/3.0) for gaiaDb</li>
-<li>Docker and Docker Compose (recommended for coordinated
-deployment)</li>
-<li>Git and GitHub account</li>
-<li>OHDSI Teams access (<a
-href="https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUQ05MOU9BSzEwOThZVjNQVVFGTDNZRENONiQlQCN0PWcu">sign
-up</a>)</li>
-<li>Programming environment of choice (R, Python, etc.) for using
-gaiaCore connectors</li>
-</ul>
+<p><br></p>
 </div>
-<div id="development-environment-setup" class="section level3">
-<h3><strong>Development Environment Setup</strong></h3>
-<div id="option-1-gaiadocker-recommended" class="section level4">
-<h4><strong>Option 1: gaiaDocker (Recommended)</strong></h4>
-<pre class="bash"><code># Clone gaiaDocker repository
-git clone https://github.com/OHDSI/gaiaDocker.git
-cd gaiaDocker
+<div id="asthma-prevalence-by-pm2.5-exposure-quartile"
+class="section level2">
+<h2><strong>Asthma prevalence by PM2.5 exposure quartile</strong></h2>
+<p>Patients are bucketed into quartiles of their assigned county’s PM2.5
+value, then checked for an asthma diagnosis. The gradient is
+intentionally modest — asthma risk in the generator is a blend of PM2.5
+and SES, and PM2.5 and SES are only loosely coupled by design (see the
+chart above) — but it should be directionally increasing.</p>
+<pre class="sql"><code>WITH prf AS (
+    SELECT p.person_id, ee.value_as_number AS pm25_value,
+           NTILE(4) OVER (ORDER BY ee.value_as_number) AS pm25_quartile
+    FROM omopgis.person p
+    JOIN omopgis.external_exposure ee
+         ON ee.person_id = p.person_id AND ee.exposure_concept_id = 2052497664 -- PM2.5
+)
+SELECT prf.pm25_quartile,
+       ROUND(AVG(prf.pm25_value)::numeric, 1) AS avg_pm25,
+       ROUND(100.0 * COUNT(DISTINCT co.person_id) / COUNT(DISTINCT prf.person_id), 2) AS asthma_pct
+FROM prf
+LEFT JOIN omopgis.condition_occurrence co
+       ON co.person_id = prf.person_id AND co.condition_concept_id = 317009 -- Asthma
+GROUP BY 1
+ORDER BY 1;</code></pre>
+<div class="chart-wrap">
+<canvas id="chartAsthmaQuartile">
+</canvas>
+</div>
+<p><br></p>
+</div>
+<div id="socioeconomic-determinants-sdoh" class="section level2">
+<h2><strong>Socioeconomic determinants (SDOH)</strong></h2>
+<p>Mean value of each county-level SDOH observation across all 10,000
+patients (each patient inherits their county’s values).</p>
+<pre class="sql"><code>SELECT o.observation_concept_id, o.observation_source_value AS observation_name,
+       ROUND(AVG(o.value_as_number)::numeric, 2) AS mean_value,
+       COUNT(*) AS n
+FROM omopgis.observation o
+WHERE o.value_as_number IS NOT NULL
+GROUP BY 1,2
+ORDER BY 2;</code></pre>
+<div class="chart-wrap">
+<canvas id="chartSdoh">
+</canvas>
+</div>
+<p><br></p>
+</div>
+<div id="drugs-procedures-and-measurements" class="section level2">
+<h2><strong>Drugs, procedures, and measurements</strong></h2>
+<p>Record counts for each concept, tied to the condition cohort that
+generates it (e.g. Albuterol only fires for patients with an asthma
+diagnosis).</p>
+<pre class="sql"><code>SELECT de.drug_concept_id, de.drug_source_value AS drug_name, COUNT(*) AS exposure_count
+FROM omopgis.drug_exposure de GROUP BY 1,2 ORDER BY exposure_count DESC;
 
-# Start the full Gaia stack
-docker compose --profile gaia up -d
+SELECT po.procedure_concept_id, po.procedure_source_value AS procedure_name, COUNT(*) AS procedure_count
+FROM omopgis.procedure_occurrence po GROUP BY 1,2 ORDER BY procedure_count DESC;
 
-# Verify services
-docker compose ps</code></pre>
+SELECT m.measurement_concept_id, m.measurement_source_value AS measurement_name, COUNT(*) AS measurement_count
+FROM omopgis.measurement m GROUP BY 1,2 ORDER BY measurement_count DESC;</code></pre>
+<div class="chart-wrap">
+<canvas id="chartDrugs">
+</canvas>
 </div>
-<div id="option-2-local-development" class="section level4">
-<h4><strong>Option 2: Local Development</strong></h4>
-<ol style="list-style-type: decimal">
-<li>Clone the gaiaDb repository and set up PostgreSQL/PostGIS</li>
-<li>Configure PostgREST for API access</li>
-<li>Install language-specific connectors (R, Python, etc.)</li>
-<li>Configure connection parameters</li>
-</ol>
-<p>See <a href="developer-deployment.html">Deployment Strategies</a> for
-detailed setup instructions.</p>
+<div class="chart-wrap">
+<canvas id="chartProcedures">
+</canvas>
 </div>
+<div class="chart-wrap">
+<canvas id="chartMeasurements">
+</canvas>
 </div>
-<div id="first-contribution" class="section level3">
-<h3><strong>First Contribution</strong></h3>
-<ol style="list-style-type: decimal">
-<li>Join the <a
-href="https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu">GIS
-Working Group on Teams</a></li>
-<li>Attend the weekly Friday meeting (10 AM US Eastern)</li>
-<li>Review the <a
-href="https://github.com/orgs/OHDSI/projects/26">Project Board</a></li>
-<li>Pick a task or propose a new one</li>
-<li>Read <a href="developer-contributing.html">Contributing
-Guidelines</a></li>
-</ol>
 <p><br></p>
 </div>
+<div id="county-map" class="section level2">
+<h2><strong>County map</strong></h2>
+<p>Every county’s centroid, plotted by longitude/latitude and colored by
+PM2.5 baseline. This is a plain scatter plot standing in for a real map
+(no basemap or projection) — enough to see the coastal/urban PM2.5
+pattern without adding a GIS mapping library to the site build. Zoom is
+disabled at this point count; use the query below with your own GIS
+tooling (e.g. QGIS, Leaflet) for a real map.</p>
+<pre class="sql"><code>SELECT c.county_ref_id, c.county_name, c.state, c.urban_density_category,
+       ROUND(c.pm25_baseline_mean::numeric, 2) AS pm25_baseline_mean,
+       ROUND(c.ses_index::numeric, 1) AS ses_index,
+       ROUND(c.centroid_lat::numeric, 3) AS centroid_lat,
+       ROUND(c.centroid_lon::numeric, 3) AS centroid_lon,
+       COUNT(p.person_id) AS patient_count
+FROM omopgis.county_reference c
+LEFT JOIN omopgis.location l ON l.county_ref_id = c.county_ref_id
+LEFT JOIN omopgis.person p ON p.location_id = l.location_id
+GROUP BY 1,2,3,4,5,6,7,8
+ORDER BY patient_count DESC;</code></pre>
+<div class="chart-wrap chart-wrap-tall">
+<canvas id="chartCountyMap">
+</canvas>
 </div>
-<div id="development-workflow" class="section level2">
-<h2><strong>Development Workflow</strong></h2>
-<p>The GIS Working Group follows an <strong>agile,
-use-case-driven</strong> development approach:</p>
-<ol style="list-style-type: decimal">
-<li><strong>Use Case Identification</strong> - Real-world research needs
-drive development</li>
-<li><strong>Task Breakdown</strong> - Use cases decomposed into GitHub
-issues</li>
-<li><strong>Sprint Planning</strong> - Tasks assigned and tracked via
-GitHub Projects</li>
-<li><strong>Weekly Standups</strong> - Friday meetings (2 min max per
-person):
-<ul>
-<li>What did you complete last week?</li>
-<li>What are you working on now?</li>
-<li>What’s blocking you?</li>
-<li>Discussion points for later</li>
-</ul></li>
-<li><strong>Development</strong> - Feature branches, pull requests, code
-review</li>
-<li><strong>Integration</strong> - Merge to main, deploy, document</li>
-</ol>
 <p><br></p>
-</div>
-<div id="key-resources" class="section level2">
-<h2><strong>Key Resources</strong></h2>
-<ul>
-<li><a href="developer-packages.html">Package Status &amp;
-Maintainers</a></li>
-<li><a href="developer-contributing.html">Contributing
-Guidelines</a></li>
-<li><a href="developer-architecture.html">Architecture &amp; Data
-Flows</a></li>
-<li><a href="developer-deployment.html">Deployment Strategies</a></li>
-<li><a href="https://github.com/orgs/OHDSI/projects/26">Project
-Board</a></li>
-</ul>
-<p><br></p>
-</div>
-<div id="working-group-leadership" class="section level2">
-<h2><strong>Working Group Leadership</strong></h2>
-<p><strong>Co-Leaders</strong>: - Robert Miller - Jared Houghtaling</p>
-<p><strong>Contributing to Leadership</strong>: The working group
-welcomes members who want to take on additional responsibilities.
-Express interest during weekly meetings or via Teams.</p>
-<p><br></p>
-</div>
-<div id="communication-channels" class="section level2">
-<h2><strong>Communication Channels</strong></h2>
-<ul>
-<li><strong>Weekly Meetings</strong>: Fridays 10 AM US Eastern (<a
-href="https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d">Teams
-Link</a>)</li>
-<li><strong>MS Teams</strong>: GIS Working Group channel</li>
-<li><strong>GitHub Issues</strong>: Bug reports, feature requests, use
-cases</li>
-<li><strong>OHDSI Forums</strong>: <a
-href="http://forums.ohdsi.org/c/developers">Developers section</a></li>
-<li><strong>Email</strong>: zollovenecek[at]ohdsi[dot]org</li>
-</ul>
-<p><br></p>
-</div>
-<div id="support" class="section level2">
-<h2><strong>Support</strong></h2>
-<ul>
-<li><strong>General Questions</strong>: OHDSI Forums</li>
-<li><strong>Bug Reports</strong>: GitHub Issues
-(repository-specific)</li>
-<li><strong>Development Help</strong>: GIS Teams channel or weekly
-meetings</li>
-<li><strong>Use Case Discussion</strong>: Schedule with working group
-leaders</li>
-</ul>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="assets/dataset-visualizations.js"></script>
 <p><br></p>
 </div>
 </div>

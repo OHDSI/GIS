@@ -1,0 +1,15 @@
+condition_concept_id,condition_name,category,patient_count,pct_of_population
+320128,HYPERTENSION,Cardiometabolic,1816,18.16
+432867,HYPERLIPIDEMIA,Cardiometabolic,1713,17.13
+433736,OBESITY,Cardiometabolic,1583,15.83
+201826,T2DM,Cardiometabolic,1186,11.86
+46271022,CKD,Cardiometabolic,784,7.84
+317576,CAD,Cardiometabolic,727,7.27
+319835,CHF,Cardiometabolic,580,5.80
+4329847,MI,Cardiometabolic,535,5.35
+381316,STROKE,Cardiometabolic,510,5.10
+4170143,RHINITIS,Respiratory,1308,13.08
+317009,ASTHMA,Respiratory,949,9.49
+255573,COPD,Respiratory,683,6.83
+255848,PNEUMONIA,Respiratory,582,5.82
+258780,BRONCHITIS,Respiratory,546,5.46

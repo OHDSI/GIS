@@ -478,287 +478,109 @@ WG</h1>
 </div>
 
 
-<div id="developer-resources" class="section level1">
-<h1><strong>Developer Resources</strong></h1>
-<p>Welcome to the OHDSI GIS Working Group developer hub. This section
-provides comprehensive information for developers contributing to the
-Gaia toolchain and related GIS infrastructure.</p>
-<p><br></p>
-<div id="overview" class="section level2">
-<h2><strong>Overview</strong></h2>
-<p>The OHDSI GIS Working Group develops and maintains a suite of tools
-collectively known as the <strong>Gaia toolchain</strong>. These tools
-enable the integration of geospatial data with OMOP Common Data Model
-(CDM) for population health research.</p>
-<p><br></p>
+<div id="exercise-1-cataloging-and-data-discovery"
+class="section level1">
+<h1><strong>Exercise 1: Cataloging and data discovery</strong></h1>
+<div id="goal" class="section level2">
+<h2><strong>Goal</strong></h2>
+<p>Produce one valid, machine-actionable metadata record and a
+dataset-fitness decision, tied to a specific research question, for a
+dataset you choose from the GAIA catalog.</p>
 </div>
-<div id="repository-ecosystem" class="section level2">
-<h2><strong>Repository Ecosystem</strong></h2>
-<div id="central-hub" class="section level3">
-<h3><strong>Central Hub</strong></h3>
-<ul>
-<li><strong><a
-href="https://github.com/OHDSI/GIS">OHDSI/GIS</a></strong> - This
-repository serves as the central coordination point
-<ul>
-<li>Documentation website (<a href="https://ohdsi.github.io/GIS/"
-class="uri">https://ohdsi.github.io/GIS/</a>)</li>
-<li>Use case tracking</li>
-<li>Project management via <a
-href="https://github.com/orgs/OHDSI/projects/26">GitHub
-Projects</a></li>
-<li>Contributing guidelines</li>
-</ul></li>
-</ul>
+<div id="background" class="section level2">
+<h2><strong>Background</strong></h2>
+<p>Discovery fails in predictable ways: the same label attached to a
+different variable, mismatched geography, incomplete temporal coverage,
+an unclear unit, an unstable URL, or a restrictive license. Treat the
+GAIA catalog as an <strong>executable contract between discovery and
+ingestion</strong>, not a simple bibliography but more like an annotated
+machine readable and machine actionable bibliography — the record you
+produce here has to be precise enough that Session 2’s pipeline can act
+on it directly.</p>
 </div>
-<div id="core-packages" class="section level3">
-<h3><strong>Core Packages</strong></h3>
-<p><strong><a href="https://github.com/OHDSI/gaiaDb">gaiaDb</a></strong>
-<img src="https://img.shields.io/badge/status-beta-yellow"
-alt="Status: Beta" /> - <strong>Technology</strong>: PostgreSQL/PostGIS
-- <strong>Purpose</strong>: Core data repository with geospatial
-processing capabilities - <strong>Maintainers</strong>: <a
-href="https://github.com/OHDSI/gaiaDb">See repository</a> - <strong>Key
-Features</strong>: - Geospatial data ingestion, management, and analysis
-- SQL routines and PostGIS functionality - OMOP CDM integration -
-LinkML/JSON-LD metadata support - Spatial indexing and optimization</p>
-<p><strong><a
-href="https://github.com/OHDSI/gaiaCore">gaiaCore</a></strong> <img
-src="https://img.shields.io/badge/status-development-orange"
-alt="Status: Development" /> - <strong>Development</strong>: <a
-href="https://github.com/TuftsCTSI/gaiaCore">TuftsCTSI/gaiaCore</a> -
-<strong>Technology</strong>: Multi-language connector framework -
-<strong>Purpose</strong>: Provides access to gaiaDB functionality across
-multiple languages and paradigms - <strong>Maintainers</strong>: <a
-href="https://github.com/OHDSI/gaiaCore">See repository</a> -
-<strong>Key Features</strong>: - RESTful API access via PostgREST -
-Direct database connection support - Language-specific client libraries
-(R, Python, etc.) - Orchestrates functions defined in gaiaDB - OpenAPI
-specification for API endpoints</p>
-<p><strong><a
-href="https://github.com/OHDSI/gaiaCatalog">gaiaCatalog</a></strong>
-<img src="https://img.shields.io/badge/status-beta-yellow"
-alt="Status: Beta" /> - <strong>Technology</strong>: Schema.org
-compliant metadata - <strong>Purpose</strong>: Data source discovery and
-cataloging - <strong>Maintainers</strong>: <a
-href="https://github.com/OHDSI/gaiaCatalog">See repository</a> -
-<strong>Key Features</strong>: - Metadata management - Federated data
-source discovery - Schema.org compliance - Integration with external
-catalogs</p>
-<p><strong><a
-href="https://github.com/OHDSI/gaiaDocker">gaiaDocker</a></strong> <img
-src="https://img.shields.io/badge/status-active-green"
-alt="Status: Active" /> - <strong>Technology</strong>: Docker Compose
-orchestration - <strong>Purpose</strong>: Coordinated deployment and
-versioned releases of the Gaia toolchain - <strong>Maintainers</strong>:
-<a href="https://github.com/OHDSI/gaiaDocker">See repository</a> -
-<strong>Key Features</strong>: - Complete GIS stack containerization -
-Coordinated image builds across all components - Version management and
-releases - Profile-based deployment (gaia, degauss) - Integration with
-OHDSI Broadsea ecosystem</p>
-</div>
-<div id="vocabulary-resources" class="section level3">
-<h3><strong>Vocabulary Resources</strong></h3>
-<p><strong><a
-href="https://github.com/TuftsCTSI/CVB">TuftsCTSI/CVB</a></strong> -
-<strong>Purpose</strong>: OMOP vocabulary extensions for GIS -
-<strong>Key Vocabularies</strong>: - OMOP GIS Vocabulary - OMOP Exposome
-Vocabulary - OMOP SDoH Vocabulary - Toxins Vocabulary -
-<strong>Location</strong>: Delta files in <a
-href="https://github.com/TuftsCTSI/CVB/tree/main/GIS/Ontology">CVB/GIS/Ontology</a></p>
-<p><br></p>
-</div>
-</div>
-<div id="architecture-overview" class="section level2">
-<h2><strong>Architecture Overview</strong></h2>
-<div id="data-flow" class="section level3">
-<h3><strong>Data Flow</strong></h3>
-<pre><code>External Geospatial Data → gaiaCatalog (Discovery)
-                                ↓
-                           gaiaDb (Backend Repository)
-                           ├── Data Ingestion
-                           ├── SQL Routines &amp; PostGIS Functions
-                           ├── OMOP Integration
-                           └── Exposure Calculation
-                                ↓
-                           gaiaCore (Access Layer)
-                           ├── RESTful API (PostgREST)
-                           └── Language Connectors (R, Python, etc.)
-                                ↓
-                      OMOP CDM + GIS Extensions
-                                ↓
-                           HADES Analytics</code></pre>
-</div>
-<div id="tool-chain-components" class="section level3">
-<h3><strong>Tool Chain Components</strong></h3>
+<div id="learning-outcomes" class="section level2">
+<h2><strong>Learning Outcomes</strong></h2>
 <ol style="list-style-type: decimal">
-<li><strong>Data Discovery</strong> (gaiaCatalog)
-<ul>
-<li>Input: External data source metadata</li>
-<li>Output: Cataloged, discoverable datasets</li>
-</ul></li>
-<li><strong>Backend Engine</strong> (gaiaDb)
-<ul>
-<li>Input: Raw geospatial datasets, patient locations</li>
-<li>Processing: SQL routines, PostGIS functions, spatial operations</li>
-<li>Output: OMOP-compliant external exposure data, standardized spatial
-tables</li>
-</ul></li>
-<li><strong>Access Layer</strong> (gaiaCore)
-<ul>
-<li>Input: Requests via API or database connections</li>
-<li>Processing: Orchestrates gaiaDB functions, provides multi-language
-access</li>
-<li>Output: Data and function access through RESTful API or direct
-database connections</li>
-</ul></li>
-<li><strong>Deployment</strong> (gaiaDocker)
-<ul>
-<li>Input: Component configurations</li>
-<li>Processing: Orchestrated container deployment</li>
-<li>Output: Running Gaia toolchain with versioned releases</li>
-</ul></li>
-<li><strong>Analytics</strong> (HADES integration)
-<ul>
-<li>Input: OMOP CDM + GIS extensions</li>
-<li>Output: Evidence generation</li>
-</ul></li>
+<li>Describe difference between raster and vector GIS data</li>
+<li>Describe spherical vs. Cartesian coordinate systems in the context
+of GIS</li>
+<li>Identify GIS dataset requirements for OHDSI GIS analytic
+pipeline</li>
+<li>Match requirements to entries in the Gaia Catalog (or not)</li>
+<li>Match requirements to publicly available datasets</li>
+<li>Make a dataset ingestion request with sufficient information to
+create a machine actionable catalog entry</li>
+<li>use the tools to create a schema.org compliant JSON-LD catalog entry
+(kobo toolbox, gdsc tools)</li>
+<li>….</li>
 </ol>
-<p><br></p>
 </div>
-</div>
-<div id="getting-started-as-a-developer" class="section level2">
-<h2><strong>Getting Started as a Developer</strong></h2>
-<div id="prerequisites" class="section level3">
-<h3><strong>Prerequisites</strong></h3>
-<ul>
-<li>PostgreSQL/PostGIS (&gt;= 12/3.0) for gaiaDb</li>
-<li>Docker and Docker Compose (recommended for coordinated
-deployment)</li>
-<li>Git and GitHub account</li>
-<li>OHDSI Teams access (<a
-href="https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUQ05MOU9BSzEwOThZVjNQVVFGTDNZRENONiQlQCN0PWcu">sign
-up</a>)</li>
-<li>Programming environment of choice (R, Python, etc.) for using
-gaiaCore connectors</li>
-</ul>
-</div>
-<div id="development-environment-setup" class="section level3">
-<h3><strong>Development Environment Setup</strong></h3>
-<div id="option-1-gaiadocker-recommended" class="section level4">
-<h4><strong>Option 1: gaiaDocker (Recommended)</strong></h4>
-<pre class="bash"><code># Clone gaiaDocker repository
-git clone https://github.com/OHDSI/gaiaDocker.git
-cd gaiaDocker
-
-# Start the full Gaia stack
-docker compose --profile gaia up -d
-
-# Verify services
-docker compose ps</code></pre>
-</div>
-<div id="option-2-local-development" class="section level4">
-<h4><strong>Option 2: Local Development</strong></h4>
+<div id="steps" class="section level2">
+<h2><strong>Steps</strong></h2>
 <ol style="list-style-type: decimal">
-<li>Clone the gaiaDb repository and set up PostgreSQL/PostGIS</li>
-<li>Configure PostgREST for API access</li>
-<li>Install language-specific connectors (R, Python, etc.)</li>
-<li>Configure connection parameters</li>
+<li>Start from a research question (exposure to PM 2.5 and COPD helath
+outcomes) and decompose it into its computable requirements: population,
+index time, exposure window, lag, geography, variable, unit, resolution,
+provenance, and permissible missingness. [it seems we will do this
+togehter as a guided excercise)]</li>
+<li>Search publicly available datasets for PM2.5 to identify one best
+candidate that meets your requirements</li>
+<li>Search the GAIA catalog for your candidate dataset (e.g., an
+air-quality dataset) that could answer your decomposed question.</li>
+<li>Inspect the candidate’s spatial coverage, temporal coverage,
+variable definition, unit, and access URL.</li>
+<li>Score the candidate against the fitness rubric: scientific
+relevance, spatial fit, temporal fit, semantic clarity, access, and
+reproducibility (green/amber/red per criterion).</li>
+<li>Complete the metadata template for your chosen dataset in
+kobotoolbox, keeping dataset-level properties (identity, version,
+provider, license, URL, spatial/temporal coverage, geometry, retrieval
+method, update cadence) separate from variable-level properties
+(definition, unit).</li>
+<li>Use the GDSC toolbox to crosswalk the kobotoolbox entry to a RO
+Crate inspired object that includes schema.org JSON-LD metadata and bash
+ingestion scripts.</li>
+<li>Record your overall fitness decision and, if any criterion scored
+amber or red, document the limitation rather than silently
+proceeding.</li>
 </ol>
-<p>See <a href="developer-deployment.html">Deployment Strategies</a> for
-detailed setup instructions.</p>
+<p>If you get stuck on a step, faculty will circulate and a fallback
+dataset/metadata record is available.</p>
 </div>
-</div>
-<div id="first-contribution" class="section level3">
-<h3><strong>First Contribution</strong></h3>
-<ol style="list-style-type: decimal">
-<li>Join the <a
-href="https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu">GIS
-Working Group on Teams</a></li>
-<li>Attend the weekly Friday meeting (10 AM US Eastern)</li>
-<li>Review the <a
-href="https://github.com/orgs/OHDSI/projects/26">Project Board</a></li>
-<li>Pick a task or propose a new one</li>
-<li>Read <a href="developer-contributing.html">Contributing
-Guidelines</a></li>
-</ol>
-<p><br></p>
-</div>
-</div>
-<div id="development-workflow" class="section level2">
-<h2><strong>Development Workflow</strong></h2>
-<p>The GIS Working Group follows an <strong>agile,
-use-case-driven</strong> development approach:</p>
-<ol style="list-style-type: decimal">
-<li><strong>Use Case Identification</strong> - Real-world research needs
-drive development</li>
-<li><strong>Task Breakdown</strong> - Use cases decomposed into GitHub
-issues</li>
-<li><strong>Sprint Planning</strong> - Tasks assigned and tracked via
-GitHub Projects</li>
-<li><strong>Weekly Standups</strong> - Friday meetings (2 min max per
-person):
+<div id="deliverable" class="section level2">
+<h2><strong>Deliverable</strong></h2>
 <ul>
-<li>What did you complete last week?</li>
-<li>What are you working on now?</li>
-<li>What’s blocking you?</li>
-<li>Discussion points for later</li>
-</ul></li>
-<li><strong>Development</strong> - Feature branches, pull requests, code
-review</li>
-<li><strong>Integration</strong> - Merge to main, deploy, document</li>
-</ol>
-<p><br></p>
+<li>One metadata record in JSON-LD, aligned to schema.org for
+interoperability and machine actionability</li>
+<li>One fitness decision (green/amber/red per rubric criterion, plus an
+overall call)</li>
+</ul>
 </div>
-<div id="key-resources" class="section level2">
-<h2><strong>Key Resources</strong></h2>
-<ul>
-<li><a href="developer-packages.html">Package Status &amp;
-Maintainers</a></li>
-<li><a href="developer-contributing.html">Contributing
-Guidelines</a></li>
-<li><a href="developer-architecture.html">Architecture &amp; Data
-Flows</a></li>
-<li><a href="developer-deployment.html">Deployment Strategies</a></li>
-<li><a href="https://github.com/orgs/OHDSI/projects/26">Project
-Board</a></li>
+<div id="check-your-work" class="section level2">
+<h2><strong>Check Your Work</strong></h2>
+<p>Faculty will validate your submission against the following, and so
+should you before calling it done:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Dataset and version are
+identifiable</label></li>
+<li><label><input type="checkbox" />Variable definition and unit are
+explicit</label></li>
+<li><label><input type="checkbox" />Spatial and temporal coverage are
+sufficient, or limitations are explicitly documented</label></li>
+<li><label><input type="checkbox" />Retrieval URL/method is
+reproducible</label></li>
+<li><label><input type="checkbox" />License permits tutorial
+use</label></li>
+<li><label><input type="checkbox" />Metadata separates dataset-level
+from variable-level properties</label></li>
+<li><label><input type="checkbox" />Required JSON-LD keys, URL, dates,
+geometry, variable, unit, and license all validate</label></li>
 </ul>
 <p><br></p>
-</div>
-<div id="working-group-leadership" class="section level2">
-<h2><strong>Working Group Leadership</strong></h2>
-<p><strong>Co-Leaders</strong>: - Robert Miller - Jared Houghtaling</p>
-<p><strong>Contributing to Leadership</strong>: The working group
-welcomes members who want to take on additional responsibilities.
-Express interest during weekly meetings or via Teams.</p>
+<p><strong>Bridge to Session 2:</strong> your frozen metadata record and
+its downloadable source become the input to the ingestion pipeline.</p>
 <p><br></p>
-</div>
-<div id="communication-channels" class="section level2">
-<h2><strong>Communication Channels</strong></h2>
-<ul>
-<li><strong>Weekly Meetings</strong>: Fridays 10 AM US Eastern (<a
-href="https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d">Teams
-Link</a>)</li>
-<li><strong>MS Teams</strong>: GIS Working Group channel</li>
-<li><strong>GitHub Issues</strong>: Bug reports, feature requests, use
-cases</li>
-<li><strong>OHDSI Forums</strong>: <a
-href="http://forums.ohdsi.org/c/developers">Developers section</a></li>
-<li><strong>Email</strong>: zollovenecek[at]ohdsi[dot]org</li>
-</ul>
-<p><br></p>
-</div>
-<div id="support" class="section level2">
-<h2><strong>Support</strong></h2>
-<ul>
-<li><strong>General Questions</strong>: OHDSI Forums</li>
-<li><strong>Bug Reports</strong>: GitHub Issues
-(repository-specific)</li>
-<li><strong>Development Help</strong>: GIS Teams channel or weekly
-meetings</li>
-<li><strong>Use Case Discussion</strong>: Schedule with working group
-leaders</li>
-</ul>
+<p>Next: <a href="tutorial-exercise-2.html">Exercise 2</a></p>
 <p><br></p>
 </div>
 </div>

@@ -1,0 +1,3104 @@
+county_ref_id,county_name,state,urban_density_category,pm25_baseline_mean,ses_index,centroid_lat,centroid_lon,patient_count
+1988,Hamilton County,NC,Rural,6.09,69.0,36.080,-82.395,12
+688,Warren County,IL,Suburban,10.23,69.3,42.380,-90.618,10
+1716,Randolph County,NE,Small Town,8.79,49.3,42.998,-101.518,10
+406,Hamilton County,GA,Small Town,6.61,63.6,30.725,-82.686,10
+29,Johnson County,AL,Small Town,6.81,66.1,32.434,-86.874,10
+38,Benton County,AL,Small Town,6.68,30.9,34.113,-87.622,10
+1375,Pike County,MN,Small Town,8.49,63.9,47.537,-97.180,10
+2589,Harrison County,TX,Small Town,8.65,76.7,29.825,-104.754,10
+2111,Knox County,OH,Small Town,7.47,63.9,39.218,-80.684,10
+2927,Warren County,WA,Small Town,6.89,85.5,47.950,-123.480,9
+520,Warren County,GA,Suburban,8.98,10.4,31.684,-81.003,9
+357,Benton County,FL,Small Town,8.16,40.0,28.556,-84.264,9
+1656,Lincoln County,NE,Small Town,8.00,67.9,40.433,-96.837,9
+592,Jefferson County,ID,Small Town,8.20,76.7,42.504,-111.429,9
+2183,Warren County,OK,Small Town,7.69,69.9,35.956,-98.845,9
+2735,Warren County,TX,Small Town,6.08,12.8,31.575,-95.623,9
+627,Orange County,IL,Small Town,8.63,46.5,40.809,-91.006,8
+2400,Chester County,SD,Small Town,8.82,79.2,43.430,-104.015,8
+997,Madison County,KY,Small Town,6.35,43.0,38.412,-87.101,8
+631,Wilson County,IL,Suburban,8.65,86.5,42.386,-88.238,8
+89,Pike Borough,AK,Small Town,6.41,92.5,66.546,-160.618,8
+2525,Lincoln County,TX,Small Town,8.85,30.1,32.603,-102.649,8
+1557,Shelby County,MO,Rural,3.73,35.0,39.570,-91.776,8
+644,Marion County,IL,Suburban,8.37,43.4,37.439,-90.933,8
+2936,Polk County,WA,Small Town,7.21,90.2,48.978,-123.519,8
+1474,Ross County,MS,Small Town,6.98,77.8,30.586,-88.270,8
+1190,Warren County,ME,Suburban,11.50,74.4,45.205,-68.497,8
+1814,Perry County,NM,Small Town,7.61,64.3,36.885,-104.254,8
+3084,Madison County,WY,Suburban,10.82,76.7,42.872,-105.890,8
+833,Madison County,IA,Small Town,7.60,53.9,43.276,-96.355,8
+2363,Franklin County,SD,Rural,5.20,17.8,45.830,-101.487,8
+2900,Jefferson County,VA,Small Town,8.33,70.2,37.786,-83.177,8
+2870,Wayne County,VA,Suburban,10.73,31.3,37.542,-75.234,8
+2922,Clay County,WA,Small Town,8.03,14.6,45.819,-119.700,8
+2306,Randolph County,PA,Suburban,8.82,80.7,41.666,-76.803,8
+574,Randolph County,ID,Small Town,8.18,42.3,47.787,-115.862,8
+2872,Warren County,VA,Small Town,8.67,82.6,39.341,-79.886,8
+1997,Clay County,ND,Small Town,7.65,90.4,46.890,-96.767,8
+730,Ross County,IN,Small Town,8.05,47.6,39.848,-86.672,8
+1969,Washington County,NC,Suburban,8.43,40.1,33.983,-77.453,8
+2786,Adams County,UT,Small Town,6.32,62.0,37.610,-111.777,8
+1797,Lincoln County,NM,Suburban,9.16,61.8,36.423,-107.799,8
+1824,Lawrence County,NM,Small Town,7.74,75.8,35.607,-103.867,8
+896,Clay County,KS,Small Town,8.30,22.5,38.079,-98.471,8
+2209,Franklin County,OR,Small Town,6.31,39.3,43.210,-123.710,8
+791,Franklin County,IA,Suburban,8.53,48.4,41.071,-92.621,8
+2626,Scott County,TX,Suburban,8.36,63.4,27.175,-103.572,8
+1447,Monroe County,MS,Suburban,10.19,29.8,32.491,-88.584,8
+1886,Hamilton County,NY,Suburban,10.34,68.4,42.913,-77.483,8
+41,Washington County,AL,Rural,4.00,23.6,34.779,-87.949,8
+1048,Montgomery County,KY,Suburban,11.02,63.6,38.835,-87.175,8
+2485,Douglas County,TN,Small Town,8.71,93.2,36.134,-89.967,8
+580,Knox County,ID,Small Town,7.63,67.6,44.572,-111.126,8
+2207,Washington County,OR,Small Town,6.67,64.2,43.961,-122.059,8
+1820,Carroll County,NM,Small Town,8.56,33.8,32.079,-108.004,7
+1000,Union County,KY,Suburban,9.47,42.6,36.914,-82.361,7
+2226,Hamilton County,OR,Small Town,7.28,81.0,42.622,-122.149,7
+1713,Perry County,NE,Small Town,6.33,71.0,40.354,-99.423,7
+2811,Monroe County,VT,Small Town,6.61,51.5,43.503,-72.078,7
+217,Lawrence County,CA,Suburban,8.89,47.9,41.891,-121.614,7
+1757,Wayne County,NV,Suburban,10.57,15.5,40.087,-119.729,7
+2188,Douglas County,OK,Suburban,10.33,83.6,35.377,-95.396,7
+2959,Monroe County,WV,Rural,4.77,14.9,39.072,-80.717,7
+3089,Marion County,WY,Rural,3.76,92.7,41.039,-104.855,7
+2972,Hamilton County,WV,Suburban,8.79,44.3,39.079,-81.461,7
+110,Warren County,AZ,Suburban,9.18,88.7,35.073,-112.505,7
+1625,Johnson County,MT,Rural,6.15,27.8,45.285,-108.731,7
+552,Jefferson County,ID,Small Town,6.62,51.0,47.517,-115.190,7
+666,Morgan County,IL,Small Town,8.97,16.6,40.459,-91.218,7
+864,Sullivan County,IA,Rural,4.50,69.8,42.197,-91.981,7
+236,Marion County,CA,Urban Core,18.14,45.6,37.426,-114.367,7
+1019,Carroll County,KY,Suburban,9.41,88.8,37.718,-88.475,7
+339,Hamilton County,FL,Small Town,8.26,46.2,24.813,-81.547,7
+79,Wayne Borough,AK,Rural,3.86,44.1,63.654,-146.813,7
+571,Perry County,ID,Small Town,8.71,48.5,47.575,-116.741,7
+720,Randolph County,IN,Suburban,10.00,64.7,40.461,-86.275,7
+351,Morgan County,FL,Suburban,10.13,25.7,28.572,-80.131,7
+533,Carroll County,GA,Suburban,8.91,16.6,32.620,-85.218,7
+1302,Morgan County,MI,Suburban,11.05,70.0,48.022,-88.931,7
+148,Wilson County,AR,Small Town,6.50,25.4,33.641,-92.452,7
+1299,Johnson County,MI,Small Town,8.38,36.8,42.859,-85.249,7
+971,Lincoln County,KS,Suburban,9.83,74.0,39.573,-97.475,7
+2313,Lincoln County,RI,Suburban,8.09,73.8,41.433,-71.349,7
+3054,Monroe County,WI,Suburban,11.73,51.8,43.367,-92.371,7
+892,Madison County,KS,Rural,5.53,49.5,38.744,-95.667,7
+1485,Franklin County,MO,Small Town,8.30,18.3,38.064,-92.267,7
+845,Lake County,IA,Small Town,6.70,19.3,41.269,-91.625,7
+1662,Marion County,NE,Small Town,8.23,80.1,40.651,-96.613,7
+2606,Madison County,TX,Small Town,6.38,87.6,34.348,-104.165,7
+2239,Orange County,OR,Small Town,7.01,49.3,42.974,-122.548,7
+2988,Sullivan County,WV,Small Town,8.46,30.4,39.876,-80.124,7
+2006,Grant County,ND,Rural,5.81,93.1,46.022,-97.017,7
+1671,Douglas County,NE,Suburban,8.67,69.0,42.590,-97.419,7
+1896,Union County,NC,Suburban,10.18,32.9,36.550,-76.671,7
+938,Adams County,KS,Rural,4.10,57.4,37.473,-95.091,7
+1540,Grant County,MO,Small Town,6.14,65.8,36.449,-91.207,7
+1113,Washington Parish,LA,Rural,3.71,14.4,31.264,-89.406,7
+1445,Madison County,MS,Small Town,6.64,52.2,31.881,-90.221,7
+650,Montgomery County,IL,Suburban,9.12,17.5,42.279,-87.628,7
+890,Franklin County,KS,Rural,5.06,17.2,39.216,-98.389,7
+121,Marion County,AR,Small Town,7.28,16.8,35.291,-90.702,7
+1995,Monroe County,ND,Small Town,7.97,52.9,48.443,-100.770,7
+1170,Grant Parish,LA,Small Town,8.09,11.7,31.912,-90.868,7
+414,Harrison County,GA,Suburban,8.83,12.0,30.912,-83.215,7
+2799,Randolph County,UT,Small Town,8.31,92.1,41.997,-110.258,7
+1328,Fayette County,MN,Small Town,8.51,72.8,44.434,-96.983,7
+726,Knox County,IN,Small Town,6.07,59.6,38.365,-86.491,7
+2121,Chester County,OH,Suburban,8.95,93.3,40.039,-80.561,7
+3035,Harrison County,WI,Rural,4.76,46.7,43.707,-91.632,7
+2315,Washington County,SC,Rural,4.90,18.6,34.502,-82.100,7
+2473,Monroe County,TN,Small Town,6.90,74.4,35.693,-85.681,7
+1067,Shelby County,KY,Rural,5.53,53.2,38.231,-89.044,7
+1957,Johnson County,NC,Suburban,10.22,22.3,33.819,-84.023,7
+2997,Madison County,WV,Rural,4.19,31.9,39.232,-79.403,7
+2785,Marion County,UT,Small Town,6.26,45.9,39.879,-110.768,7
+1035,Franklin County,KY,Suburban,9.63,11.2,38.049,-87.175,7
+532,Clark County,GA,Small Town,8.65,41.0,34.391,-84.530,7
+1290,Hamilton County,MI,Small Town,8.18,87.1,42.079,-84.015,7
+483,Lake County,GA,Small Town,8.38,84.0,31.584,-83.681,7
+1994,Jackson County,ND,Suburban,9.01,50.7,46.030,-103.483,7
+2087,Jackson County,OH,Small Town,6.04,54.3,41.405,-84.326,7
+1702,Marion County,NE,Suburban,10.99,52.0,40.891,-96.791,7
+2501,Shelby County,TN,Suburban,9.84,30.9,35.714,-86.390,7
+2562,Washington County,TX,Small Town,7.58,11.3,30.385,-99.028,7
+2474,Union County,TN,Small Town,6.47,10.8,36.372,-88.157,7
+124,Greene County,AR,Suburban,9.12,89.6,36.036,-93.963,7
+2092,Adams County,OH,Small Town,6.91,13.5,41.185,-82.718,7
+1502,Hamilton County,MO,Suburban,8.14,40.5,37.034,-92.045,7
+1720,Harrison County,NE,Small Town,7.06,62.8,41.440,-95.344,7
+1200,Union County,MD,Small Town,7.79,93.8,39.330,-78.100,7
+1603,Monroe County,MT,Rural,4.01,61.8,44.419,-113.760,7
+2999,Monroe County,WV,Rural,5.58,76.8,38.726,-79.438,7
+1046,Warren County,KY,Suburban,10.47,73.2,37.144,-89.370,7
+375,Montgomery County,FL,Small Town,8.52,36.6,27.733,-84.640,7
+1616,Hamilton County,MT,Small Town,8.26,55.9,45.111,-115.448,7
+1092,Hamilton County,KY,Small Town,6.76,19.5,36.541,-89.361,7
+553,Franklin County,ID,Rural,4.89,65.7,44.159,-117.016,7
+846,Grant County,IA,Suburban,9.26,44.7,42.299,-90.635,7
+2860,Jefferson County,VA,Small Town,8.69,12.3,36.514,-76.377,7
+1871,Madison County,NY,Suburban,9.66,64.8,41.060,-77.919,7
+505,Cass County,GA,Small Town,7.79,49.5,33.910,-82.216,7
+2276,Ross County,PA,Suburban,9.66,79.3,41.181,-76.337,7
+2861,Franklin County,VA,Suburban,9.71,43.5,39.254,-78.856,7
+2019,Lawrence County,ND,Small Town,6.16,58.0,47.955,-100.576,7
+2584,Polk County,TX,Small Town,8.24,87.0,30.485,-101.779,7
+1103,Lawrence County,KY,Small Town,7.74,14.1,36.840,-87.239,7
+367,Union County,FL,Small Town,6.64,63.0,27.737,-83.844,7
+708,Wayne County,IN,Small Town,8.82,36.8,41.184,-85.284,7
+2568,Monroe County,TX,Small Town,6.15,38.4,26.623,-99.401,7
+663,Johnson County,IL,Small Town,7.73,71.7,37.332,-91.311,7
+1762,Lake County,NV,Small Town,6.30,88.8,41.380,-119.386,7
+723,Carroll County,IN,Suburban,11.50,10.7,38.277,-85.959,6
+288,Lincoln County,CO,Small Town,8.49,70.4,40.856,-106.528,6
+2112,Lawrence County,OH,Suburban,8.74,50.3,41.588,-84.563,6
+2196,Carroll County,OK,Rural,4.46,18.6,36.078,-102.833,6
+1568,Jackson County,MO,Rural,5.45,20.8,39.771,-91.978,6
+944,Lake County,KS,Suburban,8.50,85.8,39.516,-95.731,6
+1754,Clay County,NV,Rural,6.14,20.3,38.542,-119.756,6
+168,Lake County,AR,Rural,5.38,71.3,34.880,-92.933,6
+204,Grant County,CA,Small Town,7.21,92.5,41.757,-114.273,6
+475,Clay County,GA,Small Town,6.19,60.1,34.472,-84.830,6
+612,Grant County,IL,Suburban,9.40,65.6,37.187,-88.555,6
+2750,Johnson County,TX,Small Town,7.16,76.2,33.746,-101.022,6
+2517,Adams County,TN,Small Town,8.31,91.9,35.672,-86.148,6
+769,Orange County,IN,Suburban,11.33,37.6,39.353,-86.411,6
+3053,Jackson County,WI,Rural,4.77,59.4,45.301,-91.896,6
+1847,Perry County,NY,Small Town,6.89,81.6,41.171,-79.184,6
+886,Grant County,IA,Small Town,8.14,20.4,41.163,-92.584,6
+1490,Union County,MO,Small Town,8.55,16.8,38.900,-92.650,6
+646,Wayne County,IL,Suburban,9.14,65.0,41.089,-90.564,6
+698,Jefferson County,IN,Rural,5.70,64.5,40.877,-85.799,6
+852,Randolph County,IA,Suburban,9.82,92.9,42.969,-95.284,6
+3018,Adams County,WI,Rural,5.26,59.0,46.553,-87.111,6
+1802,Clay County,NM,Small Town,8.65,27.4,34.341,-107.344,6
+3085,Jackson County,WY,Rural,6.18,69.5,41.360,-109.968,6
+1346,Orange County,MN,Small Town,8.55,63.4,43.784,-97.139,6
+381,Pike County,FL,Suburban,8.62,11.5,30.145,-80.280,6
+2100,Douglas County,OH,Suburban,9.81,16.1,38.534,-82.661,6
+1423,Polk County,MS,Suburban,9.52,23.7,32.279,-88.586,6
+1938,Marion County,NC,Small Town,7.89,52.7,34.667,-81.638,6
+753,Lake County,IN,Small Town,8.47,12.4,40.781,-87.782,6
+1881,Fayette County,NY,Suburban,11.47,59.7,44.272,-79.514,6
+844,Montgomery County,IA,Small Town,8.82,71.2,41.593,-91.631,6
+2454,Harrison County,TN,Small Town,8.83,66.6,36.144,-88.376,6
+1172,Hamilton Parish,LA,Rural,5.51,85.5,32.060,-91.507,6
+1204,Wayne County,MD,Suburban,11.16,32.3,39.006,-77.895,6
+1068,Sullivan County,KY,Small Town,7.39,65.5,38.389,-84.658,6
+616,Pike County,IL,Small Town,6.86,84.9,38.946,-89.390,6
+311,Franklin County,CT,Suburban,10.01,75.2,41.319,-73.430,6
+2602,Washington County,TX,Rural,6.30,33.5,33.501,-99.793,6
+423,Wilson County,GA,Rural,3.79,82.2,33.936,-81.836,6
+868,Chester County,IA,Small Town,8.77,58.0,41.345,-95.891,6
+2532,Adams County,TX,Small Town,7.62,36.5,34.125,-104.808,6
+1109,Wilson County,KY,Rural,6.42,27.6,38.777,-87.768,6
+1699,Monroe County,NE,Rural,5.96,25.2,40.902,-99.843,6
+3081,Jefferson County,WY,Small Town,6.88,18.7,44.584,-109.953,6
+1846,Hamilton County,NY,Small Town,7.32,27.4,43.271,-75.791,6
+1378,Scott County,MN,Suburban,8.13,74.9,49.372,-90.333,6
+1114,Jefferson Parish,LA,Suburban,9.79,43.8,32.884,-91.069,6
+2269,Carroll County,PA,Suburban,11.80,53.9,40.705,-76.831,6
+2487,Perry County,TN,Small Town,7.52,76.3,35.321,-87.127,6
+1243,Greene County,MI,Suburban,9.37,93.0,48.071,-84.015,6
+2809,Madison County,VT,Rural,4.94,63.0,44.685,-71.938,6
+1562,Chester County,MO,Small Town,7.93,10.4,37.677,-91.598,6
+1238,Union County,MI,Small Town,7.28,58.3,46.421,-89.617,6
+2129,Union County,OH,Suburban,10.30,23.0,39.536,-84.719,6
+484,Grant County,GA,Suburban,11.62,72.9,32.743,-81.685,6
+619,Scott County,IL,Suburban,9.15,43.5,41.905,-87.985,6
+2597,Sullivan County,TX,Small Town,6.56,16.8,26.762,-103.970,6
+2116,Shelby County,OH,Rural,3.87,13.0,38.996,-82.801,6
+2308,Clark County,PA,Suburban,11.88,26.4,40.525,-75.952,6
+2299,Lake County,PA,Small Town,7.85,46.5,41.791,-76.795,6
+1975,Monroe County,NC,Small Town,6.76,13.9,35.054,-79.579,6
+2916,Franklin County,WA,Suburban,10.25,12.3,47.236,-118.489,6
+1895,Monroe County,NC,Small Town,6.93,64.2,36.392,-80.248,6
+719,Polk County,IN,Rural,4.72,81.4,38.637,-85.748,6
+1395,Jefferson County,MN,Rural,5.43,31.2,47.883,-90.223,6
+2053,Wayne County,OH,Suburban,10.93,54.0,38.618,-83.069,6
+118,Monroe County,AR,Suburban,8.28,37.5,34.884,-91.426,6
+1126,Warren Parish,LA,Small Town,6.91,43.7,31.929,-93.393,6
+1929,Washington County,NC,Suburban,8.68,49.5,35.976,-80.199,6
+292,Union County,CO,Small Town,8.18,30.2,38.658,-102.655,6
+504,Benton County,GA,Small Town,8.33,79.7,32.549,-83.271,6
+301,Lake County,CO,Suburban,8.83,39.3,38.067,-105.152,6
+638,Lincoln County,IL,Suburban,8.87,85.6,38.873,-90.425,6
+2411,Adams County,SD,Small Town,6.78,80.6,44.535,-102.672,6
+2698,Lake County,TX,Small Town,8.89,86.0,35.718,-98.226,6
+3010,Franklin County,WI,Suburban,9.49,62.2,43.907,-91.767,6
+2762,Washington County,TX,Small Town,7.22,47.8,30.175,-97.109,6
+2447,Perry County,TN,Small Town,8.43,37.6,35.749,-87.497,6
+576,Clark County,ID,Rural,3.84,65.6,42.787,-112.676,6
+3063,Montgomery County,WI,Small Town,6.30,78.3,43.190,-86.818,6
+550,Madison County,HI,Suburban,9.29,92.8,21.338,-159.630,6
+2804,Johnson County,UT,Small Town,7.92,73.3,37.878,-110.856,6
+1480,Chester County,MS,Small Town,6.85,40.0,31.779,-89.711,6
+1144,Morgan Parish,LA,Suburban,11.29,34.1,29.394,-92.746,6
+2542,Perry County,TX,Small Town,8.79,20.3,32.494,-95.064,6
+2471,Madison County,TN,Rural,5.80,28.6,35.852,-84.701,6
+2714,Orange County,TX,Suburban,9.47,87.2,26.784,-101.648,6
+1781,Clay County,NJ,Suburban,11.90,23.7,39.860,-74.885,6
+197,Adams County,CA,Suburban,11.46,42.7,38.853,-115.312,6
+2634,Orange County,TX,Small Town,6.08,42.4,28.768,-96.048,6
+2237,Lawrence County,OR,Suburban,8.35,42.3,45.638,-121.552,6
+2783,Union County,UT,Small Town,8.45,35.6,40.097,-112.255,6
+510,Lincoln County,GA,Rural,4.37,82.0,34.260,-83.168,6
+2766,Madison County,TX,Small Town,8.68,62.6,27.666,-98.390,6
+65,Scott County,AL,Small Town,7.08,35.1,34.922,-85.112,6
+1417,Lake County,MS,Small Town,8.57,82.5,33.073,-89.463,6
+2551,Knox County,TX,Small Town,7.41,36.9,33.448,-102.123,6
+1292,Pike County,MI,Small Town,6.71,81.4,43.548,-84.599,6
+2468,Jefferson County,TN,Suburban,11.39,41.4,35.326,-89.212,6
+948,Perry County,KS,Rural,4.23,54.0,38.569,-95.082,6
+1844,Grant County,NY,Urban Core,17.78,36.8,42.327,-76.339,6
+2795,Hamilton County,UT,Suburban,9.60,23.2,41.295,-109.244,6
+274,Knox County,CO,Small Town,7.33,30.3,37.510,-102.220,6
+677,Franklin County,IL,Small Town,7.16,17.3,38.625,-88.262,6
+1779,Monroe County,NJ,Suburban,10.85,80.2,39.396,-74.390,6
+2444,Grant County,TN,Rural,6.05,73.8,36.032,-84.651,6
+2619,Grant County,TX,Small Town,7.12,57.5,27.680,-106.258,6
+2005,Lake County,ND,Small Town,8.01,25.7,46.774,-103.877,6
+1353,Chester County,MN,Small Town,7.30,93.6,47.411,-93.066,6
+2204,Shelby County,OK,Suburban,9.19,33.2,36.990,-95.436,6
+2823,Madison County,VA,Suburban,11.36,46.6,38.572,-81.998,6
+2596,Shelby County,TX,Small Town,7.91,89.0,28.824,-101.659,6
+1950,Pike County,NC,Small Town,8.45,44.3,34.410,-84.124,6
+1944,Montgomery County,NC,Small Town,6.95,75.7,35.451,-82.434,6
+1542,Hamilton County,MO,Small Town,7.80,76.6,40.461,-91.437,6
+302,Grant County,CO,Small Town,8.57,58.7,40.426,-103.296,6
+97,Washington County,AZ,Suburban,9.86,36.6,35.714,-114.727,6
+1807,Warren County,NM,Small Town,8.65,58.3,36.889,-108.278,6
+1704,Wayne County,NE,Rural,6.26,30.6,40.077,-98.307,6
+2881,Polk County,VA,Small Town,7.23,25.0,37.806,-77.930,6
+382,Polk County,FL,Small Town,9.00,49.3,30.285,-83.902,6
+1345,Morgan County,MN,Suburban,8.93,70.9,44.283,-92.698,6
+1686,Ross County,NE,Rural,5.68,32.7,40.993,-97.005,6
+387,Washington County,GA,Rural,5.50,69.2,33.666,-81.333,6
+2372,Wayne County,SD,Suburban,8.18,72.5,44.319,-100.566,6
+656,Pike County,IL,Suburban,9.85,84.8,42.270,-88.364,6
+776,Chester County,IN,Small Town,8.13,58.3,40.650,-85.650,6
+2364,Lincoln County,SD,Suburban,8.93,56.8,43.107,-103.937,6
+2133,Lincoln County,OK,Small Town,8.21,22.7,36.395,-96.217,6
+157,Jackson County,AR,Small Town,7.79,44.3,35.140,-93.799,6
+947,Hamilton County,KS,Small Town,7.31,62.2,39.537,-97.498,6
+2521,Fayette County,TN,Small Town,6.67,33.0,35.030,-83.172,6
+801,Greene County,IA,Suburban,8.86,82.1,42.081,-90.380,6
+1289,Douglas County,MI,Small Town,7.92,83.6,46.948,-83.636,6
+1363,Marion County,MN,Small Town,6.24,44.2,48.964,-91.836,6
+2096,Fayette County,OH,Suburban,9.05,88.5,40.675,-83.279,6
+3056,Clay County,WI,Suburban,11.56,10.1,43.848,-87.092,6
+2658,Lake County,TX,Small Town,6.17,50.1,31.396,-98.911,6
+2839,Perry County,VA,Suburban,11.52,61.1,36.717,-79.858,6
+119,Union County,AR,Small Town,7.30,75.0,34.557,-89.980,6
+2765,Lincoln County,TX,Small Town,6.13,58.3,29.267,-106.068,6
+2415,Fayette County,SD,Suburban,8.59,30.5,43.462,-99.329,6
+3059,Wayne County,WI,Small Town,7.16,58.3,43.414,-90.724,6
+2330,Montgomery County,SC,Suburban,9.47,71.8,33.005,-80.349,6
+193,Monroe County,CA,Suburban,10.84,77.6,37.680,-115.341,6
+2697,Montgomery County,TX,Rural,4.36,39.5,28.026,-106.522,6
+2,Jefferson County,AL,Suburban,11.90,37.3,32.712,-87.690,6
+915,Harrison County,KS,Small Town,8.76,39.9,39.217,-101.780,6
+1887,Perry County,NY,Small Town,7.55,37.0,42.321,-76.845,6
+1884,Grant County,NY,Small Town,7.56,48.3,40.792,-76.627,6
+2316,Jefferson County,SC,Small Town,8.46,91.0,33.843,-79.884,6
+2403,Franklin County,SD,Rural,4.39,30.3,42.583,-96.643,6
+1014,Pike County,KY,Rural,5.94,60.2,38.220,-86.956,6
+1974,Jackson County,NC,Small Town,7.09,89.3,34.316,-83.220,6
+246,Jefferson County,CO,Suburban,11.62,92.3,40.284,-104.468,6
+1608,Wayne County,MT,Rural,4.86,21.9,46.160,-109.470,6
+748,Wayne County,IN,Suburban,9.17,59.0,38.517,-86.825,6
+736,Chester County,IN,Small Town,6.34,91.9,38.900,-86.172,6
+1842,Montgomery County,NY,Small Town,8.91,33.1,43.112,-73.559,6
+1481,Washington County,MS,Small Town,8.66,22.0,32.283,-91.032,6
+125,Warren County,AR,Rural,4.78,19.4,33.252,-91.061,6
+1786,Warren County,NJ,Suburban,8.09,48.4,40.860,-74.330,6
+2479,Greene County,TN,Suburban,10.57,58.9,35.167,-87.159,6
+2025,Wilson County,ND,Small Town,7.83,17.3,47.862,-100.957,6
+880,Wayne County,IA,Small Town,6.87,34.3,41.480,-95.567,6
+1915,Carroll County,NC,Small Town,8.34,22.7,34.529,-80.847,6
+2439,Greene County,TN,Small Town,6.18,59.4,36.420,-84.058,6
+2404,Lincoln County,SD,Suburban,11.47,30.7,43.537,-101.377,6
+3096,Lake County,WY,Rural,6.12,52.2,42.451,-109.500,6
+2851,Orange County,VA,Small Town,6.73,28.2,39.198,-81.275,6
+306,Pike County,CO,Small Town,8.36,16.5,40.362,-106.084,6
+1207,Fayette County,MD,Small Town,6.66,11.9,38.937,-76.766,6
+1116,Lincoln Parish,LA,Suburban,11.32,18.5,29.576,-91.268,6
+2674,Orange County,TX,Suburban,8.57,92.8,31.866,-97.087,6
+359,Chester County,FL,Small Town,6.91,14.4,25.813,-83.568,6
+2885,Carroll County,VA,Suburban,11.94,15.4,39.251,-75.934,6
+3000,Union County,WV,Small Town,7.22,42.1,39.808,-79.793,6
+2915,Jefferson County,WA,Suburban,11.44,63.9,46.932,-120.716,6
+2326,Wayne County,SC,Suburban,11.93,69.4,33.188,-81.222,6
+789,Washington County,IA,Rural,4.25,93.7,41.535,-91.002,6
+3051,Lincoln County,WI,Small Town,8.28,28.4,43.518,-92.069,6
+3011,Lincoln County,WI,Suburban,8.32,41.9,45.432,-88.055,6
+1742,Marion County,NE,Small Town,6.97,78.6,41.307,-98.192,6
+2998,Jackson County,WV,Suburban,10.72,26.9,40.201,-82.171,6
+2387,Carroll County,SD,Small Town,6.94,48.5,44.043,-103.046,6
+1875,Clay County,NY,Small Town,7.60,18.0,41.204,-73.681,6
+1070,Benton County,KY,Small Town,7.02,44.6,37.950,-84.127,6
+2150,Perry County,OK,Small Town,6.65,28.5,34.624,-97.201,6
+1696,Lincoln County,NE,Rural,3.61,19.0,41.904,-103.066,6
+904,Lake County,KS,Rural,5.01,21.8,39.553,-95.382,6
+2692,Adams County,TX,Small Town,8.51,38.2,28.731,-94.558,6
+691,Lake County,IL,Small Town,6.30,91.6,38.176,-88.210,6
+42,Jefferson County,AL,Small Town,8.72,26.3,33.789,-87.963,5
+2552,Lawrence County,TX,Small Town,7.39,69.1,34.795,-98.524,5
+2635,Ross County,TX,Small Town,8.20,21.2,31.160,-106.343,5
+2726,Madison County,TX,Small Town,8.58,58.6,29.864,-103.060,5
+92,Scott Borough,AK,Suburban,10.13,66.5,68.908,-159.944,5
+1223,Monroe County,MA,Urban Core,16.97,28.7,41.932,-71.118,5
+2325,Adams County,SC,Small Town,8.85,60.5,32.081,-80.339,5
+1501,Douglas County,MO,Small Town,6.57,25.3,40.265,-91.109,5
+862,Ross County,IA,Rural,4.21,26.9,41.896,-96.398,5
+1498,Montgomery County,MO,Rural,4.47,54.3,36.032,-92.118,5
+425,Cass County,GA,Small Town,8.36,93.5,33.644,-83.797,5
+2155,Clark County,OK,Rural,4.35,24.4,34.907,-99.410,5
+777,Washington County,IN,Small Town,9.00,88.1,38.673,-87.366,5
+1584,Pike County,MO,Rural,5.11,67.3,39.359,-95.278,5
+2832,Warren County,VA,Suburban,11.32,80.8,37.589,-79.156,5
+2887,Johnson County,VA,Suburban,9.14,81.6,37.877,-78.794,5
+337,Grant County,FL,Small Town,7.54,44.8,24.642,-83.527,5
+1919,Lawrence County,NC,Small Town,7.04,64.1,36.269,-78.084,5
+1900,Wayne County,NC,Small Town,6.80,36.0,35.049,-77.264,5
+1149,Wilson Parish,LA,Small Town,6.20,67.8,32.046,-92.391,5
+647,Greene County,IL,Small Town,7.25,66.5,38.580,-91.396,5
+1517,Shelby County,MO,Rural,6.38,76.6,37.353,-95.208,5
+2267,Scott County,PA,Suburban,9.79,40.7,41.879,-77.103,5
+742,Jackson County,IN,Small Town,6.58,89.9,39.196,-87.714,5
+3042,Shelby County,WI,Small Town,7.20,49.8,43.831,-91.561,5
+606,Wayne County,IL,Small Town,8.00,71.1,41.364,-89.312,5
+1341,Harrison County,MN,Suburban,9.79,63.3,44.621,-96.294,5
+1141,Johnson Parish,LA,Small Town,7.45,58.5,30.297,-92.212,5
+170,Douglas County,AR,Small Town,6.68,34.6,33.892,-90.727,5
+824,Sullivan County,IA,Small Town,8.82,39.5,43.195,-93.800,5
+2290,Union County,PA,Small Town,7.18,16.1,39.768,-77.062,5
+1818,Scott County,NM,Suburban,8.10,59.5,31.345,-105.609,5
+55,Fayette County,AL,Small Town,7.17,81.2,34.335,-88.072,5
+1040,Union County,KY,Small Town,7.23,84.6,38.757,-81.928,5
+2390,Knox County,SD,Suburban,8.93,25.6,42.643,-100.855,5
+2007,Douglas County,ND,Rural,5.09,63.6,48.852,-100.286,5
+1431,Lawrence County,MS,Rural,4.07,83.2,32.588,-91.416,5
+1330,Lake County,MN,Suburban,10.54,29.4,49.219,-91.464,5
+2441,Fayette County,TN,Suburban,11.76,19.5,35.760,-89.886,5
+1010,Grant County,KY,Small Town,7.92,27.2,38.677,-85.883,5
+1982,Warren County,NC,Small Town,7.86,16.5,35.025,-77.676,5
+635,Washington County,IL,Suburban,10.39,18.7,41.000,-89.675,5
+2423,Polk County,SD,Small Town,6.44,38.2,43.471,-101.592,5
+1099,Carroll County,KY,Small Town,8.49,85.8,38.430,-83.866,5
+1856,Knox County,NY,Suburban,10.53,81.9,41.883,-76.493,5
+1548,Clark County,MO,Small Town,7.90,91.1,40.058,-90.220,5
+601,Monroe County,IL,Suburban,8.32,29.1,42.337,-90.410,5
+704,Union County,IN,Suburban,9.90,54.4,40.028,-87.146,5
+1602,Jackson County,MT,Suburban,9.50,33.4,47.823,-106.951,5
+2163,Ross County,OK,Small Town,7.33,12.8,35.303,-98.001,5
+1221,Madison County,MA,Suburban,9.73,33.3,41.727,-70.028,5
+876,Union County,IA,Suburban,9.73,60.5,41.392,-92.664,5
+2284,Jefferson County,PA,Small Town,7.65,18.8,39.794,-78.217,5
+1751,Jackson County,NV,Small Town,6.86,52.4,39.409,-115.307,5
+116,Madison County,AR,Small Town,7.81,28.2,36.410,-93.005,5
+2941,Harrison County,WA,Suburban,10.17,77.0,48.283,-117.356,5
+1965,Wilson County,NC,Rural,6.13,69.6,36.564,-76.295,5
+2264,Pike County,PA,Small Town,8.26,24.9,40.656,-78.981,5
+1415,Fayette County,MS,Small Town,7.21,69.3,34.130,-89.908,5
+2203,Ross County,OK,Suburban,8.64,72.1,34.169,-94.994,5
+296,Wayne County,CO,Suburban,11.32,23.3,37.187,-105.131,5
+438,Wayne County,GA,Small Town,7.21,12.0,34.578,-84.408,5
+497,Lawrence County,GA,Rural,4.93,36.5,31.694,-83.858,5
+516,Marion County,GA,Suburban,10.29,12.9,34.361,-81.232,5
+2564,Franklin County,TX,Suburban,8.47,52.2,31.984,-96.791,5
+2114,Orange County,OH,Small Town,6.20,64.1,40.425,-82.014,5
+2075,Ross County,OH,Suburban,9.62,27.9,40.104,-84.665,5
+1949,Perry County,NC,Suburban,11.86,68.6,34.619,-75.854,5
+2727,Jackson County,TX,Small Town,7.44,33.7,35.722,-101.412,5
+2986,Ross County,WV,Small Town,7.90,47.8,37.387,-78.522,5
+1215,Polk County,MD,Suburban,10.74,53.9,38.628,-77.849,5
+2470,Lincoln County,TN,Small Town,6.49,12.9,36.569,-86.089,5
+2252,Marion County,PA,Suburban,10.04,84.2,41.846,-79.962,5
+1151,Cass Parish,LA,Suburban,11.63,42.2,32.555,-92.454,5
+1864,Benton County,NY,Suburban,9.20,17.4,44.339,-74.038,5
+378,Douglas County,FL,Small Town,6.33,84.1,26.697,-82.561,5
+2618,Lake County,TX,Suburban,11.77,43.1,26.447,-102.723,5
+872,Lincoln County,IA,Suburban,11.67,80.4,43.197,-93.933,5
+2629,Harrison County,TX,Small Town,6.39,44.3,26.192,-94.086,5
+1633,Wilson County,MT,Small Town,6.22,44.5,48.218,-107.139,5
+1467,Carroll County,MS,Rural,6.05,44.7,31.905,-91.511,5
+525,Douglas County,GA,Suburban,8.29,94.2,32.256,-84.214,5
+2108,Carroll County,OH,Small Town,7.19,90.2,40.052,-82.091,5
+1500,Grant County,MO,Suburban,10.31,74.2,36.652,-91.408,5
+2406,Jackson County,SD,Small Town,6.62,68.6,43.308,-97.806,5
+2319,Madison County,SC,Small Town,7.61,32.4,32.416,-82.116,5
+2370,Marion County,SD,Rural,5.01,61.3,42.992,-98.443,5
+1079,Monroe County,KY,Suburban,10.75,29.2,38.918,-89.255,5
+1269,Cass County,MI,Suburban,9.57,48.3,47.699,-86.029,5
+2190,Perry County,OK,Small Town,7.51,58.0,34.355,-99.537,5
+581,Lawrence County,ID,Suburban,9.93,16.8,47.618,-113.013,5
+1385,Morgan County,MN,Small Town,7.87,73.4,48.609,-94.472,5
+1746,Washington County,NV,Suburban,9.66,75.3,36.081,-117.187,5
+1585,Polk County,MO,Small Town,8.40,89.0,39.088,-94.703,5
+1119,Monroe Parish,LA,Rural,4.04,47.5,31.335,-90.486,5
+598,Lincoln County,IL,Rural,4.07,52.5,40.371,-90.647,5
+360,Washington County,FL,Small Town,7.81,88.0,25.249,-84.743,5
+2797,Pike County,UT,Suburban,8.11,75.8,38.707,-110.510,5
+1940,Wayne County,NC,Rural,6.26,26.7,34.843,-76.391,5
+1189,Greene County,ME,Small Town,7.72,24.0,44.099,-70.850,5
+1790,Grant County,NJ,Urban Core,13.67,33.3,40.101,-74.964,5
+891,Lincoln County,KS,Small Town,8.05,55.2,37.046,-101.186,5
+1484,Jefferson County,MO,Small Town,7.54,93.8,39.993,-94.464,5
+1478,Benton County,MS,Small Town,6.82,21.1,32.681,-90.680,5
+679,Madison County,IL,Suburban,11.56,57.2,41.726,-91.002,5
+1735,Franklin County,NE,Small Town,8.15,63.8,40.033,-101.822,5
+1064,Morgan County,KY,Small Town,6.33,77.4,38.497,-86.232,5
+2627,Clark County,TX,Small Town,7.77,87.3,29.443,-98.694,5
+1630,Ross County,MT,Rural,3.96,40.3,46.226,-113.173,5
+2650,Clay County,TX,Suburban,8.42,31.3,33.225,-98.343,5
+162,Adams County,AR,Suburban,9.29,10.5,35.591,-91.743,5
+1396,Franklin County,MN,Suburban,10.53,72.0,49.352,-95.286,5
+2408,Union County,SD,Rural,6.38,17.0,43.929,-103.580,5
+2463,Wilson County,TN,Small Town,6.53,67.9,35.225,-87.742,5
+2882,Randolph County,VA,Suburban,9.55,80.6,39.451,-76.823,5
+39,Cass County,AL,Suburban,11.42,84.7,34.509,-86.424,5
+2233,Carroll County,OR,Small Town,6.71,93.9,44.031,-118.095,5
+3025,Grant County,WI,Suburban,9.53,58.7,44.483,-89.992,5
+1475,Shelby County,MS,Rural,4.73,80.6,33.921,-89.464,5
+2402,Jefferson County,SD,Small Town,7.52,63.8,43.726,-97.087,5
+794,Jackson County,IA,Small Town,7.23,91.5,42.513,-90.602,5
+2909,Adams County,VA,Suburban,10.14,19.4,37.054,-82.811,5
+645,Adams County,IL,Small Town,7.18,72.0,38.296,-89.778,5
+765,Johnson County,IN,Rural,5.05,52.6,40.311,-85.279,5
+384,Scott County,FL,Suburban,10.48,37.5,26.686,-81.756,5
+1916,Harrison County,NC,Small Town,7.42,16.8,35.957,-83.045,5
+1654,Jefferson County,NE,Rural,3.53,49.5,40.136,-95.951,5
+1041,Clay County,KY,Small Town,6.65,24.2,38.793,-84.650,5
+595,Washington County,IL,Small Town,7.75,72.0,37.051,-90.856,5
+1857,Lawrence County,NY,Suburban,10.86,12.1,40.869,-72.673,5
+2768,Monroe County,TX,Small Town,7.24,81.6,35.628,-101.304,5
+1263,Orange County,MI,Rural,4.97,94.6,47.873,-82.743,5
+402,Montgomery County,GA,Small Town,7.65,71.4,34.646,-85.416,5
+245,Washington County,CO,Small Town,7.44,49.6,37.320,-106.169,5
+2210,Lincoln County,OR,Small Town,7.68,87.0,42.566,-119.544,5
+2511,Madison County,TN,Small Town,7.11,54.1,36.632,-85.573,5
+681,Monroe County,IL,Small Town,8.04,67.5,38.852,-90.424,5
+1201,Clay County,MD,Small Town,8.03,59.4,39.248,-75.808,5
+2669,Harrison County,TX,Small Town,7.77,16.5,28.729,-93.891,5
+2699,Grant County,TX,Suburban,11.24,59.3,30.213,-95.087,5
+262,Grant County,CO,Suburban,8.56,39.1,40.146,-103.404,5
+2836,Grant County,VA,Suburban,9.54,72.8,37.843,-75.278,5
+482,Montgomery County,GA,Rural,5.79,48.8,32.050,-85.502,5
+332,Greene County,FL,Small Town,6.81,71.0,28.922,-80.739,5
+2105,Randolph County,OH,Small Town,6.35,50.8,41.750,-82.237,5
+587,Wilson County,ID,Rural,4.08,74.8,46.211,-116.580,5
+757,Perry County,IN,Rural,5.77,91.7,39.478,-86.679,5
+1985,Lake County,NC,Small Town,7.81,59.9,36.354,-78.504,5
+111,Fayette County,AZ,Small Town,6.09,78.8,36.306,-113.016,5
+1606,Marion County,MT,Rural,4.82,64.8,48.186,-109.237,5
+1607,Adams County,MT,Small Town,7.98,51.7,45.346,-114.842,5
+1424,Randolph County,MS,Rural,6.33,34.8,30.655,-91.443,5
+2603,Jefferson County,TX,Rural,3.67,35.8,33.695,-95.183,5
+2176,Monroe County,OK,Rural,5.08,53.9,35.824,-101.479,5
+285,Washington County,CO,Suburban,10.29,50.7,37.748,-104.624,5
+324,Madison County,FL,Suburban,8.49,73.4,28.270,-83.887,5
+1888,Pike County,NY,Small Town,7.53,80.0,41.781,-73.332,5
+410,Randolph County,GA,Suburban,9.38,76.2,33.886,-82.055,5
+1964,Sullivan County,NC,Suburban,9.91,25.1,36.510,-82.826,5
+2902,Lincoln County,VA,Small Town,7.43,78.3,39.042,-80.694,5
+2280,Benton County,PA,Small Town,6.27,64.3,40.890,-78.158,5
+117,Jackson County,AR,Rural,5.79,23.7,35.765,-92.306,5
+1769,Monroe County,NH,Small Town,6.26,72.5,44.835,-70.883,5
+931,Lincoln County,KS,Small Town,7.87,88.4,39.738,-101.275,5
+2031,Franklin County,ND,Small Town,7.49,69.6,46.587,-97.245,5
+1992,Lincoln County,ND,Rural,5.33,38.3,46.816,-100.332,5
+1309,Cass County,MI,Suburban,11.56,30.0,47.553,-85.919,5
+1573,Adams County,MO,Rural,3.75,61.1,39.807,-95.574,5
+2700,Douglas County,TX,Suburban,9.42,45.3,33.084,-93.938,5
+1897,Clay County,NC,Suburban,9.61,48.7,35.085,-81.993,5
+2755,Ross County,TX,Suburban,11.75,15.9,30.454,-94.624,5
+2436,Marion County,TN,Suburban,9.39,81.0,36.640,-87.282,5
+174,Polk County,AR,Rural,5.51,47.1,34.378,-91.523,5
+2037,Clay County,ND,Rural,4.39,81.8,47.617,-99.801,5
+2261,Douglas County,PA,Small Town,6.84,23.6,41.481,-79.655,5
+2945,Morgan County,WA,Suburban,10.41,34.2,48.543,-124.213,5
+1536,Warren County,MO,Rural,5.41,88.9,38.687,-94.933,5
+2622,Perry County,TX,Small Town,7.47,72.4,31.907,-94.631,5
+643,Clay County,IL,Small Town,6.31,29.9,39.195,-91.205,5
+594,Lincoln County,ID,Rural,5.76,44.6,48.283,-117.191,5
+713,Lake County,IN,Small Town,7.58,63.3,38.420,-85.672,5
+2556,Shelby County,TX,Small Town,6.28,72.2,33.750,-99.335,5
+2320,Jackson County,SC,Rural,3.64,59.0,34.101,-79.707,5
+355,Sullivan County,FL,Suburban,11.44,85.6,24.977,-80.338,5
+1912,Randolph County,NC,Small Town,7.24,66.8,34.750,-83.701,5
+1158,Jackson Parish,LA,Small Town,7.35,38.4,32.482,-91.879,5
+2450,Randolph County,TN,Suburban,11.92,41.6,35.516,-88.905,5
+543,Wilson County,GA,Small Town,8.36,88.1,31.272,-84.246,5
+980,Greene County,KS,Small Town,6.87,80.0,38.197,-98.352,5
+447,Perry County,GA,Small Town,7.00,86.5,30.928,-82.055,5
+2759,Benton County,TX,Suburban,10.67,85.2,36.053,-97.126,5
+737,Washington County,IN,Small Town,8.10,48.0,40.332,-87.009,5
+1816,Polk County,NM,Rural,5.47,45.6,34.891,-104.518,5
+649,Fayette County,IL,Small Town,7.00,57.7,41.664,-90.489,5
+2323,Clay County,SC,Small Town,6.07,15.0,33.466,-80.156,5
+2356,Jefferson County,SC,Suburban,10.98,51.3,33.847,-83.259,5
+1451,Adams County,MS,Rural,5.30,20.7,32.785,-90.825,5
+1321,Union County,MN,Small Town,7.83,78.5,46.363,-90.434,5
+2079,Benton County,OH,Small Town,6.72,37.4,40.590,-83.941,5
+43,Franklin County,AL,Small Town,7.26,85.0,32.567,-85.997,5
+775,Cass County,IN,Rural,5.96,55.2,38.105,-86.518,5
+2008,Hamilton County,ND,Rural,4.30,90.8,46.857,-103.481,5
+3067,Hamilton County,WI,Small Town,6.53,18.4,46.005,-90.943,5
+212,Clark County,CA,Small Town,6.48,36.7,36.441,-123.792,5
+404,Grant County,GA,Small Town,6.33,92.6,33.072,-84.119,5
+1785,Greene County,NJ,Urban Core,13.36,84.7,41.338,-74.698,5
+91,Randolph Borough,AK,Small Town,8.59,63.3,70.932,-149.394,5
+151,Chester County,AR,Rural,4.12,37.9,33.449,-91.112,5
+636,Jefferson County,IL,Suburban,10.75,76.8,37.874,-88.971,5
+1948,Hamilton County,NC,Small Town,8.78,31.4,35.681,-78.847,5
+420,Ross County,GA,Small Town,7.28,93.9,33.562,-83.258,5
+1586,Randolph County,MO,Small Town,8.52,25.7,38.862,-90.850,5
+431,Madison County,GA,Rural,5.88,57.3,30.902,-81.201,5
+881,Greene County,IA,Small Town,8.02,78.8,42.197,-94.132,5
+172,Perry County,AR,Small Town,7.80,34.4,34.387,-92.256,5
+870,Jefferson County,IA,Suburban,10.71,26.0,42.193,-95.459,5
+211,Scott County,CA,Suburban,11.75,77.7,37.286,-114.553,5
+230,Lincoln County,CA,Small Town,6.57,40.7,36.041,-120.405,5
+1142,Knox Parish,LA,Suburban,8.64,28.2,30.371,-91.359,5
+2427,Washington County,TN,Small Town,7.12,30.5,36.357,-83.612,5
+1576,Warren County,MO,Small Town,7.65,94.9,39.410,-93.276,5
+2522,Washington County,TX,Small Town,8.19,89.9,28.811,-99.113,5
+822,Ross County,IA,Rural,6.43,62.6,43.053,-90.629,5
+2625,Randolph County,TX,Small Town,7.02,88.9,36.480,-97.324,5
+1083,Adams County,KY,Suburban,11.99,25.1,38.638,-89.510,5
+640,Jackson County,IL,Suburban,10.15,18.2,40.616,-88.357,5
+380,Perry County,FL,Suburban,10.52,94.9,28.903,-80.601,5
+1984,Montgomery County,NC,Suburban,9.52,19.6,35.995,-80.036,5
+1981,Greene County,NC,Small Town,7.03,13.0,36.304,-83.223,5
+2512,Jackson County,TN,Suburban,11.55,84.7,36.336,-89.064,5
+790,Jefferson County,IA,Rural,3.69,94.1,40.850,-94.434,5
+2465,Cass County,TN,Rural,5.75,94.5,35.123,-85.916,5
+1351,Benton County,MN,Suburban,11.39,50.5,48.104,-96.037,5
+544,Benton County,GA,Suburban,11.55,34.0,31.176,-81.229,5
+1904,Montgomery County,NC,Suburban,10.05,13.8,35.007,-79.066,5
+2852,Ross County,VA,Small Town,7.08,11.5,38.071,-83.321,5
+567,Lake County,ID,Small Town,8.05,37.9,44.515,-114.845,5
+2059,Grant County,OH,Suburban,9.09,35.5,41.341,-81.182,5
+395,Clay County,GA,Rural,3.51,68.6,31.071,-84.117,5
+2216,Marion County,OR,Rural,5.16,10.3,42.610,-122.495,5
+1538,Montgomery County,MO,Suburban,10.68,37.8,37.418,-93.028,5
+653,Douglas County,IL,Suburban,10.60,92.9,40.837,-91.458,5
+1852,Clark County,NY,Suburban,8.91,18.0,40.602,-75.650,5
+1823,Knox County,NM,Rural,3.71,37.5,32.283,-103.373,5
+94,Carroll Borough,AK,Suburban,10.20,36.9,56.719,-142.911,5
+1101,Johnson County,KY,Small Town,8.20,29.8,38.243,-83.527,5
+2689,Union County,TX,Rural,5.04,39.7,31.204,-105.862,5
+51,Adams County,AL,Small Town,8.35,14.3,34.798,-88.458,5
+785,Clay County,IN,Suburban,8.64,80.5,40.641,-87.225,5
+1183,Monroe County,ME,Small Town,6.86,80.9,46.268,-67.470,5
+2876,Grant County,VA,Small Town,8.21,68.2,37.098,-83.461,5
+1821,Harrison County,NM,Suburban,11.06,21.2,33.728,-103.819,5
+435,Clay County,GA,Suburban,10.13,90.1,34.285,-81.858,5
+802,Warren County,IA,Small Town,7.35,61.4,41.243,-90.615,5
+1307,Wilson County,MI,Suburban,10.49,88.9,41.715,-82.711,5
+155,Lincoln County,AR,Small Town,6.84,58.0,36.174,-91.011,5
+2784,Clay County,UT,Small Town,8.17,13.2,40.393,-110.494,5
+397,Adams County,GA,Small Town,8.49,82.0,31.168,-85.464,5
+2996,Lincoln County,WV,Rural,5.99,35.7,37.625,-81.751,5
+2752,Lawrence County,TX,Rural,6.38,33.2,31.635,-94.255,5
+1318,Madison County,MN,Small Town,7.99,45.4,46.815,-89.866,5
+103,Monroe County,AZ,Small Town,7.04,82.3,35.295,-109.589,5
+372,Greene County,FL,Urban Core,19.78,94.5,27.791,-87.004,5
+1815,Pike County,NM,Small Town,6.04,74.0,32.399,-106.487,5
+2489,Polk County,TN,Rural,4.65,32.8,35.736,-90.226,5
+847,Douglas County,IA,Suburban,10.14,57.7,42.929,-93.639,5
+1240,Marion County,MI,Suburban,10.54,72.0,46.977,-89.059,5
+1730,Benton County,NE,Suburban,8.79,31.7,42.046,-96.768,5
+2291,Clay County,PA,Suburban,8.36,72.4,40.862,-75.099,5
+1784,Wayne County,NJ,Small Town,6.46,25.4,38.935,-74.347,5
+1933,Madison County,NC,Small Town,8.47,80.9,34.279,-76.384,5
+867,Cass County,IA,Rural,4.46,13.7,42.695,-96.323,5
+956,Johnson County,KS,Suburban,10.20,16.7,38.330,-100.226,5
+2051,Marion County,OH,Small Town,7.37,23.8,41.663,-81.512,5
+19,Douglas County,AL,Small Town,8.91,40.3,32.444,-86.101,5
+2352,Benton County,SC,Small Town,6.94,82.1,34.613,-80.791,5
+1514,Morgan County,MO,Rural,5.78,54.6,40.462,-93.272,5
+634,Chester County,IL,Small Town,8.28,86.1,37.735,-89.593,5
+1728,Sullivan County,NE,Small Town,7.23,75.6,40.332,-99.648,5
+2072,Lawrence County,OH,Small Town,6.97,59.4,39.170,-83.985,5
+1317,Lincoln County,MN,Small Town,6.30,63.8,45.354,-89.722,5
+778,Jefferson County,IN,Suburban,8.84,91.3,40.527,-87.709,5
+2492,Clark County,TN,Small Town,6.30,90.1,35.333,-82.427,5
+2122,Washington County,OH,Suburban,9.62,88.8,40.529,-82.358,5
+153,Jefferson County,AR,Small Town,8.06,75.2,33.942,-92.186,5
+2961,Clay County,WV,Small Town,7.90,32.1,39.893,-80.423,5
+82,Fayette Borough,AK,Small Town,7.77,76.8,70.045,-141.527,5
+2837,Douglas County,VA,Small Town,7.46,54.9,37.504,-75.544,5
+1479,Cass County,MS,Small Town,6.42,10.1,30.959,-89.041,5
+1211,Douglas County,MD,Small Town,8.29,66.5,38.355,-78.124,5
+582,Morgan County,ID,Rural,5.15,58.5,46.477,-114.696,5
+365,Jackson County,FL,Suburban,9.80,75.4,28.985,-82.361,5
+1979,Adams County,NC,Rural,5.28,81.3,35.417,-81.910,5
+37,Wilson County,AL,Suburban,10.01,12.2,33.622,-85.257,5
+225,Cass County,CA,Small Town,7.71,39.5,41.534,-119.267,5
+144,Orange County,AR,Small Town,6.95,54.5,35.832,-90.660,5
+1059,Carroll County,KY,Suburban,11.30,38.0,38.585,-89.491,5
+1868,Jefferson County,NY,Small Town,8.00,10.5,44.115,-75.619,5
+3079,Morgan County,WI,Small Town,8.70,72.2,43.076,-88.594,5
+1016,Randolph County,KY,Rural,4.55,73.1,38.224,-86.401,5
+2347,Orange County,SC,Small Town,6.03,69.6,34.274,-80.727,5
+1017,Scott County,KY,Small Town,6.96,46.4,37.683,-82.866,5
+825,Wilson County,IA,Rural,5.65,65.2,41.369,-91.456,5
+2703,Pike County,TX,Small Town,6.70,52.2,26.668,-104.192,5
+1408,Union County,MS,Rural,3.56,80.6,30.480,-90.483,5
+2452,Clark County,TN,Small Town,7.88,48.3,36.202,-87.274,5
+471,Madison County,GA,Small Town,8.30,42.9,31.025,-83.632,5
+2009,Perry County,ND,Rural,4.23,16.9,48.237,-103.536,5
+2120,Cass County,OH,Suburban,9.00,75.4,40.302,-83.903,5
+1002,Marion County,KY,Small Town,6.47,28.5,38.649,-86.167,5
+2822,Lincoln County,VA,Small Town,8.61,90.0,38.682,-81.185,5
+2029,Washington County,ND,Small Town,8.95,92.2,46.740,-100.092,5
+1559,Wilson County,MO,Rural,4.88,21.1,37.414,-91.951,5
+429,Franklin County,GA,Suburban,9.59,16.1,32.426,-84.903,5
+2211,Madison County,OR,Rural,3.67,63.9,44.376,-117.785,5
+1637,Washington County,MT,Suburban,10.03,69.5,45.666,-109.186,5
+1261,Lawrence County,MI,Small Town,7.09,70.2,45.175,-84.541,5
+1159,Monroe Parish,LA,Suburban,9.32,17.5,30.476,-91.795,5
+1156,Lincoln Parish,LA,Small Town,6.67,64.7,31.271,-92.162,5
+373,Warren County,FL,Suburban,10.91,32.6,28.985,-87.172,5
+714,Grant County,IN,Small Town,7.68,64.3,38.242,-87.614,5
+2701,Hamilton County,TX,Suburban,9.85,10.0,25.857,-103.636,5
+1036,Lincoln County,KY,Suburban,8.97,53.5,37.452,-83.787,5
+1167,Fayette Parish,LA,Suburban,8.65,62.5,29.761,-89.308,5
+1185,Clay County,ME,Suburban,9.76,88.2,47.288,-70.536,5
+999,Monroe County,KY,Small Town,8.41,70.8,37.429,-87.414,5
+989,Pike County,KS,Small Town,8.40,46.2,37.350,-97.001,5
+281,Wilson County,CO,Small Town,8.11,88.7,37.555,-106.035,5
+1719,Carroll County,NE,Suburban,8.21,83.2,40.864,-98.141,5
+2018,Knox County,ND,Rural,3.76,28.8,48.191,-98.799,5
+2706,Scott County,TX,Suburban,11.93,65.6,27.591,-104.504,5
+1681,Johnson County,NE,Small Town,7.39,28.6,40.287,-100.120,5
+762,Clark County,IN,Suburban,9.12,65.4,40.297,-86.916,5
+1482,Jefferson County,MS,Small Town,6.89,29.5,34.219,-88.716,5
+1508,Clark County,MO,Suburban,10.60,63.1,38.051,-94.932,5
+707,Adams County,IN,Rural,5.81,20.8,39.485,-85.878,5
+2344,Knox County,SC,Suburban,9.37,94.4,33.800,-81.496,5
+774,Benton County,IN,Rural,4.04,93.1,38.481,-85.634,5
+2578,Lake County,TX,Rural,5.23,65.5,32.247,-96.016,5
+3028,Perry County,WI,Small Town,7.92,85.6,44.337,-89.184,5
+1272,Jefferson County,MI,Small Town,8.98,22.0,46.004,-89.963,5
+2816,Wayne County,VT,Rural,4.37,34.2,43.810,-72.529,5
+26,Clark County,AL,Small Town,6.87,20.7,34.267,-86.219,5
+1324,Adams County,MN,Suburban,9.38,35.7,48.526,-93.488,5
+2359,Madison County,SC,Small Town,7.10,53.0,34.075,-82.698,5
+1023,Lawrence County,KY,Small Town,8.29,72.9,38.031,-84.357,5
+2790,Fayette County,UT,Small Town,6.69,86.2,39.785,-112.116,5
+1457,Lake County,MS,Small Town,8.64,22.1,33.068,-91.150,5
+542,Sullivan County,GA,Small Town,6.54,81.2,32.189,-80.910,5
+113,Jefferson County,AR,Suburban,10.29,67.4,35.478,-92.937,5
+957,Knox County,KS,Suburban,9.70,85.7,38.926,-100.485,5
+2340,Clark County,SC,Suburban,11.88,88.1,32.084,-82.400,5
+1673,Perry County,NE,Small Town,7.26,75.0,40.456,-101.997,5
+1421,Perry County,MS,Suburban,11.62,29.8,34.635,-90.832,5
+2753,Morgan County,TX,Small Town,6.47,51.7,28.298,-99.519,5
+1115,Franklin Parish,LA,Suburban,10.54,79.8,31.665,-91.039,5
+513,Monroe County,GA,Rural,5.37,21.4,33.348,-81.426,5
+1678,Clark County,NE,Rural,3.53,51.2,40.888,-97.305,5
+1953,Scott County,NC,Suburban,11.49,17.7,34.100,-84.084,5
+2933,Hamilton County,WA,Small Town,6.05,92.6,45.899,-118.687,5
+603,Clay County,IL,Suburban,9.34,11.6,38.604,-91.046,5
+568,Grant County,ID,Rural,4.81,37.5,44.543,-115.696,5
+2962,Marion County,WV,Small Town,7.67,58.9,37.464,-79.833,5
+907,Hamilton County,KS,Suburban,11.39,71.4,39.501,-94.752,5
+1727,Shelby County,NE,Small Town,6.04,31.1,40.852,-101.916,5
+2397,Wilson County,SD,Rural,4.26,48.8,45.341,-96.866,5
+1793,Perry County,NJ,Urban Core,19.54,75.5,40.252,-75.296,5
+2947,Ross County,WA,Suburban,9.46,38.8,47.045,-117.415,5
+2311,Jefferson County,RI,Suburban,11.79,77.0,41.487,-71.216,5
+286,Jefferson County,CO,Small Town,6.84,50.8,39.211,-104.555,5
+2951,Benton County,WA,Suburban,11.85,13.5,45.695,-121.791,5
+2594,Orange County,TX,Suburban,8.92,91.5,26.343,-97.408,5
+1371,Grant County,MN,Suburban,9.60,57.9,43.788,-93.833,4
+2097,Montgomery County,OH,Suburban,8.75,53.7,41.613,-83.990,4
+1069,Wilson County,KY,Rural,3.90,80.6,37.393,-82.156,4
+1429,Johnson County,MS,Small Town,8.12,32.8,34.912,-91.050,4
+2138,Clay County,OK,Small Town,6.84,25.0,34.612,-99.597,4
+2343,Johnson County,SC,Small Town,8.21,75.8,33.781,-80.310,4
+3015,Union County,WI,Suburban,9.82,42.6,43.288,-87.665,4
+914,Carroll County,KS,Small Town,6.68,88.2,38.262,-98.046,4
+255,Adams County,CO,Small Town,7.94,25.4,39.485,-104.985,4
+2924,Adams County,WA,Small Town,7.40,55.3,48.368,-118.693,4
+1253,Polk County,MI,Small Town,6.40,10.3,42.983,-83.363,4
+86,Douglas Borough,AK,Small Town,8.78,90.4,61.876,-159.858,4
+537,Lawrence County,GA,Small Town,7.50,79.9,34.162,-81.088,4
+835,Monroe County,IA,Suburban,10.12,61.5,42.440,-90.908,4
+507,Washington County,GA,Small Town,7.17,16.5,30.660,-82.728,4
+295,Adams County,CO,Rural,3.61,83.8,38.845,-107.496,4
+1098,Clark County,KY,Rural,4.36,64.2,37.417,-84.264,4
+1972,Lincoln County,NC,Suburban,9.65,39.8,34.283,-78.578,4
+804,Montgomery County,IA,Small Town,7.55,89.2,41.760,-90.153,4
+1715,Polk County,NE,Rural,4.51,70.0,40.761,-96.997,4
+87,Hamilton Borough,AK,Rural,6.31,90.6,66.172,-159.840,4
+2248,Jackson County,PA,Suburban,8.39,78.5,41.401,-75.964,4
+669,Shelby County,IL,Small Town,7.27,39.2,42.125,-87.498,4
+48,Union County,AL,Suburban,9.18,46.3,33.760,-86.415,4
+1362,Clay County,MN,Rural,4.51,40.9,47.027,-90.228,4
+205,Douglas County,CA,Small Town,7.76,76.8,40.141,-121.816,4
+1737,Madison County,NE,Small Town,8.77,42.2,41.634,-103.754,4
+3057,Marion County,WI,Small Town,7.32,57.9,43.230,-91.719,4
+1670,Grant County,NE,Small Town,6.34,67.8,41.632,-99.606,4
+3094,Fayette County,WY,Small Town,7.66,20.6,42.797,-104.899,4
+1080,Union County,KY,Rural,4.37,16.5,38.331,-88.147,4
+2834,Montgomery County,VA,Suburban,9.16,41.6,38.539,-79.771,4
+586,Sullivan County,ID,Rural,4.38,52.7,43.585,-114.852,4
+2806,Jefferson County,VT,Small Town,7.22,47.1,43.842,-71.547,4
+1488,Jackson County,MO,Small Town,6.04,19.8,36.461,-94.086,4
+273,Johnson County,CO,Small Town,8.12,36.7,37.303,-104.384,4
+1138,Clark Parish,LA,Small Town,8.80,35.3,32.601,-92.386,4
+325,Jackson County,FL,Small Town,8.83,20.1,28.674,-84.646,4
+556,Jackson County,ID,Small Town,6.37,32.7,45.916,-113.453,4
+607,Greene County,IL,Small Town,6.49,14.6,37.158,-90.697,4
+2731,Marion County,TX,Small Town,7.79,69.9,30.935,-103.642,4
+1707,Fayette County,NE,Suburban,9.70,11.8,42.906,-97.171,4
+575,Scott County,ID,Rural,6.49,66.1,44.343,-112.360,4
+1232,Jefferson County,MI,Suburban,11.06,13.3,41.829,-83.440,4
+1265,Shelby County,MI,Small Town,7.51,80.3,43.500,-85.957,4
+3013,Jackson County,WI,Small Town,7.28,71.3,43.620,-90.303,4
+2032,Lincoln County,ND,Suburban,10.29,19.7,47.095,-99.864,4
+1236,Jackson County,MI,Rural,4.62,46.4,44.187,-86.017,4
+993,Washington County,KY,Small Town,7.76,11.7,37.897,-83.931,4
+159,Union County,AR,Small Town,6.22,62.6,34.442,-93.400,4
+1851,Scott County,NY,Small Town,6.50,86.8,41.484,-71.994,4
+1934,Jackson County,NC,Suburban,11.52,49.3,34.553,-83.176,4
+1160,Union Parish,LA,Suburban,9.62,13.2,31.319,-93.929,4
+2081,Chester County,OH,Suburban,10.62,74.1,39.740,-83.757,4
+2516,Marion County,TN,Rural,6.39,83.2,36.305,-85.703,4
+841,Greene County,IA,Suburban,8.53,13.3,41.158,-94.203,4
+2472,Jackson County,TN,Suburban,10.26,82.7,36.021,-82.931,4
+1137,Scott Parish,LA,Small Town,8.34,62.4,32.466,-89.185,4
+1827,Washington County,NY,Small Town,8.98,15.3,42.284,-73.107,4
+540,Ross County,GA,Suburban,8.09,67.3,31.487,-81.904,4
+503,Wilson County,GA,Small Town,6.52,50.4,32.107,-82.789,4
+1860,Ross County,NY,Small Town,7.08,19.7,44.713,-77.168,4
+934,Monroe County,KS,Small Town,6.36,35.6,37.848,-101.305,4
+319,Franklin County,DE,Suburban,11.38,16.5,39.051,-75.605,4
+695,Perry County,IL,Small Town,8.05,54.6,42.371,-87.719,4
+1580,Grant County,MO,Small Town,6.40,76.6,37.391,-90.661,4
+2389,Johnson County,SD,Suburban,11.37,29.6,45.787,-101.672,4
+2067,Clark County,OH,Small Town,8.05,80.0,38.770,-82.212,4
+920,Orange County,KS,Small Town,7.03,14.8,38.062,-101.226,4
+973,Jackson County,KS,Rural,5.64,13.8,39.629,-101.047,4
+1809,Montgomery County,NM,Rural,4.19,16.1,35.646,-107.223,4
+421,Shelby County,GA,Rural,4.39,40.7,33.081,-80.806,4
+364,Madison County,FL,Suburban,10.84,59.9,29.230,-85.035,4
+1574,Wayne County,MO,Rural,5.46,21.2,38.503,-95.744,4
+2086,Madison County,OH,Small Town,7.55,39.7,39.353,-83.712,4
+782,Jackson County,IN,Suburban,8.96,37.0,40.905,-87.312,4
+2066,Scott County,OH,Suburban,8.13,79.3,40.629,-84.750,4
+1150,Benton Parish,LA,Small Town,6.38,92.0,29.030,-93.700,4
+488,Pike County,GA,Small Town,6.35,83.6,33.224,-82.917,4
+2695,Warren County,TX,Rural,5.47,30.2,27.679,-95.744,4
+658,Randolph County,IL,Suburban,10.20,72.3,37.793,-90.061,4
+2535,Warren County,TX,Small Town,8.77,64.6,36.319,-94.003,4
+334,Fayette County,FL,Suburban,8.25,59.8,27.312,-84.196,4
+2747,Clark County,TX,Small Town,6.26,10.6,28.426,-95.692,4
+1535,Greene County,MO,Small Town,6.12,86.2,36.810,-93.271,4
+2173,Lincoln County,OK,Suburban,10.99,64.1,33.929,-100.537,4
+1251,Perry County,MI,Small Town,8.52,58.0,47.427,-85.850,4
+1990,Jefferson County,ND,Suburban,8.46,83.6,46.212,-97.703,4
+1264,Ross County,MI,Small Town,6.72,24.1,45.457,-88.601,4
+2749,Harrison County,TX,Small Town,8.81,23.3,31.754,-101.246,4
+1961,Orange County,NC,Small Town,7.58,81.4,35.644,-78.702,4
+2151,Pike County,OK,Small Town,6.27,46.9,33.903,-99.211,4
+665,Lawrence County,IL,Suburban,9.43,77.6,41.500,-89.965,4
+674,Chester County,IL,Suburban,8.40,84.3,42.465,-91.229,4
+77,Marion Borough,AK,Small Town,8.02,47.9,57.815,-145.954,4
+951,Randolph County,KS,Small Town,7.63,52.2,38.083,-97.521,4
+1869,Franklin County,NY,Suburban,11.59,69.5,40.903,-75.953,4
+554,Lincoln County,ID,Small Town,8.40,46.9,48.243,-116.988,4
+2543,Pike County,TX,Suburban,8.47,62.1,30.737,-98.965,4
+659,Scott County,IL,Suburban,10.99,18.2,40.412,-87.581,4
+1788,Montgomery County,NJ,Small Town,6.62,25.6,39.325,-74.462,4
+2309,Carroll County,PA,Suburban,8.53,92.1,42.289,-78.622,4
+1595,Orange County,MO,Rural,4.73,78.7,37.727,-90.725,4
+330,Adams County,FL,Suburban,8.10,17.2,27.458,-86.815,4
+3007,Fayette County,WV,Rural,6.29,78.7,38.933,-80.949,4
+2891,Orange County,VA,Suburban,11.37,14.3,37.776,-82.623,4
+1755,Marion County,NV,Small Town,8.98,14.4,37.055,-117.893,4
+2381,Perry County,SD,Small Town,7.92,25.4,44.889,-103.859,4
+599,Madison County,IL,Small Town,6.99,56.4,37.298,-89.519,4
+1230,Warren County,MA,Suburban,8.69,14.8,42.887,-71.498,4
+95,Harrison Borough,AK,Small Town,6.17,81.5,58.659,-147.143,4
+1752,Monroe County,NV,Small Town,7.17,54.4,39.802,-119.676,4
+572,Pike County,ID,Small Town,6.65,37.9,45.165,-115.945,4
+1107,Shelby County,KY,Small Town,6.24,21.3,37.158,-83.448,4
+1052,Hamilton County,KY,Rural,4.89,36.5,36.937,-88.524,4
+2277,Shelby County,PA,Small Town,8.98,88.7,41.166,-76.710,4
+1778,Jackson County,NJ,Urban Core,13.38,80.8,39.863,-75.114,4
+975,Union County,KS,Small Town,8.55,19.4,37.135,-100.791,4
+2101,Hamilton County,OH,Small Town,7.22,49.2,41.811,-84.239,4
+1384,Lawrence County,MN,Small Town,7.32,70.2,44.518,-93.195,4
+1044,Wayne County,KY,Small Town,8.56,53.8,38.589,-83.761,4
+2046,Madison County,OH,Small Town,8.46,63.5,40.578,-83.080,4
+3016,Clay County,WI,Suburban,10.70,58.0,43.527,-87.058,4
+749,Greene County,IN,Rural,5.99,72.3,41.479,-87.821,4
+982,Fayette County,KS,Suburban,8.81,78.7,39.223,-98.551,4
+2877,Douglas County,VA,Suburban,9.99,15.4,39.110,-82.373,4
+523,Lake County,GA,Small Town,7.13,89.4,33.045,-80.815,4
+1026,Ross County,KY,Small Town,6.76,42.6,37.133,-86.338,4
+2088,Monroe County,OH,Suburban,9.36,10.7,38.646,-84.409,4
+1650,Warren County,MT,Rural,3.84,12.1,45.279,-108.347,4
+767,Lawrence County,IN,Small Town,8.35,54.3,38.106,-86.976,4
+2078,Wilson County,OH,Suburban,11.06,76.4,40.581,-83.372,4
+1537,Fayette County,MO,Rural,3.82,73.6,36.063,-94.904,4
+605,Adams County,IL,Suburban,8.29,83.9,42.449,-87.778,4
+2772,Adams County,TX,Rural,4.22,93.5,35.026,-96.683,4
+2574,Greene County,TX,Small Town,6.25,94.3,32.895,-95.530,4
+731,Shelby County,IN,Small Town,6.40,93.6,39.804,-85.871,4
+908,Perry County,KS,Small Town,6.70,73.7,37.059,-98.057,4
+1541,Douglas County,MO,Small Town,6.17,49.5,37.004,-92.147,4
+2796,Perry County,UT,Suburban,8.16,26.3,37.635,-113.584,4
+2177,Union County,OK,Suburban,11.80,13.7,33.781,-94.820,4
+2268,Clark County,PA,Small Town,6.67,21.5,41.443,-79.226,4
+2254,Wayne County,PA,Suburban,10.90,25.4,39.918,-78.987,4
+66,Clark County,AL,Small Town,7.71,52.8,33.221,-88.437,4
+923,Sullivan County,KS,Rural,5.38,31.2,38.839,-97.564,4
+722,Clark County,IN,Small Town,6.19,10.4,39.666,-86.073,4
+1338,Scott County,MN,Small Town,6.28,89.1,47.660,-93.760,4
+323,Lincoln County,FL,Small Town,7.75,59.3,25.668,-87.266,4
+269,Scott County,CO,Small Town,7.85,33.4,39.353,-108.281,4
+22,Pike County,AL,Rural,6.31,57.8,32.778,-85.718,4
+267,Polk County,CO,Suburban,11.92,34.7,38.279,-107.364,4
+529,Polk County,GA,Rural,5.88,21.9,33.625,-82.939,4
+1301,Lawrence County,MI,Small Town,7.74,18.5,42.433,-90.122,4
+344,Scott County,FL,Suburban,11.67,68.0,24.689,-83.826,4
+2780,Madison County,UT,Small Town,8.27,84.8,38.635,-113.680,4
+1357,Lincoln County,MN,Small Town,6.57,84.7,47.835,-93.649,4
+1675,Polk County,NE,Small Town,8.54,39.1,40.078,-98.115,4
+1405,Madison County,MS,Rural,6.28,47.8,33.019,-88.196,4
+1148,Sullivan Parish,LA,Small Town,7.10,40.5,32.100,-92.645,4
+2519,Greene County,TN,Rural,4.32,90.7,35.614,-82.739,4
+2416,Montgomery County,SD,Small Town,8.49,72.2,42.630,-100.890,4
+1367,Warren County,MN,Suburban,11.57,74.3,44.356,-89.538,4
+1513,Lawrence County,MO,Small Town,6.65,84.4,36.962,-94.400,4
+222,Sullivan County,CA,Small Town,7.89,15.0,37.111,-115.585,4
+950,Polk County,KS,Rural,6.11,88.1,39.929,-101.236,4
+2275,Orange County,PA,Small Town,6.29,48.7,39.919,-76.978,4
+560,Marion County,ID,Rural,3.81,17.1,48.351,-112.605,4
+1277,Monroe County,MI,Small Town,6.67,94.2,46.223,-84.936,4
+1652,Montgomery County,MT,Small Town,7.96,65.1,45.351,-112.595,4
+1638,Jefferson County,MT,Small Town,8.27,72.8,48.509,-114.570,4
+73,Jackson Borough,AK,Small Town,7.98,42.2,58.705,-145.009,4
+1130,Grant Parish,LA,Suburban,9.40,24.6,30.953,-91.295,4
+452,Clark County,GA,Small Town,7.10,58.9,34.535,-84.499,4
+1515,Orange County,MO,Small Town,6.28,43.1,38.085,-89.847,4
+1684,Morgan County,NE,Suburban,11.21,12.6,42.294,-99.324,4
+63,Polk County,AL,Suburban,10.19,89.8,34.734,-87.558,4
+1152,Chester Parish,LA,Small Town,6.69,64.2,31.495,-91.360,4
+2301,Douglas County,PA,Suburban,11.75,62.8,42.005,-75.692,4
+309,Washington County,CT,Suburban,10.59,42.0,41.300,-72.028,4
+1045,Greene County,KY,Suburban,11.35,39.9,37.549,-83.457,4
+1331,Grant County,MN,Small Town,7.79,28.0,45.302,-90.877,4
+259,Fayette County,CO,Small Town,8.55,44.7,38.309,-106.964,4
+2430,Lincoln County,TN,Suburban,10.92,62.7,36.234,-84.923,4
+3023,Montgomery County,WI,Rural,3.99,73.7,44.017,-90.315,4
+2818,Warren County,VT,Suburban,10.25,10.7,44.966,-72.688,4
+570,Hamilton County,ID,Small Town,8.04,61.6,46.063,-112.030,4
+1342,Johnson County,MN,Suburban,11.63,76.9,48.174,-93.848,4
+1326,Greene County,MN,Rural,4.99,16.4,47.943,-90.662,4
+3041,Ross County,WI,Rural,3.98,88.6,44.505,-89.044,4
+2139,Marion County,OK,Suburban,9.42,58.1,34.581,-98.648,4
+2657,Montgomery County,TX,Small Town,8.91,21.4,26.366,-101.559,4
+613,Douglas County,IL,Suburban,9.09,66.1,37.369,-89.621,4
+467,Washington County,GA,Suburban,11.83,83.1,34.175,-80.982,4
+2314,Madison County,RI,Urban Core,16.49,84.0,41.686,-71.892,4
+208,Pike County,CA,Suburban,11.37,92.3,39.649,-119.629,4
+2730,Clay County,TX,Suburban,9.27,90.7,28.975,-101.865,4
+2230,Randolph County,OR,Suburban,11.10,59.3,42.027,-118.713,4
+1924,Sullivan County,NC,Small Town,6.34,87.0,34.588,-80.690,4
+792,Lincoln County,IA,Rural,4.53,34.1,41.245,-94.670,4
+522,Montgomery County,GA,Small Town,7.84,17.3,33.328,-81.980,4
+2044,Franklin County,OH,Small Town,8.62,78.1,38.847,-82.717,4
+1661,Clay County,NE,Suburban,9.92,67.2,41.201,-99.294,4
+1093,Perry County,KY,Rural,4.24,51.2,38.608,-88.168,4
+1061,Johnson County,KY,Rural,5.67,31.1,38.207,-86.201,4
+1256,Clark County,MI,Rural,4.44,13.7,42.343,-83.927,4
+2803,Harrison County,UT,Small Town,6.95,11.6,40.251,-110.688,4
+2550,Johnson County,TX,Suburban,10.13,86.5,34.538,-95.515,4
+1734,Jefferson County,NE,Rural,6.12,70.8,42.045,-96.117,4
+889,Jefferson County,KS,Small Town,8.33,64.1,37.683,-97.683,4
+1615,Douglas County,MT,Small Town,8.02,59.3,45.805,-106.211,4
+1297,Carroll County,MI,Rural,4.05,75.9,44.794,-85.180,4
+3,Franklin County,AL,Suburban,8.01,47.2,32.713,-87.536,4
+1437,Wilson County,MS,Suburban,8.54,78.0,30.395,-90.027,4
+1764,Jefferson County,NH,Small Town,8.32,86.6,43.462,-71.462,4
+746,Marion County,IN,Rural,3.78,50.8,41.067,-86.403,4
+1191,Fayette County,ME,Suburban,10.43,32.1,46.948,-67.851,4
+4,Lincoln County,AL,Small Town,8.31,21.1,33.576,-86.979,4
+744,Union County,IN,Small Town,7.45,45.9,38.584,-85.828,4
+1072,Chester County,KY,Rural,5.55,85.2,38.611,-87.208,4
+1768,Jackson County,NH,Small Town,7.14,19.4,44.232,-71.341,4
+2039,Adams County,ND,Suburban,8.35,88.3,48.217,-103.551,4
+1388,Shelby County,MN,Small Town,8.01,23.4,49.227,-95.840,4
+1659,Monroe County,NE,Suburban,11.89,45.1,40.406,-97.028,4
+1489,Monroe County,MO,Suburban,9.43,64.7,39.297,-93.659,4
+783,Monroe County,IN,Suburban,11.27,18.2,38.183,-87.828,4
+199,Greene County,CA,Suburban,8.97,67.1,40.345,-117.256,4
+451,Scott County,GA,Suburban,10.14,57.9,30.875,-83.123,4
+928,Washington County,KS,Small Town,6.56,90.6,38.238,-101.573,4
+1224,Union County,MA,Small Town,7.51,10.7,41.809,-71.112,4
+348,Johnson County,FL,Small Town,8.37,78.9,26.723,-87.011,4
+2953,Washington County,WV,Small Town,6.24,93.3,38.258,-80.761,4
+1310,Chester County,MI,Suburban,11.24,32.5,47.837,-89.311,4
+1798,Madison County,NM,Rural,5.02,36.0,32.707,-104.672,4
+470,Lincoln County,GA,Suburban,9.33,29.2,33.090,-84.587,4
+2838,Hamilton County,VA,Rural,5.99,55.9,37.635,-78.443,4
+1316,Franklin County,MN,Suburban,9.44,49.9,45.855,-90.291,4
+2886,Harrison County,VA,Rural,5.91,16.3,39.372,-77.761,4
+1701,Clay County,NE,Rural,4.92,49.7,41.616,-96.496,4
+1033,Washington County,KY,Rural,5.36,52.5,38.992,-84.293,4
+58,Grant County,AL,Small Town,7.13,58.5,33.602,-86.869,4
+1516,Ross County,MO,Suburban,11.32,17.8,38.052,-92.522,4
+916,Johnson County,KS,Small Town,7.39,89.5,37.597,-97.536,4
+899,Wayne County,KS,Rural,6.09,68.5,38.677,-94.833,4
+967,Chester County,KS,Rural,3.83,42.4,37.797,-102.050,4
+959,Morgan County,KS,Small Town,7.88,69.4,37.337,-96.301,4
+2367,Monroe County,SD,Rural,4.98,37.3,45.251,-103.281,4
+307,Polk County,CO,Small Town,8.06,58.4,37.644,-102.331,4
+2599,Benton County,TX,Suburban,11.93,93.3,30.401,-93.518,4
+188,Jefferson County,CA,Suburban,10.83,86.8,40.525,-116.627,4
+3092,Greene County,WY,Small Town,8.77,60.5,42.779,-108.751,4
+1634,Benton County,MT,Rural,4.80,45.9,46.764,-109.130,4
+1853,Carroll County,NY,Suburban,8.98,61.7,40.505,-76.293,4
+2892,Ross County,VA,Small Town,6.35,42.6,39.381,-83.238,4
+1783,Adams County,NJ,Suburban,9.61,91.5,41.106,-74.901,4
+9,Clay County,AL,Small Town,7.31,64.9,33.403,-85.819,4
+1718,Clark County,NE,Suburban,11.88,62.5,42.247,-97.132,4
+1275,Madison County,MI,Rural,4.34,56.0,48.121,-84.708,4
+1806,Greene County,NM,Small Town,8.35,32.2,31.729,-106.437,4
+192,Jackson County,CA,Urban Core,14.37,70.9,41.060,-118.116,4
+407,Perry County,GA,Suburban,11.44,33.5,32.986,-84.851,4
+104,Union County,AZ,Small Town,7.51,40.6,36.104,-112.054,4
+2232,Clark County,OR,Small Town,7.14,31.9,42.474,-121.538,4
+1270,Chester County,MI,Small Town,6.46,44.7,47.240,-83.444,4
+764,Harrison County,IN,Small Town,8.38,83.1,39.804,-87.619,4
+2296,Warren County,PA,Small Town,6.47,37.5,42.283,-74.940,4
+2663,Pike County,TX,Suburban,9.63,52.6,31.916,-104.822,4
+2003,Fayette County,ND,Small Town,7.91,45.6,48.698,-102.473,4
+163,Wayne County,AR,Rural,6.30,48.8,34.909,-90.434,4
+2540,Douglas County,TX,Suburban,8.67,92.4,34.071,-94.570,4
+165,Warren County,AR,Suburban,11.56,15.4,34.426,-93.994,4
+2800,Scott County,UT,Suburban,11.35,35.2,37.535,-110.828,4
+2576,Fayette County,TX,Small Town,6.90,14.1,33.845,-94.975,4
+2318,Lincoln County,SC,Rural,6.08,89.4,32.097,-79.670,4
+2893,Shelby County,VA,Small Town,6.46,43.2,37.903,-78.848,4
+1007,Fayette County,KY,Rural,3.74,13.4,38.177,-85.944,4
+1578,Montgomery County,MO,Small Town,7.51,11.3,36.637,-91.565,4
+430,Lincoln County,GA,Suburban,10.77,62.4,34.091,-85.323,4
+458,Morgan County,GA,Suburban,11.33,55.9,33.212,-82.452,4
+2989,Wilson County,WV,Small Town,8.36,60.2,37.599,-78.624,4
+1366,Greene County,MN,Small Town,8.78,93.6,46.722,-92.562,4
+2383,Polk County,SD,Small Town,6.09,13.3,42.875,-97.288,4
+3032,Scott County,WI,Rural,3.75,12.2,46.398,-90.442,4
+1506,Randolph County,MO,Small Town,8.03,12.8,39.786,-93.655,4
+1311,Washington County,MI,Suburban,9.43,21.5,46.930,-82.835,4
+1609,Greene County,MT,Small Town,6.72,82.0,48.809,-113.323,4
+3101,Pike County,WY,Small Town,8.77,42.1,41.947,-105.550,4
+393,Monroe County,GA,Small Town,6.38,58.5,31.876,-83.311,4
+1125,Greene Parish,LA,Rural,5.57,53.8,32.842,-91.115,4
+141,Knox County,AR,Small Town,8.09,74.7,33.079,-90.130,4
+1590,Harrison County,MO,Suburban,9.84,60.4,37.833,-93.951,4
+1022,Knox County,KY,Small Town,8.66,59.0,37.900,-87.137,4
+478,Wayne County,GA,Rural,6.28,27.9,31.707,-83.101,4
+1749,Lincoln County,NV,Small Town,6.03,74.6,38.001,-115.230,4
+2963,Adams County,WV,Small Town,7.42,55.1,37.618,-79.419,4
+1458,Grant County,MS,Small Town,8.49,78.7,33.876,-91.581,4
+203,Lake County,CA,Urban Core,12.30,81.2,36.973,-118.833,4
+3083,Lincoln County,WY,Rural,5.37,17.9,41.730,-105.782,4
+818,Knox County,IA,Suburban,10.29,78.6,40.701,-93.912,4
+2990,Benton County,WV,Small Town,9.00,29.9,38.809,-80.969,4
+1199,Monroe County,MD,Small Town,7.68,11.3,38.073,-79.149,4
+2496,Knox County,TN,Rural,5.40,26.4,35.046,-84.655,4
+46,Jackson County,AL,Rural,5.44,44.4,34.589,-85.805,4
+906,Douglas County,KS,Rural,4.11,69.3,37.090,-97.915,4
+1885,Douglas County,NY,Small Town,8.83,40.5,40.881,-78.948,4
+98,Jefferson County,AZ,Small Town,9.00,21.4,35.122,-112.687,4
+2405,Madison County,SD,Small Town,8.01,62.8,44.719,-100.612,4
+1062,Knox County,KY,Small Town,6.47,70.1,38.021,-83.622,4
+1724,Morgan County,NE,Small Town,7.79,32.8,41.720,-97.749,4
+912,Scott County,KS,Rural,5.89,21.0,37.211,-102.039,4
+2859,Washington County,VA,Suburban,10.82,66.3,36.737,-83.246,4
+998,Jackson County,KY,Rural,4.17,55.8,38.928,-86.608,4
+3003,Adams County,WV,Small Town,6.02,64.2,38.340,-78.175,4
+743,Monroe County,IN,Small Town,7.85,60.4,39.701,-86.206,4
+1381,Harrison County,MN,Small Town,7.94,86.7,44.839,-92.578,4
+1018,Clark County,KY,Small Town,8.09,20.0,37.053,-82.883,4
+1668,Montgomery County,NE,Suburban,8.25,55.5,40.455,-95.423,4
+935,Union County,KS,Rural,5.32,39.6,39.478,-98.827,4
+1140,Harrison Parish,LA,Suburban,9.39,77.1,32.574,-92.261,4
+2910,Wayne County,VA,Small Town,6.47,41.0,38.830,-77.701,4
+1892,Lincoln County,NC,Small Town,7.25,55.4,34.860,-77.982,4
+1274,Lincoln County,MI,Suburban,8.59,83.8,43.672,-85.788,4
+485,Douglas County,GA,Rural,4.74,22.7,32.810,-81.651,4
+668,Ross County,IL,Small Town,6.79,62.9,37.593,-91.450,4
+787,Adams County,IN,Suburban,11.28,49.9,39.077,-87.431,4
+1571,Clay County,MO,Rural,5.42,34.4,36.515,-92.874,4
+2760,Cass County,TX,Small Town,8.09,19.1,36.454,-102.109,4
+1826,Orange County,NM,Small Town,8.08,12.9,33.616,-107.135,4
+2646,Madison County,TX,Small Town,8.34,86.5,32.929,-96.383,4
+1219,Franklin County,MA,Urban Core,14.67,83.5,42.229,-71.991,4
+2449,Polk County,TN,Small Town,7.84,76.1,36.135,-85.495,4
+843,Fayette County,IA,Small Town,6.33,34.2,42.369,-92.287,4
+850,Pike County,IA,Small Town,6.81,71.8,41.213,-91.238,4
+2571,Marion County,TX,Suburban,10.20,24.6,32.582,-95.067,4
+3005,Greene County,WV,Suburban,8.15,53.5,38.630,-82.536,4
+2563,Jefferson County,TX,Rural,3.68,93.2,32.898,-102.166,4
+1097,Scott County,KY,Suburban,9.68,18.5,37.534,-87.593,4
+2840,Pike County,VA,Small Town,8.90,23.9,36.530,-79.838,4
+327,Union County,FL,Suburban,9.02,84.6,26.770,-82.690,4
+2847,Johnson County,VA,Suburban,9.53,19.1,37.466,-81.134,4
+2015,Carroll County,ND,Small Town,8.12,74.2,46.875,-98.705,4
+494,Harrison County,GA,Small Town,6.14,18.1,30.509,-80.930,4
+44,Lincoln County,AL,Small Town,8.11,83.8,32.740,-86.946,4
+2948,Shelby County,WA,Suburban,11.60,26.6,46.447,-122.765,4
+2453,Carroll County,TN,Small Town,7.06,11.6,35.567,-85.977,4
+405,Douglas County,GA,Small Town,7.74,89.2,30.521,-83.861,4
+136,Scott County,AR,Small Town,6.09,35.5,36.022,-89.937,4
+812,Randolph County,IA,Small Town,6.69,70.1,41.151,-91.449,4
+2683,Jefferson County,TX,Suburban,8.31,81.8,35.451,-106.146,4
+107,Adams County,AZ,Small Town,7.08,81.8,34.726,-111.595,4
+1566,Lincoln County,MO,Rural,5.30,53.8,37.742,-90.439,4
+836,Union County,IA,Small Town,7.96,62.8,42.788,-90.476,4
+2385,Scott County,SD,Small Town,8.77,89.5,44.818,-99.068,4
+1598,Jefferson County,MT,Small Town,8.85,47.8,45.247,-109.456,4
+2027,Cass County,ND,Suburban,8.70,47.2,48.362,-96.900,4
+1443,Franklin County,MS,Suburban,10.03,81.2,34.374,-90.464,4
+173,Pike County,AR,Suburban,9.10,40.2,36.308,-90.525,4
+2723,Jefferson County,TX,Suburban,11.06,14.8,35.369,-96.553,4
+1509,Carroll County,MO,Small Town,7.70,58.4,40.121,-93.158,4
+142,Lawrence County,AR,Suburban,9.97,28.8,34.618,-94.225,4
+189,Franklin County,CA,Small Town,8.69,27.0,38.618,-117.000,4
+1932,Lincoln County,NC,Rural,3.53,27.7,35.192,-81.105,4
+2329,Fayette County,SC,Suburban,9.12,84.7,32.957,-78.519,4
+983,Montgomery County,KS,Suburban,8.61,82.9,39.567,-98.759,4
+869,Washington County,IA,Small Town,8.70,22.9,42.480,-96.002,4
+2312,Franklin County,RI,Urban Core,14.05,55.1,41.102,-71.537,4
+1838,Wayne County,NY,Small Town,7.01,63.4,42.137,-75.357,4
+1180,Lincoln County,ME,Small Town,6.23,93.7,43.166,-68.567,4
+2853,Shelby County,VA,Suburban,10.15,74.7,38.733,-76.687,4
+685,Adams County,IL,Suburban,8.44,40.2,39.409,-89.805,4
+468,Jefferson County,GA,Small Town,7.93,93.6,31.328,-83.008,4
+1836,Marion County,NY,Small Town,6.01,27.7,41.710,-72.990,4
+655,Perry County,IL,Small Town,6.52,32.5,42.367,-89.243,4
+6,Jackson County,AL,Rural,4.85,86.4,34.398,-85.643,4
+1413,Greene County,MS,Small Town,7.52,28.1,33.107,-89.668,4
+23,Polk County,AL,Small Town,7.08,88.9,33.729,-87.207,4
+1356,Franklin County,MN,Suburban,10.23,79.5,47.489,-92.119,4
+5,Madison County,AL,Suburban,9.58,21.2,33.250,-85.634,4
+1468,Harrison County,MS,Suburban,9.65,88.8,30.260,-91.203,4
+215,Johnson County,CA,Small Town,7.27,51.3,41.709,-124.128,4
+276,Morgan County,CO,Small Town,8.06,91.1,39.439,-106.668,4
+2504,Benton County,TN,Small Town,8.68,13.3,36.038,-86.553,4
+1487,Madison County,MO,Suburban,9.99,82.5,39.596,-92.154,4
+1677,Scott County,NE,Rural,4.80,44.7,42.845,-100.690,4
+2975,Polk County,WV,Rural,5.69,28.1,40.207,-78.334,4
+1354,Washington County,MN,Suburban,9.41,44.7,45.938,-90.923,4
+1624,Harrison County,MT,Rural,5.71,57.4,44.448,-114.082,4
+2673,Morgan County,TX,Small Town,7.66,68.0,31.713,-103.415,4
+239,Greene County,CA,Suburban,10.86,42.2,39.140,-121.509,4
+1843,Lake County,NY,Suburban,9.02,83.7,42.602,-77.340,4
+90,Polk Borough,AK,Small Town,8.84,24.8,62.049,-159.248,4
+502,Sullivan County,GA,Suburban,10.30,75.7,34.437,-84.939,4
+3047,Chester County,WI,Suburban,11.06,42.0,46.153,-91.947,4
+1244,Warren County,MI,Suburban,11.91,48.0,43.442,-87.893,4
+1906,Grant County,NC,Suburban,10.56,43.1,34.874,-79.047,4
+492,Clark County,GA,Small Town,8.77,50.0,32.927,-84.787,4
+2914,Washington County,WA,Suburban,10.19,47.7,45.802,-120.724,4
+1121,Clay Parish,LA,Suburban,10.14,74.3,32.107,-90.391,4
+293,Clay County,CO,Small Town,8.74,83.5,40.592,-105.192,4
+954,Carroll County,KS,Small Town,6.77,22.2,37.901,-99.230,4
+1027,Shelby County,KY,Suburban,9.90,83.9,38.618,-83.478,4
+2491,Scott County,TN,Small Town,7.63,85.0,35.550,-81.992,4
+2179,Marion County,OK,Rural,5.33,44.6,34.424,-102.151,4
+2054,Greene County,OH,Small Town,7.33,93.9,41.509,-82.408,4
+2272,Knox County,PA,Suburban,8.95,86.6,40.504,-80.223,4
+1494,Wayne County,MO,Suburban,11.09,77.0,38.559,-89.375,4
+1801,Union County,NM,Small Town,6.62,73.7,35.071,-103.765,4
+1456,Montgomery County,MS,Rural,4.26,21.8,34.664,-89.997,4
+2414,Warren County,SD,Small Town,7.97,57.6,43.814,-102.774,4
+2135,Jackson County,OK,Small Town,8.52,28.6,33.918,-102.796,4
+1700,Union County,NE,Small Town,7.87,18.9,41.303,-101.789,4
+3006,Warren County,WV,Rural,6.12,40.3,37.436,-79.351,4
+60,Hamilton County,AL,Small Town,6.75,11.8,32.922,-86.219,4
+2128,Monroe County,OH,Small Town,6.59,52.3,40.088,-83.848,4
+2384,Randolph County,SD,Rural,5.60,29.7,43.137,-97.808,4
+214,Harrison County,CA,Suburban,10.59,88.4,32.931,-122.618,4
+398,Wayne County,GA,Small Town,7.70,90.9,30.562,-84.591,4
+1166,Warren Parish,LA,Small Town,7.53,41.8,29.512,-89.253,4
+705,Clay County,IN,Rural,6.08,91.6,41.727,-86.583,4
+1954,Clark County,NC,Suburban,10.55,40.4,35.423,-77.965,4
+1834,Union County,NY,Suburban,9.62,52.5,43.069,-79.010,4
+2734,Greene County,TX,Suburban,8.09,55.9,28.933,-105.082,4
+2065,Randolph County,OH,Small Town,6.37,64.6,39.646,-84.136,4
+1641,Madison County,MT,Small Town,8.69,36.0,48.777,-112.494,4
+2180,Adams County,OK,Rural,5.59,81.3,33.858,-102.733,4
+2200,Lawrence County,OK,Small Town,8.95,82.1,33.639,-102.938,4
+149,Benton County,AR,Small Town,6.89,54.8,35.293,-91.975,4
+463,Wilson County,GA,Small Town,7.91,22.7,33.417,-84.934,4
+282,Benton County,CO,Suburban,10.72,19.1,38.987,-109.028,4
+2565,Lincoln County,TX,Suburban,11.08,80.4,32.590,-94.469,4
+67,Carroll County,AL,Small Town,8.60,73.4,34.380,-85.187,4
+1558,Sullivan County,MO,Suburban,11.01,91.0,39.653,-95.300,4
+930,Franklin County,KS,Small Town,7.26,33.3,39.246,-96.497,4
+2249,Monroe County,PA,Small Town,7.86,20.8,41.376,-79.565,4
+1063,Lawrence County,KY,Suburban,8.14,60.4,37.767,-88.156,4
+1349,Sullivan County,MN,Small Town,8.00,81.2,46.041,-93.666,4
+2222,Montgomery County,OR,Small Town,7.34,34.8,43.093,-120.559,4
+356,Wilson County,FL,Suburban,10.95,28.7,26.730,-80.934,4
+2533,Wayne County,TX,Suburban,11.80,44.4,35.560,-103.062,4
+1989,Washington County,ND,Small Town,8.36,52.8,46.645,-100.721,4
+1060,Harrison County,KY,Suburban,8.13,89.1,37.698,-88.579,4
+955,Harrison County,KS,Small Town,8.50,26.9,38.361,-99.211,4
+3093,Warren County,WY,Small Town,8.23,49.2,41.977,-110.622,4
+1626,Knox County,MT,Small Town,6.70,33.5,48.720,-108.600,4
+1639,Franklin County,MT,Rural,4.80,86.1,44.956,-104.867,4
+849,Perry County,IA,Small Town,7.08,45.7,40.466,-96.188,4
+453,Carroll County,GA,Suburban,9.08,48.9,31.565,-85.137,4
+2255,Greene County,PA,Small Town,6.15,76.3,40.562,-75.832,4
+2464,Benton County,TN,Small Town,8.75,76.5,35.021,-88.511,4
+2095,Warren County,OH,Small Town,8.43,44.0,40.893,-81.818,4
+925,Benton County,KS,Rural,5.43,25.0,38.638,-101.186,4
+361,Jefferson County,FL,Suburban,11.55,20.2,25.433,-85.435,4
+2208,Jefferson County,OR,Suburban,9.19,60.1,44.154,-124.238,4
+751,Fayette County,IN,Small Town,7.89,14.9,39.880,-86.134,4
+2935,Pike County,WA,Small Town,7.89,34.3,48.967,-118.100,4
+2349,Shelby County,SC,Small Town,6.38,29.8,34.326,-81.583,4
+657,Polk County,IL,Small Town,8.79,52.7,37.844,-87.647,4
+1736,Lincoln County,NE,Rural,5.29,31.7,42.728,-100.552,4
+1291,Perry County,MI,Small Town,6.95,84.6,42.929,-86.452,4
+577,Carroll County,ID,Suburban,10.82,73.1,47.068,-114.286,4
+1963,Shelby County,NC,Small Town,6.13,37.1,34.957,-81.119,4
+2434,Union County,TN,Small Town,8.32,41.6,35.093,-83.841,4
+2227,Perry County,OR,Rural,4.71,20.8,44.900,-117.296,4
+945,Grant County,KS,Suburban,9.69,25.1,38.291,-101.424,4
+2889,Lawrence County,VA,Small Town,8.30,48.2,38.130,-76.677,4
+1432,Morgan County,MS,Small Town,7.37,66.7,32.940,-88.538,4
+1547,Scott County,MO,Small Town,7.00,57.8,40.091,-94.610,4
+2321,Monroe County,SC,Small Town,8.18,30.8,33.329,-80.117,4
+2500,Ross County,TN,Suburban,9.51,71.8,35.266,-89.436,4
+493,Carroll County,GA,Suburban,9.19,43.3,33.496,-83.073,4
+2518,Wayne County,TN,Suburban,9.32,81.4,36.023,-89.241,4
+328,Clay County,FL,Small Town,8.84,66.6,29.207,-80.685,4
+1260,Knox County,MI,Rural,4.00,93.5,45.235,-83.050,4
+3080,Washington County,WY,Rural,3.53,44.6,44.167,-105.820,4
+1632,Sullivan County,MT,Small Town,8.21,86.0,46.353,-104.909,4
+621,Carroll County,IL,Suburban,8.61,94.8,40.369,-88.114,4
+1449,Clay County,MS,Small Town,7.76,41.3,31.050,-88.844,4
+2410,Marion County,SD,Rural,5.41,94.1,42.555,-100.181,4
+2012,Randolph County,ND,Small Town,6.17,39.6,46.285,-102.102,4
+2285,Franklin County,PA,Suburban,8.58,23.3,41.406,-77.306,4
+112,Washington County,AR,Suburban,8.37,61.9,34.034,-91.501,4
+590,Chester County,ID,Suburban,10.00,35.9,45.747,-115.326,4
+1372,Douglas County,MN,Small Town,8.52,49.9,46.102,-91.574,4
+3102,Polk County,WY,Suburban,11.29,13.4,44.124,-104.532,4
+1976,Union County,NC,Suburban,8.33,72.3,35.325,-82.299,4
+1766,Lincoln County,NH,Suburban,11.39,40.1,43.781,-71.372,4
+96,Johnson Borough,AK,Small Town,7.60,33.1,56.799,-145.785,4
+2002,Warren County,ND,Suburban,10.34,18.2,47.555,-98.500,4
+2530,Clay County,TX,Suburban,8.24,28.0,26.974,-104.037,4
+1614,Grant County,MT,Small Town,7.88,94.6,47.575,-112.094,4
+1605,Clay County,MT,Suburban,11.44,92.2,45.546,-115.631,4
+1999,Adams County,ND,Rural,6.39,79.4,47.458,-102.149,4
+2068,Carroll County,OH,Small Town,6.82,53.5,38.957,-83.001,4
+2632,Lawrence County,TX,Suburban,9.00,27.4,35.667,-96.985,4
+305,Perry County,CO,Small Town,8.75,27.0,37.139,-102.606,4
+770,Ross County,IN,Suburban,11.77,22.6,41.181,-84.822,4
+2677,Sullivan County,TX,Small Town,8.85,62.8,27.668,-98.409,4
+1733,Washington County,NE,Rural,5.98,45.0,41.540,-98.052,4
+2778,Franklin County,UT,Small Town,8.40,93.5,39.740,-113.728,4
+700,Lincoln County,IN,Rural,4.26,66.5,39.581,-86.918,4
+178,Carroll County,AR,Rural,6.25,24.0,36.154,-90.006,4
+1433,Orange County,MS,Small Town,6.19,44.2,33.851,-90.383,4
+1523,Washington County,MO,Suburban,8.90,46.5,36.575,-93.805,4
+1176,Randolph Parish,LA,Small Town,8.94,63.1,32.833,-90.370,4
+2610,Clay County,TX,Small Town,8.57,34.3,36.469,-105.738,4
+2801,Clark County,UT,Rural,3.99,52.0,37.703,-110.807,4
+1693,Washington County,NE,Small Town,8.31,41.7,42.287,-100.988,4
+1812,Douglas County,NM,Rural,5.04,90.4,34.117,-105.827,4
+3039,Morgan County,WI,Suburban,8.42,90.8,44.944,-89.679,4
+2791,Montgomery County,UT,Suburban,9.21,72.0,41.552,-113.599,4
+2857,Cass County,VA,Suburban,10.32,65.0,37.510,-78.712,4
+2199,Knox County,OK,Small Town,6.38,73.0,35.343,-98.704,4
+1078,Jackson County,KY,Suburban,11.80,61.8,37.023,-85.227,4
+2968,Montgomery County,WV,Rural,5.41,30.5,38.473,-79.035,4
+509,Franklin County,GA,Rural,4.78,13.3,31.139,-85.122,4
+1555,Orange County,MO,Rural,6.32,59.9,36.124,-92.392,4
+711,Fayette County,IN,Small Town,8.30,28.8,40.432,-86.916,4
+1267,Wilson County,MI,Small Town,7.00,90.3,44.246,-85.279,4
+2528,Monroe County,TX,Small Town,7.80,90.8,35.764,-103.347,4
+1420,Hamilton County,MS,Rural,6.09,82.7,33.034,-90.480,4
+1058,Clark County,KY,Rural,4.85,35.8,38.087,-83.116,4
+1703,Adams County,NE,Small Town,8.23,27.1,41.774,-101.469,4
+2168,Cass County,OK,Rural,5.98,53.6,34.011,-96.868,4
+786,Marion County,IN,Small Town,6.29,78.4,40.968,-85.752,4
+1519,Wilson County,MO,Suburban,10.92,90.1,39.877,-89.253,4
+1672,Hamilton County,NE,Rural,5.39,87.1,41.774,-97.144,4
+3061,Warren County,WI,Small Town,6.43,68.9,43.660,-91.210,4
+2929,Montgomery County,WA,Suburban,11.42,73.4,47.777,-121.594,4
+1861,Shelby County,NY,Suburban,8.90,66.7,40.986,-74.313,4
+1739,Monroe County,NE,Rural,5.55,66.0,42.775,-100.532,4
+877,Clay County,IA,Suburban,9.57,57.7,41.591,-93.446,4
+99,Franklin County,AZ,Small Town,8.42,91.2,32.079,-110.816,4
+2374,Warren County,SD,Rural,5.85,52.7,44.373,-104.062,4
+589,Cass County,ID,Small Town,6.09,20.3,48.094,-114.884,4
+913,Clark County,KS,Small Town,6.91,36.2,37.430,-98.090,4
+268,Randolph County,CO,Small Town,8.43,14.4,39.072,-105.697,4
+3036,Johnson County,WI,Small Town,8.73,85.5,46.194,-86.852,4
+1898,Marion County,NC,Suburban,8.45,83.1,33.813,-78.159,4
+3099,Hamilton County,WY,Small Town,8.80,68.1,41.062,-107.082,4
+506,Chester County,GA,Small Town,6.30,29.2,34.194,-83.270,4
+315,Monroe County,CT,Suburban,11.04,11.6,41.859,-73.266,4
+672,Benton County,IL,Suburban,10.80,10.6,37.801,-87.175,4
+807,Douglas County,IA,Small Town,8.74,66.7,40.633,-90.615,4
+36,Sullivan County,AL,Small Town,7.04,64.8,33.597,-86.604,4
+2643,Jefferson County,TX,Suburban,8.56,27.3,26.788,-100.817,4
+2541,Hamilton County,TX,Suburban,11.23,93.6,34.501,-99.943,4
+805,Lake County,IA,Rural,5.68,81.7,41.935,-95.487,4
+2958,Jackson County,WV,Rural,5.78,57.6,39.975,-81.082,4
+2182,Greene County,OK,Small Town,8.73,44.1,36.639,-102.611,4
+2792,Lake County,UT,Small Town,6.71,25.8,40.238,-110.897,4
+1029,Wilson County,KY,Suburban,8.12,26.7,38.374,-87.331,4
+1805,Wayne County,NM,Small Town,6.49,83.5,33.044,-106.636,4
+1563,Washington County,MO,Small Town,8.63,29.6,37.222,-89.296,4
+1776,Lincoln County,NJ,Small Town,7.36,71.5,38.935,-74.523,4
+1760,Fayette County,NV,Suburban,9.31,42.3,35.962,-114.786,4
+1175,Polk Parish,LA,Suburban,8.16,24.2,32.548,-92.083,4
+1441,Washington County,MS,Suburban,8.64,59.6,31.773,-89.269,4
+1006,Warren County,KY,Suburban,9.17,80.4,37.254,-84.595,4
+2545,Randolph County,TX,Small Town,7.12,36.3,35.371,-98.989,4
+2736,Fayette County,TX,Small Town,6.85,82.1,33.614,-100.402,4
+472,Jackson County,GA,Small Town,8.30,63.9,32.625,-83.222,4
+2798,Polk County,UT,Small Town,8.73,40.8,41.902,-113.113,4
+164,Greene County,AR,Suburban,11.76,35.0,36.131,-89.960,4
+2157,Harrison County,OK,Small Town,7.30,11.8,35.362,-94.804,4
+53,Greene County,AL,Small Town,7.70,22.7,33.826,-85.464,4
+1008,Montgomery County,KY,Suburban,10.38,32.2,37.942,-88.119,4
+942,Fayette County,KS,Small Town,7.20,50.2,37.939,-99.374,4
+433,Monroe County,GA,Small Town,8.90,12.7,34.175,-82.933,4
+2282,Chester County,PA,Small Town,6.20,42.1,41.082,-76.742,4
+445,Douglas County,GA,Suburban,10.64,15.9,31.506,-82.187,4
+750,Warren County,IN,Small Town,6.49,36.6,37.837,-85.270,4
+1011,Douglas County,KY,Rural,5.56,20.1,38.325,-85.381,4
+3001,Clay County,WV,Suburban,11.83,38.3,39.508,-80.190,4
+837,Clay County,IA,Small Town,7.59,21.0,41.595,-90.759,4
+450,Randolph County,GA,Rural,4.52,69.3,30.575,-84.977,4
+604,Marion County,IL,Small Town,7.48,22.0,39.363,-89.805,3
+2376,Montgomery County,SD,Small Town,6.50,85.1,45.734,-96.680,3
+2908,Marion County,VA,Suburban,10.78,76.9,37.301,-76.076,3
+2228,Pike County,OR,Small Town,7.77,74.3,42.098,-123.433,3
+2197,Harrison County,OK,Small Town,7.29,43.5,34.629,-100.611,3
+1952,Randolph County,NC,Suburban,8.40,17.9,36.073,-78.445,3
+911,Randolph County,KS,Suburban,9.54,81.7,39.988,-99.250,3
+2137,Union County,OK,Small Town,7.48,13.7,34.266,-94.767,3
+2126,Madison County,OH,Suburban,8.61,40.1,40.466,-80.803,3
+3068,Perry County,WI,Small Town,7.42,55.8,42.855,-92.402,3
+169,Grant County,AR,Small Town,8.54,59.1,33.128,-91.793,3
+1416,Montgomery County,MS,Rural,4.34,27.5,30.982,-88.912,3
+64,Randolph County,AL,Small Town,7.89,79.9,32.975,-88.155,3
+2379,Douglas County,SD,Small Town,7.58,14.3,43.968,-97.756,3
+1315,Jefferson County,MN,Small Town,8.56,12.2,47.392,-89.562,3
+1108,Sullivan County,KY,Small Town,8.07,21.3,36.605,-82.792,3
+1333,Hamilton County,MN,Rural,5.19,62.1,47.458,-97.083,3
+1436,Sullivan County,MS,Small Town,7.71,39.0,34.291,-89.019,3
+3069,Pike County,WI,Suburban,10.33,47.2,45.273,-89.105,3
+1570,Union County,MO,Rural,4.99,29.2,36.867,-93.816,3
+972,Madison County,KS,Small Town,7.28,51.3,38.771,-101.715,3
+2761,Chester County,TX,Small Town,7.60,58.7,35.962,-93.520,3
+2546,Scott County,TX,Small Town,6.83,38.1,34.818,-104.501,3
+2398,Benton County,SD,Small Town,6.55,89.1,45.427,-101.150,3
+514,Union County,GA,Suburban,9.18,94.7,32.451,-83.087,3
+641,Monroe County,IL,Small Town,7.48,40.2,38.995,-90.551,3
+134,Polk County,AR,Rural,5.65,48.9,35.478,-90.903,3
+2158,Johnson County,OK,Small Town,8.03,11.9,36.797,-99.338,3
+241,Fayette County,CA,Small Town,7.97,83.2,38.363,-114.660,3
+2609,Union County,TX,Suburban,9.91,12.5,33.047,-96.085,3
+1758,Greene County,NV,Suburban,11.40,57.2,36.213,-119.601,3
+1890,Jefferson County,NC,Small Town,7.41,16.6,35.359,-78.773,3
+2131,Jefferson County,OK,Suburban,10.20,50.3,35.914,-102.310,3
+1780,Union County,NJ,Small Town,8.57,94.4,39.452,-75.106,3
+2333,Douglas County,SC,Rural,5.16,87.9,34.056,-78.620,3
+275,Lawrence County,CO,Suburban,10.22,15.4,37.196,-104.961,3
+919,Morgan County,KS,Rural,5.62,65.2,39.560,-99.416,3
+2433,Monroe County,TN,Small Town,8.73,21.0,35.147,-84.235,3
+340,Perry County,FL,Suburban,8.98,15.0,26.110,-86.444,3
+2716,Shelby County,TX,Small Town,7.30,67.4,34.937,-102.958,3
+2826,Union County,VA,Suburban,10.96,65.2,37.880,-83.634,3
+2641,Chester County,TX,Rural,5.88,41.6,28.211,-103.567,3
+1647,Adams County,MT,Rural,5.39,20.8,45.393,-105.576,3
+80,Greene Borough,AK,Small Town,6.12,13.7,69.430,-153.988,3
+1810,Lake County,NM,Suburban,10.87,26.9,35.077,-103.450,3
+2869,Adams County,VA,Suburban,10.44,67.0,37.021,-79.163,3
+434,Union County,GA,Suburban,10.18,23.4,32.815,-85.265,3
+2817,Greene County,VT,Suburban,10.70,63.6,43.295,-72.373,3
+851,Polk County,IA,Rural,3.79,25.3,42.431,-92.474,3
+54,Warren County,AL,Small Town,6.22,19.4,34.174,-87.486,3
+1831,Madison County,NY,Suburban,10.59,16.6,42.112,-76.687,3
+848,Hamilton County,IA,Small Town,6.48,53.9,41.601,-96.183,3
+2833,Fayette County,VA,Small Town,8.03,84.6,39.193,-82.987,3
+294,Marion County,CO,Small Town,7.20,65.3,37.806,-107.614,3
+2560,Cass County,TX,Small Town,8.95,33.0,29.022,-104.739,3
+2913,Fayette County,VA,Small Town,8.22,59.8,38.572,-81.914,3
+990,Polk County,KS,Rural,4.60,64.9,39.842,-96.706,3
+1978,Marion County,NC,Suburban,11.06,30.9,35.330,-76.389,3
+963,Sullivan County,KS,Small Town,8.56,58.6,38.605,-97.664,3
+2457,Lawrence County,TN,Small Town,8.21,24.0,35.761,-81.770,3
+1879,Greene County,NY,Small Town,7.26,13.8,41.128,-72.109,3
+1611,Fayette County,MT,Small Town,7.90,22.5,44.643,-106.351,3
+427,Washington County,GA,Suburban,9.57,76.1,30.696,-83.981,3
+1685,Orange County,NE,Rural,6.30,45.8,40.378,-100.612,3
+108,Wayne County,AZ,Small Town,7.81,58.3,32.042,-109.906,3
+1741,Clay County,NE,Small Town,6.22,48.6,42.138,-102.765,3
+1518,Sullivan County,MO,Small Town,6.48,23.5,36.535,-92.934,3
+2969,Lake County,WV,Small Town,7.82,33.5,40.120,-81.928,3
+729,Orange County,IN,Small Town,6.54,76.8,38.395,-85.579,3
+1399,Jackson County,MN,Suburban,9.16,38.7,43.862,-95.956,3
+2174,Madison County,OK,Small Town,6.03,76.3,34.076,-102.895,3
+2413,Greene County,SD,Suburban,10.56,58.7,42.922,-98.638,3
+1012,Hamilton County,KY,Suburban,9.83,58.8,37.420,-87.539,3
+761,Scott County,IN,Rural,3.97,54.6,39.115,-87.233,3
+129,Grant County,AR,Small Town,6.07,10.3,35.186,-94.153,3
+114,Franklin County,AR,Rural,4.84,86.7,33.509,-90.752,3
+3038,Lawrence County,WI,Rural,4.52,69.6,45.185,-92.033,3
+1800,Monroe County,NM,Suburban,9.04,84.7,36.272,-109.049,3
+271,Carroll County,CO,Suburban,9.89,48.2,38.383,-105.057,3
+181,Knox County,AR,Suburban,9.01,27.2,36.403,-91.956,3
+2776,Washington County,UT,Suburban,9.39,72.5,40.151,-113.622,3
+2895,Wilson County,VA,Small Town,6.24,92.8,36.950,-78.812,3
+456,Knox County,GA,Suburban,8.05,84.9,33.552,-82.945,3
+2744,Polk County,TX,Small Town,8.20,32.1,31.424,-103.385,3
+1524,Jefferson County,MO,Small Town,7.48,60.5,38.328,-91.233,3
+642,Union County,IL,Small Town,8.57,35.8,39.619,-90.662,3
+1714,Pike County,NE,Rural,4.37,57.6,42.030,-98.627,3
+179,Harrison County,AR,Small Town,7.55,25.8,35.741,-90.955,3
+1132,Hamilton Parish,LA,Suburban,8.32,78.3,29.417,-93.671,3
+2336,Pike County,SC,Suburban,8.72,70.7,32.632,-82.887,3
+1004,Wayne County,KY,Suburban,11.07,33.0,38.634,-82.966,3
+888,Washington County,KS,Rural,4.94,88.5,38.753,-94.951,3
+2460,Ross County,TN,Rural,5.37,65.8,35.004,-82.297,3
+717,Perry County,IN,Small Town,7.62,12.6,41.178,-87.226,3
+2742,Perry County,TX,Suburban,10.19,35.3,29.172,-94.378,3
+346,Carroll County,FL,Small Town,6.60,51.1,25.186,-84.388,3
+969,Jefferson County,KS,Suburban,9.07,84.0,37.775,-100.352,3
+2456,Knox County,TN,Suburban,8.57,34.9,36.507,-84.818,3
+3065,Grant County,WI,Rural,6.02,65.1,42.972,-89.882,3
+1492,Marion County,MO,Suburban,9.15,28.1,36.697,-93.728,3
+3095,Montgomery County,WY,Small Town,7.79,16.0,44.971,-108.245,3
+209,Polk County,CA,Suburban,11.35,87.5,38.228,-122.018,3
+2334,Hamilton County,SC,Rural,3.77,73.3,32.410,-79.522,3
+254,Marion County,CO,Suburban,8.06,21.9,40.180,-104.735,3
+1031,Cass County,KY,Suburban,9.16,44.7,38.484,-83.727,3
+147,Sullivan County,AR,Small Town,8.66,62.4,35.934,-92.975,3
+2036,Union County,ND,Small Town,8.06,14.6,48.162,-97.979,3
+2987,Shelby County,WV,Small Town,7.02,47.8,37.811,-79.292,3
+2043,Jefferson County,OH,Small Town,7.28,33.9,39.269,-82.891,3
+2172,Franklin County,OK,Rural,4.69,58.2,33.882,-102.509,3
+2113,Morgan County,OH,Suburban,9.96,52.6,40.965,-83.217,3
+358,Cass County,FL,Small Town,8.93,63.7,25.415,-84.225,3
+978,Adams County,KS,Rural,6.40,31.1,37.061,-96.309,3
+213,Carroll County,CA,Suburban,11.31,57.3,36.456,-121.655,3
+72,Madison Borough,AK,Small Town,8.09,35.9,59.829,-144.056,3
+1259,Johnson County,MI,Small Town,6.03,21.1,43.455,-83.024,3
+2084,Franklin County,OH,Small Town,8.47,36.0,40.434,-83.576,3
+793,Madison County,IA,Rural,3.81,29.4,43.208,-95.285,3
+1619,Polk County,MT,Suburban,9.10,76.6,45.703,-105.484,3
+2110,Johnson County,OH,Small Town,6.13,30.8,40.464,-82.566,3
+389,Franklin County,GA,Suburban,8.78,25.3,34.082,-81.923,3
+798,Marion County,IA,Small Town,6.48,55.2,43.348,-91.084,3
+1621,Scott County,MT,Rural,4.52,78.6,46.549,-107.188,3
+927,Chester County,KS,Small Town,6.14,61.8,37.589,-99.231,3
+874,Jackson County,IA,Small Town,6.84,91.6,43.047,-91.239,3
+353,Ross County,FL,Suburban,9.36,19.7,25.234,-86.719,3
+1071,Cass County,KY,Suburban,10.63,14.5,38.222,-82.821,3
+1830,Lincoln County,NY,Suburban,11.22,76.7,42.549,-73.919,3
+2395,Shelby County,SD,Small Town,8.35,14.6,42.680,-99.539,3
+454,Harrison County,GA,Small Town,8.94,69.8,31.368,-85.141,3
+2083,Jefferson County,OH,Suburban,10.43,44.1,40.425,-84.709,3
+1216,Randolph County,MD,Small Town,7.01,74.1,37.931,-78.256,3
+1255,Scott County,MI,Rural,5.31,93.1,44.199,-84.970,3
+1622,Clark County,MT,Suburban,9.57,89.8,48.720,-113.117,3
+625,Lawrence County,IL,Small Town,7.80,65.5,37.894,-90.702,3
+3090,Adams County,WY,Suburban,10.35,79.8,41.286,-110.494,3
+202,Montgomery County,CA,Small Town,6.88,70.9,39.947,-114.415,3
+1931,Franklin County,NC,Small Town,6.44,52.8,36.375,-77.542,3
+2878,Hamilton County,VA,Suburban,10.09,24.8,36.890,-78.525,3
+1198,Jackson County,MD,Suburban,10.19,49.8,38.254,-75.496,3
+940,Greene County,KS,Suburban,10.75,43.9,39.062,-99.781,3
+511,Madison County,GA,Suburban,8.30,18.1,30.633,-83.601,3
+3098,Douglas County,WY,Small Town,8.46,25.5,42.172,-110.309,3
+2607,Jackson County,TX,Small Town,6.33,89.8,27.509,-95.291,3
+3066,Douglas County,WI,Suburban,9.24,23.4,45.011,-87.902,3
+1094,Pike County,KY,Rural,4.00,86.3,37.839,-86.323,3
+2567,Jackson County,TX,Suburban,11.84,69.0,26.521,-95.012,3
+312,Lincoln County,CT,Suburban,11.40,29.1,41.479,-71.833,3
+2805,Washington County,VT,Rural,5.45,76.6,43.306,-72.403,3
+437,Adams County,GA,Small Town,8.03,10.4,31.628,-83.217,3
+1667,Fayette County,NE,Small Town,6.94,77.4,41.696,-100.240,3
+819,Lawrence County,IA,Small Town,8.24,19.8,42.575,-95.562,3
+481,Fayette County,GA,Small Town,8.40,44.0,32.870,-84.102,3
+2588,Carroll County,TX,Small Town,6.78,66.2,27.465,-96.672,3
+2830,Wayne County,VA,Small Town,6.62,42.5,37.006,-77.417,3
+1828,Jefferson County,NY,Suburban,8.35,70.5,42.565,-76.702,3
+1440,Chester County,MS,Rural,5.18,85.6,34.827,-90.098,3
+2161,Morgan County,OK,Suburban,9.91,90.3,36.573,-102.924,3
+2191,Pike County,OK,Rural,4.20,39.5,36.398,-97.942,3
+2181,Wayne County,OK,Suburban,11.56,82.1,36.072,-100.838,3
+10,Marion County,AL,Small Town,8.14,49.7,34.124,-85.345,3
+960,Orange County,KS,Rural,4.01,34.4,38.156,-96.963,3
+2854,Sullivan County,VA,Rural,4.96,51.4,36.624,-79.198,3
+1926,Benton County,NC,Suburban,8.73,34.2,36.336,-82.752,3
+2192,Polk County,OK,Small Town,6.42,76.7,33.906,-102.771,3
+2670,Johnson County,TX,Suburban,8.81,63.7,31.057,-100.396,3
+683,Clay County,IL,Suburban,11.83,12.1,38.765,-89.159,3
+579,Johnson County,ID,Small Town,8.07,25.1,46.770,-113.975,3
+2310,Washington County,RI,Suburban,9.35,41.2,41.365,-71.858,3
+235,Clay County,CA,Small Town,8.49,68.4,41.995,-118.536,3
+1666,Warren County,NE,Small Town,7.37,59.8,42.405,-98.209,3
+350,Lawrence County,FL,Suburban,9.13,14.0,28.634,-81.044,3
+921,Ross County,KS,Suburban,8.59,88.7,37.654,-98.931,3
+2245,Franklin County,PA,Small Town,7.16,57.0,41.074,-77.872,3
+1131,Douglas Parish,LA,Suburban,9.09,34.7,29.128,-89.013,3
+1053,Perry County,KY,Small Town,8.55,36.9,38.464,-86.078,3
+1572,Marion County,MO,Small Town,8.67,20.7,39.927,-91.583,3
+1380,Carroll County,MN,Small Town,8.54,81.0,44.688,-90.819,3
+2425,Scott County,SD,Small Town,6.61,13.5,42.889,-101.039,3
+2719,Benton County,TX,Small Town,6.65,80.2,35.182,-103.408,3
+287,Franklin County,CO,Suburban,8.20,40.8,40.161,-105.315,3
+2678,Wilson County,TX,Suburban,9.59,90.6,31.588,-96.373,3
+2656,Fayette County,TX,Small Town,7.63,54.4,27.487,-94.175,3
+1617,Perry County,MT,Small Town,6.17,80.8,48.413,-112.572,3
+1503,Perry County,MO,Small Town,7.19,50.6,37.019,-92.468,3
+2170,Washington County,OK,Rural,4.95,67.7,35.579,-97.789,3
+2938,Scott County,WA,Small Town,7.64,46.3,46.278,-121.230,3
+377,Grant County,FL,Small Town,8.90,93.5,30.394,-82.082,3
+3034,Carroll County,WI,Suburban,8.97,92.0,47.019,-92.747,3
+1120,Union Parish,LA,Suburban,8.59,61.3,30.866,-89.878,3
+861,Orange County,IA,Small Town,8.15,81.0,43.188,-90.187,3
+716,Hamilton County,IN,Suburban,11.08,54.4,41.598,-87.036,3
+1794,Washington County,NM,Small Town,6.79,56.8,36.669,-106.807,3
+3091,Wayne County,WY,Rural,4.88,47.4,43.898,-105.916,3
+1300,Knox County,MI,Suburban,9.30,50.5,44.087,-89.734,3
+696,Pike County,IL,Small Town,7.06,81.8,39.352,-88.362,3
+530,Randolph County,GA,Suburban,8.91,38.9,32.458,-82.884,3
+3076,Johnson County,WI,Suburban,9.51,55.2,45.685,-90.957,3
+2590,Johnson County,TX,Small Town,8.49,18.7,29.119,-99.770,3
+2946,Orange County,WA,Small Town,8.31,30.0,48.228,-123.285,3
+2202,Orange County,OK,Rural,6.14,10.5,36.947,-97.609,3
+1966,Benton County,NC,Suburban,8.93,54.0,33.965,-77.464,3
+1748,Franklin County,NV,Suburban,9.95,56.7,38.128,-115.200,3
+1767,Madison County,NH,Suburban,10.53,64.9,45.259,-71.910,3
+469,Franklin County,GA,Suburban,12.00,39.6,33.213,-83.202,3
+2090,Clay County,OH,Small Town,7.61,45.2,39.285,-81.164,3
+3073,Clark County,WI,Suburban,8.58,39.2,45.877,-90.726,3
+855,Carroll County,IA,Suburban,9.50,48.7,40.649,-95.639,3
+2691,Marion County,TX,Small Town,6.62,42.3,26.896,-99.005,3
+11,Adams County,AL,Suburban,8.67,26.2,33.892,-88.470,3
+2880,Pike County,VA,Suburban,11.75,65.0,38.772,-81.061,3
+2123,Jefferson County,OH,Suburban,10.15,51.7,39.992,-80.623,3
+2279,Wilson County,PA,Small Town,6.90,43.8,41.311,-77.213,3
+1213,Perry County,MD,Small Town,6.54,55.9,39.321,-78.455,3
+1795,Jefferson County,NM,Suburban,9.38,88.5,35.464,-108.150,3
+734,Benton County,IN,Suburban,9.72,62.1,40.619,-84.839,3
+2295,Greene County,PA,Small Town,6.97,20.7,41.660,-77.932,3
+3082,Franklin County,WY,Rural,6.40,59.2,43.430,-104.514,3
+2292,Marion County,PA,Suburban,11.79,73.0,41.841,-76.095,3
+2704,Polk County,TX,Small Town,8.52,29.7,32.974,-97.466,3
+3103,District of Columbia,DC,Suburban,10.85,57.3,38.954,-76.973,3
+2373,Greene County,SD,Rural,4.82,72.8,45.785,-97.141,3
+2508,Jefferson County,TN,Small Town,8.05,46.6,36.048,-84.269,3
+1368,Fayette County,MN,Small Town,7.52,29.1,48.140,-94.353,3
+941,Warren County,KS,Rural,5.93,41.3,38.082,-95.470,3
+671,Wilson County,IL,Rural,6.33,59.8,39.930,-89.154,3
+2050,Clay County,OH,Small Town,7.35,70.8,40.276,-83.170,3
+1789,Lake County,NJ,Suburban,9.48,86.8,40.227,-74.003,3
+25,Scott County,AL,Small Town,7.30,76.0,32.340,-87.089,3
+664,Knox County,IL,Suburban,11.29,12.6,37.266,-91.005,3
+396,Marion County,GA,Small Town,7.25,38.7,32.955,-85.166,3
+738,Jefferson County,IN,Suburban,10.79,73.2,40.215,-87.279,3
+138,Carroll County,AR,Suburban,11.66,26.5,33.122,-93.283,3
+2187,Grant County,OK,Small Town,8.40,84.6,35.684,-100.473,3
+1039,Monroe County,KY,Rural,4.48,73.9,38.991,-85.127,3
+2380,Hamilton County,SD,Small Town,7.26,54.8,45.637,-98.247,3
+1689,Wilson County,NE,Small Town,6.80,66.7,42.034,-99.942,3
+27,Carroll County,AL,Rural,4.24,83.3,33.957,-88.322,3
+873,Madison County,IA,Rural,5.83,60.5,41.381,-92.426,3
+224,Benton County,CA,Small Town,7.91,15.5,33.450,-124.305,3
+75,Union Borough,AK,Rural,5.77,71.9,58.944,-164.810,3
+1747,Jefferson County,NV,Small Town,8.78,63.4,35.824,-119.977,3
+2850,Morgan County,VA,Suburban,10.25,55.1,38.264,-75.539,3
+1495,Greene County,MO,Suburban,8.88,55.8,39.740,-94.759,3
+740,Lincoln County,IN,Suburban,8.82,63.7,39.934,-87.950,3
+386,Carroll County,FL,Suburban,9.62,39.5,24.714,-84.851,3
+1643,Monroe County,MT,Small Town,7.57,18.1,45.945,-111.578,3
+1483,Washington County,MO,Small Town,7.30,83.7,39.280,-92.591,3
+2981,Johnson County,WV,Rural,6.21,29.4,39.158,-81.293,3
+2879,Perry County,VA,Suburban,10.49,43.5,36.589,-79.584,3
+318,Jefferson County,DE,Suburban,11.59,45.3,38.585,-75.529,3
+7,Monroe County,AL,Small Town,6.27,21.2,32.388,-87.171,3
+49,Clay County,AL,Small Town,7.69,17.0,32.705,-87.752,3
+2812,Union County,VT,Rural,5.15,56.1,43.036,-73.124,3
+2547,Clark County,TX,Small Town,8.71,71.2,32.416,-96.557,3
+2052,Adams County,OH,Small Town,8.77,19.0,41.372,-81.033,3
+1799,Jackson County,NM,Small Town,7.52,94.5,31.982,-107.382,3
+690,Montgomery County,IL,Small Town,7.58,91.7,37.950,-89.625,3
+1465,Scott County,MS,Small Town,6.30,31.2,31.560,-91.409,3
+2143,Warren County,OK,Rural,5.43,91.5,36.987,-95.074,3
+1030,Benton County,KY,Small Town,8.98,29.4,37.959,-88.016,3
+903,Montgomery County,KS,Rural,6.06,90.5,38.736,-101.681,3
+2076,Shelby County,OH,Rural,6.11,47.9,41.221,-84.728,3
+1193,Washington County,MD,Small Town,8.50,27.4,38.415,-78.420,3
+2212,Jackson County,OR,Small Town,8.78,85.4,46.090,-124.384,3
+591,Washington County,ID,Suburban,8.78,58.2,45.180,-113.342,3
+1534,Wayne County,MO,Rural,3.79,47.5,39.653,-94.246,3
+2940,Carroll County,WA,Suburban,11.82,68.9,48.994,-119.175,3
+991,Randolph County,KS,Small Town,7.12,56.5,38.884,-97.226,3
+732,Sullivan County,IN,Rural,3.69,46.0,39.290,-86.063,3
+253,Clay County,CO,Suburban,10.17,65.9,40.936,-108.349,3
+2639,Benton County,TX,Small Town,6.58,39.6,33.684,-97.809,3
+2231,Scott County,OR,Suburban,8.79,73.1,42.787,-121.093,3
+600,Jackson County,IL,Small Town,8.13,59.7,41.025,-91.499,3
+2215,Clay County,OR,Rural,5.31,16.9,45.169,-118.249,3
+2289,Monroe County,PA,Suburban,10.22,15.4,42.229,-80.112,3
+1145,Orange Parish,LA,Small Town,8.33,55.7,31.338,-93.211,3
+310,Jefferson County,CT,Suburban,10.91,51.0,41.293,-71.925,3
+1218,Jefferson County,MA,Urban Core,17.97,44.9,41.734,-71.112,3
+1412,Wayne County,MS,Suburban,8.22,48.0,34.606,-91.589,3
+1551,Johnson County,MO,Small Town,7.78,43.3,36.607,-95.526,3
+184,Orange County,AR,Rural,6.17,65.0,35.572,-91.378,3
+1334,Perry County,MN,Small Town,7.55,85.4,43.676,-92.523,3
+2960,Union County,WV,Small Town,8.02,90.5,37.228,-79.597,3
+2438,Wayne County,TN,Suburban,11.66,34.7,36.569,-87.405,3
+626,Morgan County,IL,Suburban,8.85,23.6,42.163,-88.184,3
+2707,Clark County,TX,Suburban,8.74,70.5,33.029,-103.665,3
+2737,Montgomery County,TX,Suburban,10.14,28.5,35.890,-101.078,3
+3040,Orange County,WI,Rural,5.39,75.9,45.497,-89.643,3
+1658,Jackson County,NE,Small Town,6.21,32.4,40.632,-100.690,3
+1921,Orange County,NC,Small Town,8.59,80.6,35.719,-78.734,3
+2358,Lincoln County,SC,Small Town,8.88,79.4,32.499,-82.219,3
+2262,Hamilton County,PA,Small Town,7.28,27.3,40.976,-80.298,3
+2431,Madison County,TN,Small Town,7.24,90.6,36.205,-86.491,3
+182,Lawrence County,AR,Small Town,7.04,21.6,36.489,-91.824,3
+1839,Greene County,NY,Suburban,8.30,76.8,41.853,-76.761,3
+728,Morgan County,IN,Small Town,7.84,72.8,40.493,-87.313,3
+897,Marion County,KS,Suburban,9.38,56.6,37.914,-100.318,3
+2708,Carroll County,TX,Small Town,6.64,22.5,31.281,-101.331,3
+1796,Franklin County,NM,Small Town,7.35,26.0,34.168,-109.018,3
+2342,Harrison County,SC,Small Town,7.21,89.3,34.789,-79.605,3
+1111,Cass County,KY,Small Town,6.89,80.2,37.699,-88.181,3
+374,Fayette County,FL,Small Town,7.18,80.3,26.808,-86.922,3
+496,Knox County,GA,Suburban,9.25,25.6,31.572,-82.728,3
+455,Johnson County,GA,Suburban,10.88,58.6,32.364,-83.594,3
+2169,Chester County,OK,Small Town,6.60,10.6,35.199,-101.535,3
+558,Union County,ID,Small Town,8.38,73.6,47.305,-111.580,3
+1763,Washington County,NH,Small Town,6.95,17.2,44.657,-71.911,3
+2286,Lincoln County,PA,Suburban,10.71,19.4,40.284,-77.940,3
+2017,Johnson County,ND,Rural,4.83,28.3,48.954,-100.615,3
+231,Madison County,CA,Suburban,10.54,84.2,32.527,-121.625,3
+697,Washington County,IN,Suburban,10.23,12.1,40.346,-87.411,3
+2247,Madison County,PA,Small Town,7.01,20.8,42.238,-77.646,3
+2047,Jackson County,OH,Small Town,7.60,75.3,40.631,-82.694,3
+1355,Jefferson County,MN,Suburban,9.43,38.5,45.727,-94.050,3
+1231,Washington County,MI,Rural,4.03,38.3,44.984,-86.287,3
+1743,Adams County,NE,Rural,5.65,26.3,40.376,-96.330,3
+829,Washington County,IA,Small Town,6.94,13.1,40.869,-93.094,3
+2432,Jackson County,TN,Suburban,11.79,30.4,35.190,-85.254,3
+615,Perry County,IL,Suburban,8.70,33.6,41.172,-90.913,3
+2428,Jefferson County,TN,Small Town,6.72,88.9,36.353,-85.739,3
+2014,Clark County,ND,Suburban,8.61,75.8,46.989,-99.518,3
+692,Grant County,IL,Suburban,11.58,62.8,42.035,-90.060,3
+2628,Carroll County,TX,Small Town,8.57,32.6,27.189,-98.951,3
+965,Benton County,KS,Small Town,8.72,34.8,37.849,-96.082,3
+735,Cass County,IN,Small Town,7.14,59.2,39.319,-85.247,3
+1337,Randolph County,MN,Rural,5.74,65.5,45.329,-94.802,3
+1383,Knox County,MN,Small Town,8.43,11.3,45.415,-94.625,3
+2263,Perry County,PA,Suburban,8.81,52.3,41.677,-77.072,3
+394,Union County,GA,Small Town,6.70,48.8,32.764,-84.936,3
+1486,Lincoln County,MO,Small Town,6.79,49.7,39.590,-89.151,3
+2711,Knox County,TX,Small Town,8.70,50.4,35.157,-99.855,3
+2858,Chester County,VA,Small Town,6.86,15.1,39.289,-75.700,3
+1102,Knox County,KY,Small Town,8.02,25.3,36.876,-85.382,3
+2992,Chester County,WV,Rural,6.49,71.3,37.797,-79.318,3
+1553,Lawrence County,MO,Small Town,8.11,13.9,39.734,-93.444,3
+501,Shelby County,GA,Rural,5.47,63.4,34.645,-81.355,3
+2631,Knox County,TX,Small Town,6.69,13.2,33.350,-94.145,3
+949,Pike County,KS,Small Town,6.49,76.7,38.739,-100.336,3
+2679,Benton County,TX,Rural,5.19,53.4,34.253,-104.837,3
+840,Wayne County,IA,Suburban,8.97,58.3,42.187,-94.614,3
+2283,Washington County,PA,Small Town,8.42,60.2,42.295,-75.695,3
+2713,Morgan County,TX,Suburban,8.50,40.0,30.234,-98.258,3
+2167,Benton County,OK,Small Town,8.17,38.0,34.142,-97.980,3
+3086,Monroe County,WY,Rural,6.48,70.8,44.046,-105.916,3
+1620,Randolph County,MT,Rural,6.40,92.3,45.863,-114.593,3
+2502,Sullivan County,TN,Suburban,11.50,75.9,35.645,-87.132,3
+479,Greene County,GA,Rural,4.45,43.7,31.542,-82.798,3
+885,Lake County,IA,Small Town,7.89,72.9,42.450,-96.157,3
+3019,Wayne County,WI,Small Town,8.52,12.2,43.953,-91.163,3
+703,Monroe County,IN,Small Town,8.67,67.9,40.354,-85.545,3
+2694,Greene County,TX,Suburban,8.45,62.2,30.611,-103.940,3
+1803,Marion County,NM,Rural,4.13,25.0,31.880,-104.054,3
+1288,Grant County,MI,Rural,6.15,33.6,42.147,-83.382,3
+788,Wayne County,IN,Small Town,6.80,21.6,38.864,-85.699,3
+1507,Scott County,MO,Suburban,9.19,16.1,39.382,-93.914,3
+2664,Polk County,TX,Small Town,7.89,73.5,36.173,-94.364,3
+198,Wayne County,CA,Suburban,10.38,40.9,33.775,-116.844,3
+1020,Harrison County,KY,Rural,5.70,42.7,38.242,-85.452,3
+2348,Ross County,SC,Rural,6.05,26.7,33.476,-80.027,3
+105,Clay County,AZ,Small Town,8.72,29.3,35.831,-110.147,3
+2814,Marion County,VT,Suburban,8.29,62.3,44.282,-72.209,3
+1744,Wayne County,NE,Rural,5.53,86.3,41.327,-101.109,3
+901,Warren County,KS,Small Town,6.63,80.3,38.219,-99.614,3
+2745,Randolph County,TX,Suburban,8.81,84.8,27.694,-102.176,3
+2271,Johnson County,PA,Small Town,7.54,29.4,39.913,-80.435,3
+2186,Lake County,OK,Small Town,8.35,69.6,33.701,-102.218,3
+127,Montgomery County,AR,Rural,6.17,31.1,35.512,-93.399,3
+20,Hamilton County,AL,Suburban,10.59,57.5,33.477,-88.385,3
+2680,Cass County,TX,Suburban,8.61,88.8,32.148,-102.645,3
+1840,Warren County,NY,Small Town,8.74,41.1,44.266,-76.393,3
+349,Knox County,FL,Suburban,8.82,10.1,29.655,-82.495,3
+1588,Clark County,MO,Rural,4.30,65.6,36.558,-95.627,3
+2593,Morgan County,TX,Suburban,10.01,11.8,28.994,-98.262,3
+2057,Montgomery County,OH,Rural,5.43,56.7,39.013,-81.798,3
+2213,Monroe County,OR,Suburban,11.55,70.8,42.078,-124.284,3
+2214,Union County,OR,Suburban,9.29,70.9,42.094,-118.643,3
+673,Cass County,IL,Small Town,6.54,23.4,40.113,-89.925,3
+491,Scott County,GA,Small Town,6.92,75.9,32.342,-83.508,3
+1903,Fayette County,NC,Small Town,6.75,69.6,34.947,-83.142,3
+2069,Harrison County,OH,Rural,5.03,72.5,41.891,-80.535,3
+432,Jackson County,GA,Small Town,7.11,72.5,31.196,-83.867,3
+2026,Benton County,ND,Suburban,10.92,74.2,47.241,-97.030,3
+62,Pike County,AL,Suburban,9.94,48.4,33.228,-86.954,3
+2140,Adams County,OK,Small Town,8.14,66.0,35.724,-98.096,3
+1873,Monroe County,NY,Urban Core,17.83,57.9,44.889,-78.346,3
+701,Madison County,IN,Suburban,11.71,24.8,41.591,-86.119,3
+3062,Fayette County,WI,Suburban,9.83,58.4,46.124,-87.804,3
+2977,Scott County,WV,Suburban,8.35,42.7,40.356,-79.948,3
+684,Marion County,IL,Small Town,8.36,87.1,38.884,-90.116,3
+1811,Grant County,NM,Suburban,9.39,78.5,33.941,-103.273,3
+1348,Shelby County,MN,Small Town,8.09,21.9,48.225,-96.801,3
+2328,Warren County,SC,Suburban,9.52,11.5,32.324,-78.582,3
+545,Cass County,GA,Suburban,10.57,69.2,31.312,-85.434,3
+609,Fayette County,IL,Small Town,7.44,51.7,38.136,-87.694,3
+1941,Greene County,NC,Rural,5.29,40.6,34.276,-77.426,3
+1645,Clay County,MT,Rural,4.98,86.6,47.936,-115.500,3
+1133,Perry Parish,LA,Small Town,7.62,55.1,30.207,-91.104,3
+1660,Union County,NE,Small Town,7.96,78.1,40.971,-96.875,3
+2756,Shelby County,TX,Small Town,6.23,83.4,26.878,-101.437,3
+1197,Madison County,MD,Small Town,7.05,76.9,39.511,-77.363,3
+2132,Franklin County,OK,Suburban,10.57,12.5,35.667,-95.278,3
+2189,Hamilton County,OK,Suburban,9.29,50.3,36.042,-101.671,3
+1669,Lake County,NE,Rural,4.44,93.5,42.220,-98.001,3
+2332,Grant County,SC,Suburban,9.30,31.2,33.340,-80.713,3
+2957,Madison County,WV,Small Town,6.68,44.9,39.915,-82.400,3
+2420,Hamilton County,SD,Rural,3.86,56.5,43.193,-102.787,3
+2513,Monroe County,TN,Rural,4.50,89.1,35.792,-87.484,3
+2867,Clay County,VA,Small Town,7.78,75.1,37.770,-81.872,3
+952,Scott County,KS,Rural,3.51,94.6,39.987,-99.125,3
+1691,Cass County,NE,Rural,4.25,33.3,42.396,-101.680,3
+551,Washington County,ID,Small Town,6.37,42.9,42.438,-111.004,3
+1663,Adams County,NE,Rural,3.57,19.1,42.697,-99.046,3
+985,Grant County,KS,Rural,5.18,44.9,38.779,-99.789,3
+140,Johnson County,AR,Small Town,6.18,87.8,36.407,-90.289,3
+1753,Union County,NV,Small Town,6.64,37.4,41.706,-117.901,3
+257,Greene County,CO,Suburban,10.27,41.7,38.516,-108.760,3
+2884,Clark County,VA,Suburban,8.09,32.4,37.525,-79.723,3
+3026,Douglas County,WI,Suburban,10.58,36.9,45.866,-87.399,3
+2666,Scott County,TX,Suburban,11.75,86.6,30.879,-104.875,3
+474,Union County,GA,Suburban,11.01,88.2,34.699,-81.937,3
+2978,Clark County,WV,Rural,4.08,19.3,38.384,-78.996,3
+2041,Greene County,ND,Small Town,8.86,65.3,48.636,-102.522,3
+2821,Franklin County,VA,Small Town,7.40,93.0,38.088,-75.469,3
+3024,Lake County,WI,Small Town,7.21,85.7,46.926,-90.233,3
+1438,Benton County,MS,Suburban,11.38,87.1,33.365,-90.035,3
+2579,Grant County,TX,Small Town,7.70,57.2,31.916,-93.766,3
+2294,Wayne County,PA,Small Town,8.87,16.1,40.321,-76.113,3
+500,Ross County,GA,Suburban,8.34,42.8,30.781,-84.331,3
+2281,Cass County,PA,Small Town,7.03,53.2,40.900,-74.792,3
+933,Jackson County,KS,Rural,3.54,80.2,37.270,-97.458,3
+1529,Monroe County,MO,Small Town,6.98,20.5,39.757,-89.335,3
+1866,Chester County,NY,Small Town,8.47,13.0,40.719,-73.963,3
+442,Montgomery County,GA,Small Town,8.63,40.3,32.551,-81.114,3
+120,Clay County,AR,Small Town,7.62,35.4,34.615,-93.104,3
+1841,Fayette County,NY,Suburban,11.09,57.0,42.745,-73.311,3
+1025,Orange County,KY,Rural,4.99,38.1,37.535,-81.918,3
+436,Marion County,GA,Small Town,6.89,44.7,32.932,-81.736,3
+2767,Jackson County,TX,Small Town,6.89,69.7,31.698,-104.390,3
+541,Shelby County,GA,Rural,4.68,81.2,32.471,-81.402,3
+676,Jefferson County,IL,Small Town,6.14,92.3,41.343,-87.126,3
+884,Montgomery County,IA,Rural,4.97,45.9,41.922,-91.785,3
+2426,Clark County,SD,Small Town,8.87,42.8,43.575,-101.886,3
+1911,Polk County,NC,Small Town,8.71,26.3,34.073,-82.111,3
+909,Pike County,KS,Small Town,8.66,70.4,38.348,-98.937,3
+1648,Wayne County,MT,Rural,5.48,52.8,47.741,-107.349,3
+2206,Wilson County,OK,Small Town,7.72,48.7,36.463,-98.003,3
+1106,Ross County,KY,Suburban,10.51,82.4,38.598,-86.489,3
+2897,Cass County,VA,Suburban,11.45,65.3,37.434,-75.772,3
+2863,Madison County,VA,Small Town,6.22,22.4,37.778,-77.864,3
+1184,Union County,ME,Small Town,6.78,91.2,46.015,-67.133,3
+865,Wilson County,IA,Small Town,7.98,77.5,42.517,-92.358,3
+1332,Douglas County,MN,Rural,3.93,89.7,48.364,-91.810,3
+1983,Fayette County,NC,Rural,4.62,77.8,34.809,-77.615,3
+2506,Chester County,TN,Small Town,7.59,38.1,35.717,-84.602,3
+34,Ross County,AL,Small Town,7.84,84.1,33.162,-88.331,3
+1664,Wayne County,NE,Small Town,6.83,91.8,41.700,-103.223,3
+2102,Perry County,OH,Suburban,11.84,14.3,39.353,-83.998,3
+827,Cass County,IA,Small Town,8.42,18.8,42.704,-95.077,3
+1038,Jackson County,KY,Small Town,8.88,19.0,37.419,-86.695,3
+2063,Pike County,OH,Small Town,6.38,62.9,40.845,-82.291,3
+803,Fayette County,IA,Small Town,6.42,10.8,43.154,-96.458,3
+1350,Wilson County,MN,Suburban,8.72,57.5,47.020,-95.823,3
+1930,Jefferson County,NC,Suburban,9.34,65.4,34.253,-80.082,3
+40,Chester County,AL,Rural,4.94,28.0,33.764,-86.491,3
+610,Montgomery County,IL,Small Town,6.67,79.6,39.089,-90.877,3
+412,Clark County,GA,Suburban,9.74,90.0,34.179,-81.438,3
+620,Clark County,IL,Suburban,8.63,85.6,40.270,-91.457,3
+473,Monroe County,GA,Small Town,8.59,59.5,33.354,-81.386,3
+2118,Wilson County,OH,Small Town,6.34,76.2,39.756,-81.013,3
+14,Warren County,AL,Suburban,9.70,64.2,34.489,-87.390,3
+2994,Jefferson County,WV,Rural,6.19,69.1,37.768,-82.283,3
+59,Douglas County,AL,Small Town,8.96,63.9,33.814,-88.077,3
+2754,Orange County,TX,Small Town,6.55,40.3,25.820,-101.834,3
+1217,Washington County,MA,Small Town,6.03,22.8,41.628,-70.555,3
+81,Warren Borough,AK,Small Town,8.93,31.1,59.123,-141.979,3
+3052,Madison County,WI,Small Town,7.10,85.5,44.446,-92.422,3
+1377,Randolph County,MN,Suburban,9.11,86.9,45.501,-94.177,3
+2537,Montgomery County,TX,Small Town,6.12,28.6,35.020,-99.009,3
+821,Orange County,IA,Small Town,6.73,94.0,40.402,-90.959,3
+1530,Union County,MO,Small Town,7.49,51.6,38.323,-93.551,3
+706,Marion County,IN,Small Town,8.50,73.1,39.071,-86.128,3
+2153,Randolph County,OK,Small Town,7.36,72.7,34.764,-97.284,3
+403,Lake County,GA,Small Town,6.11,17.1,31.291,-81.547,3
+2335,Perry County,SC,Small Town,6.38,17.7,34.813,-78.629,3
+1717,Scott County,NE,Small Town,8.85,38.4,42.159,-99.238,3
+32,Morgan County,AL,Suburban,10.23,63.7,33.115,-87.795,3
+1951,Polk County,NC,Suburban,9.56,38.0,35.779,-80.494,3
+2526,Madison County,TX,Suburban,8.13,36.4,32.200,-104.737,3
+2831,Greene County,VA,Suburban,8.90,73.6,39.040,-78.395,3
+1087,Fayette County,KY,Suburban,8.17,92.4,37.699,-86.236,3
+2038,Marion County,ND,Small Town,7.90,88.6,47.953,-96.689,3
+2665,Randolph County,TX,Suburban,11.47,84.6,35.872,-95.426,3
+261,Lake County,CO,Suburban,9.96,44.2,39.013,-103.664,3
+171,Hamilton County,AR,Rural,4.08,44.6,35.875,-92.887,3
+1497,Fayette County,MO,Small Town,7.02,89.3,39.123,-91.917,3
+2523,Jefferson County,TX,Small Town,8.00,71.0,26.745,-98.647,3
+2583,Pike County,TX,Small Town,8.54,29.0,29.405,-100.849,3
+1258,Harrison County,MI,Small Town,6.70,58.0,43.480,-84.556,3
+2558,Wilson County,TX,Small Town,6.82,40.2,30.722,-101.711,3
+817,Johnson County,IA,Small Town,6.61,54.4,41.460,-93.209,3
+2156,Carroll County,OK,Rural,4.34,94.4,35.577,-94.789,3
+338,Douglas County,FL,Suburban,9.99,81.7,24.937,-85.229,3
+1756,Adams County,NV,Rural,5.54,12.1,39.522,-114.763,3
+1623,Carroll County,MT,Rural,4.25,12.6,45.874,-106.471,3
+618,Randolph County,IL,Small Town,7.77,55.5,37.717,-87.316,3
+842,Warren County,IA,Suburban,8.43,61.5,41.061,-91.068,3
+317,Washington County,DE,Small Town,7.26,57.1,38.970,-75.640,3
+3012,Madison County,WI,Suburban,11.26,39.3,46.588,-90.619,3
+1442,Jefferson County,MS,Suburban,9.71,28.9,32.357,-91.297,3
+1694,Jefferson County,NE,Small Town,8.37,12.9,40.016,-102.273,3
+1787,Fayette County,NJ,Small Town,6.78,38.3,40.809,-75.437,3
+83,Montgomery Borough,AK,Small Town,6.25,29.9,62.192,-146.591,3
+154,Franklin County,AR,Small Town,7.40,77.0,35.470,-89.696,3
+416,Knox County,GA,Small Town,7.99,29.6,34.769,-81.721,3
+1228,Wayne County,MA,Small Town,7.24,52.1,42.218,-70.834,3
+1257,Carroll County,MI,Small Town,6.11,60.9,46.097,-83.913,3
+476,Marion County,GA,Small Town,6.34,35.3,32.714,-82.468,3
+1891,Franklin County,NC,Small Town,8.33,76.4,34.951,-81.263,3
+2544,Polk County,TX,Suburban,10.71,39.6,26.483,-102.241,3
+2327,Greene County,SC,Small Town,6.08,43.2,32.762,-80.562,3
+1370,Lake County,MN,Suburban,10.14,21.6,45.594,-96.665,3
+2127,Jackson County,OH,Small Town,7.15,19.6,39.958,-82.743,3
+1283,Greene County,MI,Suburban,10.06,44.5,42.527,-84.851,3
+517,Adams County,GA,Suburban,8.74,26.6,31.207,-82.114,3
+1391,Benton County,MN,Small Town,7.56,25.8,43.871,-93.287,3
+115,Lincoln County,AR,Small Town,6.56,88.6,33.403,-93.957,3
+996,Lincoln County,KY,Small Town,8.13,66.8,36.744,-86.595,3
+1604,Union County,MT,Small Town,7.99,58.8,46.635,-110.320,3
+1819,Clark County,NM,Suburban,11.16,84.1,32.719,-106.589,3
+2757,Sullivan County,TX,Small Town,6.00,79.2,34.513,-96.848,3
+1248,Grant County,MI,Suburban,10.65,38.2,43.671,-87.842,3
+1112,Chester County,KY,Suburban,11.91,18.1,36.530,-82.178,3
+1278,Union County,MI,Small Town,8.83,11.0,44.250,-86.129,3
+2455,Johnson County,TN,Small Town,7.40,85.0,35.765,-82.572,3
+1428,Harrison County,MS,Rural,5.56,25.9,34.744,-91.230,3
+1390,Wilson County,MN,Suburban,10.91,62.1,44.117,-89.612,3
+2195,Clark County,OK,Small Town,8.68,75.4,33.869,-99.956,3
+1532,Marion County,MO,Suburban,11.60,73.6,40.412,-93.588,3
+1162,Marion Parish,LA,Suburban,11.63,41.5,30.782,-92.036,3
+2305,Polk County,PA,Small Town,8.31,44.3,40.168,-80.395,3
+2633,Morgan County,TX,Suburban,8.74,36.5,27.340,-103.088,3
+559,Clay County,ID,Rural,4.87,31.0,47.427,-116.826,3
+363,Lincoln County,FL,Suburban,8.47,94.9,28.605,-80.023,3
+2388,Harrison County,SD,Suburban,10.05,88.1,44.934,-102.889,3
+145,Ross County,AR,Suburban,9.55,37.6,35.739,-91.133,3
+1209,Lake County,MD,Suburban,8.35,87.9,39.002,-75.974,3
+2888,Knox County,VA,Suburban,9.42,46.5,37.595,-77.852,3
+806,Grant County,IA,Rural,5.69,87.4,41.824,-96.025,3
+2808,Lincoln County,VT,Suburban,8.07,63.4,44.809,-71.542,3
+1872,Jackson County,NY,Suburban,8.59,68.2,41.308,-77.297,3
+2807,Franklin County,VT,Rural,6.04,13.8,44.423,-71.821,3
+2770,Clay County,TX,Small Town,8.43,36.3,32.447,-106.371,3
+1628,Morgan County,MT,Small Town,8.96,17.8,48.948,-104.803,3
+2509,Franklin County,TN,Rural,3.97,14.8,36.118,-87.382,3
+694,Hamilton County,IL,Suburban,11.43,43.5,37.171,-88.280,3
+1013,Perry County,KY,Rural,5.22,34.8,37.298,-86.914,3
+617,Polk County,IL,Small Town,6.86,21.4,38.318,-89.691,3
+2377,Lake County,SD,Suburban,11.95,74.2,44.136,-100.341,3
+1917,Johnson County,NC,Suburban,8.77,85.8,35.912,-77.766,3
+2617,Montgomery County,TX,Suburban,10.27,87.2,28.668,-94.889,3
+759,Polk County,IN,Suburban,8.88,78.5,40.691,-87.760,3
+521,Fayette County,GA,Suburban,9.03,46.9,34.313,-83.619,3
+937,Marion County,KS,Suburban,8.90,61.9,39.781,-97.767,3
+1245,Fayette County,MI,Suburban,9.14,34.0,45.389,-83.472,3
+2098,Lake County,OH,Suburban,8.37,78.5,41.571,-82.805,3
+893,Jackson County,KS,Suburban,9.19,83.6,38.067,-98.806,3
+341,Pike County,FL,Small Town,7.33,74.0,30.832,-81.893,3
+1306,Sullivan County,MI,Small Town,6.72,23.0,46.082,-82.969,3
+2573,Wayne County,TX,Small Town,7.64,68.6,29.479,-94.227,3
+2923,Marion County,WA,Suburban,8.89,82.0,48.484,-118.772,3
+2934,Perry County,WA,Small Town,7.65,39.9,46.774,-119.390,3
+2147,Grant County,OK,Suburban,11.52,36.9,36.826,-102.599,3
+1750,Madison County,NV,Suburban,9.41,83.6,40.668,-116.210,3
+1880,Warren County,NY,Small Town,8.32,91.9,44.151,-76.620,3
+2705,Randolph County,TX,Small Town,7.34,85.0,32.620,-106.029,3
+2013,Scott County,ND,Small Town,8.61,47.0,47.926,-97.986,3
+2225,Douglas County,OR,Small Town,6.23,11.0,45.270,-120.297,3
+1738,Jackson County,NE,Suburban,9.21,47.8,42.309,-103.693,3
+1708,Montgomery County,NE,Rural,4.29,13.2,40.322,-102.787,3
+1687,Shelby County,NE,Small Town,7.33,92.3,42.603,-95.412,3
+175,Randolph County,AR,Rural,6.45,89.4,35.377,-94.433,3
+2515,Clay County,TN,Suburban,9.85,65.0,36.569,-86.097,3
+2715,Ross County,TX,Suburban,10.05,22.3,26.960,-102.028,3
+1521,Cass County,MO,Suburban,11.53,31.2,38.708,-94.432,3
+2482,Montgomery County,TN,Suburban,8.12,81.7,36.537,-85.734,3
+2154,Scott County,OK,Small Town,7.73,91.6,33.821,-95.457,3
+2702,Perry County,TX,Small Town,7.29,21.8,31.985,-94.906,3
+1128,Montgomery Parish,LA,Small Town,7.65,57.8,29.027,-89.385,3
+2505,Cass County,TN,Rural,5.70,41.2,36.046,-83.560,3
+1376,Polk County,MN,Suburban,10.08,23.7,43.856,-95.139,3
+2724,Franklin County,TX,Small Town,7.32,22.0,30.133,-97.617,3
+2676,Shelby County,TX,Suburban,10.86,29.3,30.559,-103.101,3
+362,Franklin County,FL,Suburban,8.85,87.1,29.292,-83.885,3
+2484,Grant County,TN,Small Town,7.85,55.3,35.312,-84.285,3
+2620,Douglas County,TX,Rural,6.28,58.4,31.333,-97.293,3
+462,Sullivan County,GA,Small Town,7.75,58.8,31.257,-84.069,3
+2391,Lawrence County,SD,Small Town,6.38,56.2,43.690,-103.415,3
+678,Lincoln County,IL,Small Town,7.57,43.5,37.643,-87.660,3
+2409,Clay County,SD,Rural,4.15,16.1,44.143,-101.748,3
+879,Adams County,IA,Small Town,8.69,31.7,40.514,-94.847,3
+693,Douglas County,IL,Small Town,8.88,37.2,42.049,-89.524,3
+2534,Greene County,TX,Small Town,6.61,62.5,34.378,-96.847,3
+781,Madison County,IN,Suburban,11.68,49.3,41.731,-87.580,3
+1358,Madison County,MN,Small Town,6.81,60.7,45.471,-96.430,3
+2613,Wayne County,TX,Small Town,6.43,13.5,27.775,-97.367,3
+1192,Montgomery County,ME,Rural,5.48,61.2,44.948,-70.767,3
+1210,Grant County,MD,Suburban,10.57,72.4,38.214,-76.251,3
+2218,Wayne County,OR,Small Town,8.33,71.0,44.039,-117.686,3
+2164,Shelby County,OK,Rural,6.02,46.0,35.988,-98.468,3
+250,Jackson County,CO,Suburban,9.48,73.1,37.854,-108.207,3
+1411,Adams County,MS,Suburban,11.04,35.0,32.500,-89.103,3
+1448,Union County,MS,Small Town,8.05,48.8,32.143,-91.476,3
+1168,Montgomery Parish,LA,Small Town,8.39,38.4,30.339,-91.251,3
+814,Clark County,IA,Suburban,9.83,62.0,41.851,-94.340,3
+76,Clay Borough,AK,Rural,6.31,84.7,58.630,-162.596,3
+1943,Fayette County,NC,Small Town,8.33,53.2,34.788,-81.872,3
+1202,Marion County,MD,Urban Core,19.85,11.2,38.516,-75.597,2
+1729,Wilson County,NE,Rural,3.89,52.7,40.018,-100.114,2
+2904,Jackson County,VA,Small Town,7.19,84.9,36.712,-76.147,2
+1725,Orange County,NE,Suburban,11.96,68.8,41.198,-104.063,2
+1849,Polk County,NY,Small Town,6.23,63.5,40.652,-73.930,2
+2918,Madison County,WA,Small Town,8.39,23.2,47.514,-124.630,2
+1392,Cass County,MN,Suburban,9.91,13.8,44.813,-90.559,2
+50,Marion County,AL,Small Town,6.33,53.4,34.206,-85.694,2
+2575,Warren County,TX,Suburban,8.25,49.3,30.885,-101.689,2
+17,Lake County,AL,Small Town,8.88,16.2,32.797,-85.216,2
+1430,Knox County,MS,Rural,6.05,40.4,32.997,-90.515,2
+2907,Clay County,VA,Suburban,8.69,55.1,38.633,-75.676,2
+2055,Warren County,OH,Small Town,8.16,83.1,40.677,-81.399,2
+415,Johnson County,GA,Suburban,9.99,22.9,32.854,-84.336,2
+2060,Douglas County,OH,Small Town,8.61,70.0,39.615,-84.416,2
+1581,Douglas County,MO,Suburban,10.04,69.9,39.034,-91.873,2
+1877,Adams County,NY,Small Town,8.31,31.6,43.481,-73.944,2
+1577,Fayette County,MO,Suburban,10.50,14.6,39.017,-89.409,2
+1688,Sullivan County,NE,Rural,6.35,56.1,40.664,-103.814,2
+2661,Hamilton County,TX,Small Town,6.50,74.3,29.278,-96.494,2
+1454,Warren County,MS,Small Town,7.40,77.2,30.240,-89.824,2
+2477,Adams County,TN,Suburban,10.55,12.0,36.204,-84.296,2
+2651,Marion County,TX,Small Town,7.95,58.0,29.313,-101.872,2
+2448,Pike County,TN,Small Town,7.75,61.7,36.174,-87.169,2
+1237,Monroe County,MI,Suburban,8.98,38.7,48.124,-84.993,2
+1407,Monroe County,MS,Suburban,8.57,87.3,31.711,-90.003,2
+1418,Grant County,MS,Suburban,9.06,73.3,31.376,-89.932,2
+900,Greene County,KS,Small Town,6.37,89.5,37.793,-99.564,2
+1833,Monroe County,NY,Small Town,7.63,75.9,44.706,-72.855,2
+562,Wayne County,ID,Small Town,8.72,66.1,46.863,-115.230,2
+1695,Franklin County,NE,Small Town,6.62,69.2,40.344,-96.871,2
+2928,Fayette County,WA,Suburban,11.49,10.4,47.359,-124.018,2
+499,Orange County,GA,Rural,6.08,56.4,34.141,-82.605,2
+2353,Cass County,SC,Small Town,6.62,38.0,34.877,-79.474,2
+2224,Grant County,OR,Small Town,7.24,93.1,43.253,-121.134,2
+1867,Washington County,NY,Suburban,8.32,74.9,43.121,-76.762,2
+426,Chester County,GA,Small Town,8.90,72.1,30.660,-83.079,2
+1174,Pike Parish,LA,Suburban,11.31,25.0,30.448,-89.354,2
+2740,Douglas County,TX,Rural,4.23,94.6,33.430,-96.984,2
+1493,Adams County,MO,Small Town,8.81,21.0,39.484,-89.644,2
+2718,Wilson County,TX,Small Town,6.34,22.8,26.125,-101.955,2
+557,Monroe County,ID,Small Town,7.15,72.9,48.595,-113.459,2
+385,Clark County,FL,Suburban,9.31,61.8,29.477,-83.194,2
+1082,Marion County,KY,Small Town,7.48,50.3,38.559,-88.502,2
+1403,Franklin County,MS,Suburban,9.86,35.9,30.677,-90.153,2
+123,Wayne County,AR,Small Town,7.13,52.0,34.141,-92.444,2
+2507,Washington County,TN,Suburban,11.83,85.8,35.355,-85.189,2
+2117,Sullivan County,OH,Rural,4.57,85.9,39.527,-82.428,2
+2020,Morgan County,ND,Rural,5.03,13.9,46.167,-96.789,2
+1971,Franklin County,NC,Small Town,8.77,45.5,36.136,-81.043,2
+2331,Lake County,SC,Suburban,9.83,79.9,32.088,-80.059,2
+1698,Jackson County,NE,Small Town,7.83,44.9,40.223,-101.325,2
+2270,Harrison County,PA,Suburban,11.90,79.4,40.385,-76.262,2
+2687,Jackson County,TX,Rural,4.08,57.0,30.716,-97.244,2
+441,Fayette County,GA,Small Town,6.85,30.6,34.180,-84.561,2
+1599,Franklin County,MT,Suburban,8.76,90.9,46.751,-111.999,2
+1655,Franklin County,NE,Suburban,10.73,75.4,42.108,-97.868,2
+2815,Adams County,VT,Small Town,6.86,45.8,43.222,-72.648,2
+1593,Lawrence County,MO,Suburban,9.39,78.5,39.020,-94.497,2
+2616,Fayette County,TX,Rural,5.64,46.0,33.140,-93.598,2
+2925,Wayne County,WA,Small Town,8.24,59.5,46.608,-117.327,2
+1,Washington County,AL,Suburban,8.60,74.9,34.404,-86.380,2
+194,Union County,CA,Suburban,11.57,39.2,32.802,-120.502,2
+1047,Fayette County,KY,Small Town,8.07,83.6,36.751,-88.278,2
+563,Greene County,ID,Suburban,8.51,80.9,42.361,-111.758,2
+1466,Clark County,MS,Small Town,7.68,82.8,34.911,-89.111,2
+135,Randolph County,AR,Suburban,8.54,44.8,33.673,-91.282,2
+2080,Cass County,OH,Suburban,8.72,30.0,40.498,-83.541,2
+1543,Perry County,MO,Suburban,8.70,52.4,36.724,-93.755,2
+33,Orange County,AL,Small Town,7.84,49.1,34.275,-87.389,2
+1791,Douglas County,NJ,Urban Core,15.83,73.0,39.173,-73.946,2
+1722,Knox County,NE,Small Town,6.05,19.4,40.043,-103.304,2
+258,Warren County,CO,Small Town,6.88,37.0,37.064,-103.431,2
+368,Clay County,FL,Suburban,8.68,23.0,28.590,-87.541,2
+2303,Perry County,PA,Suburban,11.03,91.4,40.427,-78.629,2
+1862,Sullivan County,NY,Suburban,10.52,25.0,43.026,-76.595,2
+1894,Jackson County,NC,Small Town,7.20,38.5,34.825,-82.904,2
+2813,Clay County,VT,Rural,4.30,83.3,43.383,-72.177,2
+280,Sullivan County,CO,Small Town,7.84,83.5,40.825,-105.041,2
+2696,Fayette County,TX,Suburban,10.20,24.5,35.880,-93.587,2
+578,Harrison County,ID,Small Town,6.44,92.4,42.414,-112.744,2
+2235,Johnson County,OR,Small Town,7.96,82.0,42.543,-123.075,2
+408,Pike County,GA,Small Town,8.16,24.6,30.980,-85.583,2
+1939,Adams County,NC,Small Town,7.23,12.2,34.124,-76.716,2
+2524,Franklin County,TX,Suburban,9.00,31.9,26.300,-102.630,2
+1262,Morgan County,MI,Suburban,8.41,10.9,48.185,-87.759,2
+1579,Lake County,MO,Suburban,11.67,41.1,36.388,-93.416,2
+648,Warren County,IL,Small Town,7.32,23.4,38.503,-87.863,2
+898,Adams County,KS,Rural,6.09,12.4,38.399,-101.891,2
+2720,Cass County,TX,Small Town,7.15,83.7,34.125,-94.676,2
+2954,Jefferson County,WV,Suburban,9.24,42.4,37.451,-79.677,2
+1276,Jackson County,MI,Small Town,7.88,85.2,46.891,-87.130,2
+754,Grant County,IN,Small Town,8.15,34.3,40.559,-85.454,2
+2848,Knox County,VA,Suburban,10.15,78.3,37.432,-82.665,2
+2862,Lincoln County,VA,Suburban,10.09,32.8,36.637,-79.230,2
+1139,Carroll Parish,LA,Small Town,8.48,92.1,30.538,-89.992,2
+2621,Hamilton County,TX,Suburban,8.37,38.8,33.022,-98.183,2
+2769,Union County,TX,Suburban,10.39,34.3,29.197,-105.256,2
+1610,Warren County,MT,Small Town,6.24,88.2,47.259,-111.170,2
+428,Jefferson County,GA,Small Town,6.05,53.5,32.144,-83.243,2
+2382,Pike County,SD,Rural,3.82,54.7,45.122,-102.281,2
+2243,Washington County,PA,Suburban,11.92,52.0,40.760,-79.637,2
+446,Hamilton County,GA,Small Town,6.76,54.8,31.760,-83.248,2
+2058,Lake County,OH,Small Town,8.18,35.0,41.185,-84.144,2
+2746,Scott County,TX,Suburban,10.51,65.6,34.882,-95.128,2
+2549,Harrison County,TX,Suburban,8.11,24.3,33.223,-93.973,2
+1352,Cass County,MN,Small Town,7.84,26.3,43.876,-95.756,2
+2965,Greene County,WV,Rural,5.18,60.6,40.413,-78.913,2
+2787,Wayne County,UT,Suburban,11.09,70.8,39.727,-111.795,2
+1127,Fayette Parish,LA,Suburban,8.59,63.8,29.254,-92.290,2
+1005,Greene County,KY,Small Town,8.66,37.7,38.834,-89.408,2
+981,Warren County,KS,Small Town,8.77,65.9,39.202,-96.774,2
+1967,Cass County,NC,Small Town,8.96,29.3,34.610,-84.127,2
+1522,Chester County,MO,Small Town,7.47,38.6,36.581,-95.501,2
+811,Polk County,IA,Suburban,10.75,93.4,40.446,-92.342,2
+2841,Polk County,VA,Suburban,10.74,11.2,38.126,-78.872,2
+1359,Jackson County,MN,Small Town,7.19,89.5,46.061,-95.599,2
+2004,Montgomery County,ND,Small Town,8.05,13.9,47.178,-97.211,2
+518,Wayne County,GA,Small Town,8.61,39.6,34.606,-81.270,2
+2146,Lake County,OK,Suburban,9.04,83.7,35.758,-97.570,2
+1829,Franklin County,NY,Suburban,8.64,66.7,44.974,-79.648,2
+1397,Lincoln County,MN,Small Town,8.79,67.9,48.924,-95.480,2
+2220,Warren County,OR,Small Town,6.71,92.2,42.525,-117.107,2
+1234,Lincoln County,MI,Small Town,8.70,62.9,43.767,-84.467,2
+409,Polk County,GA,Suburban,8.36,43.1,31.757,-84.031,2
+968,Washington County,KS,Suburban,10.28,55.0,38.591,-99.523,2
+1956,Harrison County,NC,Small Town,6.22,77.0,34.539,-79.608,2
+1161,Clay Parish,LA,Suburban,9.69,85.0,29.961,-91.508,2
+1945,Lake County,NC,Small Town,8.65,65.0,35.595,-83.502,2
+139,Harrison County,AR,Small Town,6.92,39.1,33.381,-90.860,2
+2615,Warren County,TX,Rural,3.62,41.9,36.321,-101.872,2
+515,Clay County,GA,Small Town,6.79,62.2,34.063,-83.126,2
+772,Sullivan County,IN,Suburban,11.83,28.1,38.440,-88.010,2
+366,Monroe County,FL,Suburban,8.51,45.3,25.626,-85.534,2
+1066,Ross County,KY,Suburban,8.73,17.6,38.248,-83.192,2
+2652,Adams County,TX,Small Town,8.34,33.8,27.884,-95.431,2
+1034,Jefferson County,KY,Suburban,10.93,81.6,37.693,-87.639,2
+1229,Greene County,MA,Suburban,10.86,47.6,42.899,-71.448,2
+2040,Wayne County,ND,Suburban,8.35,21.9,47.084,-98.044,2
+2093,Wayne County,OH,Suburban,9.51,92.0,39.503,-84.473,2
+709,Greene County,IN,Rural,3.72,13.6,41.650,-87.415,2
+2758,Wilson County,TX,Small Town,6.17,30.4,33.690,-100.446,2
+47,Monroe County,AL,Small Town,8.58,24.1,34.793,-85.979,2
+229,Franklin County,CA,Small Town,6.36,80.3,35.102,-117.251,2
+1835,Clay County,NY,Suburban,10.41,40.3,44.183,-79.268,2
+1973,Madison County,NC,Small Town,8.09,88.4,34.224,-78.400,2
+1629,Orange County,MT,Rural,4.50,68.6,45.224,-112.755,2
+2789,Warren County,UT,Rural,5.00,23.9,40.207,-111.644,2
+1505,Polk County,MO,Suburban,9.63,53.9,37.427,-91.084,2
+573,Polk County,ID,Small Town,7.29,43.8,48.629,-115.117,2
+1712,Hamilton County,NE,Small Town,6.25,16.9,41.236,-97.899,2
+2956,Lincoln County,WV,Small Town,6.38,16.6,39.726,-77.735,2
+796,Union County,IA,Small Town,6.71,12.7,42.510,-91.565,2
+1567,Madison County,MO,Small Town,6.55,87.6,39.939,-91.572,2
+992,Scott County,KS,Suburban,9.26,65.3,39.634,-101.783,2
+1387,Ross County,MN,Suburban,11.92,23.3,46.787,-90.499,2
+418,Morgan County,GA,Suburban,9.76,35.5,31.379,-82.129,2
+2943,Knox County,WA,Small Town,7.93,58.9,45.603,-122.768,2
+2654,Greene County,TX,Suburban,8.48,36.6,27.499,-102.177,2
+2375,Fayette County,SD,Small Town,8.08,78.4,44.708,-98.276,2
+13,Greene County,AL,Small Town,7.20,87.0,33.009,-88.325,2
+961,Ross County,KS,Small Town,8.64,10.7,39.315,-98.528,2
+2820,Jefferson County,VA,Small Town,7.75,20.3,37.177,-79.424,2
+219,Orange County,CA,Urban Core,12.31,57.7,33.491,-122.457,2
+1848,Pike County,NY,Urban Core,12.55,83.3,42.864,-75.388,2
+2119,Benton County,OH,Suburban,11.44,47.5,40.735,-80.645,2
+1340,Carroll County,MN,Small Town,7.34,59.4,46.254,-94.894,2
+1901,Greene County,NC,Suburban,9.22,91.8,36.189,-82.757,2
+2194,Scott County,OK,Suburban,11.72,38.2,33.757,-96.533,2
+1928,Chester County,NC,Small Town,6.21,80.9,36.415,-82.837,2
+2030,Jefferson County,ND,Small Town,6.43,89.1,47.184,-96.725,2
+863,Shelby County,IA,Suburban,8.99,40.5,42.771,-91.843,2
+2136,Monroe County,OK,Small Town,6.58,89.9,36.763,-97.067,2
+2322,Union County,SC,Suburban,11.06,19.1,32.594,-79.684,2
+3008,Washington County,WI,Small Town,8.33,14.3,43.252,-87.559,2
+2983,Lawrence County,WV,Rural,3.60,56.0,40.419,-82.151,2
+298,Warren County,CO,Suburban,9.54,73.1,39.411,-104.102,2
+2493,Carroll County,TN,Suburban,11.82,11.5,36.463,-82.965,2
+2871,Greene County,VA,Suburban,10.41,72.2,38.256,-77.663,2
+756,Hamilton County,IN,Small Town,8.59,34.5,38.262,-86.385,2
+1863,Wilson County,NY,Suburban,11.88,69.3,44.101,-74.102,2
+1732,Chester County,NE,Small Town,6.18,27.0,41.682,-102.439,2
+3014,Monroe County,WI,Rural,5.72,78.3,44.083,-89.893,2
+1549,Carroll County,MO,Suburban,8.00,53.9,36.684,-94.102,2
+1477,Wilson County,MS,Suburban,9.88,12.1,33.766,-88.355,2
+2538,Lake County,TX,Small Town,6.40,59.7,33.489,-97.379,2
+1642,Jackson County,MT,Small Town,7.69,58.6,48.512,-110.332,2
+1154,Jefferson Parish,LA,Small Town,8.95,24.4,29.960,-89.955,2
+1252,Pike County,MI,Small Town,7.86,46.6,41.816,-87.611,2
+622,Harrison County,IL,Small Town,7.83,86.2,37.383,-87.840,2
+1679,Carroll County,NE,Suburban,11.99,87.3,42.859,-97.674,2
+853,Scott County,IA,Small Town,6.13,37.0,40.938,-92.506,2
+2777,Jefferson County,UT,Small Town,6.83,23.9,40.374,-109.737,2
+331,Wayne County,FL,Small Town,7.67,32.3,26.379,-86.164,2
+527,Perry County,GA,Small Town,7.07,84.8,33.664,-81.165,2
+2024,Sullivan County,ND,Small Town,8.67,94.2,46.965,-97.317,2
+2638,Wilson County,TX,Small Town,7.39,66.2,28.090,-103.843,2
+2855,Wilson County,VA,Rural,5.56,36.5,39.212,-80.720,2
+84,Lake Borough,AK,Rural,5.09,53.8,63.733,-145.269,2
+2600,Cass County,TX,Small Town,6.09,44.5,33.829,-95.984,2
+1601,Madison County,MT,Small Town,6.15,54.0,48.142,-108.357,2
+2175,Jackson County,OK,Suburban,10.19,86.8,33.753,-94.684,2
+2824,Jackson County,VA,Suburban,9.96,13.1,36.853,-80.961,2
+1325,Wayne County,MN,Small Town,8.26,37.9,49.091,-93.325,2
+201,Fayette County,CA,Small Town,7.30,20.1,34.380,-118.692,2
+1295,Scott County,MI,Small Town,7.49,17.6,44.930,-88.673,2
+216,Knox County,CA,Small Town,6.28,10.1,41.637,-118.391,2
+3075,Harrison County,WI,Suburban,8.26,60.5,44.852,-87.883,2
+2302,Hamilton County,PA,Small Town,7.67,73.4,40.555,-77.319,2
+1883,Lake County,NY,Small Town,6.28,61.6,43.704,-73.610,2
+830,Jefferson County,IA,Small Town,6.28,32.0,42.332,-90.301,2
+2256,Warren County,PA,Small Town,8.46,16.6,40.922,-76.662,2
+1335,Pike County,MN,Suburban,8.15,22.6,43.933,-92.445,2
+1822,Johnson County,NM,Small Town,8.54,72.4,35.388,-105.243,2
+2440,Warren County,TN,Suburban,10.47,24.1,36.269,-89.412,2
+1049,Lake County,KY,Suburban,9.95,48.6,38.449,-86.175,2
+1710,Grant County,NE,Rural,3.53,57.3,41.834,-100.920,2
+2648,Monroe County,TX,Small Town,8.01,86.8,32.578,-99.050,2
+1526,Lincoln County,MO,Suburban,8.97,73.9,37.160,-94.312,2
+2955,Franklin County,WV,Suburban,8.99,59.8,37.845,-79.013,2
+699,Franklin County,IN,Suburban,9.03,62.7,39.634,-87.758,2
+18,Grant County,AL,Suburban,8.45,93.0,34.883,-87.941,2
+1143,Lawrence Parish,LA,Small Town,7.10,83.9,32.341,-92.021,2
+1129,Lake Parish,LA,Suburban,8.63,62.5,31.646,-89.112,2
+15,Fayette County,AL,Small Town,7.56,80.0,33.322,-85.714,2
+316,Union County,CT,Urban Core,17.35,17.5,41.283,-73.158,2
+2637,Sullivan County,TX,Suburban,8.67,48.5,34.796,-101.244,2
+1296,Clark County,MI,Small Town,7.19,11.4,48.149,-85.617,2
+943,Montgomery County,KS,Small Town,6.91,27.0,38.180,-100.036,2
+2130,Washington County,OK,Small Town,7.69,50.1,36.481,-97.859,2
+1249,Douglas County,MI,Small Town,8.68,76.4,46.880,-82.866,2
+1499,Lake County,MO,Suburban,9.91,76.2,39.554,-90.097,2
+1400,Monroe County,MN,Small Town,8.18,11.9,45.272,-96.535,2
+1470,Knox County,MS,Suburban,8.44,65.2,31.018,-90.757,2
+2048,Monroe County,OH,Small Town,6.47,63.9,41.094,-82.495,2
+2942,Johnson County,WA,Small Town,6.66,15.5,48.984,-117.631,2
+1496,Warren County,MO,Suburban,8.09,33.1,38.075,-90.498,2
+2899,Washington County,VA,Small Town,8.84,92.0,39.226,-77.223,2
+860,Morgan County,IA,Rural,5.73,87.9,42.813,-91.539,2
+883,Fayette County,IA,Small Town,6.42,28.7,43.090,-91.085,2
+1471,Lawrence County,MS,Small Town,6.81,37.7,32.055,-89.752,2
+2001,Greene County,ND,Small Town,7.79,39.5,48.230,-97.390,2
+1813,Hamilton County,NM,Rural,4.23,90.0,32.628,-106.574,2
+2490,Randolph County,TN,Small Town,7.24,62.9,35.528,-81.980,2
+2612,Adams County,TX,Small Town,6.89,72.7,30.951,-103.658,2
+448,Pike County,GA,Suburban,10.93,47.2,33.124,-80.915,2
+1304,Ross County,MI,Small Town,6.93,45.0,42.314,-87.496,2
+670,Sullivan County,IL,Suburban,9.31,76.6,39.545,-89.254,2
+2903,Madison County,VA,Rural,6.39,82.0,37.560,-81.140,2
+2417,Lake County,SD,Small Town,7.01,67.2,43.384,-102.513,2
+1298,Harrison County,MI,Suburban,8.15,78.4,45.307,-85.667,2
+1960,Morgan County,NC,Small Town,6.85,87.4,35.138,-79.389,2
+2598,Wilson County,TX,Small Town,8.07,20.0,32.249,-102.804,2
+1205,Greene County,MD,Urban Core,17.45,59.2,38.311,-79.493,2
+2595,Ross County,TX,Suburban,9.29,42.8,29.285,-95.074,2
+2763,Jefferson County,TX,Small Town,6.80,81.7,32.533,-96.758,2
+680,Jackson County,IL,Small Town,7.79,60.5,37.353,-91.327,2
+457,Lawrence County,GA,Suburban,9.11,86.7,32.428,-84.818,2
+498,Morgan County,GA,Rural,4.04,42.4,30.608,-81.612,2
+2346,Morgan County,SC,Small Town,7.32,32.6,32.076,-81.300,2
+1379,Clark County,MN,Small Town,7.54,85.9,44.609,-90.953,2
+1165,Greene Parish,LA,Suburban,11.78,35.9,31.147,-92.307,2
+2764,Franklin County,TX,Small Town,6.34,71.1,27.056,-102.312,2
+1123,Adams Parish,LA,Rural,5.09,88.6,30.458,-93.113,2
+161,Marion County,AR,Small Town,7.54,11.4,34.963,-94.561,2
+376,Lake County,FL,Small Town,8.67,56.4,28.183,-80.464,2
+411,Scott County,GA,Suburban,8.41,25.4,31.929,-84.692,2
+1246,Montgomery County,MI,Suburban,11.88,14.0,46.449,-85.893,2
+2510,Lincoln County,TN,Suburban,8.04,73.3,36.328,-83.251,2
+1365,Wayne County,MN,Suburban,9.72,83.3,43.600,-90.290,2
+1110,Benton County,KY,Small Town,6.29,89.6,38.226,-82.698,2
+1469,Johnson County,MS,Small Town,7.36,56.8,31.915,-88.288,2
+608,Warren County,IL,Small Town,6.77,33.8,41.410,-88.772,2
+2866,Union County,VA,Suburban,8.94,22.6,38.803,-76.392,2
+247,Franklin County,CO,Suburban,9.25,65.8,40.264,-108.342,2
+263,Douglas County,CO,Suburban,11.83,37.2,40.192,-108.598,2
+3009,Jefferson County,WI,Small Town,8.54,53.0,44.931,-90.565,2
+1266,Sullivan County,MI,Suburban,9.17,43.7,46.032,-83.688,2
+953,Clark County,KS,Small Town,7.60,49.1,39.450,-97.642,2
+3044,Wilson County,WI,Small Town,7.01,23.1,45.453,-87.025,2
+3050,Franklin County,WI,Suburban,9.30,27.5,45.230,-91.242,2
+2392,Morgan County,SD,Small Town,7.25,40.0,43.486,-101.922,2
+1282,Wayne County,MI,Suburban,11.59,18.1,43.724,-84.268,2
+2875,Lake County,VA,Suburban,8.90,47.5,37.866,-75.479,2
+1336,Polk County,MN,Small Town,7.15,14.3,46.566,-93.207,2
+1135,Polk Parish,LA,Suburban,9.92,51.0,29.846,-91.290,2
+905,Grant County,KS,Small Town,7.32,22.9,39.215,-99.924,2
+2710,Johnson County,TX,Suburban,11.16,73.1,35.369,-105.595,2
+227,Washington County,CA,Urban Core,12.80,51.3,36.922,-119.781,2
+1525,Franklin County,MO,Small Town,7.34,88.4,39.859,-94.670,2
+2952,Cass County,WA,Suburban,9.19,64.1,48.302,-117.184,2
+826,Benton County,IA,Small Town,7.01,45.0,41.490,-91.132,2
+1761,Montgomery County,NV,Small Town,8.93,79.6,39.465,-116.269,2
+966,Cass County,KS,Small Town,8.61,49.5,39.629,-102.052,2
+1706,Warren County,NE,Rural,5.43,69.1,42.964,-95.566,2
+2184,Fayette County,OK,Suburban,8.38,10.6,36.122,-95.748,2
+1075,Franklin County,KY,Rural,3.56,28.6,37.153,-88.870,2
+2686,Madison County,TX,Rural,5.30,22.4,26.381,-104.014,2
+632,Benton County,IL,Suburban,9.78,88.2,40.869,-89.487,2
+2160,Lawrence County,OK,Suburban,9.94,31.1,34.970,-101.401,2
+1285,Fayette County,MI,Small Town,7.87,80.6,47.853,-88.592,2
+2178,Clay County,OK,Small Town,8.36,50.9,33.996,-98.388,2
+1409,Clay County,MS,Rural,5.02,91.6,32.953,-90.125,2
+2932,Douglas County,WA,Small Town,6.86,22.0,46.797,-123.404,2
+2089,Union County,OH,Small Town,8.02,52.8,39.705,-84.587,2
+526,Hamilton County,GA,Suburban,11.90,66.4,33.374,-84.879,2
+2159,Knox County,OK,Small Town,7.53,76.9,36.884,-100.678,2
+2293,Adams County,PA,Suburban,10.56,19.5,40.645,-79.698,2
+2684,Franklin County,TX,Suburban,8.85,37.6,25.980,-99.950,2
+2614,Greene County,TX,Rural,5.38,36.4,27.777,-93.551,2
+1464,Randolph County,MS,Small Town,6.05,57.2,33.701,-89.819,2
+2751,Knox County,TX,Suburban,11.99,67.2,30.923,-105.305,2
+1870,Lincoln County,NY,Small Town,6.69,19.8,44.736,-79.576,2
+3049,Jefferson County,WI,Suburban,8.43,45.2,44.121,-86.807,2
+1452,Wayne County,MS,Small Town,8.33,88.5,31.848,-89.226,2
+2497,Lawrence County,TN,Small Town,8.71,82.6,35.229,-89.039,2
+2539,Grant County,TX,Small Town,7.22,20.4,30.729,-97.569,2
+183,Morgan County,AR,Small Town,8.61,92.5,34.022,-91.171,2
+1435,Shelby County,MS,Suburban,10.82,34.1,32.913,-90.607,2
+2585,Randolph County,TX,Suburban,8.79,12.2,34.428,-106.204,2
+2219,Greene County,OR,Small Town,7.46,17.8,43.119,-121.060,2
+2722,Washington County,TX,Small Town,7.56,11.0,34.923,-97.486,2
+2260,Grant County,PA,Small Town,8.07,36.7,39.944,-75.065,2
+2738,Lake County,TX,Suburban,8.07,33.3,31.903,-100.561,2
+2251,Clay County,PA,Small Town,6.58,41.7,40.328,-78.803,2
+2422,Pike County,SD,Small Town,8.18,31.9,45.392,-96.916,2
+2234,Harrison County,OR,Suburban,8.04,26.2,45.416,-119.721,2
+158,Monroe County,AR,Suburban,10.40,22.5,36.155,-90.693,2
+1427,Carroll County,MS,Rural,3.51,11.8,34.302,-90.069,2
+1323,Marion County,MN,Suburban,8.45,21.8,45.238,-96.777,2
+1305,Shelby County,MI,Small Town,6.38,47.0,47.050,-87.840,2
+326,Monroe County,FL,Small Town,8.24,35.7,28.786,-81.990,2
+2605,Lincoln County,TX,Rural,6.01,64.7,34.349,-105.918,2
+489,Polk County,GA,Small Town,7.61,26.5,32.747,-82.917,2
+2967,Fayette County,WV,Rural,3.86,71.5,38.870,-81.667,2
+2495,Johnson County,TN,Small Town,6.70,21.5,36.533,-82.768,2
+2729,Union County,TX,Small Town,7.68,57.7,26.077,-97.911,2
+1182,Jackson County,ME,Small Town,7.67,67.1,43.029,-70.106,2
+2682,Washington County,TX,Suburban,8.65,57.1,29.648,-101.885,2
+2035,Monroe County,ND,Small Town,7.34,76.3,47.975,-101.361,2
+2429,Franklin County,TN,Suburban,10.55,63.1,35.889,-89.163,2
+2725,Lincoln County,TX,Small Town,8.38,84.3,33.095,-98.418,2
+902,Fayette County,KS,Small Town,8.69,88.3,37.025,-100.691,2
+2217,Adams County,OR,Small Town,8.89,58.4,45.524,-123.003,2
+547,Jefferson County,HI,Small Town,8.37,32.5,19.226,-157.229,2
+1177,Washington County,ME,Small Town,6.21,57.2,43.081,-70.898,2
+399,Greene County,GA,Small Town,8.88,29.1,31.930,-82.321,2
+70,Franklin Borough,AK,Small Town,7.77,14.9,65.310,-149.858,2
+584,Ross County,ID,Suburban,10.19,63.8,43.292,-113.360,2
+2028,Chester County,ND,Suburban,11.59,65.7,46.095,-98.298,2
+24,Randolph County,AL,Small Town,8.51,35.4,34.184,-86.862,2
+322,Franklin County,FL,Small Town,6.33,21.6,25.591,-80.800,2
+602,Union County,IL,Suburban,10.66,27.8,39.294,-89.385,2
+958,Lawrence County,KS,Small Town,6.63,26.0,37.484,-96.572,2
+1564,Jefferson County,MO,Rural,5.48,55.6,36.848,-90.975,2
+461,Shelby County,GA,Rural,3.89,48.1,33.691,-84.842,2
+180,Johnson County,AR,Small Town,7.15,51.5,36.078,-91.582,2
+260,Montgomery County,CO,Small Town,6.79,67.7,40.015,-104.824,2
+2162,Orange County,OK,Small Town,7.57,68.5,34.716,-96.496,2
+61,Perry County,AL,Suburban,10.30,20.6,32.592,-85.575,2
+16,Montgomery County,AL,Small Town,6.56,80.3,33.268,-85.772,2
+2846,Harrison County,VA,Suburban,8.89,43.6,37.584,-81.906,2
+290,Jackson County,CO,Suburban,9.03,86.7,37.320,-107.952,2
+2205,Sullivan County,OK,Suburban,8.96,90.9,35.029,-99.864,2
+962,Shelby County,KS,Small Town,7.22,21.4,37.599,-100.910,2
+2640,Cass County,TX,Suburban,10.64,10.7,30.128,-97.792,2
+2223,Lake County,OR,Suburban,10.42,58.2,44.284,-119.741,2
+400,Warren County,GA,Small Town,6.74,40.3,33.268,-82.841,2
+2732,Adams County,TX,Small Town,6.41,94.9,34.491,-98.235,2
+1882,Montgomery County,NY,Suburban,11.89,36.3,43.329,-74.336,2
+1410,Marion County,MS,Rural,6.10,73.5,31.359,-91.092,2
+508,Jefferson County,GA,Suburban,11.90,73.7,34.592,-82.457,2
+524,Grant County,GA,Suburban,9.13,48.6,31.590,-84.434,2
+3031,Randolph County,WI,Suburban,8.75,61.7,44.992,-90.121,2
+1582,Hamilton County,MO,Small Town,8.33,81.7,37.269,-90.364,2
+1612,Montgomery County,MT,Rural,4.47,16.3,47.260,-108.734,2
+2278,Sullivan County,PA,Suburban,8.38,38.1,39.867,-78.754,2
+291,Monroe County,CO,Small Town,8.30,13.3,37.304,-105.693,2
+1726,Ross County,NE,Small Town,8.31,44.7,40.243,-98.805,2
+2064,Polk County,OH,Suburban,9.53,87.9,38.846,-83.521,2
+2601,Chester County,TX,Small Town,8.25,41.3,28.001,-98.543,2
+2071,Knox County,OH,Suburban,11.59,77.9,39.858,-81.270,2
+2274,Morgan County,PA,Small Town,7.59,88.5,41.249,-79.737,2
+733,Wilson County,IN,Small Town,7.45,63.9,40.299,-85.393,2
+1096,Randolph County,KY,Small Town,7.09,15.1,37.135,-86.518,2
+1320,Monroe County,MN,Small Town,7.09,48.0,45.345,-92.376,2
+2655,Warren County,TX,Suburban,8.29,48.2,28.253,-101.447,2
+2591,Knox County,TX,Rural,4.92,17.8,31.021,-101.089,2
+300,Montgomery County,CO,Small Town,8.25,47.5,38.840,-106.652,2
+3071,Randolph County,WI,Small Town,6.15,61.8,46.363,-88.067,2
+85,Grant Borough,AK,Small Town,6.94,48.7,59.811,-161.516,2
+1942,Warren County,NC,Small Town,7.69,62.7,35.122,-78.992,2
+2842,Randolph County,VA,Small Town,7.96,77.4,36.934,-79.340,2
+2476,Marion County,TN,Small Town,7.85,93.5,35.670,-87.711,2
+444,Grant County,GA,Small Town,7.68,49.2,31.682,-83.796,2
+1905,Lake County,NC,Rural,6.41,56.3,34.627,-82.705,2
+1104,Morgan County,KY,Rural,4.06,58.4,38.147,-85.483,2
+1968,Chester County,NC,Suburban,11.13,93.9,34.544,-80.771,2
+1455,Fayette County,MS,Rural,5.23,75.1,31.746,-91.005,2
+1476,Sullivan County,MS,Suburban,11.77,46.7,31.979,-88.868,2
+979,Wayne County,KS,Small Town,6.51,64.5,38.785,-95.907,2
+2949,Sullivan County,WA,Suburban,10.41,20.7,46.249,-123.554,2
+1186,Marion County,ME,Rural,6.27,22.1,44.382,-69.114,2
+1122,Marion Parish,LA,Suburban,9.91,78.6,29.421,-93.487,2
+2045,Lincoln County,OH,Small Town,6.95,30.2,39.284,-84.226,2
+1770,Union County,NH,Suburban,9.72,37.4,44.811,-71.562,2
+1446,Jackson County,MS,Rural,5.57,15.8,34.210,-88.436,2
+2480,Warren County,TN,Rural,3.79,61.1,35.506,-86.569,2
+460,Ross County,GA,Small Town,8.05,19.1,34.131,-83.974,2
+1118,Jackson Parish,LA,Small Town,8.37,76.7,30.387,-90.346,2
+2645,Lincoln County,TX,Small Town,6.65,61.6,26.448,-102.647,2
+31,Lawrence County,AL,Small Town,8.95,69.4,34.256,-85.124,2
+2142,Greene County,OK,Rural,6.29,77.7,34.759,-95.773,2
+2253,Adams County,PA,Suburban,9.26,24.3,41.555,-79.946,2
+2273,Lawrence County,PA,Small Town,6.45,88.1,39.789,-75.559,2
+2917,Lincoln County,WA,Suburban,11.10,74.2,46.174,-121.924,2
+858,Knox County,IA,Small Town,7.46,20.9,40.575,-92.450,2
+2341,Carroll County,SC,Small Town,7.96,20.8,33.715,-79.109,2
+809,Perry County,IA,Small Town,7.36,82.6,40.664,-91.453,2
+1958,Knox County,NC,Small Town,7.77,36.1,35.957,-81.123,2
+2520,Warren County,TN,Suburban,8.72,36.6,36.243,-88.034,2
+314,Jackson County,CT,Suburban,9.53,56.7,41.039,-73.672,2
+2236,Knox County,OR,Small Town,6.48,60.7,43.027,-117.838,2
+369,Marion County,FL,Suburban,11.91,29.2,24.941,-80.372,2
+2991,Cass County,WV,Small Town,7.63,61.0,40.462,-78.082,2
+1414,Warren County,MS,Suburban,10.05,46.8,31.537,-91.524,2
+2985,Orange County,WV,Small Town,6.17,57.0,39.512,-80.072,2
+710,Warren County,IN,Rural,4.80,17.0,40.377,-87.792,2
+52,Wayne County,AL,Small Town,8.40,25.8,32.814,-85.227,2
+2394,Ross County,SD,Rural,3.60,87.5,42.767,-103.442,2
+1157,Madison Parish,LA,Suburban,11.63,62.2,30.788,-89.089,2
+1188,Wayne County,ME,Small Town,8.31,81.8,47.129,-67.418,2
+2355,Washington County,SC,Small Town,6.34,12.4,32.551,-79.769,2
+2229,Polk County,OR,Rural,4.06,75.1,44.629,-124.323,2
+875,Monroe County,IA,Rural,4.00,88.5,43.103,-95.683,2
+1745,Greene County,NE,Rural,5.22,83.7,41.884,-98.764,2
+1164,Wayne Parish,LA,Small Town,8.34,50.4,29.055,-90.871,2
+243,Lake County,CA,Small Town,6.28,81.1,33.891,-121.182,2
+156,Madison County,AR,Small Town,6.86,13.9,35.921,-92.935,2
+2973,Perry County,WV,Small Town,8.72,61.8,38.113,-82.506,2
+1247,Lake County,MI,Small Town,6.34,73.0,46.680,-89.259,2
+2061,Hamilton County,OH,Suburban,11.53,64.6,39.592,-81.641,2
+2445,Douglas County,TN,Suburban,10.51,86.0,35.243,-82.620,2
+2148,Douglas County,OK,Suburban,11.59,84.8,36.635,-102.688,2
+210,Randolph County,CA,Suburban,9.41,53.8,38.773,-114.817,2
+2865,Monroe County,VA,Suburban,9.99,15.3,37.678,-76.277,2
+2442,Montgomery County,TN,Small Town,8.69,15.2,35.219,-82.292,2
+929,Jefferson County,KS,Small Town,7.81,73.3,39.517,-99.402,2
+1089,Lake County,KY,Rural,5.79,73.2,38.415,-85.780,2
+946,Douglas County,KS,Suburban,8.59,72.2,37.481,-96.689,2
+88,Perry Borough,AK,Rural,5.67,92.6,69.496,-141.949,2
+265,Perry County,CO,Small Town,8.17,33.5,37.111,-105.011,2
+2901,Franklin County,VA,Suburban,10.41,78.0,37.310,-75.247,2
+2771,Marion County,TX,Suburban,10.10,80.0,26.841,-102.096,2
+2458,Morgan County,TN,Small Town,6.35,42.8,35.403,-87.163,2
+2604,Franklin County,TX,Small Town,7.56,81.4,36.407,-96.062,2
+2529,Union County,TX,Small Town,7.59,84.8,27.739,-94.649,2
+2569,Union County,TX,Small Town,7.74,28.6,33.282,-97.590,2
+2461,Shelby County,TN,Suburban,11.46,47.2,36.391,-86.720,2
+1874,Union County,NY,Small Town,7.29,51.2,40.663,-76.040,2
+689,Fayette County,IL,Suburban,10.62,77.1,37.547,-89.156,2
+343,Randolph County,FL,Small Town,7.46,69.2,24.846,-83.927,2
+167,Montgomery County,AR,Rural,4.73,36.9,33.680,-91.612,2
+633,Cass County,IL,Small Town,8.04,84.5,40.195,-89.896,2
+2242,Sullivan County,OR,Rural,5.19,39.1,44.316,-122.288,2
+1878,Wayne County,NY,Suburban,8.27,72.2,42.101,-74.073,2
+976,Clay County,KS,Rural,4.30,34.9,38.760,-96.979,2
+2984,Morgan County,WV,Small Town,7.35,69.5,40.384,-77.922,2
+152,Washington County,AR,Rural,5.94,15.1,35.343,-92.406,2
+2165,Sullivan County,OK,Small Town,6.02,81.2,34.006,-99.389,2
+1273,Franklin County,MI,Small Town,6.29,30.7,43.929,-83.971,2
+2898,Chester County,VA,Small Town,8.60,91.3,36.649,-75.822,2
+1386,Orange County,MN,Suburban,9.10,60.7,45.840,-91.967,2
+1556,Ross County,MO,Small Town,6.94,15.9,38.924,-90.787,2
+2937,Randolph County,WA,Small Town,8.40,59.5,46.420,-119.744,2
+2149,Hamilton County,OK,Rural,5.93,67.2,34.959,-100.488,2
+2393,Orange County,SD,Rural,3.58,40.4,43.135,-97.213,2
+2748,Carroll County,TX,Small Town,7.63,38.2,33.734,-106.330,2
+974,Monroe County,KS,Small Town,8.21,19.5,39.102,-96.166,2
+1920,Morgan County,NC,Suburban,8.28,12.8,35.646,-82.941,2
+878,Marion County,IA,Small Town,8.52,44.9,40.407,-93.836,2
+1858,Morgan County,NY,Small Town,7.52,20.4,41.636,-74.980,2
+964,Wilson County,KS,Small Town,8.67,53.6,39.870,-101.293,2
+2743,Pike County,TX,Small Town,6.65,26.5,31.909,-99.978,2
+308,Randolph County,CO,Small Town,8.22,31.0,40.642,-105.099,2
+2717,Sullivan County,TX,Rural,5.50,20.9,29.438,-97.627,2
+773,Wilson County,IN,Small Town,7.70,11.8,40.786,-85.370,2
+1597,Washington County,MT,Small Town,6.36,59.5,47.997,-115.929,2
+1077,Madison County,KY,Rural,6.42,57.2,37.207,-84.060,2
+1676,Randolph County,NE,Suburban,11.03,27.5,42.506,-98.449,2
+1319,Jackson County,MN,Suburban,11.99,12.1,47.090,-92.870,2
+1560,Benton County,MO,Suburban,8.91,83.5,38.505,-90.321,2
+1709,Lake County,NE,Small Town,6.48,49.7,42.022,-103.477,2
+2874,Montgomery County,VA,Small Town,7.48,76.8,36.813,-80.130,2
+3022,Fayette County,WI,Rural,5.91,39.4,46.068,-89.872,2
+2623,Pike County,TX,Rural,5.86,61.0,34.780,-94.743,2
+1925,Wilson County,NC,Suburban,11.50,41.6,35.798,-79.003,2
+1711,Douglas County,NE,Suburban,9.78,69.3,42.828,-96.207,2
+1918,Knox County,NC,Small Town,7.30,43.4,35.918,-79.779,2
+277,Orange County,CO,Small Town,6.85,91.8,37.217,-108.787,2
+1520,Benton County,MO,Rural,6.29,70.0,36.619,-92.641,2
+1187,Adams County,ME,Small Town,8.34,88.2,43.746,-68.882,2
+2667,Clark County,TX,Suburban,9.03,95.0,28.700,-100.970,2
+413,Carroll County,GA,Rural,3.96,18.4,31.553,-81.906,2
+2337,Polk County,SC,Small Town,7.64,11.4,33.647,-80.206,2
+1865,Cass County,NY,Small Town,6.48,53.9,44.644,-76.557,2
+882,Warren County,IA,Suburban,8.46,62.0,41.605,-90.142,2
+2486,Hamilton County,TN,Suburban,8.15,66.9,36.324,-81.650,2
+1374,Perry County,MN,Rural,3.62,55.1,46.809,-96.089,2
+1225,Clay County,MA,Suburban,9.71,17.3,42.025,-73.198,2
+1271,Washington County,MI,Small Town,6.93,43.6,47.723,-84.839,2
+2548,Carroll County,TX,Suburban,8.42,94.8,33.107,-101.578,2
+569,Douglas County,ID,Small Town,8.84,85.5,42.079,-114.444,2
+639,Madison County,IL,Small Town,6.40,92.6,38.665,-89.606,2
+2557,Sullivan County,TX,Suburban,9.92,63.2,29.488,-96.750,2
+534,Harrison County,GA,Suburban,8.87,36.0,32.826,-83.872,2
+1037,Madison County,KY,Small Town,8.49,73.9,38.038,-84.004,2
+3048,Washington County,WI,Small Town,6.36,92.3,44.852,-91.132,2
+795,Monroe County,IA,Suburban,8.07,66.5,42.221,-91.976,2
+2459,Orange County,TN,Small Town,8.77,94.9,35.933,-85.547,2
+1073,Washington County,KY,Rural,4.51,58.4,37.759,-84.152,2
+12,Wayne County,AL,Small Town,8.51,36.6,34.454,-86.227,2
+2304,Pike County,PA,Small Town,8.82,50.6,41.868,-79.981,2
+816,Harrison County,IA,Small Town,8.01,63.0,41.430,-94.240,2
+739,Franklin County,IN,Small Town,6.78,18.8,41.250,-86.629,2
+200,Warren County,CA,Suburban,10.17,75.4,36.148,-122.242,2
+2257,Fayette County,PA,Small Town,6.03,47.9,40.311,-76.921,2
+1631,Shelby County,MT,Small Town,7.19,14.2,45.179,-110.949,2
+2185,Montgomery County,OK,Small Town,8.51,32.7,35.454,-100.395,2
+2828,Marion County,VA,Small Town,6.05,72.2,38.031,-83.131,2
+758,Pike County,IN,Small Town,8.58,32.7,38.346,-87.163,2
+755,Douglas County,IN,Rural,4.57,69.8,40.911,-85.244,2
+1774,Jefferson County,NJ,Suburban,8.82,16.9,41.126,-75.382,2
+2354,Chester County,SC,Rural,3.50,86.6,34.158,-78.953,2
+1554,Morgan County,MO,Suburban,11.63,67.2,39.095,-94.958,2
+240,Warren County,CA,Small Town,8.02,27.3,40.274,-122.938,2
+2338,Randolph County,SC,Small Town,6.82,72.9,34.724,-82.971,2
+1665,Greene County,NE,Small Town,6.45,21.1,41.943,-97.576,2
+725,Johnson County,IN,Suburban,11.43,11.8,39.981,-85.382,2
+196,Marion County,CA,Suburban,10.14,67.2,33.478,-119.174,2
+57,Lake County,AL,Suburban,10.27,66.8,34.768,-87.309,2
+1212,Hamilton County,MD,Small Town,8.15,90.6,39.239,-77.590,2
+2690,Clay County,TX,Suburban,9.59,20.1,29.254,-103.792,2
+3046,Cass County,WI,Rural,4.35,11.0,44.522,-90.580,2
+2070,Johnson County,OH,Small Town,6.26,51.1,40.405,-81.427,2
+675,Washington County,IL,Suburban,11.85,90.5,38.598,-88.174,2
+1740,Union County,NE,Suburban,9.48,74.1,41.888,-102.523,2
+555,Madison County,ID,Small Town,7.83,12.7,46.513,-116.059,2
+2317,Franklin County,SC,Suburban,9.09,44.3,35.150,-82.784,2
+1105,Orange County,KY,Suburban,9.74,29.0,36.939,-84.215,2
+3064,Lake County,WI,Small Town,6.89,85.1,43.964,-91.461,2
+1009,Lake County,KY,Rural,5.54,13.1,36.577,-87.002,2
+2642,Washington County,TX,Small Town,6.84,82.0,32.736,-99.634,2
+1472,Morgan County,MS,Small Town,6.35,21.7,33.082,-90.933,2
+2660,Douglas County,TX,Small Town,6.84,37.7,36.341,-101.298,2
+2912,Warren County,VA,Small Town,8.15,33.6,37.497,-83.011,2
+1909,Perry County,NC,Small Town,6.98,25.5,36.346,-84.263,2
+1042,Marion County,KY,Rural,4.21,34.6,37.965,-84.659,2
+233,Monroe County,CA,Small Town,6.92,52.9,38.309,-121.989,2
+2443,Lake County,TN,Small Town,7.19,40.8,36.651,-86.230,2
+1439,Cass County,MS,Small Town,8.56,53.2,30.259,-89.564,2
+422,Sullivan County,GA,Suburban,9.52,53.8,33.563,-83.398,2
+177,Clark County,AR,Small Town,6.92,33.6,34.886,-93.199,2
+2350,Sullivan County,SC,Small Town,8.37,15.9,34.308,-80.142,2
+1235,Madison County,MI,Suburban,11.78,15.4,47.485,-88.893,2
+838,Marion County,IA,Small Town,6.91,72.9,40.986,-93.154,2
+1402,Jefferson County,MS,Suburban,10.02,88.7,32.411,-88.496,2
+566,Montgomery County,ID,Small Town,6.13,56.0,46.164,-111.307,2
+191,Madison County,CA,Urban Core,12.41,32.2,34.708,-115.945,2
+1422,Pike County,MS,Small Town,8.03,70.7,33.344,-88.953,2
+2890,Morgan County,VA,Suburban,8.37,56.8,38.428,-75.405,2
+252,Union County,CO,Rural,5.86,54.9,38.826,-104.708,2
+1680,Harrison County,NE,Suburban,8.31,20.6,40.459,-97.036,2
+2399,Cass County,SD,Small Town,7.13,45.6,43.277,-102.617,2
+2782,Monroe County,UT,Suburban,10.36,77.3,38.317,-113.908,2
+2993,Washington County,WV,Suburban,8.79,32.5,39.535,-80.776,2
+745,Clay County,IN,Rural,5.56,55.9,41.323,-85.168,2
+2407,Monroe County,SD,Small Town,7.71,85.6,43.114,-98.984,2
+535,Johnson County,GA,Small Town,8.61,37.5,31.564,-81.751,2
+2721,Chester County,TX,Suburban,8.70,67.0,31.720,-100.824,2
+2351,Wilson County,SC,Suburban,11.75,65.1,34.570,-81.697,2
+839,Adams County,IA,Suburban,11.17,65.1,40.982,-91.665,2
+2926,Greene County,WA,Small Town,8.35,46.8,47.044,-120.054,2
+1373,Hamilton County,MN,Small Town,6.48,60.0,47.874,-90.565,2
+333,Warren County,FL,Suburban,12.00,30.9,25.492,-86.329,2
+2995,Franklin County,WV,Suburban,10.52,30.9,39.433,-80.954,2
+2288,Jackson County,PA,Small Town,6.67,63.4,40.095,-78.209,2
+2864,Jackson County,VA,Suburban,9.09,53.3,36.705,-83.139,2
+137,Clark County,AR,Suburban,9.52,87.9,35.313,-91.706,2
+2042,Washington County,OH,Small Town,6.25,78.0,41.482,-83.853,2
+1512,Knox County,MO,Small Town,8.11,69.1,37.346,-91.968,2
+401,Fayette County,GA,Rural,6.22,55.8,34.053,-83.079,2
+2844,Clark County,VA,Small Town,8.83,71.0,37.622,-75.440,2
+2201,Morgan County,OK,Small Town,6.51,65.7,36.977,-102.275,2
+895,Union County,KS,Rural,4.37,22.6,39.954,-101.670,2
+2980,Harrison County,WV,Rural,4.52,23.2,38.989,-81.213,2
+2709,Harrison County,TX,Suburban,8.49,73.9,31.093,-98.300,2
+69,Jefferson Borough,AK,Rural,5.52,73.5,60.821,-153.055,2
+593,Franklin County,ID,Rural,4.89,18.5,43.268,-116.670,2
+2062,Perry County,OH,Suburban,9.15,31.2,38.747,-81.506,2
+2775,Warren County,TX,Rural,4.78,41.8,33.184,-103.072,2
+2608,Monroe County,TX,Suburban,10.40,70.9,26.547,-98.475,2
+2964,Wayne County,WV,Suburban,10.00,31.5,40.028,-81.707,2
+1051,Douglas County,KY,Small Town,6.93,41.3,36.972,-84.463,2
+2788,Greene County,UT,Suburban,8.40,31.7,39.493,-111.159,2
+854,Clark County,IA,Small Town,8.94,82.6,42.228,-94.496,2
+1222,Jackson County,MA,Urban Core,17.85,43.4,42.763,-70.688,2
+2572,Adams County,TX,Suburban,8.03,11.4,35.674,-94.681,2
+1086,Warren County,KY,Small Town,6.47,16.4,38.040,-87.146,2
+546,Washington County,HI,Suburban,11.95,74.9,20.214,-156.868,2
+2297,Fayette County,PA,Small Town,7.59,50.0,41.079,-79.858,2
+512,Jackson County,GA,Small Town,6.28,22.6,34.324,-81.330,2
+2592,Lawrence County,TX,Rural,5.68,48.6,35.814,-94.009,2
+1054,Pike County,KY,Suburban,9.88,47.1,37.226,-83.927,2
+1463,Polk County,MS,Small Town,6.42,41.1,31.031,-90.218,2
+718,Pike County,IN,Suburban,10.53,10.7,39.050,-87.661,2
+371,Wayne County,FL,Suburban,8.45,30.0,26.883,-85.602,2
+536,Knox County,GA,Small Town,7.85,78.8,34.725,-82.073,2
+1226,Marion County,MA,Urban Core,15.92,54.6,42.802,-70.962,2
+651,Lake County,IL,Small Town,8.99,13.2,38.824,-88.705,2
+1312,Jefferson County,MI,Small Town,7.77,50.1,43.487,-87.852,2
+1980,Wayne County,NC,Suburban,10.59,29.7,34.594,-83.551,2
+1771,Clay County,NH,Small Town,7.49,29.9,44.130,-70.688,2
+2462,Sullivan County,TN,Suburban,9.47,33.7,36.133,-85.123,2
+1991,Franklin County,ND,Small Town,7.00,32.1,46.886,-103.911,2
+102,Jackson County,AZ,Suburban,11.82,32.7,34.932,-110.962,2
+419,Orange County,GA,Suburban,9.58,79.6,34.110,-80.897,2
+2856,Benton County,VA,Small Town,7.67,92.2,36.937,-80.189,2
+2794,Douglas County,UT,Small Town,8.33,22.0,38.194,-111.357,2
+2241,Shelby County,OR,Suburban,10.82,91.9,43.727,-118.482,2
+1394,Washington County,MN,Suburban,10.48,81.2,44.458,-93.207,2
+1723,Lawrence County,NE,Small Town,6.69,57.0,40.857,-101.963,2
+1055,Polk County,KY,Suburban,8.16,88.5,38.556,-84.596,2
+3017,Marion County,WI,Suburban,10.75,34.6,45.553,-92.551,2
+1360,Monroe County,MN,Small Town,8.23,84.7,49.248,-92.890,2
+810,Pike County,IA,Rural,6.05,93.5,40.948,-93.173,2
+686,Wayne County,IL,Small Town,7.26,69.8,38.905,-91.322,2
+186,Shelby County,AR,Small Town,8.03,81.3,33.707,-92.216,2
+1280,Marion County,MI,Small Town,7.60,55.3,45.787,-85.010,1
+347,Harrison County,FL,Suburban,11.65,46.4,26.251,-82.042,1
+2514,Union County,TN,Small Town,6.70,79.8,36.572,-87.278,1
+924,Wilson County,KS,Rural,4.68,69.5,39.636,-100.257,1
+28,Harrison County,AL,Small Town,8.35,63.8,32.362,-87.550,1
+390,Lincoln County,GA,Small Town,7.27,30.1,30.714,-81.058,1
+918,Lawrence County,KS,Small Town,8.31,46.8,39.284,-97.664,1
+313,Madison County,CT,Urban Core,18.89,72.5,42.061,-73.004,1
+856,Harrison County,IA,Small Town,8.36,88.3,43.462,-90.542,1
+1674,Pike County,NE,Small Town,6.33,49.6,42.024,-99.139,1
+1369,Montgomery County,MN,Small Town,7.65,65.8,47.079,-90.652,1
+1242,Wayne County,MI,Suburban,9.59,89.9,43.498,-86.827,1
+2345,Lawrence County,SC,Suburban,11.93,74.4,33.246,-80.862,1
+871,Franklin County,IA,Rural,4.29,54.1,41.161,-96.415,1
+2920,Monroe County,WA,Suburban,9.83,89.3,48.992,-121.300,1
+1065,Orange County,KY,Rural,4.94,45.4,38.387,-85.078,1
+752,Montgomery County,IN,Rural,4.94,28.6,39.806,-88.051,1
+1528,Jackson County,MO,Suburban,9.03,39.9,39.357,-94.348,1
+1382,Johnson County,MN,Suburban,8.95,31.8,43.822,-91.349,1
+564,Warren County,ID,Small Town,8.00,57.5,43.071,-111.684,1
+1854,Harrison County,NY,Suburban,9.40,29.4,42.712,-75.523,1
+2166,Wilson County,OK,Suburban,8.24,39.1,34.902,-102.477,1
+122,Adams County,AR,Small Town,6.98,72.9,35.397,-94.100,1
+800,Wayne County,IA,Small Town,8.60,65.0,43.432,-91.461,1
+2868,Marion County,VA,Suburban,10.01,11.1,38.142,-79.096,1
+1565,Franklin County,MO,Suburban,9.69,50.9,37.263,-92.115,1
+388,Jefferson County,GA,Small Town,6.51,60.6,33.737,-82.242,1
+771,Shelby County,IN,Small Town,8.52,68.8,39.526,-87.350,1
+1450,Marion County,MS,Suburban,9.63,15.1,33.157,-91.540,1
+1936,Union County,NC,Suburban,11.41,58.6,36.046,-78.807,1
+3002,Marion County,WV,Suburban,10.59,15.4,38.428,-77.774,1
+1074,Jefferson County,KY,Small Town,6.30,31.6,38.329,-83.502,1
+2193,Randolph County,OK,Small Town,8.36,58.2,35.240,-96.374,1
+1592,Knox County,MO,Small Town,6.49,90.8,37.238,-90.547,1
+2728,Monroe County,TX,Small Town,6.46,23.5,29.793,-95.313,1
+336,Lake County,FL,Suburban,8.84,33.7,27.368,-83.374,1
+2555,Ross County,TX,Small Town,8.26,11.9,29.362,-106.190,1
+1731,Cass County,NE,Suburban,11.05,33.6,41.898,-101.011,1
+1314,Washington County,MN,Rural,5.18,51.7,44.378,-93.750,1
+1171,Douglas Parish,LA,Rural,5.49,73.7,30.468,-90.557,1
+278,Ross County,CO,Suburban,9.06,71.6,38.068,-109.054,1
+2104,Polk County,OH,Suburban,8.03,49.7,40.706,-81.431,1
+1546,Randolph County,MO,Small Town,6.21,37.1,37.084,-90.516,1
+128,Lake County,AR,Small Town,8.13,88.4,34.044,-93.122,1
+195,Clay County,CA,Suburban,9.04,47.9,35.557,-119.436,1
+1850,Randolph County,NY,Suburban,10.18,35.2,43.304,-76.975,1
+2469,Franklin County,TN,Suburban,11.50,78.1,35.760,-88.313,1
+345,Clark County,FL,Suburban,10.90,70.1,27.688,-84.194,1
+2781,Jackson County,UT,Suburban,11.29,94.2,38.302,-111.069,1
+1935,Monroe County,NC,Small Town,8.12,27.4,35.529,-78.426,1
+654,Hamilton County,IL,Small Town,6.32,30.9,40.530,-89.120,1
+130,Douglas County,AR,Suburban,9.77,10.4,35.817,-90.893,1
+160,Clay County,AR,Small Town,7.77,28.8,34.620,-92.219,1
+392,Jackson County,GA,Small Town,8.76,63.2,32.867,-84.216,1
+2010,Pike County,ND,Small Town,7.37,71.4,46.458,-101.012,1
+936,Clay County,KS,Small Town,6.08,24.3,39.753,-97.569,1
+614,Hamilton County,IL,Suburban,9.49,44.2,39.017,-91.243,1
+2478,Wayne County,TN,Suburban,10.23,37.6,35.493,-83.127,1
+784,Union County,IN,Small Town,8.51,74.0,41.217,-85.008,1
+370,Adams County,FL,Suburban,8.17,74.1,26.007,-86.437,1
+2049,Union County,OH,Small Town,6.95,12.7,41.261,-81.698,1
+766,Knox County,IN,Small Town,8.42,45.2,38.319,-86.976,1
+2258,Montgomery County,PA,Small Town,7.08,93.6,41.514,-79.376,1
+2647,Jackson County,TX,Small Town,6.49,90.5,35.977,-96.352,1
+490,Randolph County,GA,Small Town,6.56,85.5,34.937,-81.005,1
+820,Morgan County,IA,Rural,6.20,56.3,42.777,-92.231,1
+2221,Fayette County,OR,Suburban,9.28,45.0,43.770,-121.726,1
+2499,Orange County,TN,Small Town,8.36,90.8,35.903,-89.774,1
+1765,Franklin County,NH,Small Town,7.28,15.5,43.943,-70.787,1
+2421,Perry County,SD,Small Town,8.38,75.7,43.702,-99.698,1
+1147,Shelby Parish,LA,Suburban,11.64,25.8,32.045,-90.949,1
+1206,Warren County,MD,Small Town,7.31,15.2,39.325,-77.367,1
+1453,Greene County,MS,Small Town,6.37,81.6,32.968,-91.495,1
+1899,Adams County,NC,Suburban,10.86,50.8,36.306,-82.919,1
+2819,Washington County,VA,Suburban,10.26,16.0,37.196,-80.389,1
+1804,Adams County,NM,Small Town,6.25,46.2,33.575,-105.255,1
+2094,Greene County,OH,Suburban,9.51,68.7,41.631,-81.901,1
+1444,Lincoln County,MS,Small Town,7.82,13.5,34.589,-88.990,1
+1946,Grant County,NC,Small Town,8.32,22.4,35.311,-76.916,1
+2827,Clay County,VA,Small Town,6.95,58.6,38.652,-79.813,1
+1986,Grant County,NC,Rural,4.29,73.4,34.485,-82.023,1
+8,Union County,AL,Suburban,8.17,43.1,34.797,-87.872,1
+1085,Greene County,KY,Small Town,7.73,90.3,37.215,-81.967,1
+439,Greene County,GA,Suburban,10.25,27.5,33.061,-82.689,1
+1268,Benton County,MI,Rural,6.09,89.5,45.419,-89.416,1
+131,Hamilton County,AR,Suburban,11.47,39.7,33.604,-91.623,1
+1773,Washington County,NJ,Small Town,6.63,65.5,40.742,-74.540,1
+1782,Marion County,NJ,Suburban,10.56,27.5,40.792,-75.022,1
+270,Clark County,CO,Suburban,11.75,68.5,39.867,-102.478,1
+1015,Polk County,KY,Suburban,8.94,79.3,38.032,-87.454,1
+2365,Madison County,SD,Small Town,8.58,43.8,44.051,-97.612,1
+747,Adams County,IN,Small Town,6.46,51.9,40.052,-86.072,1
+1241,Adams County,MI,Small Town,7.56,49.5,43.745,-83.826,1
+3055,Union County,WI,Suburban,11.41,94.0,42.540,-92.508,1
+1178,Jefferson County,ME,Small Town,7.06,72.4,43.483,-67.454,1
+2298,Montgomery County,PA,Small Town,8.00,76.9,41.387,-79.905,1
+30,Knox County,AL,Suburban,8.79,19.2,34.954,-87.334,1
+1024,Morgan County,KY,Suburban,8.20,89.4,38.650,-88.905,1
+994,Jefferson County,KY,Small Town,8.05,51.4,38.905,-88.538,1
+146,Shelby County,AR,Small Town,6.77,72.6,36.482,-91.688,1
+190,Lincoln County,CA,Suburban,11.49,46.1,38.494,-120.411,1
+2073,Morgan County,OH,Small Town,7.23,91.8,38.453,-80.585,1
+2401,Washington County,SD,Suburban,8.44,39.1,44.920,-99.897,1
+1613,Lake County,MT,Rural,6.44,57.4,47.488,-114.623,1
+2873,Fayette County,VA,Small Town,8.72,41.5,36.570,-75.648,1
+2675,Ross County,TX,Suburban,8.67,42.9,32.135,-96.818,1
+1056,Randolph County,KY,Rural,5.61,64.3,38.295,-86.010,1
+1653,Washington County,NE,Small Town,7.36,52.9,40.349,-99.160,1
+2905,Monroe County,VA,Small Town,7.75,92.6,38.912,-76.202,1
+1959,Lawrence County,NC,Small Town,7.65,58.7,35.989,-76.239,1
+1050,Grant County,KY,Suburban,11.28,31.4,36.536,-87.437,1
+932,Madison County,KS,Small Town,6.33,15.3,37.586,-96.849,1
+623,Johnson County,IL,Suburban,11.96,93.9,42.164,-88.104,1
+299,Fayette County,CO,Suburban,11.94,33.3,40.617,-104.594,1
+1155,Franklin Parish,LA,Small Town,8.30,24.1,31.508,-92.524,1
+2883,Scott County,VA,Small Town,7.74,58.2,36.598,-80.902,1
+93,Clark Borough,AK,Suburban,10.26,87.7,64.057,-161.469,1
+283,Cass County,CO,Suburban,9.54,76.8,37.098,-105.293,1
+2494,Harrison County,TN,Small Town,6.93,25.9,36.221,-89.942,1
+477,Adams County,GA,Small Town,7.48,41.5,33.299,-84.647,1
+1635,Cass County,MT,Small Town,6.68,17.8,48.892,-104.660,1
+519,Greene County,GA,Rural,5.20,61.5,34.091,-81.742,1
+2586,Scott County,TX,Small Town,6.76,83.5,30.557,-99.010,1
+1910,Pike County,NC,Suburban,8.70,13.4,36.011,-77.635,1
+624,Knox County,IL,Suburban,11.56,66.0,38.928,-90.325,1
+2531,Marion County,TX,Suburban,8.79,49.0,34.169,-106.193,1
+1627,Lawrence County,MT,Rural,4.21,85.1,44.884,-106.973,1
+304,Hamilton County,CO,Suburban,11.99,71.3,38.550,-106.009,1
+3004,Wayne County,WV,Suburban,8.83,36.1,39.573,-78.700,1
+2950,Wilson County,WA,Suburban,10.65,56.8,47.248,-121.232,1
+3020,Greene County,WI,Rural,4.40,33.8,46.650,-90.215,1
+2624,Polk County,TX,Small Town,6.28,69.0,34.353,-95.774,1
+228,Jefferson County,CA,Suburban,10.82,61.3,36.196,-118.646,1
+2611,Marion County,TX,Small Town,6.71,69.3,33.631,-98.452,1
+3078,Lawrence County,WI,Small Town,6.91,62.9,44.415,-88.775,1
+1426,Clark County,MS,Small Town,8.69,48.2,31.517,-89.668,1
+1947,Douglas County,NC,Suburban,10.94,72.4,34.099,-77.240,1
+565,Fayette County,ID,Rural,3.86,68.8,44.164,-114.357,1
+1134,Pike Parish,LA,Small Town,7.09,18.5,30.442,-90.407,1
+1313,Franklin County,MI,Suburban,11.14,64.3,47.428,-88.280,1
+101,Madison County,AZ,Suburban,9.05,93.6,32.013,-109.025,1
+2378,Grant County,SD,Rural,5.34,11.1,44.295,-103.248,1
+1239,Clay County,MI,Rural,6.35,21.4,42.907,-85.604,1
+2662,Perry County,TX,Suburban,9.23,79.9,25.882,-95.999,1
+2921,Union County,WA,Small Town,7.33,17.1,45.606,-118.459,1
+2894,Sullivan County,VA,Suburban,11.80,32.7,37.652,-76.209,1
+1817,Randolph County,NM,Small Town,8.48,37.2,32.057,-104.234,1
+832,Lincoln County,IA,Rural,6.46,52.0,41.344,-95.450,1
+1398,Madison County,MN,Small Town,6.59,37.1,46.723,-91.347,1
+894,Monroe County,KS,Small Town,7.78,68.4,39.228,-100.748,1
+3045,Benton County,WI,Small Town,8.29,15.4,46.017,-87.481,1
+2467,Washington County,TN,Suburban,8.77,33.1,35.061,-85.219,1
+1927,Cass County,NC,Suburban,11.90,70.7,35.840,-77.869,1
+2386,Clark County,SD,Suburban,8.58,92.6,43.398,-98.371,1
+2082,Washington County,OH,Small Town,8.05,29.1,39.163,-80.656,1
+2554,Orange County,TX,Suburban,11.20,73.6,27.714,-100.333,1
+234,Union County,CA,Suburban,8.41,92.3,36.875,-119.810,1
+2733,Wayne County,TX,Suburban,8.24,46.9,34.959,-104.774,1
+232,Jackson County,CA,Small Town,7.26,71.2,38.438,-114.952,1
+2022,Ross County,ND,Small Town,8.16,27.0,47.837,-102.229,1
+561,Adams County,ID,Small Town,7.79,78.9,47.466,-111.175,1
+2033,Madison County,ND,Rural,4.25,32.1,47.471,-103.874,1
+2630,Johnson County,TX,Small Town,8.65,76.3,27.187,-101.962,1
+1775,Franklin County,NJ,Suburban,8.16,25.3,38.991,-75.365,1
+662,Harrison County,IL,Suburban,8.27,25.8,37.552,-87.722,1
+1914,Clark County,NC,Suburban,10.02,46.6,35.578,-82.796,1
+2649,Union County,TX,Suburban,10.85,75.7,29.765,-105.310,1
+221,Shelby County,CA,Suburban,8.41,29.0,35.512,-114.454,1
+2503,Wilson County,TN,Suburban,8.46,36.5,35.166,-87.025,1
+2244,Jefferson County,PA,Small Town,7.24,15.9,41.197,-77.337,1
+440,Warren County,GA,Suburban,10.42,78.2,32.937,-81.120,1
+2396,Sullivan County,SD,Small Town,7.00,64.3,44.246,-100.293,1
+2339,Scott County,SC,Rural,5.18,64.6,34.262,-81.212,1
+986,Douglas County,KS,Suburban,9.36,39.6,39.234,-97.589,1
+279,Shelby County,CO,Small Town,6.30,78.8,38.533,-105.786,1
+2481,Fayette County,TN,Small Town,7.43,35.0,35.582,-88.736,1
+2587,Clark County,TX,Small Town,7.99,37.2,26.903,-105.777,1
+1279,Clay County,MI,Suburban,10.37,60.0,43.398,-82.803,1
+2488,Pike County,TN,Suburban,10.95,88.5,35.217,-82.218,1
+1284,Warren County,MI,Suburban,9.51,69.7,47.788,-83.952,1
+1889,Washington County,NC,Suburban,9.58,58.3,33.804,-77.965,1
+1759,Warren County,NV,Small Town,7.63,38.5,37.746,-119.955,1
+2266,Randolph County,PA,Small Town,6.82,47.1,41.346,-79.992,1
+1587,Scott County,MO,Small Town,8.39,63.5,39.621,-95.221,1
+424,Benton County,GA,Small Town,7.29,40.8,34.131,-83.301,1
+1640,Lincoln County,MT,Small Town,8.95,32.1,46.881,-115.550,1
+926,Cass County,KS,Small Town,7.36,89.8,37.247,-99.977,1
+1404,Lincoln County,MS,Small Town,7.87,76.0,30.326,-88.689,1
+3027,Hamilton County,WI,Small Town,8.94,53.8,43.081,-92.879,1
+2653,Wayne County,TX,Small Town,6.44,62.9,25.935,-97.301,1
+2559,Benton County,TX,Small Town,7.24,60.9,33.670,-101.265,1
+166,Fayette County,AR,Rural,4.04,81.8,33.119,-93.138,1
+2109,Harrison County,OH,Small Town,7.47,46.4,39.163,-83.995,1
+443,Lake County,GA,Rural,5.86,26.5,34.236,-81.707,1
+335,Montgomery County,FL,Small Town,8.90,74.5,30.693,-83.719,1
+242,Montgomery County,CA,Small Town,8.18,67.0,36.572,-124.108,1
+1393,Chester County,MN,Small Town,6.73,54.6,48.511,-95.050,1
+1194,Jefferson County,MD,Suburban,11.65,87.0,39.389,-77.568,1
+828,Chester County,IA,Small Town,7.95,25.6,41.538,-93.599,1
+2077,Sullivan County,OH,Suburban,8.50,19.0,38.445,-81.973,1
+1569,Monroe County,MO,Small Town,8.39,75.6,38.468,-94.246,1
+2825,Monroe County,VA,Suburban,9.96,13.5,37.313,-81.775,1
+1419,Douglas County,MS,Small Town,8.14,23.1,31.069,-90.304,1
+2475,Clay County,TN,Suburban,9.39,75.5,36.242,-82.220,1
+1473,Orange County,MS,Suburban,11.85,46.0,32.873,-89.505,1
+1561,Cass County,MO,Rural,4.78,32.9,37.295,-95.740,1
+1088,Montgomery County,KY,Small Town,6.56,82.6,37.884,-87.195,1
+2451,Scott County,TN,Small Town,7.58,93.4,36.561,-88.881,1
+71,Lincoln Borough,AK,Small Town,7.47,61.5,61.338,-148.684,1
+2739,Grant County,TX,Small Town,7.52,71.6,35.502,-99.385,1
+1163,Adams Parish,LA,Small Town,6.24,50.9,30.213,-93.707,1
+237,Adams County,CA,Suburban,11.80,26.7,34.793,-118.825,1
+1618,Pike County,MT,Small Town,7.94,64.2,44.968,-112.945,1
+995,Franklin County,KY,Suburban,10.55,26.3,37.789,-83.271,1
+1254,Randolph County,MI,Suburban,11.88,71.2,45.789,-87.704,1
+548,Franklin County,HI,Suburban,8.92,85.7,19.704,-157.695,1
+2424,Randolph County,SD,Small Town,6.46,77.5,43.586,-103.797,1
+495,Johnson County,GA,Rural,4.31,32.8,33.149,-85.344,1
+2011,Polk County,ND,Suburban,9.36,14.4,46.147,-102.383,1
+1692,Chester County,NE,Rural,5.24,39.5,40.586,-95.701,1
+466,Chester County,GA,Suburban,8.94,64.4,30.838,-82.783,1
+1179,Franklin County,ME,Rural,4.92,84.0,43.862,-70.065,1
+1084,Wayne County,KY,Suburban,8.24,60.3,38.633,-85.674,1
+187,Washington County,CA,Suburban,9.71,60.5,33.121,-114.773,1
+2896,Benton County,VA,Suburban,8.74,84.3,38.911,-83.497,1
+2774,Greene County,TX,Suburban,10.66,82.3,27.815,-105.654,1
+383,Randolph County,FL,Suburban,11.04,71.5,26.762,-85.754,1
+220,Ross County,CA,Small Town,8.49,70.8,37.253,-114.858,1
+597,Franklin County,IL,Suburban,11.56,19.3,42.010,-91.168,1
+987,Hamilton County,KS,Suburban,9.16,14.7,38.114,-100.015,1
+74,Monroe Borough,AK,Small Town,6.80,42.9,60.747,-158.832,1
+834,Jackson County,IA,Suburban,11.70,42.9,42.902,-93.323,1
+2366,Jackson County,SD,Small Town,7.88,46.4,45.002,-102.444,1
+1527,Madison County,MO,Small Town,8.43,76.4,40.165,-89.525,1
+629,Shelby County,IL,Small Town,6.84,16.8,41.087,-90.564,1
+2124,Franklin County,OH,Small Town,7.55,17.2,40.480,-80.744,1
+1876,Marion County,NY,Small Town,8.55,23.6,44.579,-75.999,1
+2246,Lincoln County,PA,Suburban,10.53,30.6,40.697,-78.228,1
+2982,Knox County,WV,Small Town,6.55,85.3,38.263,-80.607,1
+1545,Polk County,MO,Small Town,6.90,29.6,38.206,-90.964,1
+2849,Lawrence County,VA,Small Town,6.72,15.2,39.149,-78.161,1
+1329,Montgomery County,MN,Rural,6.42,16.7,47.516,-90.151,1
+1043,Adams County,KY,Suburban,10.03,90.7,37.125,-82.174,1
+1893,Madison County,NC,Suburban,9.34,91.8,34.297,-81.717,1
+1462,Pike County,MS,Rural,6.26,63.8,32.216,-88.694,1
+56,Montgomery County,AL,Suburban,10.18,26.3,34.671,-86.000,1
+887,Douglas County,IA,Rural,5.37,61.9,40.484,-92.395,1
+2056,Fayette County,OH,Suburban,9.71,54.9,39.970,-81.236,1
+249,Madison County,CO,Suburban,10.10,14.4,40.255,-105.306,1
+2360,Jackson County,SC,Suburban,9.13,93.1,32.695,-82.505,1
+1531,Clay County,MO,Small Town,6.58,10.4,39.843,-91.725,1
+2107,Clark County,OH,Small Town,7.12,46.1,39.556,-82.945,1
+1057,Scott County,KY,Small Town,7.02,68.7,39.060,-88.959,1
+1076,Lincoln County,KY,Small Town,7.81,64.5,38.363,-86.486,1
+2829,Adams County,VA,Small Town,7.88,25.4,38.122,-77.787,1
+3043,Sullivan County,WI,Suburban,10.43,22.4,45.355,-90.954,1
+133,Pike County,AR,Small Town,6.26,89.6,35.682,-94.225,1
+1233,Franklin County,MI,Suburban,8.89,15.5,42.876,-83.554,1
+417,Lawrence County,GA,Suburban,10.30,43.8,32.069,-82.426,1
+2106,Scott County,OH,Small Town,6.50,51.6,41.946,-80.642,1
+1208,Montgomery County,MD,Small Town,8.10,77.7,38.569,-76.443,1
+2016,Harrison County,ND,Small Town,6.73,61.3,47.005,-101.018,1
+2536,Fayette County,TX,Small Town,7.41,40.1,29.552,-105.825,1
+487,Perry County,GA,Suburban,11.65,23.6,32.406,-81.152,1
+2099,Grant County,OH,Suburban,9.00,83.5,38.406,-84.665,1
+1303,Orange County,MI,Suburban,8.59,49.0,44.042,-86.567,1
+1294,Randolph County,MI,Suburban,8.13,50.2,43.692,-88.260,1
+1913,Scott County,NC,Suburban,8.64,28.0,35.369,-81.904,1
+2966,Warren County,WV,Small Town,8.55,20.9,37.357,-79.397,1
+2582,Perry County,TX,Suburban,8.07,68.8,28.749,-101.237,1
+2688,Monroe County,TX,Small Town,8.99,13.2,35.307,-98.151,1
+2845,Carroll County,VA,Rural,6.17,78.1,37.986,-79.608,1
+1832,Jackson County,NY,Suburban,9.89,52.6,41.139,-71.912,1
+238,Wayne County,CA,Suburban,10.00,10.8,38.777,-122.663,1
+1339,Clark County,MN,Suburban,10.91,38.2,49.218,-94.306,1
+2911,Greene County,VA,Suburban,8.51,66.6,37.093,-81.602,1
+1287,Lake County,MI,Suburban,8.06,33.0,46.103,-83.943,1
+1955,Carroll County,NC,Suburban,11.50,42.3,36.360,-82.150,1
+1434,Ross County,MS,Small Town,6.36,35.8,34.704,-89.104,1
+712,Montgomery County,IN,Rural,4.50,84.2,38.364,-85.625,1
+702,Jackson County,IN,Small Town,8.02,83.3,38.580,-87.707,1
+1510,Harrison County,MO,Suburban,9.52,23.1,37.717,-89.360,1
+143,Morgan County,AR,Suburban,11.23,24.6,35.626,-92.045,1
+2362,Jefferson County,SD,Small Town,6.58,40.4,45.037,-100.878,1
+1293,Polk County,MI,Suburban,11.32,82.7,47.154,-84.951,1
+100,Lincoln County,AZ,Urban Core,16.35,69.1,31.869,-113.004,1
+2250,Union County,PA,Small Town,8.75,62.5,41.258,-79.641,1
+1511,Johnson County,MO,Small Town,7.07,82.0,39.756,-92.810,1
+2368,Union County,SD,Small Town,7.13,13.9,43.737,-100.334,1
+3029,Pike County,WI,Small Town,6.93,26.4,46.083,-89.342,1
+342,Polk County,FL,Urban Core,14.31,81.2,29.679,-84.810,1
+815,Carroll County,IA,Rural,6.27,94.8,42.471,-94.753,1
+2685,Lincoln County,TX,Small Town,8.78,16.9,29.207,-103.146,1
+2944,Lawrence County,WA,Small Town,7.51,89.0,45.620,-124.073,1
+2198,Johnson County,OK,Suburban,11.79,88.0,34.899,-100.186,1
+1683,Lawrence County,NE,Rural,4.80,42.0,40.586,-96.680,1
+2919,Jackson County,WA,Suburban,11.50,52.9,46.641,-120.537,1
+1461,Perry County,MS,Rural,5.16,56.7,32.012,-89.461,1
+687,Greene County,IL,Small Town,7.97,80.9,40.659,-87.913,1
+2371,Adams County,SD,Small Town,7.08,90.6,44.046,-103.573,1
+2125,Lincoln County,OH,Small Town,8.39,52.2,41.613,-81.529,1
+289,Madison County,CO,Small Town,8.67,58.4,38.433,-108.480,1
+970,Franklin County,KS,Rural,6.24,26.8,37.588,-98.175,1
+2324,Marion County,SC,Small Town,6.56,32.6,32.310,-81.049,1
+661,Carroll County,IL,Suburban,9.98,18.9,41.947,-91.197,1
+2238,Morgan County,OR,Small Town,6.47,66.2,42.992,-117.035,1
+2835,Lake County,VA,Rural,5.96,61.4,36.999,-78.870,1
+1777,Madison County,NJ,Suburban,10.87,62.4,41.203,-74.001,1
+988,Perry County,KS,Small Town,8.46,33.4,37.568,-95.075,1
+297,Greene County,CO,Suburban,8.24,43.5,39.033,-104.656,1
+1401,Washington County,MS,Small Town,6.63,18.9,30.414,-90.681,1
+652,Grant County,IL,Suburban,9.53,69.3,41.288,-88.294,1
+2085,Lincoln County,OH,Rural,5.12,90.2,38.488,-81.546,1
+1117,Madison Parish,LA,Rural,6.27,60.9,29.861,-93.978,1
+2636,Shelby County,TX,Rural,3.57,87.2,29.722,-100.094,1
+1491,Clay County,MO,Rural,4.28,20.5,37.469,-90.404,1
+1136,Randolph Parish,LA,Small Town,7.02,20.5,29.468,-93.552,1
+2979,Carroll County,WV,Small Town,8.08,20.5,39.475,-82.046,1
+1855,Johnson County,NY,Suburban,11.71,59.0,44.051,-75.998,1
+1196,Lincoln County,MD,Small Town,8.78,53.7,38.365,-79.335,1
+1539,Lake County,MO,Suburban,11.48,30.7,37.672,-94.504,1
+611,Lake County,IL,Small Town,6.18,79.1,41.527,-91.076,1
+2361,Washington County,SD,Rural,4.48,34.8,42.573,-102.586,1
+45,Madison County,AL,Suburban,10.30,91.1,34.022,-87.867,1
+1657,Madison County,NE,Rural,5.54,22.1,41.650,-100.987,1
+984,Lake County,KS,Small Town,7.01,64.0,39.067,-101.739,1
+2437,Adams County,TN,Small Town,6.14,86.2,35.383,-85.382,1
+1690,Benton County,NE,Small Town,8.39,89.1,41.019,-99.146,1
+585,Shelby County,ID,Small Town,6.69,29.6,46.805,-112.652,1
+2939,Clark County,WA,Suburban,10.41,46.7,48.060,-124.247,1
+2307,Scott County,PA,Small Town,7.60,71.2,42.017,-76.830,1
+1682,Knox County,NE,Suburban,11.43,55.4,42.630,-96.515,1
+588,Benton County,ID,Suburban,9.32,48.5,48.114,-115.296,1
+1996,Union County,ND,Rural,6.03,79.6,46.302,-100.057,1
+2287,Madison County,PA,Small Town,7.61,28.7,39.882,-75.664,1
+1220,Lincoln County,MA,Suburban,10.06,84.4,42.290,-71.464,1
+2566,Madison County,TX,Small Town,6.39,58.5,26.927,-100.562,1
+264,Hamilton County,CO,Small Town,8.15,22.4,40.811,-105.635,1
+1203,Adams County,MD,Small Town,7.07,86.8,39.621,-78.240,1
+939,Wayne County,KS,Small Town,6.59,86.2,37.893,-97.343,1
+2498,Morgan County,TN,Small Town,8.22,91.5,36.548,-87.845,1
+1095,Polk County,KY,Rural,3.51,41.9,37.577,-83.545,1
+3100,Perry County,WY,Small Town,8.14,78.3,42.232,-109.053,1
+2091,Marion County,OH,Small Town,8.97,27.4,39.548,-83.188,1
+1090,Grant County,KY,Rural,5.95,76.0,37.550,-89.309,1
+109,Greene County,AZ,Small Town,6.30,48.5,31.828,-114.234,1
+1970,Jefferson County,NC,Suburban,9.23,89.7,36.544,-80.601,1
+1028,Sullivan County,KY,Suburban,10.46,55.1,38.678,-87.378,1
+1406,Jackson County,MS,Rural,4.46,41.8,31.761,-88.994,1
+910,Polk County,KS,Suburban,11.22,14.0,39.863,-101.409,1
+126,Fayette County,AR,Small Town,8.79,85.2,34.332,-93.525,1
+1195,Franklin County,MD,Small Town,7.17,83.1,38.293,-78.891,1
+391,Madison County,GA,Suburban,8.45,46.3,33.575,-85.311,1
+2134,Madison County,OK,Small Town,6.27,87.0,34.003,-95.086,1
+1792,Hamilton County,NJ,Suburban,8.09,65.5,40.530,-75.260,1
+2906,Union County,VA,Small Town,7.32,40.6,38.114,-75.459,1
+539,Orange County,GA,Suburban,11.07,68.6,30.578,-81.305,1
+2693,Wayne County,TX,Small Town,6.72,59.2,33.080,-96.458,1
+857,Johnson County,IA,Rural,5.73,47.0,43.330,-90.957,1
+1651,Fayette County,MT,Small Town,8.02,73.4,45.694,-106.515,1
+1987,Douglas County,NC,Small Town,6.91,69.0,36.011,-82.990,1
+2810,Jackson County,VT,Suburban,10.30,64.6,43.008,-71.731,1
+2115,Ross County,OH,Small Town,6.78,54.9,41.796,-81.129,1
+1327,Warren County,MN,Small Town,8.75,16.0,48.189,-94.783,1
+2171,Jefferson County,OK,Small Town,7.89,82.0,34.404,-97.098,1
+2023,Shelby County,ND,Rural,4.55,60.0,47.810,-100.496,1
+724,Harrison County,IN,Small Town,7.10,49.4,39.308,-87.038,1
+2570,Clay County,TX,Suburban,9.56,22.7,34.622,-99.936,1
+2577,Montgomery County,TX,Suburban,11.09,17.3,30.610,-95.638,1
+2659,Grant County,TX,Suburban,11.89,80.2,26.753,-97.660,1
+2671,Knox County,TX,Suburban,10.19,54.9,32.753,-99.345,1
+223,Wilson County,CA,Suburban,10.43,54.1,39.629,-114.680,1
+226,Chester County,CA,Suburban,10.68,68.9,37.017,-118.206,1
+2103,Pike County,OH,Small Town,6.77,53.1,41.671,-83.002,1
+1977,Clay County,NC,Suburban,10.35,90.6,34.577,-82.582,1
+1808,Fayette County,NM,Suburban,11.77,85.8,34.285,-105.642,1
+831,Franklin County,IA,Small Town,7.26,12.3,41.801,-93.401,1
+1344,Lawrence County,MN,Rural,6.25,14.7,48.758,-93.174,1
+528,Pike County,GA,Suburban,8.53,49.8,33.445,-84.073,1
+2976,Randolph County,WV,Suburban,9.63,14.3,40.149,-78.227,1
+2580,Douglas County,TX,Small Town,7.95,70.3,35.657,-97.608,1
+2970,Grant County,WV,Rural,3.73,30.5,39.916,-79.159,1
+2681,Chester County,TX,Rural,5.49,76.9,28.493,-94.295,1
+1091,Douglas County,KY,Small Town,8.69,44.3,37.561,-88.566,1
+2369,Clay County,SD,Suburban,10.82,61.3,43.208,-96.454,1
+1227,Adams County,MA,Urban Core,18.09,88.6,42.757,-71.422,1
+459,Orange County,GA,Rural,4.91,22.4,34.943,-81.182,1
+1021,Johnson County,KY,Small Town,8.80,80.5,37.090,-87.391,1
+2561,Chester County,TX,Suburban,11.34,34.9,36.275,-103.657,1
+3060,Greene County,WI,Rural,4.51,46.7,44.112,-90.300,1
+1907,Douglas County,NC,Small Town,7.06,42.5,36.244,-78.248,1
+1322,Clay County,MN,Suburban,10.43,82.6,44.366,-92.355,1
+1343,Knox County,MN,Rural,3.96,16.3,45.251,-94.872,1
+486,Hamilton County,GA,Rural,6.32,72.2,31.649,-83.827,1
+799,Adams County,IA,Rural,4.09,27.5,40.693,-90.238,1
+1937,Clay County,NC,Suburban,11.62,49.3,34.271,-75.855,1
+1600,Lincoln County,MT,Suburban,11.54,47.1,48.359,-114.954,1
+630,Sullivan County,IL,Small Town,6.95,54.5,38.769,-89.720,1
+859,Lawrence County,IA,Rural,3.63,83.2,42.980,-93.321,1
+244,Grant County,CA,Suburban,8.89,64.0,33.253,-119.252,1
+218,Morgan County,CA,Suburban,10.13,82.8,40.898,-116.793,1
+3074,Carroll County,WI,Suburban,10.64,26.5,43.602,-91.998,1
+1153,Washington Parish,LA,Small Town,7.94,71.4,30.312,-92.477,1
+2712,Lawrence County,TX,Suburban,9.40,34.6,33.257,-104.815,1
+2527,Jackson County,TX,Suburban,8.06,13.0,26.493,-95.861,1
+1003,Adams County,KY,Suburban,9.53,33.6,37.060,-87.503,1
+2930,Lake County,WA,Small Town,6.41,30.1,46.734,-122.163,1
+2145,Montgomery County,OK,Suburban,9.37,17.2,35.517,-101.038,1
+531,Scott County,GA,Small Town,8.59,36.9,32.740,-85.025,1
+3072,Scott County,WI,Small Town,7.07,29.7,46.404,-90.700,1
+1214,Pike County,MD,Urban Core,19.81,16.5,39.300,-75.559,1
+2418,Grant County,SD,Small Town,8.19,89.7,42.827,-100.795,1
+2644,Franklin County,TX,Small Town,7.55,74.1,35.470,-101.182,1
+797,Clay County,IA,Rural,3.59,75.3,40.878,-95.997,1
+185,Ross County,AR,Small Town,6.63,47.2,33.823,-92.103,1
+352,Orange County,FL,Small Town,8.93,63.2,26.211,-82.673,1
+354,Shelby County,FL,Small Town,8.17,34.1,30.957,-86.154,1
+2074,Orange County,OH,Small Town,8.31,16.9,41.534,-82.581,1
+3070,Polk County,WI,Small Town,7.99,30.9,45.190,-87.893,1
+1837,Adams County,NY,Suburban,9.43,70.0,44.547,-78.034,1
+2412,Wayne County,SD,Rural,4.70,33.7,42.894,-98.753,1
+2668,Carroll County,TX,Small Town,7.23,76.7,26.781,-95.515,0
+780,Lincoln County,IN,Small Town,6.23,40.9,40.970,-85.284,0
+1705,Greene County,NE,Small Town,6.47,88.2,42.906,-98.131,0
+1923,Shelby County,NC,Suburban,11.74,19.3,35.967,-80.503,0
+3088,Clay County,WY,Rural,3.99,78.4,43.301,-105.964,0
+21,Perry County,AL,Suburban,8.73,33.8,33.818,-85.248,0
+1361,Union County,MN,Suburban,8.71,50.2,48.471,-90.268,0
+977,Marion County,KS,Suburban,9.29,19.0,38.179,-98.755,0
+922,Shelby County,KS,Small Town,8.96,31.2,39.759,-100.610,0
+1286,Montgomery County,MI,Suburban,8.93,82.9,47.511,-83.116,0
+1425,Scott County,MS,Suburban,8.05,11.0,33.690,-90.414,0
+132,Perry County,AR,Small Town,8.23,47.4,36.172,-90.336,0
+1308,Benton County,MI,Suburban,9.12,71.2,42.122,-84.807,0
+2446,Hamilton County,TN,Suburban,11.30,42.2,35.603,-88.700,0
+667,Orange County,IL,Small Town,7.35,55.0,37.750,-89.891,0
+1364,Adams County,MN,Suburban,9.39,38.2,47.497,-93.251,0
+1550,Harrison County,MO,Small Town,7.87,81.6,37.815,-89.601,0
+2300,Grant County,PA,Small Town,7.91,14.6,40.951,-78.714,0
+248,Lincoln County,CO,Small Town,6.90,35.5,38.960,-104.881,0
+538,Morgan County,GA,Rural,4.09,16.1,33.786,-85.080,0
+1575,Greene County,MO,Small Town,6.74,82.8,40.016,-95.144,0
+1922,Ross County,NC,Suburban,11.50,68.3,36.506,-82.402,0
+321,Jefferson County,FL,Suburban,10.51,78.5,27.748,-81.503,0
+2971,Douglas County,WV,Rural,6.30,18.0,39.755,-78.870,0
+150,Cass County,AR,Small Town,6.97,19.7,33.134,-91.493,0
+449,Polk County,GA,Small Town,8.36,19.8,33.826,-82.082,0
+823,Shelby County,IA,Small Town,6.15,92.9,41.986,-94.274,0
+1583,Perry County,MO,Suburban,8.07,13.3,40.456,-91.090,0
+3097,Grant County,WY,Suburban,11.46,86.3,43.929,-108.604,0
+1697,Madison County,NE,Small Town,8.84,22.8,41.923,-101.530,0
+2259,Lake County,PA,Small Town,8.01,83.1,41.611,-77.129,0
+3087,Union County,WY,Rural,6.24,37.4,44.894,-109.980,0
+256,Wayne County,CO,Small Town,7.92,17.2,39.657,-107.521,0
+1596,Ross County,MO,Rural,3.79,40.3,38.427,-89.765,0
+1962,Ross County,NC,Suburban,10.35,35.5,34.479,-77.692,0
+1589,Carroll County,MO,Small Town,8.58,26.4,38.076,-93.645,0
+1859,Orange County,NY,Small Town,7.55,41.4,42.093,-74.448,0
+1902,Warren County,NC,Small Town,6.10,12.4,35.745,-79.650,0
+813,Scott County,IA,Suburban,11.37,56.1,40.472,-91.876,0
+727,Lawrence County,IN,Small Town,7.80,35.7,39.934,-85.712,0
+741,Madison County,IN,Suburban,10.17,44.1,39.237,-87.122,0
+2265,Polk County,PA,Suburban,8.60,38.1,41.073,-79.548,0
+35,Shelby County,AL,Suburban,11.34,21.3,34.549,-86.897,0
+320,Washington County,FL,Small Town,7.42,26.7,27.091,-86.203,0
+284,Chester County,CO,Suburban,10.68,23.5,40.737,-108.231,0
+1594,Morgan County,MO,Rural,4.11,86.1,38.827,-92.514,0
+2435,Clay County,TN,Rural,6.09,19.4,36.530,-87.704,0
+1001,Clay County,KY,Rural,4.82,48.1,36.849,-89.288,0
+1721,Johnson County,NE,Small Town,7.94,76.2,40.500,-103.551,0
+1544,Pike County,MO,Suburban,9.70,65.6,39.602,-91.219,0
+779,Franklin County,IN,Suburban,11.90,19.4,40.639,-85.020,0
+1908,Hamilton County,NC,Suburban,9.17,12.2,33.838,-77.045,0
+2141,Wayne County,OK,Small Town,6.72,50.4,36.828,-96.495,0
+1591,Johnson County,MO,Small Town,7.85,57.1,38.420,-93.675,0
+1533,Adams County,MO,Small Town,7.37,12.6,36.521,-94.857,0
+2553,Morgan County,TX,Small Town,8.35,33.4,34.583,-93.527,0
+1347,Ross County,MN,Suburban,10.47,33.8,46.279,-94.362,0
+2419,Douglas County,SD,Small Town,7.23,20.4,45.213,-98.124,0
+329,Marion County,FL,Small Town,6.38,26.7,25.422,-82.589,0
+251,Monroe County,CO,Suburban,10.49,10.6,37.899,-104.654,0
+1649,Greene County,MT,Small Town,8.19,27.2,45.513,-115.124,0
+2741,Hamilton County,TX,Small Town,7.17,34.8,33.642,-98.667,0
+1504,Pike County,MO,Rural,5.77,19.5,36.210,-89.150,0
+1146,Ross Parish,LA,Small Town,8.43,36.5,29.779,-90.675,0
+2581,Hamilton County,TX,Suburban,8.83,31.1,28.589,-94.944,0
+1281,Adams County,MI,Suburban,10.15,38.3,43.745,-85.257,0
+1825,Morgan County,NM,Rural,4.03,49.7,32.752,-107.142,0
+464,Benton County,GA,Suburban,11.72,87.3,31.444,-81.305,0
+2931,Grant County,WA,Suburban,11.17,54.5,48.921,-120.664,0
+379,Hamilton County,FL,Suburban,8.60,77.3,28.478,-85.488,0
+2793,Grant County,UT,Suburban,8.15,71.5,41.150,-109.183,0
+2034,Jackson County,ND,Small Town,7.95,47.8,46.131,-98.076,0
+207,Perry County,CA,Urban Core,15.64,38.9,33.083,-114.368,0
+583,Orange County,ID,Small Town,7.84,74.0,44.364,-115.666,0
+1169,Lake Parish,LA,Suburban,10.31,18.7,29.620,-92.505,0
+2779,Lincoln County,UT,Suburban,9.77,22.9,39.539,-111.484,0
+3037,Knox County,WI,Suburban,10.60,51.5,45.483,-91.871,0
+465,Cass County,GA,Small Town,6.54,62.1,31.449,-82.405,0
+2021,Orange County,ND,Small Town,8.91,12.0,47.969,-103.067,0
+2802,Carroll County,UT,Small Town,7.98,38.9,39.883,-110.172,0
+2773,Wayne County,TX,Suburban,11.82,37.8,28.579,-100.691,0
+303,Douglas County,CO,Small Town,6.86,15.4,38.860,-103.027,0
+596,Jefferson County,IL,Small Town,6.76,35.7,38.939,-91.097,0
+1032,Chester County,KY,Rural,6.34,56.5,38.236,-88.652,0
+1250,Hamilton County,MI,Small Town,7.71,90.5,43.734,-82.867,0
+808,Hamilton County,IA,Suburban,9.21,59.6,40.667,-94.739,0
+2843,Scott County,VA,Small Town,6.90,79.2,39.372,-80.283,0
+1100,Harrison County,KY,Rural,5.59,34.4,37.134,-82.772,0
+1081,Clay County,KY,Small Town,7.42,13.5,37.611,-88.059,0
+3030,Polk County,WI,Small Town,6.42,27.2,44.882,-90.371,0
+3077,Knox County,WI,Small Town,7.93,26.1,44.863,-87.708,0
+628,Ross County,IL,Small Town,7.11,62.3,38.204,-90.836,0
+1124,Wayne Parish,LA,Suburban,11.70,75.5,32.561,-93.247,0
+480,Warren County,GA,Rural,4.21,10.7,33.604,-81.499,0
+1845,Douglas County,NY,Small Town,6.79,60.8,43.940,-72.852,0
+682,Union County,IL,Small Town,7.41,31.1,41.723,-88.870,0
+1646,Marion County,MT,Suburban,9.30,53.2,47.975,-107.477,0
+721,Scott County,IN,Small Town,8.07,29.3,38.919,-84.886,0
+2152,Polk County,OK,Small Town,8.09,87.1,34.328,-100.293,0
+266,Pike County,CO,Rural,5.20,73.8,37.500,-102.306,0
+1772,Marion County,NH,Small Town,6.71,86.8,44.540,-72.327,0
+1459,Douglas County,MS,Rural,4.36,33.1,33.393,-88.353,0
+68,Washington Borough,AK,Small Town,6.02,75.0,55.815,-144.034,0
+549,Lincoln County,HI,Suburban,11.16,80.1,20.956,-155.371,0
+2672,Lawrence County,TX,Small Town,8.79,82.2,27.570,-101.319,0
+206,Hamilton County,CA,Urban Core,19.46,23.5,34.393,-121.025,0
+1998,Marion County,ND,Rural,5.81,24.8,48.039,-97.246,0
+1552,Knox County,MO,Suburban,11.88,79.2,36.731,-89.421,0
+2466,Chester County,TN,Suburban,11.43,79.5,36.641,-89.419,0
+176,Scott County,AR,Small Town,7.41,37.2,34.419,-90.425,0
+3033,Clark County,WI,Small Town,8.76,67.2,43.317,-88.391,0
+1460,Hamilton County,MS,Small Town,7.44,91.4,33.324,-90.992,0
+2144,Fayette County,OK,Small Town,7.60,50.4,35.244,-97.033,0
+763,Carroll County,IN,Rural,3.95,15.8,40.953,-85.552,0
+2974,Pike County,WV,Suburban,11.59,49.9,38.988,-79.856,0
+715,Douglas County,IN,Suburban,11.68,12.7,41.470,-86.629,0
+2240,Ross County,OR,Suburban,8.82,89.8,42.105,-118.511,0
+1181,Madison County,ME,Small Town,6.15,41.5,43.139,-70.963,0
+3021,Warren County,WI,Suburban,9.28,58.0,46.440,-88.008,0
+2000,Wayne County,ND,Rural,5.05,10.2,47.695,-100.190,0
+917,Knox County,KS,Rural,3.99,40.9,37.230,-100.359,0
+1389,Sullivan County,MN,Small Town,6.65,30.1,46.812,-96.460,0
+106,Marion County,AZ,Suburban,9.73,19.6,32.575,-114.753,0
+1644,Union County,MT,Suburban,11.30,10.2,47.745,-104.420,0
+2357,Franklin County,SC,Rural,6.02,83.1,32.352,-83.164,0
+1993,Madison County,ND,Rural,3.91,53.2,47.791,-103.466,0
+1173,Perry Parish,LA,Rural,5.11,86.4,30.395,-91.200,0
+866,Benton County,IA,Small Town,8.38,30.2,43.388,-92.721,0
+3058,Adams County,WI,Small Town,7.31,92.8,44.966,-88.259,0
+760,Randolph County,IN,Suburban,9.60,92.4,39.421,-86.802,0
+1636,Chester County,MT,Suburban,9.56,26.1,46.949,-115.351,0
+272,Harrison County,CO,Suburban,11.54,94.1,40.787,-104.917,0
+637,Franklin County,IL,Small Town,8.53,63.7,38.149,-90.207,0
+768,Morgan County,IN,Small Town,7.41,27.3,38.065,-85.676,0
+78,Adams Borough,AK,Rural,4.46,54.1,55.105,-158.233,0
+2483,Lake County,TN,Small Town,7.77,73.0,35.264,-88.874,0
+660,Clark County,IL,Small Town,7.10,29.4,42.252,-87.684,0
