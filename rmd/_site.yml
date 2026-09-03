@@ -24,9 +24,9 @@ navbar:
       menu:
         - text: "Overview"
           href: tutorial.html
-        - text: "Data Description"
+        - text: "OMOP Data Description"
           href: tutorial-data-description.html
-        - text: "Dataset Visualizations"
+        - text: "OMOP Data Visualization"
           href: tutorial-data-visualization.html
         - text: "Exercise 1"
           href: tutorial-exercise-1.html

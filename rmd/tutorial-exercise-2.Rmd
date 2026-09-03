@@ -10,6 +10,8 @@ output:
 
 # **Exercise 2: The Gaia pipeline**
 
+<div class="alert alert-warning"><strong>Work in progress.</strong> These tutorial materials are still under active development and will continue to change until the tutorial takes place on <strong>October 20, 2026</strong>. Content, links, and exercises may be incomplete or shift without notice.</div>
+
 ## **Goal**
 
 Run a known-good ingestion and spatial-temporal linkage using the frozen Gaia pipeline, then inspect and explain one resulting derived exposure row and its provenance.

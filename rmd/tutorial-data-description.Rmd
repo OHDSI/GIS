@@ -8,7 +8,9 @@ output:
           collapsed: false
 ---
 
-# **Data Description**
+# **OMOP Data Description**
+
+<div class="alert alert-warning"><strong>Work in progress.</strong> These tutorial materials are still under active development and will continue to change until the tutorial takes place on <strong>October 20, 2026</strong>. Content, links, and exercises may be incomplete or shift without notice.</div>
 
 The tutorial uses two datasets: a synthetic OMOP CDM population (source code lives in this repository) and a public PM2.5 dataset for Massachusetts (an external source, used to demonstrate cataloging and ingestion of a real dataset). Session 1 catalogs the public dataset; Sessions 2-4 link it against the synthetic OMOP population.
 
@@ -22,7 +24,7 @@ No real addresses or coordinates are used anywhere in the tutorial. Person locat
 
 ## **1. OMOP synthetic dataset**
 
-Source: [`syntheticDataGIS/createSimpleSyntheticSet.sql`](https://github.com/OHDSI/GIS/blob/main/syntheticDataGIS/createSimpleSyntheticSet.sql) in this repository. See [Dataset Visualizations](tutorial-data-visualization.html) for charts of the cohort's condition prevalence, PM2.5/SES distribution, and SDOH observations, each paired with the SQL query that produced it.
+Source: [`syntheticDataGIS/createSimpleSyntheticSet.sql`](https://github.com/OHDSI/GIS/blob/main/syntheticDataGIS/createSimpleSyntheticSet.sql) in this repository. See [OMOP Data Visualization](tutorial-data-visualization.html) for charts of the cohort's condition prevalence, PM2.5/SES distribution, and SDOH observations, each paired with the SQL query that produced it.
 
 ### Overview
 

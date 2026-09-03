@@ -10,6 +10,8 @@ output:
 
 # **Exercise 4: Analytical applications**
 
+<div class="alert alert-warning"><strong>Work in progress.</strong> These tutorial materials are still under active development and will continue to change until the tutorial takes place on <strong>October 20, 2026</strong>. Content, links, and exercises may be incomplete or shift without notice.</div>
+
 ## **Goal**
 
 Design an analysis-ready exposure feature and identify threats to validity and federated execution requirements. Exposure records are longitudinal facts; models require index-aligned covariates, and turning one into the other requires deliberate choices that can be gotten wrong in specific, checkable ways.
