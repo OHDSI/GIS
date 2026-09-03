@@ -1,0 +1,71 @@
+
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG</div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+
+# **Exercise 1: Cataloging and data discovery**
+
+## **Goal**
+
+Produce one valid, machine-actionable metadata record and a dataset-fitness decision, tied to a specific research question, for a dataset you choose from the GAIA catalog.
+
+## **Background**
+
+Discovery fails in predictable ways: the same label attached to a different variable, mismatched geography, incomplete temporal coverage, an unclear unit, an unstable URL, or a restrictive license. Treat the GAIA catalog as an **executable contract between discovery and ingestion**, not a simple bibliography but more like an annotated machine readable and machine actionable bibliography — the record you produce here has to be precise enough that Session 2's pipeline can act on it directly.
+
+## **Learning Outcomes**
+
+1. Describe difference between raster and vector GIS data
+2. Describe spherical vs. Cartesian coordinate systems in the context of GIS
+3. Identify GIS dataset requirements for OHDSI GIS analytic pipeline
+4. Match requirements to entries in the Gaia Catalog (or not)
+5. Match requirements to publicly available datasets
+6. Make a dataset ingestion request with sufficient information to create a machine actionable catalog entry
+7. use the tools to create a schema.org compliant JSON-LD catalog entry (kobo toolbox, gdsc tools) 
+7. ....
+
+## **Steps**
+
+1. Start from a research question (exposure to PM 2.5 and COPD helath outcomes) and decompose it into its computable requirements: population, index time, exposure window, lag, geography, variable, unit, resolution, provenance, and permissible missingness. [it seems we will do this togehter as a guided excercise)]
+2. Search publicly available datasets for PM2.5 to identify one best candidate that meets your requirements
+3. Search the GAIA catalog for your candidate dataset (e.g., an air-quality dataset) that could answer your decomposed question.
+4. Inspect the candidate's spatial coverage, temporal coverage, variable definition, unit, and access URL.
+5. Score the candidate against the fitness rubric: scientific relevance, spatial fit, temporal fit, semantic clarity, access, and reproducibility (green/amber/red per criterion).
+6. Complete the metadata template for your chosen dataset in kobotoolbox, keeping dataset-level properties (identity, version, provider, license, URL, spatial/temporal coverage, geometry, retrieval method, update cadence) separate from variable-level properties (definition, unit).
+7. Use the GDSC toolbox to crosswalk the kobotoolbox entry to a RO Crate inspired object that includes schema.org JSON-LD metadata and bash ingestion scripts.
+6. Record your overall fitness decision and, if any criterion scored amber or red, document the limitation rather than silently proceeding.
+
+If you get stuck on a step, faculty will circulate and a fallback dataset/metadata record is available.
+
+## **Deliverable**
+
+- One metadata record in JSON-LD, aligned to schema.org for interoperability and machine actionability
+- One fitness decision (green/amber/red per rubric criterion, plus an overall call)
+
+## **Check Your Work**
+
+Faculty will validate your submission against the following, and so should you before calling it done:
+
+- [ ] Dataset and version are identifiable
+- [ ] Variable definition and unit are explicit
+- [ ] Spatial and temporal coverage are sufficient, or limitations are explicitly documented
+- [ ] Retrieval URL/method is reproducible
+- [ ] License permits tutorial use
+- [ ] Metadata separates dataset-level from variable-level properties
+- [ ] Required JSON-LD keys, URL, dates, geometry, variable, unit, and license all validate
+
+<br>
+
+**Bridge to Session 2:** your frozen metadata record and its downloadable source become the input to the ingestion pipeline.
+
+<br>
+
+Next: [Exercise 2](tutorial-exercise-2.html)
+
+<br>

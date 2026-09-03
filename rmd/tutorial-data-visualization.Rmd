@@ -1,0 +1,157 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG</div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+
+# **Dataset Visualizations**
+
+This page renders the contents of the synthetic OMOP + GIS/SDOH dataset described in [Data Description](tutorial-data-description.html). Source: [`syntheticDataGIS/createSimpleSyntheticSet.sql`](https://github.com/OHDSI/GIS/blob/main/syntheticDataGIS/createSimpleSyntheticSet.sql).
+
+Each chart below is paired with the SQL query used to produce it, so you can run the same query yourself against a database loaded from the script and confirm the numbers, or adapt the query to explore something else. The charts read from small, precomputed CSV extracts in [`rmd/data/synthetic-dataset/`](https://github.com/OHDSI/GIS/tree/main/rmd/data/synthetic-dataset) rather than querying a live database — this is a static site with no database behind it. To regenerate the extracts after changing the generator script, load the script into PostgreSQL and re-run the queries on this page with `psql \copy ... TO '<file>.csv' WITH CSV HEADER`.
+
+<br>
+
+## **Cohort overview**
+
+- **10,000** synthetic patients
+- **3,103** US counties/county-equivalents (`COUNTY_REFERENCE`), each with an urban-density category, a baseline PM2.5 level, and a composite SES index
+- **14** conditions (5 respiratory, 9 cardiometabolic), each with its incidence driven by a combination of the patient's county-level PM2.5 exposure and SES
+- **15** drugs, **7** procedures, **16** measurements, tied to the relevant condition cohorts
+- **12** county-level socioeconomic (SDOH) observations, all derived from the same SES index that drives comorbidity risk
+
+<br>
+
+## **Condition prevalence**
+
+Percent of the 10,000-patient cohort carrying each condition, split into respiratory and cardiometabolic groups.
+
+```sql
+SELECT co.condition_concept_id,
+       co.condition_source_value AS condition_name,
+       CASE WHEN co.condition_concept_id IN (317009,255573,258780,4170143,255848)
+            THEN 'Respiratory' ELSE 'Cardiometabolic' END AS category,
+       COUNT(DISTINCT co.person_id) AS patient_count,
+       ROUND(100.0 * COUNT(DISTINCT co.person_id) / 10000, 2) AS pct_of_population
+FROM omopgis.condition_occurrence co
+GROUP BY 1,2,3
+ORDER BY category, patient_count DESC;
+```
+
+<div class="chart-wrap"><canvas id="chartConditions"></canvas></div>
+
+<br>
+
+## **PM2.5 and SES by urban density**
+
+County-level PM2.5 baseline and average SES index, grouped by the urban-density category assigned at county-generation time. This is the key discriminative feature the dataset is built around: denser counties get systematically higher PM2.5.
+
+```sql
+SELECT urban_density_category,
+       COUNT(*) AS n_counties,
+       ROUND(AVG(pm25_baseline_mean)::numeric, 2) AS avg_pm25,
+       ROUND(AVG(ses_index)::numeric, 1) AS avg_ses
+FROM omopgis.county_reference
+GROUP BY 1
+ORDER BY avg_pm25 DESC;
+```
+
+<div class="chart-wrap"><canvas id="chartDensity"></canvas></div>
+
+<br>
+
+## **Asthma prevalence by PM2.5 exposure quartile**
+
+Patients are bucketed into quartiles of their assigned county's PM2.5 value, then checked for an asthma diagnosis. The gradient is intentionally modest — asthma risk in the generator is a blend of PM2.5 and SES, and PM2.5 and SES are only loosely coupled by design (see the chart above) — but it should be directionally increasing.
+
+```sql
+WITH prf AS (
+    SELECT p.person_id, ee.value_as_number AS pm25_value,
+           NTILE(4) OVER (ORDER BY ee.value_as_number) AS pm25_quartile
+    FROM omopgis.person p
+    JOIN omopgis.external_exposure ee
+         ON ee.person_id = p.person_id AND ee.exposure_concept_id = 2052497664 -- PM2.5
+)
+SELECT prf.pm25_quartile,
+       ROUND(AVG(prf.pm25_value)::numeric, 1) AS avg_pm25,
+       ROUND(100.0 * COUNT(DISTINCT co.person_id) / COUNT(DISTINCT prf.person_id), 2) AS asthma_pct
+FROM prf
+LEFT JOIN omopgis.condition_occurrence co
+       ON co.person_id = prf.person_id AND co.condition_concept_id = 317009 -- Asthma
+GROUP BY 1
+ORDER BY 1;
+```
+
+<div class="chart-wrap"><canvas id="chartAsthmaQuartile"></canvas></div>
+
+<br>
+
+## **Socioeconomic determinants (SDOH)**
+
+Mean value of each county-level SDOH observation across all 10,000 patients (each patient inherits their county's values).
+
+```sql
+SELECT o.observation_concept_id, o.observation_source_value AS observation_name,
+       ROUND(AVG(o.value_as_number)::numeric, 2) AS mean_value,
+       COUNT(*) AS n
+FROM omopgis.observation o
+WHERE o.value_as_number IS NOT NULL
+GROUP BY 1,2
+ORDER BY 2;
+```
+
+<div class="chart-wrap"><canvas id="chartSdoh"></canvas></div>
+
+<br>
+
+## **Drugs, procedures, and measurements**
+
+Record counts for each concept, tied to the condition cohort that generates it (e.g. Albuterol only fires for patients with an asthma diagnosis).
+
+```sql
+SELECT de.drug_concept_id, de.drug_source_value AS drug_name, COUNT(*) AS exposure_count
+FROM omopgis.drug_exposure de GROUP BY 1,2 ORDER BY exposure_count DESC;
+
+SELECT po.procedure_concept_id, po.procedure_source_value AS procedure_name, COUNT(*) AS procedure_count
+FROM omopgis.procedure_occurrence po GROUP BY 1,2 ORDER BY procedure_count DESC;
+
+SELECT m.measurement_concept_id, m.measurement_source_value AS measurement_name, COUNT(*) AS measurement_count
+FROM omopgis.measurement m GROUP BY 1,2 ORDER BY measurement_count DESC;
+```
+
+<div class="chart-wrap"><canvas id="chartDrugs"></canvas></div>
+<div class="chart-wrap"><canvas id="chartProcedures"></canvas></div>
+<div class="chart-wrap"><canvas id="chartMeasurements"></canvas></div>
+
+<br>
+
+## **County map**
+
+Every county's centroid, plotted by longitude/latitude and colored by PM2.5 baseline. This is a plain scatter plot standing in for a real map (no basemap or projection) — enough to see the coastal/urban PM2.5 pattern without adding a GIS mapping library to the site build. Zoom is disabled at this point count; use the query below with your own GIS tooling (e.g. QGIS, Leaflet) for a real map.
+
+```sql
+SELECT c.county_ref_id, c.county_name, c.state, c.urban_density_category,
+       ROUND(c.pm25_baseline_mean::numeric, 2) AS pm25_baseline_mean,
+       ROUND(c.ses_index::numeric, 1) AS ses_index,
+       ROUND(c.centroid_lat::numeric, 3) AS centroid_lat,
+       ROUND(c.centroid_lon::numeric, 3) AS centroid_lon,
+       COUNT(p.person_id) AS patient_count
+FROM omopgis.county_reference c
+LEFT JOIN omopgis.location l ON l.county_ref_id = c.county_ref_id
+LEFT JOIN omopgis.person p ON p.location_id = l.location_id
+GROUP BY 1,2,3,4,5,6,7,8
+ORDER BY patient_count DESC;
+```
+
+<div class="chart-wrap chart-wrap-tall"><canvas id="chartCountyMap"></canvas></div>
+
+<br>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="assets/dataset-visualizations.js"></script>
+
+<br>

@@ -1,0 +1,131 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG</div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+
+# **Data Description**
+
+The tutorial uses two datasets: a synthetic OMOP CDM population (source code lives in this repository) and a public PM2.5 dataset for Massachusetts (an external source, used to demonstrate cataloging and ingestion of a real dataset). Session 1 catalogs the public dataset; Sessions 2-4 link it against the synthetic OMOP population.
+
+<br>
+
+## **Privacy statement**
+
+No real addresses or coordinates are used anywhere in the tutorial. Person locations in the synthetic OMOP dataset are randomly generated within real per-state lat/lon bounding boxes covering all 50 states plus DC; they do not correspond to real people or real residences. County identities (`county_fips`, names) are synthetic (FIPS-shaped, not real FIPS codes) and are not intended to be joined against real county-level datasets as if they were authoritative.
+
+<br>
+
+## **1. OMOP synthetic dataset**
+
+Source: [`syntheticDataGIS/createSimpleSyntheticSet.sql`](https://github.com/OHDSI/GIS/blob/main/syntheticDataGIS/createSimpleSyntheticSet.sql) in this repository. See [Dataset Visualizations](tutorial-data-visualization.html) for charts of the cohort's condition prevalence, PM2.5/SES distribution, and SDOH observations, each paired with the SQL query that produced it.
+
+### Overview
+
+The script builds a standard OMOP CDM v5.4 schema (`omopgis`) plus the Gaia CDM extension tables (`LOCATION_HISTORY`, `EXTERNAL_EXPOSURE`) and one non-OMOP-standard demo dimension table, `COUNTY_REFERENCE`. It then populates 10,000 synthetic patients drawn from a synthetic nationwide population of ~3,103 US counties/county-equivalents (covering every state plus DC).
+
+Each county in `COUNTY_REFERENCE` carries an urban-density category (Urban Core / Suburban / Small Town / Rural) and a composite socioeconomic status (SES) index (0-100, higher = more affluent). These two county attributes are the dataset's two independent drivers:
+
+- **Urban density → PM2.5** (and PM10, Ozone, NO2, Noise, Tree Canopy): denser counties get systematically higher pollution baselines. See `EXTERNAL_EXPOSURE`.
+- **County SES → SDOH observations**: poverty rate, education, housing cost burden, employment, neighborhood disadvantage, food insecurity, PCP access, social isolation, uninsured rate, broadband access, violent crime rate, and AQI category — 12 observations total, all derived directly from the same `ses_index`. See `OBSERVATION`.
+
+Each patient is assigned to one county via `LOCATION.county_ref_id`, and inherits that county's PM2.5 exposure and SES for the purposes of comorbidity risk. 14 conditions are generated in `CONDITION_OCCURRENCE` — 5 respiratory (asthma, COPD, chronic bronchitis, allergic rhinitis, pneumonia) and 9 cardiometabolic (hypertension, coronary artery disease, congestive heart failure, myocardial infarction, stroke, type 2 diabetes, obesity, hyperlipidemia, chronic kidney disease) — each with its own risk formula blending the patient's PM2.5 exposure and county SES (respiratory conditions weight PM2.5 more heavily; metabolic/renal conditions weight SES more heavily; cardiovascular conditions weight both). Condition cohorts in turn drive 15 drugs, 7 procedures, and 16 measurements in `DRUG_EXPOSURE`, `PROCEDURE_OCCURRENCE`, and `MEASUREMENT` (e.g. an asthma diagnosis makes a patient eligible for an albuterol prescription and a spirometry procedure at a fixed probability).
+
+`LOCATION_HISTORY` records each person's single "lives at" interval (SNOMED concept `581476`, 2014-01-01 to 2019-12-31) at their assigned location; `EXTERNAL_EXPOSURE` records the place-based PM2.5/PM10/Ozone/NO2/Noise/Tree-Canopy values linked to that location.
+
+The exposure values populated by this script are fully synthetic (generated from the county's `pm25_baseline_mean` plus noise, not derived from or joined to the public PM2.5 dataset in Section 2). The public dataset is a separate real-world source that participants catalog and ingest independently in Exercises 1-2; linking it against this synthetic population is part of the exercise, not something the generator script pre-does for you.
+
+### Scenario
+
+- adults, one residential interval per patient (2014-01-01 to 2019-12-31); the script does **not** currently generate a residential move — every patient has exactly one `LOCATION_HISTORY` row
+- respiratory + cardiometabolic condition cohort (14 conditions — see Overview)
+- synthetic PM2.5, PM10, Ozone, NO2, Noise, and Tree Canopy exposure by county, driven by county urban density
+- county-level SDOH indicators (12 observations, listed above) driven by county SES — no SVI/ADI variable specifically; `NEIGHBORHOOD_CONCENTRATED_DISADVANTAGE` (0-1 index) is the closest analog currently in the script
+
+**Known edge cases the exercises may expect are not yet in the script.** Checked directly against the current generator: there is no residential move, no missing SDOH/exposure value, no duplicate source row, no unit-mismatch staging row, and no non-overlapping exposure record. If an exercise depends on catching one of these, it still needs to be added to the generator (or introduced as a separate exercise-specific fixture) — this is open work, not yet scheduled.
+
+### Grain and uniqueness
+
+Recommended logical key for the demo:
+
+`person_id + location_id + exposure_concept_id + exposure_start_date + exposure_end_date + exposure_type_concept_id + exposure_source_value`
+
+_TODO: confirm/finalize the logical key used for the demo._
+
+### Tables
+
+**Standard OMOP**
+
+- `person`
+- `location`
+- `observation_period`
+- `condition_occurrence`
+- `drug_exposure`
+- `procedure_occurrence`
+- `measurement`
+- `observation`
+- `cdm_source`
+- `concept`
+- `concept_relationship`
+- `concept_ancestor`
+
+**GIS extension**
+
+- `location_history`
+- `external_exposure`
+
+**Demo-only (not part of standard OMOP or the Gaia extension)**
+
+- `county_reference` — one row per synthetic county; carries `urban_density_category`, `pm25_baseline_mean`, `ses_index`, and centroid lat/lon. `location.county_ref_id` is a foreign key into this table.
+
+**Tutorial-only, not yet in the script**
+
+- `demo.rejected_exposure_row`
+- `demo.expected_result`
+
+These two are referenced by the tutorial exercises but are not created or populated by `createSimpleSyntheticSet.sql` — they still need to be added (see the edge-cases note in Scenario above; these tables presumably exist to hold the rejected/expected rows from those edge cases).
+
+### Provenance and versioning
+
+The script populates one `cdm_source` row with `cdm_version` ('5.4'), `source_release_date`/`cdm_release_date`, and `vocabulary_version` ('GIS v1.0' — a label for this demo, not a real OMOP vocabulary release). There is no dataset UUID, no algorithm-version field, and no record of which real OMOP vocabulary tables (if any) were loaded alongside it — those remain open items if the tutorial needs to pin a specific run.
+
+<br>
+
+## **2. Public GIS PM2.5 dataset (Massachusetts)**
+
+_TODO: this is the public source dataset participants catalog in Exercise 1 and ingest in Exercise 2. Fill in once the specific source is finalized._
+
+### Overview
+
+_TODO: one-paragraph summary — what the dataset measures, who publishes it, and why it was chosen for this tutorial._
+
+### Source
+
+_TODO: publisher/provider (e.g., EPA), dataset name and URL, version or vintage._
+
+### Coverage
+
+- **Spatial coverage:** _TODO — statewide MA, county, or monitor-level; resolution (point monitors, tract, grid cell, etc.)_
+- **Temporal coverage:** _TODO — years covered, update cadence_
+- **Variable definition and unit:** _TODO — PM2.5 concentration, µg/m³, averaging period (daily/annual)_
+
+### Access and license
+
+- **Retrieval method:** _TODO — API, bulk download, URL_
+- **License:** _TODO — confirm license permits tutorial use_
+
+### Role in the tutorial
+
+This is the dataset participants evaluate against the fitness rubric and catalog with a metadata record in [Exercise 1](tutorial-exercise-1.html), then ingest and spatially/temporally link to the synthetic OMOP population (Section 1 above) in [Exercise 2](tutorial-exercise-2.html).
+
+**GAIA metadata/source tables**
+
+- `backbone.data_source`
+- `backbone.variable_source`
+- optional source geometry/attribute tables
+
+<br>

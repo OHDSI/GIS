@@ -1,0 +1,5 @@
+urban_density_category,n_counties,avg_pm25,avg_ses
+Urban Core,32,16.16,57.2
+Suburban,1070,9.95,52.5
+Small Town,1499,7.50,52.4
+Rural,502,5.03,51.8

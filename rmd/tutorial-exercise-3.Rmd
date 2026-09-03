@@ -1,0 +1,46 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG</div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+
+# **Exercise 3: OMOP integration**
+
+## **Goal**
+
+Understand and query the person-place-time model, validate vocabulary roles, and calculate a temporally aligned exposure metric — here, mean PM2.5 during pregnancy.
+
+OMOP is person/event-centric; geospatial sources are place/time/attribute-centric. The bridge between them is: `PERSON`/clinical event ← `LOCATION_HISTORY` → `LOCATION` ← derived `EXTERNAL_EXPOSURE`. `LOCATION_HISTORY` captures entity, location, relationship, and start/end dates (supporting residential and other relationship types, while avoiding overlap ambiguity). `EXTERNAL_EXPOSURE` captures what, when, where, how related, source, and the numeric/categorical value and unit. Standard concepts always win over lexical-only mappings — an existing exact Standard concept is used when available, and a provisional source concept is retained or mapped rather than invented.
+
+## **Steps**
+
+1. Review the vocabulary package relevant to your exposure: OMOP GIS (geometry/geographic semantics), Exposome (toxicants and related taxonomy), and SDoH (contextual determinants and source-derived items).
+2. Query the pre-populated demo data, joining `PERSON`, `LOCATION_HISTORY`, `EXTERNAL_EXPOSURE`, the relevant vocabulary concepts, and the clinical interval (the pregnancy episode).
+3. Identify the pregnancy interval for a given person, and identify every `EXTERNAL_EXPOSURE` row whose interval overlaps it — including the row that only partially overlaps.
+4. Calculate mean PM2.5 during pregnancy, weighting by the degree of interval overlap rather than treating any overlap as full inclusion.
+5. List every semantic field your calculation depended on: the exposure concept, its unit concept, the location relationship type, and the vocabulary each concept came from.
+
+## **Deliverable**
+
+Mean PM2.5 during pregnancy for the queried person(s), plus the full list of semantic fields (concepts, units, relationship types, vocabularies) used to compute it.
+
+## **Check Your Work**
+
+- [ ] Overlap weighting is correct — no interval treated as fully included when it is only partial
+- [ ] No post-outcome leakage (no exposure data drawn from after the interval of interest)
+- [ ] Units are correct and consistent across joined rows
+- [ ] Each concept is used in its correct role (e.g., a unit concept is not confused with an exposure concept)
+
+<br>
+
+**Bridge to Session 4:** validated exposure facts become covariates; they do not become causal effects automatically.
+
+<br>
+
+Previous: [Exercise 2](tutorial-exercise-2.html) | Next: [Exercise 4](tutorial-exercise-4.html)
+
+<br>

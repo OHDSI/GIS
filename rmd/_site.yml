@@ -19,6 +19,23 @@ navbar:
     - text: "Get Started"
       icon: fa-play
       href: get-started.html
+    - text: "Tutorial"
+      icon: fa-graduation-cap
+      menu:
+        - text: "Overview"
+          href: tutorial.html
+        - text: "Data Description"
+          href: tutorial-data-description.html
+        - text: "Dataset Visualizations"
+          href: tutorial-data-visualization.html
+        - text: "Exercise 1"
+          href: tutorial-exercise-1.html
+        - text: "Exercise 2"
+          href: tutorial-exercise-2.html
+        - text: "Exercise 3"
+          href: tutorial-exercise-3.html
+        - text: "Exercise 4"
+          href: tutorial-exercise-4.html
     - text: "Gaia"
       icon: fa-earth
       menu:
