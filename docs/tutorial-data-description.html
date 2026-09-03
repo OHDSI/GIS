@@ -355,10 +355,10 @@ div.tocify {
       <a href="tutorial.html">Overview</a>
     </li>
     <li>
-      <a href="tutorial-data-description.html">Data Description</a>
+      <a href="tutorial-data-description.html">OMOP Data Description</a>
     </li>
     <li>
-      <a href="tutorial-data-visualization.html">Dataset Visualizations</a>
+      <a href="tutorial-data-visualization.html">OMOP Data Visualization</a>
     </li>
     <li>
       <a href="tutorial-exercise-1.html">Exercise 1</a>
@@ -478,8 +478,14 @@ WG</h1>
 </div>
 
 
-<div id="data-description" class="section level1">
-<h1><strong>Data Description</strong></h1>
+<div id="omop-data-description" class="section level1">
+<h1><strong>OMOP Data Description</strong></h1>
+<div class="alert alert-warning">
+<strong>Work in progress.</strong> These tutorial materials are still
+under active development and will continue to change until the tutorial
+takes place on <strong>October 20, 2026</strong>. Content, links, and
+exercises may be incomplete or shift without notice.
+</div>
 <p>The tutorial uses two datasets: a synthetic OMOP CDM population
 (source code lives in this repository) and a public PM2.5 dataset for
 Massachusetts (an external source, used to demonstrate cataloging and
@@ -501,10 +507,10 @@ county-level datasets as if they were authoritative.</p>
 <h2><strong>1. OMOP synthetic dataset</strong></h2>
 <p>Source: <a
 href="https://github.com/OHDSI/GIS/blob/main/syntheticDataGIS/createSimpleSyntheticSet.sql"><code>syntheticDataGIS/createSimpleSyntheticSet.sql</code></a>
-in this repository. See <a
-href="tutorial-data-visualization.html">Dataset Visualizations</a> for
-charts of the cohort’s condition prevalence, PM2.5/SES distribution, and
-SDOH observations, each paired with the SQL query that produced it.</p>
+in this repository. See <a href="tutorial-data-visualization.html">OMOP
+Data Visualization</a> for charts of the cohort’s condition prevalence,
+PM2.5/SES distribution, and SDOH observations, each paired with the SQL
+query that produced it.</p>
 <div id="overview" class="section level3">
 <h3>Overview</h3>
 <p>The script builds a standard OMOP CDM v5.4 schema
