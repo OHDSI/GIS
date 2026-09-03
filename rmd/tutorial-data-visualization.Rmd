@@ -8,9 +8,11 @@ output:
           collapsed: false
 ---
 
-# **Dataset Visualizations**
+# **OMOP Data Visualization**
 
-This page renders the contents of the synthetic OMOP + GIS/SDOH dataset described in [Data Description](tutorial-data-description.html). Source: [`syntheticDataGIS/createSimpleSyntheticSet.sql`](https://github.com/OHDSI/GIS/blob/main/syntheticDataGIS/createSimpleSyntheticSet.sql).
+<div class="alert alert-warning"><strong>Work in progress.</strong> These tutorial materials are still under active development and will continue to change until the tutorial takes place on <strong>October 20, 2026</strong>. Content, links, and exercises may be incomplete or shift without notice.</div>
+
+This page renders the contents of the synthetic OMOP + GIS/SDOH dataset described in [OMOP Data Description](tutorial-data-description.html). Source: [`syntheticDataGIS/createSimpleSyntheticSet.sql`](https://github.com/OHDSI/GIS/blob/main/syntheticDataGIS/createSimpleSyntheticSet.sql).
 
 Each chart below is paired with the SQL query used to produce it, so you can run the same query yourself against a database loaded from the script and confirm the numbers, or adapt the query to explore something else. The charts read from small, precomputed CSV extracts in [`rmd/data/synthetic-dataset/`](https://github.com/OHDSI/GIS/tree/main/rmd/data/synthetic-dataset) rather than querying a live database — this is a static site with no database behind it. To regenerate the extracts after changing the generator script, load the script into PostgreSQL and re-run the queries on this page with `psql \copy ... TO '<file>.csv' WITH CSV HEADER`.
 

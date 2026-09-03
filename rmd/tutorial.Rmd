@@ -10,6 +10,8 @@ output:
 
 # **Tutorial**
 
+<div class="alert alert-warning"><strong>Work in progress.</strong> These tutorial materials are still under active development and will continue to change until the tutorial takes place on <strong>October 20, 2026</strong>. Content, links, and exercises may be incomplete or shift without notice.</div>
+
 Welcome to the OHDSI GIS tutorial materials. This section walks through hands-on exercises for working with the Gaia toolchain and GIS-related OMOP CDM extensions.
 
 <br>
@@ -40,7 +42,7 @@ Each session builds directly on the output of the one before it. The metadata re
 
 ## **Demo dataset**
 
-All exercises run against a synthetic cohort designed for this tutorial. **No real addresses or coordinates are used** — all locations are synthetic points in a fictionalized study area. The dataset deliberately includes a residential move, a pregnancy episode that partially overlaps an exposure interval, a missing SVI value, a duplicate source row, a unit mismatch, and a non-overlapping exposure record, so that each session's checks have something real to catch. See the [Data Description](tutorial-data-description.html) page for details.
+All exercises run against a synthetic cohort designed for this tutorial. **No real addresses or coordinates are used** — all locations are synthetic points in a fictionalized study area. The dataset deliberately includes a residential move, a pregnancy episode that partially overlaps an exposure interval, a missing SVI value, a duplicate source row, a unit mismatch, and a non-overlapping exposure record, so that each session's checks have something real to catch. See the [OMOP Data Description](tutorial-data-description.html) page for details.
 
 <br>
 
