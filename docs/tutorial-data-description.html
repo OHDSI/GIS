@@ -488,8 +488,8 @@ exercises may be incomplete or shift without notice.
 </div>
 <p>The tutorial uses two datasets: a synthetic OMOP CDM population
 (source code lives in this repository) and a public PM2.5 dataset for
-Massachusetts (an external source, used to demonstrate cataloging and
-ingestion of a real dataset). Session 1 catalogs the public dataset;
+the United States (an external source, used to demonstrate cataloging
+and ingestion of a real dataset). Session 1 catalogs the public dataset;
 Sessions 2-4 link it against the synthetic OMOP population.</p>
 <p><br></p>
 <div id="privacy-statement" class="section level2">
@@ -650,40 +650,83 @@ the tutorial needs to pin a specific run.</p>
 <p><br></p>
 </div>
 </div>
-<div id="public-gis-pm2.5-dataset-massachusetts" class="section level2">
-<h2><strong>2. Public GIS PM2.5 dataset (Massachusetts)</strong></h2>
-<p><em>TODO: this is the public source dataset participants catalog in
-Exercise 1 and ingest in Exercise 2. Fill in once the specific source is
-finalized.</em></p>
+<div id="public-gis-pm2.5-dataset-united-states" class="section level2">
+<h2><strong>2. Public GIS PM2.5 dataset (United States)</strong></h2>
+<p>2014-2019 CDC PM 2.5 Monthly Predictions for US Counties</p>
+<p>This is the public source dataset participants catalog in Exercise 1
+and ingest in Exercise 2.</p>
+<p><em>NOTE: there are several alternative sources for PM 2.5 data in
+the <a href="https://ohdsi.github.io/gaiaCatalog/browser/">Gaia
+Catalog</a>. We may encourage participants to use different data sources
+and then compare resuts.</em></p>
 <div id="overview-1" class="section level3">
 <h3>Overview</h3>
-<p><em>TODO: one-paragraph summary — what the dataset measures, who
-publishes it, and why it was chosen for this tutorial.</em></p>
+<p>Aggregated monthly PM 2.5 modelled estimates that span 2014-01-01 to
+2019-12-31 derived from the CDC Daily County-Level PM2.5 Concentrations
+2001-2022 provided by the CDC National Environmental Public Health
+Tracking Network. From the CDC description: This dataset provides
+modeled predictions of PM2.5 levels from the EPA Downscaler model. Data
+are at the county level for 2001-2022. These data are used by the CDC
+National Environmental Public Health Tracking Network to generate air
+quality measures. By using these data, you signify your agreement to
+comply with the following requirements: 1. Use the data for statistical
+reporting and analysis only. 2. Do not attempt to learn the identity of
+any person included in the data and do not combine these data with other
+data for the purpose of matching records to identify individuals. 3. Do
+not disclose of or make use of the identity of any person or
+establishment discovered inadvertently and report the discovery to: <a
+href="mailto:trackingsupport@cdc.gov"
+class="email">trackingsupport@cdc.gov</a>. 4. Do not imply or state,
+either in written or oral form, that interpretations based on the data
+are those of the original data sources and CDC unless the data user and
+data source are formally collaborating. 5. Acknowledge, in all reports
+or presentations based on these data, the original source of the data
+and CDC. 6. Suggested citation: Centers for Disease Control and
+Prevention. National Environmental Public Health Tracking Network. Web.
+Accessed: insert date. www.cdc.gov/ephtracking.</p>
 </div>
 <div id="source" class="section level3">
 <h3>Source</h3>
-<p><em>TODO: publisher/provider (e.g., EPA), dataset name and URL,
-version or vintage.</em></p>
+<p><a
+href="https://data.cdc.gov/Environmental-Health-Toxicology/Daily-County-Level-PM2-5-Concentrations-2001-2022/53mz-4zqd/about_data">Center
+for Disease Control (CDC) - Daily County-Level PM2.5 Concentrations
+2001-2022</a></p>
+<p><a
+href="https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.2023.html#list-tab-1883739534">United
+States Census Bureau - Geography Division - TIGER/Line Shapefile, 2023,
+US, Current County</a></p>
+<p><em>NOTE: this datasource is an API from which Gaia Catalog draws and
+aggregates the data and then joins it to the TIGER line geometries for
+US counties for use in the Gaia toolchain. The University of Miami
+Geospatial Digital Special COllections maintains a pre-aggregated
+version of the dataset for the tutorial available for download in
+various formats.</em></p>
 </div>
 <div id="coverage" class="section level3">
 <h3>Coverage</h3>
 <ul>
-<li><strong>Spatial coverage:</strong> <em>TODO — statewide MA, county,
-or monitor-level; resolution (point monitors, tract, grid cell,
-etc.)</em></li>
-<li><strong>Temporal coverage:</strong> <em>TODO — years covered, update
-cadence</em></li>
-<li><strong>Variable definition and unit:</strong> <em>TODO — PM2.5
-concentration, µg/m³, averaging period (daily/annual)</em></li>
+<li><strong>Spatial coverage:</strong> United States Counties</li>
+<li><strong>Temporal coverage:</strong> 2014 - 2019 with monthly data
+points.</li>
+<li><strong>Variable definition and unit:</strong> PM2.5 concentration,
+µg/m³, monthly max, mean, median, and population weighted mean._</li>
 </ul>
 </div>
 <div id="access-and-license" class="section level3">
 <h3>Access and license</h3>
 <ul>
-<li><strong>Retrieval method:</strong> <em>TODO — API, bulk download,
-URL</em></li>
-<li><strong>License:</strong> <em>TODO — confirm license permits
-tutorial use</em></li>
+<li><p><strong>CDC Retrieval method:</strong> API <a
+href="https://data.cdc.gov/api/v3/views/53mz-4zqd/query.csv?">https://data.cdc.gov/api/v3/views/53mz-4zqd/query.csv?</a></p></li>
+<li><p><strong>CDC License:</strong> <a
+href="https://www.usa.gov/government-copyright">Public Domain Us
+Government</a></p></li>
+<li><p><strong>Census Retrieval method:</strong> Download - <a
+href="ftp://ftp2.census.gov/geo/tiger/TIGER2023/COUNTY/tl_2023_us_county.zip">ftp://ftp2.census.gov/geo/tiger/TIGER2023/COUNTY/tl_2023_us_county.zip</a></p></li>
+<li><p><strong>Census License:</strong> Public Domain</p></li>
+<li><p>UM Retrieval method: Download (TBD)</p></li>
+<li><p>UM License: <a
+href="http://opendatacommons.org/licenses/by/1.0/">Open Data Commons
+Attribution License (ODC-By)</a></p></li>
 </ul>
 </div>
 <div id="role-in-the-tutorial" class="section level3">

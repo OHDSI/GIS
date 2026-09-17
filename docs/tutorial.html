@@ -547,6 +547,48 @@ validity</td>
 </div>
 <div id="prerequisites" class="section level2">
 <h2><strong>Prerequisites</strong></h2>
+<p>You will need basic command line computing skills (powershell on
+windows, terminal on mac, or bash on linux). If you are not familiar
+with these tools, we suggest you complete the Software Carpentry lesson
+on <a href="https://swcarpentry.github.io/shell-novice/">the unix
+shell</a> (this applies to all command line computing). The lesson can
+be used in a self-learning tutorial environment.</p>
+<p>We will use docker and the docker compose container orchestration
+system for the tutorial (and for the Gaia toolchain). While no knowledge
+is needed, familiarity will be helpful. If you are not familiar and have
+a little time, the docker maintains basic documentation and several <a
+href="https://docs.docker.com/get-started/">get started tutorials</a>,
+and the <a
+href="https://docs.docker.com/get-started/tutorials/run-an-app/">build
+and share</a> tutorial is a good place to start.</p>
+<p>No prior GIS or spatial-analysis experience is assumed; familiarity
+with the OMOP CDM (PERSON, OBSERVATION_PERIOD, CONCEPT) is helpful for
+Sessions 3-4.</p>
+<div id="required-software" class="section level3">
+<h3>Required software</h3>
+<ul>
+<li><p><a href="https://www.docker.com/">Docker</a> Note: docker is
+proprietary software, but there is a community edition, Docker CE. There
+are several ways to install Docker, which is best depends on your
+compute environment and your experience.</p>
+<p><em>Windows note: to run docker you need a linux subsystem installed
+forst. We recommend the <a
+href="https://learn.microsoft.com/en-us/windows/wsl/install">WSL2 linux
+subsystem for windows</a>.</em></p>
+<ul>
+<li><a href="https://www.docker.com/products/docker-desktop/">Docker
+Desktop</a> is perhaps the easiest install and comes with a relatively
+easy to use user interface. This runs well on Windows with <a
+href="https://docs.docker.com/desktop/features/wsl/">WSL2</a> installed.
+It also can run on a mac.</li>
+<li><a href="https://colima.run/docs/installation/">Colima + Docker</a>
+is good on a mac as long as you are comfortable on the command line.
+This is a very lightweight install with no bells and whistles. This does
+not work on windows.</li>
+</ul></li>
+</ul>
+<p><em><strong>After installing docker, please complete the following
+steps before coming to the workshop</strong></em></p>
 <ul class="task-list">
 <li><label><input type="checkbox" />Review the <a
 href="get-started.html">Get Started</a> page</label></li>
@@ -554,13 +596,36 @@ href="get-started.html">Get Started</a> page</label></li>
 href="get-started.html#quick-start-deploy-gaia">Quick Start: Deploy
 Gaia</a>)</label></li>
 <li><label><input type="checkbox" />Confirm you can reach the pinned
-Gaia containers (or offline bundle) and the synthetic demo dataset
-provided by faculty</label></li>
-<li><label><input type="checkbox" />No prior GIS or spatial-analysis
-experience is assumed; familiarity with the OMOP CDM (PERSON,
-OBSERVATION_PERIOD, CONCEPT) is helpful for Sessions 3-4</label></li>
+Gaia containers on the github container repository (ghcr.io) (or offline
+bundle) (if the above two steps worked without errors, you are good to
+go)</label></li>
+<li><label><input type="checkbox" />Confirm you can download the
+synthetic demo dataset provided by faculty</label></li>
 </ul>
+</div>
+<div id="additional-useful-software-not-required"
+class="section level3">
+<h3>Additional useful software (not required)</h3>
+<p>PGAdmin and QGIS are standard components in an analytic toolbox for
+working with GIS data. They can be installed on windows, macOS, or
+linux. We encourage all participants to have these two software tools
+installed before the workshop.</p>
+<ul>
+<li><a href="https://www.pgadmin.org/">PGAdmin</a> - an open source
+postgres database management tool</li>
+<li><a href="https://qgis.org/">QGIS</a> - an open source geographic
+infomration system (GIS) and visualization tool</li>
+</ul>
+<p>There are many other tools available as well, but we find these two
+work well with the Gaia toolchain.</p>
+<p><em><strong>VERY IMPORTANT</strong></em>: If you have trouble with
+any installation or setup step above, contact the workshop organizers
+immediately ( <a href="mailto:houghtaling@ohdsi.org"
+class="email">houghtaling@ohdsi.org</a> or <a
+href="mailto:tnorris@miami.edu" class="email">tnorris@miami.edu</a>
+).</p>
 <p><br></p>
+</div>
 </div>
 <div id="demo-dataset" class="section level2">
 <h2><strong>Demo dataset</strong></h2>

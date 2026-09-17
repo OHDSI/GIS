@@ -486,12 +486,58 @@ group, or proposing a use case.</p>
 <p><br></p>
 <div id="quick-start-deploy-gaia" class="section level2">
 <h2><strong>Quick Start: Deploy Gaia</strong></h2>
-<p>The fastest way to deploy the Gaia toolchain is using gaiaDocker:</p>
+<p>The fastest way to deploy the Gaia toolchain is using gaiaDocker from
+the command line (terminal/bash on mac/linux or powershell on
+windows):</p>
 <pre class="bash"><code># Clone gaiaDocker repository
 git clone https://github.com/OHDSI/gaiaDocker.git
-cd gaiaDocker
-
-# Start the full Gaia stack
+git clone https://github.com/OHDSI/gaiaCatalog.git
+cd gaiaDocker</code></pre>
+<div id="create-blank-secrets-only-do-this-once" class="section level3">
+<h3>create blank secrets (only do this once)</h3>
+<p>The Gaia toolchain leverages Docker secrets to enable data retrieval
+from datasources that require authentication. For the quickstart we
+recommend running the script below to create empty secrets, and then see
+the <a
+href="https://github.com/OHDSI/gaiaDocker/tree/main/secrets/gaia">Gaia
+secrets documentation</a> for instructions to create the secrets for the
+sources you will use.</p>
+<p>mac/linux</p>
+<pre class="bash"><code>bash ./create_secrets.sh</code></pre>
+<p>windows</p>
+<pre><code>./create_secrets.ps1 # windows</code></pre>
+</div>
+<div id="login-to-the-github-docker-image-repository"
+class="section level3">
+<h3>login to the github docker image repository</h3>
+<p>Before the next step, you must create a <a
+href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">github
+personal access token</a> (PAT) and use it to login the the github
+docker repository to pull the repository docker images.</p>
+<ol style="list-style-type: decimal">
+<li>login to your github account</li>
+<li>in the top-right corner click your profile picutre and click
+<em>settings</em></li>
+<li>in the left menu click <em>Credentials</em> and click <em>Personal
+access Tokens (classic)</em></li>
+<li>near the top right click the <em>Generate new token</em> button anc
+choose <em>Generate new token (classic)</em></li>
+<li>follow the instructions for two-step verification</li>
+<li>give the token a recognizable name (ghcr-ro-access) in the
+<em>Note</em> field
+<ol style="list-style-type: lower-alpha">
+<li>set the expiration</li>
+<li>check the box next to <em>read:packages</em> (under
+<em>write:packages</em>)</li>
+<li>at the bottom, click the <em>Generate token</em> button</li>
+</ol></li>
+<li>save the token in a safe place, you will not see it again</li>
+</ol>
+<pre><code>echo &quot;YOUR_GITHUB_PAT&quot; | docker login ghcr.io -u YOUR_USERNAME --password-stdin</code></pre>
+</div>
+<div id="start-the-full-gaia-stack" class="section level3">
+<h3>start the full Gaia stack</h3>
+<pre class="bash"><code># Start the full Gaia stack
 docker compose --profile gaia up -d
 
 # Verify services are running
@@ -511,6 +557,7 @@ docker compose exec gaia-db psql -U postgres -d gaiacore  # Connect to database<
 alternative deployment options (Podman, Ansible, manual,
 Kubernetes).</p>
 <p><br></p>
+</div>
 </div>
 <div id="join-the-working-group" class="section level2">
 <h2><strong>Join the Working Group</strong></h2>
