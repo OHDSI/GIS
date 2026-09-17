@@ -12,7 +12,7 @@ output:
 
 <div class="alert alert-warning"><strong>Work in progress.</strong> These tutorial materials are still under active development and will continue to change until the tutorial takes place on <strong>October 20, 2026</strong>. Content, links, and exercises may be incomplete or shift without notice.</div>
 
-The tutorial uses two datasets: a synthetic OMOP CDM population (source code lives in this repository) and a public PM2.5 dataset for Massachusetts (an external source, used to demonstrate cataloging and ingestion of a real dataset). Session 1 catalogs the public dataset; Sessions 2-4 link it against the synthetic OMOP population.
+The tutorial uses two datasets: a synthetic OMOP CDM population (source code lives in this repository) and a public PM2.5 dataset for the United States (an external source, used to demonstrate cataloging and ingestion of a real dataset). Session 1 catalogs the public dataset; Sessions 2-4 link it against the synthetic OMOP population.
 
 <br>
 
@@ -97,28 +97,42 @@ The script populates one `cdm_source` row with `cdm_version` ('5.4'), `source_re
 
 <br>
 
-## **2. Public GIS PM2.5 dataset (Massachusetts)**
+## **2. Public GIS PM2.5 dataset (United States)**
 
-_TODO: this is the public source dataset participants catalog in Exercise 1 and ingest in Exercise 2. Fill in once the specific source is finalized._
+2014-2019 CDC PM 2.5 Monthly Predictions for US Counties 
+
+This is the public source dataset participants catalog in Exercise 1 and ingest in Exercise 2.
+
+_NOTE: there are several alternative sources for PM 2.5 data in the [Gaia Catalog](https://ohdsi.github.io/gaiaCatalog/browser/). We may encourage participants to use different data sources and then compare resuts._
 
 ### Overview
 
-_TODO: one-paragraph summary — what the dataset measures, who publishes it, and why it was chosen for this tutorial._
+Aggregated monthly PM 2.5 modelled estimates that span 2014-01-01 to 2019-12-31 derived from the CDC Daily County-Level PM2.5 Concentrations 2001-2022 provided by the CDC National Environmental Public Health Tracking Network. From the CDC description: This dataset provides modeled predictions of PM2.5 levels from the EPA Downscaler model. Data are at the county level for 2001-2022. These data are used by the CDC National Environmental Public Health Tracking Network to generate air quality measures. By using these data, you signify your agreement to comply with the following requirements: 1. Use the data for statistical reporting and analysis only. 2. Do not attempt to learn the identity of any person included in the data and do not combine these data with other data for the purpose of matching records to identify individuals. 3. Do not disclose of or make use of the identity of any person or establishment discovered inadvertently and report the discovery to: trackingsupport@cdc.gov. 4. Do not imply or state, either in written or oral form, that interpretations based on the data are those of the original data sources and CDC unless the data user and data source are formally collaborating. 5. Acknowledge, in all reports or presentations based on these data, the original source of the data and CDC. 6. Suggested citation: Centers for Disease Control and Prevention. National Environmental Public Health Tracking Network. Web. Accessed: insert date. www.cdc.gov/ephtracking.
 
 ### Source
 
-_TODO: publisher/provider (e.g., EPA), dataset name and URL, version or vintage._
+[Center for Disease Control (CDC) - Daily County-Level PM2.5 Concentrations 2001-2022](https://data.cdc.gov/Environmental-Health-Toxicology/Daily-County-Level-PM2-5-Concentrations-2001-2022/53mz-4zqd/about_data)  
+
+[United States Census Bureau - Geography Division - TIGER/Line Shapefile, 2023, US, Current County](https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.2023.html#list-tab-1883739534)  
+
+_NOTE: this datasource is an API from which Gaia Catalog draws and aggregates the data and then joins it to the TIGER line geometries for US counties for use in the Gaia toolchain. The University of Miami Geospatial Digital Special COllections maintains a pre-aggregated version of the dataset for the tutorial available for download in various formats._
 
 ### Coverage
 
-- **Spatial coverage:** _TODO — statewide MA, county, or monitor-level; resolution (point monitors, tract, grid cell, etc.)_
-- **Temporal coverage:** _TODO — years covered, update cadence_
-- **Variable definition and unit:** _TODO — PM2.5 concentration, µg/m³, averaging period (daily/annual)_
+- **Spatial coverage:** United States Counties
+- **Temporal coverage:** 2014 - 2019 with monthly data points.
+- **Variable definition and unit:** PM2.5 concentration, µg/m³, monthly max, mean, median, and population weighted mean._
 
 ### Access and license
 
-- **Retrieval method:** _TODO — API, bulk download, URL_
-- **License:** _TODO — confirm license permits tutorial use_
+- **CDC Retrieval method:** API [https://data.cdc.gov/api/v3/views/53mz-4zqd/query.csv?](https://data.cdc.gov/api/v3/views/53mz-4zqd/query.csv?)
+- **CDC License:** [Public Domain Us Government](https://www.usa.gov/government-copyright)  
+
+- **Census Retrieval method:** Download - [ftp://ftp2.census.gov/geo/tiger/TIGER2023/COUNTY/tl_2023_us_county.zip](ftp://ftp2.census.gov/geo/tiger/TIGER2023/COUNTY/tl_2023_us_county.zip)
+- **Census License:** Public Domain
+
+- UM Retrieval method: Download (TBD)
+- UM License: [Open Data Commons Attribution License (ODC-By)](http://opendatacommons.org/licenses/by/1.0/)
 
 ### Role in the tutorial
 

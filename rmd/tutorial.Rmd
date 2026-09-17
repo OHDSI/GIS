@@ -1,3 +1,5 @@
+
+
 ---
 title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG</div>'
 output:
@@ -33,10 +35,39 @@ Each session builds directly on the output of the one before it. The metadata re
 
 ## **Prerequisites**
 
+You will need basic command line computing skills (powershell on windows, terminal on mac, or bash on linux). If you are not familiar with these tools, we suggest you complete the Software Carpentry lesson on [the unix shell](https://swcarpentry.github.io/shell-novice/) (this applies to all command line computing). The lesson can be used in a self-learning tutorial environment.
+
+We will use docker and the docker compose container orchestration system for the tutorial (and for the Gaia toolchain). While no knowledge is needed, familiarity will be helpful. If you are not familiar and have a little time, the docker maintains basic documentation and several [get started tutorials](https://docs.docker.com/get-started/), and the [build and share](https://docs.docker.com/get-started/tutorials/run-an-app/) tutorial is a good place to start. 
+
+No prior GIS or spatial-analysis experience is assumed; familiarity with the OMOP CDM (PERSON, OBSERVATION_PERIOD, CONCEPT) is helpful for Sessions 3-4.
+
+### Required software
+
+- [Docker](https://www.docker.com/)
+   Note: docker is proprietary software, but there is a community edition, Docker CE. There are several ways to install Docker, which is best depends on your compute environment and your experience.  
+   
+   _Windows note: to run docker you need a linux subsystem installed forst. We recommend the [WSL2 linux subsystem for windows](https://learn.microsoft.com/en-us/windows/wsl/install)._  
+   
+   - [Docker Desktop](https://www.docker.com/products/docker-desktop/) is perhaps the easiest install and comes with a relatively easy to use user interface. This runs well on Windows with [WSL2](https://docs.docker.com/desktop/features/wsl/) installed. It also can run on a mac.
+   - [Colima + Docker](https://colima.run/docs/installation/) is good on a mac as long as you are comfortable on the command line. This is a very lightweight install with no bells and whistles. This does not work on windows.
+
+_**After installing docker, please complete the following steps before coming to the workshop**_
+
 - [ ] Review the [Get Started](get-started.html) page
 - [ ] Deploy the Gaia toolchain (see [Quick Start: Deploy Gaia](get-started.html#quick-start-deploy-gaia))
-- [ ] Confirm you can reach the pinned Gaia containers (or offline bundle) and the synthetic demo dataset provided by faculty
-- [ ] No prior GIS or spatial-analysis experience is assumed; familiarity with the OMOP CDM (PERSON, OBSERVATION_PERIOD, CONCEPT) is helpful for Sessions 3-4
+- [ ] Confirm you can reach the pinned Gaia containers on the github container repository (ghcr.io) (or offline bundle) (if the above two steps worked without errors, you are good to go)
+- [ ] Confirm you can download the synthetic demo dataset provided by faculty
+
+### Additional useful software (not required)
+
+PGAdmin and QGIS are standard components in an analytic toolbox for working with GIS data. They can be installed on windows, macOS, or linux. We encourage all participants to have these two software tools installed before the workshop.
+
+- [PGAdmin](https://www.pgadmin.org/) - an open source postgres database management tool
+- [QGIS](https://qgis.org/) - an open source geographic infomration system (GIS) and visualization tool
+
+There are many other tools available as well, but we find these two work well with the Gaia toolchain.
+
+_**VERY IMPORTANT**_: If you have trouble with any installation or setup step above, contact the workshop organizers immediately ( houghtaling@ohdsi.org or tnorris@miami.edu ).
 
 <br>
 

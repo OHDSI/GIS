@@ -1,4 +1,3 @@
-
 ---
 title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG </div>'
 output:
@@ -17,13 +16,51 @@ Welcome to the OHDSI GIS Working Group! This page helps you get started whether 
 
 ## **Quick Start: Deploy Gaia**
 
-The fastest way to deploy the Gaia toolchain is using gaiaDocker:
+The fastest way to deploy the Gaia toolchain is using gaiaDocker from the command line (terminal/bash on mac/linux or powershell on windows):
 
 ```bash
 # Clone gaiaDocker repository
 git clone https://github.com/OHDSI/gaiaDocker.git
+git clone https://github.com/OHDSI/gaiaCatalog.git
 cd gaiaDocker
+```
 
+### create blank secrets (only do this once)
+
+The Gaia toolchain leverages Docker secrets to enable data retrieval from datasources that require authentication. For the quickstart we recommend running the script below to create empty secrets, and then see the [Gaia secrets documentation](https://github.com/OHDSI/gaiaDocker/tree/main/secrets/gaia) for instructions to create the secrets for the sources you will use.  
+
+mac/linux
+```bash
+bash ./create_secrets.sh
+```
+
+windows
+```
+./create_secrets.ps1 # windows
+```
+
+### login to the github docker image repository
+
+Before the next step, you must create a [github personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) (PAT) and use it to login the the github docker repository to pull the repository docker images.
+
+1. login to your github account
+2. in the top-right corner click your profile picutre and click _settings_
+3. in the left menu click _Credentials_ and click _Personal access Tokens (classic)_
+4. near the top right click the _Generate new token_ button anc choose _Generate new token (classic)_
+5. follow the instructions for two-step verification
+6. give the token a recognizable name (ghcr-ro-access) in the _Note_ field
+   a. set the expiration
+   b. check the box next to _read:packages_ (under _write:packages_)
+   c. at the bottom, click the _Generate token_ button
+7. save the token in a safe place, you will not see it again
+
+```
+echo "YOUR_GITHUB_PAT" | docker login ghcr.io -u YOUR_USERNAME --password-stdin
+```
+
+### start the full Gaia stack
+
+```bash
 # Start the full Gaia stack
 docker compose --profile gaia up -d
 
