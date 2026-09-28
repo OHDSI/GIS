@@ -484,79 +484,118 @@ WG</h1>
 </div>
 
 
-<div id="exercise-4-analytical-applications" class="section level1">
-<h1><strong>Exercise 4: Analytical applications</strong></h1>
+<div id="geo-data-description" class="section level1">
+<h1><strong>Geo Data Description</strong></h1>
 <div class="alert alert-warning">
 <strong>Work in progress.</strong> These tutorial materials are still
 under active development and will continue to change until the tutorial
 takes place on <strong>October 20, 2026</strong>. Content, links, and
 exercises may be incomplete or shift without notice.
 </div>
-<div id="goal" class="section level2">
-<h2><strong>Goal</strong></h2>
-<p>Design an analysis-ready exposure feature and identify threats to
-validity and federated execution requirements. Exposure records are
-longitudinal facts; models require index-aligned covariates, and turning
-one into the other requires deliberate choices that can be gotten wrong
-in specific, checkable ways.</p>
+<p>The tutorial uses two datasets: a synthetic OMOP CDM population
+(described in <a href="tutorial-data-description.html">OMOP Data
+Description</a>) and the public PM2.5 dataset for the United States
+described on this page (an external source, used to demonstrate
+cataloging and ingestion of a real dataset). Session 1 catalogs the
+public dataset; Sessions 2-4 link it against the synthetic OMOP
+population. See <a href="tutorial-geo-data-visualization.html">Geo Data
+Visualization</a> for a characterization of this dataset.</p>
+<p><br></p>
+<div id="public-gis-pm2.5-dataset-united-states" class="section level2">
+<h2><strong>Public GIS PM2.5 dataset (United States)</strong></h2>
+<p>2014-2019 CDC PM 2.5 Monthly Predictions for US Counties</p>
+<p>This is the public source dataset participants catalog in Exercise 1
+and ingest in Exercise 2.</p>
+<p><em>NOTE: there are several alternative sources for PM 2.5 data in
+the <a href="https://ohdsi.github.io/gaiaCatalog/browser/">Gaia
+Catalog</a>. We may encourage participants to use different data sources
+and then compare resuts.</em></p>
+<div id="overview" class="section level3">
+<h3>Overview</h3>
+<p>Aggregated monthly PM 2.5 modelled estimates that span 2014-01-01 to
+2019-12-31 derived from the CDC Daily County-Level PM2.5 Concentrations
+2001-2022 provided by the CDC National Environmental Public Health
+Tracking Network. From the CDC description: This dataset provides
+modeled predictions of PM2.5 levels from the EPA Downscaler model. Data
+are at the county level for 2001-2022. These data are used by the CDC
+National Environmental Public Health Tracking Network to generate air
+quality measures. By using these data, you signify your agreement to
+comply with the following requirements: 1. Use the data for statistical
+reporting and analysis only. 2. Do not attempt to learn the identity of
+any person included in the data and do not combine these data with other
+data for the purpose of matching records to identify individuals. 3. Do
+not disclose of or make use of the identity of any person or
+establishment discovered inadvertently and report the discovery to: <a
+href="mailto:trackingsupport@cdc.gov"
+class="email">trackingsupport@cdc.gov</a>. 4. Do not imply or state,
+either in written or oral form, that interpretations based on the data
+are those of the original data sources and CDC unless the data user and
+data source are formally collaborating. 5. Acknowledge, in all reports
+or presentations based on these data, the original source of the data
+and CDC. 6. Suggested citation: Centers for Disease Control and
+Prevention. National Environmental Public Health Tracking Network. Web.
+Accessed: insert date. www.cdc.gov/ephtracking.</p>
 </div>
-<div id="steps" class="section level2">
-<h2><strong>Steps</strong></h2>
-<ol style="list-style-type: decimal">
-<li>Choose a research question that uses the exposure metric you
-calculated in Exercise 3 (or a similar one).</li>
-<li>Specify the feature: lookback window, lag, aggregation method,
-missingness handling, unit harmonization, geography, and update
-frequency.</li>
-<li>Decide whether this feature belongs in cohort eligibility or as a
-post-index predictor — these must stay separate. If your feature
-involves a spatially informed cohort, check it against appropriate
-vs. inappropriate uses.</li>
-<li>Identify three specific threats to validity for your feature, drawn
-from: ecological fallacy, exposure misclassification, residential
-mobility, MAUP (modifiable areal unit problem), temporal mismatch,
-collider/selection bias, spatial autocorrelation/clustering, site
-effects, or region-level confounding. For each, state concretely how it
-could bias your result, not just name it.</li>
-<li>Note what would need to stay local vs. what could travel in a
-federated setting: standardized concepts and code travel; precise
-locations and patient-level geographies remain local; only diagnostics
-and aggregate estimates are shared.</li>
-<li>Write the feature definition as reproducible SQL (or pseudocode if
-SQL access isn’t available in your environment).</li>
-</ol>
+<div id="source" class="section level3">
+<h3>Source</h3>
+<p><a
+href="https://data.cdc.gov/Environmental-Health-Toxicology/Daily-County-Level-PM2-5-Concentrations-2001-2022/53mz-4zqd/about_data">Center
+for Disease Control (CDC) - Daily County-Level PM2.5 Concentrations
+2001-2022</a></p>
+<p><a
+href="https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.2023.html#list-tab-1883739534">United
+States Census Bureau - Geography Division - TIGER/Line Shapefile, 2023,
+US, Current County</a></p>
+<p><em>NOTE: this datasource is an API from which Gaia Catalog draws and
+aggregates the data and then joins it to the TIGER line geometries for
+US counties for use in the Gaia toolchain. The University of Miami
+Geospatial Digital Special COllections maintains a pre-aggregated
+version of the dataset for the tutorial available for download in
+various formats.</em></p>
 </div>
-<div id="deliverable" class="section level2">
-<h2><strong>Deliverable</strong></h2>
-<p>One feature specification, plus three anticipated biases (with the
-concrete mechanism for each, not just the name).</p>
+<div id="coverage" class="section level3">
+<h3>Coverage</h3>
+<ul>
+<li><strong>Spatial coverage:</strong> United States Counties</li>
+<li><strong>Temporal coverage:</strong> 2014 - 2019 with monthly data
+points.</li>
+<li><strong>Variable definition and unit:</strong> PM2.5 concentration,
+µg/m³, monthly max, mean, median, and population weighted mean._</li>
+</ul>
 </div>
-<div id="check-your-work" class="section level2">
-<h2><strong>Check Your Work</strong></h2>
-<ul class="task-list">
-<li><label><input type="checkbox" />SQL (or equivalent logic) is
-reproducible from the specification alone</label></li>
-<li><label><input type="checkbox" />Vocabulary release used is
-fixed/pinned, not “whatever is currently installed”</label></li>
-<li><label><input type="checkbox" />Temporal alignment to the index date
-is explicit and correct</label></li>
-<li><label><input type="checkbox" />Missingness policy is
-stated</label></li>
-<li><label><input type="checkbox" />Output is privacy-safe — no exact
-coordinates or other re-identifying detail in participant-facing
-output</label></li>
+<div id="access-and-license" class="section level3">
+<h3>Access and license</h3>
+<ul>
+<li><p><strong>CDC Retrieval method:</strong> API <a
+href="https://data.cdc.gov/api/v3/views/53mz-4zqd/query.csv?">https://data.cdc.gov/api/v3/views/53mz-4zqd/query.csv?</a></p></li>
+<li><p><strong>CDC License:</strong> <a
+href="https://www.usa.gov/government-copyright">Public Domain Us
+Government</a></p></li>
+<li><p><strong>Census Retrieval method:</strong> Download - <a
+href="ftp://ftp2.census.gov/geo/tiger/TIGER2023/COUNTY/tl_2023_us_county.zip">ftp://ftp2.census.gov/geo/tiger/TIGER2023/COUNTY/tl_2023_us_county.zip</a></p></li>
+<li><p><strong>Census License:</strong> Public Domain</p></li>
+<li><p>UM Retrieval method: Download (TBD)</p></li>
+<li><p>UM License: <a
+href="http://opendatacommons.org/licenses/by/1.0/">Open Data Commons
+Attribution License (ODC-By)</a></p></li>
+</ul>
+</div>
+<div id="role-in-the-tutorial" class="section level3">
+<h3>Role in the tutorial</h3>
+<p>This is the dataset participants evaluate against the fitness rubric
+and catalog with a metadata record in <a
+href="tutorial-exercise-1.html">Exercise 1</a>, then ingest and
+spatially/temporally link to the synthetic OMOP population (<a
+href="tutorial-data-description.html">OMOP Data Description</a>) in <a
+href="tutorial-exercise-2.html">Exercise 2</a>.</p>
+<p><strong>GAIA metadata/source tables</strong></p>
+<ul>
+<li><code>backbone.data_source</code></li>
+<li><code>backbone.variable_source</code></li>
+<li>optional source geometry/attribute tables</li>
 </ul>
 <p><br></p>
 </div>
-<div id="closing-synthesis" class="section level2">
-<h2><strong>Closing synthesis</strong></h2>
-<p>Dataset → metadata → source layer → location interval → exposure fact
-→ covariate → evidence. Each session in this tutorial produced one link
-in that chain; the chain only holds if every link stays traceable back
-to its source.</p>
-<p><br></p>
-<p>Previous: <a href="tutorial-exercise-3.html">Exercise 3</a></p>
-<p><br></p>
 </div>
 </div>
 

@@ -484,78 +484,22 @@ WG</h1>
 </div>
 
 
-<div id="exercise-4-analytical-applications" class="section level1">
-<h1><strong>Exercise 4: Analytical applications</strong></h1>
+<div id="geo-data-visualization" class="section level1">
+<h1><strong>Geo Data Visualization</strong></h1>
 <div class="alert alert-warning">
 <strong>Work in progress.</strong> These tutorial materials are still
 under active development and will continue to change until the tutorial
 takes place on <strong>October 20, 2026</strong>. Content, links, and
 exercises may be incomplete or shift without notice.
 </div>
-<div id="goal" class="section level2">
-<h2><strong>Goal</strong></h2>
-<p>Design an analysis-ready exposure feature and identify threats to
-validity and federated execution requirements. Exposure records are
-longitudinal facts; models require index-aligned covariates, and turning
-one into the other requires deliberate choices that can be gotten wrong
-in specific, checkable ways.</p>
-</div>
-<div id="steps" class="section level2">
-<h2><strong>Steps</strong></h2>
-<ol style="list-style-type: decimal">
-<li>Choose a research question that uses the exposure metric you
-calculated in Exercise 3 (or a similar one).</li>
-<li>Specify the feature: lookback window, lag, aggregation method,
-missingness handling, unit harmonization, geography, and update
-frequency.</li>
-<li>Decide whether this feature belongs in cohort eligibility or as a
-post-index predictor — these must stay separate. If your feature
-involves a spatially informed cohort, check it against appropriate
-vs. inappropriate uses.</li>
-<li>Identify three specific threats to validity for your feature, drawn
-from: ecological fallacy, exposure misclassification, residential
-mobility, MAUP (modifiable areal unit problem), temporal mismatch,
-collider/selection bias, spatial autocorrelation/clustering, site
-effects, or region-level confounding. For each, state concretely how it
-could bias your result, not just name it.</li>
-<li>Note what would need to stay local vs. what could travel in a
-federated setting: standardized concepts and code travel; precise
-locations and patient-level geographies remain local; only diagnostics
-and aggregate estimates are shared.</li>
-<li>Write the feature definition as reproducible SQL (or pseudocode if
-SQL access isn’t available in your environment).</li>
-</ol>
-</div>
-<div id="deliverable" class="section level2">
-<h2><strong>Deliverable</strong></h2>
-<p>One feature specification, plus three anticipated biases (with the
-concrete mechanism for each, not just the name).</p>
-</div>
-<div id="check-your-work" class="section level2">
-<h2><strong>Check Your Work</strong></h2>
-<ul class="task-list">
-<li><label><input type="checkbox" />SQL (or equivalent logic) is
-reproducible from the specification alone</label></li>
-<li><label><input type="checkbox" />Vocabulary release used is
-fixed/pinned, not “whatever is currently installed”</label></li>
-<li><label><input type="checkbox" />Temporal alignment to the index date
-is explicit and correct</label></li>
-<li><label><input type="checkbox" />Missingness policy is
-stated</label></li>
-<li><label><input type="checkbox" />Output is privacy-safe — no exact
-coordinates or other re-identifying detail in participant-facing
-output</label></li>
-</ul>
+<p>This page will characterize the public PM2.5 dataset described in <a
+href="tutorial-geo-data-description.html">Geo Data Description</a> — for
+example its spatial and temporal coverage, value distributions, and
+missingness across US counties.</p>
 <p><br></p>
-</div>
-<div id="closing-synthesis" class="section level2">
-<h2><strong>Closing synthesis</strong></h2>
-<p>Dataset → metadata → source layer → location interval → exposure fact
-→ covariate → evidence. Each session in this tutorial produced one link
-in that chain; the chain only holds if every link stays traceable back
-to its source.</p>
-<p><br></p>
-<p>Previous: <a href="tutorial-exercise-3.html">Exercise 3</a></p>
+<div id="coming-soon" class="section level2">
+<h2><strong>Coming soon</strong></h2>
+<p><em>TODO: add a characterization of the geospatial data.</em></p>
 <p><br></p>
 </div>
 </div>
