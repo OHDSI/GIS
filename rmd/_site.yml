@@ -28,6 +28,10 @@ navbar:
           href: tutorial-data-description.html
         - text: "OMOP Data Visualization"
           href: tutorial-data-visualization.html
+        - text: "Geo Data Description"
+          href: tutorial-geo-data-description.html
+        - text: "Geo Data Visualization"
+          href: tutorial-geo-data-visualization.html
         - text: "Exercise 1"
           href: tutorial-exercise-1.html
         - text: "Exercise 2"

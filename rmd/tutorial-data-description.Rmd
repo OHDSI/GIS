@@ -12,7 +12,7 @@ output:
 
 <div class="alert alert-warning"><strong>Work in progress.</strong> These tutorial materials are still under active development and will continue to change until the tutorial takes place on <strong>October 20, 2026</strong>. Content, links, and exercises may be incomplete or shift without notice.</div>
 
-The tutorial uses two datasets: a synthetic OMOP CDM population (source code lives in this repository) and a public PM2.5 dataset for the United States (an external source, used to demonstrate cataloging and ingestion of a real dataset). Session 1 catalogs the public dataset; Sessions 2-4 link it against the synthetic OMOP population.
+The tutorial uses two datasets: a synthetic OMOP CDM population (source code lives in this repository) and a public PM2.5 dataset for the United States (an external source, used to demonstrate cataloging and ingestion of a real dataset — see [Geo Data Description](tutorial-geo-data-description.html)). Session 1 catalogs the public dataset; Sessions 2-4 link it against the synthetic OMOP population.
 
 <br>
 
@@ -22,7 +22,7 @@ No real addresses or coordinates are used anywhere in the tutorial. Person locat
 
 <br>
 
-## **1. OMOP synthetic dataset**
+## **OMOP synthetic dataset**
 
 Source: [`syntheticDataGIS/createSimpleSyntheticSet.sql`](https://github.com/OHDSI/GIS/blob/main/syntheticDataGIS/createSimpleSyntheticSet.sql) in this repository. See [OMOP Data Visualization](tutorial-data-visualization.html) for charts of the cohort's condition prevalence, PM2.5/SES distribution, and SDOH observations, each paired with the SQL query that produced it.
 
@@ -39,7 +39,7 @@ Each patient is assigned to one county via `LOCATION.county_ref_id`, and inherit
 
 `LOCATION_HISTORY` records each person's single "lives at" interval (SNOMED concept `581476`, 2014-01-01 to 2019-12-31) at their assigned location; `EXTERNAL_EXPOSURE` records the place-based PM2.5/PM10/Ozone/NO2/Noise/Tree-Canopy values linked to that location.
 
-The exposure values populated by this script are fully synthetic (generated from the county's `pm25_baseline_mean` plus noise, not derived from or joined to the public PM2.5 dataset in Section 2). The public dataset is a separate real-world source that participants catalog and ingest independently in Exercises 1-2; linking it against this synthetic population is part of the exercise, not something the generator script pre-does for you.
+The exposure values populated by this script are fully synthetic (generated from the county's `pm25_baseline_mean` plus noise, not derived from or joined to the public PM2.5 dataset described in [Geo Data Description](tutorial-geo-data-description.html)). The public dataset is a separate real-world source that participants catalog and ingest independently in Exercises 1-2; linking it against this synthetic population is part of the exercise, not something the generator script pre-does for you.
 
 ### Scenario
 
@@ -94,54 +94,5 @@ These two are referenced by the tutorial exercises but are not created or popula
 ### Provenance and versioning
 
 The script populates one `cdm_source` row with `cdm_version` ('5.4'), `source_release_date`/`cdm_release_date`, and `vocabulary_version` ('GIS v1.0' — a label for this demo, not a real OMOP vocabulary release). There is no dataset UUID, no algorithm-version field, and no record of which real OMOP vocabulary tables (if any) were loaded alongside it — those remain open items if the tutorial needs to pin a specific run.
-
-<br>
-
-## **2. Public GIS PM2.5 dataset (United States)**
-
-2014-2019 CDC PM 2.5 Monthly Predictions for US Counties 
-
-This is the public source dataset participants catalog in Exercise 1 and ingest in Exercise 2.
-
-_NOTE: there are several alternative sources for PM 2.5 data in the [Gaia Catalog](https://ohdsi.github.io/gaiaCatalog/browser/). We may encourage participants to use different data sources and then compare resuts._
-
-### Overview
-
-Aggregated monthly PM 2.5 modelled estimates that span 2014-01-01 to 2019-12-31 derived from the CDC Daily County-Level PM2.5 Concentrations 2001-2022 provided by the CDC National Environmental Public Health Tracking Network. From the CDC description: This dataset provides modeled predictions of PM2.5 levels from the EPA Downscaler model. Data are at the county level for 2001-2022. These data are used by the CDC National Environmental Public Health Tracking Network to generate air quality measures. By using these data, you signify your agreement to comply with the following requirements: 1. Use the data for statistical reporting and analysis only. 2. Do not attempt to learn the identity of any person included in the data and do not combine these data with other data for the purpose of matching records to identify individuals. 3. Do not disclose of or make use of the identity of any person or establishment discovered inadvertently and report the discovery to: trackingsupport@cdc.gov. 4. Do not imply or state, either in written or oral form, that interpretations based on the data are those of the original data sources and CDC unless the data user and data source are formally collaborating. 5. Acknowledge, in all reports or presentations based on these data, the original source of the data and CDC. 6. Suggested citation: Centers for Disease Control and Prevention. National Environmental Public Health Tracking Network. Web. Accessed: insert date. www.cdc.gov/ephtracking.
-
-### Source
-
-[Center for Disease Control (CDC) - Daily County-Level PM2.5 Concentrations 2001-2022](https://data.cdc.gov/Environmental-Health-Toxicology/Daily-County-Level-PM2-5-Concentrations-2001-2022/53mz-4zqd/about_data)  
-
-[United States Census Bureau - Geography Division - TIGER/Line Shapefile, 2023, US, Current County](https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.2023.html#list-tab-1883739534)  
-
-_NOTE: this datasource is an API from which Gaia Catalog draws and aggregates the data and then joins it to the TIGER line geometries for US counties for use in the Gaia toolchain. The University of Miami Geospatial Digital Special COllections maintains a pre-aggregated version of the dataset for the tutorial available for download in various formats._
-
-### Coverage
-
-- **Spatial coverage:** United States Counties
-- **Temporal coverage:** 2014 - 2019 with monthly data points.
-- **Variable definition and unit:** PM2.5 concentration, µg/m³, monthly max, mean, median, and population weighted mean._
-
-### Access and license
-
-- **CDC Retrieval method:** API [https://data.cdc.gov/api/v3/views/53mz-4zqd/query.csv?](https://data.cdc.gov/api/v3/views/53mz-4zqd/query.csv?)
-- **CDC License:** [Public Domain Us Government](https://www.usa.gov/government-copyright)  
-
-- **Census Retrieval method:** Download - [ftp://ftp2.census.gov/geo/tiger/TIGER2023/COUNTY/tl_2023_us_county.zip](ftp://ftp2.census.gov/geo/tiger/TIGER2023/COUNTY/tl_2023_us_county.zip)
-- **Census License:** Public Domain
-
-- UM Retrieval method: Download (TBD)
-- UM License: [Open Data Commons Attribution License (ODC-By)](http://opendatacommons.org/licenses/by/1.0/)
-
-### Role in the tutorial
-
-This is the dataset participants evaluate against the fitness rubric and catalog with a metadata record in [Exercise 1](tutorial-exercise-1.html), then ingest and spatially/temporally link to the synthetic OMOP population (Section 1 above) in [Exercise 2](tutorial-exercise-2.html).
-
-**GAIA metadata/source tables**
-
-- `backbone.data_source`
-- `backbone.variable_source`
-- optional source geometry/attribute tables
 
 <br>

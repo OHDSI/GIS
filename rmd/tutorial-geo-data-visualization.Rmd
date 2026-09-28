@@ -1,0 +1,23 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG</div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+
+# **Geo Data Visualization**
+
+<div class="alert alert-warning"><strong>Work in progress.</strong> These tutorial materials are still under active development and will continue to change until the tutorial takes place on <strong>October 20, 2026</strong>. Content, links, and exercises may be incomplete or shift without notice.</div>
+
+This page will characterize the public PM2.5 dataset described in [Geo Data Description](tutorial-geo-data-description.html) — for example its spatial and temporal coverage, value distributions, and missingness across US counties.
+
+<br>
+
+## **Coming soon**
+
+_TODO: add a characterization of the geospatial data._
+
+<br>
