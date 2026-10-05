@@ -79,9 +79,15 @@ jobs:
       run: touch docs/.nojekyll
 
     - name: Commit and push if changes
-      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add docs/
-        git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-build website [skip ci]" && git push)
+        if git diff --staged --quiet; then
+          echo "No site changes to commit"
+          exit 0
+        fi
+        git commit -m "Auto-build website [skip ci]"
+        git pull --rebase origin main
+        git push
