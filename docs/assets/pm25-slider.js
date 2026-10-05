@@ -1,7 +1,8 @@
 /*
- * Frame sliders for tutorial-geo-data-visualization.html. Each figure is a
+ * Frame sliders for tutorial-geo-data-visualization.html. Each figure is an empty
  * <div class="pm25-slider" data-folder data-count data-pad data-start data-step>
- * holding pre-rendered frames named 01.jpg, 02.jpg, ... in images/<folder>/.
+ * that this script fills with the image and controls (building the DOM here avoids
+ * pandoc treating indented HTML as a code block). Frames are named 01.jpg, 02.jpg, ... in images/<folder>/.
  * data-step is "month" or "hour"; data-start is the date of frame 1 (YYYY-MM-DD).
  */
 (function () {
@@ -33,6 +34,17 @@
     var start = root.getAttribute("data-start");
     var step = root.getAttribute("data-step");
     var fps = Number(root.getAttribute("data-fps") || 4);
+
+    var kind = step === "month" ? "month" : "hour";
+    root.innerHTML =
+      '<img alt="">' +
+      '<div class="pm25-controls">' +
+      '<button type="button" class="pm25-prev" aria-label="Previous ' + kind + '">&#9664;</button>' +
+      '<input type="range" aria-label="' + kind + ' slider" value="1">' +
+      '<button type="button" class="pm25-next" aria-label="Next ' + kind + '">&#9654;</button>' +
+      '<button type="button" class="pm25-play">Play</button>' +
+      '</div>' +
+      '<div class="pm25-label"></div>';
 
     var img = root.querySelector("img");
     var slider = root.querySelector("input[type=range]");
