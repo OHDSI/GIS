@@ -492,52 +492,61 @@ under active development and will continue to change until the tutorial
 takes place on <strong>October 20, 2026</strong>. Content, links, and
 exercises may be incomplete or shift without notice.
 </div>
-<p>This page renders the contents of the synthetic OMOP + GIS/SDOH
-dataset described in <a href="tutorial-data-description.html">OMOP Data
+<p>This page shows the contents of the synthetic OMOP + GIS/SDOH dataset
+described in <a href="tutorial-data-description.html">OMOP Data
 Description</a>. Source: <a
-href="https://github.com/OHDSI/GIS/blob/main/syntheticDataGIS/createSimpleSyntheticSet.sql"><code>syntheticDataGIS/createSimpleSyntheticSet.sql</code></a>.</p>
-<p>Each chart below is paired with the SQL query used to produce it, so
-you can run the same query yourself against a database loaded from the
-script and confirm the numbers, or adapt the query to explore something
-else. The charts read from small, precomputed CSV extracts in <a
+href="https://github.com/OHDSI/GIS/tree/main/syntheticDataGIS"><code>syntheticDataGIS/</code></a>.</p>
+<p>Each chart is paired with the SQL query that produced it. The charts
+read from small precomputed CSV extracts in <a
 href="https://github.com/OHDSI/GIS/tree/main/rmd/data/synthetic-dataset"><code>rmd/data/synthetic-dataset/</code></a>
-rather than querying a live database — this is a static site with no
-database behind it. To regenerate the extracts after changing the
-generator script, load the script into PostgreSQL and re-run the queries
-on this page with
+because this is a static site with no database behind it. To regenerate
+the extracts, build the dataset (see the <a
+href="https://github.com/OHDSI/GIS/blob/main/syntheticDataGIS/README.md">build
+instructions</a>) and re-run the queries with
 <code>psql \copy ... TO '&lt;file&gt;.csv' WITH CSV HEADER</code>.</p>
+<p><strong>About the exposure queries.</strong> The published dataset
+ships with an <strong>empty</strong> <code>external_exposure</code>
+table: you derive it yourself in <a
+href="tutorial-exercise-2.html">Exercise 2</a>. Queries below that read
+<code>external_exposure</code> assume it has been populated from the
+Gaia pipeline (or from the fallback file provided by the faculty). PM2.5
+rows use exposure concept <code>2052499839</code>, and each row is one
+person-month.</p>
 <p><br></p>
 <div id="cohort-overview" class="section level2">
 <h2><strong>Cohort overview</strong></h2>
 <ul>
-<li><strong>10,000</strong> synthetic patients</li>
-<li><strong>3,103</strong> US counties/county-equivalents
-(<code>COUNTY_REFERENCE</code>), each with an urban-density category, a
-baseline PM2.5 level, and a composite SES index</li>
-<li><strong>14</strong> conditions (5 respiratory, 9 cardiometabolic),
-each with its incidence driven by a combination of the patient’s
-county-level PM2.5 exposure and SES</li>
-<li><strong>15</strong> drugs, <strong>7</strong> procedures,
-<strong>16</strong> measurements, tied to the relevant condition
-cohorts</li>
-<li><strong>12</strong> county-level socioeconomic (SDOH) observations,
-all derived from the same SES index that drives comorbidity risk</li>
+<li><strong>10,000</strong> synthetic adults (age 18-90 on 2014-01-01),
+observed 2014-01-01 to 2019-12-31</li>
+<li><strong>3,099</strong> real US counties in
+<code>COUNTY_REFERENCE</code>, each with real FIPS code, name, centroid,
+land area, and 2019 population, plus a density category and a simulated
+SES index</li>
+<li>about <strong>10%</strong> of persons move once, so they have two
+<code>LOCATION_HISTORY</code> rows</li>
+<li><strong>14</strong> conditions (5 respiratory, 9 cardiometabolic)
+drawn from a logistic risk model, along with the drugs, procedures, and
+measurements tied to them</li>
+<li><strong>12</strong> county-level SDOH observations derived from the
+county SES index</li>
 </ul>
 <p><br></p>
 </div>
 <div id="condition-prevalence" class="section level2">
 <h2><strong>Condition prevalence</strong></h2>
-<p>Percent of the 10,000-patient cohort carrying each condition, split
-into respiratory and cardiometabolic groups.</p>
+<p>Percent of the cohort carrying each condition, split into respiratory
+and cardiometabolic groups. Prevalences are higher than a
+reference-profile calculation would suggest because the cohort skews
+older (mean age about 56).</p>
 <pre class="sql"><code>SELECT co.condition_concept_id,
        co.condition_source_value AS condition_name,
-       CASE WHEN co.condition_concept_id IN (317009,255573,258780,4170143,255848)
-            THEN &#39;Respiratory&#39; ELSE &#39;Cardiometabolic&#39; END AS category,
+       t.category,
        COUNT(DISTINCT co.person_id) AS patient_count,
-       ROUND(100.0 * COUNT(DISTINCT co.person_id) / 10000, 2) AS pct_of_population
+       ROUND(100.0 * COUNT(DISTINCT co.person_id) / (SELECT COUNT(*) FROM omopgis.person), 2) AS pct_of_population
 FROM omopgis.condition_occurrence co
+JOIN demo.generator_truth t ON t.condition_concept_id = co.condition_concept_id
 GROUP BY 1,2,3
-ORDER BY category, patient_count DESC;</code></pre>
+ORDER BY category DESC, patient_count DESC;</code></pre>
 <div class="chart-wrap">
 <canvas id="chartConditions">
 </canvas>
@@ -546,10 +555,13 @@ ORDER BY category, patient_count DESC;</code></pre>
 </div>
 <div id="pm2.5-and-ses-by-urban-density" class="section level2">
 <h2><strong>PM2.5 and SES by urban density</strong></h2>
-<p>County-level PM2.5 baseline and average SES index, grouped by the
-urban-density category assigned at county-generation time. This is the
-key discriminative feature the dataset is built around: denser counties
-get systematically higher PM2.5.</p>
+<p>County-level mean PM2.5 (2014-2019) and mean SES index, grouped by
+density category (derived from real 2019 population per square mile). In
+real data, density is only a weak predictor of PM2.5 (urban cores are
+about 1.5 µg/m³ above rural counties), and the simulated SES index is
+correlated with county PM2.5 at about -0.3: higher PM2.5 counties tend
+to have lower SES. That correlation is what makes SES a confounder in <a
+href="tutorial-exercise-4.html">Exercise 4</a>.</p>
 <pre class="sql"><code>SELECT urban_density_category,
        COUNT(*) AS n_counties,
        ROUND(AVG(pm25_baseline_mean)::numeric, 2) AS avg_pm25,
@@ -563,39 +575,83 @@ ORDER BY avg_pm25 DESC;</code></pre>
 </div>
 <p><br></p>
 </div>
-<div id="asthma-prevalence-by-pm2.5-exposure-quartile"
-class="section level2">
-<h2><strong>Asthma prevalence by PM2.5 exposure quartile</strong></h2>
-<p>Patients are bucketed into quartiles of their assigned county’s PM2.5
-value, then checked for an asthma diagnosis. The gradient is
-intentionally modest — asthma risk in the generator is a blend of PM2.5
-and SES, and PM2.5 and SES are only loosely coupled by design (see the
-chart above) — but it should be directionally increasing.</p>
-<pre class="sql"><code>WITH prf AS (
-    SELECT p.person_id, ee.value_as_number AS pm25_value,
-           NTILE(4) OVER (ORDER BY ee.value_as_number) AS pm25_quartile
-    FROM omopgis.person p
-    JOIN omopgis.external_exposure ee
-         ON ee.person_id = p.person_id AND ee.exposure_concept_id = 2052497664 -- PM2.5
-)
-SELECT prf.pm25_quartile,
-       ROUND(AVG(prf.pm25_value)::numeric, 1) AS avg_pm25,
-       ROUND(100.0 * COUNT(DISTINCT co.person_id) / COUNT(DISTINCT prf.person_id), 2) AS asthma_pct
-FROM prf
-LEFT JOIN omopgis.condition_occurrence co
-       ON co.person_id = prf.person_id AND co.condition_concept_id = 317009 -- Asthma
+<div id="monthly-pm2.5-across-the-cohort" class="section level2">
+<h2><strong>Monthly PM2.5 across the cohort</strong></h2>
+<p>The real CDC monthly county PM2.5 values (EPA Downscaler) as
+experienced by the cohort’s residences, one point per month. The peaks
+in the upper percentile (for example February 2014 and August 2018) are
+real high-pollution months. This is the table you build in Exercise 2;
+it requires a populated <code>external_exposure</code>.</p>
+<pre class="sql"><code>SELECT date_trunc(&#39;month&#39;, exposure_start_date)::date AS month,
+       ROUND(AVG(value_as_number)::numeric, 2) AS mean_pm25,
+       ROUND((percentile_cont(0.1) WITHIN GROUP (ORDER BY value_as_number))::numeric, 2) AS p10,
+       ROUND((percentile_cont(0.9) WITHIN GROUP (ORDER BY value_as_number))::numeric, 2) AS p90
+FROM omopgis.external_exposure
+WHERE exposure_concept_id = 2052499839 -- PM2.5 (CDC monthly county mean)
 GROUP BY 1
 ORDER BY 1;</code></pre>
 <div class="chart-wrap">
-<canvas id="chartAsthmaQuartile">
+<canvas id="chartPm25Monthly">
+</canvas>
+</div>
+<p><br></p>
+</div>
+<div id="copd-prevalence-by-pm2.5-and-ses" class="section level2">
+<h2><strong>COPD prevalence by PM2.5 and SES</strong></h2>
+<p>Each person’s PM2.5 is the day-weighted mean over their 2014-2019
+residences, and their SES is the day-weighted mean county SES. Persons
+are cut into tertiles of each. COPD rises with PM2.5 within every SES
+tertile, and is higher at lower SES at every PM2.5 level. Because
+high-PM2.5 counties tend to be low-SES, the crude PM2.5 gradient is
+steeper than the SES-adjusted one. This is the stratification used in <a
+href="tutorial-exercise-3.html">Exercise 3</a>. Note that the simulated
+PM2.5 effect is deliberately exaggerated (see the <a
+href="tutorial-data-description.html#how-the-conditions-are-generated">data
+description</a>).</p>
+<pre class="sql"><code>WITH pm AS (
+    SELECT person_id,
+           SUM(value_as_number * (exposure_end_date - exposure_start_date + 1))
+             / SUM(exposure_end_date - exposure_start_date + 1) AS pm25
+    FROM omopgis.external_exposure
+    WHERE exposure_concept_id = 2052499839
+    GROUP BY person_id
+),
+ses AS (
+    SELECT lh.entity_id AS person_id,
+           SUM(c.ses_index * (lh.end_date - lh.start_date + 1))
+             / SUM(lh.end_date - lh.start_date + 1) AS ses
+    FROM omopgis.location_history lh
+    JOIN omopgis.location l USING (location_id)
+    JOIN omopgis.county_reference c USING (county_ref_id)
+    GROUP BY lh.entity_id
+),
+b AS (
+    SELECT pm.person_id, pm.pm25,
+           NTILE(3) OVER (ORDER BY pm.pm25) AS pm25_tertile,
+           NTILE(3) OVER (ORDER BY ses.ses) AS ses_tertile
+    FROM pm JOIN ses USING (person_id)
+)
+SELECT pm25_tertile, ses_tertile,
+       ROUND(AVG(pm25)::numeric, 2) AS avg_pm25,
+       COUNT(*) AS n,
+       ROUND(100.0 * COUNT(DISTINCT co.person_id) / COUNT(DISTINCT b.person_id), 2) AS copd_pct
+FROM b
+LEFT JOIN omopgis.condition_occurrence co
+       ON co.person_id = b.person_id AND co.condition_concept_id = 255573 -- COPD
+GROUP BY 1,2
+ORDER BY 2,1;</code></pre>
+<div class="chart-wrap">
+<canvas id="chartCopdPm25Ses">
 </canvas>
 </div>
 <p><br></p>
 </div>
 <div id="socioeconomic-determinants-sdoh" class="section level2">
 <h2><strong>Socioeconomic determinants (SDOH)</strong></h2>
-<p>Mean value of each county-level SDOH observation across all 10,000
-patients (each patient inherits their county’s values).</p>
+<p>Mean value of each county-level SDOH observation across the cohort
+(each person inherits the values of their county). One person is
+deliberately missing one observation (see the fixtures in the data
+description), so one indicator has 9,999 rows.</p>
 <pre class="sql"><code>SELECT o.observation_concept_id, o.observation_source_value AS observation_name,
        ROUND(AVG(o.value_as_number)::numeric, 2) AS mean_value,
        COUNT(*) AS n
@@ -612,8 +668,8 @@ ORDER BY 2;</code></pre>
 <div id="drugs-procedures-and-measurements" class="section level2">
 <h2><strong>Drugs, procedures, and measurements</strong></h2>
 <p>Record counts for each concept, tied to the condition cohort that
-generates it (e.g. Albuterol only fires for patients with an asthma
-diagnosis).</p>
+generates it (for example, Albuterol only occurs for persons with
+asthma).</p>
 <pre class="sql"><code>SELECT de.drug_concept_id, de.drug_source_value AS drug_name, COUNT(*) AS exposure_count
 FROM omopgis.drug_exposure de GROUP BY 1,2 ORDER BY exposure_count DESC;
 
@@ -638,21 +694,23 @@ FROM omopgis.measurement m GROUP BY 1,2 ORDER BY measurement_count DESC;</code><
 </div>
 <div id="county-map" class="section level2">
 <h2><strong>County map</strong></h2>
-<p>Every county’s centroid, plotted by longitude/latitude and colored by
-PM2.5 baseline. This is a plain scatter plot standing in for a real map
-(no basemap or projection) — enough to see the coastal/urban PM2.5
-pattern without adding a GIS mapping library to the site build. Zoom is
-disabled at this point count; use the query below with your own GIS
-tooling (e.g. QGIS, Leaflet) for a real map.</p>
+<p>Every county’s centroid, plotted by longitude and latitude and
+colored by density category, with bubble size showing how many persons
+live there at the start of 2014. This is a plain scatter plot standing
+in for a map (no basemap or projection). Counties with many persons are
+the populous ones, because counties are sampled in proportion to the
+square root of their population. Use the query with your own GIS tooling
+(QGIS, Leaflet) for a real map.</p>
 <pre class="sql"><code>SELECT c.county_ref_id, c.county_name, c.state, c.urban_density_category,
        ROUND(c.pm25_baseline_mean::numeric, 2) AS pm25_baseline_mean,
        ROUND(c.ses_index::numeric, 1) AS ses_index,
        ROUND(c.centroid_lat::numeric, 3) AS centroid_lat,
        ROUND(c.centroid_lon::numeric, 3) AS centroid_lon,
-       COUNT(p.person_id) AS patient_count
+       COUNT(DISTINCT lh.entity_id) AS patient_count
 FROM omopgis.county_reference c
 LEFT JOIN omopgis.location l ON l.county_ref_id = c.county_ref_id
-LEFT JOIN omopgis.person p ON p.location_id = l.location_id
+LEFT JOIN omopgis.location_history lh
+       ON lh.location_id = l.location_id AND lh.start_date = &#39;2014-01-01&#39;
 GROUP BY 1,2,3,4,5,6,7,8
 ORDER BY patient_count DESC;</code></pre>
 <div class="chart-wrap chart-wrap-tall">

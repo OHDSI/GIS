@@ -494,65 +494,223 @@ exercises may be incomplete or shift without notice.
 </div>
 <div id="goal" class="section level2">
 <h2><strong>Goal</strong></h2>
-<p>Run a known-good ingestion and spatial-temporal linkage using the
-frozen Gaia pipeline, then inspect and explain one resulting derived
-exposure row and its provenance.</p>
-<p>The session artifact you are tracing is: <strong>raw dataset → source
+<p>Run the Gaia ingestion and spatial-temporal linkage, check the result
+against the answer key, then trace one derived exposure row back to its
+source and explain it.</p>
+<p>The artifact you are tracing is: <strong>raw dataset → source
 geometry/attribute tables → location interval → derived exposure
 row.</strong> <code>gaiaDocker</code> orchestrates the stack,
-<code>gaiaDB</code>/PostGIS stores and transforms data,
-<code>gaiaCore</code> connects to it, and the catalog metadata from
-Exercise 1 drives retrieval. Identifiable addresses never leave the data
-custodian’s boundary — geocoding and patient-level linkage happen
-locally, behind that boundary.</p>
+<code>gaiaDB</code>/PostGIS stores and transforms the data, and the
+catalog metadata from Exercise 1 drives retrieval. In a real deployment,
+identifiable addresses never leave the data custodian’s boundary:
+geocoding and patient-level linkage happen locally, behind that
+boundary. Here the locations are synthetic points inside real counties,
+so you can follow the whole chain.</p>
+<p>You start with the synthetic persons and their residence history but
+<strong>no exposure data</strong>. The <code>EXTERNAL_EXPOSURE</code>
+table is empty; producing it is this exercise.</p>
 </div>
 <div id="steps" class="section level2">
 <h2><strong>Steps</strong></h2>
+<p>All SQL runs in the gaia-db container:
+<code>docker compose exec gaia-db psql -U postgres -d gaiacore</code>
+(or use PGAdmin).</p>
 <ol style="list-style-type: decimal">
-<li>Deploy the stack: start the pre-pulled/pinned containers, and
-confirm health checks pass for the schemas, PostGIS, and the API
-profile.</li>
-<li>Ingest the PM2.5 demo dataset using the frozen metadata record (your
-own from Exercise 1, or the provided fallback). Load the metadata and
-source data, then inspect the resulting variable and geometry
-tables.</li>
-<li>Run the spatial join and identify which spatial assignment pattern
-was used (point-in-polygon, nearest feature, buffer/intersection, raster
-extraction, or areal aggregation) and which temporal assignment pattern
-was used (interval overlap, calendar aggregation, moving window, lag, or
-cumulative exposure).</li>
-<li>Pick one resulting exposure record and trace its full lineage: the
-source dataset variable and geometry it came from, the location history
-interval it was assigned to, and the derived exposure row itself.</li>
-<li>Write a short explanation of that one row: what it represents, where
-its value came from, and what interval it applies to.</li>
+<li><p><strong>Deploy the stack and load the persons.</strong> Start the
+pinned containers and confirm the health checks pass (see <a
+href="get-started.html#quick-start-deploy-gaia">Get Started</a>).
+Download <code>synthetic_omop_gis.sql.gz</code> (and the fallback file
+<code>external_exposure_fallback.csv.gz</code> used at the end of this
+exercise) from the <a
+href="https://github.com/OHDSI/GIS/tree/main/syntheticDataGIS/data"><code>syntheticDataGIS/data</code></a>
+folder, or get them from the faculty. Then restore the synthetic
+dataset:</p>
+<pre class="bash"><code>gunzip -c synthetic_omop_gis.sql.gz | docker compose exec -T gaia-db psql -U postgres -d gaiacore</code></pre>
+<p>This creates the <code>omopgis</code> and <code>demo</code> schemas
+next to Gaia’s <code>backbone</code> and <code>working</code> schemas.
+Check that <code>omopgis.person</code> has 10,000 rows and
+<code>omopgis.external_exposure</code> is empty.</p></li>
+<li><p><strong>Ingest the two source datasets.</strong> The county
+boundaries must be ingested before the PM2.5 dataset, which is joined to
+them. Each call downloads the data and loads it into PostGIS, which
+takes several minutes (about 0.5 GB in total; the faculty can provide a
+pre-staged volume if bandwidth is limited). The catalog entry that
+drives ingestion is the metadata record from Exercise 1 (your own, or
+the fallback provided).</p>
+<pre class="sql"><code>SELECT * FROM backbone.ingest_datasource(&#39;us_2023_county_tl&#39;);
+SELECT * FROM backbone.ingest_datasource(&#39;us_2014_2019_monthly_pm25_by_county_cdc&#39;);</code></pre>
+<p>Inspect what was registered:
+<code>SELECT * FROM backbone.data_source;</code>,
+<code>backbone.variable_source</code>, <code>backbone.geom_index</code>,
+and <code>backbone.attr_index</code>. The PM2.5 dataset has four
+variables (max, median, mean, population-weighted mean). Which one does
+your Exercise 1 requirement call for?</p></li>
+<li><p><strong>Load the persons’ locations into Gaia.</strong> Gaia
+joins exposures to <code>working.location</code> and
+<code>working.location_history</code>, so copy the synthetic residences
+there and validate them:</p>
+<pre class="sql"><code>INSERT INTO working.location (location_id, address_1, address_2, city, state, zip, county,
+                              location_source_value, country_concept_id, country_source_value,
+                              latitude, longitude, geom)
+SELECT location_id, address_1, address_2, city, state, zip, county, location_source_value,
+       country_concept_id, country_source_value, latitude, longitude,
+       ST_SetSRID(ST_MakePoint(longitude, latitude), 4326)
+FROM omopgis.location;
+
+INSERT INTO working.location_history (location_id, relationship_type_concept_id, domain_id,
+                                      entity_id, start_date, end_date)
+SELECT location_id, relationship_type_concept_id, domain_id, entity_id, start_date, end_date
+FROM omopgis.location_history;
+
+SELECT * FROM working.location_statistics();
+SELECT * FROM working.validate_location_data();</code></pre>
+<p>Some persons have two <code>location_history</code> rows. Why? (Look
+at their dates.)</p></li>
+<li><p><strong>Build the geometry and attribute tables, then run the
+spatial join</strong> for the variable you chose (here the monthly
+mean):</p>
+<pre class="sql"><code>SELECT * FROM backbone.gdsc_load_all_variables(
+    p_table_id =&gt; &#39;us_2014_2019_monthly_pm25_by_county_cdc&#39;,
+    p_geom_label =&gt; &#39;name&#39;, p_variable_nodata =&gt; -999,
+    p_source =&gt; &#39;CDC EPHTN daily county PM2.5 (EPA Downscaler), monthly means&#39;);
+
+SELECT working.spatial_join_from_catalog(&#39;pm25_mean_pred&#39;, &#39;us_2014_2019_monthly_pm25_by_county_cdc&#39;);</code></pre>
+<p>Join one variable at a time.
+<code>working.spatial_join_all_from_catalog(...)</code> would also join
+the max, median, and population-weighted variables and multiply the row
+count by four. Now identify the <strong>spatial assignment
+pattern</strong> used (point-in-polygon, nearest feature,
+buffer/intersection, raster extraction, or areal aggregation; look at
+the operator argument and at the
+<code>exposure_relationship_concept_id</code> it produced) and the
+<strong>temporal assignment pattern</strong> (interval overlap, calendar
+aggregation, moving window, lag, or cumulative exposure; compare
+<code>attr_start_date</code>/<code>attr_end_date</code> in the attribute
+table with the residence interval).</p></li>
+<li><p><strong>Check the result against the answer key.</strong>
+<code>demo.expected_result</code> holds the expected counts:</p>
+<pre class="sql"><code>SELECT metric, value, notes FROM demo.expected_result WHERE fixture_tag = &#39;GLOBAL&#39;;
+SELECT count(*) AS rows_derived, count(DISTINCT person_id) AS persons FROM working.external_exposure;
+SELECT rows_per_person, count(*) AS persons
+FROM (SELECT person_id, count(*) AS rows_per_person FROM working.external_exposure GROUP BY person_id) x
+GROUP BY 1 ORDER BY 1;</code></pre>
+<p>Every person should have 72 monthly rows (6 years x 12 months),
+except movers who change county in the middle of a month, who have 73
+because that month is split into two partial-month rows.</p></li>
+<li><p><strong>QA drill.</strong>
+<code>demo.rejected_exposure_row</code> contains four deliberately bad
+staging rows that a loader must not accept as clean data. For each,
+write a check and show that it flags the row:</p>
+<pre class="sql"><code>SELECT r.fixture_tag,
+       EXISTS (SELECT 1 FROM working.external_exposure e
+               WHERE e.person_id = r.person_id AND e.location_id = r.location_id
+                 AND e.exposure_start_date = r.exposure_start_date
+                 AND e.exposure_end_date = r.exposure_end_date) AS already_loaded,
+       r.dose_unit_source_value,
+       r.value_as_number IS NULL AS null_value,
+       NOT EXISTS (SELECT 1 FROM working.location_history lh
+                   WHERE lh.entity_id = r.person_id
+                     AND r.exposure_start_date &lt;= lh.end_date
+                     AND r.exposure_end_date &gt;= lh.start_date) AS outside_residence
+FROM demo.rejected_exposure_row r
+ORDER BY 1;</code></pre>
+<p>Which flag catches which row (duplicate, unit mismatch,
+non-overlapping interval, NULL value)? What should the pipeline do with
+each?</p></li>
+<li><p><strong>Trace one row’s lineage.</strong> Pick one exposure row,
+for example March 2017 for the person with the
+<code>DUPLICATE_SOURCE_ROW</code> fixture, and follow it from the
+exposure row to the residence interval it was clipped to, the county
+polygon the point fell in, the source attribute row, and the raw value
+in the ingested table:</p>
+<pre class="sql"><code>WITH pick AS (SELECT person_id FROM demo.fixture_person WHERE fixture_tag = &#39;DUPLICATE_SOURCE_ROW&#39;)
+SELECT ee.external_exposure_id, ee.person_id, ee.exposure_start_date, ee.exposure_end_date,
+       ROUND(ee.value_as_number::numeric, 3) AS exposure_value,
+       lh.location_history_id, lh.start_date AS residence_start, lh.end_date AS residence_end,
+       src.geoid, geo.geom_name AS county,
+       att.attr_start_date, att.attr_end_date, ROUND(att.value_as_number::numeric, 3) AS source_value,
+       src.pm25_mean_pred -&gt;&gt; (att.attr_start_date || &#39;/&#39; || att.attr_end_date) AS raw_json_value
+FROM working.external_exposure ee
+JOIN pick USING (person_id)
+JOIN working.location_history lh ON lh.location_id = ee.location_id AND lh.entity_id = ee.person_id
+JOIN working.location loc ON loc.location_id = ee.location_id
+JOIN working.geom_us_2014_2019_monthly_pm25_by_county_cdc geo ON ST_Within(loc.geom, geo.geom_wgs84)
+JOIN working.attr_us_2014_2019_monthly_pm25_by_county_cdc att
+     ON att.geom_record_id = geo.geom_record_id
+    AND att.attr_start_date = ee.exposure_start_date
+    AND att.attr_index_id = (SELECT attr_index_id FROM backbone.attr_index WHERE variable_name = &#39;pm25_mean_pred&#39;)
+JOIN public.us_2014_2019_monthly_pm25_by_county_cdc src ON src.ogc_fid = geo.geom_record_id
+WHERE ee.exposure_start_date = &#39;2017-03-01&#39;;</code></pre>
+<p>Write two or three sentences explaining that one row: what it
+represents, where its value came from, and what interval it applies to.
+Then do the same for a row in the month a mover changes county, where
+the interval is shorter than a month.</p></li>
+<li><p><strong>Move the result into the OMOP table</strong> so the next
+session can query it:</p>
+<pre class="sql"><code>INSERT INTO omopgis.external_exposure (
+    location_id, person_id, exposure_concept_id, exposure_start_date, exposure_start_datetime,
+    exposure_end_date, exposure_end_datetime, exposure_type_concept_id,
+    exposure_relationship_concept_id, exposure_source_concept_id, exposure_source_value,
+    exposure_relationship_source_value, dose_unit_source_value, quantity, modifier_source_value,
+    operator_concept_id, value_as_number, value_as_concept_id, unit_concept_id)
+SELECT location_id, person_id, exposure_concept_id, exposure_start_date, exposure_start_datetime,
+       exposure_end_date, exposure_end_datetime, exposure_type_concept_id,
+       exposure_relationship_concept_id, exposure_source_concept_id, exposure_source_value,
+       exposure_relationship_source_value, dose_unit_source_value, quantity, modifier_source_value,
+       operator_concept_id, value_as_number, value_as_concept_id, unit_concept_id
+FROM working.external_exposure
+WHERE person_id &gt; 0;</code></pre></li>
 </ol>
+<p><strong>If the pipeline does not run on your machine,</strong> load
+the derived exposure from <code>external_exposure_fallback.csv.gz</code>
+instead of steps 2 to 4 and 8:</p>
+<pre class="bash"><code>gunzip -c external_exposure_fallback.csv.gz | docker compose exec -T gaia-db psql -U postgres -d gaiacore \
+  -c &quot;\copy omopgis.external_exposure FROM STDIN WITH (FORMAT csv, HEADER true)&quot;</code></pre>
+<p>Then run the checks in steps 5 and 6 against the OMOP tables (replace
+<code>working.external_exposure</code> with
+<code>omopgis.external_exposure</code> and
+<code>working.location_history</code> with
+<code>omopgis.location_history</code>). The lineage trace in step 7
+needs the Gaia geometry and attribute tables, so ask a faculty member to
+run it for you or to share a screen.</p>
 </div>
 <div id="deliverable" class="section level2">
 <h2><strong>Deliverable</strong></h2>
-<p>One row’s lineage, traced end-to-end: dataset variable and geometry →
-location history interval → derived exposure row.</p>
+<p>One row’s lineage, traced end to end (dataset variable and geometry →
+residence interval → derived exposure row), with a short written
+explanation, plus the QA drill results (which check catches which bad
+row).</p>
 </div>
 <div id="check-your-work" class="section level2">
 <h2><strong>Check Your Work</strong></h2>
 <ul class="task-list">
-<li><label><input type="checkbox" />Row counts match expectations for
-the ingested source</label></li>
-<li><label><input type="checkbox" />Spatial overlap/assignment is
-correct for the pattern used</label></li>
-<li><label><input type="checkbox" />Unit matches the source variable’s
-declared unit</label></li>
-<li><label><input type="checkbox" />Source dataset and geometry are
-correctly attributed</label></li>
-<li><label><input type="checkbox" />Geometry relationship
-(point-in-polygon, nearest feature, etc.) is correctly
+<li><label><input type="checkbox" />Row counts match
+<code>demo.expected_result</code> for the persons and exposure rows you
+derived</label></li>
+<li><label><input type="checkbox" />Every person has 72 monthly rows, or
+73 for a mover whose move splits a month</label></li>
+<li><label><input type="checkbox" />You joined a single variable, not
+all four</label></li>
+<li><label><input type="checkbox" />The spatial pattern
+(point-in-polygon, <code>Within</code>) and the temporal pattern
+(interval overlap clipped to the residence) are correctly
 identified</label></li>
-<li><label><input type="checkbox" />No duplicated person-period-variable
-rows exist for your traced record</label></li>
+<li><label><input type="checkbox" />Source dataset, county polygon, and
+variable are correctly attributed in your lineage</label></li>
+<li><label><input type="checkbox" />The value in the exposure row equals
+the source attribute value and the raw JSON value</label></li>
+<li><label><input type="checkbox" />All four bad staging rows are caught
+by a check you wrote</label></li>
+<li><label><input type="checkbox" />No duplicate
+person-location-interval rows exist for your traced record</label></li>
+<li><label><input type="checkbox" />You noticed that Gaia leaves
+<code>unit_concept_id</code> empty and can say where the unit is
+declared instead
+(<code>backbone.attr_index.unit_source_value</code>)</label></li>
 </ul>
 <p><br></p>
 <p><strong>Bridge to Session 3:</strong> a computed value is not
-interoperable until its semantics are standardized — that’s what OMOP
+interoperable until its semantics are standardized. That’s what the OMOP
 integration does next.</p>
 <p><br></p>
 <p>Previous: <a href="tutorial-exercise-1.html">Exercise 1</a> | Next:
