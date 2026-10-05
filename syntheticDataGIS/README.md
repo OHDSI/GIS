@@ -18,7 +18,7 @@ Requires docker, git, curl and python3 (standard library). The first run downloa
 | Step | File | What happens |
 |---|---|---|
 | 1 | gaiaCatalog + `backbone.ingest_datasource()` | Ingest Census TIGER 2023 counties and the CDC monthly county PM2.5 dataset |
-| 2 | `sql/stage1_ddl.sql`, `sql/stage1_population.sql` | Create the OMOP 5.4 + Gaia extension tables, then persons, real-county residences (random points inside the real polygons), ~10% movers, `LOCATION` / `LOCATION_HISTORY` (exported as CSV) |
+| 2 | `sql/stage1_ddl.sql`, `sql/stage1_vocabulary_*.sql`, `sql/stage1_population.sql` | Create the OMOP 5.4 + Gaia extension tables, load the [mini vocabulary](vocabulary/README.md), then persons, real-county residences (random points inside the real polygons), ~10% movers, `LOCATION` / `LOCATION_HISTORY` (exported as CSV) |
 | 3 | gaiaDB | `working.load_location_data()`, `backbone.gdsc_load_all_variables()`, `working.spatial_join_from_catalog('pm25_mean_pred', ...)` derive monthly exposure rows |
 | 4 | `sql/stage2_clinical.sql` | Draw conditions, SDOH, drugs, procedures and measurements from the gaiaDB exposure; fixtures and the answer key |
 | 5 | `sql/verify.sql` | Invariants (adult ages, residence intervals, points inside polygons, 72 months per person, empty `external_exposure`) |
@@ -39,5 +39,5 @@ Conditions follow a logistic model in PM2.5 (day-weighted over a person's reside
 ## Known caveats
 
 - gaiaDB currently leaves `unit_concept_id` and `dose_unit_source_value` empty on the exposure rows it derives, and uses its own exposure concept (2052499839) and geometry-based type concepts.
-- Pregnancy concept ids (episode 32277, object 4299535) and the residence relationship concept (32848, from the gaiaDB example file) should be verified against the OMOP GIS vocabulary release in use.
+- The concepts used by the dataset are checked against the mini vocabulary at build time. The residence relationship is the OMOP GIS concept `Patient Residence` (2052496995), not the type concept used in gaiaDB's example file; confirm with the GIS vocabulary owners.
 - `data/` holds the CSV snapshot of the 2026-10-05 build (without `external_exposure`, plus the gzipped fallback exposure file); it is copied from `build/out/csv` by hand, not by the build script.

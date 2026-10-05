@@ -1,0 +1,5 @@
+relationship_id,relationship_name,is_hierarchical,defines_ancestry,reverse_relationship_id,relationship_concept_id
+Contained in version,Table/field contained in OMOP CDM Version (OMOP),1,1,Version contains,32521
+Mapped from,Standard to Non-standard map (OMOP),0,0,Maps to,44818976
+Maps to,Non-standard to Standard map (OMOP),0,0,Mapped from,44818977
+Version contains,OMOP CDM Version contains table/field (OMOP),1,0,Contained in version,32520

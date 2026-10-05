@@ -1,0 +1,18 @@
+domain_id,domain_name,domain_concept_id
+Behavioral Feature,Behavioral Feature,2052499986
+Condition,Condition,19
+Demographic Feature,Demographic Feature,2052499989
+Drug,Drug,13
+Environmental Feature,Environmental Feature,2052499991
+Episode,Episode,32527
+Gender,Gender,2
+Geographic Feature,Geographic Feature,2052499987
+Healthcare Feature,Healthcare Feature,2052499985
+Measurement,Measurement,21
+Metadata,Metadata,7
+Phenotypic Feature,Phenotypic Feature,2052499990
+Procedure,Procedure,10
+Route,Route Of Administration,15
+Socioeconomic Feature,Socioeconomic Feature,2052499988
+Type Concept,Type Concept,58
+Unit,Unit,16

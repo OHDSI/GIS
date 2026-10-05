@@ -64,6 +64,52 @@ BEGIN
     RAISE NOTICE 'verify: all invariants hold';
 END $$;
 
+
+-- every concept id used by the clinical tables exists in the mini vocabulary, is standard, and sits in the right domain
+DO $$
+DECLARE r record; n bigint;
+BEGIN
+    FOR r IN SELECT * FROM (VALUES
+        ('condition_occurrence','condition_concept_id','Condition'),
+        ('condition_occurrence','condition_source_concept_id','Condition'),
+        ('drug_exposure','drug_concept_id','Drug'),
+        ('drug_exposure','drug_source_concept_id','Drug'),
+        ('drug_exposure','route_concept_id','Route'),
+        ('procedure_occurrence','procedure_concept_id','Procedure,Measurement'),
+        ('measurement','measurement_concept_id','Measurement'),
+        ('measurement','unit_concept_id','Unit'),
+        ('observation','observation_concept_id',NULL),
+        ('observation','unit_concept_id','Unit'),
+        ('person','gender_concept_id','Gender'),
+        ('episode','episode_concept_id','Episode'),
+        ('episode','episode_object_concept_id','Condition'),
+        ('location_history','relationship_type_concept_id',NULL),
+        ('location_history','domain_id',NULL),
+        ('condition_occurrence','condition_type_concept_id','Type Concept'),
+        ('drug_exposure','drug_type_concept_id','Type Concept'),
+        ('procedure_occurrence','procedure_type_concept_id','Type Concept'),
+        ('measurement','measurement_type_concept_id','Type Concept'),
+        ('observation','observation_type_concept_id','Type Concept'),
+        ('observation_period','period_type_concept_id','Type Concept')
+    ) AS t(tbl, col, dom) LOOP
+        EXECUTE format($q$SELECT count(*) FROM (SELECT DISTINCT %I AS id FROM omopgis.%I WHERE %I IS NOT NULL AND %I <> 0) x
+                          LEFT JOIN omopgis.concept c ON c.concept_id = x.id
+                          WHERE c.concept_id IS NULL OR c.standard_concept IS DISTINCT FROM 'S'
+                             OR (%L IS NOT NULL AND c.domain_id <> ALL (string_to_array(%L, ',')))$q$,
+                       r.col, r.tbl, r.col, r.col, r.dom, r.dom) INTO n;
+        IF n > 0 THEN RAISE EXCEPTION '%.% has % concept ids missing from the vocabulary, non-standard, or in the wrong domain', r.tbl, r.col, n; END IF;
+    END LOOP;
+    SELECT count(*) INTO n FROM (SELECT DISTINCT exposure_concept_id AS id FROM working.external_exposure
+                                 UNION SELECT DISTINCT exposure_relationship_concept_id FROM working.external_exposure
+                                 UNION SELECT DISTINCT exposure_type_concept_id FROM working.external_exposure) x
+        LEFT JOIN omopgis.concept c ON c.concept_id = x.id WHERE c.concept_id IS NULL;
+    IF n > 0 THEN RAISE EXCEPTION '% exposure concept ids are missing from the vocabulary', n; END IF;
+    SELECT count(*) INTO n FROM demo.generator_truth t LEFT JOIN omopgis.concept c ON c.concept_id = t.condition_concept_id
+        WHERE c.concept_id IS NULL;
+    IF n > 0 THEN RAISE EXCEPTION '% generator_truth concepts are missing', n; END IF;
+    RAISE NOTICE 'verify: concept ids are consistent with the mini vocabulary';
+END $$;
+
 -- Informational summary (not assertions)
 SELECT 'persons' AS what, count(*)::text AS value FROM omopgis.person
 UNION ALL SELECT 'movers', count(*)::text FROM (SELECT entity_id FROM omopgis.location_history GROUP BY 1 HAVING count(*) = 2) x

@@ -1,0 +1,46 @@
+concept_class_id,concept_class_name,concept_class_concept_id
+ADI Construct,ADI Construct,2052490061
+ADI Item,ADI Item,2052490060
+AHRQ Construct,AHRQ Construct,2052490059
+AHRQ Determinant,AHRQ Determinant,2052490058
+AHRQ Item,AHRQ Item,2052490057
+CDM,CDM,32522
+COI Construct,COI Construct,2052490056
+COI Determinant,COI Determinant,2052490055
+COI Item,COI Item,2052490054
+Clinical Finding,Clinical Finding,44818997
+Clinical Observation,Clinical Class,45754679
+Disorder,Disorder,33099
+EJI EBM Item,EJI EBM Item,2052490053
+EJI HVM Item,EJI HVM Item,2052490052
+EJI Item,EJI Item,2052490051
+Episode of Care,Episode of Care,32526
+Exposome Target,Exposome Target,2052490050
+Exposome Transporter,Exposome Transporter,2052490049
+Exposure Type Concept,Exposure Type Concept,2052490048
+GIS Measure,GIS Measure,2052490045
+Gender,Gender,44819086
+Geometry Relationship,Geometry Relationship,2052490047
+Geometry Type,Geometry Type,2052490046
+Ingredient,Ingredient,44818981
+Lab Test,Laboratory Class,45754678
+Observable Entity,Observable Entity,44819029
+Procedure,Procedure,44819080
+Qualifier Value,Qualifier Value,44819021
+SDG Goal,SDG Goal,2052490044
+SDG Indicator,SDG Indicator,2052490043
+SDOH Construct,SDOH Construct,2052490042
+SDOH Determinant,SDOH Determinant,2052490041
+SDOH Item,SDOH Item,2052490040
+SDOHO Construct,SDOHO Construct,2052490039
+SDOHO Determinant,SDOHO Determinant,2052490038
+SDOHO Item,SDOHO Item,2052490037
+SDOHO Value,SDOHO Value,2052490036
+SEDH Construct,SEDH Construct,2052490035
+SEDH Item,SEDH Item,2052490034
+SVI Construct,SVI Construct,2052490033
+SVI Determinant,SVI Determinant,2052490032
+SVI Item,SVI Item,2052490031
+Table,OMOP CDM Table,32486
+Type Concept,Type Concept,581453
+Unit,Unit,44819072

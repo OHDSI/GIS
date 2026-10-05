@@ -1,0 +1,9 @@
+vocabulary_id,vocabulary_name,vocabulary_reference,vocabulary_version,vocabulary_concept_id
+CDM,OMOP Common DataModel,https://github.com/OHDSI/CommonDataModel,CDM v6.0.0,32485
+Episode,OMOP Episode,OMOP generated,Episode 20201014,32523
+Gender,OMOP Gender,OMOP generated,,44819108
+LOINC,Logical Observation Identifiers Names and Codes (Regenstrief Institute),http://loinc.org/downloads/loinc,LOINC 2.78,44819102
+RxNorm,RxNorm (NLM),http://www.nlm.nih.gov/research/umls/rxnorm/docs/rxnormfiles.html,RxNorm 20241202,44819104
+SNOMED,Systematic Nomenclature of Medicine - Clinical Terms (IHTSDO),http://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html,2024-08-01 SNOMED CT International Edition; 2024-09-01 SNOMED CT US Edition; 2024-09-25 SNOMED CT UK Edition,44819097
+Type Concept,OMOP Type Concept,OMOP generated,Type Concept 20221030,32808
+UCUM,Unified Code for Units of Measure (Regenstrief Institute),http://aurora.regenstrief.org/~ucum/ucum.html#section-Alphabetic-Index,Version 1.8.2,44819107

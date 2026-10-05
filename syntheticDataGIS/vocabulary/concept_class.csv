@@ -1,0 +1,15 @@
+concept_class_id,concept_class_name,concept_class_concept_id
+CDM,CDM,32522
+Clinical Finding,Clinical Finding,44818997
+Clinical Observation,Clinical Class,45754679
+Disorder,Disorder,33099
+Episode of Care,Episode of Care,32526
+Gender,Gender,44819086
+Ingredient,Ingredient,44818981
+Lab Test,Laboratory Class,45754678
+Observable Entity,Observable Entity,44819029
+Procedure,Procedure,44819080
+Qualifier Value,Qualifier Value,44819021
+Table,OMOP CDM Table,32486
+Type Concept,Type Concept,581453
+Unit,Unit,44819072

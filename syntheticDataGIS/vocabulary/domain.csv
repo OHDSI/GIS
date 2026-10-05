@@ -1,0 +1,11 @@
+domain_id,domain_name,domain_concept_id
+Condition,Condition,19
+Drug,Drug,13
+Episode,Episode,32527
+Gender,Gender,2
+Measurement,Measurement,21
+Metadata,Metadata,7
+Procedure,Procedure,10
+Route,Route Of Administration,15
+Type Concept,Type Concept,58
+Unit,Unit,16

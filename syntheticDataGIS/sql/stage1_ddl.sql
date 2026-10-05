@@ -32,6 +32,14 @@ DROP TABLE IF EXISTS omopgis.EPISODE_EVENT CASCADE;
 DROP TABLE IF EXISTS omopgis.COUNTY_REFERENCE CASCADE;
 DROP TABLE IF EXISTS omopgis.EXTERNAL_EXPOSURE CASCADE;
 DROP TABLE IF EXISTS omopgis.LOCATION_HISTORY CASCADE;
+DROP TABLE IF EXISTS omopgis.CONCEPT CASCADE;
+DROP TABLE IF EXISTS omopgis.VOCABULARY CASCADE;
+DROP TABLE IF EXISTS omopgis.DOMAIN CASCADE;
+DROP TABLE IF EXISTS omopgis.CONCEPT_CLASS CASCADE;
+DROP TABLE IF EXISTS omopgis.RELATIONSHIP CASCADE;
+DROP TABLE IF EXISTS omopgis.CONCEPT_RELATIONSHIP CASCADE;
+DROP TABLE IF EXISTS omopgis.CONCEPT_ANCESTOR CASCADE;
+DROP TABLE IF EXISTS omopgis.CONCEPT_SYNONYM CASCADE;
 DROP SCHEMA IF EXISTS demo CASCADE;
 CREATE SCHEMA demo;
 
@@ -538,6 +546,30 @@ CREATE TABLE IF NOT EXISTS omopgis.COHORT_DEFINITION
     subject_concept_id            integer      NOT NULL,
     cohort_initiation_date        date         NULL
 );
+
+-- Mini vocabulary (loaded by build_tutorial_dataset.sh from vocabulary/ and vocab_temp/)
+CREATE TABLE omopgis.CONCEPT (
+    concept_id integer NOT NULL PRIMARY KEY, concept_name varchar(255) NOT NULL, domain_id varchar(50) NOT NULL,
+    vocabulary_id varchar(50) NOT NULL, concept_class_id varchar(50) NOT NULL, standard_concept varchar(1) NULL,
+    concept_code varchar(50) NOT NULL, valid_start_date date NOT NULL, valid_end_date date NOT NULL, invalid_reason varchar(1) NULL);
+CREATE TABLE omopgis.VOCABULARY (
+    vocabulary_id varchar(50) NOT NULL PRIMARY KEY, vocabulary_name varchar(255) NOT NULL, vocabulary_reference varchar(255) NULL,
+    vocabulary_version varchar(255) NULL, vocabulary_concept_id integer NULL);
+CREATE TABLE omopgis.DOMAIN (
+    domain_id varchar(50) NOT NULL PRIMARY KEY, domain_name varchar(255) NOT NULL, domain_concept_id integer NULL);
+CREATE TABLE omopgis.CONCEPT_CLASS (
+    concept_class_id varchar(50) NOT NULL PRIMARY KEY, concept_class_name varchar(255) NOT NULL, concept_class_concept_id integer NULL);
+CREATE TABLE omopgis.RELATIONSHIP (
+    relationship_id varchar(50) NOT NULL PRIMARY KEY, relationship_name varchar(255) NOT NULL, is_hierarchical varchar(1) NULL,
+    defines_ancestry varchar(1) NULL, reverse_relationship_id varchar(50) NULL, relationship_concept_id integer NULL);
+CREATE TABLE omopgis.CONCEPT_RELATIONSHIP (
+    concept_id_1 integer NOT NULL, concept_id_2 integer NOT NULL, relationship_id varchar(50) NOT NULL,
+    valid_start_date date NULL, valid_end_date date NULL, invalid_reason varchar(1) NULL);
+CREATE TABLE omopgis.CONCEPT_ANCESTOR (
+    ancestor_concept_id integer NOT NULL, descendant_concept_id integer NOT NULL,
+    min_levels_of_separation integer NOT NULL, max_levels_of_separation integer NOT NULL);
+CREATE TABLE omopgis.CONCEPT_SYNONYM (
+    concept_id integer NOT NULL, concept_synonym_name varchar(1000) NOT NULL, language_concept_id integer NOT NULL);
 
 -- Gaia CDM extension tables (inst/csv/Gaia_*_Level.csv)
 

@@ -164,6 +164,21 @@ echo "   $(dbquery 'SELECT count(*) FROM public.ref_county_pop2019') counties wi
 # ---------------------------------------------------------------------------
 log "5. Stage 1 - persons, residences, location history"
 dbpsql < "$HERE/sql/stage1_ddl.sql" >/dev/null
+
+log "   mini vocabulary"
+{
+  cat "$HERE/sql/stage1_vocabulary_head.sql"
+  for tbl in concept vocabulary domain concept_class relationship concept_relationship concept_ancestor concept_synonym; do
+    for f in "$HERE/vocabulary/$tbl.csv" "$HERE/vocab_temp/${tbl}_delta.csv"; do
+      [ -f "$f" ] || continue
+      echo "COPY stg_$tbl FROM STDIN WITH (FORMAT csv, HEADER true);"
+      cat "$f"; [ -z "$(tail -c1 "$f")" ] || echo
+      echo '\.'
+    done
+  done
+  cat "$HERE/sql/stage1_vocabulary_tail.sql"
+} | dbpsql >/dev/null
+echo "   $(dbquery 'SELECT count(*) FROM omopgis.concept') concepts loaded"
 dbpsql <<SQL
 CREATE TABLE demo.build_info (key varchar(40) PRIMARY KEY, value text NOT NULL);
 INSERT INTO demo.build_info VALUES

@@ -88,13 +88,13 @@ FROM (SELECT ctid AS row_id, row_number() OVER (ORDER BY person_id, exposure_sta
       FROM demo.rejected_exposure_row) x
 WHERE r.ctid = x.row_id;
 
--- Pregnancy episodes (verify concept ids 32277 / 4299535 against the vocabulary release)
+-- Pregnancy episodes: Disease Episode (32533) whose object is the Pregnancy condition (4299535)
 INSERT INTO omopgis.episode(episode_id, person_id, episode_concept_id, episode_start_date, episode_end_date,
                             episode_number, episode_object_concept_id, episode_type_concept_id,
                             episode_source_value, episode_source_concept_id)
 SELECT row_number() OVER (ORDER BY fp.fixture_tag DESC),
        fp.person_id,
-       32277,
+       32533,
        CASE fp.fixture_tag WHEN 'PREGNANCY_STATIC' THEN '2016-03-18'::date ELSE '2016-05-20'::date END,
        CASE fp.fixture_tag WHEN 'PREGNANCY_STATIC' THEN '2016-12-09'::date ELSE '2017-02-10'::date END,
        1,
@@ -235,111 +235,113 @@ ORDER BY d.person_id, d.outcome_name;   -- fixed insertion order => stable condi
 
 -- SDOH observations, all derived from the county ses_index
 
--- Poverty Rate (concept 2051503454 - Poverty)
+-- Poverty Rate (concept 2052499459 - Poverty)
 INSERT INTO omopgis.observation(person_id, observation_concept_id, observation_date,
                                 observation_type_concept_id, value_as_number, unit_concept_id,
                                 observation_source_value, observation_source_concept_id, unit_source_value)
-SELECT prf.person_id, 2051503454, '2016-07-01'::date, 32817,
+SELECT prf.person_id, 2052499459, '2016-07-01'::date, 32817,
        GREATEST(1.0, LEAST(45.0, 45.0 - prf.ses_index * 0.4 + (random() - 0.5) * 10.0)),
-       8554, 'POVERTY_RATE', 2051503454, 'percent'
+       8554, 'POVERTY_RATE', 2052499459, 'percent'
 FROM person_risk_factors prf;
 
--- Education Level, years (concept 2051502048 - Education_Level)
+-- Education Level, years (concept 2052497092 - Education_Level)
 INSERT INTO omopgis.observation(person_id, observation_concept_id, observation_date,
                                 observation_type_concept_id, value_as_number, unit_concept_id,
                                 observation_source_value, observation_source_concept_id, unit_source_value)
-SELECT prf.person_id, 2051502048, '2016-07-01'::date, 32817,
+SELECT prf.person_id, 2052497092, '2016-07-01'::date, 32817,
        GREATEST(8.0, LEAST(20.0, 9.0 + prf.ses_index * 0.11 + (random() - 0.5) * 3.0)),
-       8505, 'EDUCATION_YEARS', 2051502048, 'years'
+       9448, 'EDUCATION_YEARS', 2052497092, 'years'
 FROM person_risk_factors prf;
 
--- Housing Cost Burden (concept 2051503305 - Housing_Cost)
+-- Housing Cost Burden (concept 2052498464 - Housing_Cost)
 INSERT INTO omopgis.observation(person_id, observation_concept_id, observation_date,
                                 observation_type_concept_id, value_as_number, unit_concept_id,
                                 observation_source_value, observation_source_concept_id, unit_source_value)
-SELECT prf.person_id, 2051503305, '2016-07-01'::date, 32817,
+SELECT prf.person_id, 2052498464, '2016-07-01'::date, 32817,
        GREATEST(10.0, LEAST(65.0, 55.0 - prf.ses_index * 0.35 + (random() - 0.5) * 10.0)),
-       8554, 'HOUSING_COST_PCT', 2051503305, 'percent'
+       8554, 'HOUSING_COST_PCT', 2052498464, 'percent'
 FROM person_risk_factors prf;
 
--- Employment Status (concept 2051501588 - Employment_Status)
+-- Employment Status (concept 2052499478): 1 = employed, 0 = unemployed; number and label from one draw
 INSERT INTO omopgis.observation(person_id, observation_concept_id, observation_date,
                                 observation_type_concept_id, value_as_number, value_as_string,
                                 observation_source_value, observation_source_concept_id)
-SELECT prf.person_id, 2051501588, '2016-07-01'::date, 32817,
-       CASE WHEN random() < GREATEST(0.02, LEAST(0.40, 0.35 - prf.ses_index * 0.003)) THEN 0 ELSE 1 END,
-       CASE WHEN random() < GREATEST(0.02, LEAST(0.40, 0.35 - prf.ses_index * 0.003)) THEN 'Unemployed' ELSE 'Employed' END,
-       'EMPLOYMENT', 2051501588
-FROM person_risk_factors prf;
+SELECT d.person_id, 2052499478, '2016-07-01'::date, 32817,
+       CASE WHEN d.unemployed THEN 0 ELSE 1 END,
+       CASE WHEN d.unemployed THEN 'Unemployed' ELSE 'Employed' END,
+       'EMPLOYMENT', 2052499478
+FROM (SELECT prf.person_id,
+             random() < GREATEST(0.02, LEAST(0.40, 0.35 - prf.ses_index * 0.003)) AS unemployed
+      FROM person_risk_factors prf) d;
 
--- Neighborhood Concentrated Disadvantage (concept 2051502386)
+-- Neighborhood Concentrated Disadvantage (concept 2052498758)
 INSERT INTO omopgis.observation(person_id, observation_concept_id, observation_date,
                                 observation_type_concept_id, value_as_number,
                                 observation_source_value, observation_source_concept_id, unit_source_value)
-SELECT prf.person_id, 2051502386, '2016-07-01'::date, 32817,
+SELECT prf.person_id, 2052498758, '2016-07-01'::date, 32817,
        GREATEST(0.0, LEAST(1.0, 1.0 - prf.ses_index / 100.0 + (random() - 0.5) * 0.2)),
-       'NEIGHBORHOOD_DISADVANTAGE', 2051502386, 'index'
+       'NEIGHBORHOOD_DISADVANTAGE', 2052498758, 'index'
 FROM person_risk_factors prf;
 
--- Food Insecurity Rate (concept 2051504000)
+-- Food Insecurity Rate (concept 2052498073)
 INSERT INTO omopgis.observation(person_id, observation_concept_id, observation_date,
                                 observation_type_concept_id, value_as_number, unit_concept_id,
                                 observation_source_value, observation_source_concept_id, unit_source_value)
-SELECT prf.person_id, 2051504000, '2016-07-01'::date, 32817,
+SELECT prf.person_id, 2052498073, '2016-07-01'::date, 32817,
        GREATEST(1.0, LEAST(40.0, 35.0 - prf.ses_index * 0.35 + (random() - 0.5) * 8.0)),
-       8554, 'FOOD_INSECURITY_RATE', 2051504000, 'percent'
+       8554, 'FOOD_INSECURITY_RATE', 2052498073, 'percent'
 FROM person_risk_factors prf;
 
--- Primary Care Physician Access (concept 2051504001) - physicians per 10,000 residents
+-- Primary Care Physician Access (concept 2052497364) - physicians per 1,000 residents
 INSERT INTO omopgis.observation(person_id, observation_concept_id, observation_date,
                                 observation_type_concept_id, value_as_number,
                                 observation_source_value, observation_source_concept_id, unit_source_value)
-SELECT prf.person_id, 2051504001, '2016-07-01'::date, 32817,
-       GREATEST(2.0, LEAST(25.0, 3.0 + prf.ses_index * 0.20 + (random() - 0.5) * 4.0)),
-       'PCP_ACCESS_RATIO', 2051504001, 'per_10000'
+SELECT prf.person_id, 2052497364, '2016-07-01'::date, 32817,
+       GREATEST(0.2, LEAST(2.5, 0.3 + prf.ses_index * 0.020 + (random() - 0.5) * 0.4)),
+       'PCP_ACCESS_RATIO', 2052497364, 'per_1000'
 FROM person_risk_factors prf;
 
--- Social Isolation Index (concept 2051504002)
+-- Social Isolation Index (concept 2052497761)
 INSERT INTO omopgis.observation(person_id, observation_concept_id, observation_date,
                                 observation_type_concept_id, value_as_number,
                                 observation_source_value, observation_source_concept_id, unit_source_value)
-SELECT prf.person_id, 2051504002, '2016-07-01'::date, 32817,
+SELECT prf.person_id, 2052497761, '2016-07-01'::date, 32817,
        GREATEST(0.0, LEAST(1.0, 0.9 - prf.ses_index / 100.0 + (random() - 0.5) * 0.2)),
-       'SOCIAL_ISOLATION_INDEX', 2051504002, 'index'
+       'SOCIAL_ISOLATION_INDEX', 2052497761, 'index'
 FROM person_risk_factors prf;
 
--- Uninsured Rate (concept 2051504003)
+-- Uninsured Rate (concept 2052498200)
 INSERT INTO omopgis.observation(person_id, observation_concept_id, observation_date,
                                 observation_type_concept_id, value_as_number, unit_concept_id,
                                 observation_source_value, observation_source_concept_id, unit_source_value)
-SELECT prf.person_id, 2051504003, '2016-07-01'::date, 32817,
+SELECT prf.person_id, 2052498200, '2016-07-01'::date, 32817,
        GREATEST(1.0, LEAST(30.0, 25.0 - prf.ses_index * 0.22 + (random() - 0.5) * 6.0)),
-       8554, 'UNINSURED_RATE', 2051504003, 'percent'
+       8554, 'UNINSURED_RATE', 2052498200, 'percent'
 FROM person_risk_factors prf;
 
--- Broadband Internet Access (concept 2051504004)
+-- Broadband Internet Access (concept 2052498483)
 INSERT INTO omopgis.observation(person_id, observation_concept_id, observation_date,
                                 observation_type_concept_id, value_as_number, unit_concept_id,
                                 observation_source_value, observation_source_concept_id, unit_source_value)
-SELECT prf.person_id, 2051504004, '2016-07-01'::date, 32817,
+SELECT prf.person_id, 2052498483, '2016-07-01'::date, 32817,
        GREATEST(30.0, LEAST(99.0, 55.0 + prf.ses_index * 0.42 + (random() - 0.5) * 8.0)),
-       8554, 'BROADBAND_ACCESS_PCT', 2051504004, 'percent'
+       8554, 'BROADBAND_ACCESS_PCT', 2052498483, 'percent'
 FROM person_risk_factors prf;
 
--- Violent Crime Rate (concept 2051504005) - per 1,000 residents
+-- Violent Crime Rate (concept 2052497310) - per 100,000 residents
 INSERT INTO omopgis.observation(person_id, observation_concept_id, observation_date,
                                 observation_type_concept_id, value_as_number,
                                 observation_source_value, observation_source_concept_id, unit_source_value)
-SELECT prf.person_id, 2051504005, '2016-07-01'::date, 32817,
-       GREATEST(0.5, LEAST(25.0, 22.0 - prf.ses_index * 0.20 + (random() - 0.5) * 6.0)),
-       'VIOLENT_CRIME_RATE', 2051504005, 'per_1000'
+SELECT prf.person_id, 2052497310, '2016-07-01'::date, 32817,
+       GREATEST(50.0, LEAST(2500.0, 2200.0 - prf.ses_index * 20.0 + (random() - 0.5) * 600.0)),
+       'VIOLENT_CRIME_RATE', 2052497310, 'per_100000'
 FROM person_risk_factors prf;
 
--- Air Quality Index Category (concept 2051504006) - derived from PM2.5, mirrors urban density
+-- Air Quality Index Category (concept 2052499437) - derived from PM2.5, mirrors urban density
 INSERT INTO omopgis.observation(person_id, observation_concept_id, observation_date,
                                 observation_type_concept_id, value_as_number, value_as_string,
                                 observation_source_value, observation_source_concept_id)
-SELECT prf.person_id, 2051504006, '2016-07-01'::date, 32817,
+SELECT prf.person_id, 2052499437, '2016-07-01'::date, 32817,
        ROUND(LEAST(300.0, prf.pm25_value * 4.2)::numeric, 1),
        CASE
            WHEN prf.pm25_value * 4.2 >= 150 THEN 'Unhealthy'
@@ -347,7 +349,7 @@ SELECT prf.person_id, 2051504006, '2016-07-01'::date, 32817,
            WHEN prf.pm25_value * 4.2 >= 50  THEN 'Moderate'
            ELSE 'Good'
        END,
-       'AQI_CATEGORY', 2051504006
+       'AQI_CATEGORY', 2052499437
 FROM person_risk_factors prf;
 
 -- RESPIRATORY DRUGS
@@ -361,79 +363,79 @@ INSERT INTO omopgis.drug_exposure(person_id, drug_concept_id, drug_exposure_star
 SELECT co.person_id, 1154343,
        co.condition_start_date + floor(random() * 30)::integer,
        co.condition_start_date + floor(random() * 30 + 90)::integer,
-       32817, 3, 1, 90, '2 puffs every 4-6 hours as needed', 4186831,
+       32817, 3, 1, 90, '2 puffs every 4-6 hours as needed', 40486069,
        'ALBUTEROL', 1154343, 'Inhalation', 'puffs'
 FROM omopgis.condition_occurrence co
 WHERE co.condition_concept_id = 317009; -- Asthma patients only
 
--- Fluticasone (Inhaled Corticosteroid) - 1115008
+-- Fluticasone (Inhaled Corticosteroid) - 1149380
 INSERT INTO omopgis.drug_exposure(person_id, drug_concept_id, drug_exposure_start_date,
                                   drug_exposure_end_date, drug_type_concept_id, refills, quantity,
                                   days_supply, sig, route_concept_id, drug_source_value,
                                   drug_source_concept_id, route_source_value, dose_unit_source_value)
-SELECT co.person_id, 1115008,
+SELECT co.person_id, 1149380,
        co.condition_start_date + floor(random() * 30)::integer,
        co.condition_start_date + floor(random() * 30 + 180)::integer,
-       32817, 5, 1, 180, '2 puffs twice daily', 4186831,
-       'FLUTICASONE', 1115008, 'Inhalation', 'puffs'
+       32817, 5, 1, 180, '2 puffs twice daily', 40486069,
+       'FLUTICASONE', 1149380, 'Inhalation', 'puffs'
 FROM omopgis.condition_occurrence co
 WHERE co.condition_concept_id = 317009
 AND random() < 0.7; -- 70% of asthma patients
 
--- Montelukast (Singulair) - 1547504
+-- Montelukast (Singulair) - 1154161
 INSERT INTO omopgis.drug_exposure(person_id, drug_concept_id, drug_exposure_start_date,
                                   drug_exposure_end_date, drug_type_concept_id, refills, quantity,
                                   days_supply, sig, route_concept_id, drug_source_value,
                                   drug_source_concept_id, route_source_value, dose_unit_source_value)
-SELECT co.person_id, 1547504,
+SELECT co.person_id, 1154161,
        co.condition_start_date + floor(random() * 30)::integer,
        co.condition_start_date + floor(random() * 30 + 365)::integer,
        32817, 11, 30, 365, '10mg once daily at bedtime', 4132161,
-       'MONTELUKAST', 1547504, 'Oral', 'mg'
+       'MONTELUKAST', 1154161, 'Oral', 'mg'
 FROM omopgis.condition_occurrence co
 WHERE co.condition_concept_id = 317009
 AND random() < 0.5; -- 50% of asthma patients
 
--- Tiotropium Bromide (Long-Acting Bronchodilator) - 986417 - COPD patients
+-- Tiotropium Bromide (Long-Acting Bronchodilator) - 1106776 - COPD patients
 INSERT INTO omopgis.drug_exposure(person_id, drug_concept_id, drug_exposure_start_date,
                                   drug_exposure_end_date, drug_type_concept_id, refills, quantity,
                                   days_supply, sig, route_concept_id, drug_source_value,
                                   drug_source_concept_id, route_source_value, dose_unit_source_value)
-SELECT co.person_id, 986417,
+SELECT co.person_id, 1106776,
        co.condition_start_date + floor(random() * 30)::integer,
        co.condition_start_date + floor(random() * 30 + 365)::integer,
-       32817, 11, 30, 365, '1 capsule inhaled once daily', 4186831,
-       'TIOTROPIUM', 986417, 'Inhalation', 'mcg'
+       32817, 11, 30, 365, '1 capsule inhaled once daily', 40486069,
+       'TIOTROPIUM', 1106776, 'Inhalation', 'mcg'
 FROM omopgis.condition_occurrence co
 WHERE co.condition_concept_id = 255573
 AND random() < 0.8; -- 80% of COPD patients
 
--- Guaifenesin (Expectorant) - 1301025 - Chronic Bronchitis patients
+-- Guaifenesin (Expectorant) - 1163944 - Chronic Bronchitis patients
 INSERT INTO omopgis.drug_exposure(person_id, drug_concept_id, drug_exposure_start_date,
                                   drug_exposure_end_date, drug_type_concept_id, refills, quantity,
                                   days_supply, sig, route_concept_id, drug_source_value,
                                   drug_source_concept_id, route_source_value, dose_unit_source_value)
-SELECT co.person_id, 1301025,
+SELECT co.person_id, 1163944,
        co.condition_start_date + floor(random() * 14)::integer,
        co.condition_start_date + floor(random() * 14 + 14)::integer,
        32817, 1, 14, 14, '400mg every 4 hours as needed', 4132161,
-       'GUAIFENESIN', 1301025, 'Oral', 'mg'
+       'GUAIFENESIN', 1163944, 'Oral', 'mg'
 FROM omopgis.condition_occurrence co
-WHERE co.condition_concept_id = 258780
+WHERE co.condition_concept_id = 255841
 AND random() < 0.4; -- 40% of bronchitis patients
 
--- Cetirizine (Antihistamine) - 985708 - Allergic Rhinitis patients
+-- Cetirizine (Antihistamine) - 1149196 - Allergic Rhinitis patients
 INSERT INTO omopgis.drug_exposure(person_id, drug_concept_id, drug_exposure_start_date,
                                   drug_exposure_end_date, drug_type_concept_id, refills, quantity,
                                   days_supply, sig, route_concept_id, drug_source_value,
                                   drug_source_concept_id, route_source_value, dose_unit_source_value)
-SELECT co.person_id, 985708,
+SELECT co.person_id, 1149196,
        co.condition_start_date + floor(random() * 30)::integer,
        co.condition_start_date + floor(random() * 30 + 365)::integer,
        32817, 11, 30, 365, '10mg once daily', 4132161,
-       'CETIRIZINE', 985708, 'Oral', 'mg'
+       'CETIRIZINE', 1149196, 'Oral', 'mg'
 FROM omopgis.condition_occurrence co
-WHERE co.condition_concept_id = 4170143
+WHERE co.condition_concept_id = 257007
 AND random() < 0.6; -- 60% of rhinitis patients
 
 -- Azithromycin (Macrolide Antibiotic) - 1734104 - Pneumonia patients
@@ -536,16 +538,16 @@ FROM omopgis.condition_occurrence co
 WHERE co.condition_concept_id = 319835
 AND random() < 0.75; -- 75% of CHF patients
 
--- Carvedilol (Beta Blocker) - 933724 - CHF patients
+-- Carvedilol (Beta Blocker) - 1346823 - CHF patients
 INSERT INTO omopgis.drug_exposure(person_id, drug_concept_id, drug_exposure_start_date,
                                   drug_exposure_end_date, drug_type_concept_id, refills, quantity,
                                   days_supply, sig, route_concept_id, drug_source_value,
                                   drug_source_concept_id, route_source_value, dose_unit_source_value)
-SELECT co.person_id, 933724,
+SELECT co.person_id, 1346823,
        co.condition_start_date + floor(random() * 30)::integer,
        co.condition_start_date + floor(random() * 30 + 365)::integer,
        32817, 11, 60, 365, '3.125mg twice daily', 4132161,
-       'CARVEDILOL', 933724, 'Oral', 'mg'
+       'CARVEDILOL', 1346823, 'Oral', 'mg'
 FROM omopgis.condition_occurrence co
 WHERE co.condition_concept_id = 319835
 AND random() < 0.65; -- 65% of CHF patients
@@ -565,93 +567,93 @@ WHERE co.condition_concept_id = 381316
 AND random() < 0.3; -- 30% of stroke patients
 
 -- RESPIRATORY PROCEDURES
--- Pulmonary Function Test (Spirometry) - 40757101
+-- Pulmonary Function Test (Spirometry) - 4133840
 
 INSERT INTO omopgis.procedure_occurrence(person_id, procedure_concept_id, procedure_date,
                                         procedure_type_concept_id, quantity, procedure_source_value,
                                         procedure_source_concept_id)
-SELECT co.person_id, 40757101,
+SELECT co.person_id, 4133840,
        co.condition_start_date + floor(random() * 365)::integer,
-       32817, 1, 'SPIROMETRY', 40757101
+       32817, 1, 'SPIROMETRY', 4133840
 FROM omopgis.condition_occurrence co
 WHERE co.condition_concept_id = 317009
 AND random() < 0.8; -- 80% of asthma patients get spirometry
 
--- Chest X-ray - 2211348 - COPD and Pneumonia patients
+-- Chest X-ray - 4163872 - COPD and Pneumonia patients
 INSERT INTO omopgis.procedure_occurrence(person_id, procedure_concept_id, procedure_date,
                                         procedure_type_concept_id, quantity, procedure_source_value,
                                         procedure_source_concept_id)
-SELECT co.person_id, 2211348,
+SELECT co.person_id, 4163872,
        co.condition_start_date + floor(random() * 14)::integer,
-       32817, 1, 'CHEST_XRAY', 2211348
+       32817, 1, 'CHEST_XRAY', 4163872
 FROM omopgis.condition_occurrence co
 WHERE co.condition_concept_id IN (255573, 255848) -- COPD, Pneumonia
 AND random() < 0.7;
 
 -- CARDIOMETABOLIC PROCEDURES
 
--- Electrocardiogram (ECG) - 40756884 - CAD and MI patients
+-- Electrocardiogram (ECG) - 4163951 - CAD and MI patients
 INSERT INTO omopgis.procedure_occurrence(person_id, procedure_concept_id, procedure_date,
                                         procedure_type_concept_id, quantity, procedure_source_value,
                                         procedure_source_concept_id)
-SELECT co.person_id, 40756884,
+SELECT co.person_id, 4163951,
        co.condition_start_date + floor(random() * 30)::integer,
-       32817, 1, 'ECG', 40756884
+       32817, 1, 'ECG', 4163951
 FROM omopgis.condition_occurrence co
 WHERE co.condition_concept_id IN (317576, 4329847) -- CAD, MI
 AND random() < 0.85;
 
--- Echocardiogram - 4142900 - CHF patients
+-- Echocardiogram - 4230911 - CHF patients
 INSERT INTO omopgis.procedure_occurrence(person_id, procedure_concept_id, procedure_date,
                                         procedure_type_concept_id, quantity, procedure_source_value,
                                         procedure_source_concept_id)
-SELECT co.person_id, 4142900,
+SELECT co.person_id, 4230911,
        co.condition_start_date + floor(random() * 30)::integer,
-       32817, 1, 'ECHOCARDIOGRAM', 4142900
+       32817, 1, 'ECHOCARDIOGRAM', 4230911
 FROM omopgis.condition_occurrence co
 WHERE co.condition_concept_id = 319835
 AND random() < 0.75; -- 75% of CHF patients
 
--- Coronary Angiography - 4234728 - MI patients
+-- Coronary Angiography - 4142645 - MI patients
 INSERT INTO omopgis.procedure_occurrence(person_id, procedure_concept_id, procedure_date,
                                         procedure_type_concept_id, quantity, procedure_source_value,
                                         procedure_source_concept_id)
-SELECT co.person_id, 4234728,
+SELECT co.person_id, 4142645,
        co.condition_start_date + floor(random() * 5)::integer,
-       32817, 1, 'CORONARY_ANGIOGRAPHY', 4234728
+       32817, 1, 'CORONARY_ANGIOGRAPHY', 4142645
 FROM omopgis.condition_occurrence co
 WHERE co.condition_concept_id = 4329847 -- MI
 AND random() < 0.6;
 
--- Cardiac Stress Test - 4239536 - CAD patients
+-- Cardiac Stress Test - 4296597 - CAD patients
 INSERT INTO omopgis.procedure_occurrence(person_id, procedure_concept_id, procedure_date,
                                         procedure_type_concept_id, quantity, procedure_source_value,
                                         procedure_source_concept_id)
-SELECT co.person_id, 4239536,
+SELECT co.person_id, 4296597,
        co.condition_start_date + floor(random() * 60)::integer,
-       32817, 1, 'CARDIAC_STRESS_TEST', 4239536
+       32817, 1, 'CARDIAC_STRESS_TEST', 4296597
 FROM omopgis.condition_occurrence co
 WHERE co.condition_concept_id = 317576 -- CAD
 AND random() < 0.5;
 
--- Hemodialysis - 4032243 - CKD patients
+-- Hemodialysis - 4120120 - CKD patients
 INSERT INTO omopgis.procedure_occurrence(person_id, procedure_concept_id, procedure_date,
                                         procedure_type_concept_id, quantity, procedure_source_value,
                                         procedure_source_concept_id)
-SELECT co.person_id, 4032243,
+SELECT co.person_id, 4120120,
        co.condition_start_date + floor(random() * 365)::integer,
-       32817, 1, 'HEMODIALYSIS', 4032243
+       32817, 1, 'HEMODIALYSIS', 4120120
 FROM omopgis.condition_occurrence co
 WHERE co.condition_concept_id = 46271022 -- CKD
 AND random() < 0.25; -- 25% of CKD patients (advanced/ESRD subset)
 
 -- RESPIRATORY & CARDIOMETABOLIC MEASUREMENTS
 
--- Peak Expiratory Flow Rate (PEFR) - 3034006, lower for asthma/COPD
+-- Peak Expiratory Flow Rate (PEFR) - 4087260, lower for asthma/COPD
 INSERT INTO omopgis.measurement(person_id, measurement_concept_id, measurement_date,
                                 measurement_type_concept_id, value_as_number, unit_concept_id,
                                 measurement_source_value, measurement_source_concept_id, unit_source_value)
-SELECT co.person_id, 3034006,
+SELECT co.person_id, 4087260,
        co.condition_start_date + floor(random() * 365)::integer,
        32817,
        CASE
@@ -659,7 +661,7 @@ SELECT co.person_id, 3034006,
            THEN (200.0 + random() * 200.0)  -- Asthma: 200-400 L/min (reduced)
            ELSE (400.0 + random() * 200.0)  -- Normal: 400-600 L/min
        END,
-       8698, 'PEFR', 3034006, 'L/min'
+       8698, 'PEFR', 4087260, 'L/min'
 FROM omopgis.condition_occurrence co
 WHERE co.condition_concept_id IN (317009, 255573)  -- Asthma and COPD
 AND random() < 0.6;
@@ -736,16 +738,16 @@ FROM omopgis.condition_occurrence co
 WHERE co.condition_concept_id IN (255573, 255848) -- COPD, Pneumonia
 AND random() < 0.7;
 
--- Eosinophil Count - 3010813, elevated for Asthma/Allergic Rhinitis patients
+-- Eosinophil Count - 3028615, elevated for Asthma/Allergic Rhinitis patients
 INSERT INTO omopgis.measurement(person_id, measurement_concept_id, measurement_date,
                                 measurement_type_concept_id, value_as_number, unit_concept_id,
                                 measurement_source_value, measurement_source_concept_id, unit_source_value)
-SELECT co.person_id, 3010813,
+SELECT co.person_id, 3028615,
        co.condition_start_date + floor(random() * 365)::integer,
        32817, (300.0 + random() * 400.0), -- 300-700 cells/uL
-       8784, 'EOSINOPHIL_COUNT', 3010813, 'cells/uL'
+       8784, 'EOSINOPHIL_COUNT', 3028615, 'cells/uL'
 FROM omopgis.condition_occurrence co
-WHERE co.condition_concept_id IN (317009, 4170143) -- Asthma, Allergic Rhinitis
+WHERE co.condition_concept_id IN (317009, 257007) -- Asthma, Allergic Rhinitis
 AND random() < 0.55;
 
 -- Serum Creatinine - 3016723, elevated for CKD patients
@@ -760,26 +762,26 @@ FROM omopgis.condition_occurrence co
 WHERE co.condition_concept_id = 46271022 -- CKD
 AND random() < 0.9;
 
--- Estimated GFR - 3013705, reduced for CKD patients
+-- Estimated GFR - 1619025, reduced for CKD patients
 INSERT INTO omopgis.measurement(person_id, measurement_concept_id, measurement_date,
                                 measurement_type_concept_id, value_as_number, unit_concept_id,
                                 measurement_source_value, measurement_source_concept_id, unit_source_value)
-SELECT co.person_id, 3013705,
+SELECT co.person_id, 1619025,
        co.condition_start_date + floor(random() * 365)::integer,
        32817, (10.0 + random() * 50.0), -- 10-60 mL/min/1.73m2
-       8794, 'EGFR', 3013705, 'mL/min/1.73m2'
+       720870, 'EGFR', 1619025, 'mL/min/1.73m2'
 FROM omopgis.condition_occurrence co
 WHERE co.condition_concept_id = 46271022 -- CKD
 AND random() < 0.9;
 
--- Troponin I - 3033891, elevated for MI patients
+-- Troponin I - 3019800, elevated for MI patients
 INSERT INTO omopgis.measurement(person_id, measurement_concept_id, measurement_date,
                                 measurement_type_concept_id, value_as_number, unit_concept_id,
                                 measurement_source_value, measurement_source_concept_id, unit_source_value)
-SELECT co.person_id, 3033891,
+SELECT co.person_id, 3019800,
        co.condition_start_date + floor(random() * 3)::integer,
        32817, (0.5 + random() * 9.5), -- 0.5-10.0 ng/mL
-       8842, 'TROPONIN', 3033891, 'ng/mL'
+       8842, 'TROPONIN', 3019800, 'ng/mL'
 FROM omopgis.condition_occurrence co
 WHERE co.condition_concept_id = 4329847 -- MI
 AND random() < 0.95;
@@ -791,31 +793,31 @@ INSERT INTO omopgis.measurement(person_id, measurement_concept_id, measurement_d
 SELECT co.person_id, 3011960,
        co.condition_start_date + floor(random() * 365)::integer,
        32817, (400.0 + random() * 1600.0), -- 400-2000 pg/mL
-       8842, 'BNP', 3011960, 'pg/mL'
+       8845, 'BNP', 3011960, 'pg/mL'
 FROM omopgis.condition_occurrence co
 WHERE co.condition_concept_id = 319835 -- CHF
 AND random() < 0.8;
 
--- Left Ventricular Ejection Fraction - 3011923, reduced for CHF patients
+-- Left Ventricular Ejection Fraction - 3027172, reduced for CHF patients
 INSERT INTO omopgis.measurement(person_id, measurement_concept_id, measurement_date,
                                 measurement_type_concept_id, value_as_number, unit_concept_id,
                                 measurement_source_value, measurement_source_concept_id, unit_source_value)
-SELECT co.person_id, 3011923,
+SELECT co.person_id, 3027172,
        co.condition_start_date + floor(random() * 365)::integer,
        32817, (15.0 + random() * 30.0), -- 15-45 %
-       8554, 'EJECTION_FRACTION', 3011923, 'percent'
+       8554, 'EJECTION_FRACTION', 3027172, 'percent'
 FROM omopgis.condition_occurrence co
 WHERE co.condition_concept_id = 319835 -- CHF
 AND random() < 0.75;
 
--- Waist Circumference - 3003397, elevated for Obesity patients
+-- Waist Circumference - 3016258, elevated for Obesity patients
 INSERT INTO omopgis.measurement(person_id, measurement_concept_id, measurement_date,
                                 measurement_type_concept_id, value_as_number, unit_concept_id,
                                 measurement_source_value, measurement_source_concept_id, unit_source_value)
-SELECT co.person_id, 3003397,
+SELECT co.person_id, 3016258,
        co.condition_start_date + floor(random() * 365)::integer,
        32817, (100.0 + random() * 40.0), -- 100-140 cm
-       8582, 'WAIST_CIRCUMFERENCE', 3003397, 'cm'
+       8582, 'WAIST_CIRCUMFERENCE', 3016258, 'cm'
 FROM omopgis.condition_occurrence co
 WHERE co.condition_concept_id = 433736 -- Obesity
 AND random() < 0.85;

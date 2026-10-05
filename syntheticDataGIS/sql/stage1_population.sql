@@ -52,9 +52,9 @@ INSERT INTO demo.generator_truth
      beta_age_per_decade, beta_female, is_pm25_null_outcome, notes) VALUES
     ('ASTHMA',         317009,   'Respiratory',     0.095, 0.080, -0.15,  0.00,  0.25, false, NULL),
     ('COPD',           255573,   'Respiratory',     0.070, 0.150, -0.20,  0.45,  0.00, false, 'Headline outcome for the tutorial'),
-    ('BRONCHITIS',     258780,   'Respiratory',     0.055, 0.100, -0.25,  0.20,  0.10, false, NULL),
+    ('BRONCHITIS',     255841,   'Respiratory',     0.055, 0.100, -0.25,  0.20,  0.10, false, NULL),
     ('PNEUMONIA',      255848,   'Respiratory',     0.060, 0.100, -0.30,  0.30, -0.10, false, NULL),
-    ('RHINITIS',       4170143,  'Respiratory',     0.130, 0.000, -0.05, -0.10,  0.10, true,  'Simulated null; real-world literature on PM2.5 and rhinitis may differ'),
+    ('RHINITIS',       257007,  'Respiratory',     0.130, 0.000, -0.05, -0.10,  0.10, true,  'Simulated null; real-world literature on PM2.5 and rhinitis may differ'),
     ('HYPERTENSION',   320128,   'Cardiometabolic', 0.180, 0.000, -0.20,  0.50, -0.05, true,  'Simulated null; real-world literature may differ'),
     ('CAD',            317576,   'Cardiometabolic', 0.070, 0.060, -0.35,  0.60, -0.45, false, NULL),
     ('CHF',            319835,   'Cardiometabolic', 0.060, 0.070, -0.45,  0.65, -0.20, false, NULL),
@@ -309,7 +309,7 @@ FROM residence r
 JOIN omopgis.county_reference c ON c.county_ref_id = r.county_ref_id
 ORDER BY r.location_id;
 
--- Location history: relationship 32848 as in the gaiaDB example file (verify against the vocabulary);
+-- Location history: relationship 2052496995 (OMOP GIS 'Patient Residence');
 -- domain_id 1147314 = Person, required for gaiaDB to assign person_id.
 INSERT INTO omopgis.location_history(location_id,
                                      relationship_type_concept_id,
@@ -318,7 +318,7 @@ INSERT INTO omopgis.location_history(location_id,
                                      start_date,
                                      end_date)
 SELECT m.person_id,
-       32848,   -- residence relationship (as used in the gaiaDB example LOCATION_HISTORY.csv)
+       2052496995, -- OMOP GIS 'Patient Residence'
        1147314, -- domain concept: Person
        m.person_id,
        '2014-01-01'::date,
@@ -326,7 +326,7 @@ SELECT m.person_id,
 FROM person_move m
 UNION ALL
 SELECT 10000 + m.person_id,
-       32848,
+       2052496995,
        1147314,
        m.person_id,
        m.move_date,

@@ -115,13 +115,13 @@ A person has 72 monthly PM2.5 rows (73 if they move in the middle of a month, be
 - `demo.fixture_person`, `demo.expected_result`, `demo.rejected_exposure_row`: the fixtures and answer key described above.
 - `demo.build_info`: Gaia image digest, Gaia Catalog commit, source datasets, and build date.
 
-Vocabulary tables (`concept`, `concept_relationship`, `concept_ancestor`) are not part of the dataset; load the OMOP and GIS vocabulary packages separately for Exercise 3.
+**Mini vocabulary** (populated): `concept`, `concept_ancestor`, `concept_relationship`, `concept_synonym`, `vocabulary`, `domain`, `concept_class`, `relationship`. It holds the 73 standard concepts the data use (SNOMED, RxNorm, LOINC, UCUM and a few CDM and type concepts) plus the OMOP GIS, SDoH, and Exposome concepts, so Exercises 3 and 4 and the OHDSI tools that resolve concept sets work without a separate vocabulary download. It is not a substitute for the full vocabulary; see the [vocabulary notes](https://github.com/OHDSI/GIS/blob/main/syntheticDataGIS/vocabulary/README.md).
 
 ### Provenance and known limitations
 
 - `cdm_source` records the CDM version (5.4) and the generator version. `demo.build_info` records the exact Gaia image and catalog commit, so a build can be reproduced.
 - Gaia currently leaves `unit_concept_id` and `dose_unit_source_value` empty on the exposure rows it derives, and assigns its own exposure concept (`2052499839`) and geometry-type concepts. Expect these in Exercise 3.
-- The concept for the residence relationship (`32848`) and the pregnancy concepts used in the `EPISODE` table should be verified against the OMOP GIS vocabulary release you load.
+- Every concept id used by the data is checked against the mini vocabulary at build time (it must exist, be a standard concept, and be in the right domain). Residences use the OMOP GIS concept `Patient Residence` as the `LOCATION_HISTORY` relationship, and pregnancies are `EPISODE` rows of the `Disease Episode` concept whose object is the `Pregnancy` condition.
 - Persons are placed uniformly at random inside a county polygon, so there is no within-county clustering; everyone in a county shares the same exposure value.
 
 <br>

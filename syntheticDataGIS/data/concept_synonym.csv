@@ -1,0 +1,262 @@
+concept_id,concept_synonym_name,language_concept_id
+201826,Diabetes mellitus type 2 (disorder),4180186
+201826,Diabetes mellitus type 2,4180186
+201826,Diabetes mellitus type II,4180186
+201826,T2DM - diabetes mellitus type 2,4180186
+201826,Type II diabetes mellitus,4180186
+201826,diabetes mellitus tipo 2 (trastorno),4182511
+201826,diabetes mellitus tipo 2,4182511
+201826,diabetes mellitus tipo II,4182511
+255573,CAFL - Chronic airflow limitation,4180186
+255573,CAL - Chronic airflow limitation,4180186
+255573,CAO - Chronic airflow obstruction,4180186
+255573,COAD - Chronic obstructive airways disease,4180186
+255573,COLD - Chronic obstructive lung disease,4180186
+255573,COPD - Chronic obstructive pulmonary disease,4180186
+255573,Chronic airflow limitation,4180186
+255573,Chronic airflow obstruction,4180186
+255573,Chronic airway disease,4180186
+255573,Chronic airway obstruction,4180186
+255573,Chronic irreversible airway obstruction,4180186
+255573,Chronic obstructive airway disease,4180186
+255573,Chronic obstructive lung disease,4180186
+255573,Chronic obstructive pulmonary disease (disorder),4180186
+255573,EPOC - enfermedad pulmonar obstructiva crónica,4182511
+255573,enfermedad pulmonar obstructiva crónica (trastorno),4182511
+255573,enfermedad pulmonar obstructiva crónica,4182511
+255573,limitación crónica al flujo de aire,4182511
+255573,neumopatía obstructiva crónica,4182511
+255841,Chronic bronchitis (disorder),4180186
+255841,bronquitis crónica (trastorno),4182511
+255841,bronquitis crónica,4182511
+255848,Pneumonia (disorder),4180186
+255848,neumonía (trastorno),4182511
+255848,neumonía,4182511
+257007,AR - Allergic rhinitis,4180186
+257007,Allergic rhinitis (disorder),4180186
+257007,Allergic rhinitis due to allergen,4180186
+257007,Atopic rhinitis,4180186
+257007,rinitis alérgica (trastorno),4182511
+257007,rinitis alérgica,4182511
+317009,Airway hyperreactivity,4180186
+317009,Asthma (disorder),4180186
+317009,BHR - Bronchial hyperreactivity,4180186
+317009,Bronchial asthma,4180186
+317009,Bronchial hyperreactivity,4180186
+317009,Bronchial hyperresponsiveness,4180186
+317009,Bronchial hypersensitivity,4180186
+317009,Hyperreactive airway disease,4180186
+317009,asma (trastorno),4182511
+317009,asma bronquial,4182511
+317009,hiperreactividad bronquial,4182511
+317009,hiperreactividad de la vía aérea,4182511
+317009,hipersensibilidad bronquial,4182511
+317009,Asthmatic,4180186
+317009,asma,4182511
+317576,Arteriosclerotic heart disease,4180186
+317576,CAD - Coronary artery disease,4180186
+317576,CHD - Coronary heart disease,4180186
+317576,Coronary arteriosclerosis (disorder),4180186
+317576,Coronary artery disease,4180186
+317576,Coronary heart disease,4180186
+317576,Coronary sclerosis,4180186
+317576,arterioesclerosis coronaria,4182511
+317576,arteriosclerosis coronaria (trastorno),4182511
+317576,arteriosclerosis coronaria,4182511
+319835,CCF - Congestive cardiac failure,4180186
+319835,CHF - Congestive heart failure,4180186
+319835,Congestive cardiac failure,4180186
+319835,Congestive heart disease,4180186
+319835,Congestive heart failure (disorder),4180186
+319835,fallo cardíaco congestivo,4182511
+319835,insuficiencia cardíaca congestiva (trastorno),4182511
+319835,insuficiencia cardíaca congestiva,4182511
+320128,Essential hypertension (disorder),4180186
+320128,Idiopathic hypertension,4180186
+320128,Primary hypertension,4180186
+320128,Systemic primary arterial hypertension,4180186
+320128,hipertensión arterial esencial (trastorno),4182511
+320128,hipertensión arterial esencial,4182511
+320128,hipertensión arterial idiopática,4182511
+320128,hipertensión arterial primaria sistémica,4182511
+320128,hipertensión arterial primaria,4182511
+381316,CVA - Cerebrovascular accident,4180186
+381316,Cerebrovascular accident (disorder),4180186
+381316,accidente cerebrovascular (trastorno),4182511
+381316,accidente cerebrovascular,4182511
+381316,ACV,4182511
+381316,Stroke,4180186
+432867,HLD - Hyperlipidaemia,4180186
+432867,HLD - Hyperlipidemia,4180186
+432867,Hyperlipidemia (disorder),4180186
+432867,hiperlipidemia (trastorno),4182511
+432867,Hyperlipidaemia,4180186
+432867,Lipidaemia,4180186
+432867,Lipidemia,4180186
+432867,hiperlipemia,4182511
+432867,hiperlipidemia,4182511
+433736,Obesity (disorder),4180186
+433736,obesidad (trastorno),4182511
+433736,Adiposis,4180186
+433736,Adiposity,4180186
+433736,obesidad,4182511
+1619025,"Blood; BSA.pred; Chemistry; EGFR; Estimated GFR; GFR; GFR/1.73 sq M; Glom; Pl; PlasBld; Plasma; Plsm; Point in time; Pred GFR; QNT; Quan; Quant; Quantitative; Random; SerP; SerPl; SerPlas; SerPlBld; Serum; Serum or plasma; Serum, plasma or whole blood; Square Meter; SR; Volume rate/area; Volume Rate/Ratio; WB; Whole blood",4180186
+1619025,"GFR/1.73 Sq M.predicted, Blood",4180186
+1619025,eGFRcr SerPlBld CKD-EPI 2021,4180186
+1619025,肾小球滤过率/1.73 平方米.预测型:单位面积体积速率:时间点:血清/血浆/全血:定量型:基于肌酐的公式 (CKD-EPI 2021),4182948
+3000905,#; ABS; absolute; absolutes; Auto; Automated detection; Blood; Cnt; Count; Count/volume; CT; Elec; Elect; Electr; HEMATOLOGY/CELL COUNTS; Leuc; Leuk; Leukocyte; Lkcs; Number concentration; Number Concentration (count/vol); Point in time; QNT; Quan; Quant; Quantitative; Random; UniversalLabOrders; WB; WBC; WBCs; White blood cell; White blood cells; Whole blood,4180186
+3000905,WBC # Bld Auto,4180186
+3000905,"White blood cell (WBC) count, Blood",4180186
+3000905,白细胞:计数型浓度:时间点:全血:定量型:自动化计数方法,4182948
+3004249,Art sys; Blood pressure; BLOOD PRESSURE MEASUREMENTS.ATOM; Blood pressure systolic; BP; BP sys; BP systolic; Cardio; Cardiology; Heart Disease; Intravenous; IV; Point in time; Pressure; QNT; Quan; Quant; Quantitative; Random; SBP; Sys BP,4180186
+3004249,BP sys,4180186
+3004249,血管内心脏收缩期:压力或压强:时间点:动脉系统:定量型,4182948
+3004410,Blood; Chemistry; Endocrine; Endocrinology; GHb; Glycated hemoglobin; Glycohaemogolobin; Glycohemogolobin; Glycosylated hemoglobin; HA1c; Haemoglobin; Hb; HbA1c; Hgb; Hgb A1c; Mass fraction; Percent; Point in time; QNT; Quan; Quant; Quantitative; Random; Tot; Totl; WB; Whole blood,4180186
+3004410,HbA1c MFr Bld,4180186
+3004410,"HbA1c/Total Hgb, Blood",4180186
+3004410,血红蛋白 A1c/血红蛋白.总计:质量分数:时间点:全血:定量型,4182948
+3011960,BNP SerPl-mCnc,4180186
+3011960,Beta Natriuretic Peptide; BNP; Brain Natriuretic Peptide; B-type natriuretic peptide; Cardio; Cardiology; Chemistry; Heart Disease; Level; Mass concentration; Natriutietic peptide.B; Pept; Pl; Plasma; Plsm; Point in time; QNT; Quan; Quant; Quantitative; Random; SerP; SerPl; SerPlas; Serum; Serum or plasma; SR; UniversalLabOrders,4180186
+3011960,"Natriuretic Peptide B, Blood",4180186
+3011960,利钠肽.B:质量浓度:时间点:血清/血浆:定量型,4182948
+3012888,Art sys; Blood pressure; Blood pressure diastolic; BLOOD PRESSURE MEASUREMENTS.ATOM; BP; BP dias; BP diastolic; Cardio; Cardiology; DBP; Dias; Dias BP; Diast; Diastoli; Heart Disease; Intravenous; IV; Point in time; Pressure; QNT; Quan; Quant; Quantitative; Random,4180186
+3012888,BP dias,4180186
+3012888,血管内心脏舒张期:压力或压强:时间点:动脉系统:定量型,4182948
+3016258,Abd; Abdo; Abdomen+; Abdominal; BODY CIRCUMFERENCE.MOLEC; Circumf.at umbilicus; Girth; Length; Maximum mid-abdomen girth; Point in time; QNT; Quan; Quant; Quantitative; Random,4180186
+3016258,Circumf.at umbilicus by Tape measure,4180186
+3016258,周长.脐:长度:时间点:腹部.中部:定量型:卷尺测量法,4182948
+3016723,Chemistry; CR; Crea; Creat; Kidney; Level; Mass concentration; Nephrology; Pl; Plasma; Plsm; Point in time; QNT; Quan; Quant; Quantitative; Random; Renal; SerP; SerPl; SerPlas; Serum; Serum or plasma; SR; UniversalLabOrders,4180186
+3016723,Creat SerPl-mCnc,4180186
+3016723,"Creatinine, Blood",4180186
+3016723,肌酐:质量浓度:时间点:血清/血浆:定量型,4182948
+3019800,Cardio; Cardiology; Chemistry; cTnT; Heart Disease; Level; Mass concentration; Pl; Plasma; Plsm; Point in time; QNT; Quan; Quant; Quantitative; Random; SerP; SerPl; SerPlas; Serum; Serum or plasma; SR; T prime; TnT; Troponin; UniversalLabOrders,4180186
+3019800,Troponin T SerPl-mCnc,4180186
+3019800,"Troponin T, Blood",4180186
+3019800,肌钙蛋白 T.心脏:质量浓度:时间点:血清/血浆:定量型,4182948
+3022192,Cardio; Cardiology; Chemistry; Heart Disease; Level; Mass concentration; Pl; Plasma; Plsm; Point in time; QNT; Quan; Quant; Quantitative; Random; SerP; SerPl; SerPlas; Serum; Serum or plasma; SR; Tg; Trig; Trigly; Triglycerides; Triglycrides; UniversalLabOrders,4180186
+3022192,Trigl SerPl-mCnc,4180186
+3022192,"Triglyceride, Blood",4180186
+3022192,甘油三酯:质量浓度:时间点:血清/血浆:定量型,4182948
+3027172,Cardiac; Cardio; Cardiology; EF; Frac; Fract; Fractionation; Fractions; Heart Disease; Hemodynamics; HEMODYNAMICS.MOLEC; Hrt; Hrt ventr; L; LT; LV; LVEF; Percent; Point in time; QNT; Quan; Quant; Quantitative; Random; Ventricular; Volfr; Volume fraction,4180186
+3027172,LV EF,4180186
+3027172,射血分数:体积分数:时间点:心脏.心室.左侧:定量型,4182948
+3028437,Cardio; Cardiology; Chemistry; Chol; Choles; Cholest; Cholesterol total; Cholesterols; Heart Disease; LDLc; LDL-C; Level; Lipid; Low density lipoprotein cholesterol; Low density lipoprotein cholesterols; Mass concentration; Pl; Plasma; Plsm; Point in time; QNT; Quan; Quant; Quantitative; Random; SerP; SerPl; SerPlas; Serum; Serum or plasma; SR; UniversalLabOrders,4180186
+3028437,"LDL cholesterol, Blood",4180186
+3028437,LDLc SerPl-mCnc,4180186
+3028437,胆固醇.LDL 之中的:质量浓度:时间点:血清/血浆:定量型,4182948
+3028615,#; ABS; absolute; absolutes; Auto; Automated detection; Blood; Cnt; Count; Count/volume; CT; Elec; Elect; Electr; Eos; Eosin; Eosino; Eosinophil; Eosins; HEMATOLOGY/CELL COUNTS; Number concentration; Number Concentration (count/vol); Point in time; QNT; Quan; Quant; Quantitative; Random; UniversalLabOrders; WB; Whole blood,4180186
+3028615,Eosinophil # Bld Auto,4180186
+3028615,"Eosinophils, Blood",4180186
+3028615,嗜酸性粒细胞:计数型浓度:时间点:全血:定量型:自动化计数方法,4182948
+3038553,BMI; bod; Bodies; BODY WEIGHT.ATOM; Point in time; QNT; Quan; Quant; Quantitative; Quetelet index; Random; Ratios; Rto,4180186
+3038553,BMI,4180186
+3038553,体质指数:比率:时间点:^患者:定量型,4182948
+4087260,PEF - Peak expiratory flow rate,4180186
+4087260,PEFR - Peak expiratory flow rate,4180186
+4087260,Peak expiratory flow rate (observable entity),4180186
+4087260,velocidad de flujo espiratorio máximo,4182511
+4087260,velocidad de flujo espiratorio pico (entidad observable),4182511
+4087260,velocidad de flujo espiratorio pico,4182511
+4120120,Extracorporeal haemodialysis,4180186
+4120120,Extracorporeal hemodialysis,4180186
+4120120,HD - Haemodialysis,4180186
+4120120,HD - Hemodialysis,4180186
+4120120,Haemodialysis procedure,4180186
+4120120,Hemodialysis (procedure),4180186
+4120120,Hemodialysis procedure,4180186
+4120120,hemodiálisis (procedimiento),4182511
+4120120,hemodiálisis extracorpórea,4182511
+4120120,procedimiento de hemodiálisis,4182511
+4120120,Haemodialysis,4180186
+4120120,hemodiálisis,4182511
+4132161,By mouth,4180186
+4132161,Oral route (qualifier value),4180186
+4132161,Oral route,4180186
+4132161,Oral use,4180186
+4132161,PO - Per os,4180186
+4132161,Per oral route,4180186
+4132161,Per os,4180186
+4132161,v.o. - vía oral,4182511
+4132161,vía oral (calificador),4182511
+4132161,vía oral,4182511
+4133840,Spirometry (procedure),4180186
+4133840,espirometría (procedimiento),4182511
+4133840,espirometría,4182511
+4142645,Angiography of coronary arteries,4180186
+4142645,Angiography of coronary artery (procedure),4180186
+4142645,Arteriography of coronary artery,4180186
+4142645,Coronary angiogram,4180186
+4142645,Coronary angiography,4180186
+4142645,Coronary arteriogram,4180186
+4142645,Coronary arteriography,4180186
+4142645,angiografía de arteria coronaria (procedimiento),4182511
+4142645,angiografía de arteria coronaria,4182511
+4142645,angiografía de arterias coronarias,4182511
+4142645,arteriografía coronaria,4182511
+4163872,Plain CXR (chest X-ray),4180186
+4163872,Plain X-ray of chest (procedure),4180186
+4163872,Plain X-ray of thorax,4180186
+4163872,Plain chest X-ray,4180186
+4163872,X-ray of chest,4180186
+4163872,radiografía simple de tórax (procedimiento),4182511
+4163872,radiografía simple de tórax,4182511
+4163951,ECG (electrocardiography) procedure,4180186
+4163951,Electrocardiographic procedure (procedure),4180186
+4163951,Electrocardiography procedure,4180186
+4163951,procedimiento electrocardiográfico (procedimiento),4182511
+4163951,procedimiento electrocardiográfico,4182511
+4163951,Electrocardiogram,4180186
+4163951,electrocardiograma,4182511
+4230911,Cardiac US scan,4180186
+4230911,Cardiac echo,4180186
+4230911,Echocardiographic procedure,4180186
+4230911,Echocardiography (procedure),4180186
+4230911,US heart scan,4180186
+4230911,US scan of heart,4180186
+4230911,Ultrasonography of heart,4180186
+4230911,Ultrasound of heart,4180186
+4230911,ecocardiografía (procedimiento),4182511
+4230911,ecografía de corazón,4182511
+4230911,procedimiento ecocardiográfico,4182511
+4230911,Echocardiogram,4180186
+4230911,ecocardiografía,4182511
+4296597,Cardiovascular stress testing (procedure),4180186
+4296597,ergometría cardiovascular (procedimiento),4182511
+4296597,ergometría cardiovascular,4182511
+4299535,Pregnancy (finding),4180186
+4299535,Pregnancy confirmed,4180186
+4299535,Pregnancy not delivered,4180186
+4299535,embarazada (hallazgo),4182511
+4299535,embarazo confirmado,4182511
+4299535,Gestation,4180186
+4299535,Pregnant,4180186
+4299535,embarazada,4182511
+4329847,Cardiac infarction,4180186
+4329847,Heart attack,4180186
+4329847,Infarction of heart,4180186
+4329847,MI - myocardial infarction,4180186
+4329847,Myocardial infarct,4180186
+4329847,Myocardial infarction (disorder),4180186
+4329847,ataque al corazón,4182511
+4329847,infarto cardíaco,4182511
+4329847,infarto de corazón,4182511
+4329847,infarto de miocardio (trastorno),4182511
+4329847,infarto de miocardio,4182511
+40486069,Inhalation route,4180186
+40486069,Respiratory tract route (qualifier value),4180186
+40486069,Respiratory tract route,4180186
+40486069,vía de administración en el tracto respiratorio (calificador),4182511
+40486069,vía de administración en el tracto respiratorio,4182511
+40762499,ABG; ART; Art bld; Art blood; Arterial; Arterial blood; Blood arterial; Lung; Mass Fraction; O2; Percent; Point in time; PULMONARY; Pulmonology; PulseOx; QNT; Quan; Quant; Quantitative; Random; Respiratory; SaO2; SAT; Satn; SO2; SpO2; tO2,4180186
+40762499,SaO2 % BldA PulseOx,4180186
+40762499,氧饱和度:质量分数:时间点:动脉全血:定量型:脉搏血氧定量法,4182948
+46271022,CKD - chronic kidney disease,4180186
+46271022,Chronic kidney disease (disorder),4180186
+46271022,Chronic renal disease,4180186
+46271022,Chronic renal impairment,4180186
+46271022,alteración renal crónica,4182511
+46271022,enfermedad renal crónica (trastorno),4182511
+46271022,enfermedad renal crónica,4182511
+2052490062,CAS:99387-89-0,4180186
+2052490064,CAS:66575-29-9,4180186
+2052490065,"Mistral t; 4-3-(4-Tert-Butylphenyl)-2-methylpropyl-2,6-dimethylmorpholine; 4-3-4-(1,1-Dimethylethyl)phenyl-2-methylpropyl-2,6-dimethylmorpholine, 9CI; Corbel; Fenpropemorph; Fenpropimorphe; Funbas; Mildofix; Mistral; Power task; CHEBI:50148; CAS:67564-91-",4180186
