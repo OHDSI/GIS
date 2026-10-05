@@ -620,7 +620,7 @@ connectionDetails &lt;- createConnectionDetails(dbms = &quot;postgresql&quot;, s
 connection &lt;- connect(connectionDetails)
 
 pm25Settings &lt;- createExtensionCovariateSettings(
-  analysisId = 901,
+  analysisId = 998,
   extensionDatabaseSchema = &quot;omopgis&quot;,
   extensionTableName = &quot;external_exposure&quot;,
   extensionFields = c(&quot;exposure_concept_id&quot;, &quot;value_as_number&quot;, &quot;exposure_start_date&quot;),
@@ -628,11 +628,11 @@ pm25Settings &lt;- createExtensionCovariateSettings(
   covariateIdField = &quot;exposure_concept_id&quot;,
   covariateValueField = &quot;value_as_number&quot;,
   dateField = &quot;exposure_start_date&quot;,
+  endDateField = &quot;exposure_end_date&quot;,
   startDay = -730,
   endDay = -1,
   conceptSet = list(Capr::cs(2052499839, name = &quot;PM2.5, CDC monthly county mean&quot;)),
-  isBinary = FALSE,
-  missingMeansZero = FALSE
+  valueAggregation = &quot;mean&quot;
 )
 
 covariateData &lt;- getDbCovariateData(
@@ -649,16 +649,19 @@ covariateData &lt;- getDbCovariateData(
 query. Three things differ, and you should be able to say what each does
 to the estimate:</p>
 <ol style="list-style-type: decimal">
-<li>The covariate value is <code>MAX(value_as_number)</code> over the
-window, <strong>not</strong> the day-weighted mean. It is the highest
-monthly mean in the 24 months before the index date.</li>
-<li>The date filter applies to <code>exposure_start_date</code> only, so
-a row that starts before the window but overlaps it is dropped instead
-of clipped.</li>
-<li>The covariate ID is the exposure concept ID, so two windows of the
-same concept (for example the last 12 months and the 12 months before
-that) would share one ID. Extract them in separate calls, or build the
-windowed means in SQL as above.</li>
+<li>The covariate value is an aggregate of the monthly rows in the
+window (<code>valueAggregation</code>: the default is the maximum; here
+it is the mean). The mean treats every monthly row as one observation,
+so partial months (a move in the middle of a month) count as full months
+and the result is <strong>not</strong> the day-weighted mean of the SQL
+reference.</li>
+<li>A row is included when its interval overlaps the window
+(<code>endDateField</code>), but it is used whole, not clipped to the
+window. Without <code>endDateField</code> the row’s start date has to
+fall inside the window.</li>
+<li>The covariate ID is the concept ID times 1000 plus the analysis ID,
+so the same concept extracted by different analyses (for example the
+last 12 months and the 12 months before that) gets different IDs.</li>
 </ol>
 <p>Join the covariate to the outcome by <code>subject_id</code>
 (<code>rowId</code>), fit the model with this covariate and with the
@@ -689,11 +692,155 @@ below the truth? (Think about exposure measured at the county level,
 residential moves, and the pre-index window.) Why does the negative
 control have a crude association at all?</p>
 </div>
+<div id="comparing-the-exercise-3-cohorts-with-cohortmethod"
+class="section level3">
+<h3>Comparing the Exercise 3 cohorts with CohortMethod</h3>
+<p>The exposure-stratified cohorts you built in Exercise 3 (1 = high
+PM2.5 at index, 2 = low PM2.5 at index, 3 = COPD, 4 = CKD, all in
+<code>demo.cohort</code>) are the inputs to a comparative cohort
+analysis with <a
+href="https://github.com/OHDSI/CohortMethod">CohortMethod</a>: high
+versus low exposure, with propensity-score adjustment for confounders,
+and incident COPD as the outcome.</p>
+<p><strong>Choose the confounders carefully.</strong> County SES drives
+both PM2.5 and disease, and you only observe it through the SDOH
+observations (poverty rate, education, and so on), which are noisy.
+Extract them with FeatureExtractionForExtensions from the standard
+<code>observation</code> table; the concept set limits the extraction to
+the indicators you list. Leave out <code>AQI_CATEGORY</code>: it is
+computed from the person’s PM2.5, so adjusting for it would adjust away
+the exposure. Do not include the PM2.5 covariate from the previous
+section either, since it defines the groups. Why is that?</p>
+<pre class="r"><code>library(CohortMethod)
+library(FeatureExtraction)
+library(FeatureExtractionForExtensions)
+
+# SDOH observation concepts, without AQI_CATEGORY (2052499437)
+sdohIds &lt;- c(2052499478, 2052497092, 2052498758, 2052498464, 2052499459, 2052498073,
+             2052497364, 2052497761, 2052498200, 2052498483, 2052497310)
+
+sdohSettings &lt;- createExtensionCovariateSettings(
+  analysisId = 997,
+  extensionDatabaseSchema = &quot;omopgis&quot;,
+  extensionTableName = &quot;observation&quot;,
+  extensionFields = c(&quot;observation_concept_id&quot;, &quot;value_as_number&quot;),
+  joinField = &quot;person_id&quot;,
+  covariateIdField = &quot;observation_concept_id&quot;,
+  covariateValueField = &quot;value_as_number&quot;,
+  conceptSet = list(Capr::cs(sdohIds, name = &quot;SDOH indicators&quot;)),
+  isBinary = FALSE,
+  missingMeansZero = FALSE
+)
+demographics &lt;- createCovariateSettings(useDemographicsGender = TRUE, useDemographicsAge = TRUE)
+
+cmData &lt;- getDbCohortMethodData(
+  connectionDetails = connectionDetails,
+  cdmDatabaseSchema = &quot;omopgis&quot;,
+  targetId = 1, comparatorId = 2, outcomeIds = c(3, 4),
+  exposureDatabaseSchema = &quot;demo&quot;, exposureTable = &quot;cohort&quot;,
+  outcomeDatabaseSchema = &quot;demo&quot;, outcomeTable = &quot;cohort&quot;,
+  removeDuplicateSubjects = &quot;remove all&quot;,
+  firstExposureOnly = TRUE,
+  washoutPeriod = 0,
+  restrictToCommonPeriod = FALSE,
+  covariateSettings = list(demographics, sdohSettings)
+)
+
+studyPop &lt;- createStudyPopulation(
+  cohortMethodData = cmData,
+  outcomeId = 3,
+  removeSubjectsWithPriorOutcome = TRUE, priorOutcomeLookback = 99999,
+  minDaysAtRisk = 1,
+  riskWindowStart = 0, startAnchor = &quot;cohort start&quot;,
+  riskWindowEnd = 0, endAnchor = &quot;cohort end&quot;
+)
+getAttritionTable(studyPop)
+
+# The default cross-validated prior shrinks everything to zero for these weakly predictive covariates,
+# so use a fixed ridge prior.
+ps &lt;- createPs(
+  cohortMethodData = cmData, population = studyPop,
+  prior = Cyclops::createPrior(&quot;normal&quot;, variance = 1, useCrossValidation = FALSE),
+  control = Cyclops::createControl(maxIterations = 5000)
+)
+computePsAuc(ps)
+matchedPop &lt;- matchOnPs(ps, maxRatio = 1)
+balance &lt;- computeCovariateBalance(matchedPop, cmData)
+
+crude    &lt;- fitOutcomeModel(population = studyPop,   modelType = &quot;cox&quot;)
+adjusted &lt;- fitOutcomeModel(population = matchedPop, modelType = &quot;cox&quot;)
+hr &lt;- function(m) with(m$outcomeModelTreatmentEstimate, c(HR = exp(logRr), lower = exp(logLb95), upper = exp(logUb95)))
+rbind(crude = hr(crude), matched = hr(adjusted))</code></pre>
+<p>Before you model anything, characterize the two exposure groups.
+Aggregated covariates summarize a cohort without downloading
+person-level rows (the statistics are computed in the database), and
+<code>computeStandardizedDifference()</code> shows how different the
+groups are before any adjustment:</p>
+<pre class="r"><code>pm25Settings$aggregateOnServer   # TRUE: statistics are computed in the database
+groupData &lt;- lapply(1:2, function(cohortId) {
+  getDbCovariateData(
+    connection = connection, cdmDatabaseSchema = &quot;omopgis&quot;,
+    cohortDatabaseSchema = &quot;demo&quot;, cohortTable = &quot;cohort&quot;, cohortIds = cohortId,
+    covariateSettings = list(demographics, sdohSettings, pm25Settings), aggregated = TRUE)
+})
+sdiff &lt;- computeStandardizedDifference(groupData[[1]], groupData[[2]], cohortId1 = 1, cohortId2 = 2)
+head(sdiff[order(-abs(sdiff$stdDiff)), c(&quot;covariateName&quot;, &quot;mean1&quot;, &quot;mean2&quot;, &quot;stdDiff&quot;)], 6)</code></pre>
+<p>On the reference build the two groups differ by about 9.9 versus 7.5
+µg/m³ in mean PM2.5 over the 24 months before the index date (a
+standardized difference of about 1.6; the sign follows
+FeatureExtraction’s convention, so a negative value means the first
+cohort is higher). The SDOH indicators differ by about 0.5 standard
+deviations, in the direction of a higher-SES profile in the low-exposure
+group: broadband access, physician access, food insecurity, and
+neighborhood disadvantage head the list. That imbalance is the
+confounding the propensity model has to remove, and you can compare it
+with the balance after matching below.</p>
+<p>Run the same pipeline with outcome 4 (CKD, replacing
+<code>outcomeId = 3</code> in <code>createStudyPopulation</code>) as a
+negative control. Answer these in your write-up:</p>
+<ul>
+<li>Which persons does the attrition table remove, and why (prior COPD,
+no time at risk)?</li>
+<li>How well does the propensity model separate the groups, and is
+covariate balance below 0.1 standardized difference after matching?
+Which covariates remain imbalanced?</li>
+<li>How do the crude and adjusted hazard ratios compare, and how do they
+compare with the negative control?</li>
+</ul>
+<p>What to expect. The image has CohortMethod 5.5; the code above is the
+version tested on the reference build. The attrition table shows 2,717
+and 3,099 persons in the two groups, 2,608 and 3,009 after removing
+prior COPD, and about 2,100 matched pairs. The propensity model
+separates the groups only weakly (AUC about 0.65, because the SDOH
+indicators only weakly distinguish high from low exposure), and matching
+brings the largest standardized difference below 0.1. For COPD the crude
+hazard ratio is about 1.43 (95% CI 1.17 to 1.73) and the matched one
+about 1.26 (1.01 to 1.57). For the CKD negative control the crude hazard
+ratio is about 1.20 (1.01 to 1.43) and the matched one about 0.94 (0.77
+to 1.15). Your numbers will vary slightly with the build. Two things go
+wrong if you change the setup: if you add <code>AQI_CATEGORY</code>
+(2052499437) to <code>sdohIds</code>, <code>createPs</code> stops with
+“High correlation between covariate(s) and treatment” (a useful safety
+net that catches the leak), and with the default cross-validated prior
+the model fits but every coefficient is zero (AUC 0.5), so matching does
+nothing. The matched estimate is pulled toward the null by the
+confounding adjustment, but it stays above 1 for COPD and about 1 for
+CKD, which is the pattern the simulation was built to show; it is also
+attenuated because the groups are defined by a single month’s exposure
+and SES is only measured through noisy indicators. You can compare it
+with the regression estimate from the SQL feature table: they answer
+slightly different questions (a two-group contrast versus a slope per
+µg/m³), so compare the direction, the confounding pattern, and the
+negative control rather than the numbers.</p>
+</div>
 </div>
 <div id="deliverable" class="section level2">
 <h2><strong>Deliverable</strong></h2>
 <p>One feature specification, plus three anticipated biases (with the
-concrete mechanism for each, not just the name).</p>
+concrete mechanism for each, not just the name), and, from the worked
+example, the crude and adjusted estimates for COPD and for the negative
+control (the regression estimates and the CohortMethod hazard ratios)
+with a short interpretation.</p>
 </div>
 <div id="check-your-work" class="section level2">
 <h2><strong>Check Your Work</strong></h2>
@@ -709,6 +856,10 @@ stated</label></li>
 <li><label><input type="checkbox" />Output is privacy-safe — no exact
 coordinates or other re-identifying detail in participant-facing
 output</label></li>
+<li><label><input type="checkbox" />The CohortMethod run uses the
+Exercise 3 cohorts, excludes <code>AQI_CATEGORY</code> and the exposure
+itself from the covariates, and reports balance and the negative
+control</label></li>
 </ul>
 <p><br></p>
 </div>

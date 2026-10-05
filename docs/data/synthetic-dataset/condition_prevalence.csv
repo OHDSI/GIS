@@ -1,9 +1,9 @@
 condition_concept_id,condition_name,category,patient_count,pct_of_population
-4170143,RHINITIS,Respiratory,1335,13.35
+257007,RHINITIS,Respiratory,1335,13.35
 317009,ASTHMA,Respiratory,1090,10.90
 255573,COPD,Respiratory,1086,10.86
 255848,PNEUMONIA,Respiratory,806,8.06
-258780,BRONCHITIS,Respiratory,688,6.88
+255841,BRONCHITIS,Respiratory,688,6.88
 320128,HYPERTENSION,Cardiometabolic,2397,23.97
 432867,HYPERLIPIDEMIA,Cardiometabolic,1989,19.89
 433736,OBESITY,Cardiometabolic,1778,17.78

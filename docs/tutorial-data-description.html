@@ -807,10 +807,17 @@ the parameters and true coefficients of the generator. -
 <code>demo.rejected_exposure_row</code>: the fixtures and answer key
 described above. - <code>demo.build_info</code>: Gaia image digest, Gaia
 Catalog commit, source datasets, and build date.</p>
-<p>Vocabulary tables (<code>concept</code>,
-<code>concept_relationship</code>, <code>concept_ancestor</code>) are
-not part of the dataset; load the OMOP and GIS vocabulary packages
-separately for Exercise 3.</p>
+<p><strong>Mini vocabulary</strong> (populated): <code>concept</code>,
+<code>concept_ancestor</code>, <code>concept_relationship</code>,
+<code>concept_synonym</code>, <code>vocabulary</code>,
+<code>domain</code>, <code>concept_class</code>,
+<code>relationship</code>. It holds the 73 standard concepts the data
+use (SNOMED, RxNorm, LOINC, UCUM and a few CDM and type concepts) plus
+the OMOP GIS, SDoH, and Exposome concepts, so Exercises 3 and 4 and the
+OHDSI tools that resolve concept sets work without a separate vocabulary
+download. It is not a substitute for the full vocabulary; see the <a
+href="https://github.com/OHDSI/GIS/blob/main/syntheticDataGIS/vocabulary/README.md">vocabulary
+notes</a>.</p>
 </div>
 <div id="provenance-and-known-limitations" class="section level3">
 <h3>Provenance and known limitations</h3>
@@ -822,9 +829,13 @@ image and catalog commit, so a build can be reproduced.</li>
 <code>dose_unit_source_value</code> empty on the exposure rows it
 derives, and assigns its own exposure concept (<code>2052499839</code>)
 and geometry-type concepts. Expect these in Exercise 3.</li>
-<li>The concept for the residence relationship (<code>32848</code>) and
-the pregnancy concepts used in the <code>EPISODE</code> table should be
-verified against the OMOP GIS vocabulary release you load.</li>
+<li>Every concept id used by the data is checked against the mini
+vocabulary at build time (it must exist, be a standard concept, and be
+in the right domain). Residences use the OMOP GIS concept
+<code>Patient Residence</code> as the <code>LOCATION_HISTORY</code>
+relationship, and pregnancies are <code>EPISODE</code> rows of the
+<code>Disease Episode</code> concept whose object is the
+<code>Pregnancy</code> condition.</li>
 <li>Persons are placed uniformly at random inside a county polygon, so
 there is no within-county clustering; everyone in a county shares the
 same exposure value.</li>

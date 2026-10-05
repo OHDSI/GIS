@@ -520,16 +520,15 @@ gaia-db container
 <div id="part-a-vocabulary-roles" class="section level3">
 <h3>Part A: vocabulary roles</h3>
 <ol style="list-style-type: decimal">
-<li><p><strong>Load the GIS vocabulary concepts</strong>
-(<code>syntheticDataGIS/vocab_temp/concept_delta.csv</code> in the
-repository) into a lookup table. It contains the OMOP GIS (geometry
-semantics), OMOP Exposome (toxicants), and OMOP SDOH (contextual
-determinants) concepts:</p>
-<pre class="sql"><code>CREATE TABLE demo.gis_concept (concept_id integer, concept_name text, domain_id text, vocabulary_id text,
-    concept_class_id text, standard_concept text, concept_code text,
-    valid_start_date date, valid_end_date date, invalid_reason text);</code></pre>
-<pre class="bash"><code>docker compose exec -T gaia-db psql -U postgres -d gaiacore \
-  -c &quot;\copy demo.gis_concept FROM STDIN WITH (FORMAT csv, HEADER true)&quot; &lt; concept_delta.csv</code></pre></li>
+<li><p><strong>Look at the mini vocabulary.</strong> The dataset ships
+with a small OMOP vocabulary in the <code>omopgis</code> schema
+(<code>concept</code>, <code>concept_ancestor</code>,
+<code>concept_relationship</code>, <code>vocabulary</code>, and so on):
+the standard concepts used by the data plus the OMOP GIS (geometry
+semantics), OMOP Exposome (toxicants), and OMOP SDoH (contextual
+determinants) concepts. See how many concepts each vocabulary
+contributes:</p>
+<pre class="sql"><code>SELECT vocabulary_id, COUNT(*) AS n_concepts FROM omopgis.concept GROUP BY 1 ORDER BY 2 DESC;</code></pre></li>
 <li><p><strong>Check the role of every concept in
 <code>external_exposure</code>.</strong> Each concept column should hold
 a concept from the right vocabulary and class:</p>
@@ -538,9 +537,9 @@ a concept from the right vocabulary and class:</p>
        ee.exposure_type_concept_id, c3.concept_name AS geometry_type, c3.concept_class_id,
        ee.unit_concept_id, COUNT(*) AS n
 FROM omopgis.external_exposure ee
-LEFT JOIN demo.gis_concept c1 ON c1.concept_id = ee.exposure_concept_id
-LEFT JOIN demo.gis_concept c2 ON c2.concept_id = ee.exposure_relationship_concept_id
-LEFT JOIN demo.gis_concept c3 ON c3.concept_id = ee.exposure_type_concept_id
+LEFT JOIN omopgis.concept c1 ON c1.concept_id = ee.exposure_concept_id
+LEFT JOIN omopgis.concept c2 ON c2.concept_id = ee.exposure_relationship_concept_id
+LEFT JOIN omopgis.concept c3 ON c3.concept_id = ee.exposure_type_concept_id
 GROUP BY 1,2,3,4,5,6,7,8,9,10;</code></pre>
 <p>Which vocabulary does each of the three concepts come from, and why?
 Two things should bother you. The exposure concept is named “Annual
@@ -566,7 +565,7 @@ this exercise is designed to catch: the first and last months overlap
 only partially.</p>
 <pre class="sql"><code>WITH preg AS (
     SELECT person_id, episode_start_date AS s, episode_end_date AS e
-    FROM omopgis.episode WHERE episode_concept_id = 32277),
+    FROM omopgis.episode WHERE episode_object_concept_id = 4299535),   -- Pregnancy
 ov AS (
     SELECT p.person_id, ee.value_as_number AS v,
            GREATEST(ee.exposure_start_date, p.s) AS os, LEAST(ee.exposure_end_date, p.e) AS oe
@@ -629,15 +628,66 @@ feature should treat the missing value:</p>
 <div id="part-d-exposure-based-cohorts-with-caprforextensions"
 class="section level3">
 <h3>Part D: exposure-based cohorts with CaprForExtensions</h3>
+<p>You build the cohorts here and use them unchanged in <a
+href="tutorial-exercise-4.html">Exercise 4</a>, where CohortMethod
+compares them. The design is a fixed index date (2016-01-01) for
+everyone, with the exposure groups defined by the PM2.5 value on the
+index month, and COPD as the outcome:</p>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Cohort id</th>
+<th>Name</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>High PM2.5 at index</td>
+<td>PM2.5 &gt;= 10 µg/m³ in the month starting 2016-01-01, with 730 days
+of prior observation</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Low PM2.5 at index</td>
+<td>PM2.5 &lt; 8 µg/m³ in the month starting 2016-01-01, with 730 days
+of prior observation</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>COPD</td>
+<td>First COPD diagnosis</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>CKD (negative-control outcome)</td>
+<td>First CKD diagnosis</td>
+</tr>
+</tbody>
+</table>
 <ol start="7" style="list-style-type: decimal">
-<li><p><strong>Register <code>external_exposure</code> as a custom
-domain</strong> with <a
-href="https://github.com/OHDSI/CaprForExtensions">CaprForExtensions</a>,
-so exposure criteria can be written next to ordinary Capr criteria. Run
-this in RStudio (the <code>gaia-core</code> container) after
-<code>remotes::install_github("OHDSI/CaprForExtensions")</code>:</p>
+<li><p><strong>Define the cohorts with <a
+href="https://github.com/OHDSI/CaprForExtensions">CaprForExtensions</a>.</strong>
+Run this in RStudio from the tutorial image (it has Capr, CirceR, and
+both extension packages installed). <code>external_exposure</code> is
+registered as a custom domain so exposure criteria can be written like
+ordinary Capr criteria:</p>
 <pre class="r"><code>library(Capr)
 library(CaprForExtensions)
+library(DatabaseConnector)
+library(SqlRender)
+
+connectionDetails &lt;- createConnectionDetails(
+  dbms = &quot;postgresql&quot;, server = &quot;gaia-db/gaiacore&quot;, port = 5432,
+  user = &quot;postgres&quot;, password = &quot;&lt;provided&gt;&quot;,
+  pathToDriver = Sys.getenv(&quot;DATABASECONNECTOR_JAR_FOLDER&quot;))
+connection &lt;- connect(connectionDetails)
 
 registerCustomDomain(
   domain_id = &quot;externalExposure&quot;,
@@ -651,58 +701,62 @@ registerCustomDomain(
 )
 
 pm25 &lt;- cs(2052499839, name = &quot;PM2.5, CDC monthly county mean&quot;)
-copd &lt;- cs(255573, name = &quot;COPD&quot;)
+indexMonth &lt;- dateRange(&quot;exposure_start_date&quot;, &quot;2016-01-01&quot;, &quot;2016-01-01&quot;)
 
-# Persons with a month of PM2.5 &gt;= 12 ug/m3 (single extension criterion as the entry event)
 highPm25 &lt;- cohort(
-  entry = entry(externalExposure(pm25, valueAsNumber = numericValue(&quot;value_as_number&quot;, &quot;&gt;=&quot;, 12))),
-  exit = exit(endStrategy = observationExit())
-)
-
-# COPD cases, kept only if they had a high-PM2.5 month on record (inclusion rule)
-copdHighPm25 &lt;- cohort(
-  entry = entry(conditionOccurrence(copd)),
-  attrition = attrition(
-    &quot;high_pm25_month&quot; = withAll(atLeast(1, externalExposure(pm25, valueAsNumber = numericValue(&quot;value_as_number&quot;, &quot;&gt;=&quot;, 12))))
-  ),
-  exit = exit(endStrategy = observationExit())
-)
-
-cohortJson &lt;- compileExtendedCohort(highPm25)
-options &lt;- buildExtensionOptions(cohort_id = 1, cdm_schema = &quot;omopgis&quot;,
-                                 target_schema = &quot;demo&quot;, target_table = &quot;cohort&quot;)
-sql &lt;- buildExtendedCohortQuery(cohortJson, options)</code></pre>
+  entry = entry(
+    externalExposure(pm25, dateRange = indexMonth,
+                     valueAsNumber = numericValue(&quot;value_as_number&quot;, &quot;&gt;=&quot;, 10)),
+    observationWindow = continuousObservation(730, 0)),
+  exit = exit(endStrategy = observationExit()))
+lowPm25 &lt;- cohort(
+  entry = entry(
+    externalExposure(pm25, dateRange = indexMonth,
+                     valueAsNumber = numericValue(&quot;value_as_number&quot;, &quot;&lt;&quot;, 8)),
+    observationWindow = continuousObservation(730, 0)),
+  exit = exit(endStrategy = observationExit()))
+copd &lt;- cohort(entry = entry(conditionOccurrence(cs(255573, name = &quot;COPD&quot;))),
+               exit = exit(endStrategy = observationExit()))
+ckd  &lt;- cohort(entry = entry(conditionOccurrence(cs(46271022, name = &quot;CKD&quot;))),
+               exit = exit(endStrategy = observationExit()))</code></pre>
 <p>The package compiles extension criteria into placeholder observation
 queries, lets CirceR generate the SQL, and then substitutes the
-extension-table logic back in. Read the generated SQL and find where
-<code>external_exposure</code> appears. Concept sets are resolved
-against the vocabulary tables
-(<code>@vocabulary_database_schema</code>), so the faculty provide a
-database with the OMOP vocabulary and the GIS delta loaded. Render and
-run the SQL with <code>SqlRender</code> and
-<code>DatabaseConnector</code>, into a <code>demo.cohort</code> table
-with the standard cohort columns.</p></li>
-<li><p><strong>Build the cohorts you need for Exercise 4, and validate
-them against SQL.</strong> Create at least:</p>
-<ul>
-<li>high and low PM2.5 cohorts (for example any month &gt;= 12 µg/m³
-vs. never above 10), and the SES-stratified variants using the SDOH
-observations;</li>
-<li>COPD (headline), pneumonia and MI outcome cohorts, plus
-negative-control outcomes (CKD, type 2 diabetes);</li>
-<li>one cohort with an inclusion rule on <code>LOCATION_HISTORY</code>
-continuity, if you can express it as an extension criterion.</li>
-</ul>
-<p>For reference on this build, about 7,800 of 10,000 persons have at
-least one month &gt;= 12 µg/m³ (about 9,600 have one &gt;= 10, and about
-3,800 have one &gt;= 15), and about 420 of the 1,086 COPD cases have a
-month &gt;= 12 in the 365 days before diagnosis. Check each cohort count
-against a hand-written SQL count: if Capr’s count and yours differ, find
-out why (temporal window, first event vs. all events, inclusive dates).
-Suppress small counts in anything you share, and compare your COPD
-prevalence strata to the <a
-href="tutorial-data-visualization.html#copd-prevalence-by-pm2.5-and-ses">visualization
-page</a>.</p></li>
+extension-table logic back in. Concept sets are resolved against the
+vocabulary tables, which the dataset provides in <code>omopgis</code>
+(use <code>omopgis</code> as both the CDM and the vocabulary
+schema).</p></li>
+<li><p><strong>Generate the cohorts into one cohort table</strong>,
+<code>demo.cohort</code>, with ids 1 to 4 as in the table above, and
+keep it for Exercise 4:</p>
+<pre class="r"><code>executeSql(connection, &quot;CREATE TABLE demo.cohort (cohort_definition_id int, subject_id int,
+                                                  cohort_start_date date, cohort_end_date date)&quot;)
+definitions &lt;- list(highPm25, lowPm25, copd, ckd)
+for (i in seq_along(definitions)) {
+  cohortJson &lt;- compileExtendedCohort(definitions[[i]])
+  options &lt;- buildExtensionOptions(cohort_id = i, cdm_schema = &quot;omopgis&quot;, target_schema = &quot;demo&quot;,
+                                   target_table = &quot;cohort&quot;, generate_stats = FALSE)
+  sql &lt;- buildExtendedCohortQuery(cohortJson, options)   # read it: find where external_exposure appears
+  sql &lt;- translate(render(sql, warnOnMissingParameters = FALSE), targetDialect = &quot;postgresql&quot;)
+  executeSql(connection, sql, progressBar = FALSE)
+}
+querySql(connection, &quot;SELECT cohort_definition_id, COUNT(DISTINCT subject_id) AS persons
+                      FROM demo.cohort GROUP BY 1 ORDER BY 1&quot;)</code></pre></li>
+<li><p><strong>Validate every cohort against hand-written SQL.</strong>
+For example, cohort 1:</p>
+<pre class="sql"><code>SELECT COUNT(DISTINCT person_id) FROM omopgis.external_exposure
+WHERE exposure_concept_id = 2052499839 AND exposure_start_date = &#39;2016-01-01&#39; AND value_as_number &gt;= 10;</code></pre>
+<p>On the reference build the counts are 2,717 persons in cohort 1,
+3,099 in cohort 2 (the 4,184 persons between 8 and 10 are in neither),
+1,086 in cohort 3 and 1,384 in cohort 4, and the package reproduces them
+exactly. If Capr’s count and yours differ, find out why (inclusive
+dates, observation window, mover rows). Check that no person is in both
+cohort 1 and cohort 2, and suppress small counts in anything you
+share.</p>
+<p>Notice what this design costs: the group is defined by one month’s
+value, which is a noisy proxy for a person’s long-run exposure (monthly
+values vary by about 2.5 µg/m³ around a county’s mean).
+Misclassification like this pulls the comparison toward the null. Where
+does that show up in Exercise 4?</p></li>
 </ol>
 </div>
 </div>
@@ -712,7 +766,7 @@ page</a>.</p></li>
 with an explanation of the difference), the 12-month lookback exposure
 summary for COPD cases, the list of semantic fields your calculations
 depended on (concepts, relationship and geometry-type concepts, units,
-and the vocabulary each came from), and the cohort definitions with
+and the vocabulary each came from), and the four cohort definitions with
 counts and their SQL validation.</p>
 </div>
 <div id="check-your-work" class="section level2">
