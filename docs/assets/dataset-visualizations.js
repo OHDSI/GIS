@@ -70,7 +70,7 @@
       options: {
         indexAxis: "y",
         plugins: {
-          title: { display: true, text: "Condition prevalence (% of 10,000 patients)" },
+          title: { display: true, text: "Condition prevalence (% of patients)" },
           legend: { display: false },
           tooltip: {
             callbacks: {
@@ -104,26 +104,47 @@
     });
   }
 
-  function renderAsthmaQuartile(rows) {
-    var sorted = rows.slice().sort(function (a, b) { return a.pm25_quartile - b.pm25_quartile; });
-    new Chart(document.getElementById("chartAsthmaQuartile"), {
+  function renderCopdPm25Ses(rows) {
+    var sesLabels = { 1: "Lowest SES tertile", 2: "Middle SES tertile", 3: "Highest SES tertile" };
+    var colors = { 1: "#C0392B", 2: "#E67E22", 3: "#2E86C1" };
+    var pmTertiles = [1, 2, 3];
+    var datasets = [1, 2, 3].map(function (ses) {
+      return {
+        label: sesLabels[ses],
+        data: pmTertiles.map(function (pm) {
+          var r = rows.filter(function (x) { return x.ses_tertile === ses && x.pm25_tertile === pm; })[0];
+          return r ? r.copd_pct : null;
+        }),
+        borderColor: colors[ses],
+        backgroundColor: colors[ses],
+        tension: 0.2
+      };
+    });
+    new Chart(document.getElementById("chartCopdPm25Ses"), {
+      type: "line",
+      data: { labels: ["Lowest PM2.5 tertile", "Middle PM2.5 tertile", "Highest PM2.5 tertile"], datasets: datasets },
+      options: {
+        plugins: { title: { display: true, text: "COPD prevalence by PM2.5 tertile and SES tertile" } },
+        scales: { y: { title: { display: true, text: "% with COPD diagnosis" } } }
+      }
+    });
+  }
+
+  function renderPm25Monthly(rows) {
+    var labels = rows.map(function (r) { return String(r.month).slice(0, 7); });
+    new Chart(document.getElementById("chartPm25Monthly"), {
       type: "line",
       data: {
-        labels: sorted.map(function (r) { return "Q" + r.pm25_quartile + " (avg " + r.avg_pm25 + " µg/m³)"; }),
-        datasets: [{
-          label: "Asthma prevalence (%)",
-          data: sorted.map(function (r) { return r.asthma_pct; }),
-          borderColor: "#4C9AFF",
-          backgroundColor: "#4C9AFF",
-          tension: 0.2
-        }]
+        labels: labels,
+        datasets: [
+          { label: "90th percentile", data: rows.map(function (r) { return r.p90; }), borderColor: "#E67E22", pointRadius: 0, borderDash: [4, 3] },
+          { label: "Mean", data: rows.map(function (r) { return r.mean_pm25; }), borderColor: "#8E44AD", backgroundColor: "#8E44AD", pointRadius: 0 },
+          { label: "10th percentile", data: rows.map(function (r) { return r.p10; }), borderColor: "#2E86C1", pointRadius: 0, borderDash: [4, 3] }
+        ]
       },
       options: {
-        plugins: { title: { display: true, text: "Asthma prevalence by county PM2.5 exposure quartile" } },
-        scales: {
-          x: { title: { display: true, text: "PM2.5 quartile (Q1 = lowest exposure)" } },
-          y: { title: { display: true, text: "% with asthma diagnosis" } }
-        }
+        plugins: { title: { display: true, text: "Monthly county PM2.5 across the cohort's residences (µg/m³)" } },
+        scales: { y: { title: { display: true, text: "µg/m³" } } }
       }
     });
   }
@@ -211,7 +232,8 @@
 
   loadCsv("condition_prevalence.csv").then(safe(renderConditions, "chartConditions")).catch(function (e) { showError("chartConditions", e); });
   loadCsv("pm25_by_density.csv").then(safe(renderDensity, "chartDensity")).catch(function (e) { showError("chartDensity", e); });
-  loadCsv("asthma_by_pm25_quartile.csv").then(safe(renderAsthmaQuartile, "chartAsthmaQuartile")).catch(function (e) { showError("chartAsthmaQuartile", e); });
+  loadCsv("copd_by_pm25_ses.csv").then(safe(renderCopdPm25Ses, "chartCopdPm25Ses")).catch(function (e) { showError("chartCopdPm25Ses", e); });
+  loadCsv("pm25_monthly.csv").then(safe(renderPm25Monthly, "chartPm25Monthly")).catch(function (e) { showError("chartPm25Monthly", e); });
   loadCsv("sdoh_summary.csv").then(safe(renderSdoh, "chartSdoh")).catch(function (e) { showError("chartSdoh", e); });
   loadCsv("drug_counts.csv").then(safe(function (rows) {
     renderCountBar("chartDrugs", rows, "drug_name", "exposure_count", "Drug exposure records by concept", "#27AE60");
