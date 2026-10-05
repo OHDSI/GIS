@@ -9,3 +9,5 @@ errorReportSql.txt
 examples/
 env/
 scratch*
+
+build/

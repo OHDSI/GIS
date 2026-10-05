@@ -12,87 +12,116 @@ output:
 
 <div class="alert alert-warning"><strong>Work in progress.</strong> These tutorial materials are still under active development and will continue to change until the tutorial takes place on <strong>October 20, 2026</strong>. Content, links, and exercises may be incomplete or shift without notice.</div>
 
-The tutorial uses two datasets: a synthetic OMOP CDM population (source code lives in this repository) and a public PM2.5 dataset for the United States (an external source, used to demonstrate cataloging and ingestion of a real dataset — see [Geo Data Description](tutorial-geo-data-description.html)). Session 1 catalogs the public dataset; Sessions 2-4 link it against the synthetic OMOP population.
+The tutorial uses two datasets: a synthetic OMOP CDM population (generated from code in this repository) and a public monthly county PM2.5 dataset for the United States (an external source; see [Geo Data Description](tutorial-geo-data-description.html)). Session 1 catalogs the public dataset. In Session 2 you ingest it with Gaia and link it to the synthetic persons, which produces the `EXTERNAL_EXPOSURE` table. Sessions 3 and 4 query and model that result.
 
 <br>
 
 ## **Privacy statement**
 
-No real addresses or coordinates are used anywhere in the tutorial. Person locations in the synthetic OMOP dataset are randomly generated within real per-state lat/lon bounding boxes covering all 50 states plus DC; they do not correspond to real people or real residences. County identities (`county_fips`, names) are synthetic (FIPS-shaped, not real FIPS codes) and are not intended to be joined against real county-level datasets as if they were authoritative.
+All persons, clinical events, and SDOH values are synthetic, and no real individuals or addresses appear anywhere. Each person's location is a random point drawn inside the boundary of a real US county; it does not correspond to a real residence. County identities (FIPS code, name, boundaries, population) and the PM2.5 exposure values are real public data, so the synthetic persons join to real county-level datasets. The county SES index and the SDOH observations derived from it are simulated, not real county statistics.
+
+<br>
+
+## **How the dataset is produced**
+
+Source code and build instructions: [`syntheticDataGIS/`](https://github.com/OHDSI/GIS/tree/main/syntheticDataGIS). The build runs the Gaia toolchain itself:
+
+1. Gaia ingests the Census TIGER 2023 counties and the CDC monthly county PM2.5 dataset through the Gaia Catalog.
+2. **Stage 1** creates the persons, their residences, and `LOCATION` / `LOCATION_HISTORY`.
+3. Gaia loads those locations and derives the exposure rows with its own spatial join (`working.spatial_join_from_catalog`).
+4. **Stage 2** draws conditions, drugs, procedures, measurements, and SDOH from that exposure, and writes the answer key.
+
+The exposure that drives disease risk is therefore exactly what you reproduce in Exercise 2. **`EXTERNAL_EXPOSURE` is empty in the published dataset**; you populate it from Gaia. A prebuilt copy (`external_exposure_fallback.csv.gz`) is provided as a fallback in case the pipeline does not run on your machine. Both the dataset (`synthetic_omop_gis.sql.gz`) and the fallback are in the [`syntheticDataGIS/data`](https://github.com/OHDSI/GIS/tree/main/syntheticDataGIS/data) folder. The build is deterministic given the same Gaia image and catalog commit, which are recorded in `demo.build_info`.
 
 <br>
 
 ## **OMOP synthetic dataset**
 
-Source: [`syntheticDataGIS/createSimpleSyntheticSet.sql`](https://github.com/OHDSI/GIS/blob/main/syntheticDataGIS/createSimpleSyntheticSet.sql) in this repository. See [OMOP Data Visualization](tutorial-data-visualization.html) for charts of the cohort's condition prevalence, PM2.5/SES distribution, and SDOH observations, each paired with the SQL query that produced it.
-
 ### Overview
 
-The script builds a standard OMOP CDM v5.4 schema (`omopgis`) plus the Gaia CDM extension tables (`LOCATION_HISTORY`, `EXTERNAL_EXPOSURE`) and one non-OMOP-standard demo dimension table, `COUNTY_REFERENCE`. It then populates 10,000 synthetic patients drawn from a synthetic nationwide population of ~3,103 US counties/county-equivalents (covering every state plus DC).
+The dataset is an OMOP CDM v5.4 schema (`omopgis`) plus the Gaia extension tables (`LOCATION_HISTORY`, `EXTERNAL_EXPOSURE`), a demo-only `COUNTY_REFERENCE` table, and a `demo` schema holding the generator parameters, the answer key, and the exercise fixtures. See [OMOP Data Visualization](tutorial-data-visualization.html) for charts of the cohort, each paired with its SQL.
 
-Each county in `COUNTY_REFERENCE` carries an urban-density category (Urban Core / Suburban / Small Town / Rural) and a composite socioeconomic status (SES) index (0-100, higher = more affluent). These two county attributes are the dataset's two independent drivers:
+- **10,000 adults**, aged 18-90 on 2014-01-01, observed 2014-01-01 to 2019-12-31.
+- **Real counties.** Persons live in about 2,700 of 3,099 eligible real US counties and county equivalents. Counties are sampled in proportion to the square root of their 2019 population, so populous counties hold more persons while every state is represented.
+- **Residence history.** Each person has one `LOCATION_HISTORY` row spanning 2014-2019, except about 10% who move once to a different county between March 2015 and October 2018 and have two consecutive, non-overlapping rows. `PERSON.location_id` is the current (last) address.
+- **Real exposure.** Once derived in Exercise 2, `EXTERNAL_EXPOSURE` holds one row per person per month (about 720,000 rows). A move in the middle of a month gives two partial-month rows for that month.
+- **14 conditions** (5 respiratory, 9 cardiometabolic), about 18,000 occurrences, plus the drugs, procedures, and measurements tied to them.
+- **12 county-level SDOH observations** per person, derived from the simulated county SES index.
 
-- **Urban density → PM2.5** (and PM10, Ozone, NO2, Noise, Tree Canopy): denser counties get systematically higher pollution baselines. See `EXTERNAL_EXPOSURE`.
-- **County SES → SDOH observations**: poverty rate, education, housing cost burden, employment, neighborhood disadvantage, food insecurity, PCP access, social isolation, uninsured rate, broadband access, violent crime rate, and AQI category — 12 observations total, all derived directly from the same `ses_index`. See `OBSERVATION`.
+The county table carries a density category from real population density (Urban Core, Suburban, Small Town, Rural) and a **simulated** SES index (0-100, higher is more affluent). County SES is correlated with county PM2.5 at about -0.3, so higher-PM2.5 counties tend to have lower SES. That makes SES a genuine confounder of the PM2.5 effect.
 
-Each patient is assigned to one county via `LOCATION.county_ref_id`, and inherits that county's PM2.5 exposure and SES for the purposes of comorbidity risk. 14 conditions are generated in `CONDITION_OCCURRENCE` — 5 respiratory (asthma, COPD, chronic bronchitis, allergic rhinitis, pneumonia) and 9 cardiometabolic (hypertension, coronary artery disease, congestive heart failure, myocardial infarction, stroke, type 2 diabetes, obesity, hyperlipidemia, chronic kidney disease) — each with its own risk formula blending the patient's PM2.5 exposure and county SES (respiratory conditions weight PM2.5 more heavily; metabolic/renal conditions weight SES more heavily; cardiovascular conditions weight both). Condition cohorts in turn drive 15 drugs, 7 procedures, and 16 measurements in `DRUG_EXPOSURE`, `PROCEDURE_OCCURRENCE`, and `MEASUREMENT` (e.g. an asthma diagnosis makes a patient eligible for an albuterol prescription and a spirometry procedure at a fixed probability).
+### How the conditions are generated
 
-`LOCATION_HISTORY` records each person's single "lives at" interval (SNOMED concept `581476`, 2014-01-01 to 2019-12-31) at their assigned location; `EXTERNAL_EXPOSURE` records the place-based PM2.5/PM10/Ozone/NO2/Noise/Tree-Canopy values linked to that location.
+Every condition follows the same logistic model, with the true coefficients stored in `demo.generator_truth`:
 
-The exposure values populated by this script are fully synthetic (generated from the county's `pm25_baseline_mean` plus noise, not derived from or joined to the public PM2.5 dataset described in [Geo Data Description](tutorial-geo-data-description.html)). The public dataset is a separate real-world source that participants catalog and ingest independently in Exercises 1-2; linking it against this synthetic population is part of the exercise, not something the generator script pre-does for you.
+```
+logit P(condition) = logit(prevalence_ref)
+                   + b_pm25  * (mean PM2.5 - 8 µg/m³)
+                   + b_ses   * (SES - 50) / 15
+                   + b_age   * (age - 54) / 10
+                   + b_female * [female]
+                   + county random effect (SD 0.15)
+```
 
-### Scenario
+PM2.5 and SES are day-weighted over a person's residences, so a mover is exposed to the average of both counties. Onset dates are uniform over 2014-2019 and carry no information about exposure timing. The unmeasured county random effect induces spatial clustering.
 
-- adults, one residential interval per patient (2014-01-01 to 2019-12-31); the script does **not** currently generate a residential move — every patient has exactly one `LOCATION_HISTORY` row
-- respiratory + cardiometabolic condition cohort (14 conditions — see Overview)
-- synthetic PM2.5, PM10, Ozone, NO2, Noise, and Tree Canopy exposure by county, driven by county urban density
-- county-level SDOH indicators (12 observations, listed above) driven by county SES — no SVI/ADI variable specifically; `NEIGHBORHOOD_CONCENTRATED_DISADVANTAGE` (0-1 index) is the closest analog currently in the script
+| Condition | Category | PM2.5 log-odds per µg/m³ (OR) | SES per SD | Age per decade | Female |
+|---|---|---|---|---|---|
+| COPD | Respiratory | 0.15 (1.16) | -0.20 | 0.45 | 0.00 |
+| Pneumonia | Respiratory | 0.10 (1.11) | -0.30 | 0.30 | -0.10 |
+| Bronchitis | Respiratory | 0.10 (1.11) | -0.25 | 0.20 | 0.10 |
+| Asthma | Respiratory | 0.08 (1.08) | -0.15 | 0.00 | 0.25 |
+| MI | Cardiometabolic | 0.08 (1.08) | -0.40 | 0.50 | -0.50 |
+| CHF | Cardiometabolic | 0.07 (1.07) | -0.45 | 0.65 | -0.20 |
+| CAD | Cardiometabolic | 0.06 (1.06) | -0.35 | 0.60 | -0.45 |
+| Stroke | Cardiometabolic | 0.05 (1.05) | -0.40 | 0.55 | -0.10 |
+| Rhinitis, hypertension, T2DM, obesity, hyperlipidemia, CKD | mixed | **0 (null)** | -0.05 to -0.50 | varies | varies |
 
-**Known edge cases the exercises may expect are not yet in the script.** Checked directly against the current generator: there is no residential move, no missing SDOH/exposure value, no duplicate source row, no unit-mismatch staging row, and no non-overlapping exposure record. If an exercise depends on catching one of these, it still needs to be added to the generator (or introduced as a separate exercise-specific fixture) — this is open work, not yet scheduled.
+The six null outcomes have no simulated PM2.5 effect; because of the PM2.5-SES correlation, a crude analysis still shows an apparent association with them, which is useful as negative controls and for illustrating confounding.
+
+<div class="alert alert-danger"><strong>The PM2.5 coefficients are deliberately exaggerated.</strong> Real county PM2.5 varies little across 10,000 people (SD about 1.4 µg/m³), so effects at epidemiologic sizes would not be recoverable. The simulated effects (for example COPD, OR about 1.16 per µg/m³) are much larger than published estimates. Treat them as a teaching device, not as real-world effect sizes. The null outcomes are simulated as null; real-world literature may report associations.</div>
+
+### Fixtures
+
+Seven persons are built to exercise specific checks. They are listed in `demo.fixture_person`, with a matching answer key in `demo.expected_result`. Person IDs may change between dataset versions, so always look them up in the tables rather than hardcoding them.
+
+| Fixture | What it contains | Used in |
+|---|---|---|
+| `PREGNANCY_STATIC` | Female, one pregnancy episode (2016-03-18 to 2016-12-09, 267 days) at a single residence; the first and last months overlap the episode only partially | Exercise 3 |
+| `PREGNANCY_MOVER` | A pregnancy episode (2016-05-20 to 2017-02-10) during which the person moves counties on 2016-08-15, so the episode spans two residences | Exercise 3 |
+| `DUPLICATE_SOURCE_ROW` | A staging row that duplicates a loaded 2017-03 row | Exercise 2 |
+| `UNIT_MISMATCH` | A staging row for 2017-04 in mg/m³ instead of µg/m³ | Exercise 2 |
+| `NON_OVERLAPPING_INTERVAL` | A staging row for January 2020, outside the residence and observation period | Exercise 2 |
+| `MISSING_EXPOSURE_VALUE` | A staging row for 2017-05 with a NULL value | Exercise 2 |
+| `MISSING_SDOH_VALUE` | One SDOH observation (neighborhood disadvantage) is missing for this person | Exercise 3 |
+
+The four bad exposure rows are in `demo.rejected_exposure_row`. They never appear in the clean tables, because the clean exposure comes only from the Gaia pipeline; they are for the QA drill in Exercise 2. The pregnancy episodes are in the OMOP `EPISODE` table. `demo.expected_result` holds, for each pregnancy, the correct day-weighted mean PM2.5 and the naive mean of the overlapping rows, plus the expected row counts for the exposure checks.
 
 ### Grain and uniqueness
 
-Recommended logical key for the demo:
+A person has 72 monthly PM2.5 rows (73 if they move in the middle of a month, because that month is split into two rows). The expected grain of `EXTERNAL_EXPOSURE` is one row per person, location, exposure concept, and interval, so no two rows share:
 
-`person_id + location_id + exposure_concept_id + exposure_start_date + exposure_end_date + exposure_type_concept_id + exposure_source_value`
-
-_TODO: confirm/finalize the logical key used for the demo._
+`person_id + location_id + exposure_concept_id + exposure_start_date + exposure_end_date`
 
 ### Tables
 
-**Standard OMOP**
+**Standard OMOP** (populated): `person`, `location`, `observation_period`, `condition_occurrence`, `drug_exposure`, `procedure_occurrence`, `measurement`, `observation`, `episode`, `cdm_source`
 
-- `person`
-- `location`
-- `observation_period`
-- `condition_occurrence`
-- `drug_exposure`
-- `procedure_occurrence`
-- `measurement`
-- `observation`
-- `cdm_source`
-- `concept`
-- `concept_relationship`
-- `concept_ancestor`
+**GIS extension**: `location_history` (populated); `external_exposure` (**empty**, populated in Exercise 2)
 
-**GIS extension**
+**Demo-only**
+- `county_reference`: one row per real county with FIPS, name, state, centroid, land area, 2019 population, density category, mean 2014-2019 PM2.5, and the simulated SES index. `location.county_ref_id` is a foreign key into it and is the generator's ground truth for each person's county.
+- `demo.generator_params`, `demo.generator_truth`: the parameters and true coefficients of the generator.
+- `demo.fixture_person`, `demo.expected_result`, `demo.rejected_exposure_row`: the fixtures and answer key described above.
+- `demo.build_info`: Gaia image digest, Gaia Catalog commit, source datasets, and build date.
 
-- `location_history`
-- `external_exposure`
+Vocabulary tables (`concept`, `concept_relationship`, `concept_ancestor`) are not part of the dataset; load the OMOP and GIS vocabulary packages separately for Exercise 3.
 
-**Demo-only (not part of standard OMOP or the Gaia extension)**
+### Provenance and known limitations
 
-- `county_reference` — one row per synthetic county; carries `urban_density_category`, `pm25_baseline_mean`, `ses_index`, and centroid lat/lon. `location.county_ref_id` is a foreign key into this table.
-
-**Tutorial-only, not yet in the script**
-
-- `demo.rejected_exposure_row`
-- `demo.expected_result`
-
-These two are referenced by the tutorial exercises but are not created or populated by `createSimpleSyntheticSet.sql` — they still need to be added (see the edge-cases note in Scenario above; these tables presumably exist to hold the rejected/expected rows from those edge cases).
-
-### Provenance and versioning
-
-The script populates one `cdm_source` row with `cdm_version` ('5.4'), `source_release_date`/`cdm_release_date`, and `vocabulary_version` ('GIS v1.0' — a label for this demo, not a real OMOP vocabulary release). There is no dataset UUID, no algorithm-version field, and no record of which real OMOP vocabulary tables (if any) were loaded alongside it — those remain open items if the tutorial needs to pin a specific run.
+- `cdm_source` records the CDM version (5.4) and the generator version. `demo.build_info` records the exact Gaia image and catalog commit, so a build can be reproduced.
+- Gaia currently leaves `unit_concept_id` and `dose_unit_source_value` empty on the exposure rows it derives, and assigns its own exposure concept (`2052499839`) and geometry-type concepts. Expect these in Exercise 3.
+- The concept for the residence relationship (`32848`) and the pregnancy concepts used in the `EPISODE` table should be verified against the OMOP GIS vocabulary release you load.
+- Persons are placed uniformly at random inside a county polygon, so there is no within-county clustering; everyone in a county shares the same exposure value.
 
 <br>

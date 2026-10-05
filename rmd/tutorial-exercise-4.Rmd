@@ -25,6 +25,130 @@ Design an analysis-ready exposure feature and identify threats to validity and f
 5. Note what would need to stay local vs. what could travel in a federated setting: standardized concepts and code travel; precise locations and patient-level geographies remain local; only diagnostics and aggregate estimates are shared.
 6. Write the feature definition as reproducible SQL (or pseudocode if SQL access isn't available in your environment).
 
+## **Suggested worked example**
+
+If you do not have your own question, use this one. It is a cohort study of whether higher PM2.5 in the two years before an index date predicts incident COPD, with the temporal alignment made explicit:
+
+- **Index date:** 2016-01-01. **Exposure:** day-weighted mean PM2.5 over the 730 days before the index date. **Outcome:** first COPD diagnosis on or after the index date (through 2019-12-31).
+- **Eligibility:** two years of observation before the index date, a full 730 days of exposure coverage, and no COPD before the index date (prevalent cases are excluded).
+- **Covariates:** age at index, sex, and county SES (the SDOH or `county_reference` value at the index date).
+
+The feature table below implements exactly that. It builds on the exposure from Exercise 3 and keeps eligibility (pre-index) separate from the outcome (post-index):
+
+```sql
+CREATE TABLE demo.ex4_features AS
+WITH params AS (SELECT DATE '2016-01-01' AS index_date, 730 AS lookback_days),
+cohort AS (
+    SELECT p.person_id, p.year_of_birth, p.gender_concept_id, pa.index_date, pa.lookback_days
+    FROM omopgis.person p
+    CROSS JOIN params pa
+    JOIN omopgis.observation_period op
+      ON op.person_id = p.person_id
+     AND op.observation_period_start_date <= pa.index_date - pa.lookback_days
+     AND op.observation_period_end_date >= pa.index_date
+    WHERE NOT EXISTS (SELECT 1 FROM omopgis.condition_occurrence co
+                      WHERE co.person_id = p.person_id AND co.condition_concept_id = 255573
+                        AND co.condition_start_date < pa.index_date)
+),
+expo AS (
+    SELECT c.person_id,
+           SUM(ee.value_as_number * (LEAST(ee.exposure_end_date, c.index_date - 1)
+                                     - GREATEST(ee.exposure_start_date, c.index_date - c.lookback_days) + 1))
+             / SUM(LEAST(ee.exposure_end_date, c.index_date - 1)
+                   - GREATEST(ee.exposure_start_date, c.index_date - c.lookback_days) + 1) AS pm25_24m,
+           SUM(LEAST(ee.exposure_end_date, c.index_date - 1)
+               - GREATEST(ee.exposure_start_date, c.index_date - c.lookback_days) + 1) AS days_covered
+    FROM cohort c
+    JOIN omopgis.external_exposure ee
+      ON ee.person_id = c.person_id AND ee.exposure_concept_id = 2052499839
+     AND ee.exposure_start_date <= c.index_date - 1
+     AND ee.exposure_end_date >= c.index_date - c.lookback_days
+    GROUP BY c.person_id
+),
+ses AS (
+    SELECT c.person_id, cr.ses_index
+    FROM cohort c
+    JOIN omopgis.location_history lh
+      ON lh.entity_id = c.person_id AND lh.start_date <= c.index_date AND lh.end_date >= c.index_date
+    JOIN omopgis.location l ON l.location_id = lh.location_id
+    JOIN omopgis.county_reference cr ON cr.county_ref_id = l.county_ref_id
+)
+SELECT c.person_id,
+       (EXTRACT(YEAR FROM c.index_date) - c.year_of_birth)::int AS age_at_index,
+       CASE WHEN c.gender_concept_id = 8532 THEN 1 ELSE 0 END AS female,
+       s.ses_index,
+       e.pm25_24m,
+       EXISTS (SELECT 1 FROM omopgis.condition_occurrence co
+               WHERE co.person_id = c.person_id AND co.condition_concept_id = 255573
+                 AND co.condition_start_date >= c.index_date)::int AS copd_after_index
+FROM cohort c
+JOIN expo e USING (person_id)
+JOIN ses s USING (person_id)
+WHERE e.days_covered = c.lookback_days;
+```
+
+### Extracting the exposure covariate with FeatureExtractionForExtensions
+
+The SQL above is the reference implementation. In a real study you would let [FeatureExtractionForExtensions](https://github.com/OHDSI/FeatureExtractionForExtensions) build the exposure covariate from `external_exposure` so it plugs into FeatureExtraction, PatientLevelPrediction, and CohortMethod. First turn the eligible persons into a standard cohort table:
+
+```sql
+CREATE TABLE demo.ex4_cohort AS
+SELECT 1 AS cohort_definition_id, person_id AS subject_id,
+       DATE '2016-01-01' AS cohort_start_date, DATE '2019-12-31' AS cohort_end_date
+FROM demo.ex4_features;
+```
+
+Then, in RStudio (`remotes::install_github("OHDSI/FeatureExtractionForExtensions")`):
+
+```r
+library(DatabaseConnector)
+library(FeatureExtraction)
+library(FeatureExtractionForExtensions)
+
+connectionDetails <- createConnectionDetails(dbms = "postgresql", server = "gaia-db/gaiacore",
+                                             port = 5432, user = "postgres", password = "<provided>")
+connection <- connect(connectionDetails)
+
+pm25Settings <- createExtensionCovariateSettings(
+  analysisId = 901,
+  extensionDatabaseSchema = "omopgis",
+  extensionTableName = "external_exposure",
+  extensionFields = c("exposure_concept_id", "value_as_number", "exposure_start_date"),
+  joinField = "person_id",
+  covariateIdField = "exposure_concept_id",
+  covariateValueField = "value_as_number",
+  dateField = "exposure_start_date",
+  startDay = -730,
+  endDay = -1,
+  conceptSet = list(Capr::cs(2052499839, name = "PM2.5, CDC monthly county mean")),
+  isBinary = FALSE,
+  missingMeansZero = FALSE
+)
+
+covariateData <- getDbCovariateData(
+  connection = connection,
+  cdmDatabaseSchema = "omopgis",
+  cohortDatabaseSchema = "demo",
+  cohortTable = "ex4_cohort",
+  cohortIds = 1,
+  rowIdField = "subject_id",
+  covariateSettings = pm25Settings,
+  aggregated = FALSE
+)
+```
+
+Read the SQL the package generates and compare it with your reference query. Three things differ, and you should be able to say what each does to the estimate:
+
+1. The covariate value is `MAX(value_as_number)` over the window, **not** the day-weighted mean. It is the highest monthly mean in the 24 months before the index date.
+2. The date filter applies to `exposure_start_date` only, so a row that starts before the window but overlaps it is dropped instead of clipped.
+3. The covariate ID is the exposure concept ID, so two windows of the same concept (for example the last 12 months and the 12 months before that) would share one ID. Extract them in separate calls, or build the windowed means in SQL as above.
+
+Join the covariate to the outcome by `subject_id` (`rowId`), fit the model with this covariate and with the weighted-mean covariate, and compare the two estimates. Which definition recovers the simulated effect better, and why? (Aggregated covariates are not supported by this package yet, so this is a person-level extraction.) Check the repository README for the exported function names in your installed version.
+
+Fit a logistic regression of `copd_after_index` on `pm25_24m`, once crude and once adjusted for `ses_index`, `age_at_index`, and `female` (for example `glm(copd_after_index ~ pm25_24m + ses_index + age_at_index + female, family = binomial, data = features)` in R). Then repeat with a negative-control outcome (for example CKD, concept `46271022`, replacing the COPD concept in both places in the query).
+
+What to expect, and what the generator knows. The true simulated PM2.5 effect on COPD is in `demo.generator_truth` (0.15 log-odds per µg/m³), and it is deliberately exaggerated (see the [data description](tutorial-data-description.html#how-the-conditions-are-generated)). On the reference build the cohort has about 9,600 persons and about 725 incident cases, the crude estimate is about 0.14 and the SES-adjusted estimate is about 0.11 per µg/m³ (standard error about 0.026), and the negative-control outcome shows a crude association of about 0.09 that disappears (about 0.00) after adjusting for SES. Your numbers will vary slightly with the build. Why is the adjusted estimate below the truth? (Think about exposure measured at the county level, residential moves, and the pre-index window.) Why does the negative control have a crude association at all?
+
 ## **Deliverable**
 
 One feature specification, plus three anticipated biases (with the concrete mechanism for each, not just the name).

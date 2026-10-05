@@ -1,0 +1,11 @@
+param,value,notes
+age_ref,54.0,"Reference age (years, at 2016-01-01) for the risk model"
+county_frailty_sd,0.15,SD of the shared county-level random effect on log-odds of every condition (unmeasured county confounding / spatial clustering)
+max_age_2014,90,Maximum age on 2014-01-01
+min_age_2014,18,Minimum age on 2014-01-01 (adults only)
+mover_fraction,0.10,Share of persons with one residential move between 2015-03-01 and 2018-10-31
+n_persons,10000,Number of synthetic persons
+pm25_ref_ugm3,8.0,Reference PM2.5 (ug/m3) at which a condition has its reference prevalence
+ses_pm25_correlation,-0.30,"Target correlation between county mean PM2.5 and county SES (higher PM2.5, lower SES): makes SES a confounder"
+ses_ref,50.0,Reference county SES index
+ses_sd,15.0,SD used to scale SES in the risk model (effects are per SD of SES)

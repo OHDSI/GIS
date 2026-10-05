@@ -1,33 +1,34 @@
 # Synthetic dataset CSV export
 
-A one-time CSV snapshot of the dataset produced by [`createSimpleSyntheticSet.sql`](../createSimpleSyntheticSet.sql), for anyone who wants to explore the data without standing up PostgreSQL. Each file is one table from the `omopgis` schema, exported with `psql \copy ... TO '<table>.csv' WITH CSV HEADER` after loading the script into a fresh PostgreSQL 16 instance. Empty tables (no rows populated by the script, e.g. `visit_occurrence`, `care_site`) are omitted.
+A CSV snapshot of the dataset produced by [`build_tutorial_dataset.sh`](../build_tutorial_dataset.sh) (generator v3.0, built 2026-10-05 with the pinned gaia-db image and gaiaCatalog commit listed in `build_info.csv`), for anyone who wants to explore the data without standing up PostgreSQL. Each file is one table from the `omopgis` or `demo` schema, sorted by its first column.
 
-Because the script uses `random()` throughout, this snapshot's exact values won't match a fresh run of the script — the distributions and correlations (urban density → PM2.5, county SES → SDOH/comorbidity risk) will, but not the row-for-row numbers. Treat this as a representative sample, not a fixed reference dataset.
+**`external_exposure` is not included.** It is empty in the published dataset: participants derive it with gaiaDB in Exercise 2. A prebuilt copy is included as a fallback in case the pipeline does not run: [`external_exposure_fallback.csv.gz`](external_exposure_fallback.csv.gz) (10.7 MB, 720,925 monthly PM2.5 rows in `external_exposure` column order). Load it with `gunzip -c external_exposure_fallback.csv.gz | psql ... -c "\\copy omopgis.external_exposure FROM STDIN WITH (FORMAT csv, HEADER true)"`.
 
-To regenerate:
-
-```sh
-psql -h <host> -U <user> -f ../createSimpleSyntheticSet.sql
-psql -h <host> -U <user> -c "\copy omopgis.<table> TO '<table>.csv' WITH CSV HEADER"
-```
+The build is deterministic, so rebuilding with the same pinned image and catalog commit reproduces these files exactly. See the [generator README](../README.md) for how the data are produced, the risk model and true coefficients, the fixtures, and known caveats. In particular, the simulated PM2.5 effects are deliberately exaggerated and are not real-world effect sizes.
 
 ## Files
 
+`synthetic_omop_gis.sql.gz` (3.3 MB) is the whole dataset as a PostgreSQL dump (schemas `omopgis` and `demo`, without exposure rows); restore it with `gunzip -c synthetic_omop_gis.sql.gz | psql -d <database>`. It is what Exercise 2 loads. The CSVs below are the same data table by table.
+
 | File | Rows | Table |
 |---|---|---|
-| `person.csv` | 10,000 | `PERSON` |
-| `location.csv` | 10,000 | `LOCATION` (includes `county_ref_id`) |
-| `county_reference.csv` | 3,103 | `COUNTY_REFERENCE` — demo dimension table, one row per synthetic county |
-| `location_history.csv` | 10,000 | `LOCATION_HISTORY` (Gaia extension) |
-| `external_exposure.csv` | 60,000 | `EXTERNAL_EXPOSURE` (Gaia extension) — PM2.5, PM10, Ozone, NO2, Noise, Tree Canopy |
-| `condition_occurrence.csv` | 13,443 | `CONDITION_OCCURRENCE` — 14 conditions |
-| `drug_exposure.csv` | 10,159 | `DRUG_EXPOSURE` — 15 drugs |
-| `procedure_occurrence.csv` | 4,085 | `PROCEDURE_OCCURRENCE` — 7 procedures |
-| `measurement.csv` | 16,324 | `MEASUREMENT` — 16 measurements |
-| `observation.csv` | 120,000 | `OBSERVATION` — 12 county-level SDOH indicators |
-| `observation_period.csv` | 10,000 | `OBSERVATION_PERIOD` |
+| `build_info.csv` | 8 | `demo.build_info`, build provenance |
 | `cdm_source.csv` | 1 | `CDM_SOURCE` |
-
-Row counts reflect the snapshot exported on 2026-09-03; a fresh run will differ slightly due to `random()`.
+| `condition_occurrence.csv` | 18,171 | `CONDITION_OCCURRENCE`, 14 conditions |
+| `county_reference.csv` | 3,099 | `COUNTY_REFERENCE`, demo dimension: one row per real county |
+| `drug_exposure.csv` | 13,802 | `DRUG_EXPOSURE`, 15 drugs |
+| `episode.csv` | 2 | `EPISODE`, the two pregnancy fixtures |
+| `expected_result.csv` | 23 | `demo.expected_result`, the answer key |
+| `fixture_person.csv` | 7 | `demo.fixture_person` |
+| `generator_params.csv` | 10 | `demo.generator_params` |
+| `generator_truth.csv` | 14 | `demo.generator_truth`, the true simulated coefficients |
+| `location.csv` | 10,955 | `LOCATION` (includes `county_ref_id`) |
+| `location_history.csv` | 10,955 | `LOCATION_HISTORY` (Gaia extension) |
+| `measurement.csv` | 21,946 | `MEASUREMENT`, 16 measurements |
+| `observation.csv` | 119,999 | `OBSERVATION`, 12 county-level SDOH indicators (one is missing for one fixture person) |
+| `observation_period.csv` | 10,000 | `OBSERVATION_PERIOD` |
+| `person.csv` | 10,000 | `PERSON` |
+| `procedure_occurrence.csv` | 6,089 | `PROCEDURE_OCCURRENCE`, 7 procedures |
+| `rejected_exposure_row.csv` | 4 | `demo.rejected_exposure_row`, four bad staging rows for the QA drill |
 
 See [Dataset Visualizations](https://ohdsi.github.io/GIS/tutorial-data-visualization.html) and [Data Description](https://ohdsi.github.io/GIS/tutorial-data-description.html) for query-and-chart pairs and a narrative description of the schema.

@@ -1,0 +1,9 @@
+key,value
+built_on,2026-10-05
+county_dataset,us_2023_county_tl (Census TIGER/Line 2023 counties)
+gaia_catalog_commit,00cec2aead13c430fe2a02fb1876611565dae4e4
+gaia_db_image,ohdsi/gaia-db@sha256:c6dab20c2064304e4293a7f66a897dbc1fd2c41c1f393234e93da4ce721474b8
+gaia_db_image_digest,ohdsi/gaia-db@sha256:c6dab20c2064304e4293a7f66a897dbc1fd2c41c1f393234e93da4ce721474b8
+generator_git_commit,4fc734a
+pm25_dataset,"us_2014_2019_monthly_pm25_by_county_cdc (pm25_mean_pred, CDC EPHTN EPA Downscaler, monthly county means)"
+population_source,https://www2.census.gov/programs-surveys/popest/datasets/2010-2019/counties/totals/co-est2019-alldata.csv

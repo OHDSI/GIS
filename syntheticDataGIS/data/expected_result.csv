@@ -1,0 +1,24 @@
+fixture_tag,person_id,metric,value,unit,notes
+DUPLICATE_SOURCE_ROW,1,n_pm25_monthly_rows,72,rows,72 rows for a non-mover; 73 for a mover (unless the move falls on the 1st of a month)
+DUPLICATE_SOURCE_ROW,1,n_rejected_rows,1,rows,DUPLICATE_SOURCE_ROW
+GLOBAL,,n_movers,955,persons,Persons with two location_history rows
+GLOBAL,,n_persons,10000,persons,
+GLOBAL,,n_pm25_monthly_rows,720925,rows,72 per non-mover; 73 per mover (the move month is split into two partial rows) unless the move date is the 1st of a month
+MISSING_EXPOSURE_VALUE,5,n_pm25_monthly_rows,72,rows,72 rows for a non-mover; 73 for a mover (unless the move falls on the 1st of a month)
+MISSING_EXPOSURE_VALUE,5,n_rejected_rows,1,rows,MISSING_VALUE
+MISSING_SDOH_VALUE,6,n_pm25_monthly_rows,72,rows,72 rows for a non-mover; 73 for a mover (unless the move falls on the 1st of a month)
+MISSING_SDOH_VALUE,6,n_sdoh_observations,11,rows,11 of the 12 SDOH observations present (NEIGHBORHOOD_DISADVANTAGE missing)
+NON_OVERLAPPING_INTERVAL,4,n_pm25_monthly_rows,72,rows,72 rows for a non-mover; 73 for a mover (unless the move falls on the 1st of a month)
+NON_OVERLAPPING_INTERVAL,4,n_rejected_rows,1,rows,NON_OVERLAPPING_INTERVAL
+PREGNANCY_MOVER,9,mean_pm25_during_pregnancy_day_weighted,8.4739,ug/m3,Correct answer: each day of the episode weighted by the exposure row covering it
+PREGNANCY_MOVER,9,mean_pm25_during_pregnancy_naive_row_mean,8.3307,ug/m3,WRONG: unweighted mean of every overlapping row (partial months count as full months)
+PREGNANCY_MOVER,9,n_overlapping_exposure_rows,11,rows,Includes the partially overlapping first/last month rows
+PREGNANCY_MOVER,9,n_pm25_monthly_rows,73,rows,72 rows for a non-mover; 73 for a mover (unless the move falls on the 1st of a month)
+PREGNANCY_MOVER,9,pregnancy_days,267,days,
+PREGNANCY_STATIC,2,mean_pm25_during_pregnancy_day_weighted,8.5257,ug/m3,Correct answer: each day of the episode weighted by the exposure row covering it
+PREGNANCY_STATIC,2,mean_pm25_during_pregnancy_naive_row_mean,8.4100,ug/m3,WRONG: unweighted mean of every overlapping row (partial months count as full months)
+PREGNANCY_STATIC,2,n_overlapping_exposure_rows,10,rows,Includes the partially overlapping first/last month rows
+PREGNANCY_STATIC,2,n_pm25_monthly_rows,72,rows,72 rows for a non-mover; 73 for a mover (unless the move falls on the 1st of a month)
+PREGNANCY_STATIC,2,pregnancy_days,267,days,
+UNIT_MISMATCH,3,n_pm25_monthly_rows,72,rows,72 rows for a non-mover; 73 for a mover (unless the move falls on the 1st of a month)
+UNIT_MISMATCH,3,n_rejected_rows,1,rows,UNIT_MISMATCH

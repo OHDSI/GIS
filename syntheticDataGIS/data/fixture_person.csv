@@ -1,0 +1,8 @@
+fixture_tag,person_id,description
+DUPLICATE_SOURCE_ROW,1,Staging contains an exact duplicate of the 2017-03 PM2.5 row (demo.rejected_exposure_row); the pipeline output must hold that month once
+MISSING_EXPOSURE_VALUE,5,"Staging contains the 2017-05 PM2.5 row with a NULL value (demo.rejected_exposure_row); must be rejected, not loaded as zero"
+MISSING_SDOH_VALUE,6,The NEIGHBORHOOD_DISADVANTAGE observation is missing for this person
+NON_OVERLAPPING_INTERVAL,4,"Staging contains a January 2020 PM2.5 row, outside the residence and observation interval (demo.rejected_exposure_row); must be rejected"
+PREGNANCY_MOVER,9,"Pregnancy episode 2016-05-20 to 2017-02-10; moves counties on 2016-08-15, so the episode spans two residences and two sets of monthly exposure rows"
+PREGNANCY_STATIC,2,Pregnancy episode 2016-03-18 to 2016-12-09 at a single residence; first and last months overlap the episode only partially
+UNIT_MISMATCH,3,Staging contains the 2017-04 PM2.5 row in mg/m3 instead of ug/m3 (demo.rejected_exposure_row); must be rejected or converted

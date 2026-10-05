@@ -12,12 +12,57 @@ output:
 
 <div class="alert alert-warning"><strong>Work in progress.</strong> These tutorial materials are still under active development and will continue to change until the tutorial takes place on <strong>October 20, 2026</strong>. Content, links, and exercises may be incomplete or shift without notice.</div>
 
-This page will characterize the public PM2.5 dataset described in [Geo Data Description](tutorial-geo-data-description.html) — for example its spatial and temporal coverage, value distributions, and missingness across US counties.
+This page lets you explore the public PM2.5 datasets described in [Geo Data Description](tutorial-geo-data-description.html). Drag the slider (or use the arrow keys once it is focused, or press Play) to move through time and compare how the pattern changes. Each map is a pre-rendered frame; nothing is queried live.
+
+<style>
+.pm25-slider { max-width: 960px; margin: 1em 0 2em 0; }
+.pm25-slider img { width: 100%; height: auto; border: 1px solid #ccc; background: #f4f4f4; display: block; }
+.pm25-controls { display: flex; align-items: center; gap: 0.6em; margin-top: 0.6em; }
+.pm25-controls input[type=range] { flex: 1 1 auto; }
+.pm25-controls button { min-width: 4.5em; padding: 0.25em 0.7em; }
+.pm25-label { margin-top: 0.4em; font-weight: bold; }
+</style>
 
 <br>
 
-## **Coming soon**
+## **CDC monthly county PM2.5, 2014-2019**
 
-_TODO: add a characterization of the geospatial data._
+The dataset you catalog in [Exercise 1](tutorial-exercise-1.html) and ingest in [Exercise 2](tutorial-exercise-2.html): modeled monthly mean PM2.5 (µg/m³) for every US county, from the CDC National Environmental Public Health Tracking Network (EPA Downscaler). There are 72 frames, one per month from January 2014 to December 2019. Look for the seasonal pattern and for regional hotspots (for example the Central Valley of California in January 2014). Counties shown in white have no data in this release, such as the Connecticut counties, whose FIPS codes were redefined after 2019.
+
+<div class="pm25-slider" data-folder="CDC_pm25_slide_frames" data-count="72" data-pad="2" data-start="2014-01-01" data-step="month" data-fps="3">
+  <img alt="CDC monthly county PM2.5 map" src="images/CDC_pm25_slide_frames/01.jpg">
+  <div class="pm25-controls">
+    <button type="button" class="pm25-prev" aria-label="Previous month">&#9664;</button>
+    <input type="range" aria-label="Month (January 2014 to December 2019)" value="1">
+    <button type="button" class="pm25-next" aria-label="Next month">&#9654;</button>
+    <button type="button" class="pm25-play">Play</button>
+  </div>
+  <div class="pm25-label"></div>
+</div>
+
+**Things to look for.** The legend bins are the EPA-style categories: below 4, 4 to 9, 9 to 18, and above 18 µg/m³. Most county-months fall in the middle two bins; the highest bins are rare. (The legend and subtitle of the images give the unit loosely; the dataset unit is µg/m³, micrograms per cubic meter.) The mean over the cohort's residences is charted on the [OMOP Data Visualization](tutorial-data-visualization.html#monthly-pm2.5-across-the-cohort) page.
+
+<br>
+
+## **AirNow interpolated hourly PM2.5 AQI**
+
+An alternative, near-real-time source: interpolated hourly PM2.5 as the EPA Air Quality Index, built from AirNow GRIB2 files. This is a **different variable at a different grain**: an index (unitless, 0 to 1,000) rather than a concentration, hourly rather than monthly, and a continuous surface rather than county polygons. The 408 frames cover every hour from 2026-07-23 00:00 to 2026-08-08 23:00 and show elevated values moving across the northwestern United States. It is useful for discussing how fitness for use depends on the question: this series is not a substitute for the monthly CDC data for the 2014-2019 cohort, but it shows what a raster or interpolated source would need in terms of spatial and temporal assignment (see Exercise 1).
+
+<div class="pm25-slider" data-folder="AirNow_pm25_slide_frames" data-count="408" data-pad="3" data-start="2026-07-23" data-step="hour" data-fps="8">
+  <img alt="AirNow interpolated hourly PM2.5 AQI map" src="images/AirNow_pm25_slide_frames/001.jpg">
+  <div class="pm25-controls">
+    <button type="button" class="pm25-prev" aria-label="Previous hour">&#9664;</button>
+    <input type="range" aria-label="Hour (2026-07-23 00:00 to 2026-08-08 23:00)" value="1">
+    <button type="button" class="pm25-next" aria-label="Next hour">&#9654;</button>
+    <button type="button" class="pm25-play">Play</button>
+  </div>
+  <div class="pm25-label"></div>
+</div>
+
+**Source.** AirNow (2026), AirNow Mapping Fact Sheet: GRIB2 AQI files, US Environmental Protection Agency. Access requires an AirNow API key.
+
+<br>
+
+<script src="assets/pm25-slider.js"></script>
 
 <br>

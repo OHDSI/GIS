@@ -1,0 +1,5 @@
+external_exposure_id,location_id,person_id,exposure_concept_id,exposure_start_date,exposure_start_datetime,exposure_end_date,exposure_end_datetime,exposure_type_concept_id,exposure_relationship_concept_id,exposure_source_concept_id,exposure_source_value,exposure_relationship_source_value,dose_unit_source_value,quantity,modifier_source_value,operator_concept_id,value_as_number,value_as_concept_id,unit_concept_id,reject_reason,fixture_tag
+1,1,1,2052499839,2017-03-01,2017-03-01 00:00:00,2017-03-31,2017-03-31 00:00:00,2052497012,2052496943,,pm25_mean_pred,,,,,,6.49327367326129,,,DUPLICATE_SOURCE_ROW,DUPLICATE_SOURCE_ROW
+2,3,3,2052499839,2017-04-01,2017-04-01 00:00:00,2017-04-30,2017-04-30 00:00:00,2052497012,2052496943,,pm25_mean_pred,,mg/m3,,,,0.00774481190475667,,0,UNIT_MISMATCH,UNIT_MISMATCH
+3,4,4,2052499839,2020-01-01,2019-12-01 00:00:00,2020-01-31,2019-12-31 00:00:00,2052497012,2052496943,,pm25_mean_pred,,,,,,10.7267135443032,,,NON_OVERLAPPING_INTERVAL,NON_OVERLAPPING_INTERVAL
+4,5,5,2052499839,2017-05-01,2017-05-01 00:00:00,2017-05-31,2017-05-31 00:00:00,2052497012,2052496943,,pm25_mean_pred,,,,,,,,,MISSING_VALUE,MISSING_EXPOSURE_VALUE

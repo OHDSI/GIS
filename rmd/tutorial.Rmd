@@ -27,9 +27,9 @@ Each session builds directly on the output of the one before it. The metadata re
 | Session | Focus | Learning outcome |
 |---|---|---|
 | 1. Cataloging and data discovery | Turning a research question into a computable data requirement | Produce one valid, machine-actionable metadata record and a dataset-fitness decision |
-| 2. The Gaia pipeline | Ingestion and spatial-temporal linkage | Execute a known-good ingestion and explain a derived exposure row and its provenance |
-| 3. OMOP integration | The person-place-time model | Query the model, validate vocabulary roles, and calculate a temporally aligned exposure metric |
-| 4. Analytical applications | From exposure fact to covariate | Design an analysis-ready exposure feature and identify threats to validity |
+| 2. The Gaia pipeline | Ingestion and spatial-temporal linkage | Run the ingestion, check it against the answer key, and explain a derived exposure row and its provenance |
+| 3. OMOP integration | The person-place-time model | Query the model, validate vocabulary roles, calculate temporally aligned exposure metrics, and build exposure-stratified cohorts |
+| 4. Analytical applications | From exposure fact to covariate | Design an analysis-ready exposure feature, fit a crude vs adjusted model, and identify threats to validity |
 
 <br>
 
@@ -56,7 +56,7 @@ _**After installing docker, please complete the following steps before coming to
 - [ ] Review the [Get Started](get-started.html) page
 - [ ] Deploy the Gaia toolchain (see [Quick Start: Deploy Gaia](get-started.html#quick-start-deploy-gaia))
 - [ ] Confirm you can reach the pinned Gaia containers on the github container repository (ghcr.io) (or offline bundle) (if the above two steps worked without errors, you are good to go)
-- [ ] Confirm you can download the synthetic demo dataset provided by faculty
+- [ ] Confirm you can download the synthetic demo dataset (`synthetic_omop_gis.sql.gz`, 3 MB) and the fallback exposure file (`external_exposure_fallback.csv.gz`, 11 MB) from the [`syntheticDataGIS/data`](https://github.com/OHDSI/GIS/tree/main/syntheticDataGIS/data) folder
 
 ### Additional useful software (not required)
 
@@ -73,16 +73,16 @@ _**VERY IMPORTANT**_: If you have trouble with any installation or setup step ab
 
 ## **Demo dataset**
 
-All exercises run against a synthetic cohort designed for this tutorial. **No real addresses or coordinates are used** — all locations are synthetic points in a fictionalized study area. The dataset deliberately includes a residential move, a pregnancy episode that partially overlaps an exposure interval, a missing SVI value, a duplicate source row, a unit mismatch, and a non-overlapping exposure record, so that each session's checks have something real to catch. See the [OMOP Data Description](tutorial-data-description.html) page for details.
+All exercises run against a synthetic cohort designed for this tutorial: 10,000 adults with residence histories (about 10% move once), 14 respiratory and cardiometabolic conditions, and county-level social determinants. **No real individuals, addresses, or coordinates are used.** Persons are placed at random points inside real US counties, and the exposure is real public data: monthly county PM2.5 from the CDC, 2014-2019, which you ingest and link to the persons yourself in Session 2 (the exposure table ships empty). A handful of fixtures (a pregnancy that partially overlaps exposure months, a pregnancy that spans a residential move, and four bad exposure rows, plus a missing SDOH value) give each session's checks something real to catch. The simulated PM2.5 effects are deliberately exaggerated so they can be recovered with 10,000 persons; they are not real-world effect sizes. See the [OMOP Data Description](tutorial-data-description.html) page for details.
 
 <br>
 
 ## **Exercises**
 
 1. [Exercise 1: Cataloging and data discovery](tutorial-exercise-1.html) - Evaluate a source dataset and produce a dataset-level and variable-level metadata record with a fitness decision.
-2. [Exercise 2: The Gaia pipeline](tutorial-exercise-2.html) - Run the frozen ingestion pipeline and trace one exposure row back to its source dataset and geometry.
-3. [Exercise 3: OMOP integration](tutorial-exercise-3.html) - Query the person-place-time model and calculate a temporally aligned exposure metric.
-4. [Exercise 4: Analytical applications](tutorial-exercise-4.html) - Draft an analysis-ready feature specification and its validity/QA checklist.
+2. [Exercise 2: The Gaia pipeline](tutorial-exercise-2.html) - Run the ingestion and spatial-temporal linkage, check it against the answer key, and trace one exposure row back to its source dataset and geometry.
+3. [Exercise 3: OMOP integration](tutorial-exercise-3.html) - Query the person-place-time model, validate vocabulary roles, calculate temporally aligned exposure metrics, and build exposure-stratified cohorts.
+4. [Exercise 4: Analytical applications](tutorial-exercise-4.html) - Draft an analysis-ready feature specification and its validity/QA checklist, then fit and critique a crude vs adjusted exposure model.
 
 <br>
 

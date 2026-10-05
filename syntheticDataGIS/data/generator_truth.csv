@@ -1,0 +1,15 @@
+outcome_name,condition_concept_id,category,prevalence_ref,beta_pm25_per_ugm3,beta_ses_per_sd,beta_age_per_decade,beta_female,is_pm25_null_outcome,notes
+ASTHMA,317009,Respiratory,0.095,0.080,-0.15,0.00,0.25,f,
+BRONCHITIS,258780,Respiratory,0.055,0.100,-0.25,0.20,0.10,f,
+CAD,317576,Cardiometabolic,0.070,0.060,-0.35,0.60,-0.45,f,
+CHF,319835,Cardiometabolic,0.060,0.070,-0.45,0.65,-0.20,f,
+CKD,46271022,Cardiometabolic,0.080,0.000,-0.50,0.50,0.05,t,Simulated null; real-world literature may differ
+COPD,255573,Respiratory,0.070,0.150,-0.20,0.45,0.00,f,Headline outcome for the tutorial
+HYPERLIPIDEMIA,432867,Cardiometabolic,0.170,0.000,-0.20,0.25,-0.05,t,Suggested negative-control outcome
+HYPERTENSION,320128,Cardiometabolic,0.180,0.000,-0.20,0.50,-0.05,t,Simulated null; real-world literature may differ
+MI,4329847,Cardiometabolic,0.050,0.080,-0.40,0.50,-0.50,f,
+OBESITY,433736,Cardiometabolic,0.160,0.000,-0.25,-0.05,0.10,t,Simulated null; real-world literature may differ
+PNEUMONIA,255848,Respiratory,0.060,0.100,-0.30,0.30,-0.10,f,
+RHINITIS,4170143,Respiratory,0.130,0.000,-0.05,-0.10,0.10,t,Simulated null; real-world literature on PM2.5 and rhinitis may differ
+STROKE,381316,Cardiometabolic,0.050,0.050,-0.40,0.55,-0.10,f,
+T2DM,201826,Cardiometabolic,0.120,0.000,-0.40,0.30,-0.10,t,Suggested negative-control outcome
