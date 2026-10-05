@@ -1,4 +1,0 @@
-Condition,Class,Prevalence,OR per SD PM2.5 (95% CI),OR per SD SES (95% CI),Encoded emphasis,Recovered?
-  "Asthma, COPD, chronic bronchitis, allergic rhinitis, pneumonia",Respiratory,34.2% (5.4–12.4%),1.12 (1.08–1.17),0.83 (0.79–0.86),PM2.5 ≈ SES,Yes
-  "Coronary artery disease, CHF, MI, stroke, hypertension",Cardiovascular,35.2% (5.3–18.1%),1.06 (1.01–1.10),0.59 (0.56–0.61),SES > PM2.5,Yes
-  "Type 2 diabetes, obesity, hyperlipidemia, CKD",Metabolic/renal,41.9% (7.3–17.5%),1.05 (1.01–1.09),0.65 (0.62–0.67),SES ≫ PM2.5,Yes
