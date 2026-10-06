@@ -6,7 +6,7 @@ SELECT setseed(0.20261006);
 DO $$
 DECLARE n bigint; expected bigint;
 BEGIN
-    SELECT count(*) INTO n FROM working.external_exposure WHERE exposure_source_value = 'pm25_mean_pred';
+    SELECT count(*) INTO n FROM working.external_exposure WHERE exposure_concept_id = 2052499839;
     SELECT count(*) INTO expected FROM omopgis.location_history lh;
     IF n = 0 THEN
         RAISE EXCEPTION 'working.external_exposure has no pm25_mean_pred rows - run the gaiaDB spatial join first';
@@ -36,7 +36,7 @@ SELECT ee.external_exposure_id, ee.location_id, ee.person_id, ee.exposure_concep
 FROM demo.fixture_person fp
 JOIN working.external_exposure ee ON ee.person_id = fp.person_id
 WHERE fp.fixture_tag = 'DUPLICATE_SOURCE_ROW'
-  AND ee.exposure_source_value = 'pm25_mean_pred' AND ee.exposure_start_date = '2017-03-01';
+  AND ee.exposure_concept_id = 2052499839 AND ee.exposure_start_date = '2017-03-01';
 
 -- UNIT_MISMATCH: 2017-04 row delivered in mg/m3 (value / 1000, unit unmapped)
 INSERT INTO demo.rejected_exposure_row
@@ -50,7 +50,7 @@ SELECT ee.external_exposure_id, ee.location_id, ee.person_id, ee.exposure_concep
 FROM demo.fixture_person fp
 JOIN working.external_exposure ee ON ee.person_id = fp.person_id
 WHERE fp.fixture_tag = 'UNIT_MISMATCH'
-  AND ee.exposure_source_value = 'pm25_mean_pred' AND ee.exposure_start_date = '2017-04-01';
+  AND ee.exposure_concept_id = 2052499839 AND ee.exposure_start_date = '2017-04-01';
 
 -- NON_OVERLAPPING_INTERVAL: a January 2020 row, after the residence/observation period
 INSERT INTO demo.rejected_exposure_row
@@ -64,7 +64,7 @@ SELECT ee.external_exposure_id, ee.location_id, ee.person_id, ee.exposure_concep
 FROM demo.fixture_person fp
 JOIN working.external_exposure ee ON ee.person_id = fp.person_id
 WHERE fp.fixture_tag = 'NON_OVERLAPPING_INTERVAL'
-  AND ee.exposure_source_value = 'pm25_mean_pred' AND ee.exposure_start_date = '2019-12-01';
+  AND ee.exposure_concept_id = 2052499839 AND ee.exposure_start_date = '2019-12-01';
 
 -- MISSING_EXPOSURE_VALUE: source row with a NULL value; month removed from the clean table
 INSERT INTO demo.rejected_exposure_row
@@ -78,7 +78,7 @@ SELECT ee.external_exposure_id, ee.location_id, ee.person_id, ee.exposure_concep
 FROM demo.fixture_person fp
 JOIN working.external_exposure ee ON ee.person_id = fp.person_id
 WHERE fp.fixture_tag = 'MISSING_EXPOSURE_VALUE'
-  AND ee.exposure_source_value = 'pm25_mean_pred' AND ee.exposure_start_date = '2017-05-01';
+  AND ee.exposure_concept_id = 2052499839 AND ee.exposure_start_date = '2017-05-01';
 
 -- gaiaDB assigns external_exposure_id in join order, which is not stable across
 -- rebuilds: renumber the staging rows deterministically.
@@ -126,14 +126,14 @@ daily AS (
     FROM ep
     CROSS JOIN LATERAL generate_series(0, ep.e - ep.s) g
     JOIN working.external_exposure ee
-         ON ee.person_id = ep.person_id AND ee.exposure_source_value = 'pm25_mean_pred'
+         ON ee.person_id = ep.person_id AND ee.exposure_concept_id = 2052499839
         AND (ep.s + g) BETWEEN ee.exposure_start_date AND ee.exposure_end_date
 ),
 naive AS (
     SELECT ep.tag, ep.person_id, count(*) AS n_rows, avg(ee.value_as_number) AS naive_mean
     FROM ep
     JOIN working.external_exposure ee
-         ON ee.person_id = ep.person_id AND ee.exposure_source_value = 'pm25_mean_pred'
+         ON ee.person_id = ep.person_id AND ee.exposure_concept_id = 2052499839
         AND ee.exposure_start_date <= ep.e AND ee.exposure_end_date >= ep.s
     GROUP BY ep.tag, ep.person_id
 )
@@ -156,13 +156,13 @@ FROM (SELECT entity_id FROM omopgis.location_history GROUP BY entity_id HAVING c
 UNION ALL
 SELECT 'GLOBAL', NULL, 'n_pm25_monthly_rows', count(*), 'rows',
        '72 per non-mover; 73 per mover (the move month is split into two partial rows) unless the move date is the 1st of a month'
-FROM working.external_exposure WHERE exposure_source_value = 'pm25_mean_pred'
+FROM working.external_exposure WHERE exposure_concept_id = 2052499839
 UNION ALL
 SELECT fixture_tag, person_id, 'n_pm25_monthly_rows', count(*), 'rows',
        '72 rows for a non-mover; 73 for a mover (unless the move falls on the 1st of a month)'
 FROM demo.fixture_person fp
 JOIN working.external_exposure ee USING (person_id)
-WHERE ee.exposure_source_value = 'pm25_mean_pred'
+WHERE ee.exposure_concept_id = 2052499839
 GROUP BY fixture_tag, person_id
 UNION ALL
 SELECT fixture_tag, person_id, 'n_rejected_rows', count(*), 'rows', reject_reason
@@ -181,7 +181,7 @@ SELECT ee.person_id,
        sum(ee.value_as_number * (ee.exposure_end_date - ee.exposure_start_date + 1))
          / sum(ee.exposure_end_date - ee.exposure_start_date + 1) AS pm25_value
 FROM working.external_exposure ee
-WHERE ee.exposure_source_value = 'pm25_mean_pred' AND ee.person_id > 0
+WHERE ee.exposure_concept_id = 2052499839 AND ee.person_id > 0
 GROUP BY ee.person_id;
 
 CREATE TEMP TABLE person_ses AS

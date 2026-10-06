@@ -35,7 +35,7 @@ All SQL runs in the gaia-db container: `docker compose exec gaia-db psql -U post
    SELECT * FROM backbone.ingest_datasource('us_2023_county_tl');
    SELECT * FROM backbone.ingest_datasource('us_2014_2019_monthly_pm25_by_county_cdc');
    ```
-   Inspect what was registered: `SELECT * FROM backbone.data_source;`, `backbone.variable_source`, `backbone.geom_index`, and `backbone.attr_index`. The PM2.5 dataset has four variables (max, median, mean, population-weighted mean). Which one does your Exercise 1 requirement call for?
+   Inspect what was registered (`attr_index.variable_source_id` links each loaded variable to its `variable_source` row, and that id becomes `exposure_source_value`): `SELECT * FROM backbone.data_source;`, `backbone.variable_source`, `backbone.geom_index`, and `backbone.attr_index`. The PM2.5 dataset has four variables (max, median, mean, population-weighted mean). Which one does your Exercise 1 requirement call for?
 
 3. **Load the persons' locations into Gaia.** Gaia joins exposures to `working.location` and `working.location_history`, so copy the synthetic residences there and validate them:
    ```sql
@@ -64,9 +64,10 @@ All SQL runs in the gaia-db container: `docker compose exec gaia-db psql -U post
        p_geom_label => 'name', p_variable_nodata => -999,
        p_source => 'CDC EPHTN daily county PM2.5 (EPA Downscaler), monthly means');
 
-   SELECT working.spatial_join_from_catalog('pm25_mean_pred', 'us_2014_2019_monthly_pm25_by_county_cdc');
+   SELECT working.spatial_join_from_catalog('pm25_mean_pred', 'us_2014_2019_monthly_pm25_by_county_cdc',
+                                            p_exposure_type_concept_id => 2052499878);  -- Air Quality Database
    ```
-   Join one variable at a time. `working.spatial_join_all_from_catalog(...)` would also join the max, median, and population-weighted variables and multiply the row count by four. Now identify the **spatial assignment pattern** used (point-in-polygon, nearest feature, buffer/intersection, raster extraction, or areal aggregation; look at the operator argument and at the `exposure_relationship_concept_id` it produced) and the **temporal assignment pattern** (interval overlap, calendar aggregation, moving window, lag, or cumulative exposure; compare `attr_start_date`/`attr_end_date` in the attribute table with the residence interval).
+   The last argument sets `exposure_type_concept_id`: the type of the *data source* (an "Exposure Type Concept"), which Gaia cannot infer. Join one variable at a time. `working.spatial_join_all_from_catalog(...)` would also join the max, median, and population-weighted variables and multiply the row count by four. Now identify the **spatial assignment pattern** used (point-in-polygon, nearest feature, buffer/intersection, raster extraction, or areal aggregation; look at the operator argument, at the `exposure_relationship_concept_id` it produced, and at `exposure_relationship_source_value`, which keeps the verbatim operator) and the **temporal assignment pattern** (interval overlap, calendar aggregation, moving window, lag, or cumulative exposure; compare `attr_start_date`/`attr_end_date` in the attribute table with the residence interval).
 
 5. **Check the result against the answer key.** `demo.expected_result` holds the expected counts:
    ```sql
@@ -96,12 +97,13 @@ All SQL runs in the gaia-db container: `docker compose exec gaia-db psql -U post
    ```
    Which flag catches which row (duplicate, unit mismatch, non-overlapping interval, NULL value)? What should the pipeline do with each?
 
-7. **Trace one row's lineage.** Pick one exposure row, for example March 2017 for the person with the `DUPLICATE_SOURCE_ROW` fixture, and follow it from the exposure row to the residence interval it was clipped to, the county polygon the point fell in, the source attribute row, and the raw value in the ingested table:
+7. **Trace one row's lineage.** Pick one exposure row, for example March 2017 for the person with the `DUPLICATE_SOURCE_ROW` fixture, and follow it from the exposure row to the residence interval it was clipped to, the county polygon the point fell in, the variable it came from, the source attribute row, and the raw value in the ingested table:
    ```sql
    WITH pick AS (SELECT person_id FROM demo.fixture_person WHERE fixture_tag = 'DUPLICATE_SOURCE_ROW')
    SELECT ee.external_exposure_id, ee.person_id, ee.exposure_start_date, ee.exposure_end_date,
           ROUND(ee.value_as_number::numeric, 3) AS exposure_value,
           lh.location_history_id, lh.start_date AS residence_start, lh.end_date AS residence_end,
+          ee.exposure_source_value, vs.variable_source_id, vs.variable_name,
           src.geoid, geo.geom_name AS county,
           att.attr_start_date, att.attr_end_date, ROUND(att.value_as_number::numeric, 3) AS source_value,
           src.pm25_mean_pred ->> (att.attr_start_date || '/' || att.attr_end_date) AS raw_json_value
@@ -114,10 +116,13 @@ All SQL runs in the gaia-db container: `docker compose exec gaia-db psql -U post
         ON att.geom_record_id = geo.geom_record_id
        AND att.attr_start_date = ee.exposure_start_date
        AND att.attr_index_id = (SELECT attr_index_id FROM backbone.attr_index WHERE variable_name = 'pm25_mean_pred')
+   JOIN backbone.attr_index ai ON ai.attr_index_id = att.attr_index_id
+   JOIN backbone.variable_source vs ON vs.variable_source_id = ai.variable_source_id
+        AND vs.variable_source_id::text = ee.exposure_source_value
    JOIN public.us_2014_2019_monthly_pm25_by_county_cdc src ON src.ogc_fid = geo.geom_record_id
    WHERE ee.exposure_start_date = '2017-03-01';
    ```
-   Write two or three sentences explaining that one row: what it represents, where its value came from, and what interval it applies to. Then do the same for a row in the month a mover changes county, where the interval is shorter than a month.
+   `exposure_source_value` should equal the `variable_source_id` of the variable you joined, which the join to `variable_source` confirms. Write two or three sentences explaining that one row: what it represents, where its value came from, and what interval it applies to. Then do the same for a row in the month a mover changes county, where the interval is shorter than a month.
 
 8. **Move the result into the OMOP table** so the next session can query it:
    ```sql

@@ -37,7 +37,7 @@ BEGIN
     -- gaiaDB exposure: every person, every month, once, inside a residence interval, ug/m3 range
     SELECT count(*) INTO n FROM omopgis.person p
     LEFT JOIN (SELECT person_id, count(*) AS c FROM working.external_exposure
-               WHERE exposure_source_value = 'pm25_mean_pred' GROUP BY person_id) x ON x.person_id = p.person_id
+               WHERE exposure_concept_id = 2052499839 GROUP BY person_id) x ON x.person_id = p.person_id
     WHERE COALESCE(x.c, 0) < 72;
     IF n > 0 THEN RAISE EXCEPTION '% persons have fewer than 72 monthly PM2.5 rows', n; END IF;
     SELECT count(*) INTO n FROM working.external_exposure ee JOIN working.external_exposure e2
@@ -104,6 +104,18 @@ BEGIN
                                  UNION SELECT DISTINCT exposure_type_concept_id FROM working.external_exposure) x
         LEFT JOIN omopgis.concept c ON c.concept_id = x.id WHERE c.concept_id IS NULL;
     IF n > 0 THEN RAISE EXCEPTION '% exposure concept ids are missing from the vocabulary', n; END IF;
+    -- exposure_type_concept_id is the data-source type (Air Quality Database), not a geometry type
+    SELECT count(*) INTO n FROM working.external_exposure ee
+        LEFT JOIN omopgis.concept c ON c.concept_id = ee.exposure_type_concept_id
+        WHERE c.concept_class_id IS DISTINCT FROM 'Exposure Type Concept' OR ee.exposure_type_concept_id <> 2052499878;
+    IF n > 0 THEN RAISE EXCEPTION '% exposure rows lack the Air Quality Database exposure type concept', n; END IF;
+    -- exposure_source_value is the variable_source_id of the joined variable, and the source concept is the exposure concept
+    SELECT count(*) INTO n FROM working.external_exposure ee
+        WHERE ee.exposure_source_value IS DISTINCT FROM
+              (SELECT variable_source_id::text FROM backbone.attr_index WHERE variable_name = 'pm25_mean_pred')
+           OR ee.exposure_source_concept_id IS DISTINCT FROM ee.exposure_concept_id
+           OR ee.exposure_relationship_source_value IS DISTINCT FROM 'ST_Within';
+    IF n > 0 THEN RAISE EXCEPTION '% exposure rows have unexpected source value / source concept / relationship source value', n; END IF;
     SELECT count(*) INTO n FROM demo.generator_truth t LEFT JOIN omopgis.concept c ON c.concept_id = t.condition_concept_id
         WHERE c.concept_id IS NULL;
     IF n > 0 THEN RAISE EXCEPTION '% generator_truth concepts are missing', n; END IF;
@@ -114,6 +126,6 @@ END $$;
 SELECT 'persons' AS what, count(*)::text AS value FROM omopgis.person
 UNION ALL SELECT 'movers', count(*)::text FROM (SELECT entity_id FROM omopgis.location_history GROUP BY 1 HAVING count(*) = 2) x
 UNION ALL SELECT 'counties used', count(DISTINCT county_ref_id)::text FROM omopgis.location
-UNION ALL SELECT 'gaiaDB pm25 rows', count(*)::text FROM working.external_exposure WHERE exposure_source_value = 'pm25_mean_pred'
+UNION ALL SELECT 'gaiaDB pm25 rows', count(*)::text FROM working.external_exposure WHERE exposure_concept_id = 2052499839
 UNION ALL SELECT 'conditions', count(*)::text FROM omopgis.condition_occurrence
 UNION ALL SELECT 'corr(county PM2.5, county SES)', round(corr(pm25_baseline_mean, ses_index)::numeric, 3)::text FROM omopgis.county_reference;

@@ -12,7 +12,7 @@ set -euo pipefail
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BUILD_DIR="${BUILD_DIR:-$HERE/build}"
 OUT_DIR="$BUILD_DIR/out"
-GAIA_DB_IMAGE="${GAIA_DB_IMAGE:-ohdsi/gaia-db@sha256:c6dab20c2064304e4293a7f66a897dbc1fd2c41c1f393234e93da4ce721474b8}"
+GAIA_DB_IMAGE="${GAIA_DB_IMAGE:-ohdsi/gaia-db@sha256:bd044e2931b11d98a99e730582ab11788fc5beac1442b5c0ada1871c6398957a}"
 GAIA_CATALOG_REPO="${GAIA_CATALOG_REPO:-https://github.com/OHDSI/gaiaCatalog.git}"
 GAIA_CATALOG_REF="${GAIA_CATALOG_REF:-00cec2aead13c430fe2a02fb1876611565dae4e4}"
 CONTAINER="${CONTAINER:-gaia-db-synth-build}"
@@ -23,6 +23,7 @@ DBUSER=postgres
 COUNTY_TABLE=us_2023_county_tl
 PM25_TABLE=us_2014_2019_monthly_pm25_by_county_cdc
 PM25_VARIABLE=pm25_mean_pred
+EXPOSURE_TYPE_CONCEPT=2052499878   # Exposure Type Concept: Air Quality Database
 POP_URL="https://www2.census.gov/programs-surveys/popest/datasets/2010-2019/counties/totals/co-est2019-alldata.csv"
 
 CLEAN=0
@@ -116,6 +117,9 @@ for _ in $(seq 1 120); do
 done
 dbquery "SELECT 1 FROM pg_proc WHERE proname='spatial_join_from_catalog'" | grep -q 1 || die "gaiaDB did not become ready (docker logs $CONTAINER)"
 
+dbquery "SELECT 1 FROM pg_proc WHERE proname='spatial_join_from_catalog' AND 'p_exposure_type_concept_id' = ANY(proargnames)" | grep -q 1 \
+  || die "this gaiaDB image predates p_exposure_type_concept_id; set GAIA_DB_IMAGE to a build that includes it"
+
 IMAGE_ID="$(docker inspect --format '{{.Image}}' "$CONTAINER")"
 IMAGE_DIGEST="$(docker inspect --format '{{if .RepoDigests}}{{index .RepoDigests 0}}{{else}}none{{end}}' "$GAIA_DB_IMAGE" 2>/dev/null || echo none)"
 echo "   image: $GAIA_DB_IMAGE  digest: $IMAGE_DIGEST"
@@ -199,7 +203,7 @@ dbpsql -c "SELECT * FROM working.load_location_data('/tmp/LOCATION.csv', '/tmp/L
 dbpsql -c "SELECT * FROM backbone.gdsc_load_all_variables(p_table_id => '$PM25_TABLE', p_geom_label => 'name', p_variable_nodata => -999, p_source => 'CDC EPHTN daily county PM2.5 (EPA Downscaler), monthly means')" \
   | tee "$BUILD_DIR/gdsc_load_variables.log" | cat
 if grep -q ' error ' "$BUILD_DIR/gdsc_load_variables.log"; then die "gdsc_load_all_variables reported an error"; fi
-dbpsql -c "SELECT working.spatial_join_from_catalog('$PM25_VARIABLE', '$PM25_TABLE')"
+dbpsql -c "SELECT working.spatial_join_from_catalog('$PM25_VARIABLE', '$PM25_TABLE', p_exposure_type_concept_id => $EXPOSURE_TYPE_CONCEPT)"
 echo "   $(dbquery "SELECT count(*) FROM working.external_exposure") exposure rows derived by gaiaDB"
 
 # ---------------------------------------------------------------------------

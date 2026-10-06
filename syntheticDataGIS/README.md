@@ -38,6 +38,6 @@ Conditions follow a logistic model in PM2.5 (day-weighted over a person's reside
 
 ## Known caveats
 
-- gaiaDB currently leaves `unit_concept_id` and `dose_unit_source_value` empty on the exposure rows it derives, and uses its own exposure concept (2052499839) and geometry-based type concepts.
+- gaiaDB leaves `unit_concept_id` and `dose_unit_source_value` empty on the exposure rows it derives. The exposure concept (2052499839, "Annual Mean…") comes from the catalog and does not match the monthly grain; this is kept deliberately as a vocabulary discussion point. `exposure_type_concept_id` is the data-source type (2052499878, Air Quality Database), `exposure_source_value` is the gaiaDB `variable_source_id`, and `exposure_relationship_source_value` is the verbatim operator (`ST_Within`).
 - The concepts used by the dataset are checked against the mini vocabulary at build time. The residence relationship is the OMOP GIS concept `Patient Residence` (2052496995), not the type concept used in gaiaDB's example file; confirm with the GIS vocabulary owners.
 - `data/` holds the CSV snapshot of the 2026-10-05 build (without `external_exposure`, plus the gzipped fallback exposure file); it is copied from `build/out/csv` by hand, not by the build script.

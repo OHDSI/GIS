@@ -12,3 +12,6 @@ scratch*
 
 build/
 .idea/
+
+# Manuscript benchmark: unpublished until the manuscript is released
+syntheticDataGIS/benchmark/

@@ -33,15 +33,16 @@ You continue with the `omopgis.external_exposure` table you populated in Exercis
    ```sql
    SELECT ee.exposure_concept_id, c1.concept_name AS exposure_concept, c1.vocabulary_id AS exposure_vocabulary,
           ee.exposure_relationship_concept_id, c2.concept_name AS relationship, c2.vocabulary_id AS relationship_vocabulary,
-          ee.exposure_type_concept_id, c3.concept_name AS geometry_type, c3.concept_class_id,
+          ee.exposure_type_concept_id, c3.concept_name AS exposure_type, c3.concept_class_id,
+          ee.exposure_source_value, ee.exposure_relationship_source_value,
           ee.unit_concept_id, COUNT(*) AS n
    FROM omopgis.external_exposure ee
    LEFT JOIN omopgis.concept c1 ON c1.concept_id = ee.exposure_concept_id
    LEFT JOIN omopgis.concept c2 ON c2.concept_id = ee.exposure_relationship_concept_id
    LEFT JOIN omopgis.concept c3 ON c3.concept_id = ee.exposure_type_concept_id
-   GROUP BY 1,2,3,4,5,6,7,8,9,10;
+   GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12;
    ```
-   Which vocabulary does each of the three concepts come from, and why? Two things should bother you. The exposure concept is named "Annual Mean" of PM2.5, but each row is a *monthly* value: what does that mean for how you can use it? And `unit_concept_id` is empty: where is the unit declared, and what would you map it to?
+   Which vocabulary does each of the three concepts come from, and why? The type concept describes the *kind of data source* (here an "Exposure Type Concept", Air Quality Database); the geometry type of the source (MultiPolygon) is recorded in Gaia's `backbone.geom_index`, not on the exposure row. `exposure_source_value` holds the Gaia `variable_source_id` of the variable and `exposure_relationship_source_value` the verbatim spatial operator (`ST_Within`); compare it with the relationship *concept* (Within). Two things should bother you. The exposure concept is named "Annual Mean" of PM2.5, but each row is a *monthly* value: what does that mean for how you can use it? And `unit_concept_id` is empty: where is the unit declared, and what would you map it to?
 
 ### Part B: mean PM2.5 during pregnancy
 
@@ -192,7 +193,7 @@ You build the cohorts here and use them unchanged in [Exercise 4](tutorial-exerc
 
 ## **Deliverable**
 
-Mean PM2.5 during pregnancy for the two persons (weighted and naive, with an explanation of the difference), the 12-month lookback exposure summary for COPD cases, the list of semantic fields your calculations depended on (concepts, relationship and geometry-type concepts, units, and the vocabulary each came from), and the four cohort definitions with counts and their SQL validation.
+Mean PM2.5 during pregnancy for the two persons (weighted and naive, with an explanation of the difference), the 12-month lookback exposure summary for COPD cases, the list of semantic fields your calculations depended on (concepts, relationship and exposure-type concepts, units, and the vocabulary each came from), and the four cohort definitions with counts and their SQL validation.
 
 ## **Check Your Work**
 
@@ -200,7 +201,7 @@ Mean PM2.5 during pregnancy for the two persons (weighted and naive, with an exp
 - [ ] No post-outcome leakage: the lookback window ends the day before the index date
 - [ ] The mover's pregnancy uses rows from both residences
 - [ ] You identified that the unit is declared in the Gaia catalog but empty in `unit_concept_id`, and that "annual mean" in the concept name does not match the monthly grain
-- [ ] Each concept is used in its correct role (an exposure concept is not confused with a relationship, geometry type, or unit concept)
+- [ ] Each concept is used in its correct role (an exposure concept is not confused with a relationship, exposure type, or unit concept)
 - [ ] Capr cohort counts match your SQL counts (or you can explain the difference), and small counts are suppressed in anything shared
 
 <br>
