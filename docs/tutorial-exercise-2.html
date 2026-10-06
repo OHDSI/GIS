@@ -539,7 +539,10 @@ drives ingestion is the metadata record from Exercise 1 (your own, or
 the fallback provided).</p>
 <pre class="sql"><code>SELECT * FROM backbone.ingest_datasource(&#39;us_2023_county_tl&#39;);
 SELECT * FROM backbone.ingest_datasource(&#39;us_2014_2019_monthly_pm25_by_county_cdc&#39;);</code></pre>
-<p>Inspect what was registered:
+<p>Inspect what was registered
+(<code>attr_index.variable_source_id</code> links each loaded variable
+to its <code>variable_source</code> row, and that id becomes
+<code>exposure_source_value</code>):
 <code>SELECT * FROM backbone.data_source;</code>,
 <code>backbone.variable_source</code>, <code>backbone.geom_index</code>,
 and <code>backbone.attr_index</code>. The PM2.5 dataset has four
@@ -574,17 +577,22 @@ mean):</p>
     p_geom_label =&gt; &#39;name&#39;, p_variable_nodata =&gt; -999,
     p_source =&gt; &#39;CDC EPHTN daily county PM2.5 (EPA Downscaler), monthly means&#39;);
 
-SELECT working.spatial_join_from_catalog(&#39;pm25_mean_pred&#39;, &#39;us_2014_2019_monthly_pm25_by_county_cdc&#39;);</code></pre>
-<p>Join one variable at a time.
+SELECT working.spatial_join_from_catalog(&#39;pm25_mean_pred&#39;, &#39;us_2014_2019_monthly_pm25_by_county_cdc&#39;,
+                                         p_exposure_type_concept_id =&gt; 2052499878);  -- Air Quality Database</code></pre>
+<p>The last argument sets <code>exposure_type_concept_id</code>: the
+type of the <em>data source</em> (an “Exposure Type Concept”), which
+Gaia cannot infer. Join one variable at a time.
 <code>working.spatial_join_all_from_catalog(...)</code> would also join
 the max, median, and population-weighted variables and multiply the row
 count by four. Now identify the <strong>spatial assignment
 pattern</strong> used (point-in-polygon, nearest feature,
 buffer/intersection, raster extraction, or areal aggregation; look at
-the operator argument and at the
-<code>exposure_relationship_concept_id</code> it produced) and the
-<strong>temporal assignment pattern</strong> (interval overlap, calendar
-aggregation, moving window, lag, or cumulative exposure; compare
+the operator argument, at the
+<code>exposure_relationship_concept_id</code> it produced, and at
+<code>exposure_relationship_source_value</code>, which keeps the
+verbatim operator) and the <strong>temporal assignment pattern</strong>
+(interval overlap, calendar aggregation, moving window, lag, or
+cumulative exposure; compare
 <code>attr_start_date</code>/<code>attr_end_date</code> in the attribute
 table with the residence interval).</p></li>
 <li><p><strong>Check the result against the answer key.</strong>
@@ -621,12 +629,13 @@ each?</p></li>
 for example March 2017 for the person with the
 <code>DUPLICATE_SOURCE_ROW</code> fixture, and follow it from the
 exposure row to the residence interval it was clipped to, the county
-polygon the point fell in, the source attribute row, and the raw value
-in the ingested table:</p>
+polygon the point fell in, the variable it came from, the source
+attribute row, and the raw value in the ingested table:</p>
 <pre class="sql"><code>WITH pick AS (SELECT person_id FROM demo.fixture_person WHERE fixture_tag = &#39;DUPLICATE_SOURCE_ROW&#39;)
 SELECT ee.external_exposure_id, ee.person_id, ee.exposure_start_date, ee.exposure_end_date,
        ROUND(ee.value_as_number::numeric, 3) AS exposure_value,
        lh.location_history_id, lh.start_date AS residence_start, lh.end_date AS residence_end,
+       ee.exposure_source_value, vs.variable_source_id, vs.variable_name,
        src.geoid, geo.geom_name AS county,
        att.attr_start_date, att.attr_end_date, ROUND(att.value_as_number::numeric, 3) AS source_value,
        src.pm25_mean_pred -&gt;&gt; (att.attr_start_date || &#39;/&#39; || att.attr_end_date) AS raw_json_value
@@ -639,12 +648,18 @@ JOIN working.attr_us_2014_2019_monthly_pm25_by_county_cdc att
      ON att.geom_record_id = geo.geom_record_id
     AND att.attr_start_date = ee.exposure_start_date
     AND att.attr_index_id = (SELECT attr_index_id FROM backbone.attr_index WHERE variable_name = &#39;pm25_mean_pred&#39;)
+JOIN backbone.attr_index ai ON ai.attr_index_id = att.attr_index_id
+JOIN backbone.variable_source vs ON vs.variable_source_id = ai.variable_source_id
+     AND vs.variable_source_id::text = ee.exposure_source_value
 JOIN public.us_2014_2019_monthly_pm25_by_county_cdc src ON src.ogc_fid = geo.geom_record_id
 WHERE ee.exposure_start_date = &#39;2017-03-01&#39;;</code></pre>
-<p>Write two or three sentences explaining that one row: what it
-represents, where its value came from, and what interval it applies to.
-Then do the same for a row in the month a mover changes county, where
-the interval is shorter than a month.</p></li>
+<p><code>exposure_source_value</code> should equal the
+<code>variable_source_id</code> of the variable you joined, which the
+join to <code>variable_source</code> confirms. Write two or three
+sentences explaining that one row: what it represents, where its value
+came from, and what interval it applies to. Then do the same for a row
+in the month a mover changes county, where the interval is shorter than
+a month.</p></li>
 <li><p><strong>Move the result into the OMOP table</strong> so the next
 session can query it:</p>
 <pre class="sql"><code>INSERT INTO omopgis.external_exposure (
