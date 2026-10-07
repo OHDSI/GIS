@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Builds the synthetic OMOP + GIS tutorial dataset end to end (see README.md):
-# gaiaDB ingests TIGER counties + CDC monthly PM2.5, stage 1 creates persons and residences,
+# gaiaDB ingests TIGER counties + CDC monthly PM2.5 + Synthetic SES, stage 1 creates persons and residences,
 # gaiaDB derives the exposure, stage 2 draws the clinical data from it, then verify and export.
 # The exported dataset omits external_exposure (participants derive it in Session 2).
 #
@@ -14,7 +14,7 @@ BUILD_DIR="${BUILD_DIR:-$HERE/build}"
 OUT_DIR="$BUILD_DIR/out"
 GAIA_DB_IMAGE="${GAIA_DB_IMAGE:-ohdsi/gaia-db@sha256:bd044e2931b11d98a99e730582ab11788fc5beac1442b5c0ada1871c6398957a}"
 GAIA_CATALOG_REPO="${GAIA_CATALOG_REPO:-https://github.com/OHDSI/gaiaCatalog.git}"
-GAIA_CATALOG_REF="${GAIA_CATALOG_REF:-43cb54d1588025269cfa4fd4c0c45667bbcf3b9d}"
+GAIA_CATALOG_REF="${GAIA_CATALOG_REF:-830b75aa6ae7febb926b05a5dd27e33a00c848d4}"
 CONTAINER="${CONTAINER:-gaia-db-synth-build}"
 VOLUME="${VOLUME:-gaia-synth-build-pgdata}"
 DB=gaiacore
