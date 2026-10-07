@@ -515,17 +515,19 @@ and then compare resuts.</em></p>
 <p>Aggregated monthly PM 2.5 modelled estimates that span 2014-01-01 to
 2019-12-31 derived from the CDC Daily County-Level PM2.5 Concentrations
 2001-2022 provided by the CDC National Environmental Public Health
-Tracking Network. From the CDC description: This dataset provides
-modeled predictions of PM2.5 levels from the EPA Downscaler model. Data
-are at the county level for 2001-2022. These data are used by the CDC
-National Environmental Public Health Tracking Network to generate air
-quality measures. By using these data, you signify your agreement to
-comply with the following requirements: 1. Use the data for statistical
-reporting and analysis only. 2. Do not attempt to learn the identity of
-any person included in the data and do not combine these data with other
-data for the purpose of matching records to identify individuals. 3. Do
-not disclose of or make use of the identity of any person or
-establishment discovered inadvertently and report the discovery to: <a
+Tracking Network. The aggregated data are then joined to the TIGER line
+county geometries provided by the US Census Bureau.</p>
+<p>From the CDC description: This dataset provides modeled predictions
+of PM2.5 levels from the EPA Downscaler model. Data are at the county
+level for 2001-2022. These data are used by the CDC National
+Environmental Public Health Tracking Network to generate air quality
+measures. By using these data, you signify your agreement to comply with
+the following requirements: 1. Use the data for statistical reporting
+and analysis only. 2. Do not attempt to learn the identity of any person
+included in the data and do not combine these data with other data for
+the purpose of matching records to identify individuals. 3. Do not
+disclose of or make use of the identity of any person or establishment
+discovered inadvertently and report the discovery to: <a
 href="mailto:trackingsupport@cdc.gov"
 class="email">trackingsupport@cdc.gov</a>. 4. Do not imply or state,
 either in written or oral form, that interpretations based on the data
@@ -536,22 +538,30 @@ and CDC. 6. Suggested citation: Centers for Disease Control and
 Prevention. National Environmental Public Health Tracking Network. Web.
 Accessed: insert date. www.cdc.gov/ephtracking.</p>
 </div>
-<div id="source" class="section level3">
-<h3>Source</h3>
-<p><a
+<div id="sources" class="section level3">
+<h3>Sources</h3>
+<ul>
+<li><p><a
 href="https://data.cdc.gov/Environmental-Health-Toxicology/Daily-County-Level-PM2-5-Concentrations-2001-2022/53mz-4zqd/about_data">Center
 for Disease Control (CDC) - Daily County-Level PM2.5 Concentrations
-2001-2022</a></p>
-<p><a
+2001-2022</a></p></li>
+<li><p><a
 href="https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.2023.html#list-tab-1883739534">United
 States Census Bureau - Geography Division - TIGER/Line Shapefile, 2023,
-US, Current County</a></p>
-<p><em>NOTE: this datasource is an API from which Gaia Catalog draws and
-aggregates the data and then joins it to the TIGER line geometries for
-US counties for use in the Gaia toolchain. The University of Miami
-Geospatial Digital Special COllections maintains a pre-aggregated
-version of the dataset for the tutorial available for download in
-various formats.</em></p>
+US, Current County</a></p></li>
+</ul>
+<p><em>NOTE: the gaiaCatalog source first pulls the CDC daily data from
+an API and then aggregates the data to monthly derivatives which are
+then joined to the US Census Bureau TIGER line geometries for US
+counties. The University of Miami Geospatial Digital Special Collections
+maintains a pre-aggregated version of the <a
+href="https://gdsc.idsc.miami.edu/detail/us_2014_2019_monthly_pm25_by_county_cdc?collection=all&amp;active=&amp;query=cdc">2014-2019
+CDC PM 2.5 Monthly Predictions for US Counties</a> dataset for the
+tutorial available for download in <a
+href="https://gdsc.idsc.miami.edu/download/data/us_2014_2019_monthly_pm25_by_county_cdc/derived?file=us_2014_2019_monthly_pm25_by_county_cdc&amp;format=sql">SQL</a>
+and <a
+href="https://gdsc.idsc.miami.edu/download/data/us_2014_2019_monthly_pm25_by_county_cdc/derived?file=us_2014_2019_monthly_pm25_by_county_cdc&amp;format=gpkg">gpkg</a>
+formats.</em></p>
 </div>
 <div id="coverage" class="section level3">
 <h3>Coverage</h3>
@@ -574,7 +584,10 @@ Government</a></p></li>
 <li><p><strong>Census Retrieval method:</strong> Download - <a
 href="ftp://ftp2.census.gov/geo/tiger/TIGER2023/COUNTY/tl_2023_us_county.zip">ftp://ftp2.census.gov/geo/tiger/TIGER2023/COUNTY/tl_2023_us_county.zip</a></p></li>
 <li><p><strong>Census License:</strong> Public Domain</p></li>
-<li><p>UM Retrieval method: Download (TBD)</p></li>
+<li><p>UM Retrieval method: <a
+href="https://gdsc.idsc.miami.edu/download/data/us_2014_2019_monthly_pm25_by_county_cdc/derived?file=us_2014_2019_monthly_pm25_by_county_cdc&amp;format=sql">SQL</a>
+and <a
+href="https://gdsc.idsc.miami.edu/download/data/us_2014_2019_monthly_pm25_by_county_cdc/derived?file=us_2014_2019_monthly_pm25_by_county_cdc&amp;format=gpkg">gpkg</a></p></li>
 <li><p>UM License: <a
 href="http://opendatacommons.org/licenses/by/1.0/">Open Data Commons
 Attribution License (ODC-By)</a></p></li>
@@ -588,12 +601,6 @@ href="tutorial-exercise-1.html">Exercise 1</a>, then ingest and
 spatially/temporally link to the synthetic OMOP population (<a
 href="tutorial-data-description.html">OMOP Data Description</a>) in <a
 href="tutorial-exercise-2.html">Exercise 2</a>.</p>
-<p><strong>GAIA metadata/source tables</strong></p>
-<ul>
-<li><code>backbone.data_source</code></li>
-<li><code>backbone.variable_source</code></li>
-<li>optional source geometry/attribute tables</li>
-</ul>
 <p><br></p>
 </div>
 </div>
