@@ -98,7 +98,7 @@ SELECT 1 AS cohort_definition_id, person_id AS subject_id,
 FROM demo.ex4_features;
 ```
 
-Then, in RStudio (`remotes::install_github("OHDSI/FeatureExtractionForExtensions")`):
+Then, in RStudio in the pre-built tutorial image (FeatureExtractionForExtensions is already installed):
 
 ```r
 library(DatabaseConnector)

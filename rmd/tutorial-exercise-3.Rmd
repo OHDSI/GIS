@@ -119,7 +119,7 @@ You build the cohorts here and use them unchanged in [Exercise 4](tutorial-exerc
 | 3 | COPD | First COPD diagnosis |
 | 4 | CKD (negative-control outcome) | First CKD diagnosis |
 
-7. **Define the cohorts with [CaprForExtensions](https://github.com/OHDSI/CaprForExtensions).** Run this in RStudio from the tutorial image (it has Capr, CirceR, and both extension packages installed). `external_exposure` is registered as a custom domain so exposure criteria can be written like ordinary Capr criteria:
+7. **Define the cohorts with [CaprForExtensions](https://github.com/OHDSI/CaprForExtensions).** Run this in RStudio from the pre-built tutorial image (`ohdsi/gaia-core-tutorial:main`, started as described in [`docker/gaia-core-tutorial`](https://github.com/OHDSI/GIS/tree/main/docker/gaia-core-tutorial); it has Capr, CirceR, and both extension packages installed, so there is nothing to install). `external_exposure` is registered as a custom domain so exposure criteria can be written like ordinary Capr criteria:
    ```r
    library(Capr)
    library(CaprForExtensions)

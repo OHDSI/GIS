@@ -56,7 +56,7 @@ _**After installing docker, please complete the following steps before coming to
 - [ ] Review the [Get Started](get-started.html) page and follw the instructions to deploy the gaia toolchain.
 - [ ] Confirm you can run the Docker stack in the above step. Please reach out if something does not work as expected.
 - [ ] Confirm you can download the synthetic demo dataset (`synthetic_omop_gis.sql.gz`, 3 MB) and the fallback exposure file (`external_exposure_fallback.csv.gz`, 11 MB) from the [`syntheticDataGIS/data`](https://github.com/OHDSI/GIS/tree/main/syntheticDataGIS/data) folder
-- [ ] For Exercises 3 and 4, build or pull the tutorial R image (HADES with Capr, CaprForExtensions, FeatureExtractionForExtensions and CohortMethod): see [`docker/gaia-core-tutorial`](https://github.com/OHDSI/GIS/tree/main/docker/gaia-core-tutorial)
+- [ ] For Exercises 3 and 4, pull the pre-built tutorial R image (HADES with Capr, CaprForExtensions, FeatureExtractionForExtensions and CohortMethod already installed): `docker pull --platform linux/amd64 ohdsi/gaia-core-tutorial:main`, then start it as described in [`docker/gaia-core-tutorial`](https://github.com/OHDSI/GIS/tree/main/docker/gaia-core-tutorial). Nothing needs to be built or installed.
 
 ### Additional useful software (not required)
 

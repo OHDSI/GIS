@@ -70,6 +70,8 @@ CATALOG_DIR="$BUILD_DIR/gaiaCatalog"
 if [ ! -d "$CATALOG_DIR/.git" ]; then
   git clone --quiet "$GAIA_CATALOG_REPO" "$CATALOG_DIR"
 fi
+# the ETL scripts need write access under /data (chmod below); do not let those mode changes block a checkout
+git -C "$CATALOG_DIR" config core.fileMode false
 git -C "$CATALOG_DIR" fetch --quiet origin
 git -C "$CATALOG_DIR" checkout --quiet "$GAIA_CATALOG_REF"
 git -C "$CATALOG_DIR" merge --quiet --ff-only "origin/$GAIA_CATALOG_REF" 2>/dev/null || true
