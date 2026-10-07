@@ -13,5 +13,6 @@ scratch*
 build/
 .idea/
 
-# Manuscript benchmark: unpublished until the manuscript is released
-syntheticDataGIS/benchmark/
+# Manuscript benchmark: only the script is published; its outputs stay unpublished until the manuscript is released
+syntheticDataGIS/benchmark/*
+!syntheticDataGIS/benchmark/pm25_effect_recovery.R
