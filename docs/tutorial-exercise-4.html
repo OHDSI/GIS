@@ -609,8 +609,8 @@ First turn the eligible persons into a standard cohort table:</p>
 SELECT 1 AS cohort_definition_id, person_id AS subject_id,
        DATE &#39;2016-01-01&#39; AS cohort_start_date, DATE &#39;2019-12-31&#39; AS cohort_end_date
 FROM demo.ex4_features;</code></pre>
-<p>Then, in RStudio
-(<code>remotes::install_github("OHDSI/FeatureExtractionForExtensions")</code>):</p>
+<p>Then, in RStudio in the pre-built tutorial image
+(FeatureExtractionForExtensions is already installed):</p>
 <pre class="r"><code>library(DatabaseConnector)
 library(FeatureExtraction)
 library(FeatureExtractionForExtensions)
