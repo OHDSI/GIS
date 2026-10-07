@@ -30,12 +30,18 @@ All SQL runs in the gaia-db container: `docker compose exec gaia-db psql -U post
    ```
    This creates the `omopgis` and `demo` schemas next to Gaia's `backbone` and `working` schemas. Check that `omopgis.person` has 10,000 rows and `omopgis.external_exposure` is empty.
 
-2. **Ingest the two source datasets.** The county boundaries must be ingested before the PM2.5 dataset, which is joined to them. Each call downloads the data and loads it into PostGIS, which takes several minutes (about 0.5 GB in total; the faculty can provide a pre-staged volume if bandwidth is limited). The catalog entry that drives ingestion is the metadata record from Exercise 1 (your own, or the fallback provided).
+2. **Ingest the source datasets.** The county boundaries must be ingested before the PM2.5 dataset and the SES index, which are joined to them. Each call downloads the data and loads it into PostGIS, which takes several minutes (about 0.5 GB in total; the faculty can provide a pre-staged volume if bandwidth is limited). The catalog entry that drives ingestion is the metadata record from Exercise 1 (your own, or the fallback provided).
    ```sql
    SELECT * FROM backbone.ingest_datasource('us_2023_county_tl');
    SELECT * FROM backbone.ingest_datasource('us_2014_2019_monthly_pm25_by_county_cdc');
    ```
    Inspect what was registered (`attr_index.variable_source_id` links each loaded variable to its `variable_source` row, and that id becomes `exposure_source_value`): `SELECT * FROM backbone.data_source;`, `backbone.variable_source`, `backbone.geom_index`, and `backbone.attr_index`. The PM2.5 dataset has four variables (max, median, mean, population-weighted mean). Which one does your Exercise 1 requirement call for?
+
+   The third source, the county **SES index**, is simulated, but it is ingested exactly like the other two. Its entry is part of gaiaCatalog (`synthetic_county_ses`: JSON-LD record, ETL metadata, and the `_osgeo.sh` and `_postgis.sh` scripts, the same layout as the CDC PM2.5 entry), and its source file (`county_ses.csv`, two columns: `geoid`, `ses_index`) is downloaded from the tutorial repository. Ingest it after the counties, which its polygons come from:
+   ```sql
+   SELECT * FROM backbone.ingest_datasource('synthetic_county_ses');
+   ```
+   Check `backbone.attr_index`: there is now an `ses_index` variable next to the four PM2.5 variables, with the SES concept from the record.
 
 3. **Load the persons' locations into Gaia.** Gaia joins exposures to `working.location` and `working.location_history`, so copy the synthetic residences there and validate them:
    ```sql
@@ -57,7 +63,7 @@ All SQL runs in the gaia-db container: `docker compose exec gaia-db psql -U post
    ```
    Some persons have two `location_history` rows. Why? (Look at their dates.)
 
-4. **Build the geometry and attribute tables, then run the spatial join** for the variable you chose (here the monthly mean):
+4. **Build the geometry and attribute tables, then run the spatial joins** for the PM2.5 variable you chose (here the monthly mean) and for the SES index:
    ```sql
    SELECT * FROM backbone.gdsc_load_all_variables(
        p_table_id => 'us_2014_2019_monthly_pm25_by_county_cdc',
@@ -66,24 +72,35 @@ All SQL runs in the gaia-db container: `docker compose exec gaia-db psql -U post
 
    SELECT working.spatial_join_from_catalog('pm25_mean_pred', 'us_2014_2019_monthly_pm25_by_county_cdc',
                                             p_exposure_type_concept_id => 2052499878);  -- Air Quality Database
+
+   SELECT * FROM backbone.gdsc_load_all_variables(
+       p_table_id => 'synthetic_county_ses',
+       p_geom_label => 'name', p_variable_nodata => -999,
+       p_source => 'Simulated county SES index (tutorial)');
+
+   SELECT working.spatial_join_from_catalog('ses_index', 'synthetic_county_ses',
+                                            p_exposure_type_concept_id => 2052497765);  -- SDOH Database
    ```
-   The last argument sets `exposure_type_concept_id`: the type of the *data source* (an "Exposure Type Concept"), which Gaia cannot infer. Join one variable at a time. `working.spatial_join_all_from_catalog(...)` would also join the max, median, and population-weighted variables and multiply the row count by four. Now identify the **spatial assignment pattern** used (point-in-polygon, nearest feature, buffer/intersection, raster extraction, or areal aggregation; look at the operator argument, at the `exposure_relationship_concept_id` it produced, and at `exposure_relationship_source_value`, which keeps the verbatim operator) and the **temporal assignment pattern** (interval overlap, calendar aggregation, moving window, lag, or cumulative exposure; compare `attr_start_date`/`attr_end_date` in the attribute table with the residence interval).
+   The last argument sets `exposure_type_concept_id`: the type of the *data source* (an "Exposure Type Concept"), which Gaia cannot infer. Join one variable at a time. The SES index is joined the same way: it is static over 2014-2019, so it produces one row per residence interval (not per month). `working.spatial_join_all_from_catalog(...)` would also join the max, median, and population-weighted variables and multiply the row count by four. Now identify the **spatial assignment pattern** used (point-in-polygon, nearest feature, buffer/intersection, raster extraction, or areal aggregation; look at the operator argument, at the `exposure_relationship_concept_id` it produced, and at `exposure_relationship_source_value`, which keeps the verbatim operator) and the **temporal assignment pattern** (interval overlap, calendar aggregation, moving window, lag, or cumulative exposure; compare `attr_start_date`/`attr_end_date` in the attribute table with the residence interval).
 
 5. **Check the result against the answer key.** `demo.expected_result` holds the expected counts:
    ```sql
    SELECT metric, value, notes FROM demo.expected_result WHERE fixture_tag = 'GLOBAL';
-   SELECT count(*) AS rows_derived, count(DISTINCT person_id) AS persons FROM working.external_exposure;
+   SELECT exposure_concept_id, count(*) AS rows_derived, count(DISTINCT person_id) AS persons
+   FROM working.external_exposure GROUP BY 1 ORDER BY 1;
    SELECT rows_per_person, count(*) AS persons
-   FROM (SELECT person_id, count(*) AS rows_per_person FROM working.external_exposure GROUP BY person_id) x
+   FROM (SELECT person_id, count(*) AS rows_per_person FROM working.external_exposure
+         WHERE exposure_concept_id = 2052499839 GROUP BY person_id) x
    GROUP BY 1 ORDER BY 1;
    ```
-   Every person should have 72 monthly rows (6 years x 12 months), except movers who change county in the middle of a month, who have 73 because that month is split into two partial-month rows.
+   The SES index gives one row per residence interval (`n_ses_rows` in the answer key). Every person should have 72 monthly PM2.5 rows (6 years x 12 months), except movers who change county in the middle of a month, who have 73 because that month is split into two partial-month rows.
 
 6. **QA drill.** `demo.rejected_exposure_row` contains four deliberately bad staging rows that a loader must not accept as clean data. For each, write a check and show that it flags the row:
    ```sql
    SELECT r.fixture_tag,
           EXISTS (SELECT 1 FROM working.external_exposure e
-                  WHERE e.person_id = r.person_id AND e.location_id = r.location_id
+                  WHERE e.exposure_concept_id = 2052499839
+                    AND e.person_id = r.person_id AND e.location_id = r.location_id
                     AND e.exposure_start_date = r.exposure_start_date
                     AND e.exposure_end_date = r.exposure_end_date) AS already_loaded,
           r.dose_unit_source_value,
@@ -155,8 +172,8 @@ One row's lineage, traced end to end (dataset variable and geometry → residenc
 ## **Check Your Work**
 
 - [ ] Row counts match `demo.expected_result` for the persons and exposure rows you derived
-- [ ] Every person has 72 monthly rows, or 73 for a mover whose move splits a month
-- [ ] You joined a single variable, not all four
+- [ ] Every person has 72 monthly PM2.5 rows, or 73 for a mover whose move splits a month
+- [ ] You joined a single PM2.5 variable, not all four, plus the SES index
 - [ ] The spatial pattern (point-in-polygon, `Within`) and the temporal pattern (interval overlap clipped to the residence) are correctly identified
 - [ ] Source dataset, county polygon, and variable are correctly attributed in your lineage
 - [ ] The value in the exposure row equals the source attribute value and the raw JSON value

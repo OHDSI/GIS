@@ -107,15 +107,27 @@ BEGIN
     -- exposure_type_concept_id is the data-source type (Air Quality Database), not a geometry type
     SELECT count(*) INTO n FROM working.external_exposure ee
         LEFT JOIN omopgis.concept c ON c.concept_id = ee.exposure_type_concept_id
-        WHERE c.concept_class_id IS DISTINCT FROM 'Exposure Type Concept' OR ee.exposure_type_concept_id <> 2052499878;
-    IF n > 0 THEN RAISE EXCEPTION '% exposure rows lack the Air Quality Database exposure type concept', n; END IF;
+        WHERE c.concept_class_id IS DISTINCT FROM 'Exposure Type Concept'
+           OR ee.exposure_type_concept_id <> CASE ee.exposure_concept_id WHEN 2052499839 THEN 2052499878 WHEN 2052497744 THEN 2052497765 END;
+    IF n > 0 THEN RAISE EXCEPTION '% exposure rows lack the expected exposure type concept (Air Quality Database / SDOH Database)', n; END IF;
     -- exposure_source_value is the variable_source_id of the joined variable, and the source concept is the exposure concept
     SELECT count(*) INTO n FROM working.external_exposure ee
         WHERE ee.exposure_source_value IS DISTINCT FROM
-              (SELECT variable_source_id::text FROM backbone.attr_index WHERE variable_name = 'pm25_mean_pred')
+              (SELECT variable_source_id::text FROM backbone.attr_index
+               WHERE variable_name = CASE ee.exposure_concept_id WHEN 2052499839 THEN 'pm25_mean_pred' WHEN 2052497744 THEN 'ses_index' END)
            OR ee.exposure_source_concept_id IS DISTINCT FROM ee.exposure_concept_id
-           OR ee.exposure_relationship_source_value IS DISTINCT FROM 'ST_Within';
+           OR ee.exposure_relationship_source_value IS DISTINCT FROM 'ST_Within'
+           OR ee.exposure_concept_id NOT IN (2052499839, 2052497744);
     IF n > 0 THEN RAISE EXCEPTION '% exposure rows have unexpected source value / source concept / relationship source value', n; END IF;
+    -- the SES exposure is the county SES index of each residence, one row per residence interval, through the index
+    SELECT count(*) INTO n FROM omopgis.location_history lh
+        JOIN omopgis.location l ON l.location_id = lh.location_id
+        JOIN omopgis.county_reference c ON c.county_ref_id = l.county_ref_id
+        LEFT JOIN working.external_exposure ee ON ee.exposure_concept_id = 2052497744
+             AND ee.location_id = lh.location_id AND ee.person_id = lh.entity_id
+             AND ee.exposure_start_date = lh.start_date AND ee.exposure_end_date = lh.end_date
+        WHERE ee.value_as_number IS NULL OR abs(ee.value_as_number - c.ses_index) > 0.0001;
+    IF n > 0 THEN RAISE EXCEPTION '% residence intervals lack a matching ses_index exposure row', n; END IF;
     SELECT count(*) INTO n FROM demo.generator_truth t LEFT JOIN omopgis.concept c ON c.concept_id = t.condition_concept_id
         WHERE c.concept_id IS NULL;
     IF n > 0 THEN RAISE EXCEPTION '% generator_truth concepts are missing', n; END IF;
@@ -127,5 +139,6 @@ SELECT 'persons' AS what, count(*)::text AS value FROM omopgis.person
 UNION ALL SELECT 'movers', count(*)::text FROM (SELECT entity_id FROM omopgis.location_history GROUP BY 1 HAVING count(*) = 2) x
 UNION ALL SELECT 'counties used', count(DISTINCT county_ref_id)::text FROM omopgis.location
 UNION ALL SELECT 'gaiaDB pm25 rows', count(*)::text FROM working.external_exposure WHERE exposure_concept_id = 2052499839
+UNION ALL SELECT 'gaiaDB ses rows', count(*)::text FROM working.external_exposure WHERE exposure_concept_id = 2052497744
 UNION ALL SELECT 'conditions', count(*)::text FROM omopgis.condition_occurrence
 UNION ALL SELECT 'corr(county PM2.5, county SES)', round(corr(pm25_baseline_mean, ses_index)::numeric, 3)::text FROM omopgis.county_reference;

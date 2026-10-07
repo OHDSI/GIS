@@ -14,7 +14,7 @@ BUILD_DIR="${BUILD_DIR:-$HERE/build}"
 OUT_DIR="$BUILD_DIR/out"
 GAIA_DB_IMAGE="${GAIA_DB_IMAGE:-ohdsi/gaia-db@sha256:bd044e2931b11d98a99e730582ab11788fc5beac1442b5c0ada1871c6398957a}"
 GAIA_CATALOG_REPO="${GAIA_CATALOG_REPO:-https://github.com/OHDSI/gaiaCatalog.git}"
-GAIA_CATALOG_REF="${GAIA_CATALOG_REF:-00cec2aead13c430fe2a02fb1876611565dae4e4}"
+GAIA_CATALOG_REF="${GAIA_CATALOG_REF:-43cb54d1588025269cfa4fd4c0c45667bbcf3b9d}"
 CONTAINER="${CONTAINER:-gaia-db-synth-build}"
 VOLUME="${VOLUME:-gaia-synth-build-pgdata}"
 DB=gaiacore
@@ -23,6 +23,9 @@ DBUSER=postgres
 COUNTY_TABLE=us_2023_county_tl
 PM25_TABLE=us_2014_2019_monthly_pm25_by_county_cdc
 PM25_VARIABLE=pm25_mean_pred
+SES_TABLE=synthetic_county_ses
+SES_VARIABLE=ses_index
+SES_TYPE_CONCEPT=2052497765          # Exposure Type Concept: Social Determinants Of Health (SDOH) Database
 EXPOSURE_TYPE_CONCEPT=2052499878   # Exposure Type Concept: Air Quality Database
 POP_URL="https://www2.census.gov/programs-surveys/popest/datasets/2010-2019/counties/totals/co-est2019-alldata.csv"
 
@@ -193,6 +196,7 @@ INSERT INTO demo.build_info VALUES
   ('gaia_catalog_commit', '$CATALOG_SHA'),
   ('pm25_dataset',        '$PM25_TABLE ($PM25_VARIABLE, CDC EPHTN EPA Downscaler, monthly county means)'),
   ('county_dataset',      '$COUNTY_TABLE (Census TIGER/Line 2023 counties)'),
+  ('ses_dataset',         '$SES_TABLE ($SES_VARIABLE, simulated county SES index registered through the Gaia catalog)'),
   ('population_source',   '$POP_URL');
 SQL
 dbpsql < "$HERE/sql/stage1_population.sql" >/dev/null
@@ -203,7 +207,13 @@ dbpsql -c "SELECT * FROM working.load_location_data('/tmp/LOCATION.csv', '/tmp/L
 dbpsql -c "SELECT * FROM backbone.gdsc_load_all_variables(p_table_id => '$PM25_TABLE', p_geom_label => 'name', p_variable_nodata => -999, p_source => 'CDC EPHTN daily county PM2.5 (EPA Downscaler), monthly means')" \
   | tee "$BUILD_DIR/gdsc_load_variables.log" | cat
 if grep -q ' error ' "$BUILD_DIR/gdsc_load_variables.log"; then die "gdsc_load_all_variables reported an error"; fi
+log "   SES source: ingest the gaiaCatalog entry like any other dataset"
+ingest "$SES_TABLE" 3000
+dbpsql -c "SELECT * FROM backbone.gdsc_load_all_variables(p_table_id => '$SES_TABLE', p_geom_label => 'name', p_variable_nodata => -999, p_source => 'Simulated county SES index (tutorial)')" \
+  | tee "$BUILD_DIR/gdsc_load_ses.log" | cat
+if grep -q ' error ' "$BUILD_DIR/gdsc_load_ses.log"; then die "gdsc_load_all_variables reported an error for $SES_TABLE"; fi
 dbpsql -c "SELECT working.spatial_join_from_catalog('$PM25_VARIABLE', '$PM25_TABLE', p_exposure_type_concept_id => $EXPOSURE_TYPE_CONCEPT)"
+dbpsql -c "SELECT working.spatial_join_from_catalog('$SES_VARIABLE', '$SES_TABLE', p_exposure_type_concept_id => $SES_TYPE_CONCEPT)"
 echo "   $(dbquery "SELECT count(*) FROM working.external_exposure") exposure rows derived by gaiaDB"
 
 # ---------------------------------------------------------------------------
@@ -238,6 +248,8 @@ dbpsql -c "\\copy (SELECT row_number() OVER (ORDER BY person_id, exposure_start_
                    FROM working.external_exposure ORDER BY person_id, exposure_start_date, location_id)
            TO STDOUT WITH (FORMAT csv, HEADER true)" | gzip -9 > "$OUT_DIR/external_exposure_fallback.csv.gz"
 
+# source file of the SES catalog entry (publish it as syntheticDataGIS/data/county_ses.csv, where the entry downloads it from)
+dbpsql -c "\\copy (SELECT county_fips AS geoid, ses_index FROM omopgis.county_reference ORDER BY county_fips) TO STDOUT WITH (FORMAT csv, HEADER true)" > "$OUT_DIR/county_ses.csv"
 dbpsql -At -c "SELECT key || ': ' || value FROM demo.build_info ORDER BY key" > "$OUT_DIR/BUILD_INFO.txt"
 
 ( cd "$OUT_DIR" && ls -l synthetic_omop_gis.sql.gz external_exposure_fallback.csv.gz && du -sh csv )

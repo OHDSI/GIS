@@ -4,6 +4,7 @@ DUPLICATE_SOURCE_ROW,1,n_rejected_rows,1,rows,DUPLICATE_SOURCE_ROW
 GLOBAL,,n_movers,955,persons,Persons with two location_history rows
 GLOBAL,,n_persons,10000,persons,
 GLOBAL,,n_pm25_monthly_rows,720925,rows,72 per non-mover; 73 per mover (the move month is split into two partial rows) unless the move date is the 1st of a month
+GLOBAL,,n_ses_rows,10955,rows,One row per residence interval (the SES index is static over 2014-2019)
 MISSING_EXPOSURE_VALUE,5,n_pm25_monthly_rows,72,rows,72 rows for a non-mover; 73 for a mover (unless the move falls on the 1st of a month)
 MISSING_EXPOSURE_VALUE,5,n_rejected_rows,1,rows,MISSING_VALUE
 MISSING_SDOH_VALUE,6,n_pm25_monthly_rows,72,rows,72 rows for a non-mover; 73 for a mover (unless the move falls on the 1st of a month)

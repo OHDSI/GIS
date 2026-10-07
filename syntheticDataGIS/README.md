@@ -19,8 +19,8 @@ Requires docker, git, curl and python3 (standard library). The first run downloa
 |---|---|---|
 | 1 | gaiaCatalog + `backbone.ingest_datasource()` | Ingest Census TIGER 2023 counties and the CDC monthly county PM2.5 dataset |
 | 2 | `sql/stage1_ddl.sql`, `sql/stage1_vocabulary_*.sql`, `sql/stage1_population.sql` | Create the OMOP 5.4 + Gaia extension tables, load the [mini vocabulary](vocabulary/README.md), then persons, real-county residences (random points inside the real polygons), ~10% movers, `LOCATION` / `LOCATION_HISTORY` (exported as CSV) |
-| 3 | gaiaDB | `working.load_location_data()`, `backbone.gdsc_load_all_variables()`, `working.spatial_join_from_catalog('pm25_mean_pred', ...)` derive monthly exposure rows |
-| 4 | `sql/stage2_clinical.sql` | Draw conditions, SDOH, drugs, procedures and measurements from the gaiaDB exposure; fixtures and the answer key |
+| 3 | gaiaDB, gaiaCatalog entry `synthetic_county_ses` | The simulated county SES index is a third source with its own gaiaCatalog entry (JSON-LD, ETL metadata, osgeo and postgis scripts, like the CDC PM2.5 entry). Its source file `data/county_ses.csv` is generated from the stage-1 county table, and `backbone.ingest_datasource('synthetic_county_ses')` loads it and joins it to the TIGER county polygons. Then `working.load_location_data()`, `backbone.gdsc_load_all_variables()` and `working.spatial_join_from_catalog()` derive the monthly PM2.5 rows (`pm25_mean_pred`) and one SES row per residence interval (`ses_index`) |
+| 4 | `sql/stage2_clinical.sql` | Draw conditions, SDOH, drugs, procedures and measurements from the gaiaDB exposures (PM2.5 and SES); fixtures and the answer key |
 | 5 | `sql/verify.sql` | Invariants (adult ages, residence intervals, points inside polygons, 72 months per person, empty `external_exposure`) |
 | 6 | build script | `synthetic_omop_gis.sql.gz`, one CSV per non-empty table, `external_exposure_fallback.csv.gz`, `BUILD_INFO.txt` |
 
@@ -28,7 +28,7 @@ The build is deterministic given the same gaia-db image and gaiaCatalog commit (
 
 ## The model and the answer key
 
-Conditions follow a logistic model in PM2.5 (day-weighted over a person's residences), county SES, age, sex and a shared county random effect. All parameters, and the true effects, are in `demo.generator_params` and `demo.generator_truth`. County SES is simulated and correlated with county PM2.5 (about -0.3), so SES confounds the crude PM2.5 effect.
+Conditions follow a logistic model in PM2.5 (day-weighted over a person's residences), county SES, age, sex and a shared county random effect. All parameters, and the true effects, are in `demo.generator_params` and `demo.generator_truth`. County SES is simulated (county values live in `county_reference`; persons get theirs through the Gaia spatial join, day-weighted over residences) and correlated with county PM2.5 (about -0.3), so SES confounds the crude PM2.5 effect.
 
 **The PM2.5 coefficients are deliberately exaggerated.** Real county PM2.5 varies little across 10,000 persons (SD about 1.4 ug/m3), so the true effects (for example COPD, OR about 1.16 per ug/m3) are much larger than epidemiologic estimates to make them recoverable. They are not real-world effect sizes. Outcomes with a simulated effect of zero (`is_pm25_null_outcome`) can serve as negative controls.
 

@@ -12,6 +12,10 @@ BEGIN
         RAISE EXCEPTION 'working.external_exposure has no pm25_mean_pred rows - run the gaiaDB spatial join first';
     END IF;
     RAISE NOTICE 'gaiaDB exposure rows (pm25_mean_pred): % for % residence intervals', n, expected;
+    SELECT count(*) INTO n FROM working.external_exposure WHERE exposure_concept_id = 2052497744;
+    IF n <> expected THEN
+        RAISE EXCEPTION 'expected % ses_index rows (one per residence interval), found % - run the gaiaDB SES join first', expected, n;
+    END IF;
 END $$;
 
 -- Fixtures (see demo.fixture_person) and answer key (demo.expected_result)
@@ -158,6 +162,9 @@ SELECT 'GLOBAL', NULL, 'n_pm25_monthly_rows', count(*), 'rows',
        '72 per non-mover; 73 per mover (the move month is split into two partial rows) unless the move date is the 1st of a month'
 FROM working.external_exposure WHERE exposure_concept_id = 2052499839
 UNION ALL
+SELECT 'GLOBAL', NULL, 'n_ses_rows', count(*), 'rows', 'One row per residence interval (the SES index is static over 2014-2019)'
+FROM working.external_exposure WHERE exposure_concept_id = 2052497744
+UNION ALL
 SELECT fixture_tag, person_id, 'n_pm25_monthly_rows', count(*), 'rows',
        '72 rows for a non-mover; 73 for a mover (unless the move falls on the 1st of a month)'
 FROM demo.fixture_person fp
@@ -168,7 +175,7 @@ UNION ALL
 SELECT fixture_tag, person_id, 'n_rejected_rows', count(*), 'rows', reject_reason
 FROM demo.rejected_exposure_row GROUP BY fixture_tag, person_id, reject_reason;
 
--- Person risk factors: day-weighted PM2.5 and SES across residences, age, sex, county frailty
+-- Person risk factors: day-weighted PM2.5 and SES (both derived by gaiaDB) across residences, age, sex, county frailty
 
 CREATE TEMP TABLE county_frailty AS
 SELECT county_ref_id,
@@ -184,9 +191,17 @@ FROM working.external_exposure ee
 WHERE ee.exposure_concept_id = 2052499839 AND ee.person_id > 0
 GROUP BY ee.person_id;
 
+CREATE TEMP TABLE person_ses_gaia AS
+SELECT ee.person_id,
+       sum(ee.value_as_number::numeric * (ee.exposure_end_date - ee.exposure_start_date + 1))
+         / sum(ee.exposure_end_date - ee.exposure_start_date + 1) AS ses_index
+FROM working.external_exposure ee
+WHERE ee.exposure_concept_id = 2052497744 AND ee.person_id > 0
+GROUP BY ee.person_id;
+
 CREATE TEMP TABLE person_ses AS
 SELECT lh.entity_id AS person_id,
-       sum(c.ses_index * (lh.end_date - lh.start_date + 1)) / sum(lh.end_date - lh.start_date + 1) AS ses_index,
+       g.ses_index,
        sum(f.u * (lh.end_date - lh.start_date + 1)) / sum(lh.end_date - lh.start_date + 1) AS frailty,
        (array_agg(c.urban_density_category ORDER BY lh.start_date))[1] AS urban_density_category,
        (array_agg(c.county_ref_id ORDER BY lh.start_date))[1] AS county_ref_id
@@ -194,7 +209,8 @@ FROM omopgis.location_history lh
 JOIN omopgis.location l ON l.location_id = lh.location_id
 JOIN omopgis.county_reference c ON c.county_ref_id = l.county_ref_id
 JOIN county_frailty f ON f.county_ref_id = c.county_ref_id
-GROUP BY lh.entity_id;
+JOIN person_ses_gaia g ON g.person_id = lh.entity_id
+GROUP BY lh.entity_id, g.ses_index;
 
 CREATE TEMP TABLE person_risk_factors AS
 SELECT p.person_id,
@@ -233,7 +249,7 @@ FROM (
 WHERE demo.hash_u(d.person_id || ':' || d.outcome_name || ':occur') < d.p
 ORDER BY d.person_id, d.outcome_name;   -- fixed insertion order => stable condition_occurrence_id
 
--- SDOH observations, all derived from the county ses_index
+-- SDOH observations, all derived from the county SES index (as joined to the person by gaiaDB)
 
 -- Poverty Rate (concept 2052499459 - Poverty)
 INSERT INTO omopgis.observation(person_id, observation_concept_id, observation_date,

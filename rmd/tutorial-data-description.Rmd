@@ -12,7 +12,7 @@ output:
 
 <div class="alert alert-warning"><strong>Work in progress.</strong> These tutorial materials are still under active development and will continue to change until the tutorial takes place on <strong>October 20, 2026</strong>. Content, links, and exercises may be incomplete or shift without notice.</div>
 
-The tutorial uses two datasets: a synthetic OMOP CDM population (generated from code in this repository) and a public monthly county PM2.5 dataset for the United States (an external source; see [Geo Data Description](tutorial-geo-data-description.html)). Session 1 catalogs the public dataset. In Session 2 you ingest it with Gaia and link it to the synthetic persons, which produces the `EXTERNAL_EXPOSURE` table. Sessions 3 and 4 query and model that result.
+The tutorial uses two datasets: a synthetic OMOP CDM population (generated from code in this repository) and a public monthly county PM2.5 dataset for the United States (an external source; see [Geo Data Description](tutorial-geo-data-description.html)). Session 1 catalogs the public dataset. In Session 2 you ingest it with Gaia and link it, together with the simulated county SES index (registered through the same catalog), to the synthetic persons, which produces the `EXTERNAL_EXPOSURE` table. Sessions 3 and 4 query and model that result.
 
 <br>
 
@@ -27,11 +27,11 @@ All persons, clinical events, and SDOH values are synthetic, and no real individ
 Source code and build instructions: [`syntheticDataGIS/`](https://github.com/OHDSI/GIS/tree/main/syntheticDataGIS). The build runs the Gaia toolchain itself:
 
 1. Gaia ingests the Census TIGER 2023 counties and the CDC monthly county PM2.5 dataset through the Gaia Catalog.
-2. **Stage 1** creates the persons, their residences, and `LOCATION` / `LOCATION_HISTORY`.
-3. Gaia loads those locations and derives the exposure rows with its own spatial join (`working.spatial_join_from_catalog`).
-4. **Stage 2** draws conditions, drugs, procedures, measurements, and SDOH from that exposure, and writes the answer key.
+2. **Stage 1** creates the persons, their residences, and `LOCATION` / `LOCATION_HISTORY`, and draws the simulated county SES index. The SES index is then ingested through the Gaia Catalog as a third source (`synthetic_county_ses`, published as `county_ses.csv`), the same way as PM2.5, and attached to the TIGER county polygons.
+3. Gaia loads those locations and derives the exposure rows with its own spatial join (`working.spatial_join_from_catalog`), once for PM2.5 and once for SES.
+4. **Stage 2** draws conditions, drugs, procedures, measurements, and SDOH from those exposures (PM2.5 and SES, both as Gaia derived them), and writes the answer key.
 
-The exposure that drives disease risk is therefore exactly what you reproduce in Exercise 2. **`EXTERNAL_EXPOSURE` is empty in the published dataset**; you populate it from Gaia. A prebuilt copy (`external_exposure_fallback.csv.gz`) is provided as a fallback in case the pipeline does not run on your machine. Both the dataset (`synthetic_omop_gis.sql.gz`) and the fallback are in the [`syntheticDataGIS/data`](https://github.com/OHDSI/GIS/tree/main/syntheticDataGIS/data) folder. The build is deterministic given the same Gaia image and catalog commit, which are recorded in `demo.build_info`.
+The exposures that drive disease risk (PM2.5 and SES) are therefore exactly what you reproduce in Exercise 2. **`EXTERNAL_EXPOSURE` is empty in the published dataset**; you populate it from Gaia. A prebuilt copy (`external_exposure_fallback.csv.gz`) is provided as a fallback in case the pipeline does not run on your machine. Both the dataset (`synthetic_omop_gis.sql.gz`) and the fallback are in the [`syntheticDataGIS/data`](https://github.com/OHDSI/GIS/tree/main/syntheticDataGIS/data) folder. The build is deterministic given the same Gaia image and catalog commit, which are recorded in `demo.build_info`.
 
 <br>
 
@@ -44,11 +44,11 @@ The dataset is an OMOP CDM v5.4 schema (`omopgis`) plus the Gaia extension table
 - **10,000 adults**, aged 18-90 on 2014-01-01, observed 2014-01-01 to 2019-12-31.
 - **Real counties.** Persons live in about 2,700 of 3,099 eligible real US counties and county equivalents. Counties are sampled in proportion to the square root of their 2019 population, so populous counties hold more persons while every state is represented.
 - **Residence history.** Each person has one `LOCATION_HISTORY` row spanning 2014-2019, except about 10% who move once to a different county between March 2015 and October 2018 and have two consecutive, non-overlapping rows. `PERSON.location_id` is the current (last) address.
-- **Real exposure.** Once derived in Exercise 2, `EXTERNAL_EXPOSURE` holds one row per person per month (about 720,000 rows). A move in the middle of a month gives two partial-month rows for that month.
+- **Exposure.** Once derived in Exercise 2, `EXTERNAL_EXPOSURE` holds one PM2.5 row per person per month (about 720,000 rows; a move in the middle of a month gives two partial-month rows for that month) and one SES row per residence interval (about 11,000 rows).
 - **14 conditions** (5 respiratory, 9 cardiometabolic), about 18,000 occurrences, plus the drugs, procedures, and measurements tied to them.
 - **12 county-level SDOH observations** per person, derived from the simulated county SES index.
 
-The county table carries a density category from real population density (Urban Core, Suburban, Small Town, Rural) and a **simulated** SES index (0-100, higher is more affluent). County SES is correlated with county PM2.5 at about -0.3, so higher-PM2.5 counties tend to have lower SES. That makes SES a genuine confounder of the PM2.5 effect.
+The county table carries a density category from real population density (Urban Core, Suburban, Small Town, Rural) and a **simulated** SES index (0-100, higher is more affluent). The SES index is a source dataset in the Gaia catalog like the others: persons receive their SES exposure through the same spatial-temporal join as PM2.5. County SES is correlated with county PM2.5 at about -0.3, so higher-PM2.5 counties tend to have lower SES. That makes SES a genuine confounder of the PM2.5 effect.
 
 ### How the conditions are generated
 

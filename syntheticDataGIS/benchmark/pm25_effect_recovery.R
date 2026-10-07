@@ -11,21 +11,6 @@
 #   adjusted    CohortMethod propensity score (county SES, age, sex: the covariates of the generator's risk model),
 #               stratified in --strata strata, with a stratified outcome model
 #
-# CohortMethod estimates one contrast (high versus low), so the log odds ratio is divided by the difference in mean PM2.5
-# between the two groups to give a log-odds per ug/m3 that is compared with the true coefficient in demo.generator_truth.
-# This assumes a log-linear exposure-response, which is what the generator uses. Standard errors are those of the outcome
-# model; they do not account for the unmeasured county random effect, so the intervals are narrower than a county-clustered
-# analysis would give.
-#
-# The cohort data are assembled directly from the CSV snapshot (the same tables CohortMethod's own simulator uses), so no
-# database is needed.
-#
-# Needs: R, CohortMethod, dplyr, readr, ggplot2 (all in the HADES image). Inputs are the CSV snapshot in data/ and the
-# exposure file derived by Gaia (external_exposure_fallback.csv.gz, or the table you derived in Exercise 2).
-#
-#   Rscript benchmark/pm25_effect_recovery.R [--data-dir syntheticDataGIS/data] [--exposure <csv or csv.gz>]
-#                                            [--out syntheticDataGIS/benchmark/output] [--high 10] [--low 8] [--strata 5]
-# Writes pm25_effect_recovery.csv (table), pm25_effect_recovery.md (the same table) and pm25_effect_recovery.{png,pdf,svg}.
 
 suppressPackageStartupMessages({
   library(dplyr)
