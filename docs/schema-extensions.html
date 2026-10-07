@@ -791,7 +791,7 @@ The LOCATION_ID of the Person for whom the exposure is associated.
 integer
 </td>
 <td style="text-align:left;">
-Yes
+No
 </td>
 <td style="text-align:left;">
 No
@@ -977,14 +977,16 @@ No
 exposure_type_concept_id
 </td>
 <td style="text-align:left;">
-This field identifies the origin of the exposure record (e.g. Census,
-EHR, Environmental data, Geospatial data, Satellite imagery, GIS
-mapping, Sensor network, Mobile device geolocation, LiDAR)
+This field identifies the type of data source the exposure record was
+derived from (e.g. Air Quality Database, Public Environmental Data,
+Census Data, Satellite Imagery). It describes the kind of source, not
+the geometry type of the source.
 </td>
 <td style="text-align:left;">
-The CONCEPT_ID to which the exposure’s data source type is mapped. This
-mapping should be integrated into the data_source record and
-automatically populated in this record.
+The CONCEPT_ID of the Exposure Type Concept that describes the data
+source. Gaia cannot infer it; it is supplied to the spatial join
+(p_exposure_type_concept_id, default 0). The geometry type of the source
+is stored in geom_index.geom_type_concept_id.
 </td>
 <td style="text-align:left;">
 integer
@@ -1041,13 +1043,13 @@ concept
 exposure_source_concept_id
 </td>
 <td style="text-align:left;">
-This field can be used to determine the original source of place-based
-exposure data
+The concept the source exposure variable is mapped from. It currently
+equals EXPOSURE_CONCEPT_ID.
 </td>
 <td style="text-align:left;">
-The CONCEPT_ID to which the exposure’s data source is mapped. This
-mapping should be integrated into the data_source record and
-automatically populated in this record.
+The CONCEPT_ID of the exposure variable as declared in the source
+catalog. Gaia copies the exposure concept here until a separate source
+concept exists.
 </td>
 <td style="text-align:left;">
 integer
@@ -1072,12 +1074,12 @@ concept
 exposure_source_value
 </td>
 <td style="text-align:left;">
-This field houses the verbatim name of the original source of
-place-based exposure data.
+This field houses the identifier of the source variable the exposure
+value came from.
 </td>
 <td style="text-align:left;">
-This name is mapped to a Standard Exposure Source Concept and the
-original name is stored here for reference.
+Gaia stores the variable_source_id of the joined variable (as text); the
+variable name is in backbone.variable_source.
 </td>
 <td style="text-align:left;">
 varchar(50)
@@ -1101,8 +1103,12 @@ No
 exposure_relationship_source_value
 </td>
 <td style="text-align:left;">
+The verbatim spatial operator used to relate the exposure to the
+location.
 </td>
 <td style="text-align:left;">
+Gaia stores the operator as passed to the spatial join (e.g. ST_Within);
+the mapped concept is in EXPOSURE_RELATIONSHIP_CONCEPT_ID.
 </td>
 <td style="text-align:left;">
 varchar(50)
@@ -1126,8 +1132,12 @@ No
 dose_unit_source_value
 </td>
 <td style="text-align:left;">
+The verbatim unit string of the exposure value as given in the source.
 </td>
 <td style="text-align:left;">
+Not populated by Gaia, which keeps the unit text in
+attr_index.unit_source_value; it can be used to flag rows whose unit
+differs from the expected one.
 </td>
 <td style="text-align:left;">
 varchar(50)
@@ -1151,8 +1161,10 @@ No
 quantity
 </td>
 <td style="text-align:left;">
+Not used by Gaia.
 </td>
 <td style="text-align:left;">
+Left empty.
 </td>
 <td style="text-align:left;">
 integer
@@ -1259,12 +1271,13 @@ No
 value_as_concept_id
 </td>
 <td style="text-align:left;">
-If the raw data gives a categorial result for exposures those values are
-captured and mapped to standard concepts in the ?Exposure Value? domain.
+If the raw data gives a categorical result for the exposure (rather than
+a number), the value is captured here as a Standard Concept (as in OMOP
+MEASUREMENT.value_as_concept_id).
 </td>
 <td style="text-align:left;">
-This mapping should be integrated into the variable_source record and
-automatically populated in this record.
+Left empty for numeric exposures. Populated from the variable_source
+record when the variable is categorical.
 </td>
 <td style="text-align:left;">
 integer
@@ -1289,12 +1302,14 @@ concept
 unit_concept_id
 </td>
 <td style="text-align:left;">
-UNIT_SOURCE_VALUES should be mapped to a Standard Concept in the Unit
-domain that best represents the unit as given in the source data.
+The Standard Concept in the Unit domain that represents the unit of
+VALUE_AS_NUMBER (as in OMOP MEASUREMENT.unit_concept_id).
 </td>
 <td style="text-align:left;">
-This mapping should be integrated into the variable_source record and
-automatically populated in this record.
+Mapped from the unit declared in the source catalog
+(variable_source/attr_index). Gaia leaves it empty when the catalog
+declares no unit concept; the unit text is kept in
+attr_index.unit_source_value.
 </td>
 <td style="text-align:left;">
 integer

@@ -495,9 +495,9 @@ exercises may be incomplete or shift without notice.
 </div>
 <div id="goal" class="section level2">
 <h2><strong>Goal</strong></h2>
-<p>Produce one valid, machine-actionable metadata record and a
-dataset-fitness decision, tied to a specific research question, for a
-dataset you choose from the GAIA catalog.</p>
+<p>Identify a candidate dataset based on a dataset fitness decision tied
+to a specific research question and then author a machine-actionable
+metadata record for use in the GAIA catalog.</p>
 </div>
 <div id="background" class="section level2">
 <h2><strong>Background</strong></h2>
@@ -518,27 +518,24 @@ on it directly.</p>
 of GIS</li>
 <li>Identify GIS dataset requirements for OHDSI GIS analytic
 pipeline</li>
-<li>Match requirements to entries in the Gaia Catalog (or not)</li>
 <li>Match requirements to publicly available datasets</li>
 <li>Make a dataset ingestion request with sufficient information to
 create a machine actionable catalog entry</li>
-<li>use the tools to create a schema.org compliant JSON-LD catalog entry
-(kobo toolbox, gdsc tools)</li>
-<li>….</li>
+<li>Understand the workflow to create a schema.org compliant JSON-LD
+catalog entry</li>
+<li>Match requirements to entries in the Gaia Catalog</li>
 </ol>
 </div>
 <div id="steps" class="section level2">
 <h2><strong>Steps</strong></h2>
 <ol style="list-style-type: decimal">
-<li>Start from a research question (exposure to PM 2.5 and COPD helath
+<li>Start from a research question (exposure to PM 2.5 and COPD health
 outcomes) and decompose it into its computable requirements: population,
 index time, exposure window, lag, geography, variable, unit, resolution,
 provenance, and permissible missingness. [it seems we will do this
-togehter as a guided excercise)]</li>
+togehter as a guided excercise]</li>
 <li>Search publicly available datasets for PM2.5 to identify one best
 candidate that meets your requirements</li>
-<li>Search the GAIA catalog for your candidate dataset (e.g., an
-air-quality dataset) that could answer your decomposed question.</li>
 <li>Inspect the candidate’s spatial coverage, temporal coverage,
 variable definition, unit, and access URL.</li>
 <li>Score the candidate against the fitness rubric: scientific
@@ -549,9 +546,11 @@ kobotoolbox, keeping dataset-level properties (identity, version,
 provider, license, URL, spatial/temporal coverage, geometry, retrieval
 method, update cadence) separate from variable-level properties
 (definition, unit).</li>
-<li>Use the GDSC toolbox to crosswalk the kobotoolbox entry to a RO
+<li>Observe the workflow to crosswalk the kobotoolbox entry to a RO
 Crate inspired object that includes schema.org JSON-LD metadata and bash
 ingestion scripts.</li>
+<li>Search the GAIA catalog for your candidate dataset (e.g., an
+air-quality dataset) that could answer your decomposed question.</li>
 <li>Record your overall fitness decision and, if any criterion scored
 amber or red, document the limitation rather than silently
 proceeding.</li>
@@ -562,8 +561,8 @@ dataset/metadata record is available.</p>
 <div id="deliverable" class="section level2">
 <h2><strong>Deliverable</strong></h2>
 <ul>
-<li>One metadata record in JSON-LD, aligned to schema.org for
-interoperability and machine actionability</li>
+<li>One draft metadata record ready to be transformed to JSON-LD aligned
+to schema.org for interoperability and machine actionability</li>
 <li>One fitness decision (green/amber/red per rubric criterion, plus an
 overall call)</li>
 </ul>
@@ -585,8 +584,6 @@ reproducible</label></li>
 use</label></li>
 <li><label><input type="checkbox" />Metadata separates dataset-level
 from variable-level properties</label></li>
-<li><label><input type="checkbox" />Required JSON-LD keys, URL, dates,
-geometry, variable, unit, and license all validate</label></li>
 </ul>
 <p><br></p>
 <p><strong>Bridge to Session 2:</strong> your frozen metadata record and

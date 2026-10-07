@@ -489,6 +489,8 @@ WG</h1>
 <p>Welcome to the OHDSI GIS Working Group! This page helps you get
 started whether you’re deploying the Gaia toolchain, joining the working
 group, or proposing a use case.</p>
+<p><strong>Prerequisites</strong>: Docker Engine 20.10+, Docker Compose
+2.0+, 8GB+ RAM, 50GB+ disk</p>
 <p><br></p>
 <div id="quick-start-deploy-gaia" class="section level2">
 <h2><strong>Quick Start: Deploy Gaia</strong></h2>
@@ -503,9 +505,8 @@ cd gaiaDocker</code></pre>
 <h3>create blank secrets (only do this once)</h3>
 <p>The Gaia toolchain leverages Docker secrets to enable data retrieval
 from datasources that require authentication. For the quickstart we
-recommend running the script below to create empty secrets, and then see
-the <a
-href="https://github.com/OHDSI/gaiaDocker/tree/main/secrets/gaia">Gaia
+recommend running the script in the gaiaDocker root directory to create
+empty secrets, and then see the <a href="secrets/gaia/README.md">Gaia
 secrets documentation</a> for instructions to create the secrets for the
 sources you will use.</p>
 <p>mac/linux</p>
@@ -513,52 +514,44 @@ sources you will use.</p>
 <p>windows</p>
 <pre><code>./create_secrets.ps1 # windows</code></pre>
 </div>
-<div id="login-to-the-github-docker-image-repository"
-class="section level3">
-<h3>login to the github docker image repository</h3>
-<p>Before the next step, you must create a <a
-href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">github
-personal access token</a> (PAT) and use it to login the the github
-docker repository to pull the repository docker images.</p>
-<ol style="list-style-type: decimal">
-<li>login to your github account</li>
-<li>in the top-right corner click your profile picutre and click
-<em>settings</em></li>
-<li>in the left menu click <em>Credentials</em> and click <em>Personal
-access Tokens (classic)</em></li>
-<li>near the top right click the <em>Generate new token</em> button anc
-choose <em>Generate new token (classic)</em></li>
-<li>follow the instructions for two-step verification</li>
-<li>give the token a recognizable name (ghcr-ro-access) in the
-<em>Note</em> field
-<ol style="list-style-type: lower-alpha">
-<li>set the expiration</li>
-<li>check the box next to <em>read:packages</em> (under
-<em>write:packages</em>)</li>
-<li>at the bottom, click the <em>Generate token</em> button</li>
-</ol></li>
-<li>save the token in a safe place, you will not see it again</li>
-</ol>
-<pre><code>echo &quot;YOUR_GITHUB_PAT&quot; | docker login ghcr.io -u YOUR_USERNAME --password-stdin</code></pre>
-</div>
 <div id="start-the-full-gaia-stack" class="section level3">
 <h3>start the full Gaia stack</h3>
 <pre class="bash"><code># Start the full Gaia stack
-docker compose --profile gaia up -d
-
-# Verify services are running
+docker compose --profile gaia up -d</code></pre>
+<p>On the first start it may take several minutes to pull the containers
+from the docker hub container repository. NOTE: there are several
+profiles available (see <a href="#profiles">Profiles</a>).</p>
+</div>
+<div id="verify-services-are-running" class="section level3">
+<h3>verify services are running</h3>
+<pre><code># Verify services are running
 docker compose ps</code></pre>
-<p><strong>Prerequisites</strong>: Docker Engine 20.10+, Docker Compose
-2.0+, 8GB+ RAM, 50GB+ disk</p>
 <p><strong>What’s deployed</strong>: - <strong>gaia-db</strong>:
 PostgreSQL/PostGIS (core data repository)<br />
 - <strong>gaia-postgrest</strong>: PostgREST API (exposes gaiaDb
 functions)<br />
 - <strong>gaia-catalog</strong>: Data source discovery interface<br />
 - <strong>gaia-solr</strong>: Search engine for catalog</p>
-<p><strong>Testing</strong>:</p>
-<pre class="bash"><code>curl http://localhost:3000/  # Test PostgREST API
-docker compose exec gaia-db psql -U postgres -d gaiacore  # Connect to database</code></pre>
+</div>
+<div id="testing" class="section level3">
+<h3>testing</h3>
+<p>You can test various endpoints from the command line</p>
+<pre class="bash"><code># connect to the gaia-db database ...
+# result: you will enter into a psql command line environment
+docker compose exec gaia-db psql -U postgres -d gaiacore 
+
+# test the postgrest API ...
+# result: you will see a long sumamry of available funcitonality
+curl http://localhost:3000/</code></pre>
+<p>You can also use a web browser to navigate to:</p>
+<ul>
+<li><code>http://localhost:5001</code>: the catalog discovery
+application</li>
+<li><code>https://ohdsi.github.io/gaiaCatalog/browser</code>: an
+alternative catalog browser</li>
+</ul>
+<p>From the main pages of either browser you can view descriptive
+entries for datasets available in the catalog.</p>
 <p>See <a href="developer-deployment.html">Deployment Strategies</a> for
 alternative deployment options (Podman, Ansible, manual,
 Kubernetes).</p>

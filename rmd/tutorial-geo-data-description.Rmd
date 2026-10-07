@@ -26,15 +26,17 @@ _NOTE: there are several alternative sources for PM 2.5 data in the [Gaia Catalo
 
 ### Overview
 
-Aggregated monthly PM 2.5 modelled estimates that span 2014-01-01 to 2019-12-31 derived from the CDC Daily County-Level PM2.5 Concentrations 2001-2022 provided by the CDC National Environmental Public Health Tracking Network. From the CDC description: This dataset provides modeled predictions of PM2.5 levels from the EPA Downscaler model. Data are at the county level for 2001-2022. These data are used by the CDC National Environmental Public Health Tracking Network to generate air quality measures. By using these data, you signify your agreement to comply with the following requirements: 1. Use the data for statistical reporting and analysis only. 2. Do not attempt to learn the identity of any person included in the data and do not combine these data with other data for the purpose of matching records to identify individuals. 3. Do not disclose of or make use of the identity of any person or establishment discovered inadvertently and report the discovery to: trackingsupport@cdc.gov. 4. Do not imply or state, either in written or oral form, that interpretations based on the data are those of the original data sources and CDC unless the data user and data source are formally collaborating. 5. Acknowledge, in all reports or presentations based on these data, the original source of the data and CDC. 6. Suggested citation: Centers for Disease Control and Prevention. National Environmental Public Health Tracking Network. Web. Accessed: insert date. www.cdc.gov/ephtracking.
+Aggregated monthly PM 2.5 modelled estimates that span 2014-01-01 to 2019-12-31 derived from the CDC Daily County-Level PM2.5 Concentrations 2001-2022 provided by the CDC National Environmental Public Health Tracking Network. The aggregated data are then joined to the TIGER line county geometries provided by the US Census Bureau.  
 
-### Source
+From the CDC description: This dataset provides modeled predictions of PM2.5 levels from the EPA Downscaler model. Data are at the county level for 2001-2022. These data are used by the CDC National Environmental Public Health Tracking Network to generate air quality measures. By using these data, you signify your agreement to comply with the following requirements: 1. Use the data for statistical reporting and analysis only. 2. Do not attempt to learn the identity of any person included in the data and do not combine these data with other data for the purpose of matching records to identify individuals. 3. Do not disclose of or make use of the identity of any person or establishment discovered inadvertently and report the discovery to: trackingsupport@cdc.gov. 4. Do not imply or state, either in written or oral form, that interpretations based on the data are those of the original data sources and CDC unless the data user and data source are formally collaborating. 5. Acknowledge, in all reports or presentations based on these data, the original source of the data and CDC. 6. Suggested citation: Centers for Disease Control and Prevention. National Environmental Public Health Tracking Network. Web. Accessed: insert date. www.cdc.gov/ephtracking.
 
-[Center for Disease Control (CDC) - Daily County-Level PM2.5 Concentrations 2001-2022](https://data.cdc.gov/Environmental-Health-Toxicology/Daily-County-Level-PM2-5-Concentrations-2001-2022/53mz-4zqd/about_data)  
+### Sources
 
-[United States Census Bureau - Geography Division - TIGER/Line Shapefile, 2023, US, Current County](https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.2023.html#list-tab-1883739534)  
+- [Center for Disease Control (CDC) - Daily County-Level PM2.5 Concentrations 2001-2022](https://data.cdc.gov/Environmental-Health-Toxicology/Daily-County-Level-PM2-5-Concentrations-2001-2022/53mz-4zqd/about_data)  
 
-_NOTE: this datasource is an API from which Gaia Catalog draws and aggregates the data and then joins it to the TIGER line geometries for US counties for use in the Gaia toolchain. The University of Miami Geospatial Digital Special COllections maintains a pre-aggregated version of the dataset for the tutorial available for download in various formats._
+- [United States Census Bureau - Geography Division - TIGER/Line Shapefile, 2023, US, Current County](https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.2023.html#list-tab-1883739534)  
+
+_NOTE: the gaiaCatalog source first pulls the CDC daily data from an API and then aggregates the data to monthly derivatives which are then joined to the US Census Bureau TIGER line geometries for US counties. The University of Miami Geospatial Digital Special Collections maintains a pre-aggregated version of the [2014-2019 CDC PM 2.5 Monthly Predictions for US Counties](https://gdsc.idsc.miami.edu/detail/us_2014_2019_monthly_pm25_by_county_cdc?collection=all&active=&query=cdc) dataset for the tutorial available for download in [SQL](https://gdsc.idsc.miami.edu/download/data/us_2014_2019_monthly_pm25_by_county_cdc/derived?file=us_2014_2019_monthly_pm25_by_county_cdc&format=sql) and [gpkg](https://gdsc.idsc.miami.edu/download/data/us_2014_2019_monthly_pm25_by_county_cdc/derived?file=us_2014_2019_monthly_pm25_by_county_cdc&format=gpkg) formats._
 
 ### Coverage
 
@@ -50,17 +52,11 @@ _NOTE: this datasource is an API from which Gaia Catalog draws and aggregates th
 - **Census Retrieval method:** Download - [ftp://ftp2.census.gov/geo/tiger/TIGER2023/COUNTY/tl_2023_us_county.zip](ftp://ftp2.census.gov/geo/tiger/TIGER2023/COUNTY/tl_2023_us_county.zip)
 - **Census License:** Public Domain
 
-- UM Retrieval method: Download (TBD)
+- UM Retrieval method: [SQL](https://gdsc.idsc.miami.edu/download/data/us_2014_2019_monthly_pm25_by_county_cdc/derived?file=us_2014_2019_monthly_pm25_by_county_cdc&format=sql) and [gpkg](https://gdsc.idsc.miami.edu/download/data/us_2014_2019_monthly_pm25_by_county_cdc/derived?file=us_2014_2019_monthly_pm25_by_county_cdc&format=gpkg)
 - UM License: [Open Data Commons Attribution License (ODC-By)](http://opendatacommons.org/licenses/by/1.0/)
 
 ### Role in the tutorial
 
 This is the dataset participants evaluate against the fitness rubric and catalog with a metadata record in [Exercise 1](tutorial-exercise-1.html), then ingest and spatially/temporally link to the synthetic OMOP population ([OMOP Data Description](tutorial-data-description.html)) in [Exercise 2](tutorial-exercise-2.html).
-
-**GAIA metadata/source tables**
-
-- `backbone.data_source`
-- `backbone.variable_source`
-- optional source geometry/attribute tables
 
 <br>

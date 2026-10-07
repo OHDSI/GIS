@@ -825,10 +825,21 @@ notes</a>.</p>
 <li><code>cdm_source</code> records the CDM version (5.4) and the
 generator version. <code>demo.build_info</code> records the exact Gaia
 image and catalog commit, so a build can be reproduced.</li>
-<li>Gaia currently leaves <code>unit_concept_id</code> and
-<code>dose_unit_source_value</code> empty on the exposure rows it
-derives, and assigns its own exposure concept (<code>2052499839</code>)
-and geometry-type concepts. Expect these in Exercise 3.</li>
+<li>On the exposure rows it derives, Gaia leaves
+<code>unit_concept_id</code> and <code>dose_unit_source_value</code>
+empty. The exposure concept comes from the catalog
+(<code>2052499839</code>, “Annual Mean Of Particulate Matter (PM2.5)
+Concentration”), which does not match the monthly grain of the data; the
+tutorial keeps it on purpose as a vocabulary discussion point in
+Exercise 3. <code>exposure_type_concept_id</code> is the data-source
+type (<code>2052499878</code>, Air Quality Database), passed explicitly
+to the join in Exercise 2. <code>exposure_source_value</code> is the
+Gaia <code>variable_source_id</code> of the variable,
+<code>exposure_source_concept_id</code> repeats the exposure concept,
+and <code>exposure_relationship_source_value</code> is the verbatim
+operator (<code>ST_Within</code>). <code>value_as_concept_id</code> and
+<code>unit_concept_id</code> follow the OMOP MEASUREMENT meaning (a
+categorical result and the unit of the numeric value).</li>
 <li>Every concept id used by the data is checked against the mini
 vocabulary at build time (it must exist, be a standard concept, and be
 in the right domain). Residences use the OMOP GIS concept
