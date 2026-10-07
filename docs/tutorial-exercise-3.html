@@ -542,13 +542,15 @@ LEFT JOIN omopgis.concept c1 ON c1.concept_id = ee.exposure_concept_id
 LEFT JOIN omopgis.concept c2 ON c2.concept_id = ee.exposure_relationship_concept_id
 LEFT JOIN omopgis.concept c3 ON c3.concept_id = ee.exposure_type_concept_id
 GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12;</code></pre>
-<p>Which vocabulary does each of the three concepts come from, and why?
-The type concept describes the <em>kind of data source</em> (here an
-“Exposure Type Concept”, Air Quality Database); the geometry type of the
-source (MultiPolygon) is recorded in Gaia’s
-<code>backbone.geom_index</code>, not on the exposure row.
-<code>exposure_source_value</code> holds the Gaia
-<code>variable_source_id</code> of the variable and
+<p>The query returns two rows, one per exposure variable: monthly PM2.5,
+and the county SES index (Socioeconomic Status, with the SDOH Database
+as its type; one row per residence interval because it is static). Which
+vocabulary does each of the three concepts come from, and why? The type
+concept describes the <em>kind of data source</em> (here an “Exposure
+Type Concept”, Air Quality Database); the geometry type of the source
+(MultiPolygon) is recorded in Gaia’s <code>backbone.geom_index</code>,
+not on the exposure row. <code>exposure_source_value</code> holds the
+Gaia <code>variable_source_id</code> of the variable and
 <code>exposure_relationship_source_value</code> the verbatim spatial
 operator (<code>ST_Within</code>); compare it with the relationship
 <em>concept</em> (Within). Two things should bother you. The exposure
