@@ -250,6 +250,8 @@ dbpsql -c "\\copy (SELECT row_number() OVER (ORDER BY person_id, exposure_start_
                    FROM working.external_exposure ORDER BY person_id, exposure_start_date, location_id)
            TO STDOUT WITH (FORMAT csv, HEADER true)" | gzip -9 > "$OUT_DIR/external_exposure_fallback.csv.gz"
 
+# raw monthly county PM2.5 for the persons' counties: the input of the benchmark's independent answer key
+dbpsql -c "\\copy (SELECT c.geoid AS county_fips, split_part(k.key, '/', 1) AS start_date, split_part(k.key, '/', 2) AS end_date, k.value::numeric AS pm25_mean_pred FROM public.$PM25_TABLE c, jsonb_each_text(c.$PM25_VARIABLE) k WHERE c.geoid IN (SELECT county_fips FROM omopgis.county_reference) ORDER BY 1, 2) TO STDOUT WITH (FORMAT csv, HEADER true)" | gzip -9 > "$OUT_DIR/county_pm25_monthly.csv.gz"
 # source file of the SES catalog entry (publish it as syntheticDataGIS/data/county_ses.csv, where the entry downloads it from)
 dbpsql -c "\\copy (SELECT county_fips AS geoid, ses_index FROM omopgis.county_reference ORDER BY county_fips) TO STDOUT WITH (FORMAT csv, HEADER true)" > "$OUT_DIR/county_ses.csv"
 dbpsql -At -c "SELECT key || ': ' || value FROM demo.build_info ORDER BY key" > "$OUT_DIR/BUILD_INFO.txt"

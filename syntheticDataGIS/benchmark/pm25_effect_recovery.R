@@ -31,6 +31,13 @@ highCut <- as.numeric(arg("high", "10"))
 lowCut <- as.numeric(arg("low", "8"))
 nStrata <- as.integer(arg("strata", "5"))
 dir.create(outDir, showWarnings = FALSE, recursive = TRUE)
+pm25Source <- arg("pm25-source", NA_character_)   # exposure_source_value (variable_source_id) of the PM2.5 variable to use; NA = all rows of the concept
+sesSource <- arg("ses-source", NA_character_)
+sourceFilter <- c(`2052499839` = pm25Source, `2052497744` = sesSource)
+keepSource <- function(rows, conceptId) {
+  s <- sourceFilter[[as.character(conceptId)]]
+  if (is.na(s)) rows else rows %>% filter(exposure_source_value == s)
+}
 read <- function(f, ...) read_csv(file.path(dataDir, f), show_col_types = FALSE, progress = FALSE, ...)
 
 # ---- person-level data -------------------------------------------------------------------------------------------
@@ -40,12 +47,14 @@ obsPeriod <- read("observation_period.csv") %>%
   transmute(person_id, obsStart = as.Date(observation_period_start_date), obsEnd = as.Date(observation_period_end_date))
 
 exposureRows <- read_csv(exposureFile, show_col_types = FALSE, progress = FALSE,
-                         col_select = c(person_id, exposure_concept_id, exposure_start_date, exposure_end_date, value_as_number)) %>%
+                         col_select = c(person_id, exposure_concept_id, exposure_source_value, exposure_start_date, exposure_end_date, value_as_number)) %>%
   filter(!is.na(value_as_number)) %>%
-  mutate(days = as.numeric(as.Date(exposure_end_date) - as.Date(exposure_start_date)) + 1)
+  mutate(days = as.numeric(as.Date(exposure_end_date) - as.Date(exposure_start_date)) + 1,
+         exposure_source_value = as.character(exposure_source_value))
 dayWeighted <- function(rows, conceptId, name) {
   rows %>%
     filter(exposure_concept_id == conceptId) %>%
+    keepSource(conceptId) %>%
     group_by(person_id) %>%
     summarise(value = sum(value_as_number * days) / sum(days), .groups = "drop") %>%
     rename(!!name := value)
@@ -71,6 +80,8 @@ d <- d %>% mutate(treatment = case_when(pm25 >= highCut ~ 1L, pm25 < lowCut ~ 0L
 message(sprintf("%d persons analysed: %d high (>= %g ug/m3, mean %.2f), %d low (< %g ug/m3, mean %.2f)",
                 nrow(d), sum(d$treatment == 1), highCut, mean(d$pm25[d$treatment == 1]),
                 sum(d$treatment == 0), lowCut, mean(d$pm25[d$treatment == 0])))
+message(sprintf("mean PM2.5 difference, high minus low: %.3f ug/m3 (%d of %d persons are between the cut points and not analysed)",
+                mean(d$pm25[d$treatment == 1]) - mean(d$pm25[d$treatment == 0]), nrow(person) - nrow(d), nrow(person)))
 
 # ---- CohortMethodData ----------------------------------------------------------------------------------------------
 # Same layout as getDbCohortMethodData() (and CohortMethod's own simulator): cohorts, outcomes, covariates and their
@@ -149,6 +160,9 @@ fitAll <- function() suppressMessages(bind_rows(lapply(seq_len(nrow(truth)), fun
   ) %>% mutate(outcome = truth$outcome_name[i])
 })))
 invisible(capture.output(fits <- fitAll()))   # CohortMethod prints its progress; keep the console readable
+message(sprintf("per-outcome mean PM2.5 difference used for scaling (crude / PS-stratified): %.3f to %.3f / %.3f to %.3f ug/m3",
+                min(fits$delta[fits$model == "Crude"]), max(fits$delta[fits$model == "Crude"]),
+                min(fits$delta[fits$model == "Adjusted"]), max(fits$delta[fits$model == "Adjusted"])))
 results <- fits %>%
   left_join(truth %>% transmute(outcome = outcome_name, category, truth = beta_pm25_per_ugm3,
                                 effect = factor(ifelse(is_pm25_null_outcome, "Simulated null", "Simulated effect"),
