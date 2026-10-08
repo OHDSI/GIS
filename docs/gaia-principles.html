@@ -616,9 +616,9 @@ gaiaDb ETL Functions (SQL/PostGIS)
     ↓ [Automated retrieval &amp; transformation]
 Harmonized Backbone Schema
     ↓ [GEOM_* and ATTR_* tables]
-gaiaCore Access Layer
-    ↓ [API or database connections]
-Client Applications (R, Python, etc.)</code></pre>
+gaiaCore (R package)
+    ↓ [direct database connection]
+OMOP CDM + HADES analytics</code></pre>
 <p><strong>Pipeline stages</strong>:</p>
 <ol style="list-style-type: decimal">
 <li><strong>Discovery</strong>: gaiaCatalog contains metadata for
@@ -631,8 +631,8 @@ attr_spec) standardize data</li>
 tables</li>
 <li><strong>Index</strong>: GEOM_INDEX and ATTR_INDEX populated for
 parameterized querying</li>
-<li><strong>Access</strong>: gaiaCore provides multi-language access to
-harmonized data</li>
+<li><strong>Access</strong>: gaiaCore runs the pipeline from R and
+copies the harmonized exposure into the OMOP CDM</li>
 </ol>
 <p><br></p>
 <p><img src="images/pipeline_flow.png" /></p>
@@ -1030,8 +1030,8 @@ semantic interoperability</li>
 <li><strong>Parallel processing</strong>: Independent data source
 ingestion</li>
 <li><strong>Cloud-ready</strong>: Deployable on any infrastructure</li>
-<li><strong>Horizontal scaling</strong>: Multiple gaiaCore
-instances</li>
+<li><strong>Scaling</strong>: Spatial processing stays in gaiaDb; R
+sessions connect to it as needed</li>
 </ul>
 </div>
 <div id="community-growth" class="section level2">

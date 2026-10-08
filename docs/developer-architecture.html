@@ -521,10 +521,10 @@ Data Model.</p>
                              ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                       gaiaCore                                   │
-│  • Multi-language connector framework                            │
-│  • PostgREST API access                                          │
-│  • Database connection orchestration                             │
-│  • Language-specific client libraries                            │
+│  • R package (direct database connection)                        │
+│  • Pipeline: ingestion, locations, spatial-temporal join         │
+│  • Quality checks, copy into the OMOP CDM                        │
+│  • Exposure analytics                                            │
 └────────────────────────────┬────────────────────────────────────┘
                              │
                              ▼
@@ -574,14 +574,18 @@ data_sources/, transformations/, functions/, api/</p>
 </div>
 <div id="gaiacore" class="section level3">
 <h3><strong>3. gaiaCore</strong></h3>
-<p><strong>Purpose</strong>: Multi-language connector framework (access
-layer only - NO processing logic)</p>
-<p><strong>Technology</strong>: PostgREST, language-specific connectors
-(R, Python)</p>
-<p><strong>I/O</strong>: API/database requests → Routed to gaiaDb →
-Results in client format</p>
-<p><strong>Key</strong>: gaiaCore orchestrates access to gaiaDb
-functions. All processing happens in gaiaDb.</p>
+<p><strong>Purpose</strong>: R interface to gaiaDb: runs the pipeline,
+checks the derived exposure and provides exposure analytics (no spatial
+processing logic of its own)</p>
+<p><strong>Technology</strong>: R package using DatabaseConnector
+(JDBC); Docker image <code>ohdsi/gaia-core</code> (HADES + gaiaCore)</p>
+<p><strong>I/O</strong>: Catalog dataset ids, person locations → gaiaDb
+functions → exposure rows → OMOP <code>EXTERNAL_EXPOSURE</code>,
+summaries and estimates in R</p>
+<p><strong>Key</strong>: gaiaCore calls gaiaDb’s SQL functions. All
+spatial processing happens in gaiaDb. The Python, Java, Julia and Bash
+clients and the PostgREST-based R client live on the gaiaCore
+<code>connectors</code> branch.</p>
 <p><br></p>
 </div>
 </div>
@@ -605,7 +609,7 @@ functions. All processing happens in gaiaDb.</p>
 </div>
 <div id="phase-3-exposure-calculation" class="section level4">
 <h4><strong>Phase 3: Exposure Calculation</strong></h4>
-<pre><code>Patient Locations → gaiaDb (via gaiaCore)
+<pre><code>Patient Locations → gaiaDb (loaded and joined from R with gaiaCore)
     Input:
         - Patient geocoded addresses
         - Residence time periods
@@ -771,9 +775,9 @@ documented provenance, open source</li>
 </tr>
 <tr class="even">
 <td>SQL function calls</td>
-<td>SQL/PostgREST</td>
+<td>SQL</td>
 <td>Query results</td>
-<td>JSON/Tabular</td>
+<td>Tabular</td>
 </tr>
 </tbody>
 </table>
@@ -781,6 +785,12 @@ documented provenance, open source</li>
 <div id="gaiacore-1" class="section level3">
 <h3><strong>gaiaCore</strong></h3>
 <table>
+<colgroup>
+<col width="22%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th>Input</th>
@@ -791,28 +801,34 @@ documented provenance, open source</li>
 </thead>
 <tbody>
 <tr class="odd">
-<td>API requests</td>
-<td>HTTP/JSON</td>
-<td>Exposure data</td>
-<td>JSON</td>
+<td>Catalog dataset ids</td>
+<td>Character</td>
+<td>Ingested datasets, variable tables</td>
+<td>gaiaDb tables</td>
 </tr>
 <tr class="even">
-<td>Database queries</td>
-<td>SQL</td>
-<td>Query results</td>
-<td>Tabular</td>
+<td>Locations and residence histories</td>
+<td>Data frames / OMOP tables</td>
+<td>Loaded <code>working</code> tables</td>
+<td>gaiaDb tables</td>
 </tr>
 <tr class="odd">
-<td>Function calls</td>
-<td>REST/SQL</td>
-<td>Processed data</td>
-<td>Client format</td>
+<td>Variable name, spatial operator</td>
+<td>Function call</td>
+<td>Exposure rows</td>
+<td><code>EXTERNAL_EXPOSURE</code></td>
 </tr>
 <tr class="even">
+<td>Exposure rows, windows, outcomes</td>
+<td>Data frames</td>
+<td>Quality checks, windowed exposure, effect estimates</td>
+<td>Data frames</td>
+</tr>
+<tr class="odd">
 <td>Connection params</td>
-<td>Config</td>
+<td><code>connectionDetails</code></td>
 <td>Database access</td>
-<td>Connection</td>
+<td>JDBC connection</td>
 </tr>
 </tbody>
 </table>
@@ -881,8 +897,8 @@ complete DDL.</p>
 views</li>
 <li><strong>Caching</strong>: Datasets, transformations, API
 responses</li>
-<li><strong>Scaling</strong>: Horizontal gaiaCore instances, connection
-pooling, batch processing</li>
+<li><strong>Scaling</strong>: Connection pooling, batch processing;
+heavy work stays in gaiaDb</li>
 </ul>
 <p>See <a href="developer-deployment.html">Deployment Strategies</a> for
 deployment options.</p>

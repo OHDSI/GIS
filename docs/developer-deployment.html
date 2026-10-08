@@ -542,8 +542,10 @@ example.</p>
 <ul>
 <li><strong>gaia-db</strong>: PostgreSQL/PostGIS (core data
 repository)</li>
-<li><strong>gaia-core</strong>: PostgREST API (exposes gaiaDb
-functions)</li>
+<li><strong>gaia-core</strong>: RStudio with HADES and the gaiaCore R
+package</li>
+<li><strong>gaia-postgrest</strong>: PostgREST API (optional; exposes
+gaiaDb functions)</li>
 <li><strong>gaia-catalog</strong>: Flask catalog interface (data
 discovery)</li>
 <li><strong>gaia-solr</strong>: Search engine (catalog indexing)</li>
@@ -621,8 +623,9 @@ CREATE EXTENSION postgis;
 # 3. Clone gaiaDb
 git clone https://github.com/OHDSI/gaiaDb.git &amp;&amp; cd gaiaDb
 psql -U gaia -d gaiadb -f schema/create_schema.sql</code></pre>
-<p>See gaiaDb and gaiaCore repositories for detailed setup
-instructions.</p>
+<p>See the gaiaDb and gaiaCore repositories for detailed setup
+instructions; gaiaCore connects to the database with
+<code>createGaiaConnectionDetails()</code>.</p>
 <p><br></p>
 </div>
 <div id="kubernetes-cloud" class="section level2">
@@ -764,7 +767,7 @@ reduce batch size</p>
 changelog → deploy → verify → monitor</p>
 <p><strong>Help</strong>: <a href="https://teams.microsoft.com">GIS
 Teams channel</a>, <a href="https://github.com/OHDSI/GIS/issues">GitHub
-issues</a>, Friday meetings (10 AM ET), <a
+issues</a>, Thursday meetings (10 AM ET), <a
 href="mailto:houghtaling@ohdsi.org"
 class="email">houghtaling@ohdsi.org</a></p>
 <p><br></p>
