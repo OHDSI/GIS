@@ -19,7 +19,7 @@ BUILD_DIR="${BUILD_DIR:-$HERE/build}"
 OUT_DIR="$BUILD_DIR/out"
 GAIA_DB_IMAGE="${GAIA_DB_IMAGE:-ohdsi/gaia-db@sha256:bd044e2931b11d98a99e730582ab11788fc5beac1442b5c0ada1871c6398957a}"
 GAIA_CATALOG_REPO="${GAIA_CATALOG_REPO:-https://github.com/OHDSI/gaiaCatalog.git}"
-GAIA_CATALOG_REF="${GAIA_CATALOG_REF:-830b75aa6ae7febb926b05a5dd27e33a00c848d4}"
+GAIA_CATALOG_REF="${GAIA_CATALOG_REF:-11cbafc5609cbe95f1149803102407360e093146}"
 CATALOG_OVERLAY="${CATALOG_OVERLAY:-}"
 CONTAINER="${CONTAINER:-gaia-db-tract-build}"
 VOLUME="${VOLUME:-gaia-tract-build-pgdata}"
@@ -254,19 +254,8 @@ dbpsql -c "TRUNCATE working.external_exposure; TRUNCATE working.location_history
 dbpsql -c "SELECT * FROM working.load_location_data('/tmp/LOCATION.csv', '/tmp/LOCATION_HISTORY.csv')"
 load_variables "$TRACT_PM25_TABLE" geoid "CDC EPHTN daily tract PM2.5 (EPA Downscaler), monthly means"
 
-# the tract SES source file is generated from tract_reference; its catalog entry downloads it from the published URL.
-# The file is pre-staged with a datestamp so the first build does not need the published file to exist yet.
-SES_DIR="$CATALOG_DIR/datastore/data/$TRACT_SES_TABLE"
-mkdir -p "$SES_DIR/download"
-dbpsql -c "\\copy (SELECT tract_geoid AS geoid, ses_index FROM omopgis.tract_reference ORDER BY tract_geoid) TO STDOUT WITH (FORMAT csv, HEADER true)" > "$SES_DIR/download/$TRACT_SES_TABLE.csv"
-date '+%F %T' > "$SES_DIR/datestamp"
-chmod -R a+rwX "$SES_DIR"
-dbpsql -c "DROP TABLE IF EXISTS working.attr_$TRACT_SES_TABLE, working.geom_$TRACT_SES_TABLE CASCADE;
-           DELETE FROM backbone.attr_index WHERE table_name = '$TRACT_SES_TABLE';
-           DELETE FROM backbone.geom_index WHERE table_name = '$TRACT_SES_TABLE';
-           DELETE FROM backbone.variable_source WHERE data_source_uuid IN (SELECT data_source_uuid FROM backbone.data_source WHERE dataset_id LIKE '%/$TRACT_SES_TABLE');
-           DELETE FROM backbone.data_source WHERE dataset_id LIKE '%/$TRACT_SES_TABLE';
-           DROP TABLE IF EXISTS public.$TRACT_SES_TABLE;"
+# the tract SES entry downloads syntheticDataGIS/tract/data/tract_ses.csv from GitHub (written by the previous build from
+# omopgis.tract_reference); verify_tract.sql checks that the ingested values match the tract table of this build
 ingest "$TRACT_SES_TABLE" "$MIN_TRACTS"
 load_variables "$TRACT_SES_TABLE" geoid "Simulated tract SES index (benchmark)"
 
@@ -319,8 +308,8 @@ dbpsql -c "\\copy (SELECT row_number() OVER (ORDER BY person_id, exposure_start_
 # raw monthly series of the tracts and counties in use: the input of an independent answer key
 dbpsql -c "\\copy (SELECT c.geoid AS tract_geoid, split_part(k.key, '/', 1) AS start_date, split_part(k.key, '/', 2) AS end_date, k.value::numeric AS pm25_mean_pred FROM public.$TRACT_PM25_TABLE c, jsonb_each_text(c.$PM25_VARIABLE) k WHERE c.geoid IN (SELECT tract_geoid FROM omopgis.tract_reference) ORDER BY 1, 2) TO STDOUT WITH (FORMAT csv, HEADER true)" | gzip -9 > "$OUT_DIR/tract_pm25_monthly.csv.gz"
 dbpsql -c "\\copy (SELECT c.geoid AS county_fips, split_part(k.key, '/', 1) AS start_date, split_part(k.key, '/', 2) AS end_date, k.value::numeric AS pm25_mean_pred FROM public.$COUNTY_PM25_TABLE c, jsonb_each_text(c.$PM25_VARIABLE) k WHERE c.geoid IN (SELECT county_fips FROM omopgis.county_reference) ORDER BY 1, 2) TO STDOUT WITH (FORMAT csv, HEADER true)" | gzip -9 > "$OUT_DIR/county_pm25_monthly.csv.gz"
-# source file of the tract SES catalog entry (publish it as syntheticDataGIS/tract/data/tract_ses.csv)
-cp "$SES_DIR/download/$TRACT_SES_TABLE.csv" "$OUT_DIR/tract_ses.csv"
+# source file of the tract SES catalog entry (commit it as syntheticDataGIS/tract/data/tract_ses.csv when it changes)
+dbpsql -c "\\copy (SELECT tract_geoid AS geoid, ses_index FROM omopgis.tract_reference ORDER BY tract_geoid) TO STDOUT WITH (FORMAT csv, HEADER true)" > "$OUT_DIR/tract_ses.csv"
 dbpsql -At -c "SELECT key || ': ' || value FROM demo.build_info ORDER BY key" > "$OUT_DIR/BUILD_INFO.txt"
 ( cd "$OUT_DIR" && ls -l *.gz && du -sh csv && cat timings.csv )
 
