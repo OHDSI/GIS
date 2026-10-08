@@ -32,9 +32,34 @@ All SQL runs in the gaia-db container: `docker compose exec gaia-db psql -U post
 
 2. **Ingest the source datasets.** The county boundaries must be ingested before the PM2.5 dataset and the SES index, which are joined to them. Each call downloads the data and loads it into PostGIS, which takes several minutes (about 0.5 GB in total; the faculty can provide a pre-staged volume if bandwidth is limited). The catalog entry that drives ingestion is the metadata record from Exercise 1 (your own, or the fallback provided).
    ```sql
-   SELECT * FROM backbone.ingest_datasource('us_2023_county_tl');
+   SELECT * FROM backbone.ingest_datasource('us_20219_county_tl');
    SELECT * FROM backbone.ingest_datasource('us_2014_2019_monthly_pm25_by_county_cdc');
    ```
+
+   This next approach is an alternate that mirrors what happens when you use the catalog browsers. It is more explicit but draws from the same JSON metadata. The result of the first two lines will be identical to the code above, but the third line will only load one variable.
+   ```sql
+   SELECT backbone.load_table('us_20219_county_tl');
+   SELECT backbone.load_table('us_2014_2019_monthly_pm25_by_county_cdc');
+   SELECT backbone.gdsc_load_variable('{
+    "table_id": "us_2014_2019_monthly_pm25_by_county_cdc",
+    "table_description": "Aggregated monthly PM 2.5 modelled estimates that span 2014-01-01 to 2019-12-31 derived from the CDC Daily County-Level PM2.5 Concentrations 2001-2022 provided by the CDC National Environmental Public Health Tracking Network. From the CDC description: This dataset provides modeled predictions of PM2.5 levels from the EPA Downscaler model. Data are at the county level for 2001-2022. These data are used by the CDC National Environmental Public Health Tracking Network to generate air quality measures.",
+    "geom_type": "multipolygon",
+    "geom_label": "name",
+    "variable_nodata": "",
+    "variable_id": "pm25_mean_pred",
+    "description": "The series of mean predicted values for the given county and month stored as a jsonb object with date ranges as keys (startDate/endDate formatted as YYYY-MM-DD/YYYY-MM-DD) and mean pm 2.5 values for each date key.",
+    "source": "Derived from the CDC data as the mean() of all mean values for each day in the month. NOTE: all sub-samples may not be the same size (dpending on which monitoring staions were used to calculate the original mean), so this is likely not a true mean",
+    "type": "jsonb",
+    "unit": "micrograms/cubic meter",
+    "unit_concept_id": 32964,
+    "min_val": 1.59,
+    "max_val": 50.59,
+    "start_date": "2014-01-01",
+    "end_date": "2019-12-31",
+    "concept_id": 2052499839
+   }')
+   ```
+
    Inspect what was registered (`attr_index.variable_source_id` links each loaded variable to its `variable_source` row, and that id becomes `exposure_source_value`): `SELECT * FROM backbone.data_source;`, `backbone.variable_source`, `backbone.geom_index`, and `backbone.attr_index`. The PM2.5 dataset has four variables (max, median, mean, population-weighted mean). Which one does your Exercise 1 requirement call for?
 
    The third source, the county **SES index**, is simulated, but it is ingested exactly like the other two. Its entry is part of gaiaCatalog (`synthetic_county_ses`: JSON-LD record, ETL metadata, and the `_osgeo.sh` and `_postgis.sh` scripts, the same layout as the CDC PM2.5 entry), and its source file (`county_ses.csv`, two columns: `geoid`, `ses_index`) is downloaded from the tutorial repository. Ingest it after the counties, which its polygons come from:

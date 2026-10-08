@@ -31,27 +31,45 @@ Discovery fails in predictable ways: the same label attached to a different vari
 6. Understand the workflow to create a schema.org compliant JSON-LD catalog entry
 7. Match requirements to entries in the Gaia Catalog
 
+## **Materials**
+
+- [GIS Cheatsheet](https://github.com/DataCurationNetwork/curation-curriculum/blob/main/Specialized%20Data%20Types/Geospatial/Exercise%20Materials/1_3_GIS_Cheat_Sheet.pdf?raw=true)
+- [KoboToolbox Form](https://ee.kobotoolbox.org/x/rdhxaIkg)
+
 ## **Steps**
+
+_Activity 1._
+
+Seek a partner to form a pair and then:
 
 1. Start from a research question (exposure to PM 2.5 and COPD health outcomes) and decompose it into its computable requirements: population, index time, exposure window, lag, geography, variable, unit, resolution, provenance, and permissible missingness. [it seems we will do this togehter as a guided excercise]
 2. Search publicly available datasets for PM2.5 to identify one best candidate that meets your requirements
 4. Inspect the candidate's spatial coverage, temporal coverage, variable definition, unit, and access URL.
 5. Score the candidate against the fitness rubric: scientific relevance, spatial fit, temporal fit, semantic clarity, access, and reproducibility (green/amber/red per criterion).
+
+Share these results with the tutorial group.
+
+_Activity 2._
+
+With the same partner for the first activity:
+
 6. Complete the metadata template for your chosen dataset in kobotoolbox, keeping dataset-level properties (identity, version, provider, license, URL, spatial/temporal coverage, geometry, retrieval method, update cadence) separate from variable-level properties (definition, unit).
 7. Observe the workflow to crosswalk the kobotoolbox entry to a RO Crate inspired object that includes schema.org JSON-LD metadata and bash ingestion scripts.
 3. Search the GAIA catalog for your candidate dataset (e.g., an air-quality dataset) that could answer your decomposed question.
 6. Record your overall fitness decision and, if any criterion scored amber or red, document the limitation rather than silently proceeding.
 
+Share these results with the tutorial group.
+
 If you get stuck on a step, faculty will circulate and a fallback dataset/metadata record is available.
 
 ## **Deliverable**
 
-- One draft metadata record ready to be transformed to JSON-LD aligned to schema.org for interoperability and machine actionability
+- Two draft metadata records ready to be transformed to JSON-LD aligned to schema.org for interoperability and machine actionability
 - One fitness decision (green/amber/red per rubric criterion, plus an overall call)
 
 ## **Check Your Work**
 
-Faculty will validate your submission against the following, and so should you before calling it done:
+Faculty will validate your submission against the following criteria, and so should you before calling it done:
 
 - [ ] Dataset and version are identifiable
 - [ ] Variable definition and unit are explicit

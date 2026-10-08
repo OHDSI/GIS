@@ -39,7 +39,7 @@ You will need basic command line computing skills (powershell on windows, termin
 
 We will use docker and the docker compose container orchestration system for the tutorial (and for the Gaia toolchain). While no knowledge is needed, familiarity will be helpful. If you are not familiar and have a little time, the docker maintains basic documentation and several [get started tutorials](https://docs.docker.com/get-started/), and the [build and share](https://docs.docker.com/get-started/tutorials/run-an-app/) tutorial is a good place to start. 
 
-No prior GIS or spatial-analysis experience is assumed; familiarity with the OMOP CDM (PERSON, OBSERVATION_PERIOD, CONCEPT) is helpful for Sessions 3-4.
+No prior GIS or spatial-analysis experience is assumed; familiarity with Structured Query Language (SQL) and the OMOP CDM (PERSON, OBSERVATION_PERIOD, CONCEPT) is helpful for Sessions 3-4.
 
 ### Required software
 
@@ -75,6 +75,10 @@ PGAdmin and QGIS are standard components in an analytic toolbox for working with
 There are many other tools available as well, but we find these two work well with the Gaia toolchain.
 
 _**VERY IMPORTANT**_: If you have trouble with any installation or setup step above, contact the workshop organizers immediately ( houghtaling@ohdsi.org or tnorris@miami.edu ).
+
+### Additional resources (not required)
+
+- [GIS Cheatsheet](https://github.com/DataCurationNetwork/curation-curriculum/blob/main/Specialized%20Data%20Types/Geospatial/Exercise%20Materials/1_3_GIS_Cheat_Sheet.pdf?raw=true)
 
 <br>
 
