@@ -496,125 +496,102 @@ WG</h1>
 </div>
 
 
-<div id="geo-data-description" class="section level1">
-<h1><strong>Geo Data Description</strong></h1>
+<div id="r-track-setup" class="section level1">
+<h1><strong>R track: setup</strong></h1>
 <div class="alert alert-warning">
-<strong>Work in progress.</strong> These tutorial materials are still
-under active development and will continue to change until the tutorial
-takes place on <strong>October 20, 2026</strong>. Content, links, and
-exercises may be incomplete or shift without notice.
+<strong>Beta.</strong> The R track is a parallel version of Exercises 2
+to 4 that uses the <a href="gaiaCore.html">gaiaCore</a> R package
+instead of SQL. The SQL exercises remain the reference path for October
+20, 2026.
 </div>
-<p>The tutorial uses two datasets: a synthetic OMOP CDM population
-(described in <a href="tutorial-data-description.html">OMOP Data
-Description</a>) and the public PM2.5 dataset for the United States
-described on this page (an external source, used to demonstrate
-cataloging and ingestion of a real dataset). Session 1 catalogs the
-public dataset; Sessions 2-4 link it against the synthetic OMOP
-population. See <a href="tutorial-geo-data-visualization.html">Geo Data
-Visualization</a> for a characterization of this dataset.</p>
+<div id="what-changes-in-the-r-track" class="section level2">
+<h2><strong>What changes in the R track</strong></h2>
+<p>The pipeline and the data are the same as in the SQL exercises. You
+run each step with a gaiaCore function from RStudio, which calls the
+same gaiaDb SQL functions underneath, and you keep the SQL only where it
+is the clearest way to look at the data (the answer key and the lineage
+trace).</p>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>SQL track</th>
+<th>R track</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>psql</code> in the gaia-db container</td>
+<td>RStudio in the <code>ohdsi/gaia-core</code> container</td>
+</tr>
+<tr class="even">
+<td><code>SELECT * FROM backbone.ingest_datasource(...)</code></td>
+<td><code>ingestDatasource(connection, ...)</code></td>
+</tr>
+<tr class="odd">
+<td><code>INSERT INTO working.location ...</code></td>
+<td><code>loadLocationsFromOmop(connection)</code></td>
+</tr>
+<tr class="even">
+<td><code>SELECT working.spatial_join_from_catalog(...)</code></td>
+<td><code>spatialJoin(connection, ...)</code></td>
+</tr>
+<tr class="odd">
+<td>Hand-written QA queries</td>
+<td><code>checkExposure(connection)</code></td>
+</tr>
+<tr class="even">
+<td><code>INSERT INTO omopgis.external_exposure ...</code></td>
+<td><code>copyExposureToOmop(connection)</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="start-the-r-environment" class="section level2">
+<h2><strong>Start the R environment</strong></h2>
+<ol style="list-style-type: decimal">
+<li><p>Deploy the Gaia stack and restore the synthetic dataset as in
+Exercise 2, step 1 of the <a href="tutorial-exercise-2.html">SQL
+track</a> (the restore is a shell command and is the same in both
+tracks).</p></li>
+<li><p>Pull and start the R image on the same Docker network as the
+database (stop the stack’s own <code>gaia-core</code> service first if
+it is running, because both use port 8787; on Apple Silicon keep
+<code>--platform linux/amd64</code>):</p>
+<pre class="sh"><code>docker pull --platform linux/amd64 ohdsi/gaia-core:main
+docker run -d --name gaia-core --platform linux/amd64 --network gaiadocker_default -p 8787:8787 \
+  -e USER=ohdsi -e PASSWORD=&lt;choose a password&gt; \
+  -e GAIA_POSTGRES_PASSWORD=&quot;$(cat secrets/gaia/POSTGRES_PASSWORD)&quot; ohdsi/gaia-core:main</code></pre>
+<p>(<code>gaiadocker_default</code> is the network docker compose
+creates for a checkout in a folder called <code>gaiaDocker</code>; list
+yours with <code>docker network ls</code>. Run the command from the
+<code>gaiaDocker</code> folder so the password file is found.)</p></li>
+<li><p>Open <a href="http://localhost:8787"
+class="uri">http://localhost:8787</a> and sign in with
+<code>ohdsi</code> and the password you chose.</p></li>
+</ol>
+</div>
+<div id="connect" class="section level2">
+<h2><strong>Connect</strong></h2>
+<pre class="r"><code>library(gaiaCore)
+library(DatabaseConnector)
+
+connection &lt;- connectGaia(createGaiaConnectionDetails(server = &quot;gaia-db/gaiacore&quot;))
+
+querySql(connection, &quot;SELECT count(*) AS persons FROM omopgis.person&quot;)   # 10,000</code></pre>
+<p><code>createGaiaConnectionDetails()</code> reads the password from
+<code>GAIA_POSTGRES_PASSWORD</code> and the JDBC driver folder from
+<code>DATABASECONNECTOR_JAR_FOLDER</code>, both set by the commands
+above. Run <code>disconnectGaia(connection)</code> when you are done.
+The connection is a normal DatabaseConnector connection, so
+<code>querySql()</code> and <code>executeSql()</code> work on it
+whenever you want to look at a table directly.</p>
 <p><br></p>
-<div id="public-gis-pm2.5-dataset-united-states" class="section level2">
-<h2><strong>Public GIS PM2.5 dataset (United States)</strong></h2>
-<p>2014-2019 CDC PM 2.5 Monthly Predictions for US Counties</p>
-<p>This is the public source dataset participants catalog in Exercise 1
-and ingest in Exercise 2.</p>
-<p><em>NOTE: there are several alternative sources for PM 2.5 data in
-the <a href="https://ohdsi.github.io/gaiaCatalog/browser/">Gaia
-Catalog</a>. We may encourage participants to use different data sources
-and then compare resuts.</em></p>
-<div id="overview" class="section level3">
-<h3>Overview</h3>
-<p>Aggregated monthly PM 2.5 modelled estimates that span 2014-01-01 to
-2019-12-31 derived from the CDC Daily County-Level PM2.5 Concentrations
-2001-2022 provided by the CDC National Environmental Public Health
-Tracking Network. The aggregated data are then joined to the TIGER line
-county geometries provided by the US Census Bureau.</p>
-<p>From the CDC description: This dataset provides modeled predictions
-of PM2.5 levels from the EPA Downscaler model. Data are at the county
-level for 2001-2022. These data are used by the CDC National
-Environmental Public Health Tracking Network to generate air quality
-measures. By using these data, you signify your agreement to comply with
-the following requirements: 1. Use the data for statistical reporting
-and analysis only. 2. Do not attempt to learn the identity of any person
-included in the data and do not combine these data with other data for
-the purpose of matching records to identify individuals. 3. Do not
-disclose of or make use of the identity of any person or establishment
-discovered inadvertently and report the discovery to: <a
-href="mailto:trackingsupport@cdc.gov"
-class="email">trackingsupport@cdc.gov</a>. 4. Do not imply or state,
-either in written or oral form, that interpretations based on the data
-are those of the original data sources and CDC unless the data user and
-data source are formally collaborating. 5. Acknowledge, in all reports
-or presentations based on these data, the original source of the data
-and CDC. 6. Suggested citation: Centers for Disease Control and
-Prevention. National Environmental Public Health Tracking Network. Web.
-Accessed: insert date. www.cdc.gov/ephtracking.</p>
-</div>
-<div id="sources" class="section level3">
-<h3>Sources</h3>
-<ul>
-<li><p><a
-href="https://data.cdc.gov/Environmental-Health-Toxicology/Daily-County-Level-PM2-5-Concentrations-2001-2022/53mz-4zqd/about_data">Center
-for Disease Control (CDC) - Daily County-Level PM2.5 Concentrations
-2001-2022</a></p></li>
-<li><p><a
-href="https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.2023.html#list-tab-1883739534">United
-States Census Bureau - Geography Division - TIGER/Line Shapefile, 2023,
-US, Current County</a></p></li>
-</ul>
-<p><em>NOTE: the gaiaCatalog source first pulls the CDC daily data from
-an API and then aggregates the data to monthly derivatives which are
-then joined to the US Census Bureau TIGER line geometries for US
-counties. The University of Miami Geospatial Digital Special Collections
-maintains a pre-aggregated version of the <a
-href="https://gdsc.idsc.miami.edu/detail/us_2014_2019_monthly_pm25_by_county_cdc?collection=all&amp;active=&amp;query=cdc">2014-2019
-CDC PM 2.5 Monthly Predictions for US Counties</a> dataset for the
-tutorial available for download in <a
-href="https://gdsc.idsc.miami.edu/download/data/us_2014_2019_monthly_pm25_by_county_cdc/derived?file=us_2014_2019_monthly_pm25_by_county_cdc&amp;format=sql">SQL</a>
-and <a
-href="https://gdsc.idsc.miami.edu/download/data/us_2014_2019_monthly_pm25_by_county_cdc/derived?file=us_2014_2019_monthly_pm25_by_county_cdc&amp;format=gpkg">gpkg</a>
-formats.</em></p>
-</div>
-<div id="coverage" class="section level3">
-<h3>Coverage</h3>
-<ul>
-<li><strong>Spatial coverage:</strong> United States Counties</li>
-<li><strong>Temporal coverage:</strong> 2014 - 2019 with monthly data
-points.</li>
-<li><strong>Variable definition and unit:</strong> PM2.5 concentration,
-µg/m³, monthly max, mean, median, and population weighted mean._</li>
-</ul>
-</div>
-<div id="access-and-license" class="section level3">
-<h3>Access and license</h3>
-<ul>
-<li><p><strong>CDC Retrieval method:</strong> API <a
-href="https://data.cdc.gov/api/v3/views/53mz-4zqd/query.csv?">https://data.cdc.gov/api/v3/views/53mz-4zqd/query.csv?</a></p></li>
-<li><p><strong>CDC License:</strong> <a
-href="https://www.usa.gov/government-copyright">Public Domain Us
-Government</a></p></li>
-<li><p><strong>Census Retrieval method:</strong> Download - <a
-href="ftp://ftp2.census.gov/geo/tiger/TIGER2023/COUNTY/tl_2023_us_county.zip">ftp://ftp2.census.gov/geo/tiger/TIGER2023/COUNTY/tl_2023_us_county.zip</a></p></li>
-<li><p><strong>Census License:</strong> Public Domain</p></li>
-<li><p>UM Retrieval method: <a
-href="https://gdsc.idsc.miami.edu/download/data/us_2014_2019_monthly_pm25_by_county_cdc/derived?file=us_2014_2019_monthly_pm25_by_county_cdc&amp;format=sql">SQL</a>
-and <a
-href="https://gdsc.idsc.miami.edu/download/data/us_2014_2019_monthly_pm25_by_county_cdc/derived?file=us_2014_2019_monthly_pm25_by_county_cdc&amp;format=gpkg">gpkg</a></p></li>
-<li><p>UM License: <a
-href="http://opendatacommons.org/licenses/by/1.0/">Open Data Commons
-Attribution License (ODC-By)</a></p></li>
-</ul>
-</div>
-<div id="role-in-the-tutorial" class="section level3">
-<h3>Role in the tutorial</h3>
-<p>This is the dataset participants evaluate against the fitness rubric
-and catalog with a metadata record in <a
-href="tutorial-exercise-1.html">Exercise 1</a>, then ingest and
-spatially/temporally link to the synthetic OMOP population (<a
-href="tutorial-data-description.html">OMOP Data Description</a>) in <a
-href="tutorial-exercise-2.html">Exercise 2</a>.</p>
+<p>Next: <a href="tutorial-r-exercise-2.html">R Exercise 2</a></p>
 <p><br></p>
-</div>
 </div>
 </div>
 

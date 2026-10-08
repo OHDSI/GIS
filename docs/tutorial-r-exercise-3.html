@@ -496,36 +496,33 @@ WG</h1>
 </div>
 
 
-<div id="exercise-3-omop-integration" class="section level1">
-<h1><strong>Exercise 3: OMOP integration</strong></h1>
+<div id="r-exercise-3-omop-integration-with-gaiacore"
+class="section level1">
+<h1><strong>R Exercise 3: OMOP integration with gaiaCore</strong></h1>
 <div class="alert alert-warning">
-<strong>Work in progress.</strong> These tutorial materials are still
-under active development and will continue to change until the tutorial
-takes place on <strong>October 20, 2026</strong>. Content, links, and
-exercises may be incomplete or shift without notice.
+<strong>Beta.</strong> This is the R version of
+<a href="tutorial-exercise-3.html">Exercise 3</a>, with the same data,
+goal and answer key. The SQL version remains the reference path for
+October 20, 2026.
 </div>
 <div id="goal" class="section level2">
 <h2><strong>Goal</strong></h2>
-<p>Understand and query the person-place-time model, validate vocabulary
-roles, and calculate temporally aligned exposure metrics: mean PM2.5
-during pregnancy, and mean PM2.5 in the year before a COPD diagnosis.
-Then build cohorts stratified by exposure with the Capr extension.</p>
-<p>OMOP is person/event-centric; geospatial sources are
-place/time/attribute-centric. The bridge between them is:
-<code>PERSON</code>/clinical event ← <code>LOCATION_HISTORY</code> →
-<code>LOCATION</code> ← derived <code>EXTERNAL_EXPOSURE</code>.
-<code>LOCATION_HISTORY</code> captures entity, location, relationship,
-and start/end dates (supporting residential and other relationship
-types, while avoiding overlap ambiguity). <code>EXTERNAL_EXPOSURE</code>
-captures what, when, where, how related, source, and the
-numeric/categorical value and unit. Standard concepts always win over
-lexical-only mappings: an existing exact Standard concept is used when
-available, and a provisional source concept is retained or mapped rather
-than invented.</p>
+<p>Query the person-place-time model, validate vocabulary roles, and
+calculate temporally aligned exposure metrics: mean PM2.5 during
+pregnancy, and mean PM2.5 in the year before a COPD diagnosis. Then
+build cohorts stratified by exposure with the Capr extension.</p>
 <p>You continue with the <code>omopgis.external_exposure</code> table
-you populated in Exercise 2 (or the fallback file). All SQL runs in the
-gaia-db container
-(<code>docker compose exec gaia-db psql -U postgres -d gaiacore</code>).</p>
+you populated in <a href="tutorial-r-exercise-2.html">R Exercise 2</a>
+(or the fallback file), through the same <code>connection</code>. The
+background on the person-place-time model, the vocabulary roles and the
+pregnancy and lookback designs is in the <a
+href="tutorial-exercise-3.html">SQL version</a>. Here the exposure rows
+are fetched into R and the day-weighting is done with gaiaCore’s
+<code>dayWeightedExposure()</code>, which replaces the hand-written
+overlap arithmetic.</p>
+<pre class="r"><code>library(gaiaCore)
+library(DatabaseConnector)
+connection &lt;- connectGaia(createGaiaConnectionDetails(server = &quot;gaia-db/gaiacore&quot;))</code></pre>
 </div>
 <div id="steps" class="section level2">
 <h2><strong>Steps</strong></h2>
@@ -533,43 +530,33 @@ gaia-db container
 <h3>Part A: vocabulary roles</h3>
 <ol style="list-style-type: decimal">
 <li><p><strong>Look at the mini vocabulary.</strong> The dataset ships
-with a small OMOP vocabulary in the <code>omopgis</code> schema
-(<code>concept</code>, <code>concept_ancestor</code>,
-<code>concept_relationship</code>, <code>vocabulary</code>, and so on):
-the standard concepts used by the data plus the OMOP GIS (geometry
-semantics), OMOP Exposome (toxicants), and OMOP SDoH (contextual
-determinants) concepts. See how many concepts each vocabulary
-contributes:</p>
-<pre class="sql"><code>SELECT vocabulary_id, COUNT(*) AS n_concepts FROM omopgis.concept GROUP BY 1 ORDER BY 2 DESC;</code></pre></li>
+with a small OMOP vocabulary in the <code>omopgis</code> schema: the
+standard concepts used by the data plus the OMOP GIS, OMOP Exposome and
+OMOP SDoH concepts.</p>
+<pre class="r"><code>querySql(connection, &quot;SELECT vocabulary_id, COUNT(*) AS n_concepts FROM omopgis.concept GROUP BY 1 ORDER BY 2 DESC&quot;)</code></pre></li>
 <li><p><strong>Check the role of every concept in
 <code>external_exposure</code>.</strong> Each concept column should hold
-a concept from the right vocabulary and class:</p>
-<pre class="sql"><code>SELECT ee.exposure_concept_id, c1.concept_name AS exposure_concept, c1.vocabulary_id AS exposure_vocabulary,
-       ee.exposure_relationship_concept_id, c2.concept_name AS relationship, c2.vocabulary_id AS relationship_vocabulary,
-       ee.exposure_type_concept_id, c3.concept_name AS exposure_type, c3.concept_class_id,
-       ee.exposure_source_value, ee.exposure_relationship_source_value,
-       ee.unit_concept_id, COUNT(*) AS n
-FROM omopgis.external_exposure ee
-LEFT JOIN omopgis.concept c1 ON c1.concept_id = ee.exposure_concept_id
-LEFT JOIN omopgis.concept c2 ON c2.concept_id = ee.exposure_relationship_concept_id
-LEFT JOIN omopgis.concept c3 ON c3.concept_id = ee.exposure_type_concept_id
-GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12;</code></pre>
+a concept from the right vocabulary and class.</p>
+<pre class="r"><code>querySql(connection, &quot;
+  SELECT ee.exposure_concept_id, c1.concept_name AS exposure_concept, c1.vocabulary_id AS exposure_vocabulary,
+         ee.exposure_relationship_concept_id, c2.concept_name AS relationship, c2.vocabulary_id AS relationship_vocabulary,
+         ee.exposure_type_concept_id, c3.concept_name AS exposure_type, c3.concept_class_id,
+         ee.exposure_source_value, ee.exposure_relationship_source_value,
+         ee.unit_concept_id, COUNT(*) AS n
+  FROM omopgis.external_exposure ee
+  LEFT JOIN omopgis.concept c1 ON c1.concept_id = ee.exposure_concept_id
+  LEFT JOIN omopgis.concept c2 ON c2.concept_id = ee.exposure_relationship_concept_id
+  LEFT JOIN omopgis.concept c3 ON c3.concept_id = ee.exposure_type_concept_id
+  GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12&quot;)</code></pre>
 <p>The query returns two rows, one per exposure variable: monthly PM2.5,
-and the county SES index (Socioeconomic Status, with the SDOH Database
-as its type; one row per residence interval because it is static). Which
-vocabulary does each of the three concepts come from, and why? The type
-concept describes the <em>kind of data source</em> (here an “Exposure
-Type Concept”, Air Quality Database); the geometry type of the source
-(MultiPolygon) is recorded in Gaia’s <code>backbone.geom_index</code>,
-not on the exposure row. <code>exposure_source_value</code> holds the
-Gaia <code>variable_source_id</code> of the variable and
-<code>exposure_relationship_source_value</code> the verbatim spatial
-operator (<code>ST_Within</code>); compare it with the relationship
-<em>concept</em> (Within). Two things should bother you. The exposure
-concept is named “Annual Mean” of PM2.5, but each row is a
+and the county SES index (with the SDOH Database as its type; one row
+per residence interval because it is static). Which vocabulary does each
+of the three concepts come from, and why? Two things should bother you.
+The exposure concept is named “Annual Mean” of PM2.5, but each row is a
 <em>monthly</em> value: what does that mean for how you can use it? And
-<code>unit_concept_id</code> is empty: where is the unit declared, and
-what would you map it to?</p></li>
+<code>unit_concept_id</code> is empty: where is the unit declared
+(<code>listVariables(connection)</code> shows it), and what would you
+map it to?</p></li>
 </ol>
 </div>
 <div id="part-b-mean-pm2.5-during-pregnancy" class="section level3">
@@ -577,35 +564,36 @@ what would you map it to?</p></li>
 <ol start="3" style="list-style-type: decimal">
 <li><p><strong>Find the pregnancy episodes.</strong> Pregnancy is
 modeled in the OMOP <code>EPISODE</code> table. Two persons have one,
-and the answer key is in <code>demo.expected_result</code>:</p>
-<pre class="sql"><code>SELECT person_id, episode_start_date, episode_end_date FROM omopgis.episode;
-SELECT fixture_tag, person_id, metric, value FROM demo.expected_result WHERE fixture_tag LIKE &#39;PREGNANCY%&#39;;</code></pre>
+and the answer key is in <code>demo.expected_result</code>.</p>
+<pre class="r"><code>episodes &lt;- querySql(connection, &quot;
+  SELECT person_id, episode_start_date, episode_end_date FROM omopgis.episode
+  WHERE episode_object_concept_id = 4299535&quot;)   # Pregnancy
+episodes
+
+querySql(connection, &quot;SELECT fixture_tag, person_id, metric, value FROM demo.expected_result WHERE fixture_tag LIKE &#39;PREGNANCY%&#39;&quot;)</code></pre>
 <p>For each, list the <code>LOCATION_HISTORY</code> rows overlapping the
-episode. One person moved counties during the pregnancy.</p></li>
+episode
+(<code>SELECT * FROM omopgis.location_history WHERE entity_id = ...</code>).
+One person moved counties during the pregnancy.</p></li>
 <li><p><strong>Join exposure to the episode and calculate the mean,
 weighting each row by the number of days it overlaps the
 episode.</strong> Treating any overlap as full inclusion is the mistake
 this exercise is designed to catch: the first and last months overlap
-only partially.</p>
-<pre class="sql"><code>WITH preg AS (
-    SELECT person_id, episode_start_date AS s, episode_end_date AS e
-    FROM omopgis.episode WHERE episode_object_concept_id = 4299535),   -- Pregnancy
-ov AS (
-    SELECT p.person_id, ee.value_as_number AS v,
-           GREATEST(ee.exposure_start_date, p.s) AS os, LEAST(ee.exposure_end_date, p.e) AS oe
-    FROM preg p
-    JOIN omopgis.external_exposure ee
-      ON ee.person_id = p.person_id AND ee.exposure_concept_id = 2052499839
-     AND ee.exposure_start_date &lt;= p.e AND ee.exposure_end_date &gt;= p.s)
-SELECT person_id, COUNT(*) AS n_rows,
-       ROUND(AVG(v)::numeric, 4) AS naive_mean,
-       ROUND((SUM(v * (oe - os + 1)) / SUM(oe - os + 1))::numeric, 4) AS weighted_mean,
-       SUM(oe - os + 1) AS days_covered
-FROM ov GROUP BY person_id ORDER BY person_id;</code></pre>
-<p>Compare both columns to <code>demo.expected_result</code>. Which one
-is correct? Why is the difference larger for the person who moved? Check
-that <code>days_covered</code> equals the length of the
-episode.</p></li>
+only partially. <code>dayWeightedExposure()</code> returns both means
+side by side.</p>
+<pre class="r"><code>exposure &lt;- querySql(connection, sprintf(&quot;
+  SELECT person_id, exposure_start_date, exposure_end_date, value_as_number
+  FROM omopgis.external_exposure
+  WHERE exposure_concept_id = 2052499839 AND person_id IN (%s)&quot;, paste(episodes$person_id, collapse = &quot;, &quot;)))
+
+windows &lt;- data.frame(person_id = episodes$person_id,
+                      window_start = episodes$episode_start_date, window_end = episodes$episode_end_date)
+dayWeightedExposure(exposure, windows)</code></pre>
+<p>Compare <code>weighted_mean</code> and <code>naive_mean</code> with
+<code>demo.expected_result</code>. Which one is correct? Why is the
+difference larger for the person who moved? Check that
+<code>days_covered</code> equals <code>window_days</code>
+(<code>coverage</code> is 1).</p></li>
 </ol>
 </div>
 <div id="part-c-mean-pm2.5-in-the-year-before-a-copd-diagnosis"
@@ -616,47 +604,46 @@ class="section level3">
 first COPD diagnosis.</strong> Persons need a full 12 months of
 observation before the index date, and the window must end
 <em>before</em> the index date so no exposure after the diagnosis leaks
-in:</p>
-<pre class="sql"><code>WITH idx AS (
-    SELECT person_id, MIN(condition_start_date) AS index_date
-    FROM omopgis.condition_occurrence WHERE condition_concept_id = 255573 GROUP BY person_id),
-elig AS (
-    SELECT i.person_id, i.index_date
-    FROM idx i
-    JOIN omopgis.observation_period op
-      ON op.person_id = i.person_id
-     AND i.index_date - 365 &gt;= op.observation_period_start_date
-     AND i.index_date &lt;= op.observation_period_end_date),
-ov AS (
-    SELECT e.person_id, ee.value_as_number AS v,
-           GREATEST(ee.exposure_start_date, e.index_date - 365) AS os,
-           LEAST(ee.exposure_end_date, e.index_date - 1) AS oe
-    FROM elig e
-    JOIN omopgis.external_exposure ee
-      ON ee.person_id = e.person_id AND ee.exposure_concept_id = 2052499839
-     AND ee.exposure_start_date &lt;= e.index_date - 1
-     AND ee.exposure_end_date &gt;= e.index_date - 365)
-SELECT (SELECT COUNT(*) FROM idx) AS copd_cases,
-       (SELECT COUNT(*) FROM elig) AS with_12m_lookback,
-       ROUND(AVG(m)::numeric, 2) AS mean_lookback_pm25, ROUND(STDDEV(m)::numeric, 2) AS sd
-FROM (SELECT person_id, SUM(v * (oe - os + 1)) / SUM(oe - os + 1) AS m FROM ov GROUP BY 1) x;</code></pre>
+in.</p>
+<pre class="r"><code>firstCopd &lt;- &quot;SELECT person_id, MIN(condition_start_date) AS index_date
+              FROM omopgis.condition_occurrence WHERE condition_concept_id = 255573 GROUP BY person_id&quot;
+
+cases &lt;- querySql(connection, sprintf(&quot;
+  SELECT i.person_id, i.index_date
+  FROM (%s) i
+  JOIN omopgis.observation_period op
+    ON op.person_id = i.person_id
+   AND i.index_date - 365 &gt;= op.observation_period_start_date
+   AND i.index_date &lt;= op.observation_period_end_date&quot;, firstCopd))
+c(copd_cases = nrow(querySql(connection, firstCopd)), with_12m_lookback = nrow(cases))
+
+exposure &lt;- querySql(connection, sprintf(&quot;
+  SELECT person_id, exposure_start_date, exposure_end_date, value_as_number
+  FROM omopgis.external_exposure
+  WHERE exposure_concept_id = 2052499839 AND person_id IN (%s)&quot;, paste(cases$person_id, collapse = &quot;, &quot;)))
+
+windows &lt;- data.frame(person_id = cases$person_id,
+                      window_start = as.Date(cases$index_date) - 365,
+                      window_end = as.Date(cases$index_date) - 1)
+lookback &lt;- dayWeightedExposure(exposure, windows)
+c(mean = mean(lookback$weighted_mean), sd = sd(lookback$weighted_mean), min_coverage = min(lookback$coverage))</code></pre>
 <p>How many cases are lost because they were diagnosed in the first year
 of observation? What would happen to the mean if you let the window run
 to the end of the diagnosis month instead?</p></li>
 <li><p><strong>Check the SDOH covariate.</strong> Persons should have 12
 SDOH observations. Find anyone who does not, and decide how a downstream
-feature should treat the missing value:</p>
-<pre class="sql"><code>SELECT person_id, COUNT(*) FROM omopgis.observation GROUP BY 1 HAVING COUNT(*) &lt; 12;</code></pre></li>
+feature should treat the missing value.</p>
+<pre class="r"><code>querySql(connection, &quot;SELECT person_id, COUNT(*) AS n FROM omopgis.observation GROUP BY 1 HAVING COUNT(*) &lt; 12&quot;)</code></pre></li>
 </ol>
 </div>
 <div id="part-d-exposure-based-cohorts-with-caprforextensions"
 class="section level3">
 <h3>Part D: exposure-based cohorts with CaprForExtensions</h3>
 <p>You build the cohorts here and use them unchanged in <a
-href="tutorial-exercise-4.html">Exercise 4</a>, where CohortMethod
-compares them. The design is a fixed index date (2016-01-01) for
-everyone, with the exposure groups defined by the PM2.5 value on the
-index month, and COPD as the outcome:</p>
+href="tutorial-r-exercise-4.html">R Exercise 4</a>. The design is a
+fixed index date (2016-01-01) for everyone, with the exposure groups
+defined by the PM2.5 value on the index month, and COPD as the
+outcome:</p>
 <table>
 <colgroup>
 <col width="33%" />
@@ -698,22 +685,12 @@ of prior observation</td>
 <ol start="7" style="list-style-type: decimal">
 <li><p><strong>Define the cohorts with <a
 href="https://github.com/OHDSI/CaprForExtensions">CaprForExtensions</a>.</strong>
-Run this in RStudio from the pre-built <code>ohdsi/gaia-core:main</code>
-image (started as described in the <a href="tutorial.html">tutorial
-checklist</a>; it has Capr, CirceR, and both extension packages
-installed, so there is nothing to install).
 <code>external_exposure</code> is registered as a custom domain so
-exposure criteria can be written like ordinary Capr criteria:</p>
+exposure criteria can be written like ordinary Capr criteria. Both
+packages are already installed in the image.</p>
 <pre class="r"><code>library(Capr)
 library(CaprForExtensions)
-library(DatabaseConnector)
 library(SqlRender)
-
-connectionDetails &lt;- createConnectionDetails(
-  dbms = &quot;postgresql&quot;, server = &quot;gaia-db/gaiacore&quot;, port = 5432,
-  user = &quot;postgres&quot;, password = &quot;&lt;provided&gt;&quot;,
-  pathToDriver = Sys.getenv(&quot;DATABASECONNECTOR_JAR_FOLDER&quot;))
-connection &lt;- connect(connectionDetails)
 
 registerCustomDomain(
   domain_id = &quot;externalExposure&quot;,
@@ -748,12 +725,11 @@ ckd  &lt;- cohort(entry = entry(conditionOccurrence(cs(46271022, name = &quot;CK
 <p>The package compiles extension criteria into placeholder observation
 queries, lets CirceR generate the SQL, and then substitutes the
 extension-table logic back in. Concept sets are resolved against the
-vocabulary tables, which the dataset provides in <code>omopgis</code>
-(use <code>omopgis</code> as both the CDM and the vocabulary
-schema).</p></li>
+vocabulary tables in <code>omopgis</code> (used as both the CDM and the
+vocabulary schema).</p></li>
 <li><p><strong>Generate the cohorts into one cohort table</strong>,
 <code>demo.cohort</code>, with ids 1 to 4 as in the table above, and
-keep it for Exercise 4:</p>
+keep it for Exercise 4.</p>
 <pre class="r"><code>executeSql(connection, &quot;CREATE TABLE demo.cohort (cohort_definition_id int, subject_id int,
                                                   cohort_start_date date, cohort_end_date date)&quot;)
 definitions &lt;- list(highPm25, lowPm25, copd, ckd)
@@ -767,23 +743,25 @@ for (i in seq_along(definitions)) {
 }
 querySql(connection, &quot;SELECT cohort_definition_id, COUNT(DISTINCT subject_id) AS persons
                       FROM demo.cohort GROUP BY 1 ORDER BY 1&quot;)</code></pre></li>
-<li><p><strong>Validate every cohort against hand-written SQL.</strong>
-For example, cohort 1:</p>
-<pre class="sql"><code>SELECT COUNT(DISTINCT person_id) FROM omopgis.external_exposure
-WHERE exposure_concept_id = 2052499839 AND exposure_start_date = &#39;2016-01-01&#39; AND value_as_number &gt;= 10;</code></pre>
+<li><p><strong>Validate every cohort against a hand-written
+query.</strong> For example, cohort 1:</p>
+<pre class="r"><code>querySql(connection, &quot;
+  SELECT COUNT(DISTINCT person_id) AS persons FROM omopgis.external_exposure
+  WHERE exposure_concept_id = 2052499839 AND exposure_start_date = &#39;2016-01-01&#39; AND value_as_number &gt;= 10&quot;)</code></pre>
 <p>On the reference build the counts are 2,717 persons in cohort 1,
 3,099 in cohort 2 (the 4,184 persons between 8 and 10 are in neither),
-1,086 in cohort 3 and 1,384 in cohort 4, and the package reproduces them
-exactly. If Capr’s count and yours differ, find out why (inclusive
-dates, observation window, mover rows). Check that no person is in both
-cohort 1 and cohort 2, and suppress small counts in anything you
-share.</p>
+1,086 in cohort 3 and 1,384 in cohort 4. If Capr’s count and yours
+differ, find out why (inclusive dates, observation window, mover rows).
+Check that no person is in both cohort 1 and cohort 2, and suppress
+small counts in anything you share.</p>
 <p>Notice what this design costs: the group is defined by one month’s
-value, which is a noisy proxy for a person’s long-run exposure (monthly
-values vary by about 2.5 µg/m³ around a county’s mean).
+value, which is a noisy proxy for a person’s long-run exposure.
 Misclassification like this pulls the comparison toward the null. Where
 does that show up in Exercise 4?</p></li>
 </ol>
+<p>Close the connection when you are done with
+<code>disconnectGaia(connection)</code>; the next exercise opens a new
+one.</p>
 </div>
 </div>
 <div id="deliverable" class="section level2">
@@ -793,14 +771,13 @@ with an explanation of the difference), the 12-month lookback exposure
 summary for COPD cases, the list of semantic fields your calculations
 depended on (concepts, relationship and exposure-type concepts, units,
 and the vocabulary each came from), and the four cohort definitions with
-counts and their SQL validation.</p>
+counts and their validation.</p>
 </div>
 <div id="check-your-work" class="section level2">
 <h2><strong>Check Your Work</strong></h2>
 <ul class="task-list">
-<li><label><input type="checkbox" />Overlap weighting is correct: no
-interval is treated as fully included when it is only partial, and your
-weighted means match <code>demo.expected_result</code></label></li>
+<li><label><input type="checkbox" />Overlap weighting is correct and
+your weighted means match <code>demo.expected_result</code></label></li>
 <li><label><input type="checkbox" />No post-outcome leakage: the
 lookback window ends the day before the index date</label></li>
 <li><label><input type="checkbox" />The mover’s pregnancy uses rows from
@@ -810,18 +787,17 @@ declared in the Gaia catalog but empty in <code>unit_concept_id</code>,
 and that “annual mean” in the concept name does not match the monthly
 grain</label></li>
 <li><label><input type="checkbox" />Each concept is used in its correct
-role (an exposure concept is not confused with a relationship, exposure
-type, or unit concept)</label></li>
-<li><label><input type="checkbox" />Capr cohort counts match your SQL
-counts (or you can explain the difference), and small counts are
-suppressed in anything shared</label></li>
+role</label></li>
+<li><label><input type="checkbox" />Capr cohort counts match your
+validation counts (or you can explain the difference), and small counts
+are suppressed in anything shared</label></li>
 </ul>
 <p><br></p>
 <p><strong>Bridge to Session 4:</strong> validated exposure facts become
 covariates; they do not become causal effects automatically.</p>
 <p><br></p>
-<p>Previous: <a href="tutorial-exercise-2.html">Exercise 2</a> | Next:
-<a href="tutorial-exercise-4.html">Exercise 4</a></p>
+<p>Previous: <a href="tutorial-r-exercise-2.html">R Exercise 2</a> |
+Next: <a href="tutorial-r-exercise-4.html">R Exercise 4</a></p>
 <p><br></p>
 </div>
 </div>

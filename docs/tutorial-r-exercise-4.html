@@ -496,13 +496,15 @@ WG</h1>
 </div>
 
 
-<div id="exercise-4-analytical-applications" class="section level1">
-<h1><strong>Exercise 4: Analytical applications</strong></h1>
+<div id="r-exercise-4-analytical-applications-with-gaiacore"
+class="section level1">
+<h1><strong>R Exercise 4: Analytical applications with
+gaiaCore</strong></h1>
 <div class="alert alert-warning">
-<strong>Work in progress.</strong> These tutorial materials are still
-under active development and will continue to change until the tutorial
-takes place on <strong>October 20, 2026</strong>. Content, links, and
-exercises may be incomplete or shift without notice.
+<strong>Beta.</strong> This is the R version of
+<a href="tutorial-exercise-4.html">Exercise 4</a>, with the same data
+and design. The SQL version remains the reference path for October 20,
+2026.
 </div>
 <div id="goal" class="section level2">
 <h2><strong>Goal</strong></h2>
@@ -521,28 +523,24 @@ calculated in Exercise 3 (or a similar one).</li>
 missingness handling, unit harmonization, geography, and update
 frequency.</li>
 <li>Decide whether this feature belongs in cohort eligibility or as a
-post-index predictor — these must stay separate. If your feature
-involves a spatially informed cohort, check it against appropriate
-vs. inappropriate uses.</li>
-<li>Identify three specific threats to validity for your feature, drawn
-from: ecological fallacy, exposure misclassification, residential
-mobility, MAUP (modifiable areal unit problem), temporal mismatch,
-collider/selection bias, spatial autocorrelation/clustering, site
-effects, or region-level confounding. For each, state concretely how it
-could bias your result, not just name it.</li>
-<li>Note what would need to stay local vs. what could travel in a
+post-index predictor. These must stay separate.</li>
+<li>Identify three specific threats to validity for your feature
+(ecological fallacy, exposure misclassification, residential mobility,
+MAUP, temporal mismatch, collider/selection bias, spatial
+autocorrelation/clustering, site effects, region-level confounding). For
+each, state concretely how it could bias your result, not just name
+it.</li>
+<li>Note what would need to stay local and what could travel in a
 federated setting: standardized concepts and code travel; precise
 locations and patient-level geographies remain local; only diagnostics
 and aggregate estimates are shared.</li>
-<li>Write the feature definition as reproducible SQL (or pseudocode if
-SQL access isn’t available in your environment).</li>
+<li>Write the feature definition as reproducible code.</li>
 </ol>
 </div>
 <div id="suggested-worked-example" class="section level2">
 <h2><strong>Suggested worked example</strong></h2>
-<p>If you do not have your own question, use this one. It is a cohort
-study of whether higher PM2.5 in the two years before an index date
-predicts incident COPD, with the temporal alignment made explicit:</p>
+<p>If you do not have your own question, use this one: whether higher
+PM2.5 in the two years before an index date predicts incident COPD.</p>
 <ul>
 <li><strong>Index date:</strong> 2016-01-01. <strong>Exposure:</strong>
 day-weighted mean PM2.5 over the 730 days before the index date.
@@ -550,86 +548,117 @@ day-weighted mean PM2.5 over the 730 days before the index date.
 date (through 2019-12-31).</li>
 <li><strong>Eligibility:</strong> two years of observation before the
 index date, a full 730 days of exposure coverage, and no COPD before the
-index date (prevalent cases are excluded).</li>
-<li><strong>Covariates:</strong> age at index, sex, and county SES (the
-SDOH or <code>county_reference</code> value at the index date).</li>
+index date.</li>
+<li><strong>Covariates:</strong> age at index, sex, and county SES at
+the index date.</li>
 </ul>
-<p>The feature table below implements exactly that. It builds on the
-exposure from Exercise 3 and keeps eligibility (pre-index) separate from
-the outcome (post-index):</p>
-<pre class="sql"><code>CREATE TABLE demo.ex4_features AS
-WITH params AS (SELECT DATE &#39;2016-01-01&#39; AS index_date, 730 AS lookback_days),
-cohort AS (
-    SELECT p.person_id, p.year_of_birth, p.gender_concept_id, pa.index_date, pa.lookback_days
+<p>Connect as in the earlier exercises:</p>
+<pre class="r"><code>library(gaiaCore)
+library(DatabaseConnector)
+connectionDetails &lt;- createGaiaConnectionDetails(server = &quot;gaia-db/gaiacore&quot;)
+connection &lt;- connectGaia(connectionDetails)</code></pre>
+<div id="build-the-feature-table" class="section level3">
+<h3>Build the feature table</h3>
+<p>Eligibility, covariates and the outcome come from the CDM. The
+exposure feature is computed with <code>dayWeightedExposure()</code>,
+with the window ending the day before the index date. Keeping
+eligibility (pre-index) apart from the outcome (post-index) is what
+prevents leakage.</p>
+<pre class="r"><code>base &lt;- querySql(connection, &quot;
+  WITH cohort AS (
+    SELECT p.person_id, p.year_of_birth, p.gender_concept_id
     FROM omopgis.person p
-    CROSS JOIN params pa
     JOIN omopgis.observation_period op
       ON op.person_id = p.person_id
-     AND op.observation_period_start_date &lt;= pa.index_date - pa.lookback_days
-     AND op.observation_period_end_date &gt;= pa.index_date
+     AND op.observation_period_start_date &lt;= DATE &#39;2016-01-01&#39; - 730
+     AND op.observation_period_end_date &gt;= DATE &#39;2016-01-01&#39;
     WHERE NOT EXISTS (SELECT 1 FROM omopgis.condition_occurrence co
                       WHERE co.person_id = p.person_id AND co.condition_concept_id = 255573
-                        AND co.condition_start_date &lt; pa.index_date)
-),
-expo AS (
-    SELECT c.person_id,
-           SUM(ee.value_as_number * (LEAST(ee.exposure_end_date, c.index_date - 1)
-                                     - GREATEST(ee.exposure_start_date, c.index_date - c.lookback_days) + 1))
-             / SUM(LEAST(ee.exposure_end_date, c.index_date - 1)
-                   - GREATEST(ee.exposure_start_date, c.index_date - c.lookback_days) + 1) AS pm25_24m,
-           SUM(LEAST(ee.exposure_end_date, c.index_date - 1)
-               - GREATEST(ee.exposure_start_date, c.index_date - c.lookback_days) + 1) AS days_covered
-    FROM cohort c
-    JOIN omopgis.external_exposure ee
-      ON ee.person_id = c.person_id AND ee.exposure_concept_id = 2052499839
-     AND ee.exposure_start_date &lt;= c.index_date - 1
-     AND ee.exposure_end_date &gt;= c.index_date - c.lookback_days
-    GROUP BY c.person_id
-),
-ses AS (
-    SELECT c.person_id, cr.ses_index
-    FROM cohort c
-    JOIN omopgis.location_history lh
-      ON lh.entity_id = c.person_id AND lh.start_date &lt;= c.index_date AND lh.end_date &gt;= c.index_date
-    JOIN omopgis.location l ON l.location_id = lh.location_id
-    JOIN omopgis.county_reference cr ON cr.county_ref_id = l.county_ref_id
-)
-SELECT c.person_id,
-       (EXTRACT(YEAR FROM c.index_date) - c.year_of_birth)::int AS age_at_index,
-       CASE WHEN c.gender_concept_id = 8532 THEN 1 ELSE 0 END AS female,
-       s.ses_index,
-       e.pm25_24m,
-       EXISTS (SELECT 1 FROM omopgis.condition_occurrence co
-               WHERE co.person_id = c.person_id AND co.condition_concept_id = 255573
-                 AND co.condition_start_date &gt;= c.index_date)::int AS copd_after_index
-FROM cohort c
-JOIN expo e USING (person_id)
-JOIN ses s USING (person_id)
-WHERE e.days_covered = c.lookback_days;</code></pre>
+                        AND co.condition_start_date &lt; DATE &#39;2016-01-01&#39;))
+  SELECT c.person_id,
+         2016 - c.year_of_birth AS age_at_index,
+         CASE WHEN c.gender_concept_id = 8532 THEN 1 ELSE 0 END AS female,
+         cr.ses_index, cr.county_ref_id AS county,
+         (EXISTS (SELECT 1 FROM omopgis.condition_occurrence co
+                  WHERE co.person_id = c.person_id AND co.condition_concept_id = 255573
+                    AND co.condition_start_date &gt;= DATE &#39;2016-01-01&#39;))::int AS copd_after_index,
+         (EXISTS (SELECT 1 FROM omopgis.condition_occurrence co
+                  WHERE co.person_id = c.person_id AND co.condition_concept_id = 46271022
+                    AND co.condition_start_date &gt;= DATE &#39;2016-01-01&#39;))::int AS ckd_after_index
+  FROM cohort c
+  JOIN omopgis.location_history lh
+    ON lh.entity_id = c.person_id AND lh.start_date &lt;= DATE &#39;2016-01-01&#39; AND lh.end_date &gt;= DATE &#39;2016-01-01&#39;
+  JOIN omopgis.location l ON l.location_id = lh.location_id
+  JOIN omopgis.county_reference cr ON cr.county_ref_id = l.county_ref_id&quot;)
+
+exposure &lt;- querySql(connection, &quot;
+  SELECT person_id, exposure_start_date, exposure_end_date, value_as_number
+  FROM omopgis.external_exposure
+  WHERE exposure_concept_id = 2052499839
+    AND exposure_start_date &lt;= DATE &#39;2015-12-31&#39; AND exposure_end_date &gt;= DATE &#39;2014-01-02&#39;&quot;)
+
+windows &lt;- data.frame(person_id = base$person_id,
+                      window_start = as.Date(&quot;2016-01-01&quot;) - 730, window_end = as.Date(&quot;2016-01-01&quot;) - 1)
+pm25 &lt;- dayWeightedExposure(exposure, windows)
+
+features &lt;- merge(base, pm25[, c(&quot;person_id&quot;, &quot;weighted_mean&quot;, &quot;days_covered&quot;)], by = &quot;person_id&quot;)
+names(features)[names(features) == &quot;weighted_mean&quot;] &lt;- &quot;pm25_24m&quot;
+features &lt;- features[features$days_covered == 730, ]
+c(persons = nrow(features), copd_cases = sum(features$copd_after_index), ckd_cases = sum(features$ckd_after_index))</code></pre>
+</div>
+<div id="estimate-the-effect" class="section level3">
+<h3>Estimate the effect</h3>
+<p>Fit a logistic regression of the outcome on the exposure, once crude
+and once adjusted for <code>ses_index</code>, <code>age_at_index</code>
+and <code>female</code>. Persons in the same county share unmeasured
+influences, so use <code>fitExposureEffect()</code>, which reports a
+confidence interval that accounts for the clustering (a
+leave-one-county-out jackknife by default; <code>interval = "cr1"</code>
+and <code>"glmm"</code> are alternatives). Then repeat with the CKD
+negative-control outcome.</p>
+<pre class="r"><code>rbind(
+  crude    = fitExposureEffect(copd_after_index ~ pm25_24m, features, exposure = &quot;pm25_24m&quot;, cluster = &quot;county&quot;),
+  adjusted = fitExposureEffect(copd_after_index ~ pm25_24m + ses_index + age_at_index + female, features,
+                               exposure = &quot;pm25_24m&quot;, cluster = &quot;county&quot;))
+
+rbind(
+  crude    = fitExposureEffect(ckd_after_index ~ pm25_24m, features, exposure = &quot;pm25_24m&quot;, cluster = &quot;county&quot;),
+  adjusted = fitExposureEffect(ckd_after_index ~ pm25_24m + ses_index + age_at_index + female, features,
+                               exposure = &quot;pm25_24m&quot;, cluster = &quot;county&quot;))
+
+querySql(connection, &quot;SELECT * FROM demo.generator_truth&quot;)</code></pre>
+<p>What to expect, and what the generator knows. The true simulated
+PM2.5 effect on COPD is in <code>demo.generator_truth</code> (0.15
+log-odds per µg/m³), and it is deliberately exaggerated (see the <a
+href="tutorial-data-description.html#how-the-conditions-are-generated">data
+description</a>). The cohort has about 9,600 persons and about 725
+incident cases. The crude estimate is about 0.14 and the SES-adjusted
+estimate about 0.11 per µg/m³, and the negative-control outcome shows a
+crude association of about 0.09 that disappears (about 0.00) after
+adjusting for SES. Compare the interval width with the model-based one
+(<code>interval = "model"</code>): why is the clustered interval wider?
+Why is the adjusted estimate below the truth? (Think about exposure
+measured at the county level, residential moves, and the pre-index
+window.) Why does the negative control have a crude association at
+all?</p>
+</div>
 <div
 id="extracting-the-exposure-covariate-with-featureextractionforextensions"
 class="section level3">
 <h3>Extracting the exposure covariate with
 FeatureExtractionForExtensions</h3>
-<p>The SQL above is the reference implementation. In a real study you
-would let <a
+<p>In a real study you would let <a
 href="https://github.com/OHDSI/FeatureExtractionForExtensions">FeatureExtractionForExtensions</a>
 build the exposure covariate from <code>external_exposure</code> so it
-plugs into FeatureExtraction, PatientLevelPrediction, and CohortMethod.
+plugs into FeatureExtraction, PatientLevelPrediction and CohortMethod.
 First turn the eligible persons into a standard cohort table:</p>
-<pre class="sql"><code>CREATE TABLE demo.ex4_cohort AS
-SELECT 1 AS cohort_definition_id, person_id AS subject_id,
-       DATE &#39;2016-01-01&#39; AS cohort_start_date, DATE &#39;2019-12-31&#39; AS cohort_end_date
-FROM demo.ex4_features;</code></pre>
-<p>Then, in RStudio in the pre-built tutorial image
-(FeatureExtractionForExtensions is already installed):</p>
-<pre class="r"><code>library(DatabaseConnector)
-library(FeatureExtraction)
+<pre class="r"><code>insertTable(connection, databaseSchema = &quot;demo&quot;, tableName = &quot;ex4_cohort&quot;, dropTableIfExists = TRUE,
+            data = data.frame(cohort_definition_id = 1L, subject_id = features$person_id,
+                              cohort_start_date = as.Date(&quot;2016-01-01&quot;), cohort_end_date = as.Date(&quot;2019-12-31&quot;)))</code></pre>
+<p>Then extract the covariate (FeatureExtractionForExtensions is already
+installed in the image):</p>
+<pre class="r"><code>library(FeatureExtraction)
 library(FeatureExtractionForExtensions)
-
-connectionDetails &lt;- createConnectionDetails(dbms = &quot;postgresql&quot;, server = &quot;gaia-db/gaiacore&quot;,
-                                             port = 5432, user = &quot;postgres&quot;, password = &quot;&lt;provided&gt;&quot;)
-connection &lt;- connect(connectionDetails)
 
 pm25Settings &lt;- createExtensionCovariateSettings(
   analysisId = 998,
@@ -656,58 +685,35 @@ covariateData &lt;- getDbCovariateData(
   rowIdField = &quot;subject_id&quot;,
   covariateSettings = pm25Settings,
   aggregated = FALSE
-)</code></pre>
-<p>Read the SQL the package generates and compare it with your reference
-query. Three things differ, and you should be able to say what each does
-to the estimate:</p>
+)
+extracted &lt;- as.data.frame(covariateData$covariates)
+head(extracted)</code></pre>
+<p>Read the SQL the package generates and compare it with
+<code>dayWeightedExposure()</code>. Three things differ, and you should
+be able to say what each does to the estimate:</p>
 <ol style="list-style-type: decimal">
 <li>The covariate value is an aggregate of the monthly rows in the
 window (<code>valueAggregation</code>: the default is the maximum; here
 it is the mean). The mean treats every monthly row as one observation,
 so partial months (a move in the middle of a month) count as full months
-and the result is <strong>not</strong> the day-weighted mean of the SQL
-reference.</li>
+and the result is <strong>not</strong> the day-weighted mean.</li>
 <li>A row is included when its interval overlaps the window
 (<code>endDateField</code>), but it is used whole, not clipped to the
 window. Without <code>endDateField</code> the row’s start date has to
 fall inside the window.</li>
 <li>The covariate ID is the concept ID times 1000 plus the analysis ID,
-so the same concept extracted by different analyses (for example the
-last 12 months and the 12 months before that) gets different IDs.</li>
+so the same concept extracted by different analyses gets different
+IDs.</li>
 </ol>
-<p>Join the covariate to the outcome by <code>subject_id</code>
-(<code>rowId</code>), fit the model with this covariate and with the
-weighted-mean covariate, and compare the two estimates. Which definition
-recovers the simulated effect better, and why? (Aggregated covariates
-are not supported by this package yet, so this is a person-level
-extraction.) Check the repository README for the exported function names
-in your installed version.</p>
-<p>Fit a logistic regression of <code>copd_after_index</code> on
-<code>pm25_24m</code>, once crude and once adjusted for
-<code>ses_index</code>, <code>age_at_index</code>, and
-<code>female</code> (for example
-<code>glm(copd_after_index ~ pm25_24m + ses_index + age_at_index + female, family = binomial, data = features)</code>
-in R). Then repeat with a negative-control outcome (for example CKD,
-concept <code>46271022</code>, replacing the COPD concept in both places
-in the query).</p>
-<p>What to expect, and what the generator knows. The true simulated
-PM2.5 effect on COPD is in <code>demo.generator_truth</code> (0.15
-log-odds per µg/m³), and it is deliberately exaggerated (see the <a
-href="tutorial-data-description.html#how-the-conditions-are-generated">data
-description</a>). On the reference build the cohort has about 9,600
-persons and about 725 incident cases, the crude estimate is about 0.14
-and the SES-adjusted estimate is about 0.11 per µg/m³ (standard error
-about 0.026), and the negative-control outcome shows a crude association
-of about 0.09 that disappears (about 0.00) after adjusting for SES. Your
-numbers will vary slightly with the build. Why is the adjusted estimate
-below the truth? (Think about exposure measured at the county level,
-residential moves, and the pre-index window.) Why does the negative
-control have a crude association at all?</p>
+<p>Join the extracted covariate to <code>features</code> by
+<code>subject_id</code> (<code>rowId</code>), fit the model with this
+covariate and with the day-weighted one, and compare the two estimates.
+Which recovers the simulated effect better, and why?</p>
 </div>
-<div id="comparing-the-exercise-3-cohorts-with-cohortmethod"
+<div id="comparing-the-r-exercise-3-cohorts-with-cohortmethod"
 class="section level3">
-<h3>Comparing the Exercise 3 cohorts with CohortMethod</h3>
-<p>The exposure-stratified cohorts you built in Exercise 3 (1 = high
+<h3>Comparing the R Exercise 3 cohorts with CohortMethod</h3>
+<p>The exposure-stratified cohorts you built in R Exercise 3 (1 = high
 PM2.5 at index, 2 = low PM2.5 at index, 3 = COPD, 4 = CKD, all in
 <code>demo.cohort</code>) are the inputs to a comparative cohort
 analysis with <a
@@ -716,18 +722,14 @@ versus low exposure, with propensity-score adjustment for confounders,
 and incident COPD as the outcome.</p>
 <p><strong>Choose the confounders carefully.</strong> County SES drives
 both PM2.5 and disease, and you only observe it through the SDOH
-observations (poverty rate, education, and so on), which are noisy.
-Extract them with FeatureExtractionForExtensions from the standard
-<code>observation</code> table; the concept set limits the extraction to
-the indicators you list. Leave out <code>AQI_CATEGORY</code>: it is
-computed from the person’s PM2.5, so adjusting for it would adjust away
-the exposure. Do not include the PM2.5 covariate from the previous
+observations, which are noisy. Extract them with
+FeatureExtractionForExtensions from the standard
+<code>observation</code> table. Leave out <code>AQI_CATEGORY</code>: it
+is computed from the person’s PM2.5, so adjusting for it would adjust
+away the exposure. Do not include the PM2.5 covariate from the previous
 section either, since it defines the groups. Why is that?</p>
 <pre class="r"><code>library(CohortMethod)
-library(FeatureExtraction)
-library(FeatureExtractionForExtensions)
 
-# SDOH observation concepts, without AQI_CATEGORY (2052499437)
 sdohIds &lt;- c(2052499478, 2052497092, 2052498758, 2052498464, 2052499459, 2052498073,
              2052497364, 2052497761, 2052498200, 2052498483, 2052497310)
 
@@ -783,30 +785,6 @@ crude    &lt;- fitOutcomeModel(population = studyPop,   modelType = &quot;cox&qu
 adjusted &lt;- fitOutcomeModel(population = matchedPop, modelType = &quot;cox&quot;)
 hr &lt;- function(m) with(m$outcomeModelTreatmentEstimate, c(HR = exp(logRr), lower = exp(logLb95), upper = exp(logUb95)))
 rbind(crude = hr(crude), matched = hr(adjusted))</code></pre>
-<p>Before you model anything, characterize the two exposure groups.
-Aggregated covariates summarize a cohort without downloading
-person-level rows (the statistics are computed in the database), and
-<code>computeStandardizedDifference()</code> shows how different the
-groups are before any adjustment:</p>
-<pre class="r"><code>pm25Settings$aggregateOnServer   # TRUE: statistics are computed in the database
-groupData &lt;- lapply(1:2, function(cohortId) {
-  getDbCovariateData(
-    connection = connection, cdmDatabaseSchema = &quot;omopgis&quot;,
-    cohortDatabaseSchema = &quot;demo&quot;, cohortTable = &quot;cohort&quot;, cohortIds = cohortId,
-    covariateSettings = list(demographics, sdohSettings, pm25Settings), aggregated = TRUE)
-})
-sdiff &lt;- computeStandardizedDifference(groupData[[1]], groupData[[2]], cohortId1 = 1, cohortId2 = 2)
-head(sdiff[order(-abs(sdiff$stdDiff)), c(&quot;covariateName&quot;, &quot;mean1&quot;, &quot;mean2&quot;, &quot;stdDiff&quot;)], 6)</code></pre>
-<p>On the reference build the two groups differ by about 9.9 versus 7.5
-µg/m³ in mean PM2.5 over the 24 months before the index date (a
-standardized difference of about 1.6; the sign follows
-FeatureExtraction’s convention, so a negative value means the first
-cohort is higher). The SDOH indicators differ by about 0.5 standard
-deviations, in the direction of a higher-SES profile in the low-exposure
-group: broadband access, physician access, food insecurity, and
-neighborhood disadvantage head the list. That imbalance is the
-confounding the propensity model has to remove, and you can compare it
-with the balance after matching below.</p>
 <p>Run the same pipeline with outcome 4 (CKD, replacing
 <code>outcomeId = 3</code> in <code>createStudyPopulation</code>) as a
 negative control. Answer these in your write-up:</p>
@@ -819,36 +797,29 @@ Which covariates remain imbalanced?</li>
 <li>How do the crude and adjusted hazard ratios compare, and how do they
 compare with the negative control?</li>
 </ul>
-<p>What to expect. The image has CohortMethod 5.5; the code above is the
-version tested on the reference build. The attrition table shows 2,717
-and 3,099 persons in the two groups, 2,608 and 3,009 after removing
-prior COPD, and about 2,100 matched pairs. The propensity model
-separates the groups only weakly (AUC about 0.65, because the SDOH
-indicators only weakly distinguish high from low exposure), and matching
-brings the largest standardized difference below 0.1. For COPD the crude
-hazard ratio is about 1.43 (95% CI 1.17 to 1.73) and the matched one
-about 1.26 (1.01 to 1.57). For the CKD negative control the crude hazard
-ratio is about 1.20 (1.01 to 1.43) and the matched one about 0.94 (0.77
-to 1.15). Your numbers will vary slightly with the build. Two things go
-wrong if you change the setup: if you add <code>AQI_CATEGORY</code>
+<p>What to expect. The attrition table shows 2,717 and 3,099 persons in
+the two groups, 2,608 and 3,009 after removing prior COPD, and about
+2,100 matched pairs. The propensity model separates the groups only
+weakly (AUC about 0.65), and matching brings the largest standardized
+difference below 0.1. For COPD the crude hazard ratio is about 1.43 (95%
+CI 1.17 to 1.73) and the matched one about 1.26 (1.01 to 1.57). For the
+CKD negative control the crude hazard ratio is about 1.20 (1.01 to 1.43)
+and the matched one about 0.94 (0.77 to 1.15). Your numbers will vary
+slightly with the build. If you add <code>AQI_CATEGORY</code>
 (2052499437) to <code>sdohIds</code>, <code>createPs</code> stops with
-“High correlation between covariate(s) and treatment” (a useful safety
-net that catches the leak), and with the default cross-validated prior
-the model fits but every coefficient is zero (AUC 0.5), so matching does
-nothing. The matched estimate is pulled toward the null by the
-confounding adjustment, but it stays above 1 for COPD and about 1 for
-CKD, which is the pattern the simulation was built to show; it is also
-attenuated because the groups are defined by a single month’s exposure
-and SES is only measured through noisy indicators. You can compare it
-with the regression estimate from the SQL feature table: they answer
-slightly different questions (a two-group contrast versus a slope per
-µg/m³), so compare the direction, the confounding pattern, and the
-negative control rather than the numbers.</p>
+“High correlation between covariate(s) and treatment”, which catches the
+leak; with the default cross-validated prior the model fits but every
+coefficient is zero (AUC 0.5), so matching does nothing. The two
+analyses answer slightly different questions (a two-group contrast
+versus a slope per µg/m³), so compare the direction, the confounding
+pattern and the negative control rather than the numbers.</p>
+<p>Close the connection with <code>disconnectGaia(connection)</code>
+when you are done.</p>
 </div>
 </div>
 <div id="deliverable" class="section level2">
 <h2><strong>Deliverable</strong></h2>
-<p>One feature specification, plus three anticipated biases (with the
+<p>One feature specification, three anticipated biases (with the
 concrete mechanism for each, not just the name), and, from the worked
 example, the crude and adjusted estimates for COPD and for the negative
 control (the regression estimates and the CohortMethod hazard ratios)
@@ -857,18 +828,18 @@ with a short interpretation.</p>
 <div id="check-your-work" class="section level2">
 <h2><strong>Check Your Work</strong></h2>
 <ul class="task-list">
-<li><label><input type="checkbox" />SQL (or equivalent logic) is
-reproducible from the specification alone</label></li>
+<li><label><input type="checkbox" />The code is reproducible from the
+specification alone</label></li>
 <li><label><input type="checkbox" />Vocabulary release used is
 fixed/pinned, not “whatever is currently installed”</label></li>
 <li><label><input type="checkbox" />Temporal alignment to the index date
 is explicit and correct</label></li>
 <li><label><input type="checkbox" />Missingness policy is
 stated</label></li>
-<li><label><input type="checkbox" />Output is privacy-safe — no exact
+<li><label><input type="checkbox" />Output is privacy-safe: no exact
 coordinates or other re-identifying detail in participant-facing
 output</label></li>
-<li><label><input type="checkbox" />The CohortMethod run uses the
+<li><label><input type="checkbox" />The CohortMethod run uses the R
 Exercise 3 cohorts, excludes <code>AQI_CATEGORY</code> and the exposure
 itself from the covariates, and reports balance and the negative
 control</label></li>
@@ -882,7 +853,7 @@ control</label></li>
 in that chain; the chain only holds if every link stays traceable back
 to its source.</p>
 <p><br></p>
-<p>Previous: <a href="tutorial-exercise-3.html">Exercise 3</a></p>
+<p>Previous: <a href="tutorial-r-exercise-3.html">R Exercise 3</a></p>
 <p><br></p>
 </div>
 </div>

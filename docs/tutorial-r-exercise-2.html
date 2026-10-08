@@ -496,125 +496,227 @@ WG</h1>
 </div>
 
 
-<div id="geo-data-description" class="section level1">
-<h1><strong>Geo Data Description</strong></h1>
+<div id="r-exercise-2-the-gaia-pipeline-with-gaiacore"
+class="section level1">
+<h1><strong>R Exercise 2: The Gaia pipeline with gaiaCore</strong></h1>
 <div class="alert alert-warning">
-<strong>Work in progress.</strong> These tutorial materials are still
-under active development and will continue to change until the tutorial
-takes place on <strong>October 20, 2026</strong>. Content, links, and
-exercises may be incomplete or shift without notice.
+<strong>Beta.</strong> This is the R version of
+<a href="tutorial-exercise-2.html">Exercise 2</a>, with the same data,
+goal and answer key. The SQL version remains the reference path for
+October 20, 2026.
 </div>
-<p>The tutorial uses two datasets: a synthetic OMOP CDM population
-(described in <a href="tutorial-data-description.html">OMOP Data
-Description</a>) and the public PM2.5 dataset for the United States
-described on this page (an external source, used to demonstrate
-cataloging and ingestion of a real dataset). Session 1 catalogs the
-public dataset; Sessions 2-4 link it against the synthetic OMOP
-population. See <a href="tutorial-geo-data-visualization.html">Geo Data
-Visualization</a> for a characterization of this dataset.</p>
+<div id="goal" class="section level2">
+<h2><strong>Goal</strong></h2>
+<p>Run the Gaia ingestion and spatial-temporal linkage from R, check the
+result against the answer key, then trace one derived exposure row back
+to its source and explain it. The artifact you are tracing is the same:
+<strong>raw dataset → source geometry/attribute tables → location
+interval → derived exposure row.</strong></p>
+<p>Each <a href="gaiaCore.html">gaiaCore</a> function calls the gaiaDb
+SQL routine you ran in the SQL track, so the tables you inspect are
+identical. You start with the synthetic persons and their residence
+history but <strong>no exposure data</strong>:
+<code>omopgis.external_exposure</code> is empty.</p>
+</div>
+<div id="steps" class="section level2">
+<h2><strong>Steps</strong></h2>
+<p>Complete the <a href="tutorial-r-setup.html">R setup</a> first, so
+that you have a <code>connection</code> in RStudio.</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Check the starting point.</strong> The dataset is
+restored as in the SQL track (step 1 there).</p>
+<pre class="r"><code>querySql(connection, &quot;SELECT (SELECT count(*) FROM omopgis.person) AS persons,
+                             (SELECT count(*) FROM omopgis.external_exposure) AS exposure_rows&quot;)</code></pre>
+<p>There should be 10,000 persons and no exposure rows.</p></li>
+<li><p><strong>Ingest the source datasets.</strong> The county
+boundaries must be ingested before the PM2.5 dataset and the SES index,
+which are joined to them. Ingestion downloads each dataset and loads it
+into PostGIS (about 2 minutes on a typical machine once the files are
+downloaded). The catalog entry that drives it is the metadata record
+from Exercise 1. The SES index is simulated but is ingested like the
+others: its entry is part of gaiaCatalog, and its source file is
+downloaded from the tutorial repository.</p>
+<pre class="r"><code>ingestDatasource(connection, &quot;us_2023_county_tl&quot;)
+ingestDatasource(connection, &quot;us_2014_2019_monthly_pm25_by_county_cdc&quot;)
+ingestDatasource(connection, &quot;synthetic_county_ses&quot;)
+
+listDatasources(connection)
+listVariables(connection)</code></pre>
+<p><code>listVariables()</code> shows what was registered. The
+<code>variable_source_id</code> of each variable becomes
+<code>exposure_source_value</code>, and the PM2.5 dataset has four
+variables (max, median, mean, population-weighted mean). Which one does
+your Exercise 1 requirement call for?</p></li>
+<li><p><strong>Load the persons’ locations into Gaia.</strong> Gaia
+joins exposures to <code>working.location</code> and
+<code>working.location_history</code>, so copy the synthetic residences
+there and validate them.</p>
+<pre class="r"><code>loadLocationsFromOmop(connection, cdmSchema = &quot;omopgis&quot;)
+
+validation &lt;- validateLocations(connection)
+validation$statistics
+validation$checks</code></pre>
+<p>Some persons have two <code>location_history</code> rows. Why? (Look
+at their dates.) To load locations that are not in an OMOP CDM, use
+<code>loadLocations()</code> with data frames.</p></li>
+<li><p><strong>Build the geometry and attribute tables, then run the
+spatial joins</strong> for the PM2.5 variable you chose (here the
+monthly mean) and for the SES index.</p>
+<pre class="r"><code>loadVariables(connection, &quot;us_2014_2019_monthly_pm25_by_county_cdc&quot;, geomLabel = &quot;name&quot;, variableNodata = -999,
+              source = &quot;CDC EPHTN daily county PM2.5 (EPA Downscaler), monthly means&quot;)
+spatialJoin(connection, &quot;pm25_mean_pred&quot;, &quot;us_2014_2019_monthly_pm25_by_county_cdc&quot;, exposureTypeConceptId = 2052499878)
+loadVariables(connection, &quot;synthetic_county_ses&quot;, geomLabel = &quot;name&quot;, variableNodata = -999,
+              source = &quot;Simulated county SES index (tutorial)&quot;)
+spatialJoin(connection, &quot;ses_index&quot;, &quot;synthetic_county_ses&quot;, exposureTypeConceptId = 2052497765)</code></pre>
+<p><code>exposureTypeConceptId</code> is the type of the <em>data
+source</em> (an “Exposure Type Concept”), which Gaia cannot infer. Join
+one variable at a time: <code>spatialJoinAll()</code> would also join
+the max, median and population-weighted variables and multiply the row
+count by four. Each call returns the number of rows created. Now
+identify the <strong>spatial assignment pattern</strong> used
+(point-in-polygon, nearest feature, buffer/intersection, raster
+extraction, or areal aggregation: look at the
+<code>spatialOperator</code> argument, at
+<code>exposure_relationship_concept_id</code> and at
+<code>exposure_relationship_source_value</code>, which keeps the
+verbatim operator) and the <strong>temporal assignment pattern</strong>
+(interval overlap, calendar aggregation, moving window, lag, or
+cumulative exposure: compare <code>attr_start_date</code> and
+<code>attr_end_date</code> in the attribute table with the residence
+interval).</p></li>
+<li><p><strong>Check the result against the answer key.</strong>
+<code>demo.expected_result</code> holds the expected counts.</p>
+<pre class="r"><code>querySql(connection, &quot;SELECT metric, value, notes FROM demo.expected_result WHERE fixture_tag = &#39;GLOBAL&#39;&quot;)
+
+summarizeExposure(connection)
+
+perPerson &lt;- querySql(connection, &quot;
+  SELECT person_id, count(*) AS n FROM working.external_exposure
+  WHERE exposure_concept_id = 2052499839 GROUP BY person_id&quot;)
+table(perPerson$n)
+
+checkExposure(connection, valueRange = c(0, 200))</code></pre>
+<p>The SES index gives one row per residence interval
+(<code>n_ses_rows</code>). Every person should have 72 monthly PM2.5
+rows (6 years x 12 months), except movers who change county in the
+middle of a month, who have 73 because that month is split into two
+partial-month rows. <code>checkExposure()</code> is a general check for
+duplicates, rows outside the residence interval, missing and implausible
+values, unit mismatches (with <code>expectedUnit</code>) and unassigned
+persons.</p></li>
+<li><p><strong>QA drill.</strong>
+<code>demo.rejected_exposure_row</code> contains four deliberately bad
+staging rows that a loader must not accept as clean data.
+<code>checkStagedExposure()</code> checks staged rows against what is
+already derived and the loaded residence history.</p>
+<pre class="r"><code>staged &lt;- querySql(connection, &quot;SELECT * FROM demo.rejected_exposure_row&quot;)
+names(staged) &lt;- tolower(names(staged))
+
+flags &lt;- checkStagedExposure(connection, staged, valueRange = c(0, 200), expectedUnit = &quot;micrograms/cubic meter&quot;)
+flags[, c(&quot;fixture_tag&quot;, &quot;duplicate_row&quot;, &quot;outside_residence&quot;, &quot;missing_value&quot;, &quot;implausible_value&quot;, &quot;unit_mismatch&quot;, &quot;reject&quot;)]</code></pre>
+<p>Which flag catches which row (duplicate, unit mismatch,
+non-overlapping interval, NULL value)? What should the pipeline do with
+each? Then write one of the checks yourself on the data frame (for
+example the unit check) and confirm it agrees.
+<code>checkExposure()</code> runs the same kinds of checks on the rows
+already derived.</p></li>
+<li><p><strong>Trace one row’s lineage.</strong> Pick one exposure row,
+for example March 2017 for the person with the
+<code>DUPLICATE_SOURCE_ROW</code> fixture, and follow it from the
+exposure row to the residence interval it was clipped to, the county
+polygon the point fell in, the variable it came from, the source
+attribute row and the raw value in the ingested table. This is the one
+step where the SQL is the point, so it stays SQL, run through the same
+connection.</p>
+<pre class="r"><code>lineage &lt;- renderTranslateQuerySql(connection, &quot;
+ WITH pick AS (SELECT person_id FROM demo.fixture_person WHERE fixture_tag = &#39;DUPLICATE_SOURCE_ROW&#39;)
+ SELECT ee.external_exposure_id, ee.person_id, ee.exposure_start_date, ee.exposure_end_date,
+        ROUND(ee.value_as_number::numeric, 3) AS exposure_value,
+        lh.location_history_id, lh.start_date AS residence_start, lh.end_date AS residence_end,
+        ee.exposure_source_value, vs.variable_source_id, vs.variable_name,
+        src.geoid, geo.geom_name AS county,
+        att.attr_start_date, att.attr_end_date, ROUND(att.value_as_number::numeric, 3) AS source_value,
+        src.pm25_mean_pred -&gt;&gt; (att.attr_start_date || &#39;/&#39; || att.attr_end_date) AS raw_json_value
+ FROM working.external_exposure ee
+ JOIN pick USING (person_id)
+ JOIN working.location_history lh ON lh.location_id = ee.location_id AND lh.entity_id = ee.person_id
+ JOIN working.location loc ON loc.location_id = ee.location_id
+ JOIN working.geom_us_2014_2019_monthly_pm25_by_county_cdc geo ON ST_Within(loc.geom, geo.geom_wgs84)
+ JOIN working.attr_us_2014_2019_monthly_pm25_by_county_cdc att
+      ON att.geom_record_id = geo.geom_record_id AND att.attr_start_date = ee.exposure_start_date
+     AND att.attr_index_id = (SELECT attr_index_id FROM backbone.attr_index WHERE variable_name = &#39;pm25_mean_pred&#39;)
+ JOIN backbone.attr_index ai ON ai.attr_index_id = att.attr_index_id
+ JOIN backbone.variable_source vs ON vs.variable_source_id = ai.variable_source_id
+      AND vs.variable_source_id::text = ee.exposure_source_value
+ JOIN public.us_2014_2019_monthly_pm25_by_county_cdc src ON src.ogc_fid = geo.geom_record_id
+ WHERE ee.exposure_start_date = &#39;2017-03-01&#39;&quot;)
+t(lineage)</code></pre>
+<p><code>exposure_source_value</code> should equal the
+<code>variable_source_id</code> of the variable you joined. Write two or
+three sentences explaining that one row: what it represents, where its
+value came from, and what interval it applies to. Then do the same for a
+row in the month a mover changes county, where the interval is shorter
+than a month.</p></li>
+<li><p><strong>Move the result into the OMOP table</strong> so the next
+session can query it.</p>
+<pre class="r"><code>copyExposureToOmop(connection, cdmSchema = &quot;omopgis&quot;)
+
+querySql(connection, &quot;SELECT exposure_concept_id, count(*) AS n FROM omopgis.external_exposure GROUP BY 1&quot;)</code></pre>
+<p>Use the <code>sourceValue</code> or <code>conceptId</code> arguments
+to copy one variable at a time.</p></li>
+</ol>
+<p>When you are done, close the connection with
+<code>disconnectGaia(connection)</code>.</p>
+<p><strong>If the pipeline does not run on your machine,</strong> load
+the derived exposure from <code>external_exposure_fallback.csv.gz</code>
+as described in the <a href="tutorial-exercise-2.html">SQL track</a>,
+then run steps 5 and 6 against the OMOP tables. The lineage trace in
+step 7 needs the Gaia geometry and attribute tables, so ask a faculty
+member to run it for you or to share a screen.</p>
+</div>
+<div id="deliverable" class="section level2">
+<h2><strong>Deliverable</strong></h2>
+<p>One row’s lineage, traced end to end (dataset variable and geometry →
+residence interval → derived exposure row), with a short written
+explanation, plus the QA drill results (which check catches which bad
+row).</p>
+</div>
+<div id="check-your-work" class="section level2">
+<h2><strong>Check Your Work</strong></h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />Row counts match
+<code>demo.expected_result</code> (720,925 monthly PM2.5 rows and 10,955
+SES rows)</label></li>
+<li><label><input type="checkbox" />Every person has 72 monthly PM2.5
+rows, or 73 for a mover whose move splits a month (9,075 and 925
+persons)</label></li>
+<li><label><input type="checkbox" />You joined a single PM2.5 variable,
+not all four, plus the SES index</label></li>
+<li><label><input type="checkbox" />The spatial pattern
+(point-in-polygon, <code>Within</code>) and the temporal pattern
+(interval overlap clipped to the residence) are correctly
+identified</label></li>
+<li><label><input type="checkbox" />Source dataset, county polygon and
+variable are correctly attributed in your lineage</label></li>
+<li><label><input type="checkbox" />The value in the exposure row equals
+the source attribute value and the raw JSON value</label></li>
+<li><label><input type="checkbox" />All four bad staging rows are caught
+by a check you wrote</label></li>
+<li><label><input type="checkbox" /><code>checkExposure()</code> reports
+no flagged rows on the derived exposure</label></li>
+<li><label><input type="checkbox" />You noticed that Gaia leaves
+<code>unit_concept_id</code> empty and can say where the unit is
+declared instead (<code>unit_source_value</code> in
+<code>listVariables()</code>)</label></li>
+</ul>
 <p><br></p>
-<div id="public-gis-pm2.5-dataset-united-states" class="section level2">
-<h2><strong>Public GIS PM2.5 dataset (United States)</strong></h2>
-<p>2014-2019 CDC PM 2.5 Monthly Predictions for US Counties</p>
-<p>This is the public source dataset participants catalog in Exercise 1
-and ingest in Exercise 2.</p>
-<p><em>NOTE: there are several alternative sources for PM 2.5 data in
-the <a href="https://ohdsi.github.io/gaiaCatalog/browser/">Gaia
-Catalog</a>. We may encourage participants to use different data sources
-and then compare resuts.</em></p>
-<div id="overview" class="section level3">
-<h3>Overview</h3>
-<p>Aggregated monthly PM 2.5 modelled estimates that span 2014-01-01 to
-2019-12-31 derived from the CDC Daily County-Level PM2.5 Concentrations
-2001-2022 provided by the CDC National Environmental Public Health
-Tracking Network. The aggregated data are then joined to the TIGER line
-county geometries provided by the US Census Bureau.</p>
-<p>From the CDC description: This dataset provides modeled predictions
-of PM2.5 levels from the EPA Downscaler model. Data are at the county
-level for 2001-2022. These data are used by the CDC National
-Environmental Public Health Tracking Network to generate air quality
-measures. By using these data, you signify your agreement to comply with
-the following requirements: 1. Use the data for statistical reporting
-and analysis only. 2. Do not attempt to learn the identity of any person
-included in the data and do not combine these data with other data for
-the purpose of matching records to identify individuals. 3. Do not
-disclose of or make use of the identity of any person or establishment
-discovered inadvertently and report the discovery to: <a
-href="mailto:trackingsupport@cdc.gov"
-class="email">trackingsupport@cdc.gov</a>. 4. Do not imply or state,
-either in written or oral form, that interpretations based on the data
-are those of the original data sources and CDC unless the data user and
-data source are formally collaborating. 5. Acknowledge, in all reports
-or presentations based on these data, the original source of the data
-and CDC. 6. Suggested citation: Centers for Disease Control and
-Prevention. National Environmental Public Health Tracking Network. Web.
-Accessed: insert date. www.cdc.gov/ephtracking.</p>
-</div>
-<div id="sources" class="section level3">
-<h3>Sources</h3>
-<ul>
-<li><p><a
-href="https://data.cdc.gov/Environmental-Health-Toxicology/Daily-County-Level-PM2-5-Concentrations-2001-2022/53mz-4zqd/about_data">Center
-for Disease Control (CDC) - Daily County-Level PM2.5 Concentrations
-2001-2022</a></p></li>
-<li><p><a
-href="https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.2023.html#list-tab-1883739534">United
-States Census Bureau - Geography Division - TIGER/Line Shapefile, 2023,
-US, Current County</a></p></li>
-</ul>
-<p><em>NOTE: the gaiaCatalog source first pulls the CDC daily data from
-an API and then aggregates the data to monthly derivatives which are
-then joined to the US Census Bureau TIGER line geometries for US
-counties. The University of Miami Geospatial Digital Special Collections
-maintains a pre-aggregated version of the <a
-href="https://gdsc.idsc.miami.edu/detail/us_2014_2019_monthly_pm25_by_county_cdc?collection=all&amp;active=&amp;query=cdc">2014-2019
-CDC PM 2.5 Monthly Predictions for US Counties</a> dataset for the
-tutorial available for download in <a
-href="https://gdsc.idsc.miami.edu/download/data/us_2014_2019_monthly_pm25_by_county_cdc/derived?file=us_2014_2019_monthly_pm25_by_county_cdc&amp;format=sql">SQL</a>
-and <a
-href="https://gdsc.idsc.miami.edu/download/data/us_2014_2019_monthly_pm25_by_county_cdc/derived?file=us_2014_2019_monthly_pm25_by_county_cdc&amp;format=gpkg">gpkg</a>
-formats.</em></p>
-</div>
-<div id="coverage" class="section level3">
-<h3>Coverage</h3>
-<ul>
-<li><strong>Spatial coverage:</strong> United States Counties</li>
-<li><strong>Temporal coverage:</strong> 2014 - 2019 with monthly data
-points.</li>
-<li><strong>Variable definition and unit:</strong> PM2.5 concentration,
-µg/m³, monthly max, mean, median, and population weighted mean._</li>
-</ul>
-</div>
-<div id="access-and-license" class="section level3">
-<h3>Access and license</h3>
-<ul>
-<li><p><strong>CDC Retrieval method:</strong> API <a
-href="https://data.cdc.gov/api/v3/views/53mz-4zqd/query.csv?">https://data.cdc.gov/api/v3/views/53mz-4zqd/query.csv?</a></p></li>
-<li><p><strong>CDC License:</strong> <a
-href="https://www.usa.gov/government-copyright">Public Domain Us
-Government</a></p></li>
-<li><p><strong>Census Retrieval method:</strong> Download - <a
-href="ftp://ftp2.census.gov/geo/tiger/TIGER2023/COUNTY/tl_2023_us_county.zip">ftp://ftp2.census.gov/geo/tiger/TIGER2023/COUNTY/tl_2023_us_county.zip</a></p></li>
-<li><p><strong>Census License:</strong> Public Domain</p></li>
-<li><p>UM Retrieval method: <a
-href="https://gdsc.idsc.miami.edu/download/data/us_2014_2019_monthly_pm25_by_county_cdc/derived?file=us_2014_2019_monthly_pm25_by_county_cdc&amp;format=sql">SQL</a>
-and <a
-href="https://gdsc.idsc.miami.edu/download/data/us_2014_2019_monthly_pm25_by_county_cdc/derived?file=us_2014_2019_monthly_pm25_by_county_cdc&amp;format=gpkg">gpkg</a></p></li>
-<li><p>UM License: <a
-href="http://opendatacommons.org/licenses/by/1.0/">Open Data Commons
-Attribution License (ODC-By)</a></p></li>
-</ul>
-</div>
-<div id="role-in-the-tutorial" class="section level3">
-<h3>Role in the tutorial</h3>
-<p>This is the dataset participants evaluate against the fitness rubric
-and catalog with a metadata record in <a
-href="tutorial-exercise-1.html">Exercise 1</a>, then ingest and
-spatially/temporally link to the synthetic OMOP population (<a
-href="tutorial-data-description.html">OMOP Data Description</a>) in <a
-href="tutorial-exercise-2.html">Exercise 2</a>.</p>
+<p><strong>Bridge to Session 3:</strong> a computed value is not
+interoperable until its semantics are standardized. That’s what the OMOP
+integration does next.</p>
 <p><br></p>
-</div>
+<p>Previous: <a href="tutorial-r-setup.html">R setup</a> | Next: <a
+href="tutorial-r-exercise-3.html">R Exercise 3</a></p>
+<p><br></p>
 </div>
 </div>
 
