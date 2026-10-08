@@ -9,7 +9,8 @@
 #   outcome     any occurrence of the condition during 2014-2019, analysed with a logistic outcome model
 #   crude       CohortMethod outcome model on the unadjusted cohorts
 #   adjusted    CohortMethod propensity score (county SES, age, sex: the covariates of the generator's risk model),
-#               stratified in --strata strata, with a stratified outcome model
+#               stratified in --strata strata (or matched 1:1 with --design match), with a stratified outcome model;
+#               --outcome-covariates adds SES, age and sex to the outcome model as well
 #
 
 suppressPackageStartupMessages({
@@ -30,6 +31,8 @@ outDir <- arg("out", "syntheticDataGIS/benchmark/output")
 highCut <- as.numeric(arg("high", "10"))
 lowCut <- as.numeric(arg("low", "8"))
 nStrata <- as.integer(arg("strata", "5"))
+design <- arg("design", "stratify")                    # stratify (default) or match: how the propensity score is used
+outcomeCovariates <- "--outcome-covariates" %in% args  # also adjust for SES, age and sex in the outcome model
 dir.create(outDir, showWarnings = FALSE, recursive = TRUE)
 pm25Source <- arg("pm25-source", NA_character_)   # exposure_source_value (variable_source_id) of the PM2.5 variable to use; NA = all rows of the concept
 sesSource <- arg("ses-source", NA_character_)
@@ -150,19 +153,45 @@ fitAll <- function() suppressMessages(bind_rows(lapply(seq_len(nrow(truth)), fun
                                       riskWindowEnd = 0, endAnchor = "cohort end", minDaysAtRisk = 1)
   crudeModel <- fitOutcomeModel(population, modelType = "logistic", stratified = FALSE, useCovariates = FALSE,
                                 prior = noPrior, control = quiet)
-  ps <- createPs(cmData, population, prior = noPrior, control = quiet)
-  stratified <- stratifyByPs(ps, numberOfStrata = nStrata)
-  adjustedModel <- fitOutcomeModel(stratified, modelType = "logistic", stratified = TRUE, useCovariates = FALSE,
-                                   prior = noPrior, control = quiet)
+  # SES is strongly associated with the high/low PM2.5 contrast in some datasets: do not stop at the correlation check
+  ps <- createPs(cmData, population, prior = noPrior, control = quiet, errorOnHighCorrelation = FALSE)
+  analysed <- if (design == "match") matchOnPs(ps, caliper = 0.2, caliperScale = "standardized logit", maxRatio = 1)
+              else stratifyByPs(ps, numberOfStrata = nStrata)
+  adjustedModel <- fitOutcomeModel(analysed, cohortMethodData = if (outcomeCovariates) cmData else NULL, modelType = "logistic",
+                                   stratified = TRUE, useCovariates = outcomeCovariates, prior = noPrior, control = quiet)
   bind_rows(
     estimate(crudeModel, population) %>% mutate(model = "Crude"),
-    estimate(adjustedModel, stratified) %>% mutate(model = "Adjusted")
+    estimate(adjustedModel, analysed) %>% mutate(model = "Adjusted")
   ) %>% mutate(outcome = truth$outcome_name[i])
 })))
 invisible(capture.output(fits <- fitAll()))   # CohortMethod prints its progress; keep the console readable
 message(sprintf("per-outcome mean PM2.5 difference used for scaling (crude / PS-stratified): %.3f to %.3f / %.3f to %.3f ug/m3",
                 min(fits$delta[fits$model == "Crude"]), max(fits$delta[fits$model == "Crude"]),
                 min(fits$delta[fits$model == "Adjusted"]), max(fits$delta[fits$model == "Adjusted"])))
+# covariate balance of the analysed population for the first outcome: standardised mean difference of SES, age and sex,
+# before and after the propensity score design (strata-size weighted within-stratum differences)
+balance <- local({
+  pop <- suppressMessages(createStudyPopulation(cmData, outcomeId = truth$condition_concept_id[1], removeSubjectsWithPriorOutcome = FALSE,
+                                                 riskWindowStart = 0, startAnchor = "cohort start", riskWindowEnd = 0, endAnchor = "cohort end"))
+  ps <- suppressMessages(createPs(cmData, pop, prior = noPrior, control = quiet, errorOnHighCorrelation = FALSE))
+  an <- suppressMessages(if (design == "match") matchOnPs(ps, caliper = 0.2, caliperScale = "standardized logit", maxRatio = 1) else stratifyByPs(ps, numberOfStrata = nStrata))
+  cov <- d %>% transmute(rowId = as.integer(person_id), SES = ses_sd, age = age_decades, female = female)
+  smd <- function(p, weighted) {
+    p <- p %>% inner_join(cov, by = "rowId")
+    vapply(c("SES", "age", "female"), function(v) {
+      sdAll <- sd(p[[v]])
+      if (!weighted) return((mean(p[[v]][p$treatment == 1]) - mean(p[[v]][p$treatment == 0])) / sdAll)
+      p %>% group_by(stratumId) %>% filter(any(treatment == 1), any(treatment == 0)) %>%
+        summarise(n = n(), dm = mean(.data[[v]][treatment == 1]) - mean(.data[[v]][treatment == 0]), .groups = "drop") %>%
+        summarise(x = sum(n * dm) / sum(n) / sdAll) %>% pull(x)
+    }, numeric(1))
+  }
+  list(before = smd(pop, FALSE), after = smd(an, TRUE), n_before = nrow(pop), n_after = nrow(an))
+})
+message(sprintf("design: %s%s | persons %d -> %d | standardised mean difference before: SES %.2f, age %.2f, female %.2f; after: SES %.2f, age %.2f, female %.2f",
+                design, if (outcomeCovariates) " + covariates in the outcome model" else "", balance$n_before, balance$n_after,
+                balance$before[["SES"]], balance$before[["age"]], balance$before[["female"]],
+                balance$after[["SES"]], balance$after[["age"]], balance$after[["female"]]))
 results <- fits %>%
   left_join(truth %>% transmute(outcome = outcome_name, category, truth = beta_pm25_per_ugm3,
                                 effect = factor(ifelse(is_pm25_null_outcome, "Simulated null", "Simulated effect"),

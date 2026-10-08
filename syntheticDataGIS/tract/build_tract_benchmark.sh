@@ -10,7 +10,7 @@
 # database volume. Usage: tract/build_tract_benchmark.sh [--clean] [--keep-running] [--out DIR]
 # Env:   TRACT_STATES (space separated state FIPS codes, default "01 04 06 41" = AL AZ CA OR), N_PERSONS (default 40000),
 #        CATALOG_OVERLAY (a gaiaCatalog datastore/data directory whose entries are copied over the pinned catalog checkout while the
-#        tract entries are not part of it), GAIA_DB_IMAGE, GAIA_CATALOG_REPO, GAIA_CATALOG_REF, BUILD_DIR, CONTAINER, VOLUME
+#        tract entries are not part of it), GENERATOR_COMMIT (recorded in build_info when run from a copy), GAIA_DB_IMAGE, GAIA_CATALOG_REPO, GAIA_CATALOG_REF, BUILD_DIR, CONTAINER, VOLUME
 set -euo pipefail
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -230,7 +230,7 @@ CREATE TABLE demo.build_info (key varchar(40) PRIMARY KEY, value text NOT NULL);
 INSERT INTO demo.build_info VALUES
   ('profile',             'tract benchmark'),
   ('built_on',            to_char(now() AT TIME ZONE 'UTC', 'YYYY-MM-DD')),
-  ('generator_git_commit','$(git -C "$HERE" rev-parse --short HEAD 2>/dev/null || echo unknown)'),
+  ('generator_git_commit','${GENERATOR_COMMIT:-$(git -C "$HERE" rev-parse --short HEAD 2>/dev/null || echo unknown)}'),
   ('gaia_db_image',       '$GAIA_DB_IMAGE'),
   ('gaia_db_image_digest','$IMAGE_DIGEST'),
   ('gaia_catalog_commit', '$CATALOG_SHA'),
