@@ -1,0 +1,58 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG</div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+
+# **R track: setup**
+
+<div class="alert alert-warning"><strong>Beta.</strong> The R track is a parallel version of Exercises 2 to 4 that uses the <a href="gaiaCore.html">gaiaCore</a> R package instead of SQL. The SQL exercises remain the reference path for October 20, 2026.</div>
+
+## **What changes in the R track**
+
+The pipeline and the data are the same as in the SQL exercises. You run each step with a gaiaCore function from RStudio, which calls the same gaiaDb SQL functions underneath, and you keep the SQL only where it is the clearest way to look at the data (the answer key and the lineage trace).
+
+| SQL track | R track |
+|---|---|
+| `psql` in the gaia-db container | RStudio in the `ohdsi/gaia-core` container |
+| `SELECT * FROM backbone.ingest_datasource(...)` | `ingestDatasource(connection, ...)` |
+| `INSERT INTO working.location ...` | `loadLocationsFromOmop(connection)` |
+| `SELECT working.spatial_join_from_catalog(...)` | `spatialJoin(connection, ...)` |
+| Hand-written QA queries | `checkExposure(connection)` |
+| `INSERT INTO omopgis.external_exposure ...` | `copyExposureToOmop(connection)` |
+
+## **Start the R environment**
+
+1. Deploy the Gaia stack and restore the synthetic dataset as in Exercise 2, step 1 of the [SQL track](tutorial-exercise-2.html) (the restore is a shell command and is the same in both tracks).
+2. Pull and start the R image on the same Docker network as the database (stop the stack's own `gaia-core` service first if it is running, because both use port 8787; on Apple Silicon keep `--platform linux/amd64`):
+   ```sh
+   docker pull --platform linux/amd64 ohdsi/gaia-core:main
+   docker run -d --name gaia-core --platform linux/amd64 --network gaiadocker_default -p 8787:8787 \
+     -e USER=ohdsi -e PASSWORD=<choose a password> \
+     -e GAIA_POSTGRES_PASSWORD="$(cat secrets/gaia/POSTGRES_PASSWORD)" ohdsi/gaia-core:main
+   ```
+   (`gaiadocker_default` is the network docker compose creates for a checkout in a folder called `gaiaDocker`; list yours with `docker network ls`. Run the command from the `gaiaDocker` folder so the password file is found.)
+3. Open <http://localhost:8787> and sign in with `ohdsi` and the password you chose.
+
+## **Connect**
+
+```r
+library(gaiaCore)
+library(DatabaseConnector)
+
+connection <- connectGaia(createGaiaConnectionDetails(server = "gaia-db/gaiacore"))
+
+querySql(connection, "SELECT count(*) AS persons FROM omopgis.person")   # 10,000
+```
+
+`createGaiaConnectionDetails()` reads the password from `GAIA_POSTGRES_PASSWORD` and the JDBC driver folder from `DATABASECONNECTOR_JAR_FOLDER`, both set by the commands above. Run `disconnectGaia(connection)` when you are done. The connection is a normal DatabaseConnector connection, so `querySql()` and `executeSql()` work on it whenever you want to look at a table directly.
+
+<br>
+
+Next: [R Exercise 2](tutorial-r-exercise-2.html)
+
+<br>

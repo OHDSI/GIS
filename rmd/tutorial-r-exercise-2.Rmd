@@ -1,0 +1,153 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG</div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+
+# **R Exercise 2: The Gaia pipeline with gaiaCore**
+
+<div class="alert alert-warning"><strong>Beta.</strong> This is the R version of <a href="tutorial-exercise-2.html">Exercise 2</a>, with the same data, goal and answer key. The SQL version remains the reference path for October 20, 2026.</div>
+
+## **Goal**
+
+Run the Gaia ingestion and spatial-temporal linkage from R, check the result against the answer key, then trace one derived exposure row back to its source and explain it. The artifact you are tracing is the same: **raw dataset → source geometry/attribute tables → location interval → derived exposure row.**
+
+Each [gaiaCore](gaiaCore.html) function calls the gaiaDb SQL routine you ran in the SQL track, so the tables you inspect are identical. You start with the synthetic persons and their residence history but **no exposure data**: `omopgis.external_exposure` is empty.
+
+## **Steps**
+
+Complete the [R setup](tutorial-r-setup.html) first, so that you have a `connection` in RStudio.
+
+1. **Check the starting point.** The dataset is restored as in the SQL track (step 1 there).
+   ```r
+   querySql(connection, "SELECT (SELECT count(*) FROM omopgis.person) AS persons,
+                                (SELECT count(*) FROM omopgis.external_exposure) AS exposure_rows")
+   ```
+   There should be 10,000 persons and no exposure rows.
+
+2. **Ingest the source datasets.** The county boundaries must be ingested before the PM2.5 dataset and the SES index, which are joined to them. Ingestion downloads each dataset and loads it into PostGIS (about 2 minutes on a typical machine once the files are downloaded). The catalog entry that drives it is the metadata record from Exercise 1. The SES index is simulated but is ingested like the others: its entry is part of gaiaCatalog, and its source file is downloaded from the tutorial repository.
+   ```r
+   ingestDatasource(connection, "us_2023_county_tl")
+   ingestDatasource(connection, "us_2014_2019_monthly_pm25_by_county_cdc")
+   ingestDatasource(connection, "synthetic_county_ses")
+
+   listDatasources(connection)
+   listVariables(connection)
+   ```
+   `listVariables()` shows what was registered. The `variable_source_id` of each variable becomes `exposure_source_value`, and the PM2.5 dataset has four variables (max, median, mean, population-weighted mean). Which one does your Exercise 1 requirement call for?
+
+3. **Load the persons' locations into Gaia.** Gaia joins exposures to `working.location` and `working.location_history`, so copy the synthetic residences there and validate them.
+   ```r
+   loadLocationsFromOmop(connection, cdmSchema = "omopgis")
+
+   validation <- validateLocations(connection)
+   validation$statistics
+   validation$checks
+   ```
+   Some persons have two `location_history` rows. Why? (Look at their dates.) To load locations that are not in an OMOP CDM, use `loadLocations()` with data frames.
+
+4. **Build the geometry and attribute tables, then run the spatial joins** for the PM2.5 variable you chose (here the monthly mean) and for the SES index.
+   ```r
+   loadVariables(connection, "us_2014_2019_monthly_pm25_by_county_cdc", geomLabel = "name", variableNodata = -999,
+                 source = "CDC EPHTN daily county PM2.5 (EPA Downscaler), monthly means")
+   spatialJoin(connection, "pm25_mean_pred", "us_2014_2019_monthly_pm25_by_county_cdc", exposureTypeConceptId = 2052499878)
+   loadVariables(connection, "synthetic_county_ses", geomLabel = "name", variableNodata = -999,
+                 source = "Simulated county SES index (tutorial)")
+   spatialJoin(connection, "ses_index", "synthetic_county_ses", exposureTypeConceptId = 2052497765)
+   ```
+   `exposureTypeConceptId` is the type of the *data source* (an "Exposure Type Concept"), which Gaia cannot infer. Join one variable at a time: `spatialJoinAll()` would also join the max, median and population-weighted variables and multiply the row count by four. Each call returns the number of rows created. Now identify the **spatial assignment pattern** used (point-in-polygon, nearest feature, buffer/intersection, raster extraction, or areal aggregation: look at the `spatialOperator` argument, at `exposure_relationship_concept_id` and at `exposure_relationship_source_value`, which keeps the verbatim operator) and the **temporal assignment pattern** (interval overlap, calendar aggregation, moving window, lag, or cumulative exposure: compare `attr_start_date` and `attr_end_date` in the attribute table with the residence interval).
+
+5. **Check the result against the answer key.** `demo.expected_result` holds the expected counts.
+   ```r
+   querySql(connection, "SELECT metric, value, notes FROM demo.expected_result WHERE fixture_tag = 'GLOBAL'")
+
+   summarizeExposure(connection)
+
+   perPerson <- querySql(connection, "
+     SELECT person_id, count(*) AS n FROM working.external_exposure
+     WHERE exposure_concept_id = 2052499839 GROUP BY person_id")
+   table(perPerson$n)
+
+   checkExposure(connection, valueRange = c(0, 200))
+   ```
+   The SES index gives one row per residence interval (`n_ses_rows`). Every person should have 72 monthly PM2.5 rows (6 years x 12 months), except movers who change county in the middle of a month, who have 73 because that month is split into two partial-month rows. `checkExposure()` is a general check for duplicates, rows outside the residence interval, missing and implausible values, unit mismatches (with `expectedUnit`) and unassigned persons.
+
+6. **QA drill.** `demo.rejected_exposure_row` contains four deliberately bad staging rows that a loader must not accept as clean data. `checkStagedExposure()` checks staged rows against what is already derived and the loaded residence history.
+   ```r
+   staged <- querySql(connection, "SELECT * FROM demo.rejected_exposure_row")
+   names(staged) <- tolower(names(staged))
+
+   flags <- checkStagedExposure(connection, staged, valueRange = c(0, 200), expectedUnit = "micrograms/cubic meter")
+   flags[, c("fixture_tag", "duplicate_row", "outside_residence", "missing_value", "implausible_value", "unit_mismatch", "reject")]
+   ```
+   Which flag catches which row (duplicate, unit mismatch, non-overlapping interval, NULL value)? What should the pipeline do with each? Then write one of the checks yourself on the data frame (for example the unit check) and confirm it agrees. `checkExposure()` runs the same kinds of checks on the rows already derived.
+
+7. **Trace one row's lineage.** Pick one exposure row, for example March 2017 for the person with the `DUPLICATE_SOURCE_ROW` fixture, and follow it from the exposure row to the residence interval it was clipped to, the county polygon the point fell in, the variable it came from, the source attribute row and the raw value in the ingested table. This is the one step where the SQL is the point, so it stays SQL, run through the same connection.
+   ```r
+   lineage <- renderTranslateQuerySql(connection, "
+    WITH pick AS (SELECT person_id FROM demo.fixture_person WHERE fixture_tag = 'DUPLICATE_SOURCE_ROW')
+    SELECT ee.external_exposure_id, ee.person_id, ee.exposure_start_date, ee.exposure_end_date,
+           ROUND(ee.value_as_number::numeric, 3) AS exposure_value,
+           lh.location_history_id, lh.start_date AS residence_start, lh.end_date AS residence_end,
+           ee.exposure_source_value, vs.variable_source_id, vs.variable_name,
+           src.geoid, geo.geom_name AS county,
+           att.attr_start_date, att.attr_end_date, ROUND(att.value_as_number::numeric, 3) AS source_value,
+           src.pm25_mean_pred ->> (att.attr_start_date || '/' || att.attr_end_date) AS raw_json_value
+    FROM working.external_exposure ee
+    JOIN pick USING (person_id)
+    JOIN working.location_history lh ON lh.location_id = ee.location_id AND lh.entity_id = ee.person_id
+    JOIN working.location loc ON loc.location_id = ee.location_id
+    JOIN working.geom_us_2014_2019_monthly_pm25_by_county_cdc geo ON ST_Within(loc.geom, geo.geom_wgs84)
+    JOIN working.attr_us_2014_2019_monthly_pm25_by_county_cdc att
+         ON att.geom_record_id = geo.geom_record_id AND att.attr_start_date = ee.exposure_start_date
+        AND att.attr_index_id = (SELECT attr_index_id FROM backbone.attr_index WHERE variable_name = 'pm25_mean_pred')
+    JOIN backbone.attr_index ai ON ai.attr_index_id = att.attr_index_id
+    JOIN backbone.variable_source vs ON vs.variable_source_id = ai.variable_source_id
+         AND vs.variable_source_id::text = ee.exposure_source_value
+    JOIN public.us_2014_2019_monthly_pm25_by_county_cdc src ON src.ogc_fid = geo.geom_record_id
+    WHERE ee.exposure_start_date = '2017-03-01'")
+   t(lineage)
+   ```
+   `exposure_source_value` should equal the `variable_source_id` of the variable you joined. Write two or three sentences explaining that one row: what it represents, where its value came from, and what interval it applies to. Then do the same for a row in the month a mover changes county, where the interval is shorter than a month.
+
+8. **Move the result into the OMOP table** so the next session can query it.
+   ```r
+   copyExposureToOmop(connection, cdmSchema = "omopgis")
+
+   querySql(connection, "SELECT exposure_concept_id, count(*) AS n FROM omopgis.external_exposure GROUP BY 1")
+   ```
+   Use the `sourceValue` or `conceptId` arguments to copy one variable at a time.
+
+When you are done, close the connection with `disconnectGaia(connection)`.
+
+**If the pipeline does not run on your machine,** load the derived exposure from `external_exposure_fallback.csv.gz` as described in the [SQL track](tutorial-exercise-2.html), then run steps 5 and 6 against the OMOP tables. The lineage trace in step 7 needs the Gaia geometry and attribute tables, so ask a faculty member to run it for you or to share a screen.
+
+## **Deliverable**
+
+One row's lineage, traced end to end (dataset variable and geometry → residence interval → derived exposure row), with a short written explanation, plus the QA drill results (which check catches which bad row).
+
+## **Check Your Work**
+
+- [ ] Row counts match `demo.expected_result` (720,925 monthly PM2.5 rows and 10,955 SES rows)
+- [ ] Every person has 72 monthly PM2.5 rows, or 73 for a mover whose move splits a month (9,075 and 925 persons)
+- [ ] You joined a single PM2.5 variable, not all four, plus the SES index
+- [ ] The spatial pattern (point-in-polygon, `Within`) and the temporal pattern (interval overlap clipped to the residence) are correctly identified
+- [ ] Source dataset, county polygon and variable are correctly attributed in your lineage
+- [ ] The value in the exposure row equals the source attribute value and the raw JSON value
+- [ ] All four bad staging rows are caught by a check you wrote
+- [ ] `checkExposure()` reports no flagged rows on the derived exposure
+- [ ] You noticed that Gaia leaves `unit_concept_id` empty and can say where the unit is declared instead (`unit_source_value` in `listVariables()`)
+
+<br>
+
+**Bridge to Session 3:** a computed value is not interoperable until its semantics are standardized. That's what the OMOP integration does next.
+
+<br>
+
+Previous: [R setup](tutorial-r-setup.html) | Next: [R Exercise 3](tutorial-r-exercise-3.html)
+
+<br>

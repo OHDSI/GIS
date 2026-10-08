@@ -56,7 +56,14 @@ _**After installing docker, please complete the following steps before coming to
 - [ ] Review the [Get Started](get-started.html) page and follw the instructions to deploy the gaia toolchain.
 - [ ] Confirm you can run the Docker stack in the above step. Please reach out if something does not work as expected.
 - [ ] Confirm you can download the synthetic demo dataset (`synthetic_omop_gis.sql.gz`, 3 MB) and the fallback exposure file (`external_exposure_fallback.csv.gz`, 11 MB) from the [`syntheticDataGIS/data`](https://github.com/OHDSI/GIS/tree/main/syntheticDataGIS/data) folder
-- [ ] For Exercises 3 and 4, pull the pre-built tutorial R image (HADES with Capr, CaprForExtensions, FeatureExtractionForExtensions and CohortMethod already installed): `docker pull --platform linux/amd64 ohdsi/gaia-core-tutorial:main`, then start it as described in [`docker/gaia-core-tutorial`](https://github.com/OHDSI/GIS/tree/main/docker/gaia-core-tutorial). Nothing needs to be built or installed.
+- [ ] For Exercises 3 and 4, pull the pre-built R image (RStudio with HADES, Capr, CaprForExtensions, FeatureExtractionForExtensions, CohortMethod and the [gaiaCore](gaiaCore.html) package already installed): `docker pull --platform linux/amd64 ohdsi/gaia-core:main`. Nothing needs to be built or installed. After the Gaia stack from [Get Started](get-started.html) is running, start the image on the same Docker network so it can reach the database as `gaia-db` (stop the stack's own `gaia-core` service first if it is running, because both use port 8787; on Apple Silicon keep `--platform linux/amd64`):
+
+  ```sh
+  docker run -d --name gaia-core --platform linux/amd64 --network gaiadocker_default -p 8787:8787 \
+    -e USER=ohdsi -e PASSWORD=<choose a password> ohdsi/gaia-core:main
+  ```
+
+  Then open <http://localhost:8787> and sign in with `ohdsi` and that password. In R, connect with `server = "gaia-db/gaiacore"` and the Postgres password from `gaiaDocker/secrets/gaia/POSTGRES_PASSWORD`; `DATABASECONNECTOR_JAR_FOLDER` is already set, so `pathToDriver` is optional. (`gaiadocker_default` is the network docker compose creates for a checkout in a folder called `gaiaDocker`; list yours with `docker network ls`.)
 
 ### Additional useful software (not required)
 
@@ -83,6 +90,8 @@ All exercises run against a synthetic cohort designed for this tutorial: 10,000 
 2. [Exercise 2: The Gaia pipeline](tutorial-exercise-2.html) - Run the ingestion and spatial-temporal linkage, check it against the answer key, and trace one exposure row back to its source dataset and geometry.
 3. [Exercise 3: OMOP integration](tutorial-exercise-3.html) - Query the person-place-time model, validate vocabulary roles, calculate temporally aligned exposure metrics, and build exposure-stratified cohorts.
 4. [Exercise 4: Analytical applications](tutorial-exercise-4.html) - Draft an analysis-ready feature specification and its validity/QA checklist, then fit and critique a crude vs adjusted exposure model.
+
+**Choose your track.** Exercises 2 to 4 are written in SQL (the reference path for the workshop). An R version that uses the [gaiaCore](gaiaCore.html) package is available as a beta: start with the [R setup](tutorial-r-setup.html), then [R Exercise 2](tutorial-r-exercise-2.html), [3](tutorial-r-exercise-3.html) and [4](tutorial-r-exercise-4.html). Both tracks use the same data, the same answer key and the same `ohdsi/gaia-core:main` image.
 
 <br>
 

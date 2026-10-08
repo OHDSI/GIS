@@ -200,11 +200,9 @@ Image status is read from Docker Hub when the site is built, so the dates reflec
 
 ```{r image-status, echo=FALSE, message=FALSE, warning=FALSE}
 images <- data.frame(
-  image = c("ohdsi/gaia-db", "ohdsi/gaia-core", "ohdsi/gaia-core-tutorial", "ohdsi/gaia-core-tutorial",
-            "ohdsi/gaia-postgrest", "ohdsi/gaia-catalog", "ohdsi/gaia-solr"),
-  tag = c("main", "main", "main", "benchmark", "main", "main", "main"),
-  purpose = c("PostgreSQL/PostGIS database (gaiaDb)", "RStudio, HADES and gaiaCore",
-              "Tutorial image (Oct 20 session)", "Manuscript benchmark image",
+  image = c("ohdsi/gaia-db", "ohdsi/gaia-core", "ohdsi/gaia-postgrest", "ohdsi/gaia-catalog", "ohdsi/gaia-solr"),
+  tag = rep("main", 5),
+  purpose = c("PostgreSQL/PostGIS database (gaiaDb)", "RStudio, HADES, gaiaCore (tutorial and benchmark image)",
               "PostgREST API (optional)", "Catalog interface", "Catalog search index"),
   stringsAsFactors = FALSE)
 lookup <- function(image, tag) {

@@ -40,6 +40,14 @@ navbar:
           href: tutorial-exercise-3.html
         - text: "Exercise 4"
           href: tutorial-exercise-4.html
+        - text: "R track: Setup (beta)"
+          href: tutorial-r-setup.html
+        - text: "R track: Exercise 2 (beta)"
+          href: tutorial-r-exercise-2.html
+        - text: "R track: Exercise 3 (beta)"
+          href: tutorial-r-exercise-3.html
+        - text: "R track: Exercise 4 (beta)"
+          href: tutorial-r-exercise-4.html
     - text: "Gaia"
       icon: fa-earth
       menu:

@@ -1,0 +1,212 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG</div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 3
+        toc_float:
+          collapsed: false
+---
+
+# **R Exercise 3: OMOP integration with gaiaCore**
+
+<div class="alert alert-warning"><strong>Beta.</strong> This is the R version of <a href="tutorial-exercise-3.html">Exercise 3</a>, with the same data, goal and answer key. The SQL version remains the reference path for October 20, 2026.</div>
+
+## **Goal**
+
+Query the person-place-time model, validate vocabulary roles, and calculate temporally aligned exposure metrics: mean PM2.5 during pregnancy, and mean PM2.5 in the year before a COPD diagnosis. Then build cohorts stratified by exposure with the Capr extension.
+
+You continue with the `omopgis.external_exposure` table you populated in [R Exercise 2](tutorial-r-exercise-2.html) (or the fallback file), through the same `connection`. The background on the person-place-time model, the vocabulary roles and the pregnancy and lookback designs is in the [SQL version](tutorial-exercise-3.html). Here the exposure rows are fetched into R and the day-weighting is done with gaiaCore's `dayWeightedExposure()`, which replaces the hand-written overlap arithmetic.
+
+```r
+library(gaiaCore)
+library(DatabaseConnector)
+connection <- connectGaia(createGaiaConnectionDetails(server = "gaia-db/gaiacore"))
+```
+
+## **Steps**
+
+### Part A: vocabulary roles
+
+1. **Look at the mini vocabulary.** The dataset ships with a small OMOP vocabulary in the `omopgis` schema: the standard concepts used by the data plus the OMOP GIS, OMOP Exposome and OMOP SDoH concepts.
+   ```r
+   querySql(connection, "SELECT vocabulary_id, COUNT(*) AS n_concepts FROM omopgis.concept GROUP BY 1 ORDER BY 2 DESC")
+   ```
+
+2. **Check the role of every concept in `external_exposure`.** Each concept column should hold a concept from the right vocabulary and class.
+   ```r
+   querySql(connection, "
+     SELECT ee.exposure_concept_id, c1.concept_name AS exposure_concept, c1.vocabulary_id AS exposure_vocabulary,
+            ee.exposure_relationship_concept_id, c2.concept_name AS relationship, c2.vocabulary_id AS relationship_vocabulary,
+            ee.exposure_type_concept_id, c3.concept_name AS exposure_type, c3.concept_class_id,
+            ee.exposure_source_value, ee.exposure_relationship_source_value,
+            ee.unit_concept_id, COUNT(*) AS n
+     FROM omopgis.external_exposure ee
+     LEFT JOIN omopgis.concept c1 ON c1.concept_id = ee.exposure_concept_id
+     LEFT JOIN omopgis.concept c2 ON c2.concept_id = ee.exposure_relationship_concept_id
+     LEFT JOIN omopgis.concept c3 ON c3.concept_id = ee.exposure_type_concept_id
+     GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12")
+   ```
+   The query returns two rows, one per exposure variable: monthly PM2.5, and the county SES index (with the SDOH Database as its type; one row per residence interval because it is static). Which vocabulary does each of the three concepts come from, and why? Two things should bother you. The exposure concept is named "Annual Mean" of PM2.5, but each row is a *monthly* value: what does that mean for how you can use it? And `unit_concept_id` is empty: where is the unit declared (`listVariables(connection)` shows it), and what would you map it to?
+
+### Part B: mean PM2.5 during pregnancy
+
+3. **Find the pregnancy episodes.** Pregnancy is modeled in the OMOP `EPISODE` table. Two persons have one, and the answer key is in `demo.expected_result`.
+   ```r
+   episodes <- querySql(connection, "
+     SELECT person_id, episode_start_date, episode_end_date FROM omopgis.episode
+     WHERE episode_object_concept_id = 4299535")   # Pregnancy
+   episodes
+
+   querySql(connection, "SELECT fixture_tag, person_id, metric, value FROM demo.expected_result WHERE fixture_tag LIKE 'PREGNANCY%'")
+   ```
+   For each, list the `LOCATION_HISTORY` rows overlapping the episode (`SELECT * FROM omopgis.location_history WHERE entity_id = ...`). One person moved counties during the pregnancy.
+
+4. **Join exposure to the episode and calculate the mean, weighting each row by the number of days it overlaps the episode.** Treating any overlap as full inclusion is the mistake this exercise is designed to catch: the first and last months overlap only partially. `dayWeightedExposure()` returns both means side by side.
+   ```r
+   exposure <- querySql(connection, sprintf("
+     SELECT person_id, exposure_start_date, exposure_end_date, value_as_number
+     FROM omopgis.external_exposure
+     WHERE exposure_concept_id = 2052499839 AND person_id IN (%s)", paste(episodes$person_id, collapse = ", ")))
+
+   windows <- data.frame(person_id = episodes$person_id,
+                         window_start = episodes$episode_start_date, window_end = episodes$episode_end_date)
+   dayWeightedExposure(exposure, windows)
+   ```
+   Compare `weighted_mean` and `naive_mean` with `demo.expected_result`. Which one is correct? Why is the difference larger for the person who moved? Check that `days_covered` equals `window_days` (`coverage` is 1).
+
+### Part C: mean PM2.5 in the year before a COPD diagnosis
+
+5. **Calculate the 12-month lookback before each person's first COPD diagnosis.** Persons need a full 12 months of observation before the index date, and the window must end *before* the index date so no exposure after the diagnosis leaks in.
+   ```r
+   firstCopd <- "SELECT person_id, MIN(condition_start_date) AS index_date
+                 FROM omopgis.condition_occurrence WHERE condition_concept_id = 255573 GROUP BY person_id"
+
+   cases <- querySql(connection, sprintf("
+     SELECT i.person_id, i.index_date
+     FROM (%s) i
+     JOIN omopgis.observation_period op
+       ON op.person_id = i.person_id
+      AND i.index_date - 365 >= op.observation_period_start_date
+      AND i.index_date <= op.observation_period_end_date", firstCopd))
+   c(copd_cases = nrow(querySql(connection, firstCopd)), with_12m_lookback = nrow(cases))
+
+   exposure <- querySql(connection, sprintf("
+     SELECT person_id, exposure_start_date, exposure_end_date, value_as_number
+     FROM omopgis.external_exposure
+     WHERE exposure_concept_id = 2052499839 AND person_id IN (%s)", paste(cases$person_id, collapse = ", ")))
+
+   windows <- data.frame(person_id = cases$person_id,
+                         window_start = as.Date(cases$index_date) - 365,
+                         window_end = as.Date(cases$index_date) - 1)
+   lookback <- dayWeightedExposure(exposure, windows)
+   c(mean = mean(lookback$weighted_mean), sd = sd(lookback$weighted_mean), min_coverage = min(lookback$coverage))
+   ```
+   How many cases are lost because they were diagnosed in the first year of observation? What would happen to the mean if you let the window run to the end of the diagnosis month instead?
+
+6. **Check the SDOH covariate.** Persons should have 12 SDOH observations. Find anyone who does not, and decide how a downstream feature should treat the missing value.
+   ```r
+   querySql(connection, "SELECT person_id, COUNT(*) AS n FROM omopgis.observation GROUP BY 1 HAVING COUNT(*) < 12")
+   ```
+
+### Part D: exposure-based cohorts with CaprForExtensions
+
+You build the cohorts here and use them unchanged in [R Exercise 4](tutorial-r-exercise-4.html). The design is a fixed index date (2016-01-01) for everyone, with the exposure groups defined by the PM2.5 value on the index month, and COPD as the outcome:
+
+| Cohort id | Name | Definition |
+|---|---|---|
+| 1 | High PM2.5 at index | PM2.5 >= 10 µg/m³ in the month starting 2016-01-01, with 730 days of prior observation |
+| 2 | Low PM2.5 at index | PM2.5 < 8 µg/m³ in the month starting 2016-01-01, with 730 days of prior observation |
+| 3 | COPD | First COPD diagnosis |
+| 4 | CKD (negative-control outcome) | First CKD diagnosis |
+
+7. **Define the cohorts with [CaprForExtensions](https://github.com/OHDSI/CaprForExtensions).** `external_exposure` is registered as a custom domain so exposure criteria can be written like ordinary Capr criteria. Both packages are already installed in the image.
+   ```r
+   library(Capr)
+   library(CaprForExtensions)
+   library(SqlRender)
+
+   registerCustomDomain(
+     domain_id = "externalExposure",
+     domain_name = "External Exposure",
+     table = "external_exposure",
+     schema = "@cdm_database_schema",
+     person_id_field = "person_id",
+     start_date_field = "exposure_start_date",
+     end_date_field = "exposure_end_date",
+     concept_id_field = "exposure_concept_id"
+   )
+
+   pm25 <- cs(2052499839, name = "PM2.5, CDC monthly county mean")
+   indexMonth <- dateRange("exposure_start_date", "2016-01-01", "2016-01-01")
+
+   highPm25 <- cohort(
+     entry = entry(
+       externalExposure(pm25, dateRange = indexMonth,
+                        valueAsNumber = numericValue("value_as_number", ">=", 10)),
+       observationWindow = continuousObservation(730, 0)),
+     exit = exit(endStrategy = observationExit()))
+   lowPm25 <- cohort(
+     entry = entry(
+       externalExposure(pm25, dateRange = indexMonth,
+                        valueAsNumber = numericValue("value_as_number", "<", 8)),
+       observationWindow = continuousObservation(730, 0)),
+     exit = exit(endStrategy = observationExit()))
+   copd <- cohort(entry = entry(conditionOccurrence(cs(255573, name = "COPD"))),
+                  exit = exit(endStrategy = observationExit()))
+   ckd  <- cohort(entry = entry(conditionOccurrence(cs(46271022, name = "CKD"))),
+                  exit = exit(endStrategy = observationExit()))
+   ```
+   The package compiles extension criteria into placeholder observation queries, lets CirceR generate the SQL, and then substitutes the extension-table logic back in. Concept sets are resolved against the vocabulary tables in `omopgis` (used as both the CDM and the vocabulary schema).
+
+8. **Generate the cohorts into one cohort table**, `demo.cohort`, with ids 1 to 4 as in the table above, and keep it for Exercise 4.
+   ```r
+   executeSql(connection, "CREATE TABLE demo.cohort (cohort_definition_id int, subject_id int,
+                                                     cohort_start_date date, cohort_end_date date)")
+   definitions <- list(highPm25, lowPm25, copd, ckd)
+   for (i in seq_along(definitions)) {
+     cohortJson <- compileExtendedCohort(definitions[[i]])
+     options <- buildExtensionOptions(cohort_id = i, cdm_schema = "omopgis", target_schema = "demo",
+                                      target_table = "cohort", generate_stats = FALSE)
+     sql <- buildExtendedCohortQuery(cohortJson, options)   # read it: find where external_exposure appears
+     sql <- translate(render(sql, warnOnMissingParameters = FALSE), targetDialect = "postgresql")
+     executeSql(connection, sql, progressBar = FALSE)
+   }
+   querySql(connection, "SELECT cohort_definition_id, COUNT(DISTINCT subject_id) AS persons
+                         FROM demo.cohort GROUP BY 1 ORDER BY 1")
+   ```
+
+9. **Validate every cohort against a hand-written query.** For example, cohort 1:
+   ```r
+   querySql(connection, "
+     SELECT COUNT(DISTINCT person_id) AS persons FROM omopgis.external_exposure
+     WHERE exposure_concept_id = 2052499839 AND exposure_start_date = '2016-01-01' AND value_as_number >= 10")
+   ```
+   On the reference build the counts are 2,717 persons in cohort 1, 3,099 in cohort 2 (the 4,184 persons between 8 and 10 are in neither), 1,086 in cohort 3 and 1,384 in cohort 4. If Capr's count and yours differ, find out why (inclusive dates, observation window, mover rows). Check that no person is in both cohort 1 and cohort 2, and suppress small counts in anything you share.
+
+   Notice what this design costs: the group is defined by one month's value, which is a noisy proxy for a person's long-run exposure. Misclassification like this pulls the comparison toward the null. Where does that show up in Exercise 4?
+
+Close the connection when you are done with `disconnectGaia(connection)`; the next exercise opens a new one.
+
+## **Deliverable**
+
+Mean PM2.5 during pregnancy for the two persons (weighted and naive, with an explanation of the difference), the 12-month lookback exposure summary for COPD cases, the list of semantic fields your calculations depended on (concepts, relationship and exposure-type concepts, units, and the vocabulary each came from), and the four cohort definitions with counts and their validation.
+
+## **Check Your Work**
+
+- [ ] Overlap weighting is correct and your weighted means match `demo.expected_result`
+- [ ] No post-outcome leakage: the lookback window ends the day before the index date
+- [ ] The mover's pregnancy uses rows from both residences
+- [ ] You identified that the unit is declared in the Gaia catalog but empty in `unit_concept_id`, and that "annual mean" in the concept name does not match the monthly grain
+- [ ] Each concept is used in its correct role
+- [ ] Capr cohort counts match your validation counts (or you can explain the difference), and small counts are suppressed in anything shared
+
+<br>
+
+**Bridge to Session 4:** validated exposure facts become covariates; they do not become causal effects automatically.
+
+<br>
+
+Previous: [R Exercise 2](tutorial-r-exercise-2.html) | Next: [R Exercise 4](tutorial-r-exercise-4.html)
+
+<br>
