@@ -549,8 +549,32 @@ PostGIS, which takes several minutes (about 0.5 GB in total; the faculty
 can provide a pre-staged volume if bandwidth is limited). The catalog
 entry that drives ingestion is the metadata record from Exercise 1 (your
 own, or the fallback provided).</p>
-<pre class="sql"><code>SELECT * FROM backbone.ingest_datasource(&#39;us_2023_county_tl&#39;);
+<pre class="sql"><code>SELECT * FROM backbone.ingest_datasource(&#39;us_20219_county_tl&#39;);
 SELECT * FROM backbone.ingest_datasource(&#39;us_2014_2019_monthly_pm25_by_county_cdc&#39;);</code></pre>
+<p>This next approach is an alternate that mirrors what happens when you
+use the catalog browsers. It is more explicit but draws from the same
+JSON metadata. The result of the first two lines will be identical to
+the code above, but the third line will only load one variable.</p>
+<pre class="sql"><code>SELECT backbone.load_table(&#39;us_20219_county_tl&#39;);
+SELECT backbone.load_table(&#39;us_2014_2019_monthly_pm25_by_county_cdc&#39;);
+SELECT backbone.gdsc_load_variable(&#39;{
+ &quot;table_id&quot;: &quot;us_2014_2019_monthly_pm25_by_county_cdc&quot;,
+ &quot;table_description&quot;: &quot;Aggregated monthly PM 2.5 modelled estimates that span 2014-01-01 to 2019-12-31 derived from the CDC Daily County-Level PM2.5 Concentrations 2001-2022 provided by the CDC National Environmental Public Health Tracking Network. From the CDC description: This dataset provides modeled predictions of PM2.5 levels from the EPA Downscaler model. Data are at the county level for 2001-2022. These data are used by the CDC National Environmental Public Health Tracking Network to generate air quality measures.&quot;,
+ &quot;geom_type&quot;: &quot;multipolygon&quot;,
+ &quot;geom_label&quot;: &quot;name&quot;,
+ &quot;variable_nodata&quot;: &quot;&quot;,
+ &quot;variable_id&quot;: &quot;pm25_mean_pred&quot;,
+ &quot;description&quot;: &quot;The series of mean predicted values for the given county and month stored as a jsonb object with date ranges as keys (startDate/endDate formatted as YYYY-MM-DD/YYYY-MM-DD) and mean pm 2.5 values for each date key.&quot;,
+ &quot;source&quot;: &quot;Derived from the CDC data as the mean() of all mean values for each day in the month. NOTE: all sub-samples may not be the same size (dpending on which monitoring staions were used to calculate the original mean), so this is likely not a true mean&quot;,
+ &quot;type&quot;: &quot;jsonb&quot;,
+ &quot;unit&quot;: &quot;micrograms/cubic meter&quot;,
+ &quot;unit_concept_id&quot;: 32964,
+ &quot;min_val&quot;: 1.59,
+ &quot;max_val&quot;: 50.59,
+ &quot;start_date&quot;: &quot;2014-01-01&quot;,
+ &quot;end_date&quot;: &quot;2019-12-31&quot;,
+ &quot;concept_id&quot;: 2052499839
+}&#39;)</code></pre>
 <p>Inspect what was registered
 (<code>attr_index.variable_source_id</code> links each loaded variable
 to its <code>variable_source</code> row, and that id becomes
