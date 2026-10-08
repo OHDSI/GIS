@@ -17,7 +17,7 @@ gaiaDb is the **core data repository** for the Gaia toolchain, implemented as a 
 - **SQL routines and PostGIS functions** for geospatial analysis and exposure calculations
 - **OMOP CDM integration** via External_Exposure and Location_History tables
 - **LinkML/JSON-LD metadata** support for standardized data representation
-- **RESTful API exposure** via PostgREST for multi-language access
+- **Direct connections** from R through gaiaCore, and an optional PostgREST API deployed by gaiaDocker
 
 ## Architecture
 
@@ -30,9 +30,9 @@ All data transformation, spatial operations, and exposure calculations are perfo
 ## Access
 
 gaiaDb is accessed through:
-- **PostgREST API**: RESTful interface to database functions and tables
+- **gaiaCore**: R package that connects directly and calls the database's functions
 - **Direct database connections**: Standard PostgreSQL client connections
-- **gaiaCore connectors**: Language-specific client libraries (R, Python, etc.)
+- **PostgREST API** (optional): RESTful interface to database functions and tables, deployed by gaiaDocker
 
 ## Documentation
 

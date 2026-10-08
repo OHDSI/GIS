@@ -7,7 +7,7 @@ Thank you for your interest in contributing to the OHDSI GIS Working Group!
 1. **Join the Community**
    - [Sign up for OHDSI Teams](https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUQ05MOU9BSzEwOThZVjNQVVFGTDNZRENONiQlQCN0PWcu)
    - [Join the GIS Working Group](https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu)
-   - Attend our [weekly Friday meetings](https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d) at 10 AM US Eastern
+   - Attend our [weekly Thursday meetings](https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d) at 10 AM US Eastern
 
 2. **Get Oriented**
    - Read our [Developer Hub](https://ohdsi.github.io/GIS/developer.html)
@@ -57,7 +57,7 @@ All contributors are expected to follow the [OHDSI Code of Conduct](https://www.
 ## Questions?
 
 - **Teams**: GIS Working Group channel
-- **Meetings**: Fridays 10 AM US Eastern
+- **Meetings**: Thursdays 10 AM US Eastern
 - **Email**: zollovenecek[at]ohdsi[dot]org
 - **GitHub**: Open an [issue](https://github.com/OHDSI/GIS/issues) or [discussion](https://github.com/OHDSI/GIS/discussions)
 

@@ -56,12 +56,12 @@ Gaia consists of multiple interconnected components:
 - LinkML/JSON-LD metadata support
 - Transformation recipe library
 
-**[gaiaCore](gaiaCore.html)** - Multi-language connector framework
-- RESTful API access via PostgREST
-- Direct database connection support
-- Language-specific client libraries (R, Python)
-- Orchestrates functions defined in gaiaDb
-- Zero data processing logic (access layer only)
+**[gaiaCore](gaiaCore.html)** - R package for the Gaia pipeline and exposure analytics
+- Direct database connection with DatabaseConnector
+- Runs ingestion, location loading and the spatial-temporal join from R
+- Quality checks on derived exposure and copy into the OMOP CDM
+- Exposure analytics (day-weighted windows, cluster-robust effect estimates)
+- Calls functions defined in gaiaDb; no processing logic of its own
 
 **[gaiaCatalog](gaiaCatalog.html)** - Metadata catalog
 - Functional metadata for publicly-hosted geospatial datasets
@@ -177,17 +177,17 @@ The Gaia Framework consists of three main components working together:
 - **Processing engine**: All SQL routines and PostGIS functions for spatial operations
 - **Standardized format**: Entity-Attribute-Value (EAV) structure for harmonized data
 - **OMOP integration**: Direct integration with CDM extension tables
-- **API exposure**: PostgREST automatically generates RESTful API
+- **Optional API**: gaiaDocker can expose the database through a PostgREST service
 
-**[gaiaCore](gaiaCore.html)** provides multi-language access:
+**[gaiaCore](gaiaCore.html)** is the R interface to gaiaDb:
 
-- **Access layer**: Routes requests to gaiaDb functions (zero processing logic)
-- **RESTful API**: PostgREST-based HTTP interface
-- **Database connections**: Direct PostgreSQL access
-- **Language connectors**: R and Python client libraries
-- **OpenAPI specification**: Documented API endpoints
+- **Pipeline**: ingests catalog datasets, loads locations and runs the spatial-temporal join from R
+- **Direct connection**: DatabaseConnector opens a JDBC connection; there is no REST layer in between
+- **Quality**: checks the derived exposure rows before they reach the CDM
+- **Analytics**: day-weighted exposure windows and cluster-robust effect estimates
+- **Docker image**: `ohdsi/gaia-core`, HADES with gaiaCore and the extension packages
 
-**Data flow**: Raw geospatial data → gaiaDb processing → gaiaCore access → Client applications
+**Data flow**: Raw geospatial data → gaiaDb processing → gaiaCore (R) → OMOP CDM → HADES analytics
 
 ## **3. Extension Layer**
 
@@ -198,7 +198,7 @@ Specialized functionality beyond core CRUD operations:
 - **Geocoding**: DeGauss containerized geocoder integration
 - **Domain-specific**: Custom workflows for specific research domains
 
-Extensions interface with gaiaCore to leverage gaiaDb functionality.
+Extensions build on the exposure that gaiaCore derives and copies into the OMOP CDM.
 
 <br>
 
@@ -207,7 +207,7 @@ Extensions interface with gaiaCore to leverage gaiaDb functionality.
 ### **Separation of Concerns**
 - **gaiaCatalog**: Discovery and metadata
 - **gaiaDb**: Storage and processing
-- **gaiaCore**: Multi-language access
+- **gaiaCore**: R interface, quality checks and exposure analytics
 - **gaiaDocker**: Deployment
 
 ### **Privacy by Design**
@@ -259,6 +259,6 @@ See [Get Started](get-started.html) for detailed deployment and onboarding instr
 - [Join the working group](get-started.html#join-the-working-group)
 - [Propose a use case](get-started.html#propose-a-use-case)
 - [Contribute code](developer-contributing.html)
-- Attend Friday meetings (10 AM ET)
+- Attend Thursday meetings (10 AM ET)
 
 <br>

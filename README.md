@@ -31,12 +31,12 @@ The OHDSI GIS Working Group maintains and develops several interconnected reposi
 - OMOP CDM integration
 - LinkML/JSON-LD metadata support
 
-**[OHDSI/gaiaCore](https://github.com/OHDSI/gaiaCore)** (TuftsCTSI/gaiaCore for development)
-- Multi-language connector framework for gaiaDB
-- RESTful API access via PostgREST
-- Database and API paradigm support
-- Language-specific client libraries (R, Python, etc.)
-- Orchestrates functions and protocols defined in gaiaDB
+**[OHDSI/gaiaCore](https://github.com/OHDSI/gaiaCore)**
+- R package for working with gaiaDB, connecting directly through DatabaseConnector
+- Runs the Gaia pipeline from R: ingestion, location loading, the spatial-temporal join
+- Quality checks on derived exposure and copy into the OMOP CDM
+- Exposure analytics (day-weighted windows, cluster-robust effect estimates)
+- Docker image `ohdsi/gaia-core` (HADES with gaiaCore and the extension packages)
 
 **[OHDSI/gaiaCatalog](https://github.com/OHDSI/gaiaCatalog)**
 - Metadata catalog for geospatial data sources
@@ -71,7 +71,7 @@ Features:
 ### Gaia Toolchain
 The Gaia toolchain provides end-to-end support for integrating geospatial data with OMOP CDM:
 - **[gaiaDB](https://github.com/ohdsi/gaiaDB)**: PostgreSQL/PostGIS database with geospatial data processing, SQL routines, and OMOP integration
-- **[gaiaCore](https://github.com/ohdsi/gaiaCore)**: Multi-language connector framework providing RESTful API and database access to gaiaDB
+- **[gaiaCore](https://github.com/ohdsi/gaiaCore)**: R package that runs the Gaia pipeline against gaiaDB, checks the derived exposure and provides exposure analytics
 - **[gaiaCatalog](https://github.com/ohdsi/gaiaCatalog)**: Data discovery and metadata management
 - **[gaiaDocker](https://github.com/ohdsi/gaiaDocker)**: Containerized deployment with coordinated image builds and versioned releases
 
@@ -82,33 +82,20 @@ Instructions to quickly install and start using Gaia are [here](https://ohdsi.gi
 ### Docker Quick Start
 > Prerequisite: this solution requires that you have Docker and Docker Compose installed. See [here](https://docs.docker.com/engine/install/).
 
-Containerized instances of gaiaDB (geospatial data store) and the gaiaCore R package (built in to Broadsea Hades and wrapped with an HTTP API via Plumber) can quickly be deployed and connected using Docker Compose
+The whole stack (gaiaDB, the catalog and the `gaia-core` RStudio image with the gaiaCore R package) is deployed with [gaiaDocker](https://github.com/OHDSI/gaiaDocker):
 
 ```bash
-git clone git@github.com:OHDSI/GIS.git
-
-cd GIS
-
-docker compose -f ./docker/docker-compose.yaml up -d
+git clone https://github.com/OHDSI/gaiaDocker.git
+cd gaiaDocker
+docker compose --profile gaia up -d
 ```
-The gaiaCore R Package is wrapped with an HTTP API. You can test that the service is started in running at the specified port with the /hello endpoint, or load a variable to gaiaDB with the /load endpoint
+
+Then connect from R with the gaiaCore package (also available as the image `ohdsi/gaia-core`); see the [gaiaCore documentation](https://ohdsi.github.io/gaiaCore/).
 
 ```bash
-curl "http://localhost:8000/load?variable_id=1"
+docker compose --profile gaia down
 ```
 
-Configure database connection details and HTTP API port in the .env file in the docker directory.
-
-At this time, images are *not* published and are built when docker compose is run:
-
-The gaiaDB image is **built** from the Dockerfile in the [gaiaDB repository](https://github.com/ohdsi/gaiaDB).
-
-The gaiaCore image is **built** from the Dockerfile in the docker directory in this repository.
-
-```bash
-# stop containers
-docker compose -f ./docker/docker-compose.yaml down
-```
 ## Support
 
 -   Developer questions/comments/feedback: <a href="http://forums.ohdsi.org/c/developers">OHDSI Forum</a>

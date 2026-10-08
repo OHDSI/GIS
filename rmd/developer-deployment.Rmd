@@ -61,7 +61,8 @@ Customize `.env` file for database credentials, service ports, and resource limi
 ### **Services**
 
 - **gaia-db**: PostgreSQL/PostGIS (core data repository)
-- **gaia-core**: PostgREST API (exposes gaiaDb functions)
+- **gaia-core**: RStudio with HADES and the gaiaCore R package
+- **gaia-postgrest**: PostgREST API (optional; exposes gaiaDb functions)
 - **gaia-catalog**: Flask catalog interface (data discovery)
 - **gaia-solr**: Search engine (catalog indexing)
 - **gaia-osgeo**: GDAL/OGR ETL tools
@@ -149,7 +150,7 @@ git clone https://github.com/OHDSI/gaiaDb.git && cd gaiaDb
 psql -U gaia -d gaiadb -f schema/create_schema.sql
 ```
 
-See gaiaDb and gaiaCore repositories for detailed setup instructions.
+See the gaiaDb and gaiaCore repositories for detailed setup instructions; gaiaCore connects to the database with `createGaiaConnectionDetails()`.
 
 <br>
 
@@ -241,6 +242,6 @@ VACUUM ANALYZE table;
 
 **Upgrades**: Backup → test in staging → review changelog → deploy → verify → monitor
 
-**Help**: [GIS Teams channel](https://teams.microsoft.com), [GitHub issues](https://github.com/OHDSI/GIS/issues), Friday meetings (10 AM ET), houghtaling@ohdsi.org
+**Help**: [GIS Teams channel](https://teams.microsoft.com), [GitHub issues](https://github.com/OHDSI/GIS/issues), Thursday meetings (10 AM ET), houghtaling@ohdsi.org
 
 <br>

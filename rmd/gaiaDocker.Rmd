@@ -24,7 +24,8 @@ gaiaDocker provides **containerized deployment orchestration** for the complete 
 
 gaiaDocker orchestrates the following services:
 - **gaia-db**: PostgreSQL/PostGIS database (gaiaDb)
-- **gaia-core**: PostgREST API service
+- **gaia-core**: RStudio with HADES and the gaiaCore R package (image `ohdsi/gaia-core`)
+- **gaia-postgrest**: optional PostgREST API service
 - **gaia-catalog**: Flask catalog interface
 - **gaia-solr**: Solr search engine
 - **gaia-osgeo**: GDAL/OGR ETL tools

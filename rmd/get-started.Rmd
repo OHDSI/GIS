@@ -58,7 +58,8 @@ docker compose ps
 
 **What's deployed**:
 - **gaia-db**: PostgreSQL/PostGIS (core data repository)  
-- **gaia-postgrest**: PostgREST API (exposes gaiaDb functions)  
+- **gaia-core**: RStudio with HADES and the gaiaCore R package (http://localhost:8787)  
+- **gaia-postgrest**: optional PostgREST API (exposes gaiaDb functions)  
 - **gaia-catalog**: Data source discovery interface  
 - **gaia-solr**: Search engine for catalog  
 
@@ -96,7 +97,7 @@ See [Deployment Strategies](developer-deployment.html) for alternative deploymen
 2. **[Join the GIS Working Group](https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu)**
 
 3. **Attend Weekly Meetings**
-   - **When**: Fridays 10 AM US Eastern
+   - **When**: Thursdays 10 AM US Eastern
    - **Where**: [MS Teams](https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d)
    - **Format**: Intros (5 min) → GitHub ticket review (10-15 min) → Standup updates (2 min each) → Discussion (25-30 min) → Action items (5 min)
 
@@ -165,7 +166,7 @@ Development in the OHDSI GIS Working Group is **use-case driven** - specific res
 
 1. **Submit** - Create use case issue with above details
 2. **Review** - Working group leaders review and schedule discussion
-3. **Present** - Present use case at Friday meeting
+3. **Present** - Present use case at Thursday meeting
 4. **Decompose** - Break into specific work orders/tasks
 5. **Prioritize** - Add to project board, assign priority
 6. **Execute** - Development sprint with progress updates
@@ -217,7 +218,7 @@ See [Project Management](project-management.html) for complete process details.
 ### **Repositories**
 - [OHDSI/GIS](https://github.com/OHDSI/GIS) - Central hub (this repo)
 - [OHDSI/gaiaDb](https://github.com/OHDSI/gaiaDb) - Core data repository
-- [OHDSI/gaiaCore](https://github.com/OHDSI/gaiaCore) - Multi-language connector
+- [OHDSI/gaiaCore](https://github.com/OHDSI/gaiaCore) - R package: Gaia pipeline, quality checks and exposure analytics
 - [OHDSI/gaiaCatalog](https://github.com/OHDSI/gaiaCatalog) - Data catalog
 - [OHDSI/gaiaDocker](https://github.com/OHDSI/gaiaDocker) - Deployment orchestration
 - [TuftsCTSI/CVB](https://github.com/TuftsCTSI/CVB) - Vocabulary package
@@ -236,7 +237,7 @@ See [Project Management](project-management.html) for complete process details.
 
 - **Teams**: Post in GIS Working Group channel
 - **GitHub**: [Open an issue](https://github.com/OHDSI/GIS/issues) or discussion
-- **Meetings**: Attend Friday meetings (10 AM ET)
+- **Meetings**: Attend Thursday meetings (10 AM ET)
 - **Email**: houghtaling@ohdsi.org
 
 ### **Technical Support**
@@ -259,7 +260,7 @@ Welcome! We support all skill levels:
 ## **Contact**
 
 - **Teams**: GIS Working Group channel
-- **Meetings**: Fridays 10 AM US Eastern
+- **Meetings**: Thursdays 10 AM US Eastern
 - **Email**: houghtaling@ohdsi.org
 - **GitHub**: [@OHDSI/GIS-leaders](https://github.com/OHDSI/GIS)
 

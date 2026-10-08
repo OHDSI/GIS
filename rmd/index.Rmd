@@ -22,7 +22,7 @@ Improve the health of populations by generating reliable evidence from integrate
 
 Like most of OHDSI, we use Github and MS Teams for collaboration, version control, etc. There are no perfect options for supporting collaboration. We'll help you accomodate to ours as best we can. In particular, we use Github for managing tasks like defining and monitoring progress on OHDSI studies, infrastructure roadmaps, technical issues, etc.
 
-We review progress and get input from the broader group at weekly meetings on Fridays. Leaders of specific projects within the GIS workgroup schedule and hold meetings with subgroups outside the main Friday meeting. Those other meetings are where most of the work on use cases and advancing technical infrastructure gets done.
+We review progress and get input from the broader group at weekly meetings on Thursdays. Leaders of specific projects within the GIS workgroup schedule and hold meetings with subgroups outside the main Thursday meeting. Those other meetings are where most of the work on use cases and advancing technical infrastructure gets done.
 
 Apart from the groups' offical leadership, many members make fundamental contributions to the group's decisions, strategies, and products.
 
@@ -31,7 +31,7 @@ All are welcome. We'd love to work with you. Please see our page on [proposing n
 New to OHDSI? First sign up for an OHDSI MS Teams account [here](https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUQ05MOU9BSzEwOThZVjNQVVFGTDNZRENONiQlQCN0PWcu). It's easy peasy.
 Already have an OHDSI Teams account? Great. Just sign up for the GIS Workgroup [here](https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu).
 
-The main workgroup call is on MS Teams every Friday at 10 AM US Eastern Time ([Meeting Link](https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d)). We are always looking for better ways to accomodate the time constraints of valued members around the world. Please let us know if this schedule is an obstacle.
+The main workgroup call is on MS Teams every Thursday at 10 AM US Eastern Time ([Meeting Link](https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d)). We are always looking for better ways to accomodate the time constraints of valued members around the world. Please let us know if this schedule is an obstacle.
 
 <br>
 
@@ -48,7 +48,7 @@ The External_Exposure table is an extension to the main OMOP schema. It holds da
 The GIS extensions to the OMOP Vocabulary cover geometries, toxicants, and social determinants. They are used to represent a very large set of entities that can affect health and their relationships. The draft versions of these vocabularies are available [here](https://github.com/OHDSI/GIS/tree/main/vocabularies). They are based on mature existing ontologies and were developed by GIS workgroup members who are part of the OHDSI Core Vocabulary team in accordance with the guiding principles for OMOP vocabulary development, quality assurance, and integration. Current work on their validation in real use cases is expected to support their eventual acceptance as versioned community-maintained extensions of the core OMOP Vocabulary.
 
 #### **gaiaCore**
-The gaiaCore software and associated gaiaDB schema support specification of attributes and geographic shapes in publicly available datasets. This specification allows the tables in the GIS schema extension to be joined with patient-level clinical data stored in the main OMOP schema. The current Beta release of gaiaCore software and its documentation are [here](https://github.com/OHDSI/gaiaCore).
+The gaiaDB schema supports specification of attributes and geographic shapes in publicly available datasets, which allows the tables in the GIS schema extension to be joined with patient-level clinical data stored in the main OMOP schema. The gaiaCore R package runs this pipeline from R (ingestion, location loading, the spatial-temporal join), checks the derived exposure, copies it into the OMOP CDM, and provides exposure analytics. The package and its documentation are [here](https://github.com/OHDSI/gaiaCore).
 
 #### **Guidance**
 The GIS toolchain requires patient addresses to be geocoded into representations that GIS software expects; for example, the latitude and longitude coordinates of street addresses or the coordinates of the lines that define a postal region. The OHDSI GIS workgroup does not provide or maintain software that does this geocoding. The GIS Workgroup does provide guidance about privacy-preserving options for geocoding address information and considerations for using available open-source and comercial geocoding approaches. The workgroup is also developing guidance to aid researchers in making informed decisions about selecting and working with alternative geospatial data sources that are relevant to addressing a research question.

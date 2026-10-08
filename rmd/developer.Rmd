@@ -43,16 +43,15 @@ The OHDSI GIS Working Group develops and maintains a suite of tools collectively
   - Spatial indexing and optimization
 
 **[gaiaCore](https://github.com/OHDSI/gaiaCore)** ![Status: Development](https://img.shields.io/badge/status-development-orange)
-- **Development**: [TuftsCTSI/gaiaCore](https://github.com/TuftsCTSI/gaiaCore)
-- **Technology**: Multi-language connector framework
-- **Purpose**: Provides access to gaiaDB functionality across multiple languages and paradigms
+- **Technology**: R package (DatabaseConnector); Docker image `ohdsi/gaia-core`
+- **Purpose**: R interface to gaiaDB: runs the Gaia pipeline and provides quality checks and exposure analytics
 - **Maintainers**: [See repository](https://github.com/OHDSI/gaiaCore)
 - **Key Features**:
-  - RESTful API access via PostgREST
-  - Direct database connection support
-  - Language-specific client libraries (R, Python, etc.)
-  - Orchestrates functions defined in gaiaDB
-  - OpenAPI specification for API endpoints
+  - Direct database connection (no REST layer)
+  - Ingestion, location loading and the spatial-temporal join from R
+  - Quality checks and copy into the OMOP CDM
+  - Day-weighted exposure and cluster-robust effect estimates
+  - Python, Java, Julia, Bash and PostgREST clients on the [`connectors`](https://github.com/OHDSI/gaiaCore/tree/connectors) branch
 
 **[gaiaCatalog](https://github.com/OHDSI/gaiaCatalog)** ![Status: Beta](https://img.shields.io/badge/status-beta-yellow)
 - **Technology**: Schema.org compliant metadata
@@ -101,9 +100,10 @@ External Geospatial Data → gaiaCatalog (Discovery)
                            ├── OMOP Integration
                            └── Exposure Calculation
                                 ↓
-                           gaiaCore (Access Layer)
-                           ├── RESTful API (PostgREST)
-                           └── Language Connectors (R, Python, etc.)
+                           gaiaCore (R package)
+                           ├── Direct database connection
+                           ├── Pipeline, quality checks, copy into the CDM
+                           └── Exposure analytics
                                 ↓
                       OMOP CDM + GIS Extensions
                                 ↓
@@ -121,10 +121,10 @@ External Geospatial Data → gaiaCatalog (Discovery)
    - Processing: SQL routines, PostGIS functions, spatial operations
    - Output: OMOP-compliant external exposure data, standardized spatial tables
 
-3. **Access Layer** (gaiaCore)
-   - Input: Requests via API or database connections
-   - Processing: Orchestrates gaiaDB functions, provides multi-language access
-   - Output: Data and function access through RESTful API or direct database connections
+3. **R Interface** (gaiaCore)
+   - Input: Catalog dataset ids, person locations and residence histories
+   - Processing: Calls gaiaDB functions over a direct connection, checks the derived rows, computes exposure analytics
+   - Output: Exposure in the OMOP CDM (`EXTERNAL_EXPOSURE`) and analysis-ready summaries
 
 4. **Deployment** (gaiaDocker)
    - Input: Component configurations
@@ -144,7 +144,7 @@ External Geospatial Data → gaiaCatalog (Discovery)
 - Docker and Docker Compose (recommended for coordinated deployment)
 - Git and GitHub account
 - OHDSI Teams access ([sign up](https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUQ05MOU9BSzEwOThZVjNQVVFGTDNZRENONiQlQCN0PWcu))
-- Programming environment of choice (R, Python, etc.) for using gaiaCore connectors
+- R (or the `ohdsi/gaia-core` Docker image) for using gaiaCore
 
 ### **Development Environment Setup**
 
@@ -163,15 +163,14 @@ docker compose ps
 
 #### **Option 2: Local Development**
 1. Clone the gaiaDb repository and set up PostgreSQL/PostGIS
-2. Configure PostgREST for API access
-3. Install language-specific connectors (R, Python, etc.)
-4. Configure connection parameters
+2. Install the gaiaCore R package (`remotes::install_github("OHDSI/gaiaCore")`)
+3. Configure the database connection with `createGaiaConnectionDetails()`
 
 See [Deployment Strategies](developer-deployment.html) for detailed setup instructions.
 
 ### **First Contribution**
 1. Join the [GIS Working Group on Teams](https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu)
-2. Attend the weekly Friday meeting (10 AM US Eastern)
+2. Attend the weekly Thursday meeting (10 AM US Eastern)
 3. Review the [Project Board](https://github.com/orgs/OHDSI/projects/26)
 4. Pick a task or propose a new one
 5. Read [Contributing Guidelines](developer-contributing.html)
@@ -185,13 +184,44 @@ The GIS Working Group follows an **agile, use-case-driven** development approach
 1. **Use Case Identification** - Real-world research needs drive development
 2. **Task Breakdown** - Use cases decomposed into GitHub issues
 3. **Sprint Planning** - Tasks assigned and tracked via GitHub Projects
-4. **Weekly Standups** - Friday meetings (2 min max per person):
+4. **Weekly Standups** - Thursday meetings (2 min max per person):
    - What did you complete last week?
    - What are you working on now?
    - What's blocking you?
    - Discussion points for later
 5. **Development** - Feature branches, pull requests, code review
 6. **Integration** - Merge to main, deploy, document
+
+<br>
+
+## **Docker Image Status**
+
+Image status is read from Docker Hub when the site is built, so the dates reflect the most recent build of the site.
+
+```{r image-status, echo=FALSE, message=FALSE, warning=FALSE}
+images <- data.frame(
+  image = c("ohdsi/gaia-db", "ohdsi/gaia-core", "ohdsi/gaia-core-tutorial", "ohdsi/gaia-core-tutorial",
+            "ohdsi/gaia-postgrest", "ohdsi/gaia-catalog", "ohdsi/gaia-solr"),
+  tag = c("main", "main", "main", "benchmark", "main", "main", "main"),
+  purpose = c("PostgreSQL/PostGIS database (gaiaDb)", "RStudio, HADES and gaiaCore",
+              "Tutorial image (Oct 20 session)", "Manuscript benchmark image",
+              "PostgREST API (optional)", "Catalog interface", "Catalog search index"),
+  stringsAsFactors = FALSE)
+lookup <- function(image, tag) {
+  out <- tryCatch(jsonlite::fromJSON(sprintf("https://hub.docker.com/v2/repositories/%s/tags/%s", image, tag)),
+                  error = function(e) NULL)
+  if (is.null(out) || is.null(out$last_updated)) return(c("Unavailable", ""))
+  c("Published", format(as.Date(substr(out$last_updated, 1, 10))))
+}
+res <- t(mapply(lookup, images$image, images$tag))
+images$status <- res[, 1]
+images$last_built <- res[, 2]
+images$image <- sprintf("[%s](https://hub.docker.com/r/%s)", images$image, images$image)
+knitr::kable(images[, c("image", "tag", "purpose", "status", "last_built")],
+             col.names = c("Image", "Tag", "Purpose", "Status", "Last built"), row.names = FALSE)
+```
+
+The ETL helper images (`gaia-osgeo`, `gaia-postgis`, `gaia-gdsc`, `gaia-git`, `gaia-degauss`) are built locally by gaiaDocker and are not published.
 
 <br>
 
@@ -217,7 +247,7 @@ The GIS Working Group follows an **agile, use-case-driven** development approach
 
 ## **Communication Channels**
 
-- **Weekly Meetings**: Fridays 10 AM US Eastern ([Teams Link](https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d))
+- **Weekly Meetings**: Thursdays 10 AM US Eastern ([Teams Link](https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d))
 - **MS Teams**: GIS Working Group channel
 - **GitHub Issues**: Bug reports, feature requests, use cases
 - **OHDSI Forums**: [Developers section](http://forums.ohdsi.org/c/developers)

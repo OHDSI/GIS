@@ -38,7 +38,7 @@ The OHDSI GIS Working Group follows an **agile, use-case-driven** development me
 
 ### **Weekly Working Group Meeting**
 
-**When**: Fridays 10 AM US Eastern
+**When**: Thursdays 10 AM US Eastern
 **Where**: [MS Teams](https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d)
 
 **Agenda** (60 minutes):
@@ -52,7 +52,7 @@ The OHDSI GIS Working Group follows an **agile, use-case-driven** development me
 
 ### **Subgroup Meetings**
 
-Task-specific subgroups meet separately for focused work on use cases or components, reporting progress at Friday meetings.
+Task-specific subgroups meet separately for focused work on use cases or components, reporting progress at Thursday meetings.
 
 <br>
 
@@ -60,8 +60,8 @@ Task-specific subgroups meet separately for focused work on use cases or compone
 
 ### **Sprint Cycle** (2-week informal iterations)
 
-- **Week 1**: Plan, assign from backlog, develop, Friday check-in
-- **Week 2**: Continue development, submit PRs, code review, Friday sprint review
+- **Week 1**: Plan, assign from backlog, develop, Thursday check-in
+- **Week 2**: Continue development, submit PRs, code review, Thursday sprint review
 
 ### **Definition of Done**
 
@@ -73,7 +73,7 @@ Code written and tested → Tests pass → Documentation updated → Code review
 
 1. [Submit Use Case](https://github.com/OHDSI/GIS/issues/new?assignees=&labels=Use+Case&projects=&template=use-case.yaml&title=%5BUse+Case%5D%3A+) (Description, Infrastructure needs, Timeline, Credit, Support, Datasets)
 2. Leaders review and schedule discussion
-3. Present in Friday meeting
+3. Present in Thursday meeting
 4. Decompose into work orders
 5. Prioritize and assign
 6. Execute development sprint
@@ -87,7 +87,7 @@ Code written and tested → Tests pass → Documentation updated → Code review
 |------------|---------|--------|
 | [OHDSI/GIS](https://github.com/OHDSI/GIS) | Central hub, docs, coordination | Active |
 | [OHDSI/gaiaDb](https://github.com/OHDSI/gaiaDb) | Core data repository | Beta |
-| [OHDSI/gaiaCore](https://github.com/OHDSI/gaiaCore) | Multi-language connector | Development |
+| [OHDSI/gaiaCore](https://github.com/OHDSI/gaiaCore) | R package: Gaia pipeline, quality checks, exposure analytics | Development |
 | [OHDSI/gaiaCatalog](https://github.com/OHDSI/gaiaCatalog) | Data catalog | Beta |
 | [OHDSI/gaiaDocker](https://github.com/OHDSI/gaiaDocker) | Deployment orchestration | Active |
 | [TuftsCTSI/CVB](https://github.com/TuftsCTSI/CVB) | Vocabulary builder | Development |
@@ -130,7 +130,7 @@ Key component roadmaps maintained as GitHub issues:
 **New Member Checklist**:
 1. [Sign up for OHDSI Teams](https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUQ05MOU9BSzEwOThZVjNQVVFGTDNZRENONiQlQCN0PWcu)
 2. [Join GIS Working Group](https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu)
-3. Attend Friday meeting and introduce yourself
+3. Attend Thursday meeting and introduce yourself
 4. Review [Developer Resources](developer.html)
 5. Pick a `good first issue` or join subgroup
 6. Set up development environment ([Deployment Guide](developer-deployment.html))
@@ -190,7 +190,7 @@ The working group regularly reflects on processes through quarterly retrospectiv
 ## **Contact**
 
 - **Teams**: GIS Working Group channel
-- **Meetings**: Fridays 10 AM US Eastern
+- **Meetings**: Thursdays 10 AM US Eastern
 - **Email**: zollovenecek[at]ohdsi[dot]org
 - **GitHub**: Tag @OHDSI/GIS-leaders
 

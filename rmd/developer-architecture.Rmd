@@ -46,10 +46,10 @@ The Gaia toolchain consists of multiple interconnected components that work toge
                              ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                       gaiaCore                                   │
-│  • Multi-language connector framework                            │
-│  • PostgREST API access                                          │
-│  • Database connection orchestration                             │
-│  • Language-specific client libraries                            │
+│  • R package (direct database connection)                        │
+│  • Pipeline: ingestion, locations, spatial-temporal join         │
+│  • Quality checks, copy into the OMOP CDM                        │
+│  • Exposure analytics                                            │
 └────────────────────────────┬────────────────────────────────────┘
                              │
                              ▼
@@ -100,13 +100,13 @@ The Gaia toolchain consists of multiple interconnected components that work toge
 
 ### **3. gaiaCore**
 
-**Purpose**: Multi-language connector framework (access layer only - NO processing logic)
+**Purpose**: R interface to gaiaDb: runs the pipeline, checks the derived exposure and provides exposure analytics (no spatial processing logic of its own)
 
-**Technology**: PostgREST, language-specific connectors (R, Python)
+**Technology**: R package using DatabaseConnector (JDBC); Docker image `ohdsi/gaia-core` (HADES + gaiaCore)
 
-**I/O**: API/database requests → Routed to gaiaDb → Results in client format
+**I/O**: Catalog dataset ids, person locations → gaiaDb functions → exposure rows → OMOP `EXTERNAL_EXPOSURE`, summaries and estimates in R
 
-**Key**: gaiaCore orchestrates access to gaiaDb functions. All processing happens in gaiaDb.
+**Key**: gaiaCore calls gaiaDb's SQL functions. All spatial processing happens in gaiaDb. The Python, Java, Julia and Bash clients and the PostgREST-based R client live on the gaiaCore `connectors` branch.
 
 <br>
 
@@ -132,7 +132,7 @@ Cataloged Source → gaiaDb
 
 #### **Phase 3: Exposure Calculation**
 ```
-Patient Locations → gaiaDb (via gaiaCore)
+Patient Locations → gaiaDb (loaded and joined from R with gaiaCore)
     Input:
         - Patient geocoded addresses
         - Residence time periods
@@ -213,16 +213,17 @@ Gaia enables geospatial analysis **without sharing sensitive patient addresses**
 | Transformation recipe | SQL | Transformed data | PostGIS |
 | Patient locations and residence periods| Geocoded coords | External_Exposure | OMOP table |
 | Variable IDs | Integer | Exposure values | Numeric |
-| SQL function calls | SQL/PostgREST | Query results | JSON/Tabular |
+| SQL function calls | SQL | Query results | Tabular |
 
 ### **gaiaCore**
 
 | Input | Format | Output | Format |
 |-------|--------|--------|--------|
-| API requests | HTTP/JSON | Exposure data | JSON |
-| Database queries | SQL | Query results | Tabular |
-| Function calls | REST/SQL | Processed data | Client format |
-| Connection params | Config | Database access | Connection |
+| Catalog dataset ids | Character | Ingested datasets, variable tables | gaiaDb tables |
+| Locations and residence histories | Data frames / OMOP tables | Loaded `working` tables | gaiaDb tables |
+| Variable name, spatial operator | Function call | Exposure rows | `EXTERNAL_EXPOSURE` |
+| Exposure rows, windows, outcomes | Data frames | Quality checks, windowed exposure, effect estimates | Data frames |
+| Connection params | `connectionDetails` | Database access | JDBC connection |
 
 ### **gaiaDocker**
 
@@ -249,7 +250,7 @@ See [Schema Extensions](schema-extensions.html) for complete DDL.
 
 - **Indexing**: GIST spatial indexes, materialized views
 - **Caching**: Datasets, transformations, API responses
-- **Scaling**: Horizontal gaiaCore instances, connection pooling, batch processing
+- **Scaling**: Connection pooling, batch processing; heavy work stays in gaiaDb
 
 See [Deployment Strategies](developer-deployment.html) for deployment options.
 

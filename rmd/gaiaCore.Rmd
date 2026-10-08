@@ -9,37 +9,48 @@ output:
 
 ## Description
 
-gaiaCore is a **multi-language connector framework** providing programmatic access to gaiaDb functionality. It serves as an access layer, orchestrating SQL functions and protocols defined within gaiaDb across multiple programming languages and access paradigms.
+gaiaCore is an **R package** for working with a Gaia database. It connects to gaiaDb directly with [DatabaseConnector](https://ohdsi.github.io/DatabaseConnector/), runs the Gaia pipeline from R, and provides the quality checks and exposure analytics that turn the result into evidence for OHDSI studies. All spatial processing happens inside gaiaDb: gaiaCore calls its SQL functions, so every derived value stays traceable to the catalog entry, the geometry and the residence interval that produced it.
 
 ## Key Features
 
-- **RESTful API access** via PostgREST with OpenAPI specification
-- **Direct database connections** for SQL-based workflows
-- **Language-specific client libraries** (R, Python, and more in development)
-- **Multi-paradigm support** for both API and database access patterns
-- **Zero processing logic** - all data operations performed in gaiaDb
+- **Ingest** datasets registered in the Gaia catalog and build their geometry and attribute tables
+- **Load person locations** and residence histories from data frames or from an OMOP CDM with the Gaia extension
+- **Derive exposure** with gaiaDb's spatial-temporal join, one variable at a time, into `EXTERNAL_EXPOSURE`
+- **Check** the derived rows: duplicates, values outside the residence interval, missing or implausible values, unit mismatches
+- **Copy** the result into the CDM, where HADES tools such as CohortMethod and FeatureExtraction can use it
+- **Analyse**: day-weighted exposure over windows such as a pregnancy, and effect estimates whose confidence intervals stay valid with few, unbalanced geographic clusters
+- **Docker image** `ohdsi/gaia-core`: HADES (RStudio) with gaiaCore and the extension packages (CaprForExtensions, FeatureExtractionForExtensions) installed
 
 ## Architecture
 
-gaiaCore acts as a thin access layer that:
-- Routes requests to appropriate gaiaDb functions
-- Provides convenient language-specific abstractions
-- Handles authentication and connection management
-- Does NOT contain data processing or transformation logic
+gaiaCore sits between gaiaDb and the HADES analytics:
 
-## Development Status
+- It opens a direct database connection (JDBC); there is no REST layer in between
+- It wraps gaiaDb's SQL functions and does not duplicate processing logic
+- Its output is the OMOP `EXTERNAL_EXPOSURE` table, which the rest of the OHDSI tools consume
 
-Active development is occurring at [TuftsCTSI/gaiaCore](https://github.com/TuftsCTSI/gaiaCore), with plans to migrate to [OHDSI/gaiaCore](https://github.com/OHDSI/gaiaCore) upon reaching production readiness.
+The Python, Java, Julia, Bash and PostgREST-based R clients that used to live in the gaiaCore repository are on its [`connectors`](https://github.com/OHDSI/gaiaCore/tree/connectors) branch, until they find their own home. The PostgREST API service is deployed by [gaiaDocker](gaiaDocker.html).
 
 ## Usage
 
-Access gaiaDb through gaiaCore using your preferred language:
-- **R**: Client library (in development)
-- **Python**: Client library (in development)
-- **REST API**: Direct HTTP requests to PostgREST endpoint
-- **SQL**: Standard PostgreSQL connections
+```r
+library(gaiaCore)
+
+connection <- connectGaia(createGaiaConnectionDetails(server = "gaia-db/gaiacore"))
+
+ingestDatasource(connection, "us_2023_county_tl")
+ingestDatasource(connection, "us_2014_2019_monthly_pm25_by_county_cdc")
+loadVariables(connection, "us_2014_2019_monthly_pm25_by_county_cdc", geomLabel = "name", variableNodata = -999)
+
+loadLocationsFromOmop(connection, cdmSchema = "omopgis")
+spatialJoin(connection, "pm25_mean_pred", "us_2014_2019_monthly_pm25_by_county_cdc",
+            exposureTypeConceptId = 2052499878)
+checkExposure(connection)
+copyExposureToOmop(connection, cdmSchema = "omopgis")
+```
 
 ## Documentation
 
-- [Development Repository](https://github.com/TuftsCTSI/gaiaCore)
+- [Package documentation](https://ohdsi.github.io/gaiaCore/)
+- [Repository](https://github.com/OHDSI/gaiaCore)
 - [Architecture Details](developer-architecture.html)

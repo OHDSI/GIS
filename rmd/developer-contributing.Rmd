@@ -28,7 +28,7 @@ Before contributing code, we encourage you to:
 
 1. **Sign up for OHDSI Teams** ([registration link](https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUQ05MOU9BSzEwOThZVjNQVVFGTDNZRENONiQlQCN0PWcu))
 2. **Join the GIS Working Group** ([registration link](https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu))
-3. **Attend weekly meetings** - Fridays 10 AM US Eastern ([Teams link](https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d))
+3. **Attend weekly meetings** - Thursdays 10 AM US Eastern ([Teams link](https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d))
 4. **Introduce yourself** - Let us know your interests and background
 
 ### **2. Find Something to Work On**
@@ -91,7 +91,7 @@ git checkout -b fix/your-bug-fix
 
 #### **Coding Standards**
 
-**R Code (gaiaCore R client)**:
+**R Code (gaiaCore package)**:
 - Follow [tidyverse style guide](https://style.tidyverse.org/)
 - Use roxygen2 for documentation
 - Include unit tests for new functions
@@ -208,7 +208,7 @@ See GitHub PR template for full checklist.
 
 ## **Coordination**
 
-**Weekly meetings** (Fridays 10 AM ET): 2-min updates - completed work, current tasks, blockers
+**Weekly meetings** (Thursdays 10 AM ET): 2-min updates - completed work, current tasks, blockers
 
 **Task tracking**: [GitHub Project Board](https://github.com/orgs/OHDSI/projects/26)
 
@@ -304,7 +304,7 @@ We welcome all skill levels:
 Contact the working group:
 - **Email**: houghtaling[at]ohdsi[dot]org
 - **Teams**: GIS Working Group channel
-- **Meetings**: Fridays 10 AM US Eastern
+- **Meetings**: Thursdays 10 AM US Eastern
 - **GitHub**: [@OHDSI/GIS](https://github.com/OHDSI/GIS)
 
 <br>
