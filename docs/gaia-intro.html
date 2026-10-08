@@ -549,11 +549,13 @@ PostgreSQL/PostGIS database - Core data repository with all geospatial
 processing logic - SQL routines and PostGIS functions for spatial
 operations - OMOP CDM integration and exposure calculations -
 LinkML/JSON-LD metadata support - Transformation recipe library</p>
-<p><strong><a href="gaiaCore.html">gaiaCore</a></strong> -
-Multi-language connector framework - RESTful API access via PostgREST -
-Direct database connection support - Language-specific client libraries
-(R, Python) - Orchestrates functions defined in gaiaDb - Zero data
-processing logic (access layer only)</p>
+<p><strong><a href="gaiaCore.html">gaiaCore</a></strong> - R package for
+the Gaia pipeline and exposure analytics - Direct database connection
+with DatabaseConnector - Runs ingestion, location loading and the
+spatial-temporal join from R - Quality checks on derived exposure and
+copy into the OMOP CDM - Exposure analytics (day-weighted windows,
+cluster-robust effect estimates) - Calls functions defined in gaiaDb; no
+processing logic of its own</p>
 <p><strong><a href="gaiaCatalog.html">gaiaCatalog</a></strong> -
 Metadata catalog - Functional metadata for publicly-hosted geospatial
 datasets - Schema.org-compliant dataset descriptions - Automated
@@ -691,23 +693,25 @@ functions for spatial operations</li>
 structure for harmonized data</li>
 <li><strong>OMOP integration</strong>: Direct integration with CDM
 extension tables</li>
-<li><strong>API exposure</strong>: PostgREST automatically generates
-RESTful API</li>
+<li><strong>Optional API</strong>: gaiaDocker can expose the database
+through a PostgREST service</li>
 </ul>
-<p><strong><a href="gaiaCore.html">gaiaCore</a></strong> provides
-multi-language access:</p>
+<p><strong><a href="gaiaCore.html">gaiaCore</a></strong> is the R
+interface to gaiaDb:</p>
 <ul>
-<li><strong>Access layer</strong>: Routes requests to gaiaDb functions
-(zero processing logic)</li>
-<li><strong>RESTful API</strong>: PostgREST-based HTTP interface</li>
-<li><strong>Database connections</strong>: Direct PostgreSQL access</li>
-<li><strong>Language connectors</strong>: R and Python client
-libraries</li>
-<li><strong>OpenAPI specification</strong>: Documented API
-endpoints</li>
+<li><strong>Pipeline</strong>: ingests catalog datasets, loads locations
+and runs the spatial-temporal join from R</li>
+<li><strong>Direct connection</strong>: DatabaseConnector opens a JDBC
+connection; there is no REST layer in between</li>
+<li><strong>Quality</strong>: checks the derived exposure rows before
+they reach the CDM</li>
+<li><strong>Analytics</strong>: day-weighted exposure windows and
+cluster-robust effect estimates</li>
+<li><strong>Docker image</strong>: <code>ohdsi/gaia-core</code>, HADES
+with gaiaCore and the extension packages</li>
 </ul>
 <p><strong>Data flow</strong>: Raw geospatial data → gaiaDb processing →
-gaiaCore access → Client applications</p>
+gaiaCore (R) → OMOP CDM → HADES analytics</p>
 </div>
 <div id="extension-layer" class="section level2">
 <h2><strong>3. Extension Layer</strong></h2>
@@ -721,8 +725,8 @@ integration</li>
 <li><strong>Domain-specific</strong>: Custom workflows for specific
 research domains</li>
 </ul>
-<p>Extensions interface with gaiaCore to leverage gaiaDb
-functionality.</p>
+<p>Extensions build on the exposure that gaiaCore derives and copies
+into the OMOP CDM.</p>
 <p><br></p>
 </div>
 <div id="architecture-principles" class="section level2">
@@ -732,7 +736,8 @@ functionality.</p>
 <ul>
 <li><strong>gaiaCatalog</strong>: Discovery and metadata</li>
 <li><strong>gaiaDb</strong>: Storage and processing</li>
-<li><strong>gaiaCore</strong>: Multi-language access</li>
+<li><strong>gaiaCore</strong>: R interface, quality checks and exposure
+analytics</li>
 <li><strong>gaiaDocker</strong>: Deployment</li>
 </ul>
 </div>
@@ -805,7 +810,7 @@ group</a></li>
 <li><a href="get-started.html#propose-a-use-case">Propose a use
 case</a></li>
 <li><a href="developer-contributing.html">Contribute code</a></li>
-<li>Attend Friday meetings (10 AM ET)</li>
+<li>Attend Thursday meetings (10 AM ET)</li>
 </ul>
 <p><br></p>
 </div>

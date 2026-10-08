@@ -406,54 +406,76 @@ WG</h1>
 <h1><strong>gaiaCore</strong></h1>
 <div id="description" class="section level2">
 <h2>Description</h2>
-<p>gaiaCore is a <strong>multi-language connector framework</strong>
-providing programmatic access to gaiaDb functionality. It serves as an
-access layer, orchestrating SQL functions and protocols defined within
-gaiaDb across multiple programming languages and access paradigms.</p>
+<p>gaiaCore is an <strong>R package</strong> for working with a Gaia
+database. It connects to gaiaDb directly with <a
+href="https://ohdsi.github.io/DatabaseConnector/">DatabaseConnector</a>,
+runs the Gaia pipeline from R, and provides the quality checks and
+exposure analytics that turn the result into evidence for OHDSI studies.
+All spatial processing happens inside gaiaDb: gaiaCore calls its SQL
+functions, so every derived value stays traceable to the catalog entry,
+the geometry and the residence interval that produced it.</p>
 </div>
 <div id="key-features" class="section level2">
 <h2>Key Features</h2>
 <ul>
-<li><strong>RESTful API access</strong> via PostgREST with OpenAPI
-specification</li>
-<li><strong>Direct database connections</strong> for SQL-based
-workflows</li>
-<li><strong>Language-specific client libraries</strong> (R, Python, and
-more in development)</li>
-<li><strong>Multi-paradigm support</strong> for both API and database
-access patterns</li>
-<li><strong>Zero processing logic</strong> - all data operations
-performed in gaiaDb</li>
+<li><strong>Ingest</strong> datasets registered in the Gaia catalog and
+build their geometry and attribute tables</li>
+<li><strong>Load person locations</strong> and residence histories from
+data frames or from an OMOP CDM with the Gaia extension</li>
+<li><strong>Derive exposure</strong> with gaiaDb’s spatial-temporal
+join, one variable at a time, into <code>EXTERNAL_EXPOSURE</code></li>
+<li><strong>Check</strong> the derived rows: duplicates, values outside
+the residence interval, missing or implausible values, unit
+mismatches</li>
+<li><strong>Copy</strong> the result into the CDM, where HADES tools
+such as CohortMethod and FeatureExtraction can use it</li>
+<li><strong>Analyse</strong>: day-weighted exposure over windows such as
+a pregnancy, and effect estimates whose confidence intervals stay valid
+with few, unbalanced geographic clusters</li>
+<li><strong>Docker image</strong> <code>ohdsi/gaia-core</code>: HADES
+(RStudio) with gaiaCore and the extension packages (CaprForExtensions,
+FeatureExtractionForExtensions) installed</li>
 </ul>
 </div>
 <div id="architecture" class="section level2">
 <h2>Architecture</h2>
-<p>gaiaCore acts as a thin access layer that: - Routes requests to
-appropriate gaiaDb functions - Provides convenient language-specific
-abstractions - Handles authentication and connection management - Does
-NOT contain data processing or transformation logic</p>
-</div>
-<div id="development-status" class="section level2">
-<h2>Development Status</h2>
-<p>Active development is occurring at <a
-href="https://github.com/TuftsCTSI/gaiaCore">TuftsCTSI/gaiaCore</a>,
-with plans to migrate to <a
-href="https://github.com/OHDSI/gaiaCore">OHDSI/gaiaCore</a> upon
-reaching production readiness.</p>
+<p>gaiaCore sits between gaiaDb and the HADES analytics:</p>
+<ul>
+<li>It opens a direct database connection (JDBC); there is no REST layer
+in between</li>
+<li>It wraps gaiaDb’s SQL functions and does not duplicate processing
+logic</li>
+<li>Its output is the OMOP <code>EXTERNAL_EXPOSURE</code> table, which
+the rest of the OHDSI tools consume</li>
+</ul>
+<p>The Python, Java, Julia, Bash and PostgREST-based R clients that used
+to live in the gaiaCore repository are on its <a
+href="https://github.com/OHDSI/gaiaCore/tree/connectors"><code>connectors</code></a>
+branch, until they find their own home. The PostgREST API service is
+deployed by <a href="gaiaDocker.html">gaiaDocker</a>.</p>
 </div>
 <div id="usage" class="section level2">
 <h2>Usage</h2>
-<p>Access gaiaDb through gaiaCore using your preferred language: -
-<strong>R</strong>: Client library (in development) -
-<strong>Python</strong>: Client library (in development) - <strong>REST
-API</strong>: Direct HTTP requests to PostgREST endpoint -
-<strong>SQL</strong>: Standard PostgreSQL connections</p>
+<pre class="r"><code>library(gaiaCore)
+
+connection &lt;- connectGaia(createGaiaConnectionDetails(server = &quot;gaia-db/gaiacore&quot;))
+
+ingestDatasource(connection, &quot;us_2023_county_tl&quot;)
+ingestDatasource(connection, &quot;us_2014_2019_monthly_pm25_by_county_cdc&quot;)
+loadVariables(connection, &quot;us_2014_2019_monthly_pm25_by_county_cdc&quot;, geomLabel = &quot;name&quot;, variableNodata = -999)
+
+loadLocationsFromOmop(connection, cdmSchema = &quot;omopgis&quot;)
+spatialJoin(connection, &quot;pm25_mean_pred&quot;, &quot;us_2014_2019_monthly_pm25_by_county_cdc&quot;,
+            exposureTypeConceptId = 2052499878)
+checkExposure(connection)
+copyExposureToOmop(connection, cdmSchema = &quot;omopgis&quot;)</code></pre>
 </div>
 <div id="documentation" class="section level2">
 <h2>Documentation</h2>
 <ul>
-<li><a href="https://github.com/TuftsCTSI/gaiaCore">Development
-Repository</a></li>
+<li><a href="https://ohdsi.github.io/gaiaCore/">Package
+documentation</a></li>
+<li><a href="https://github.com/OHDSI/gaiaCore">Repository</a></li>
 <li><a href="developer-architecture.html">Architecture Details</a></li>
 </ul>
 </div>

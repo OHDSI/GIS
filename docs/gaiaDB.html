@@ -422,8 +422,8 @@ analysis and exposure calculations</li>
 Location_History tables</li>
 <li><strong>LinkML/JSON-LD metadata</strong> support for standardized
 data representation</li>
-<li><strong>RESTful API exposure</strong> via PostgREST for
-multi-language access</li>
+<li><strong>Direct connections</strong> from R through gaiaCore, and an
+optional PostgREST API deployed by gaiaDocker</li>
 </ul>
 </div>
 <div id="architecture" class="section level2">
@@ -438,11 +438,11 @@ functions.</p>
 </div>
 <div id="access" class="section level2">
 <h2>Access</h2>
-<p>gaiaDb is accessed through: - <strong>PostgREST API</strong>: RESTful
-interface to database functions and tables - <strong>Direct database
-connections</strong>: Standard PostgreSQL client connections -
-<strong>gaiaCore connectors</strong>: Language-specific client libraries
-(R, Python, etc.)</p>
+<p>gaiaDb is accessed through: - <strong>gaiaCore</strong>: R package
+that connects directly and calls the database’s functions -
+<strong>Direct database connections</strong>: Standard PostgreSQL client
+connections - <strong>PostgREST API</strong> (optional): RESTful
+interface to database functions and tables, deployed by gaiaDocker</p>
 </div>
 <div id="documentation" class="section level2">
 <h2>Documentation</h2>

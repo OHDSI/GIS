@@ -503,9 +503,9 @@ particular, we use Github for managing tasks like defining and
 monitoring progress on OHDSI studies, infrastructure roadmaps, technical
 issues, etc.</p>
 <p>We review progress and get input from the broader group at weekly
-meetings on Fridays. Leaders of specific projects within the GIS
+meetings on Thursdays. Leaders of specific projects within the GIS
 workgroup schedule and hold meetings with subgroups outside the main
-Friday meeting. Those other meetings are where most of the work on use
+Thursday meeting. Those other meetings are where most of the work on use
 cases and advancing technical infrastructure gets done.</p>
 <p>Apart from the groups’ offical leadership, many members make
 fundamental contributions to the group’s decisions, strategies, and
@@ -521,7 +521,7 @@ href="https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1Z
 It’s easy peasy. Already have an OHDSI Teams account? Great. Just sign
 up for the GIS Workgroup <a
 href="https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUOVJFUzBFWE1aSVlLN0ozR01MUVQ4T0RGNyQlQCN0PWcu">here</a>.</p>
-<p>The main workgroup call is on MS Teams every Friday at 10 AM US
+<p>The main workgroup call is on MS Teams every Thursday at 10 AM US
 Eastern Time (<a
 href="https://teams.microsoft.com/l/meetup-join/19%3af4d776830f504bf3827fe4309156a3c6%40thread.tacv2/1724707871947?context=%7b%22Tid%22%3a%22a30f0094-9120-4aab-ba4c-e5509023b2d5%22%2c%22Oid%22%3a%22457ee911-94c1-4da2-8287-8d8a5a749931%22%7d">Meeting
 Link</a>). We are always looking for better ways to accomodate the time
@@ -576,12 +576,13 @@ Vocabulary.</p>
 </div>
 <div id="gaiacore" class="section level4">
 <h4><strong>gaiaCore</strong></h4>
-<p>The gaiaCore software and associated gaiaDB schema support
-specification of attributes and geographic shapes in publicly available
-datasets. This specification allows the tables in the GIS schema
-extension to be joined with patient-level clinical data stored in the
-main OMOP schema. The current Beta release of gaiaCore software and its
-documentation are <a
+<p>The gaiaDB schema supports specification of attributes and geographic
+shapes in publicly available datasets, which allows the tables in the
+GIS schema extension to be joined with patient-level clinical data
+stored in the main OMOP schema. The gaiaCore R package runs this
+pipeline from R (ingestion, location loading, the spatial-temporal
+join), checks the derived exposure, copies it into the OMOP CDM, and
+provides exposure analytics. The package and its documentation are <a
 href="https://github.com/OHDSI/gaiaCore">here</a>.</p>
 </div>
 <div id="guidance" class="section level4">
