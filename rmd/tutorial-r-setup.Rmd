@@ -18,7 +18,7 @@ The pipeline and the data are the same as in the SQL exercises. You run each ste
 
 | SQL track | R track |
 |---|---|
-| `psql` in the gaia-db container | RStudio in the `ohdsi/gaia-core` container |
+| pgAdmin, or `psql` in the gaia-db container | RStudio in the `ohdsi/gaia-core` container |
 | `SELECT * FROM backbone.ingest_datasource(...)` | `ingestDatasource(connection, ...)` |
 | `INSERT INTO working.location ...` | `loadLocationsFromOmop(connection)` |
 | `SELECT working.spatial_join_from_catalog(...)` | `spatialJoin(connection, ...)` |
