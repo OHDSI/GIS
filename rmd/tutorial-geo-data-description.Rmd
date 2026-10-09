@@ -46,7 +46,7 @@ _NOTE: the gaiaCatalog source first pulls the CDC daily data from an API and the
 
 ### Access and license
 
-- **CDC Retrieval method:** API [https://data.cdc.gov/api/v3/views/53mz-4zqd/query.csv?](https://data.cdc.gov/api/v3/views/53mz-4zqd/query.csv?)
+- **CDC Retrieval method:** API https://data.cdc.gov/api/v3/views/53mz-4zqd/query.csv?query=some_query&app_token=APP_TOKEN (with no query this is several GB and the API will not work without the APP_TOKEN)
 - **CDC License:** [Public Domain Us Government](https://www.usa.gov/government-copyright)  
 
 - **Census Retrieval method:** Download - [ftp://ftp2.census.gov/geo/tiger/TIGER2019/COUNTY/tl_2019_us_county.zip](ftp://ftp2.census.gov/geo/tiger/TIGER2019/COUNTY/tl_2019_us_county.zip)
