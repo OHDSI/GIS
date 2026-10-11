@@ -24,6 +24,7 @@ docker run --rm --platform linux/amd64 -v "$PWD":/repo -w /repo ohdsi/gaia-core:
 | `spatial_cv_model.R` | The derived exposure as input to a machine-learning workflow: logistic regression and gradient-boosted trees under random and spatially blocked cross-validation |
 | `geocoding_stress_figure.R` | Figure of the stress tests: attenuation and coverage against the correlation length (with the regression-dilution prediction) and the road-proximity result |
 | `road_bands_gaia_check.R` | Checks Gaia's road-band assignment (`synthetic_road_proximity`) against the exact distance to the nearest road |
+| `tract_pm25_seam_check.R` | Level-shift check at the 2015/2016 seam of the two CDC tract PM2.5 releases: the tract series aggregated to counties against the single-release county series, plus within-county spatial detail across the seam |
 
 The scripts take `--pm25-source` and `--ses-source` (the `exposure_source_value` of the variable) when an exposure file holds several,
 as the tract benchmark's does. `exposure_agreement.R` also takes `--resolution tract`.
