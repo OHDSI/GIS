@@ -38,3 +38,14 @@ monthly series (`tract_pm25_monthly.csv.gz`, `county_pm25_monthly.csv.gz`) and `
 ```sh
 tract/geocoding_error_mc.sh --errors errors.csv --reps 200      # errors.csv: stratum (urban|rural|all), error_m
 ```
+
+## Timing the join on another machine
+
+`timing_bundle.sh` compares the Gaia spatial join with the same join as plain PostGIS SQL (`../benchmark/baseline_join.sh`) on a machine that does not hold the build.
+`export` writes a bundle (about 400 MB: the tract source tables, the Gaia metadata and the tract OMOP dump); `run` starts a fresh `gaia-db` container from the pinned image, restores the bundle, loads the locations and runs the comparison.
+
+```sh
+tract/timing_bundle.sh export gaia-db-tract-build timing_bundle
+tract/timing_bundle.sh run timing_bundle timing_results
+```
+

@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 # Propagation of geocoding error into PM2.5 exposure and effect estimates (tract benchmark dataset).
-#   Rscript benchmark/geocoding_error_propagation.R --data-dir <dir> --exposure <file> --mc <mc_assignment.csv.gz> --truth <mc_location_truth.csv> --pm25-source-tract <id> --pm25-source-county <id> --ses-source <id> [--out DIR] [--reps N] [--cores N]
+#   Rscript benchmark/geocoding_error_propagation.R --data-dir <dir> --exposure <file> --mc <mc_assignment.csv.gz> --truth <mc_location_truth.csv> --pm25-source-tract <id> --pm25-source-county <id> --ses-source <id> [--out DIR] [--reps N] [--cores N] [--variant both|exposure|ses] [--fast]
 
 suppressPackageStartupMessages({ library(dplyr); library(readr); library(parallel); library(tibble) })
 
@@ -10,6 +10,8 @@ dataDir <- arg("data-dir"); exposureFile <- arg("exposure"); mcFile <- arg("mc")
 srcTract <- arg("pm25-source-tract"); srcCounty <- arg("pm25-source-county"); srcSes <- arg("ses-source")
 outDir <- arg("out", "syntheticDataGIS/benchmark/output"); maxReps <- as.integer(arg("reps", "1000000"))
 cores <- as.integer(arg("cores", as.character(max(1, min(4, detectCores() - 1)))))
+variant <- arg("variant", "both"); fast <- "--fast" %in% args
+stopifnot(variant %in% c("both", "exposure", "ses"))
 stopifnot(!is.na(dataDir), !is.na(exposureFile), !is.na(mcFile), !is.na(truthFile), !is.na(srcTract), !is.na(srcCounty), !is.na(srcSes))
 dir.create(outDir, showWarnings = FALSE, recursive = TRUE)
 read <- function(f, ...) read_csv(file.path(dataDir, f), show_col_types = FALSE, progress = FALSE, ...)
@@ -76,18 +78,20 @@ oneRep <- function(r) {
   tIdx <- match(a$tract_geoid, rownames(Mtract)); cIdx <- match(a$county_fips, rownames(Mcounty))
   sesLoc <- unname(sesOf[a$tract_geoid])
   ses <- personExposure(NULL, NULL, values = sesLoc)
+  ses0 <- personExposure(NULL, NULL, values = unname(sesOf[refAssign$tract_geoid]))
   out <- list(); mis <- list()
-  for (res in c("tract", "county")) {
+  for (res in if (fast) "tract" else c("tract", "county")) {
     x <- if (res == "tract") personExposure(tIdx, Mtract) else personExposure(cIdx, Mcounty)
     ref <- if (res == "tract") refTract else refCounty
     same <- if (res == "tract") a$tract_geoid == refAssign$tract_geoid else a$county_fips == refAssign$county_fips
-    for (st in c("all", "urban", "rural")) {
-      sel <- (st == "all" | d$stratum == st) & !is.na(x) & !is.na(ses)
+    for (st in if (fast) "all" else c("all", "urban", "rural")) {
+      sel <- (st == "all" | d$stratum == st) & !is.na(x) & !is.na(ses) & !is.na(ref) & !is.na(ses0)
       locSel <- loc$person_id %in% d$person_id[d$stratum == st | st == "all"]
       mis[[length(mis) + 1]] <- tibble(rep = r, resolution = res, stratum = st, share_reassigned = mean(!(same[locSel] %in% TRUE)),
         share_unassigned = mean(is.na(if (res == "tract") a$tract_geoid[locSel] else a$county_fips[locSel])),
         bias = mean(x[sel] - ref[sel]), rmse = sqrt(mean((x[sel] - ref[sel])^2)), correlation = cor(x[sel], ref[sel]), slope = unname(coef(lm(x[sel] ~ ref[sel]))[2]), persons = sum(sel))
-      X <- cbind(1, x[sel], (ses[sel] - 50) / 15, d$age_decades[sel], d$female[sel])
+      xFit <- if (variant == "ses") ref else x; sesFit <- if (variant == "exposure") ses0 else ses
+      X <- cbind(1, xFit[sel], (sesFit[sel] - 50) / 15, d$age_decades[sel], d$female[sel])
       for (i in seq_len(nrow(truth))) out[[length(out) + 1]] <- tibble(rep = r, resolution = res, stratum = st, outcome = truth$outcome_name[i], as_tibble_row(fit(X, Y[sel, i], d$county[sel])))
     }
   }
