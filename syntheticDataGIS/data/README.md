@@ -41,3 +41,8 @@ The build is deterministic, so rebuilding with the same pinned image and catalog
 | `vocabulary.csv` | 12 | `VOCABULARY` (mini vocabulary) |
 
 See [Dataset Visualizations](https://ohdsi.github.io/GIS/tutorial-data-visualization.html) and [Data Description](https://ohdsi.github.io/GIS/tutorial-data-description.html) for query-and-chart pairs and a narrative description of the schema.
+
+## Vocabulary content
+
+`concept.csv` and the related vocabulary tables are a minimal extract of the OMOP Standardized Vocabularies for the tutorial, including 67 concepts from SNOMED CT, RxNorm, LOINC and UCUM. See [`VOCABULARY_NOTICE.md`](VOCABULARY_NOTICE.md) for the sources, terms and attribution.
+

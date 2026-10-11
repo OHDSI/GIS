@@ -1,0 +1,78 @@
+cff-version: 1.2.0
+message: "If you use this software or dataset, please cite it using the metadata below. After publication, please also cite the associated article (see preferred-citation)."
+type: software
+title: "OHDSI GIS toolchain: documentation, GIS vocabulary tools, and synthetic benchmark and tutorial datasets"
+abstract: >-
+  Documentation, GIS vocabulary tooling, and generators, scripts and inputs for the synthetic tutorial and
+  benchmark datasets of the OHDSI GIS toolchain, which integrates geospatial data with the OMOP Common Data
+  Model through a geometry-attribute index and two OMOP extension tables (LOCATION_HISTORY and
+  EXTERNAL_EXPOSURE). The database (GaiaDB), R package (GaiaCore), metadata catalog (GaiaCatalog) and deployment
+  (GaiaDocker) are developed in separate repositories. All persons, addresses and outcomes in the datasets are synthetic.
+version: 1.2.0
+message: "If you use this software or dataset, please cite it using the metadata below. After publication, please also cite the associated article (see preferred-citation)."
+type: software
+title: "OHDSI GIS toolchain: documentation, GIS vocabulary tools, and synthetic benchmark and tutorial datasets"
+abstract: >-
+  Open-source infrastructure that integrates geospatial data with the OMOP Common Data Model,
+  including a geometry-attribute index, OMOP extension tables (LOCATION_HISTORY and
+  EXTERNAL_EXPOSURE), an R analysis package, a FAIR metadata catalog, a GIS vocabulary,
+  and a synthetic benchmark and tutorial dataset generator. All datasets are synthetic.
+version: "1.0.1"
+date-released: "2026-10-11"
+repository-code: "https://github.com/OHDSI/GIS"
+url: "https://ohdsi.github.io/GIS/"
+license: Apache-2.0
+keywords:
+  - OMOP
+  - OHDSI
+  - geospatial
+  - exposome
+  - environmental health
+  - federated analytics
+  - synthetic data
+authors:
+  - family-names: Williams
+    given-names: Andrew E.
+    affiliation: "Tufts Clinical and Translational Science Institute, Boston, MA, USA (deceased)"
+  - family-names: Zollo-Venecek
+    given-names: Kyle
+    affiliation: "Tufts Clinical and Translational Science Institute, Boston, MA, USA; Valo Health, Lexington, MA, USA"
+  - family-names: Miller
+    given-names: Robert
+    affiliation: "Tufts Clinical and Translational Science Institute, Boston, MA, USA"
+  - family-names: Talapova
+    given-names: Polina
+    affiliation: "Tufts Clinical and Translational Science Institute, Boston, MA, USA; SciForce, Ukraine"
+  - family-names: Norris
+    given-names: Timothy
+    affiliation: "University of Miami, Miami, FL, USA"
+  - family-names: Greenfield
+    given-names: Jay
+    affiliation: "CODATA, Paris, France"
+  - family-names: Parikh
+    given-names: Nitin
+    affiliation: "University of Miami, Clinical and Translational Science Institute, Miami, FL, USA"
+  - family-names: Phuong
+    given-names: Jimmy
+    affiliation: "University of Washington, WA, USA"
+  - family-names: Thessen
+    given-names: Anne E.
+    affiliation: "University of North Carolina at Chapel Hill, NC, USA"
+  - family-names: Rossi
+    given-names: Timothy D.
+    affiliation: "Architectural Medicine LLC, NM, USA"
+  - family-names: Khalid
+    given-names: Sara
+    affiliation: "NDORMS, University of Oxford, United Kingdom"
+  - family-names: Sampri
+    given-names: Alexia
+    affiliation: "D4L Data4Life gGmbH, Potsdam, Germany; Hasso Plattner Institute, University of Potsdam, Germany"
+  - family-names: Liao
+    given-names: Jiawen
+    affiliation: "Cleveland Clinic Foundation, Cleveland, OH, USA"
+  - family-names: Trofymenko
+    given-names: Maksym
+    affiliation: "SciForce, Ukraine"
+  - family-names: Houghtaling
+    given-names: Jared
+    affiliation: "Tufts Clinical and Translational Science Institute, Boston, MA, USA; Observational Health Data Analytics, Global Epidemiology, Johnson & Johnson Research and Development, Beerse, Belgium"

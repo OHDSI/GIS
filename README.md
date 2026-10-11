@@ -109,6 +109,10 @@ If you are interested in contributing and don't know where to begin, please join
 
 See [Developer Resources](https://ohdsi.github.io/GIS/developer.html) for detailed contributing guidelines.
 
+## Citing
+
+Use the "Cite this repository" button on GitHub (from [`CITATION.cff`](CITATION.cff)) or the Zenodo record of the release you used; releases are listed under [Releases](https://github.com/OHDSI/GIS/releases) and notes for each are in [`releases/`](releases/). The accompanying article will be added to the citation after publication.
+
 ## Building Documentation
 
 This repository uses RMarkdown to generate documentation hosted on GitHub Pages. To build the site locally:

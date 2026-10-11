@@ -1,0 +1,124 @@
+{
+  "title": "OHDSI GIS toolchain: documentation, GIS vocabulary tools, and synthetic benchmark and tutorial datasets",
+  "upload_type": "software",
+  "description": "<p>Documentation, GIS vocabulary tooling, and generators, scripts and inputs for the synthetic tutorial dataset (10,000 adults, 2,672 US counties) and the tract-level benchmark dataset (40,000 adults, four US states, 2014&ndash;2019) of the OHDSI GIS toolchain, which integrates geospatial data with the OMOP Common Data Model through a geometry-attribute index and two OMOP extension tables (LOCATION_HISTORY and EXTERNAL_EXPOSURE).</p><p>This release is the code and input snapshot behind the manuscript <em>An OMOP-Compatible Exposure Infrastructure for GeoAI-Ready Environmental Health Research: The OHDSI GIS Toolchain</em>. The database (GaiaDB), R package (GaiaCore), metadata catalog (GaiaCatalog) and deployment (GaiaDocker) are developed in separate repositories and are referenced here by commit. All persons, addresses and outcomes are synthetic; the exposure and boundary sources are public. The synthetic data do not demonstrate privacy preservation. Geocoding error distributions (distances only) are derived from a CC BY 4.0 source. The tutorial data include a minimal extract of the OMOP Standardized Vocabularies (SNOMED CT, RxNorm, LOINC and UCUM concepts) that retains the terms of its sources; see syntheticDataGIS/data/VOCABULARY_NOTICE.md. See the release notes for contents, reproducibility information and known limitations.</p>",
+  "creators": [
+    {
+      "name": "Williams, Andrew E.",
+      "affiliation": "Tufts Clinical and Translational Science Institute, Boston, MA, USA (deceased)"
+    },
+    {
+      "name": "Zollo-Venecek, Kyle",
+      "affiliation": "Tufts Clinical and Translational Science Institute, Boston, MA, USA; Valo Health, Lexington, MA, USA"
+    },
+    {
+      "name": "Miller, Robert",
+      "affiliation": "Tufts Clinical and Translational Science Institute, Boston, MA, USA"
+    },
+    {
+      "name": "Talapova, Polina",
+      "affiliation": "Tufts Clinical and Translational Science Institute, Boston, MA, USA; SciForce, Ukraine"
+    },
+    {
+      "name": "Norris, Timothy",
+      "affiliation": "University of Miami, Miami, FL, USA"
+    },
+    {
+      "name": "Greenfield, Jay",
+      "affiliation": "CODATA, Paris, France"
+    },
+    {
+      "name": "Parikh, Nitin",
+      "affiliation": "University of Miami, Clinical and Translational Science Institute, Miami, FL, USA"
+    },
+    {
+      "name": "Phuong, Jimmy",
+      "affiliation": "University of Washington, WA, USA"
+    },
+    {
+      "name": "Thessen, Anne E.",
+      "affiliation": "University of North Carolina at Chapel Hill, NC, USA"
+    },
+    {
+      "name": "Rossi, Timothy D.",
+      "affiliation": "Architectural Medicine LLC, NM, USA"
+    },
+    {
+      "name": "Khalid, Sara",
+      "affiliation": "NDORMS, University of Oxford, United Kingdom"
+    },
+    {
+      "name": "Sampri, Alexia",
+      "affiliation": "D4L Data4Life gGmbH, Potsdam, Germany; Hasso Plattner Institute, University of Potsdam, Germany"
+    },
+    {
+      "name": "Liao, Jiawen",
+      "affiliation": "Cleveland Clinic Foundation, Cleveland, OH, USA"
+    },
+    {
+      "name": "Trofymenko, Maksym",
+      "affiliation": "SciForce, Ukraine"
+    },
+    {
+      "name": "Houghtaling, Jared",
+      "affiliation": "Tufts Clinical and Translational Science Institute, Boston, MA, USA; Observational Health Data Analytics, Global Epidemiology, Johnson & Johnson Research and Development, Beerse, Belgium"
+    }
+  ],
+  "license": "apache-2.0",
+  "access_right": "open",
+  "version": "1.0.1",
+  "language": "eng",
+  "keywords": [
+    "OMOP",
+    "OHDSI",
+    "geospatial",
+    "exposome",
+    "environmental health",
+    "federated analytics",
+    "synthetic data"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/OHDSI/GIS/tree/benchmark-v1.0.1",
+      "relation": "isSupplementTo",
+      "scheme": "url",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://ohdsi.github.io/GIS/",
+      "relation": "isDocumentedBy",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://github.com/OHDSI/gaiaDB/tree/570a40b",
+      "relation": "references",
+      "scheme": "url",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://github.com/OHDSI/gaiaCore/tree/7f26c7d",
+      "relation": "references",
+      "scheme": "url",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://github.com/OHDSI/gaiaCatalog/tree/a5e077f",
+      "relation": "references",
+      "scheme": "url",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://github.com/OHDSI/gaiaDocker/tree/0975e65",
+      "relation": "references",
+      "scheme": "url",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "https://github.com/tibbben/geocode-benchmark-2023",
+      "relation": "isDerivedFrom",
+      "scheme": "url",
+      "resource_type": "dataset"
+    }
+  ],
+  "notes": "Funding: National Institutes of Health through NCATS Clinical and Translational Science Awards UL1TR002544 (Tufts University) and UL1TR002736 (University of Miami). The content is solely the responsibility of the authors and does not represent official views of the NIH."
+}
