@@ -111,7 +111,9 @@ See [Developer Resources](https://ohdsi.github.io/GIS/developer.html) for detail
 
 ## Citing
 
-Use the "Cite this repository" button on GitHub (from [`CITATION.cff`](CITATION.cff)) or the Zenodo record of the release you used; releases are listed under [Releases](https://github.com/OHDSI/GIS/releases) and notes for each are in [`releases/`](releases/). The accompanying article will be added to the citation after publication.
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23296291.svg)](https://doi.org/10.5281/zenodo.23296291)
+
+Cite the toolchain with the Zenodo record: [10.5281/zenodo.23296291](https://doi.org/10.5281/zenodo.23296291) (all versions; it always resolves to the latest release). To cite the exact snapshot behind the manuscript, use version 1.0.1 (tag `benchmark-v1.0.1`): [10.5281/zenodo.23296292](https://doi.org/10.5281/zenodo.23296292). GitHub's "Cite this repository" button uses [`CITATION.cff`](CITATION.cff). All releases are listed under [Releases](https://github.com/OHDSI/GIS/releases). The accompanying article will be added to the citation after publication.
 
 ## Building Documentation
 

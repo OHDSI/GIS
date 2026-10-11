@@ -22,6 +22,14 @@ date-released: "2026-10-11"
 repository-code: "https://github.com/OHDSI/GIS"
 url: "https://ohdsi.github.io/GIS/"
 license: Apache-2.0
+doi: 10.5281/zenodo.23296291
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23296292
+    description: "Version 1.0.1 (benchmark-v1.0.1)"
+  - type: doi
+    value: 10.5281/zenodo.23296291
+    description: "All versions"
 keywords:
   - OMOP
   - OHDSI
