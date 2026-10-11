@@ -2,18 +2,24 @@
 # Timing of the Gaia join against plain PostGIS SQL on another machine, without rebuilding the tract benchmark.
 #   tract/timing_bundle.sh export [container] [bundle dir]   on the machine holding the build: writes the bundle
 #   tract/timing_bundle.sh run [bundle dir] [out dir]        on the timing machine: restores the bundle and runs benchmark/baseline_join.sh
+# Paths may be absolute or relative to the current directory; the script can be run from anywhere.
 set -euo pipefail
-MODE="${1:?export or run}"; ROOT="$(git rev-parse --show-toplevel)"; cd "$ROOT"
+MODE="${1:?export or run}"; START="$PWD"; ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"; cd "$ROOT"
+abs() { case "$1" in /*) echo "$1" ;; *) echo "$START/$1" ;; esac; }
 PM25=us_2014_2019_monthly_pm25_by_tract_cdc
 if [ "$MODE" = export ]; then
-  C="${2:-gaia-db-tract-build}"; B="${3:-timing_bundle}"; mkdir -p "$B"
+  C="${2:-gaia-db-tract-build}"; B="$(abs "${3:-timing_bundle}")"; mkdir -p "$B"
   docker exec "$C" pg_dump -U postgres -d gaiacore -Fc -t public.us_2019_tract_tl -t public.$PM25 -t working.geom_$PM25 -t working.attr_$PM25 > "$B/tract_tables.dump"
   docker exec "$C" pg_dump -U postgres -d gaiacore -a -n backbone --inserts --on-conflict-do-nothing > "$B/backbone_data.sql"
   cp syntheticDataGIS/tract/build/out/synthetic_omop_gis_tract.sql.gz "$B/"
   grep -E "gaia_db_image:" syntheticDataGIS/tract/build/out/BUILD_INFO.txt | sed 's/gaia_db_image: //' > "$B/image.txt"
   ls -l "$B"; exit 0
 fi
-B="${2:-timing_bundle}"; OUT="${3:-timing_results}"; mkdir -p "$OUT"
+B="$(abs "${2:-timing_bundle}")"; OUT="$(abs "${3:-timing_results}")"
+for f in image.txt backbone_data.sql synthetic_omop_gis_tract.sql.gz tract_tables.dump; do
+  [ -f "$B/$f" ] || { echo "bundle file not found: $B/$f (first argument after run is the bundle directory)" >&2; exit 1; }
+done
+mkdir -p "$OUT"
 DB=gaia-timing-db; IMAGE="$(cat "$B/image.txt")"; WORK="$(mktemp -d)"; mkdir -p "$WORK/secrets"
 printf 'timing-pw' > "$WORK/secrets/PG"; printf 'timing-auth' > "$WORK/secrets/AUTH"
 docker rm -f "$DB" > /dev/null 2>&1 || true
