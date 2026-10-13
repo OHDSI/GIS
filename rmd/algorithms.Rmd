@@ -59,6 +59,42 @@ c = 2 · atan2(√a, √(1−a))
 d = R · c        (R = 6371 km, Earth mean radius)
 ```
 
+### R Implementation
+
+The dependency-free function below returns the distance in kilometers for two
+latitude/longitude points expressed in decimal degrees.
+
+```r
+haversine_distance_km <- function(lat1, lon1, lat2, lon2) {
+  coordinates <- c(lat1, lon1, lat2, lon2)
+
+  if (!is.numeric(coordinates) || length(coordinates) != 4L ||
+      any(!is.finite(coordinates))) {
+    stop("Coordinates must be four finite numeric values.", call. = FALSE)
+  }
+  if (abs(lat1) > 90 || abs(lat2) > 90 ||
+      abs(lon1) > 180 || abs(lon2) > 180) {
+    stop("Latitude must be between -90 and 90 and longitude between -180 and 180.",
+      call. = FALSE
+    )
+  }
+
+  to_radians <- pi / 180
+  delta_lat <- (lat2 - lat1) * to_radians
+  delta_lon <- (lon2 - lon1) * to_radians
+
+  a <- sin(delta_lat / 2)^2 +
+    cos(lat1 * to_radians) * cos(lat2 * to_radians) *
+    sin(delta_lon / 2)^2
+  central_angle <- 2 * atan2(sqrt(a), sqrt(1 - min(1, a)))
+
+  6371.0 * central_angle
+}
+
+# Example: Boston, MA to New York, NY (approximately 306 km)
+haversine_distance_km(42.3601, -71.0589, 40.7128, -74.0060)
+```
+
 ### SQL Implementation (PostgreSQL)
 
 The function below is designed to operate entirely within the `omopgis` schema and is compatible with the synthetic dataset structure.
