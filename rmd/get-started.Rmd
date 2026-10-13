@@ -38,8 +38,10 @@ bash ./create_secrets.sh
 
 windows
 ```
-./create_secrets.ps1 # windows
+powershell -ExecutionPolicy Bypass -File .\create_secrets.ps1
 ```
+
+If PowerShell reports that running scripts is disabled on this system, the command above runs the script once without changing your policy (use `pwsh` instead of `powershell` if that is the PowerShell you have installed).
 
 ### start the full Gaia stack
 
@@ -54,7 +56,7 @@ docker compose --profile gaia up -d
 docker compose -f docker-compose.yaml -f docker-compose.tutorial.yaml --profile gaia up -d
 ```
 
-Use the same two `-f` options for any later `docker compose` command that starts or stops the stack (`docker compose exec` and `docker compose ps` work as before).
+Use the same two `-f` options for any later `docker compose` command that starts or stops the stack (`docker compose exec` and `docker compose ps` work as before). The file pins the five services of the `gaia` profile (database, PostgREST, catalog, Solr and pgAdmin). The stack's own `gaia-core` service and the services of the `gaia-tcp-api` profile are not pinned; the tutorial does not use them, and the R image is started separately from a pinned image (see the [tutorial checklist](tutorial.html)).
 
 On the first start it may take several minutes to pull the containers from the docker hub container repository. NOTE: there are several profiles available (see [Profiles](#profiles)).
 
