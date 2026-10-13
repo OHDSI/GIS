@@ -623,9 +623,11 @@ the fallback exposure file
 <code>docker-compose.tutorial.yaml</code> from the <a
 href="https://github.com/OHDSI/GIS/tree/main/syntheticDataGIS/data"><code>syntheticDataGIS/data</code></a>
 folder. Copy the two data files into the <code>volumes/temp</code>
-folder of your <code>gaiaDocker</code> checkout; Exercise 2 restores
-them from there, inside the container, so nothing needs to be unzipped
-on your computer (this matters on Windows).</label></p></li>
+folder of your <code>gaiaDocker</code> checkout once the stack is
+running (Docker creates the folder the first time the stack starts; on
+Linux it belongs to root, so use <code>sudo cp</code>); Exercise 2
+restores them from there, inside the container, so nothing needs to be
+unzipped on your computer (this matters on Windows).</label></p></li>
 <li><p><label><input type="checkbox" />For Exercises 3 and 4, pull the
 pre-built R image (RStudio with HADES, Capr, CaprForExtensions,
 FeatureExtractionForExtensions, CohortMethod and the <a

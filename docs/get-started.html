@@ -524,7 +524,11 @@ sources you will use.</p>
 <p>mac/linux</p>
 <pre class="bash"><code>bash ./create_secrets.sh</code></pre>
 <p>windows</p>
-<pre><code>./create_secrets.ps1 # windows</code></pre>
+<pre><code>powershell -ExecutionPolicy Bypass -File .\create_secrets.ps1</code></pre>
+<p>If PowerShell reports that running scripts is disabled on this
+system, the command above runs the script once without changing your
+policy (use <code>pwsh</code> instead of <code>powershell</code> if that
+is the PowerShell you have installed).</p>
 </div>
 <div id="start-the-full-gaia-stack" class="section level3">
 <h3>start the full Gaia stack</h3>
@@ -540,7 +544,13 @@ into the <code>gaiaDocker</code> folder (next to
 <p>Use the same two <code>-f</code> options for any later
 <code>docker compose</code> command that starts or stops the stack
 (<code>docker compose exec</code> and <code>docker compose ps</code>
-work as before).</p>
+work as before). The file pins the five services of the
+<code>gaia</code> profile (database, PostgREST, catalog, Solr and
+pgAdmin). The stack’s own <code>gaia-core</code> service and the
+services of the <code>gaia-tcp-api</code> profile are not pinned; the
+tutorial does not use them, and the R image is started separately from a
+pinned image (see the <a href="tutorial.html">tutorial
+checklist</a>).</p>
 <p>On the first start it may take several minutes to pull the containers
 from the docker hub container repository. NOTE: there are several
 profiles available (see <a href="#profiles">Profiles</a>).</p>
