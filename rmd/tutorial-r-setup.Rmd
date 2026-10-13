@@ -27,15 +27,13 @@ The pipeline and the data are the same as in the SQL exercises. You run each ste
 
 ## **Start the R environment**
 
-1. Deploy the Gaia stack and restore the synthetic dataset as in Exercise 2, step 1 of the [SQL track](tutorial-exercise-2.html) (the restore is a shell command and is the same in both tracks).
+1. Deploy the Gaia stack (with the pinned images, see [Get Started](get-started.html)) and restore the synthetic dataset as in Exercise 2, step 1 of the [SQL track](tutorial-exercise-2.html) (the restore is the same in both tracks).
 2. Pull and start the R image on the same Docker network as the database (stop the stack's own `gaia-core` service first if it is running, because both use port 8787; on Apple Silicon keep `--platform linux/amd64`):
    ```sh
-   docker pull --platform linux/amd64 ohdsi/gaia-core:main
-   docker run -d --name gaia-core --platform linux/amd64 --network gaiadocker_default -p 8787:8787 \
-     -e USER=ohdsi -e PASSWORD=<choose a password> \
-     -e GAIA_POSTGRES_PASSWORD="$(cat secrets/gaia/POSTGRES_PASSWORD)" ohdsi/gaia-core:main
+   docker pull --platform linux/amd64 ohdsi/gaia-core@sha256:40ebb1e5a4e57b455bf6444f8389bd71b2e8483491b00f0ba5193f9969636eb4
+   docker run -d --name gaia-core --platform linux/amd64 --network gaiadocker_default -p 8787:8787 -e USER=ohdsi -e PASSWORD=<choose a password> -e GAIA_POSTGRES_PASSWORD=<postgres password> ohdsi/gaia-core@sha256:40ebb1e5a4e57b455bf6444f8389bd71b2e8483491b00f0ba5193f9969636eb4
    ```
-   (`gaiadocker_default` is the network docker compose creates for a checkout in a folder called `gaiaDocker`; list yours with `docker network ls`. Run the command from the `gaiaDocker` folder so the password file is found.)
+   (`gaiadocker_default` is the network docker compose creates for a checkout in a folder called `gaiaDocker`; list yours with `docker network ls`. `<postgres password>` is the content of the file `gaiaDocker/secrets/gaia/POSTGRES_PASSWORD`; paste it in directly. Keep the command on one line: it is the same in PowerShell, Terminal and bash.)
 3. Open <http://localhost:8787> and sign in with `ohdsi` and the password you chose.
 
 ## **Connect**

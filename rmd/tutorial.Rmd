@@ -53,15 +53,16 @@ No prior GIS or spatial-analysis experience is assumed; familiarity with Structu
 
 _**After installing docker, please complete the following steps before coming to the workshop**_
 
-- [ ] Review the [Get Started](get-started.html) page and follw the instructions to deploy the gaia toolchain.
+- [ ] Review the [Get Started](get-started.html) page and follow the instructions to deploy the gaia toolchain. For the tutorial, start the stack with the pinned images (`docker-compose.tutorial.yaml`, described on that page).
 - [ ] Confirm you can run the Docker stack in the above step. Please reach out if something does not work as expected.
-- [ ] Confirm you can download the synthetic demo dataset (`synthetic_omop_gis.sql.gz`, 3 MB) and the fallback exposure file (`external_exposure_fallback.csv.gz`, 11 MB) from the [`syntheticDataGIS/data`](https://github.com/OHDSI/GIS/tree/main/syntheticDataGIS/data) folder
-- [ ] For Exercises 3 and 4, pull the pre-built R image (RStudio with HADES, Capr, CaprForExtensions, FeatureExtractionForExtensions, CohortMethod and the [gaiaCore](gaiaCore.html) package already installed): `docker pull --platform linux/amd64 ohdsi/gaia-core:main`. Nothing needs to be built or installed. After the Gaia stack from [Get Started](get-started.html) is running, start the image on the same Docker network so it can reach the database as `gaia-db` (stop the stack's own `gaia-core` service first if it is running, because both use port 8787; on Apple Silicon keep `--platform linux/amd64`):
+- [ ] Confirm you can download the synthetic demo dataset (`synthetic_omop_gis.sql.gz`, 3 MB), the fallback exposure file (`external_exposure_fallback.csv.gz`, 11 MB) and `docker-compose.tutorial.yaml` from the [`syntheticDataGIS/data`](https://github.com/OHDSI/GIS/tree/main/syntheticDataGIS/data) folder. Copy the two data files into the `volumes/temp` folder of your `gaiaDocker` checkout; Exercise 2 restores them from there, inside the container, so nothing needs to be unzipped on your computer (this matters on Windows).
+- [ ] For Exercises 3 and 4, pull the pre-built R image (RStudio with HADES, Capr, CaprForExtensions, FeatureExtractionForExtensions, CohortMethod and the [gaiaCore](gaiaCore.html) package already installed): `docker pull --platform linux/amd64 ohdsi/gaia-core@sha256:40ebb1e5a4e57b455bf6444f8389bd71b2e8483491b00f0ba5193f9969636eb4`. Nothing needs to be built or installed. After the Gaia stack from [Get Started](get-started.html) is running, start the image on the same Docker network so it can reach the database as `gaia-db` (stop the stack's own `gaia-core` service first if it is running, because both use port 8787; on Apple Silicon keep `--platform linux/amd64`):
 
   ```sh
-  docker run -d --name gaia-core --platform linux/amd64 --network gaiadocker_default -p 8787:8787 \
-    -e USER=ohdsi -e PASSWORD=<choose a password> ohdsi/gaia-core:main
+  docker run -d --name gaia-core --platform linux/amd64 --network gaiadocker_default -p 8787:8787 -e USER=ohdsi -e PASSWORD=<choose a password> ohdsi/gaia-core@sha256:40ebb1e5a4e57b455bf6444f8389bd71b2e8483491b00f0ba5193f9969636eb4
   ```
+
+  (Keep the command on one line: it is the same in PowerShell, Terminal and bash.)
 
   Then open <http://localhost:8787> and sign in with `ohdsi` and that password. In R, connect with `server = "gaia-db/gaiacore"` and the Postgres password from `gaiaDocker/secrets/gaia/POSTGRES_PASSWORD`; `DATABASECONNECTOR_JAR_FOLDER` is already set, so `pathToDriver` is optional. (`gaiadocker_default` is the network docker compose creates for a checkout in a folder called `gaiaDocker`; list yours with `docker network ls`.)
 

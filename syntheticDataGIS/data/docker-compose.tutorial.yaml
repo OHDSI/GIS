@@ -1,0 +1,19 @@
+services:
+  gaia-db:
+    image: ohdsi/gaia-db@sha256:bd044e2931b11d98a99e730582ab11788fc5beac1442b5c0ada1871c6398957a
+    pull_policy: missing
+  gaia-postgrest:
+    image: ohdsi/gaia-postgrest@sha256:b1cf7d160263b7101b81337b91005acf7299fb1b461e944a4c7e2f45e20670cf
+    pull_policy: missing
+  gaia-catalog-pg:
+    image: ohdsi/gaia-catalog@sha256:30803318c694fb067a0f6877058cea8abaedf8bd89b4795a36f64aac86e66a00
+    pull_policy: missing
+  gaia-catalog-tcp:
+    image: ohdsi/gaia-catalog@sha256:30803318c694fb067a0f6877058cea8abaedf8bd89b4795a36f64aac86e66a00
+    pull_policy: missing
+  gaia-solr:
+    image: ohdsi/gaia-solr@sha256:1e84f6d57de2952c6c502f835abc432204ce8f3113359d7451474265f39cee39
+    pull_policy: missing
+  gaia-pgadmin:
+    image: dpage/pgadmin4@sha256:2c7d73e13bd6c30b1d53e4c25d0d6d81adbd0799c4f4d6a09efc5d68fca5d16d
+    pull_policy: missing

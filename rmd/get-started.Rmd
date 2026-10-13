@@ -48,6 +48,14 @@ windows
 docker compose --profile gaia up -d
 ```
 
+**For the tutorial**, start the stack with the pinned images instead, so that everyone runs exactly the same versions. Download [`docker-compose.tutorial.yaml`](https://github.com/OHDSI/GIS/blob/main/syntheticDataGIS/data/docker-compose.tutorial.yaml) into the `gaiaDocker` folder (next to `docker-compose.yaml`) and run:
+
+```bash
+docker compose -f docker-compose.yaml -f docker-compose.tutorial.yaml --profile gaia up -d
+```
+
+Use the same two `-f` options for any later `docker compose` command that starts or stops the stack (`docker compose exec` and `docker compose ps` work as before).
+
 On the first start it may take several minutes to pull the containers from the docker hub container repository. NOTE: there are several profiles available (see [Profiles](#profiles)).
 
 ### verify services are running

@@ -24,10 +24,11 @@ You start with the synthetic persons and their residence history but **no exposu
 
 All SQL runs in the gaia-db container: `docker compose exec gaia-db psql -U postgres -d gaiacore` (or use PGAdmin).
 
-1. **Deploy the stack and load the persons.** Start the pinned containers and confirm the health checks pass (see [Get Started](get-started.html#quick-start-deploy-gaia)). Download `synthetic_omop_gis.sql.gz` (and the fallback file `external_exposure_fallback.csv.gz` used at the end of this exercise) from the [`syntheticDataGIS/data`](https://github.com/OHDSI/GIS/tree/main/syntheticDataGIS/data) folder, or get them from the faculty. Then restore the synthetic dataset:
+1. **Deploy the stack and load the persons.** Start the pinned containers and confirm the health checks pass (see [Get Started](get-started.html#quick-start-deploy-gaia)). Download `synthetic_omop_gis.sql.gz` (and the fallback file `external_exposure_fallback.csv.gz` used at the end of this exercise) from the [`syntheticDataGIS/data`](https://github.com/OHDSI/GIS/tree/main/syntheticDataGIS/data) folder, or get them from the faculty, and **copy both into the `volumes/temp` folder of your `gaiaDocker` checkout**: the stack mounts that folder inside the database container as `/temp`. Then restore the synthetic dataset by running the unzip inside the container. The command is the same in PowerShell, Terminal and bash, and nothing is unzipped on your computer:
    ```bash
-   gunzip -c synthetic_omop_gis.sql.gz | docker compose exec -T gaia-db psql -U postgres -d gaiacore
+   docker compose exec gaia-db sh -c "gunzip -c /temp/synthetic_omop_gis.sql.gz | psql -U postgres -d gaiacore"
    ```
+   Run it once: running it again prints "already exists" errors and loads every row twice.
    This creates the `omopgis` and `demo` schemas next to Gaia's `backbone` and `working` schemas. Check that `omopgis.person` has 10,000 rows and `omopgis.external_exposure` is empty.
 
 2. **Ingest the source datasets.** The county boundaries must be ingested before the PM2.5 dataset and the SES index, which are joined to them. Each call downloads the data and loads it into PostGIS, which takes several minutes (about 0.5 GB in total; the faculty can provide a pre-staged volume if bandwidth is limited). The catalog entry that drives ingestion is the metadata record from Exercise 1 (your own, or the fallback provided).
@@ -185,8 +186,7 @@ All SQL runs in the gaia-db container: `docker compose exec gaia-db psql -U post
 
 **If the pipeline does not run on your machine,** load the derived exposure from `external_exposure_fallback.csv.gz` instead of steps 2 to 4 and 8:
 ```bash
-gunzip -c external_exposure_fallback.csv.gz | docker compose exec -T gaia-db psql -U postgres -d gaiacore \
-  -c "\copy omopgis.external_exposure FROM STDIN WITH (FORMAT csv, HEADER true)"
+docker compose exec gaia-db psql -U postgres -d gaiacore -c "\copy omopgis.external_exposure FROM PROGRAM 'gunzip -c /temp/external_exposure_fallback.csv.gz' WITH (FORMAT csv, HEADER true)"
 ```
 Then run the checks in steps 5 and 6 against the OMOP tables (replace `working.external_exposure` with `omopgis.external_exposure` and `working.location_history` with `omopgis.location_history`). The lineage trace in step 7 needs the Gaia geometry and attribute tables, so ask a faculty member to run it for you or to share a screen.
 

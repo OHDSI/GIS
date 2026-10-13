@@ -241,13 +241,13 @@ for t in $(dbquery "SELECT table_schema || '.' || table_name FROM information_sc
 done
 
 # fallback exposure file
-dbpsql -c "\\copy (SELECT row_number() OVER (ORDER BY person_id, exposure_start_date, location_id) AS external_exposure_id,
+dbpsql -c "\\copy (SELECT row_number() OVER (ORDER BY person_id, exposure_start_date, location_id, exposure_concept_id DESC) AS external_exposure_id,
                           location_id, person_id, exposure_concept_id, exposure_start_date,
                           exposure_start_datetime, exposure_end_date, exposure_end_datetime, exposure_type_concept_id,
                           exposure_relationship_concept_id, exposure_source_concept_id, exposure_source_value,
                           exposure_relationship_source_value, dose_unit_source_value, quantity, modifier_source_value,
                           operator_concept_id, value_as_number, value_as_concept_id, unit_concept_id
-                   FROM working.external_exposure ORDER BY person_id, exposure_start_date, location_id)
+                   FROM working.external_exposure ORDER BY person_id, exposure_start_date, location_id, exposure_concept_id DESC)
            TO STDOUT WITH (FORMAT csv, HEADER true)" | gzip -9 > "$OUT_DIR/external_exposure_fallback.csv.gz"
 
 # raw monthly county PM2.5 for the persons' counties: the input of the benchmark's independent answer key
