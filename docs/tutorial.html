@@ -609,30 +609,37 @@ not work on windows.</li>
 steps before coming to the workshop</strong></em></p>
 <ul class="task-list">
 <li><p><label><input type="checkbox" />Review the <a
-href="get-started.html">Get Started</a> page and follw the instructions
-to deploy the gaia toolchain.</label></p></li>
+href="get-started.html">Get Started</a> page and follow the instructions
+to deploy the gaia toolchain. For the tutorial, start the stack with the
+pinned images (<code>docker-compose.tutorial.yaml</code>, described on
+that page).</label></p></li>
 <li><p><label><input type="checkbox" />Confirm you can run the Docker
 stack in the above step. Please reach out if something does not work as
 expected.</label></p></li>
 <li><p><label><input type="checkbox" />Confirm you can download the
-synthetic demo dataset (<code>synthetic_omop_gis.sql.gz</code>, 3 MB)
-and the fallback exposure file
-(<code>external_exposure_fallback.csv.gz</code>, 11 MB) from the <a
+synthetic demo dataset (<code>synthetic_omop_gis.sql.gz</code>, 3 MB),
+the fallback exposure file
+(<code>external_exposure_fallback.csv.gz</code>, 11 MB) and
+<code>docker-compose.tutorial.yaml</code> from the <a
 href="https://github.com/OHDSI/GIS/tree/main/syntheticDataGIS/data"><code>syntheticDataGIS/data</code></a>
-folder</label></p></li>
+folder. Copy the two data files into the <code>volumes/temp</code>
+folder of your <code>gaiaDocker</code> checkout; Exercise 2 restores
+them from there, inside the container, so nothing needs to be unzipped
+on your computer (this matters on Windows).</label></p></li>
 <li><p><label><input type="checkbox" />For Exercises 3 and 4, pull the
 pre-built R image (RStudio with HADES, Capr, CaprForExtensions,
 FeatureExtractionForExtensions, CohortMethod and the <a
 href="gaiaCore.html">gaiaCore</a> package already installed):
-<code>docker pull --platform linux/amd64 ohdsi/gaia-core:main</code>.
+<code>docker pull --platform linux/amd64 ohdsi/gaia-core@sha256:40ebb1e5a4e57b455bf6444f8389bd71b2e8483491b00f0ba5193f9969636eb4</code>.
 Nothing needs to be built or installed. After the Gaia stack from <a
 href="get-started.html">Get Started</a> is running, start the image on
 the same Docker network so it can reach the database as
 <code>gaia-db</code> (stop the stack’s own <code>gaia-core</code>
 service first if it is running, because both use port 8787; on Apple
 Silicon keep <code>--platform linux/amd64</code>):</label></p>
-<pre class="sh"><code>docker run -d --name gaia-core --platform linux/amd64 --network gaiadocker_default -p 8787:8787 \
-  -e USER=ohdsi -e PASSWORD=&lt;choose a password&gt; ohdsi/gaia-core:main</code></pre>
+<pre class="sh"><code>docker run -d --name gaia-core --platform linux/amd64 --network gaiadocker_default -p 8787:8787 -e USER=ohdsi -e PASSWORD=&lt;choose a password&gt; ohdsi/gaia-core@sha256:40ebb1e5a4e57b455bf6444f8389bd71b2e8483491b00f0ba5193f9969636eb4</code></pre>
+<p>(Keep the command on one line: it is the same in PowerShell, Terminal
+and bash.)</p>
 <p>Then open <a href="http://localhost:8787"
 class="uri">http://localhost:8787</a> and sign in with
 <code>ohdsi</code> and that password. In R, connect with

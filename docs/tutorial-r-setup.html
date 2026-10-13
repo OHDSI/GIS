@@ -553,22 +553,24 @@ trace).</p>
 <div id="start-the-r-environment" class="section level2">
 <h2><strong>Start the R environment</strong></h2>
 <ol style="list-style-type: decimal">
-<li><p>Deploy the Gaia stack and restore the synthetic dataset as in
-Exercise 2, step 1 of the <a href="tutorial-exercise-2.html">SQL
-track</a> (the restore is a shell command and is the same in both
-tracks).</p></li>
+<li><p>Deploy the Gaia stack (with the pinned images, see <a
+href="get-started.html">Get Started</a>) and restore the synthetic
+dataset as in Exercise 2, step 1 of the <a
+href="tutorial-exercise-2.html">SQL track</a> (the restore is the same
+in both tracks).</p></li>
 <li><p>Pull and start the R image on the same Docker network as the
 database (stop the stack’s own <code>gaia-core</code> service first if
 it is running, because both use port 8787; on Apple Silicon keep
 <code>--platform linux/amd64</code>):</p>
-<pre class="sh"><code>docker pull --platform linux/amd64 ohdsi/gaia-core:main
-docker run -d --name gaia-core --platform linux/amd64 --network gaiadocker_default -p 8787:8787 \
-  -e USER=ohdsi -e PASSWORD=&lt;choose a password&gt; \
-  -e GAIA_POSTGRES_PASSWORD=&quot;$(cat secrets/gaia/POSTGRES_PASSWORD)&quot; ohdsi/gaia-core:main</code></pre>
+<pre class="sh"><code>docker pull --platform linux/amd64 ohdsi/gaia-core@sha256:40ebb1e5a4e57b455bf6444f8389bd71b2e8483491b00f0ba5193f9969636eb4
+docker run -d --name gaia-core --platform linux/amd64 --network gaiadocker_default -p 8787:8787 -e USER=ohdsi -e PASSWORD=&lt;choose a password&gt; -e GAIA_POSTGRES_PASSWORD=&lt;postgres password&gt; ohdsi/gaia-core@sha256:40ebb1e5a4e57b455bf6444f8389bd71b2e8483491b00f0ba5193f9969636eb4</code></pre>
 <p>(<code>gaiadocker_default</code> is the network docker compose
 creates for a checkout in a folder called <code>gaiaDocker</code>; list
-yours with <code>docker network ls</code>. Run the command from the
-<code>gaiaDocker</code> folder so the password file is found.)</p></li>
+yours with <code>docker network ls</code>.
+<code>&lt;postgres password&gt;</code> is the content of the file
+<code>gaiaDocker/secrets/gaia/POSTGRES_PASSWORD</code>; paste it in
+directly. Keep the command on one line: it is the same in PowerShell,
+Terminal and bash.)</p></li>
 <li><p>Open <a href="http://localhost:8787"
 class="uri">http://localhost:8787</a> and sign in with
 <code>ohdsi</code> and the password you chose.</p></li>
