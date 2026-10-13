@@ -535,13 +535,20 @@ Download <code>synthetic_omop_gis.sql.gz</code> (and the fallback file
 <code>external_exposure_fallback.csv.gz</code> used at the end of this
 exercise) from the <a
 href="https://github.com/OHDSI/GIS/tree/main/syntheticDataGIS/data"><code>syntheticDataGIS/data</code></a>
-folder, or get them from the faculty. Then restore the synthetic
-dataset:</p>
-<pre class="bash"><code>gunzip -c synthetic_omop_gis.sql.gz | docker compose exec -T gaia-db psql -U postgres -d gaiacore</code></pre>
-<p>This creates the <code>omopgis</code> and <code>demo</code> schemas
-next to Gaia’s <code>backbone</code> and <code>working</code> schemas.
-Check that <code>omopgis.person</code> has 10,000 rows and
-<code>omopgis.external_exposure</code> is empty.</p></li>
+folder, or get them from the faculty, and <strong>copy both into the
+<code>volumes/temp</code> folder of your <code>gaiaDocker</code>
+checkout</strong>: the stack mounts that folder inside the database
+container as <code>/temp</code>. Then restore the synthetic dataset by
+running the unzip inside the container. The command is the same in
+PowerShell, Terminal and bash, and nothing is unzipped on your
+computer:</p>
+<pre class="bash"><code>docker compose exec gaia-db sh -c &quot;gunzip -c /temp/synthetic_omop_gis.sql.gz | psql -U postgres -d gaiacore&quot;</code></pre>
+<p>Run it once: running it again prints “already exists” errors and
+loads every row twice. This creates the <code>omopgis</code> and
+<code>demo</code> schemas next to Gaia’s <code>backbone</code> and
+<code>working</code> schemas. Check that <code>omopgis.person</code> has
+10,000 rows and <code>omopgis.external_exposure</code> is
+empty.</p></li>
 <li><p><strong>Ingest the source datasets.</strong> The county
 boundaries must be ingested before the PM2.5 dataset and the SES index,
 which are joined to them. Each call downloads the data and loads it into
@@ -743,8 +750,7 @@ WHERE person_id &gt; 0;</code></pre></li>
 <p><strong>If the pipeline does not run on your machine,</strong> load
 the derived exposure from <code>external_exposure_fallback.csv.gz</code>
 instead of steps 2 to 4 and 8:</p>
-<pre class="bash"><code>gunzip -c external_exposure_fallback.csv.gz | docker compose exec -T gaia-db psql -U postgres -d gaiacore \
-  -c &quot;\copy omopgis.external_exposure FROM STDIN WITH (FORMAT csv, HEADER true)&quot;</code></pre>
+<pre class="bash"><code>docker compose exec gaia-db psql -U postgres -d gaiacore -c &quot;\copy omopgis.external_exposure FROM PROGRAM &#39;gunzip -c /temp/external_exposure_fallback.csv.gz&#39; WITH (FORMAT csv, HEADER true)&quot;</code></pre>
 <p>Then run the checks in steps 5 and 6 against the OMOP tables (replace
 <code>working.external_exposure</code> with
 <code>omopgis.external_exposure</code> and
