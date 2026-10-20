@@ -10,8 +10,6 @@ output:
 
 # **Geo Data Visualization**
 
-<div class="alert alert-warning"><strong>Work in progress.</strong> These tutorial materials are still under active development and will continue to change until the tutorial takes place on <strong>October 20, 2026</strong>. Content, links, and exercises may be incomplete or shift without notice.</div>
-
 This page lets you explore the public PM2.5 datasets described in [Geo Data Description](tutorial-geo-data-description.html). Drag the slider (or use the arrow keys once it is focused, or press Play) to move through time and compare how the pattern changes. Each map is a pre-rendered frame; nothing is queried live.
 
 _NOTE: both of these datasets are derived from the same [raw sensor data](https://www.epa.gov/outdoor-air-quality-data) published by the US Environmental Protection Agency (EPA) as pre-generated aggregates and hourly observations._

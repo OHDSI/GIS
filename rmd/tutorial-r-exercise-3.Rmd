@@ -10,8 +10,6 @@ output:
 
 # **R Exercise 3: OMOP integration with gaiaCore**
 
-<div class="alert alert-warning"><strong>Beta.</strong> This is the R version of <a href="tutorial-exercise-3.html">Exercise 3</a>, with the same data, goal and answer key. The SQL version remains the reference path for October 20, 2026.</div>
-
 ## **Goal**
 
 Query the person-place-time model, validate vocabulary roles, and calculate temporally aligned exposure metrics: mean PM2.5 during pregnancy, and mean PM2.5 in the year before a COPD diagnosis. Then build cohorts stratified by exposure with the Capr extension.

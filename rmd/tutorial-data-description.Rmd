@@ -10,8 +10,6 @@ output:
 
 # **OMOP Data Description**
 
-<div class="alert alert-warning"><strong>Work in progress.</strong> These tutorial materials are still under active development and will continue to change until the tutorial takes place on <strong>October 20, 2026</strong>. Content, links, and exercises may be incomplete or shift without notice.</div>
-
 The tutorial uses two datasets: a synthetic OMOP CDM population (generated from code in this repository) and a public monthly county PM2.5 dataset for the United States (an external source; see [Geo Data Description](tutorial-geo-data-description.html)). Session 1 catalogs the public dataset. In Session 2 you ingest it with Gaia and link it, together with the simulated county SES index (registered through the same catalog), to the synthetic persons, which produces the `EXTERNAL_EXPOSURE` table. Sessions 3 and 4 query and model that result.
 
 <br>

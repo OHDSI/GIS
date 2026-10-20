@@ -10,8 +10,6 @@ output:
 
 # **R track: setup**
 
-<div class="alert alert-warning"><strong>Beta.</strong> The R track is a parallel version of Exercises 2 to 4 that uses the <a href="gaiaCore.html">gaiaCore</a> R package instead of SQL. The SQL exercises remain the reference path for October 20, 2026.</div>
-
 ## **What changes in the R track**
 
 The pipeline and the data are the same as in the SQL exercises. You run each step with a gaiaCore function from RStudio, which calls the same gaiaDb SQL functions underneath, and you keep the SQL only where it is the clearest way to look at the data (the answer key and the lineage trace).

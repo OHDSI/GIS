@@ -10,8 +10,6 @@ output:
 
 # **OMOP Data Visualization**
 
-<div class="alert alert-warning"><strong>Work in progress.</strong> These tutorial materials are still under active development and will continue to change until the tutorial takes place on <strong>October 20, 2026</strong>. Content, links, and exercises may be incomplete or shift without notice.</div>
-
 This page shows the contents of the synthetic OMOP + GIS/SDOH dataset described in [OMOP Data Description](tutorial-data-description.html). Source: [`syntheticDataGIS/`](https://github.com/OHDSI/GIS/tree/main/syntheticDataGIS).
 
 Each chart is paired with the SQL query that produced it. The charts read from small precomputed CSV extracts in [`rmd/data/synthetic-dataset/`](https://github.com/OHDSI/GIS/tree/main/rmd/data/synthetic-dataset) because this is a static site with no database behind it. To regenerate the extracts, build the dataset (see the [build instructions](https://github.com/OHDSI/GIS/blob/main/syntheticDataGIS/README.md)) and re-run the queries with `psql \copy ... TO '<file>.csv' WITH CSV HEADER`.

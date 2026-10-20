@@ -10,8 +10,6 @@ output:
 
 # **R Exercise 4: Analytical applications with gaiaCore**
 
-<div class="alert alert-warning"><strong>Beta.</strong> This is the R version of <a href="tutorial-exercise-4.html">Exercise 4</a>, with the same data and design. The SQL version remains the reference path for October 20, 2026.</div>
-
 ## **Goal**
 
 Design an analysis-ready exposure feature and identify threats to validity and federated execution requirements. Exposure records are longitudinal facts; models require index-aligned covariates, and turning one into the other requires deliberate choices that can be gotten wrong in specific, checkable ways.

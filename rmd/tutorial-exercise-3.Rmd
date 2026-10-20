@@ -10,8 +10,6 @@ output:
 
 # **Exercise 3: OMOP integration**
 
-<div class="alert alert-warning"><strong>Work in progress.</strong> These tutorial materials are still under active development and will continue to change until the tutorial takes place on <strong>October 20, 2026</strong>. Content, links, and exercises may be incomplete or shift without notice.</div>
-
 ## **Goal**
 
 Understand and query the person-place-time model, validate vocabulary roles, and calculate temporally aligned exposure metrics: mean PM2.5 during pregnancy, and mean PM2.5 in the year before a COPD diagnosis. Then build cohorts stratified by exposure with the Capr extension.

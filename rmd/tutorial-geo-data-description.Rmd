@@ -10,8 +10,6 @@ output:
 
 # **Geo Data Description**
 
-<div class="alert alert-warning"><strong>Work in progress.</strong> These tutorial materials are still under active development and will continue to change until the tutorial takes place on <strong>October 20, 2026</strong>. Content, links, and exercises may be incomplete or shift without notice.</div>
-
 The tutorial uses two datasets: a synthetic OMOP CDM population (described in [OMOP Data Description](tutorial-data-description.html)) and the public PM2.5 dataset for the United States described on this page (an external source, used to demonstrate cataloging and ingestion of a real dataset). Session 1 catalogs the public dataset; Sessions 2-4 link it against the synthetic OMOP population. See [Geo Data Visualization](tutorial-geo-data-visualization.html) for a characterization of this dataset.
 
 <br>
