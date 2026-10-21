@@ -1,0 +1,44 @@
+{
+  "rights": "CC0-1.0",
+  "temporal_extent": [
+    "2019-01-01",
+    "2019-12-31"
+  ],
+  "structure": "vector",
+  "geometry": "point",
+  "temporal_dimension": "1 day",
+  "epsg": "EPSG:4269",
+  "fields": [
+    "sensor_id",
+    "floor_number",
+    "sensor_type",
+    "pm25_sensor"
+  ],
+  "attributes": [
+    "sensor_id;Sensor identifier;OHDSI GIS tutorial data generator (simulated);integer;;;;",
+    "floor_number;Floor the sensor is on;OHDSI GIS tutorial data generator (simulated);integer;;;;",
+    "sensor_type;window (near an outer wall) or core;OHDSI GIS tutorial data generator (simulated);varchar;;;;",
+    "pm25_sensor;Daily PM2.5 reading of the sensor, stored as a jsonb object keyed by startDate/endDate;OHDSI GIS tutorial data generator (simulated);jsonb;micrograms/cubic meter;;;;2019-01-01;2019-12-31;2052499839"
+  ],
+  "local_epsg": "EPSG:4269",
+  "derive": [],
+  "service": [
+    "file"
+  ],
+  "source": "https://raw.githubusercontent.com/OHDSI/GIS/main/syntheticDataGIS/tower/data/tower_sensors.csv",
+  "file": [
+    "synthetic_tower_sensors"
+  ],
+  "extension": "csv",
+  "download": "wget",
+  "table": "synthetic_tower_sensors",
+  "format": "csv",
+  "dependency": [],
+  "etl_parameters": "",
+  "custom_etl": "",
+  "custom_parameters": "",
+  "up": "true",
+  "podID": "gaia-db",
+  "update_frequency": "Never",
+  "checksum": "TBD"
+}

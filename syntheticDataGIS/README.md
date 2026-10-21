@@ -4,6 +4,8 @@ Generator for the synthetic cohort used in the OHDSI GIS tutorial: 10,000 adult 
 
 Everything about the persons is synthetic. The exposure behind the conditions is real, but it is **not shipped**: `omopgis.external_exposure` is empty in the published dataset and participants derive it with gaiaDB in Session 2.
 
+See also [`tower/`](tower/README.md): a second synthetic dataset, a 100-floor building flattened to a row of floor polygons with particle sensors on every floor, for exposure that changes over a short distance (the floor you live on).
+
 ## Build
 
 ```sh

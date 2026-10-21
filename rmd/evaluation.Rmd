@@ -48,9 +48,6 @@ The sources of the evaluation differ in geometry, resolution, time coverage, ori
 | US census tract boundaries (TIGER/Line 2019; 2010 vintage) | Geometry | Real | Polygons, 11,523 eligible tracts in four states | Static | `geom_index` |
 | Monthly PM2.5 at county and tract resolution (CDC EPHTN; EPA Downscaler) | Attribute (four variables; monthly mean joined) | Real | Monthly time series per unit | 2014-2019, monthly | `attr_index` |
 | Simulated SES index (by county; by tract in the benchmark) | Attribute (confounder) | Simulated | One value per unit | Static | `attr_index` |
-| US primary and secondary roads (TIGER/Line 2019) | Geometry | Real | Lines, 18,408 segments in four states | Static | `geom_index` |
-| Simulated near-road increment (distance bands of 0-50, 50-100, 100-200 and 200-400 m around those roads) | Geometry and attribute | Simulated on real road geometry | Polygons, 140,832 pieces | Static | `geom_index` and `attr_index` |
-| Simulated exposure surfaces (correlation length 100 m, 1 km and 10 km; 10 km window) | Geometry and attribute | Simulated | Polygons: 160,801, 1,681 and 25 cells | Static | `geom_index` and `attr_index` |
 
 <br>
 
@@ -77,18 +74,6 @@ A CohortMethod comparison of high versus low exposure performed less well (adjus
 
 For a smooth regional exposure such as PM2.5, averaged over six years, realistic geocoding error changed person-level exposure little, and shifts in the effect estimates were smaller than their standard errors; no effect was lost or created.
 
-**When geocoding error matters.** In two stress tests with the same persons, outcome model and error distributions, geocoding error mattered once it approached the length scale of the exposure. For synthetic exposure surfaces with an exponential correlation length of 100 m, 1 km or 10 km, the share of the true effect recovered fell as predicted by regression dilution:
-
-| Correlation length | Nominatim | ArcGIS Pro | DeGAUSS | PostGIS TIGER |
-|---|---|---|---|---|
-| 100 m | 0.82 (56%) | 0.70 (27%) | 0.52 (7%) | 0.54 (7%) |
-| 1 km | 0.95 (91%) | 0.96 (92%) | 0.87 (72%) | 0.87 (74%) |
-| 10 km | 0.99 (93%) | 0.99 (93%) | 0.98 (93%) | 0.97 (93%) |
-
-*Share of the true effect recovered (coverage of the 8 true effects). Coverage at the true locations was 94%, 93% and 93%.*
-
-A near-road increment added to real tract PM2.5 behaved similarly: the near-road coefficient lost 4-6% with Nominatim and ArcGIS Pro and 14% with DeGAUSS and PostGIS TIGER, while the tract PM2.5 coefficient was unaffected. The road increments are illustrative, and synthetic residences lie farther from roads than real addresses, so the effect is likely understated. In both tests, Gaia joins of the surfaces and road bands reproduced the analytic values.
-
 <br>
 
 ## **Limitations**
@@ -96,8 +81,8 @@ A near-road increment added to real tract PM2.5 behaved similarly: the near-road
 - No analysis was run across sites: federated execution is a property of the OHDSI network and of the design, not a result shown here.
 - Patient locations were coordinates, not geocoded addresses, so geocoding was evaluated through simulated displacement rather than end to end.
 - Persons are placed uniformly at random inside county or tract polygons, so everyone in a unit shares one exposure value; SES and SDOH values are simulated; null outcomes are null by construction.
-- The index was exercised on a small set of source types: county and tract polygons, two area-level attribute sources, and, in the stress tests, simulated surfaces and road bands represented as vector polygons. It has not yet been exercised on native raster files, real high-resolution surfaces or point-monitor networks.
-- The geocoding error distributions come from one urban county, so rural error is probably understated.
+- The index was exercised on a small set of source types: county and tract polygons and two area-level attribute sources. It has not yet been exercised on native raster files, real high-resolution surfaces or point-monitor networks.
+- The geocoding error distributions come from one urban county, so rural error is probably understated, and the analysis is specific to a smooth, regionally correlated exposure averaged over six years.
 - Gaia-derived rows currently leave `unit_concept_id` empty; the unit is declared in the catalog (for example 32964, micrograms per cubic meter, for PM2.5).
 
 Real-world, multi-site validation is a near-term priority.

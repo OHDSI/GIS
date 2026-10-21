@@ -1,0 +1,42 @@
+{
+  "rights": "CC0-1.0",
+  "temporal_extent": [
+    "2019-01-01",
+    "2019-12-31"
+  ],
+  "structure": "vector",
+  "geometry": "multipolygon",
+  "temporal_dimension": "1 day",
+  "epsg": "EPSG:4269",
+  "fields": [
+    "floor_id",
+    "floor_number",
+    "pm25_floor_mean"
+  ],
+  "attributes": [
+    "floor_id;Floor identifier;OHDSI GIS tutorial data generator (simulated);integer;;;;",
+    "floor_number;Floor number, 1 (lowest) to 100;OHDSI GIS tutorial data generator (simulated);integer;;;;",
+    "pm25_floor_mean;Daily mean PM2.5 of the four sensors on the floor, stored as a jsonb object keyed by startDate/endDate;OHDSI GIS tutorial data generator (simulated);jsonb;micrograms/cubic meter;;;;2019-01-01;2019-12-31;2052499839"
+  ],
+  "local_epsg": "EPSG:4269",
+  "derive": [],
+  "service": [
+    "file"
+  ],
+  "source": "https://raw.githubusercontent.com/OHDSI/GIS/main/syntheticDataGIS/tower/data/tower_floors.csv",
+  "file": [
+    "synthetic_tower_floors"
+  ],
+  "extension": "csv",
+  "download": "wget",
+  "table": "synthetic_tower_floors",
+  "format": "csv",
+  "dependency": [],
+  "etl_parameters": "",
+  "custom_etl": "",
+  "custom_parameters": "",
+  "up": "true",
+  "podID": "gaia-db",
+  "update_frequency": "Never",
+  "checksum": "TBD"
+}

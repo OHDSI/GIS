@@ -1,0 +1,24 @@
+param,value,notes
+seed,20261021,Random seed
+n_floors,100,Floors in the building
+n_persons,10000,Persons (an equal number on every floor)
+floor_width_m,30.0,"Floor extent along the flattened strip (x), metres"
+floor_depth_m,30.0,"Floor extent across the strip (y), metres"
+metres_per_deg_lon,111319.49079327357,Metres per degree of longitude at the equator
+metres_per_deg_lat,110574.0,Metres per degree of latitude at the equator
+period_start,2019-01-01,First day of the sensor series and of the observation period
+period_end,2019-12-31,"Last day (daily series, 365 days)"
+pm25_floor1_ugm3,6.0,"Expected PM2.5 on floor 1 before seasonal, weather and sensor terms"
+pm25_slope_per_floor,0.12,Increase of the expected PM2.5 per floor (ug/m3)
+pm25_season_amp,1.0,Amplitude of the annual cycle shared by all floors
+pm25_weather_sd,0.6,SD of the building-wide AR(1) weather term
+pm25_weather_rho,0.8,Day-to-day autocorrelation of the weather term
+pm25_sensor_noise_sd,0.5,SD of the daily noise of every sensor reading
+pm25_sensor_offset_sd,0.05,SD of the fixed random offset of every sensor
+pm25_ref,12.0,Reference PM2.5 for the outcome model (about the building mean)
+ses_slope_per_floor,0.2,Person SES index rises by this many points per floor (confounder)
+ses_sd,15.0,SD of the person SES index around its floor mean
+mover_share,0.1,Share of persons who move once to another floor
+move_window,2019-02-01/2019-11-30,Move dates are uniform in this window
+floor_frailty_sd,0.15,SD of the shared floor-level random effect on the log-odds of every outcome
+age_ref,54.0,Reference age for the risk model

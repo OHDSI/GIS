@@ -60,7 +60,7 @@ Median error was smallest for Nominatim and ArcGIS Pro. PostGIS TIGER and DeGAUS
 
 *Two example addresses: the green point is the original location, the others are each geocoder's result.*
 
-The error distributions come from one urban county, so rural error is probably understated. How much geocoding error matters for an effect estimate depends on how fast the exposure varies in space; see the [evaluation](evaluation.html) page.
+The error distributions come from one urban county, so rural error is probably understated. How much geocoding error matters for an effect estimate depends on how fast the exposure varies in space.
 
 <br>
 
