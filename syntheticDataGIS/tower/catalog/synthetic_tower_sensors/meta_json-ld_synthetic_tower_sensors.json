@@ -1,0 +1,113 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "dct": "http://purl.org/dc/terms/",
+    "qudt": "http://qudt.org/schema/qudt/"
+  },
+  "@type": "Dataset",
+  "@id": "https://github.com/OHDSI/gaiaCatalog/tree/main/datastore/data/synthetic_tower_sensors",
+  "name": "Simulated particle sensors of a 100-floor tower, daily PM2.5 per sensor",
+  "creator": [
+    {
+      "@type": "Organization",
+      "name": "OHDSI GIS Working Group"
+    }
+  ],
+  "url": "https://github.com/OHDSI/GIS/tree/main/syntheticDataGIS/tower",
+  "provider": [
+    {
+      "@type": "Organization",
+      "name": "OHDSI GIS Working Group"
+    }
+  ],
+  "license": "cc0-1.0",
+  "spatialCoverage": [
+    {
+      "@type": "Place",
+      "name": "Synthetic (open ocean at longitude 0, latitude 0; no real place)"
+    }
+  ],
+  "temporalCoverage": "2019-01-01/2019-12-31",
+  "type": "Vector Dataset",
+  "datePublished": "2026-10-21",
+  "dateModified": "2026-10-21",
+  "description": "SIMULATED data for a 100-floor tower flattened to a row of adjacent sensor geometries (400 sensor points; floor k is the 30 m by 30 m rectangle starting at x = 30(k-1) m, so height is the x axis). Daily PM2.5 reading of the sensor, one value per day of 2019. Particle levels rise with height by design and are illustrative, not physical. It is not a measurement of any real exposure.",
+  "keywords": [
+    "simulated",
+    "synthetic",
+    "tower",
+    "floors",
+    "particulate matter",
+    "OHDSI benchmark"
+  ],
+  "@language": "en",
+  "measurementTechnique": [
+    {
+      "@type": "DefinedTerm",
+      "description": "GIS Data Structure for Representation",
+      "inDefinedTermSet": {
+        "@type": "DefinedTermSet",
+        "name": "dataRepresentation"
+      },
+      "termCode": "vector"
+    },
+    {
+      "@type": "DefinedTerm",
+      "description": "GIS Vector Geometery",
+      "inDefinedTermSet": {
+        "@type": "DefinedTermSet",
+        "name": "vectorGeometry"
+      },
+      "termCode": "point"
+    }
+  ],
+  "additionalProperty": [
+    {
+      "@type": "PropertyValue",
+      "propertyID": "http://dbpedia.org/resource/Spatial_reference_system",
+      "value": "https://epsg.io/4269"
+    }
+  ],
+  "about": [
+    {
+      "@type": "Event",
+      "name": "ETL process for the simulated tower sensors",
+      "description": "The CSV (WKT geometry plus a daily jsonb series) is published by the tower generator and loaded into a raw table with ogr2ogr; the postgis step builds the typed table, converts the series to jsonb, adds geom_local and the spatial index."
+    }
+  ],
+  "variableMeasured": [
+    {
+      "@type": "PropertyValue",
+      "name": "sensor_id",
+      "description": "Sensor identifier",
+      "qudt:dataType": "integer"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "floor_number",
+      "description": "Floor the sensor is on",
+      "qudt:dataType": "integer"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "sensor_type",
+      "description": "window (near an outer wall) or core",
+      "qudt:dataType": "varchar"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "pm25_sensor",
+      "description": "Daily PM2.5 reading of the sensor, stored as a jsonb object with date ranges as keys (startDate/endDate formatted as YYYY-MM-DD/YYYY-MM-DD) and PM2.5 values for each date key.",
+      "propertyID": "2052499839",
+      "qudt:dataType": "jsonb",
+      "unitCode": "32964",
+      "unitText": "micrograms/cubic meter",
+      "startDate": "2019-01-01",
+      "endDate": "2019-12-31"
+    }
+  ],
+  "version": "1",
+  "distribution": [
+    "https://raw.githubusercontent.com/OHDSI/GIS/main/syntheticDataGIS/tower/data/tower_sensors.csv"
+  ]
+}
