@@ -427,9 +427,6 @@ div.tocify {
       <a href="algorithms.html">Algorithms</a>
     </li>
     <li>
-      <a href="evaluation.html">Evaluation</a>
-    </li>
-    <li>
       <a href="geocoding.html">Geocoding</a>
     </li>
     <li>
@@ -515,8 +512,8 @@ WG</h1>
 address strings or place names. The GIS toolchain needs patient
 locations as coordinates (or as a geography such as a tract or ZIP code)
 with dates, but the working group does not develop geocoding software.
-This page summarizes the options, how four geocoders compared on the
-same addresses, and what to consider before choosing one.</p>
+This page summarizes the options and what to consider before choosing
+one.</p>
 <p>Geocoding is optional and sits outside the Gaia core. A site that
 already holds ZIP codes or census tracts can start from those; the <a
 href="gaia-intro.html#what-you-need">Gaia overview</a> describes the
@@ -570,11 +567,11 @@ county)</td>
 </div>
 <div id="the-four-geocoders-compared" class="section level2">
 <h2><strong>The four geocoders compared</strong></h2>
-<p>DeGAUSS and the PostGIS TIGER geocoder are available as optional
-components of the Gaia Docker deployment. OpenStreetMap Nominatim has
-been used as an alternate geocoder in prior deployments but is not part
-of the default containerized stack. ArcGIS Pro is a commercial
-comparator and is not part of the toolchain.</p>
+<p>DeGAUSS and the PostGIS TIGER geocoder are optional components of the
+Gaia Docker deployment and run locally. Nominatim has been used as an
+alternative. ArcGIS Pro is a commercial tool shown for comparison: it is
+not part of the toolchain, and it sends addresses to the vendor’s
+servers.</p>
 <table style="width:100%;">
 <colgroup>
 <col width="16%" />
@@ -630,102 +627,18 @@ city</td>
 </tr>
 </tbody>
 </table>
-<p>PostGIS TIGER and DeGAUSS use U.S. reference data and cover U.S.
-addresses only. Nominatim also provides global coverage, which matters
-for international multi-site studies.</p>
+<p>PostGIS TIGER and DeGAUSS cover U.S. addresses only; Nominatim
+(OpenStreetMap) is not limited to the U.S.</p>
 <p><br></p>
 </div>
-<div id="benchmark" class="section level2">
-<h2><strong>Benchmark</strong></h2>
-<p>We benchmarked the four geocoders on 5,000 validated residential
-addresses in Miami-Dade County, Florida, with known true locations (the
-county property-parcel point for each address). Metrics were hit rate,
-the distribution of error distances by distance band, and the median,
-mean and maximum error. DeGAUSS, PostGIS TIGER and Nominatim can run
-locally, so no address data leaves the institutional compute
-environment. ArcGIS Pro was run with an enterprise license and the Esri
-StreetMap Premium database; addresses are sent to Esri servers in the
-University of Miami configuration, so it is used only as a comparator
-and is not part of the privacy-preserving stack. The protocol recorded
-geocoder versions, reference-data snapshot dates, the address sampling
-frame, preprocessing rules and hardware.</p>
-<table style="width:100%;">
-<colgroup>
-<col width="11%" />
-<col width="11%" />
-<col width="11%" />
-<col width="11%" />
-<col width="11%" />
-<col width="11%" />
-<col width="11%" />
-<col width="11%" />
-<col width="11%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Geocoder</th>
-<th>Geocoded (hit rate)</th>
-<th>0-100 ft</th>
-<th>100-500 ft</th>
-<th>500 ft-1 mi</th>
-<th>&gt; 1 mi</th>
-<th>Median ft (m)</th>
-<th>Mean ft</th>
-<th>Max ft</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>PostGIS TIGER</td>
-<td>4,999 (99.98%)</td>
-<td>1,675</td>
-<td>2,400</td>
-<td>711</td>
-<td>213</td>
-<td>155 (47)</td>
-<td>3,934</td>
-<td>2,700,504</td>
-</tr>
-<tr class="even">
-<td>DeGAUSS</td>
-<td>4,960 (99.20%)</td>
-<td>1,420</td>
-<td>2,583</td>
-<td>766</td>
-<td>191</td>
-<td>165 (50)</td>
-<td>818</td>
-<td>57,698</td>
-</tr>
-<tr class="odd">
-<td>ArcGIS Pro</td>
-<td>4,868 (97.36%)</td>
-<td>2,985</td>
-<td>1,789</td>
-<td>87</td>
-<td>7</td>
-<td>85 (26)</td>
-<td>284</td>
-<td>212,687</td>
-</tr>
-<tr class="even">
-<td>Nominatim</td>
-<td>4,918 (98.36%)</td>
-<td>3,718</td>
-<td>899</td>
-<td>230</td>
-<td>71</td>
-<td>18 (5.6)</td>
-<td>303</td>
-<td>57,096</td>
-</tr>
-</tbody>
-</table>
-<p>Median error was smallest for Nominatim and ArcGIS Pro. PostGIS TIGER
-and DeGAUSS had the heaviest tails, and PostGIS TIGER produced a few
-extreme outliers (maximum about 510 miles). Address preprocessing
-(standardizing directional abbreviations, street suffixes and unit
-designators) improved match rates by 8-12% across services.</p>
+<div id="comparing-geocoders" class="section level2">
+<h2><strong>Comparing geocoders</strong></h2>
+<p>Geocoders differ in how close they land to the true location and in
+how often they match at all. Comparing them on a sample of addresses
+with known locations, and recording versions, reference-data dates and
+preprocessing, is the way to choose one for a site. The comparison data
+for one such exercise are in <a
+href="https://github.com/tibbben/geocode-benchmark-2023">geocode-benchmark-2023</a>.</p>
 <div class="float">
 <img src="images/slides/geocoder_benchmark_examples.jpg"
 alt="Example geocoder results against the original locations" />
@@ -734,9 +647,6 @@ locations</div>
 </div>
 <p><em>Two example addresses: the green point is the original location,
 the others are each geocoder’s result.</em></p>
-<p>The error distributions come from one urban county, so rural error is
-probably understated. How much geocoding error matters for an effect
-estimate depends on how fast the exposure varies in space.</p>
 <p><br></p>
 </div>
 <div id="an-example-workflow-with-degauss" class="section level2">
@@ -778,25 +688,11 @@ internet API calls, and query speed</li>
 <li><strong>Data flow</strong>: encryption, retention in external
 systems, and deletion clauses</li>
 </ul>
-<p>Local geocoding supports privacy-preserving deployment, but
-compliance depends on institutional governance, configuration and
-data-flow controls. Residential addresses and location histories are
-personal data under the GDPR, and fine-grained coordinates can act as
-quasi-identifiers; sites in the EU should complete the appropriate
-data-protection assessments.</p>
-<p>Geocoding accuracy and bias also vary by address type and population:
-rural addresses geocode less accurately than urban ones, and addresses
-for people experiencing homelessness or in non-traditional housing may
-be incomplete or missing from reference data. These errors are socially
-patterned and may amplify, rather than randomize, exposure
-misclassification.</p>
 <p><br></p>
 </div>
 <div id="more" class="section level2">
 <h2><strong>More</strong></h2>
 <ul>
-<li>Benchmark data: <a
-href="https://github.com/tibbben/geocode-benchmark-2023">geocode-benchmark-2023</a></li>
 <li>Roadmap: <a
 href="https://github.com/OHDSI/GIS/issues/366">Geocoding</a></li>
 </ul>
