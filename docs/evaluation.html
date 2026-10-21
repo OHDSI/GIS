@@ -392,6 +392,13 @@ div.tocify {
     </li>
   </ul>
 </li>
+<li>
+  <a href="examples.html">
+    <span class="fa fa-lightbulb"></span>
+     
+    Examples
+  </a>
+</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-earth"></span>
@@ -657,32 +664,6 @@ Downscaler)</td>
 <td>Static</td>
 <td><code>attr_index</code></td>
 </tr>
-<tr class="odd">
-<td>US primary and secondary roads (TIGER/Line 2019)</td>
-<td>Geometry</td>
-<td>Real</td>
-<td>Lines, 18,408 segments in four states</td>
-<td>Static</td>
-<td><code>geom_index</code></td>
-</tr>
-<tr class="even">
-<td>Simulated near-road increment (distance bands of 0-50, 50-100,
-100-200 and 200-400 m around those roads)</td>
-<td>Geometry and attribute</td>
-<td>Simulated on real road geometry</td>
-<td>Polygons, 140,832 pieces</td>
-<td>Static</td>
-<td><code>geom_index</code> and <code>attr_index</code></td>
-</tr>
-<tr class="odd">
-<td>Simulated exposure surfaces (correlation length 100 m, 1 km and 10
-km; 10 km window)</td>
-<td>Geometry and attribute</td>
-<td>Simulated</td>
-<td>Polygons: 160,801, 1,681 and 25 cells</td>
-<td>Static</td>
-<td><code>geom_index</code> and <code>attr_index</code></td>
-</tr>
 </tbody>
 </table>
 <p><br></p>
@@ -786,62 +767,6 @@ and county, and all exposures and outcome models recomputed.</p>
 years, realistic geocoding error changed person-level exposure little,
 and shifts in the effect estimates were smaller than their standard
 errors; no effect was lost or created.</p>
-<p><strong>When geocoding error matters.</strong> In two stress tests
-with the same persons, outcome model and error distributions, geocoding
-error mattered once it approached the length scale of the exposure. For
-synthetic exposure surfaces with an exponential correlation length of
-100 m, 1 km or 10 km, the share of the true effect recovered fell as
-predicted by regression dilution:</p>
-<table>
-<colgroup>
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
-<col width="20%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Correlation length</th>
-<th>Nominatim</th>
-<th>ArcGIS Pro</th>
-<th>DeGAUSS</th>
-<th>PostGIS TIGER</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>100 m</td>
-<td>0.82 (56%)</td>
-<td>0.70 (27%)</td>
-<td>0.52 (7%)</td>
-<td>0.54 (7%)</td>
-</tr>
-<tr class="even">
-<td>1 km</td>
-<td>0.95 (91%)</td>
-<td>0.96 (92%)</td>
-<td>0.87 (72%)</td>
-<td>0.87 (74%)</td>
-</tr>
-<tr class="odd">
-<td>10 km</td>
-<td>0.99 (93%)</td>
-<td>0.99 (93%)</td>
-<td>0.98 (93%)</td>
-<td>0.97 (93%)</td>
-</tr>
-</tbody>
-</table>
-<p><em>Share of the true effect recovered (coverage of the 8 true
-effects). Coverage at the true locations was 94%, 93% and 93%.</em></p>
-<p>A near-road increment added to real tract PM2.5 behaved similarly:
-the near-road coefficient lost 4-6% with Nominatim and ArcGIS Pro and
-14% with DeGAUSS and PostGIS TIGER, while the tract PM2.5 coefficient
-was unaffected. The road increments are illustrative, and synthetic
-residences lie farther from roads than real addresses, so the effect is
-likely understated. In both tests, Gaia joins of the surfaces and road
-bands reproduced the analytic values.</p>
 <p><br></p>
 </div>
 <div id="limitations" class="section level2">
@@ -856,12 +781,12 @@ to end.</li>
 polygons, so everyone in a unit shares one exposure value; SES and SDOH
 values are simulated; null outcomes are null by construction.</li>
 <li>The index was exercised on a small set of source types: county and
-tract polygons, two area-level attribute sources, and, in the stress
-tests, simulated surfaces and road bands represented as vector polygons.
-It has not yet been exercised on native raster files, real
-high-resolution surfaces or point-monitor networks.</li>
+tract polygons and two area-level attribute sources. It has not yet been
+exercised on native raster files, real high-resolution surfaces or
+point-monitor networks.</li>
 <li>The geocoding error distributions come from one urban county, so
-rural error is probably understated.</li>
+rural error is probably understated, and the analysis is specific to a
+smooth, regionally correlated exposure averaged over six years.</li>
 <li>Gaia-derived rows currently leave <code>unit_concept_id</code>
 empty; the unit is declared in the catalog (for example 32964,
 micrograms per cubic meter, for PM2.5).</li>
