@@ -31,6 +31,8 @@ If you do not have your own question, use this one. It is a cohort study of whet
 - **Eligibility:** two years of observation before the index date, a full 730 days of exposure coverage, and no COPD before the index date (prevalent cases are excluded).
 - **Covariates:** age at index, sex, and county SES (the SDOH or `county_reference` value at the index date).
 
+![The exposure window: day -730 to day -1 before the index date](images/slides/exposure_window.png)
+
 The feature table below implements exactly that. It builds on the exposure from Exercise 3 and keeps eligibility (pre-index) separate from the outcome (post-index):
 
 ```sql
@@ -254,6 +256,12 @@ One feature specification, plus three anticipated biases (with the concrete mech
 - [ ] The CohortMethod run uses the Exercise 3 cohorts, excludes `AQI_CATEGORY` and the exposure itself from the covariates, and reports balance and the negative control
 
 <br>
+
+## **What travels across a network, and what stays home**
+
+![What travels and what stays local](images/slides/travels_vs_stays.png)
+
+Each site runs Gaia beside its own CDM; only the left column crosses the network.
 
 ## **Closing synthesis**
 

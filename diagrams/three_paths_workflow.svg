@@ -1,0 +1,199 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='1152.00pt' height='1080.00pt' viewBox='0 0 1152.00 1080.00'>
+<g class='svglite'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+    }
+    .svglite g.glyphgroup path {
+      fill: inherit;
+      stroke: none;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHwxMTUyLjAwfDAuMDB8MTA4MC4wMA=='>
+    <rect x='0.00' y='0.00' width='1152.00' height='1080.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHwxMTUyLjAwfDAuMDB8MTA4MC4wMA==)'>
+<rect x='0.00' y='0.00' width='1152.00' height='1080.00' style='stroke-width: 0.00; stroke: none; fill: #FFFFFF;' />
+<text x='576.00' y='21.51' text-anchor='middle' style='font-size: 21.62px; font-weight: bold;fill: #222222; font-family: "TeX Gyre Heros";' textLength='654.05px' lengthAdjust='spacingAndGlyphs'>Three data paths, one exposure record, reliable health evidence</text>
+<text x='576.00' y='46.14' text-anchor='middle' style='font-size: 9.96px;fill: #444444; font-family: "TeX Gyre Heros";' textLength='640.64px' lengthAdjust='spacingAndGlyphs'>Worked example with real rows from the synthetic tutorial dataset: person 9 moves from Fauquier County, VA to Lamar County, MS while pregnant</text>
+<rect x='21.60' y='64.80' width='352.80' height='68.40' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #2166AC;' />
+<text x='36.00' y='82.37' style='font-size: 14.23px; font-weight: bold;fill: #FFFFFF; font-family: "TeX Gyre Heros";' textLength='122.30px' lengthAdjust='spacingAndGlyphs'>1  CLINICAL PATH</text>
+<text x='36.00' y='112.79' style='font-size: 10.53px;fill: #FFFFFF; font-family: "TeX Gyre Heros";' textLength='136.03px' lengthAdjust='spacingAndGlyphs'>what happened to the person</text>
+<rect x='21.60' y='147.60' width='352.80' height='111.60' style='stroke-width: 1.28; stroke: #2166AC; stroke-linecap: butt; stroke-linejoin: miter; fill: #E3EDF7;' />
+<text x='36.00' y='160.30' style='font-size: 8.54px; font-weight: bold;fill: #2166AC; font-family: "TeX Gyre Heros";' textLength='36.44px' lengthAdjust='spacingAndGlyphs'>SOURCE</text>
+<text x='36.00' y='185.61' style='font-size: 10.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='184.30px' lengthAdjust='spacingAndGlyphs'>EHR or claims data at the data partner,</text>
+<text x='36.00' y='200.33' style='font-size: 10.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='207.00px' lengthAdjust='spacingAndGlyphs'>standardized to the OMOP CDM: PERSON,</text>
+<text x='36.00' y='215.06' style='font-size: 10.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='195.64px' lengthAdjust='spacingAndGlyphs'>OBSERVATION_PERIOD, EPISODE and</text>
+<text x='36.00' y='229.78' style='font-size: 10.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='141.88px' lengthAdjust='spacingAndGlyphs'>CONDITION_OCCURRENCE</text>
+<line x1='198.00' y1='259.20' x2='198.00' y2='279.36' style='stroke-width: 2.56; stroke: #2166AC; stroke-linecap: butt;' />
+<polygon points='193.46,271.50 198.00,279.36 202.54,271.50 ' style='stroke-width: 2.56; stroke: #2166AC; stroke-linecap: butt; fill: #2166AC;' />
+<rect x='21.60' y='279.36' width='352.80' height='113.04' style='stroke-width: 1.28; stroke: #2166AC; stroke-linecap: butt; stroke-linejoin: miter; fill: #E3EDF7;' />
+<text x='36.00' y='292.06' style='font-size: 8.54px; font-weight: bold;fill: #2166AC; font-family: "TeX Gyre Heros";' textLength='80.41px' lengthAdjust='spacingAndGlyphs'>STANDARDIZED AS</text>
+<text x='36.00' y='317.37' style='font-size: 10.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='183.33px' lengthAdjust='spacingAndGlyphs'>A person_id with clinical time windows:</text>
+<text x='36.00' y='332.09' style='font-size: 10.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='190.00px' lengthAdjust='spacingAndGlyphs'>an index date, a pregnancy, a diagnosis.</text>
+<text x='36.00' y='346.82' style='font-size: 10.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='213.61px' lengthAdjust='spacingAndGlyphs'>Standard concepts, e.g. Pregnancy 4299535,</text>
+<text x='36.00' y='361.54' style='font-size: 10.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='69.17px' lengthAdjust='spacingAndGlyphs'>COPD 255573</text>
+<line x1='198.00' y1='392.40' x2='198.00' y2='412.56' style='stroke-width: 2.56; stroke: #2166AC; stroke-linecap: butt;' />
+<polygon points='193.46,404.70 198.00,412.56 202.54,404.70 ' style='stroke-width: 2.56; stroke: #2166AC; stroke-linecap: butt; fill: #2166AC;' />
+<rect x='21.60' y='414.00' width='352.80' height='183.60' style='stroke-width: 2.35; stroke: #2166AC; stroke-linecap: butt; stroke-linejoin: miter; fill: #FFFFFF;' />
+<text x='36.00' y='427.42' style='font-size: 8.54px; font-weight: bold;fill: #2166AC; font-family: "TeX Gyre Heros";' textLength='145.61px' lengthAdjust='spacingAndGlyphs'>EXAMPLE: PERSON 9 (SYNTHETIC)</text>
+<text x='36.00' y='454.07' style='font-size: 10.53px; font-weight: bold;fill: #2166AC; font-family: "TeX Gyre Heros";' textLength='44.42px' lengthAdjust='spacingAndGlyphs'>PERSON</text>
+<text x='36.00' y='468.47' style='font-size: 10.53px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='84.55px' lengthAdjust='spacingAndGlyphs'>female, born 1981</text>
+<text x='36.00' y='482.87' style='font-size: 10.53px; font-weight: bold;fill: #2166AC; font-family: "TeX Gyre Heros";' textLength='121.45px' lengthAdjust='spacingAndGlyphs'>OBSERVATION_PERIOD</text>
+<text x='36.00' y='497.27' style='font-size: 10.53px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='122.00px' lengthAdjust='spacingAndGlyphs'>2014-01-01 to 2019-12-31</text>
+<text x='36.00' y='511.67' style='font-size: 10.53px; font-weight: bold;fill: #2166AC; font-family: "TeX Gyre Heros";' textLength='109.89px' lengthAdjust='spacingAndGlyphs'>EPISODE (pregnancy)</text>
+<text x='36.00' y='526.07' style='font-size: 10.53px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='174.22px' lengthAdjust='spacingAndGlyphs'>2016-05-20 to 2017-02-10 (267 days)</text>
+<text x='36.00' y='554.87' style='font-size: 10.53px; font-weight: bold;fill: #2166AC; font-family: "TeX Gyre Heros";' textLength='71.23px' lengthAdjust='spacingAndGlyphs'>Whole dataset</text>
+<text x='36.00' y='569.27' style='font-size: 10.53px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='215.50px' lengthAdjust='spacingAndGlyphs'>10,000 persons; 1,086 with a COPD diagnosis</text>
+<rect x='399.60' y='64.80' width='352.80' height='68.40' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #1B7837;' />
+<text x='414.00' y='82.37' style='font-size: 14.23px; font-weight: bold;fill: #FFFFFF; font-family: "TeX Gyre Heros";' textLength='128.62px' lengthAdjust='spacingAndGlyphs'>2  LOCATION PATH</text>
+<text x='414.00' y='112.79' style='font-size: 10.53px;fill: #FFFFFF; font-family: "TeX Gyre Heros";' textLength='126.77px' lengthAdjust='spacingAndGlyphs'>where they lived, and when</text>
+<rect x='399.60' y='147.60' width='352.80' height='111.60' style='stroke-width: 1.28; stroke: #1B7837; stroke-linecap: butt; stroke-linejoin: miter; fill: #E1F1E3;' />
+<text x='414.00' y='160.30' style='font-size: 8.54px; font-weight: bold;fill: #1B7837; font-family: "TeX Gyre Heros";' textLength='36.44px' lengthAdjust='spacingAndGlyphs'>SOURCE</text>
+<text x='414.00' y='185.61' style='font-size: 10.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='209.50px' lengthAdjust='spacingAndGlyphs'>Addresses stay at the data partner. They are</text>
+<text x='414.00' y='200.33' style='font-size: 10.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='238.39px' lengthAdjust='spacingAndGlyphs'>geocoded locally (DeGAUSS, PostGIS, Nominatim</text>
+<text x='414.00' y='215.06' style='font-size: 10.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='204.30px' lengthAdjust='spacingAndGlyphs'>or ArcGIS) to a point; only the point and the</text>
+<text x='414.00' y='229.78' style='font-size: 10.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='130.91px' lengthAdjust='spacingAndGlyphs'>dates are used downstream</text>
+<line x1='576.00' y1='259.20' x2='576.00' y2='279.36' style='stroke-width: 2.56; stroke: #1B7837; stroke-linecap: butt;' />
+<polygon points='571.46,271.50 576.00,279.36 580.54,271.50 ' style='stroke-width: 2.56; stroke: #1B7837; stroke-linecap: butt; fill: #1B7837;' />
+<rect x='399.60' y='279.36' width='352.80' height='113.04' style='stroke-width: 1.28; stroke: #1B7837; stroke-linecap: butt; stroke-linejoin: miter; fill: #E1F1E3;' />
+<text x='414.00' y='292.06' style='font-size: 8.54px; font-weight: bold;fill: #1B7837; font-family: "TeX Gyre Heros";' textLength='80.41px' lengthAdjust='spacingAndGlyphs'>STANDARDIZED AS</text>
+<text x='414.00' y='317.37' style='font-size: 10.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='223.45px' lengthAdjust='spacingAndGlyphs'>OMOP GIS extension: LOCATION (a point) and</text>
+<text x='414.00' y='332.09' style='font-size: 10.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='234.17px' lengthAdjust='spacingAndGlyphs'>LOCATION_HISTORY (person, location, start and</text>
+<text x='414.00' y='346.82' style='font-size: 10.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='199.75px' lengthAdjust='spacingAndGlyphs'>end date, relationship = Patient Residence</text>
+<text x='414.00' y='361.54' style='font-size: 10.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='62.77px' lengthAdjust='spacingAndGlyphs'>2052496995)</text>
+<line x1='576.00' y1='392.40' x2='576.00' y2='412.56' style='stroke-width: 2.56; stroke: #1B7837; stroke-linecap: butt;' />
+<polygon points='571.46,404.70 576.00,412.56 580.54,404.70 ' style='stroke-width: 2.56; stroke: #1B7837; stroke-linecap: butt; fill: #1B7837;' />
+<rect x='399.60' y='414.00' width='352.80' height='183.60' style='stroke-width: 2.35; stroke: #1B7837; stroke-linecap: butt; stroke-linejoin: miter; fill: #FFFFFF;' />
+<text x='414.00' y='427.42' style='font-size: 8.54px; font-weight: bold;fill: #1B7837; font-family: "TeX Gyre Heros";' textLength='191.69px' lengthAdjust='spacingAndGlyphs'>EXAMPLE: LOCATION_HISTORY OF PERSON 9</text>
+<text x='414.00' y='454.07' style='font-size: 10.53px; font-weight: bold;fill: #1B7837; font-family: "TeX Gyre Heros";' textLength='178.64px' lengthAdjust='spacingAndGlyphs'>location 9: 2014-01-01 to 2016-08-14</text>
+<text x='414.00' y='468.47' style='font-size: 10.53px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='104.61px' lengthAdjust='spacingAndGlyphs'>Fauquier Crossing, VA</text>
+<text x='414.00' y='482.87' style='font-size: 10.53px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='137.98px' lengthAdjust='spacingAndGlyphs'>Fauquier County, FIPS 51061</text>
+<text x='414.00' y='497.27' style='font-size: 10.53px; font-weight: bold;fill: #1B7837; font-family: "TeX Gyre Heros";' textLength='202.02px' lengthAdjust='spacingAndGlyphs'>location 10009: 2016-08-15 to 2019-12-31</text>
+<text x='414.00' y='511.67' style='font-size: 10.53px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='95.77px' lengthAdjust='spacingAndGlyphs'>Lamar Crossing, MS</text>
+<text x='414.00' y='526.07' style='font-size: 10.53px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='126.64px' lengthAdjust='spacingAndGlyphs'>Lamar County, FIPS 28073</text>
+<text x='414.00' y='554.87' style='font-size: 10.53px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='187.48px' lengthAdjust='spacingAndGlyphs'>The move falls mid-pregnancy and splits</text>
+<text x='414.00' y='569.27' style='font-size: 10.53px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='216.95px' lengthAdjust='spacingAndGlyphs'>one month. 955 of 10,000 persons move once.</text>
+<rect x='777.60' y='64.80' width='352.80' height='68.40' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #B35806;' />
+<text x='792.00' y='82.37' style='font-size: 14.23px; font-weight: bold;fill: #FFFFFF; font-family: "TeX Gyre Heros";' textLength='146.75px' lengthAdjust='spacingAndGlyphs'>3  GEOSPATIAL PATH</text>
+<text x='792.00' y='112.79' style='font-size: 10.53px;fill: #FFFFFF; font-family: "TeX Gyre Heros";' textLength='116.94px' lengthAdjust='spacingAndGlyphs'>what the places were like</text>
+<rect x='777.60' y='147.60' width='352.80' height='111.60' style='stroke-width: 1.28; stroke: #B35806; stroke-linecap: butt; stroke-linejoin: miter; fill: #FBEBD5;' />
+<text x='792.00' y='160.30' style='font-size: 8.54px; font-weight: bold;fill: #B35806; font-family: "TeX Gyre Heros";' textLength='36.44px' lengthAdjust='spacingAndGlyphs'>SOURCE</text>
+<text x='792.00' y='185.61' style='font-size: 10.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='202.03px' lengthAdjust='spacingAndGlyphs'>Public datasets: CDC monthly PM2.5 (EPA</text>
+<text x='792.00' y='200.33' style='font-size: 10.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='229.64px' lengthAdjust='spacingAndGlyphs'>Downscaler), Census TIGER county boundaries,</text>
+<text x='792.00' y='215.06' style='font-size: 10.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='219.69px' lengthAdjust='spacingAndGlyphs'>a simulated SES index. Each is described by a</text>
+<text x='792.00' y='229.78' style='font-size: 10.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='164.19px' lengthAdjust='spacingAndGlyphs'>catalog entry (JSON-LD metadata)</text>
+<line x1='954.00' y1='259.20' x2='954.00' y2='279.36' style='stroke-width: 2.56; stroke: #B35806; stroke-linecap: butt;' />
+<polygon points='949.46,271.50 954.00,279.36 958.54,271.50 ' style='stroke-width: 2.56; stroke: #B35806; stroke-linecap: butt; fill: #B35806;' />
+<rect x='777.60' y='279.36' width='352.80' height='113.04' style='stroke-width: 1.28; stroke: #B35806; stroke-linecap: butt; stroke-linejoin: miter; fill: #FBEBD5;' />
+<text x='792.00' y='292.06' style='font-size: 8.54px; font-weight: bold;fill: #B35806; font-family: "TeX Gyre Heros";' textLength='80.41px' lengthAdjust='spacingAndGlyphs'>STANDARDIZED AS</text>
+<text x='792.00' y='317.37' style='font-size: 10.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='221.41px' lengthAdjust='spacingAndGlyphs'>GaiaDB geometry-attribute index: every source</text>
+<text x='792.00' y='332.09' style='font-size: 10.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='192.97px' lengthAdjust='spacingAndGlyphs'>is registered the same way (geom_index,</text>
+<text x='792.00' y='346.82' style='font-size: 10.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='205.11px' lengthAdjust='spacingAndGlyphs'>attr_index) with its concept, unit, period and</text>
+<text x='792.00' y='361.54' style='font-size: 10.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='43.16px' lengthAdjust='spacingAndGlyphs'>source id</text>
+<line x1='954.00' y1='392.40' x2='954.00' y2='412.56' style='stroke-width: 2.56; stroke: #B35806; stroke-linecap: butt;' />
+<polygon points='949.46,404.70 954.00,412.56 958.54,404.70 ' style='stroke-width: 2.56; stroke: #B35806; stroke-linecap: butt; fill: #B35806;' />
+<rect x='777.60' y='414.00' width='352.80' height='183.60' style='stroke-width: 2.35; stroke: #B35806; stroke-linecap: butt; stroke-linejoin: miter; fill: #FFFFFF;' />
+<text x='792.00' y='427.42' style='font-size: 8.54px; font-weight: bold;fill: #B35806; font-family: "TeX Gyre Heros";' textLength='132.23px' lengthAdjust='spacingAndGlyphs'>EXAMPLE: THE TWO COUNTIES</text>
+<text x='792.00' y='454.07' style='font-size: 10.53px; font-weight: bold;fill: #B35806; font-family: "TeX Gyre Heros";' textLength='212.62px' lengthAdjust='spacingAndGlyphs'>PM2.5 monthly mean, ug/m3 (source id 23)</text>
+<text x='792.00' y='468.47' style='font-size: 10.53px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='182.34px' lengthAdjust='spacingAndGlyphs'>Fauquier: Jun 2016 7.65, Jul 2016 8.55</text>
+<text x='792.00' y='482.87' style='font-size: 10.53px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='181.53px' lengthAdjust='spacingAndGlyphs'>Lamar: Sep 2016 8.82, Oct 2016 10.30</text>
+<text x='792.00' y='497.27' style='font-size: 10.53px; font-weight: bold;fill: #B35806; font-family: "TeX Gyre Heros";' textLength='110.12px' lengthAdjust='spacingAndGlyphs'>SES index (simulated)</text>
+<text x='792.00' y='511.67' style='font-size: 10.53px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='123.53px' lengthAdjust='spacingAndGlyphs'>Fauquier 58.6, Lamar 68.2</text>
+<text x='792.00' y='526.07' style='font-size: 10.53px; font-weight: bold;fill: #B35806; font-family: "TeX Gyre Heros";' textLength='194.88px' lengthAdjust='spacingAndGlyphs'>County polygons (Census TIGER 2023)</text>
+<text x='792.00' y='540.47' style='font-size: 10.53px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='141.06px' lengthAdjust='spacingAndGlyphs'>Fauquier 51061, Lamar 28073</text>
+<text x='792.00' y='569.27' style='font-size: 10.53px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='186.66px' lengthAdjust='spacingAndGlyphs'>Whole index: 2,672 counties, 72 months</text>
+<line x1='198.00' y1='597.60' x2='198.00' y2='622.08' style='stroke-width: 3.41; stroke: #2166AC; stroke-linecap: butt;' />
+<polygon points='193.46,614.22 198.00,622.08 202.54,614.22 ' style='stroke-width: 3.41; stroke: #2166AC; stroke-linecap: butt; fill: #2166AC;' />
+<text x='210.96' y='613.05' style='font-size: 8.82px; font-style: italic;fill: #2166AC; font-family: "TeX Gyre Heros";' textLength='106.88px' lengthAdjust='spacingAndGlyphs'>person_id + clinical window</text>
+<line x1='576.00' y1='597.60' x2='576.00' y2='622.08' style='stroke-width: 3.41; stroke: #1B7837; stroke-linecap: butt;' />
+<polygon points='571.46,614.22 576.00,622.08 580.54,614.22 ' style='stroke-width: 3.41; stroke: #1B7837; stroke-linecap: butt; fill: #1B7837;' />
+<text x='588.96' y='613.05' style='font-size: 8.82px; font-style: italic;fill: #1B7837; font-family: "TeX Gyre Heros";' textLength='109.12px' lengthAdjust='spacingAndGlyphs'>location + residence interval</text>
+<line x1='954.00' y1='597.60' x2='954.00' y2='622.08' style='stroke-width: 3.41; stroke: #B35806; stroke-linecap: butt;' />
+<polygon points='949.46,614.22 954.00,622.08 958.54,614.22 ' style='stroke-width: 3.41; stroke: #B35806; stroke-linecap: butt; fill: #B35806;' />
+<text x='966.96' y='613.05' style='font-size: 8.82px; font-style: italic;fill: #B35806; font-family: "TeX Gyre Heros";' textLength='103.23px' lengthAdjust='spacingAndGlyphs'>polygons + monthly values</text>
+<rect x='21.60' y='619.20' width='1108.80' height='176.40' style='stroke-width: 2.35; stroke: #5E3C99; stroke-linecap: butt; stroke-linejoin: miter; fill: #EBE5F4;' />
+<text x='36.00' y='635.10' style='font-size: 11.95px; font-weight: bold;fill: #5E3C99; font-family: "TeX Gyre Heros";' textLength='456.30px' lengthAdjust='spacingAndGlyphs'>MERGE: THE SPATIAL-TEMPORAL JOIN IN GAIADB  (spatial_join_from_catalog)</text>
+<text x='36.00' y='671.51' style='font-size: 10.53px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='260.52px' lengthAdjust='spacingAndGlyphs'>1  Place: the person's point falls inside a county polygon</text>
+<text x='36.00' y='686.27' style='font-size: 10.53px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='66.77px' lengthAdjust='spacingAndGlyphs'>    (ST_Within)</text>
+<text x='36.00' y='701.03' style='font-size: 10.53px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='252.77px' lengthAdjust='spacingAndGlyphs'>2  Time: the month overlaps the residence interval and</text>
+<text x='36.00' y='715.79' style='font-size: 10.53px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='75.25px' lengthAdjust='spacingAndGlyphs'>    is clipped to it</text>
+<text x='36.00' y='730.55' style='font-size: 10.53px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='302.02px' lengthAdjust='spacingAndGlyphs'>3  Result: one EXTERNAL_EXPOSURE row per person, location</text>
+<text x='36.00' y='745.31' style='font-size: 10.53px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='267.14px' lengthAdjust='spacingAndGlyphs'>    and interval, carrying its concept (PM2.5 2052499839),</text>
+<text x='36.00' y='760.07' style='font-size: 10.53px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='258.72px' lengthAdjust='spacingAndGlyphs'>    type (Air Quality Database 2052499878), relationship</text>
+<text x='36.00' y='774.83' style='font-size: 10.53px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='196.75px' lengthAdjust='spacingAndGlyphs'>    (Within 2052496943) and source id (23)</text>
+<rect x='532.80' y='651.60' width='583.20' height='133.20' style='stroke-width: 1.71; stroke: #5E3C99; stroke-linecap: butt; stroke-linejoin: miter; fill: #FFFFFF;' />
+<text x='543.60' y='664.30' style='font-size: 8.54px; font-weight: bold;fill: #5E3C99; font-family: "TeX Gyre Heros";' textLength='389.45px' lengthAdjust='spacingAndGlyphs'>EXTERNAL_EXPOSURE rows of person 9 around the move (one month, two counties, two rows)</text>
+<text x='543.60' y='693.71' style='font-size: 9.39px; font-weight: bold;fill: #5E3C99; font-family: "TeX Gyre Heros";' textLength='27.53px' lengthAdjust='spacingAndGlyphs'>row id</text>
+<text x='543.60' y='715.74' style='font-size: 9.96px; font-weight: bold;fill: #5E3C99; font-family: "TeX Gyre Heros";' textLength='16.59px' lengthAdjust='spacingAndGlyphs'>617</text>
+<text x='543.60' y='735.18' style='font-size: 9.96px; font-weight: bold;fill: #5E3C99; font-family: "TeX Gyre Heros";' textLength='16.59px' lengthAdjust='spacingAndGlyphs'>618</text>
+<text x='597.60' y='693.71' style='font-size: 9.39px; font-weight: bold;fill: #2166AC; font-family: "TeX Gyre Heros";' textLength='31.31px' lengthAdjust='spacingAndGlyphs'>person</text>
+<text x='597.60' y='715.74' style='font-size: 9.96px; font-weight: bold;fill: #2166AC; font-family: "TeX Gyre Heros";' textLength='5.53px' lengthAdjust='spacingAndGlyphs'>9</text>
+<text x='597.60' y='735.18' style='font-size: 9.96px; font-weight: bold;fill: #2166AC; font-family: "TeX Gyre Heros";' textLength='5.53px' lengthAdjust='spacingAndGlyphs'>9</text>
+<text x='658.80' y='693.71' style='font-size: 9.39px; font-weight: bold;fill: #1B7837; font-family: "TeX Gyre Heros";' textLength='35.98px' lengthAdjust='spacingAndGlyphs'>location</text>
+<text x='658.80' y='715.74' style='font-size: 9.96px; font-weight: bold;fill: #1B7837; font-family: "TeX Gyre Heros";' textLength='5.53px' lengthAdjust='spacingAndGlyphs'>9</text>
+<text x='658.80' y='735.18' style='font-size: 9.96px; font-weight: bold;fill: #1B7837; font-family: "TeX Gyre Heros";' textLength='27.66px' lengthAdjust='spacingAndGlyphs'>10009</text>
+<text x='734.40' y='693.71' style='font-size: 9.39px; font-weight: bold;fill: #1B7837; font-family: "TeX Gyre Heros";' textLength='33.36px' lengthAdjust='spacingAndGlyphs'>interval</text>
+<text x='734.40' y='715.74' style='font-size: 9.96px; font-weight: bold;fill: #1B7837; font-family: "TeX Gyre Heros";' textLength='116.56px' lengthAdjust='spacingAndGlyphs'>2016-08-01 to 2016-08-14</text>
+<text x='734.40' y='735.18' style='font-size: 9.96px; font-weight: bold;fill: #1B7837; font-family: "TeX Gyre Heros";' textLength='116.56px' lengthAdjust='spacingAndGlyphs'>2016-08-15 to 2016-08-31</text>
+<text x='936.00' y='693.71' style='font-size: 9.39px; font-weight: bold;fill: #B35806; font-family: "TeX Gyre Heros";' textLength='57.34px' lengthAdjust='spacingAndGlyphs'>PM2.5 ug/m3</text>
+<text x='936.00' y='715.74' style='font-size: 9.96px; font-weight: bold;fill: #B35806; font-family: "TeX Gyre Heros";' textLength='78.95px' lengthAdjust='spacingAndGlyphs'>6.954  (Fauquier)</text>
+<text x='936.00' y='735.18' style='font-size: 9.96px; font-weight: bold;fill: #B35806; font-family: "TeX Gyre Heros";' textLength='66.91px' lengthAdjust='spacingAndGlyphs'>7.998  (Lamar)</text>
+<text x='543.60' y='758.31' style='font-size: 9.10px; font-style: italic;fill: #444444; font-family: "TeX Gyre Heros";' textLength='275.36px' lengthAdjust='spacingAndGlyphs'>Colors show where each field came from: clinical path, location path,</text>
+<text x='543.60' y='770.88' style='font-size: 9.10px; font-style: italic;fill: #444444; font-family: "TeX Gyre Heros";' textLength='283.62px' lengthAdjust='spacingAndGlyphs'>geospatial path. Whole dataset: 720,925 PM2.5 and 10,955 SES rows.</text>
+<line x1='576.00' y1='795.60' x2='576.00' y2='815.76' style='stroke-width: 3.41; stroke: #5E3C99; stroke-linecap: butt;' />
+<polygon points='571.46,807.90 576.00,815.76 580.54,807.90 ' style='stroke-width: 3.41; stroke: #5E3C99; stroke-linecap: butt; fill: #5E3C99;' />
+<rect x='21.60' y='817.20' width='1108.80' height='126.00' style='stroke-width: 2.35; stroke: #33333A; stroke-linecap: butt; stroke-linejoin: miter; fill: #FFFFFF;' />
+<text x='36.00' y='832.38' style='font-size: 11.95px; font-weight: bold;fill: #33333A; font-family: "TeX Gyre Heros";' textLength='503.45px' lengthAdjust='spacingAndGlyphs'>RESEARCH INTEGRATION: THE EXPOSURE RECORD MEETS THE CLINICAL QUESTION</text>
+<rect x='36.00' y='843.84' width='349.20' height='90.72' style='stroke-width: 1.07; stroke: #BBBBBB; stroke-linecap: butt; stroke-linejoin: miter; fill: #F6F6F6;' />
+<text x='46.80' y='857.27' style='font-size: 10.53px; font-weight: bold;fill: #33333A; font-family: "TeX Gyre Heros";' textLength='137.64px' lengthAdjust='spacingAndGlyphs'>Align to the clinical window</text>
+<text x='46.80' y='880.41' style='font-size: 9.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='163.70px' lengthAdjust='spacingAndGlyphs'>Pregnancy 2016-05-20 to 2017-02-10:</text>
+<text x='46.80' y='894.34' style='font-size: 9.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='166.69px' lengthAdjust='spacingAndGlyphs'>11 exposure rows over 267 days give a</text>
+<text x='46.80' y='908.27' style='font-size: 9.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='153.58px' lengthAdjust='spacingAndGlyphs'>day-weighted mean of 8.474 ug/m3.</text>
+<text x='46.80' y='922.20' style='font-size: 9.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='160.78px' lengthAdjust='spacingAndGlyphs'>The naive row mean, 8.331, is wrong.</text>
+<rect x='401.40' y='843.84' width='349.20' height='90.72' style='stroke-width: 1.07; stroke: #BBBBBB; stroke-linecap: butt; stroke-linejoin: miter; fill: #F6F6F6;' />
+<text x='412.20' y='857.27' style='font-size: 10.53px; font-weight: bold;fill: #33333A; font-family: "TeX Gyre Heros";' textLength='133.36px' lengthAdjust='spacingAndGlyphs'>Build cohorts and features</text>
+<text x='412.20' y='880.41' style='font-size: 9.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='159.31px' lengthAdjust='spacingAndGlyphs'>Index 2016-01-01, exposure at index:</text>
+<text x='412.20' y='894.34' style='font-size: 9.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='170.30px' lengthAdjust='spacingAndGlyphs'>high (10 or more ug/m3): 2,717 persons</text>
+<text x='412.20' y='908.27' style='font-size: 9.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='152.56px' lengthAdjust='spacingAndGlyphs'>low (under 8 ug/m3): 3,099 persons</text>
+<text x='412.20' y='922.20' style='font-size: 9.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='177.89px' lengthAdjust='spacingAndGlyphs'>COPD 1,086; negative control CKD 1,384</text>
+<rect x='766.80' y='843.84' width='349.20' height='90.72' style='stroke-width: 1.07; stroke: #BBBBBB; stroke-linecap: butt; stroke-linejoin: miter; fill: #F6F6F6;' />
+<text x='777.60' y='857.27' style='font-size: 10.53px; font-weight: bold;fill: #33333A; font-family: "TeX Gyre Heros";' textLength='93.09px' lengthAdjust='spacingAndGlyphs'>Estimate the effect</text>
+<text x='777.60' y='880.41' style='font-size: 9.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='151.83px' lengthAdjust='spacingAndGlyphs'>Adjusted for SES, age, sex; county-</text>
+<text x='777.60' y='894.34' style='font-size: 9.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='180.06px' lengthAdjust='spacingAndGlyphs'>clustered intervals. COPD slope 0.108 per</text>
+<text x='777.60' y='908.27' style='font-size: 9.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='195.41px' lengthAdjust='spacingAndGlyphs'>ug/m3 (simulated truth 0.15); matched hazard</text>
+<text x='777.60' y='922.20' style='font-size: 9.67px;fill: #222222; font-family: "TeX Gyre Heros";' textLength='187.36px' lengthAdjust='spacingAndGlyphs'>ratio 1.26 (1.01-1.57); CKD 0.94 (0.77-1.15)</text>
+<line x1='576.00' y1='943.20' x2='576.00' y2='959.04' style='stroke-width: 3.41; stroke: #33333A; stroke-linecap: butt;' />
+<polygon points='571.46,951.18 576.00,959.04 580.54,951.18 ' style='stroke-width: 3.41; stroke: #33333A; stroke-linecap: butt; fill: #33333A;' />
+<rect x='21.60' y='961.20' width='1108.80' height='113.04' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #33333A;' />
+<text x='36.00' y='974.94' style='font-size: 11.95px; font-weight: bold;fill: #FFFFFF; font-family: "TeX Gyre Heros";' textLength='174.81px' lengthAdjust='spacingAndGlyphs'>RELIABLE HEALTH EVIDENCE</text>
+<text x='36.00' y='1008.26' style='font-size: 10.24px; font-weight: bold;fill: #FFFFFF; font-family: "TeX Gyre Heros";' textLength='47.09px' lengthAdjust='spacingAndGlyphs'>Traceable</text>
+<text x='36.00' y='1026.87' style='font-size: 9.10px;fill: #FFFFFF; font-family: "TeX Gyre Heros";' textLength='110.45px' lengthAdjust='spacingAndGlyphs'>every row names its source</text>
+<text x='36.00' y='1039.44' style='font-size: 9.10px;fill: #FFFFFF; font-family: "TeX Gyre Heros";' textLength='101.45px' lengthAdjust='spacingAndGlyphs'>variable (23: CDC county</text>
+<text x='36.00' y='1052.00' style='font-size: 9.10px;fill: #FFFFFF; font-family: "TeX Gyre Heros";' textLength='29.33px' lengthAdjust='spacingAndGlyphs'>PM2.5)</text>
+<text x='309.60' y='1008.26' style='font-size: 10.24px; font-weight: bold;fill: #FFFFFF; font-family: "TeX Gyre Heros";' textLength='37.06px' lengthAdjust='spacingAndGlyphs'>Verified</text>
+<text x='309.60' y='1026.87' style='font-size: 9.10px;fill: #FFFFFF; font-family: "TeX Gyre Heros";' textLength='127.33px' lengthAdjust='spacingAndGlyphs'>720,925 of 720,925 rows match</text>
+<text x='309.60' y='1039.44' style='font-size: 9.10px;fill: #FFFFFF; font-family: "TeX Gyre Heros";' textLength='110.84px' lengthAdjust='spacingAndGlyphs'>an independent answer key</text>
+<text x='583.20' y='1008.26' style='font-size: 10.24px; font-weight: bold;fill: #FFFFFF; font-family: "TeX Gyre Heros";' textLength='78.92px' lengthAdjust='spacingAndGlyphs'>Quality-checked</text>
+<text x='583.20' y='1026.87' style='font-size: 9.10px;fill: #FFFFFF; font-family: "TeX Gyre Heros";' textLength='110.88px' lengthAdjust='spacingAndGlyphs'>4 of 4 deliberately bad rows</text>
+<text x='583.20' y='1039.44' style='font-size: 9.10px;fill: #FFFFFF; font-family: "TeX Gyre Heros";' textLength='90.73px' lengthAdjust='spacingAndGlyphs'>caught before analysis</text>
+<text x='856.80' y='1008.26' style='font-size: 10.24px; font-weight: bold;fill: #FFFFFF; font-family: "TeX Gyre Heros";' textLength='50.02px' lengthAdjust='spacingAndGlyphs'>Calibrated</text>
+<text x='856.80' y='1026.87' style='font-size: 9.10px;fill: #FFFFFF; font-family: "TeX Gyre Heros";' textLength='106.58px' lengthAdjust='spacingAndGlyphs'>negative control stays null;</text>
+<text x='856.80' y='1039.44' style='font-size: 9.10px;fill: #FFFFFF; font-family: "TeX Gyre Heros";' textLength='70.03px' lengthAdjust='spacingAndGlyphs'>intervals allow for</text>
+<text x='856.80' y='1052.00' style='font-size: 9.10px;fill: #FFFFFF; font-family: "TeX Gyre Heros";' textLength='38.75px' lengthAdjust='spacingAndGlyphs'>clustering</text>
+</g>
+</g>
+</svg>

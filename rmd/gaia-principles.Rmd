@@ -23,7 +23,7 @@ The Gaia toolchain was designed to meet specific research requirements for integ
 - Harmonize disparate geospatial datasets from multiple sources
 - Calculate spatiotemporal exposure metrics while preserving patient privacy
 - Enable reproducible, federated network studies
-- Support diverse spatial data types (polygons, points, rasters)
+- Support diverse spatial data types (the geometry-attribute index is implemented for vector geometries today; rasters can be staged, and full raster support is planned)
 
 **Technical Requirements**:
 - Standardized representation for heterogeneous geospatial data
@@ -40,18 +40,18 @@ The foundational goals driving Gaia's architecture:
 
 ### **Extensibility**
 - **Common data model** enables stable tooling development
-- **Collaborative growth** through shared metadata repository
+- **Collaborative growth** through a shared metadata repository (the catalog)
 - **Ontology integration** via OMOP vocabulary standards
-- **Language-agnostic access** through RESTful API and database connections
+- **Language-agnostic access** through database connections and an optional PostgREST API
 
 ### **Automation**
-- **Data retrieval** from external sources via functional metadata
-- **Standardization** through transformation recipes
-- **Ingestion** into harmonized schema
-- **Deployment** via containerized stack (gaiaDocker)
+- **Data retrieval** from external sources, driven by each catalog entry's metadata and ETL scripts
+- **Standardization** of every source into the same geometry and attribute structure
+- **Ingestion** into the harmonized schema with one call per dataset
+- **Deployment** via a containerized stack (gaiaDocker), or on any PostgreSQL/PostGIS server
 
 ### **Efficiency**
-- **Storage design** using Entity-Attribute-Value structure
+- **Storage design**: one geometry table and one attribute table per source, in a tall (one row per fact) layout
 - **Spatial indexing** for query performance
 - **Centralized metadata** reduces duplication of ETL effort
 - **Modular architecture** allows independent component development
@@ -68,13 +68,33 @@ The foundational goals driving Gaia's architecture:
 
 | Challenge | Approach |
 | :-------- | :------- |
-| Enable extensible tooling | Implement common data model for place-related data |
+| Enable extensible tooling | Implement a common data model for place-related data |
 | Universal representation for any geospatial data | Represent data as geometries and attributes (of geometries) |
-| Efficiency with large standardized datasets | Split each data source into own pair of geometry and attribute tables |
-| Static functionality for any new data | Indexing structures and parameterization treat disparate tables as functionally combined |
-| Maintain source provenance and versioning | Data source and variable metadata with unique identifiers referenced throughout schema |
-| Automate retrieval, ingestion, standardization | "Functional metadata" at data source and variable level, executed via gaiaDb SQL functions |
-| Enable collaborative metadata growth | Host metadata centrally (gaiaCatalog), not actual data sources |
+| Efficiency with large standardized datasets | Split each data source into its own pair of geometry and attribute tables |
+| Static functionality for any new data | A geometry-attribute index (`geom_index`, `attr_index`) lets one join serve every source |
+| Maintain source provenance and versioning | Data source and variable metadata with unique identifiers referenced throughout the schema |
+| Automate retrieval, ingestion, standardization | Each catalog entry carries its metadata (JSON-LD) and ETL scripts; gaiaDB runs them |
+| Enable collaborative metadata growth | Host metadata centrally (gaiaCatalog), not the data sources themselves |
+
+<br>
+
+![Any source becomes a place and its facts](images/slides/gaia_in_a_nutshell.png)
+
+*Whatever format a source arrives in, Gaia retrieves it using its catalog entry, ingests it, harmonizes it and stores it as geometries and their attributes.*
+
+<br>
+
+## Geometries and Attributes
+
+Every source, whatever its native format, resolution or time coverage, is stored as one of two kinds of object: a **place** (a geometry) or a **fact about a place at a time** (an attribute).
+
+![Geometry and attribute tables](images/slides/geometry_attribute_tables.png)
+
+Geometries are stored once, and any number of sources can attach facts to the same place:
+
+![Many facts, one place](images/slides/many_facts_one_place.png)
+
+*Two sources at the same level (for example SVI and ACS for one tract) do not add a new place, only new facts about the place that is already there.*
 
 <br>
 
@@ -83,33 +103,29 @@ The foundational goals driving Gaia's architecture:
 Gaia processes geospatial data through a standardized pipeline:
 
 ```
-External Data Sources
+External data source
     ↓
-gaiaCatalog (Metadata Repository)
-    ↓ [Functional metadata specifications]
-gaiaDb ETL Functions (SQL/PostGIS)
-    ↓ [Automated retrieval & transformation]
-Harmonized Backbone Schema
-    ↓ [GEOM_* and ATTR_* tables]
-gaiaCore (R package)
-    ↓ [direct database connection]
-OMOP CDM + HADES analytics
+gaiaCatalog entry (JSON-LD metadata + ETL scripts)
+    ↓  backbone.ingest_datasource()
+gaiaDB: metadata load → download and load into PostGIS → geometry clean-up
+    ↓  backbone.gdsc_load_all_variables()
+working.geom_<source> and working.attr_<source>, registered in geom_index / attr_index
+    ↓  working.spatial_join_from_catalog()
+working.external_exposure
+    ↓  gaiaCore (direct database connection)
+OMOP CDM (EXTERNAL_EXPOSURE) + HADES analytics
 ```
 
 **Pipeline stages**:
 
-1. **Discovery**: gaiaCatalog contains metadata for external datasets
-2. **Retrieval**: gaiaDb functions fetch data from source URLs
-3. **Transform**: Transformation recipes (geom_spec, attr_spec) standardize data
-4. **Load**: Data inserted into GEOM_* and ATTR_* tables
-5. **Index**: GEOM_INDEX and ATTR_INDEX populated for parameterized querying
-6. **Access**: gaiaCore runs the pipeline from R and copies the harmonized exposure into the OMOP CDM
+1. **Discovery**: gaiaCatalog holds metadata and ETL scripts for external datasets
+2. **Metadata load**: the entry's JSON-LD populates `data_source` and `variable_source` and registers the dataset in the indexes
+3. **Retrieval and ingestion**: the entry's ETL scripts download the source and load it into PostGIS (`ogr2ogr`), then clean the geometry and add a local-projection column
+4. **Load variables**: `gdsc_load_all_variables` builds the dataset's `geom_*` and `attr_*` tables, one row per feature, variable and time window
+5. **Join**: `spatial_join_from_catalog` matches person locations to geometries and clips each value to the residence interval, one variable at a time
+6. **Access**: gaiaCore runs the pipeline from R, checks the derived rows and copies the exposure into the OMOP CDM
 
-<br>
-
-![](images/pipeline_flow.png)
-
-*Gaia data flow from external sources through catalog metadata to harmonized storage and client access*
+See the [gaiaDB README](https://github.com/OHDSI/gaiaDB) for the function reference.
 
 <br>
 
@@ -121,197 +137,37 @@ OMOP CDM + HADES analytics
 
 ## Schema Overview
 
-The gaiaDb backbone schema consists of three distinct portions:
+The gaiaDB `backbone` schema holds the metadata and the index; the per-source data tables live in the `working` schema.
 
-<br>
+![Three tiers: metadata, index, standardized data](images/schema_3_tier.png)
+
+*Metadata tables describe what data exists. Index tables map each source to its tables. Standardized tables hold the harmonized data.*
 
 ### **1. Metadata Tables**
 
-**DATA_SOURCE** and **VARIABLE_SOURCE** contain both descriptive and functional metadata:
+**DATA_SOURCE** and **VARIABLE_SOURCE** are loaded from a catalog entry's JSON-LD file:
 
-- **DATA_SOURCE**: Catalogs external web-hosted datasets
-  - One row per unique data source
-  - Contains geom_spec (geometry transformation recipe)
-  - Links to multiple VARIABLE_SOURCE records
+- **DATA_SOURCE**: one row per dataset. Columns include `dataset_id`, `dataset_name`, `dataset_version`, `description`, `creator`, `provider`, `license`, `spatial_coverage`, `geom_type`, `srid`, and the dataset's ETL metadata (`etl_metadata`).
+- **VARIABLE_SOURCE**: one row per variable of a dataset. Columns include `variable_name`, `variable_description`, `property_id` (the variable's concept), `data_type`, `unit_code`, `unit_text`, `min_value`, `max_value`, `start_date` and `end_date`. The `variable_source_id` is what Gaia writes into `exposure_source_value`.
 
-- **VARIABLE_SOURCE**: Specifies individual variables within data sources
-  - Many-to-one relationship with DATA_SOURCE
-  - Contains attr_spec (attribute transformation recipe)
-  - Links to ATTR_INDEX for query mapping
+### **2. Index Tables**
 
-<br>
+**GEOM_INDEX** and **ATTR_INDEX** map each source to the tables that hold it:
 
-### **2. Indexing Tables**
+- **GEOM_INDEX**: where each geometry table lives (`database_schema`, `table_name`) and its geometry type
+- **ATTR_INDEX**: where each attribute table lives, plus the variable's name, concept, unit (`unit_source_value`) and time window (`attr_start_date`, `attr_end_date`)
 
-**GEOM_INDEX** and **ATTR_INDEX** provide functional mapping to standardized data:
+The joins run against the tables these indexes describe, rather than against source-specific code, so a new source is added by cataloging it, not by writing a new join.
 
-- Automatically populated from DATA_SOURCE metadata
-- Enable parameterized querying across disparate tables
-- Map data source IDs to actual table locations
-- Support efficient spatial and attribute queries
-
-<br>
+*Known limitation: the link from a geometry table back to its data source is still partly by table name; stable, load-order-independent identifiers are under discussion in the working group.*
 
 ### **3. Standardized Place-Related Data**
 
-**GEOM_*{x}*** and **ATTR_*{x}*** tables store harmonized geospatial data:
+**GEOM_*{x}*** and **ATTR_*{x}*** tables hold the harmonized data:
 
-- Each data source gets unique pair of GEOM and ATTR tables
-- All follow standard template structure (EAV-like format)
-- Schema and table names determined by DATA_SOURCE fields
-- Spatial indexes created on all geometry columns
-
-<br>
-
-## Schema Diagrams
-
-### Conceptual View
-
-![](images/schema_3_tier.png)
-
-The three-tier architecture separates metadata, indexing, and data storage concerns. Metadata tables define what data exists and how to transform it. Indexing tables map logical data source identifiers to physical table locations. Standardized data tables store the harmonized geospatial data itself.
-
-<br>
-
-### Relational Summary
-
-![](images/rel_diagram_1.png)
-
-Relationships between key components: DATA_SOURCE contains functional metadata for datasets. VARIABLE_SOURCE defines variables within datasets. GEOM_INDEX and ATTR_INDEX map to physical GEOM_* and ATTR_* tables containing harmonized data.
-
-<br>
-
-### Full Schema
-
-![](images/backbone_er.png)
-
-Complete entity-relationship diagram showing all tables, fields, and relationships in the gaiaDb backbone schema. Note the indexing tables that bridge metadata definitions to actual data storage.
-
-<br>
-
----
-
-# **Metadata Tables**
-
-<br>
-
-## DATA_SOURCE
-
-![](images/data_and_var_source.png)
-
-*Blue stars signify functional metadata fields*
-
-<br>
-
-**Purpose**: Catalog external (or local) web-hosted geospatial datasets
-
-**Key characteristics**:
-- Every record has unique UUID
-- Valid when geometry type is consistent (e.g., all census tracts)
-- Unique combination of {Organization, Organization Set, Dataset Name}
-- Multiple granularities split into separate DATA_SOURCE records
-
-**Contains**:
-- **Descriptive metadata**: Organization, dataset name, documentation URL, temporal coverage
-- **Functional metadata** (★): geom_spec (geometry transformation recipe), source URL, file format
-- **Technical metadata**: Schema name, table prefix, geometry type
-
-**Usage**:
-- First step of data ingestion process
-- Referenced by VARIABLE_SOURCE, GEOM_INDEX, ATTR_INDEX (foreign keys)
-- Downloaded and ingested by gaiaDb ETL functions
-- Geometry translation logic stored in geom_spec field
-
-See [Backbone Specification: data_source](gaia-datamodels.html#data_source) for detailed field definitions.
-
-<br>
-
-## VARIABLE_SOURCE
-
-**Purpose**: Specify individual variables within data sources and their transformation logic
-
-**Key characteristics**:
-- Many-to-one relationship with DATA_SOURCE
-- Each variable from external dataset gets own VARIABLE_SOURCE record
-- Links to OMOP vocabulary concepts when available
-
-**Contains**:
-- **Descriptive metadata**: Variable name, description, units, temporal coverage
-- **Functional metadata** (★): attr_spec (attribute transformation recipe)
-- **Vocabulary mapping**: OMOP concept_id for standardized terminology
-
-**Usage**:
-- Attribute translation logic stored in attr_spec field
-- Referenced by ATTR_INDEX for query mapping
-- Enables parameterized extraction of specific variables
-- Links geospatial attributes to OMOP vocabularies
-
-**Example**:
-- DATA_SOURCE: "CDC Social Vulnerability Index 2020"
-- VARIABLE_SOURCE records: "Overall SVI Score", "Socioeconomic Theme", "Household Composition Theme", etc.
-
-See [Backbone Specification: variable_source](gaia-datamodels.html#variable_source) for detailed field definitions.
-
-<br>
-
----
-
-# **Indexing Tables**
-
-<br>
-
-Indexing tables are automatically populated from DATA_SOURCE metadata and provide functional mapping to enable parameterized querying across disparate schemas and tables.
-
-![](images/rel_diagram_1.png)
-
-<br>
-
-![](images/backbone_slice_1.png)
-
-*Indexing tables bridge metadata definitions to physical data storage*
-
-<br>
-
-## GEOM_INDEX
-
-![](images/geom_index.png)
-
-**Purpose**: Map data source IDs to physical geometry table locations
-
-**Key fields**:
-- **data_source_id**: Links to DATA_SOURCE.uuid
-- **schema_name**: PostgreSQL schema containing geometry table
-- **table_name**: Name of GEOM_* table
-- **geometry_type**: PostGIS geometry type (POLYGON, POINT, etc.)
-
-**Usage**:
-- Enables queries like "get all geometries for data_source_id X"
-- Supports parameterized spatial queries across sources
-- Automatically updated when new data sources ingested
-
-See [Backbone Specification: geom_index](gaia-datamodels.html#geom_index) for complete definition.
-
-<br>
-
-## ATTR_INDEX
-
-![](images/attr_index.png)
-
-**Purpose**: Map variable IDs to physical attribute table locations
-
-**Key fields**:
-- **variable_source_id**: Links to VARIABLE_SOURCE.uuid
-- **data_source_id**: Links to DATA_SOURCE.uuid
-- **schema_name**: PostgreSQL schema containing attribute table
-- **table_name**: Name of ATTR_* table
-- **column_name**: Specific column in ATTR table
-
-**Usage**:
-- Enables queries like "get attribute values for variable_source_id Y"
-- Supports extraction of specific variables across data sources
-- Facilitates spatiotemporal joins for exposure calculations
-
-See [Backbone Specification: attr_index](gaia-datamodels.html#attr_index) for complete definition.
+- Each data source gets its own pair, created from two template tables
+- All follow the same structure
+- Spatial indexes are created on the geometry columns
 
 <br>
 
@@ -323,201 +179,124 @@ See [Backbone Specification: attr_index](gaia-datamodels.html#attr_index) for co
 
 ## Common Data Model Rationale
 
-The common data model approach, proven successful for clinical data (OMOP CDM), provides:
+The common data model approach, proven for clinical data (OMOP CDM), provides:
 
-1. **Interoperability**: Harmonized structure enables federated research
-2. **Extensibility**: Static model supports stable tooling development
-3. **Scalability**: New data sources fit existing structure
+1. **Interoperability**: harmonized structure enables federated research
+2. **Extensibility**: a static model supports stable tooling development
+3. **Scalability**: new data sources fit the existing structure
 
-**Gaia's approach**: Represent all geospatial data as **geometry objects with affiliated temporal attributes**
+**Gaia's approach**: represent geospatial data as **geometry objects with affiliated temporal attributes**.
 
-**Key transformation**: Convert "wide" tables (variable columns) to "tall" Entity-Attribute-Value (EAV) structure:
+**Key transformation**: wide tables (one column per variable) become tall tables (one row per fact):
 
 ```
 Wide format:
 | geom_id | county_name | pop_2020 | income_median | svi_score |
 
-Tall format (EAV):
-| geom_id | attribute_name | attribute_value | year |
-| 001     | pop_2020       | 50000          | 2020 |
-| 001     | income_median  | 65000          | 2020 |
-| 001     | svi_score      | 0.45           | 2020 |
+Tall format:
+| geom_id | variable       | value | start_date | end_date   |
+| 001     | pop_2020       | 50000 | 2020-01-01 | 2020-12-31 |
+| 001     | income_median  | 65000 | 2020-01-01 | 2020-12-31 |
+| 001     | svi_score      | 0.45  | 2020-01-01 | 2020-12-31 |
 ```
 
+Time series stored as JSON in a source column (for example the CDC monthly PM2.5 series) become one row per time window.
+
 **Benefits**:
-- Single standard representation for all attributes
-- Static column structure across all data sources
-- Efficient querying via indexing
-- Flexible addition of new variables
+- A single standard representation for all attributes
+- A static column structure across all data sources
+- Efficient querying via the indexes
+- New variables are added without changing the schema
 
 <br>
 
-## GEOM_TEMPLATE and ATTR_TEMPLATE
+## GEOM and ATTR tables
 
-Two template tables replicate for every data source:
+Two template tables, `backbone.geom_template` and `backbone.attr_template`, are replicated for every data source as `working.geom_<table_id>` and `working.attr_<table_id>`.
 
-![](images/backbone_slice_2v2.png)
+### Geometry table
 
-*Each data source creates unique pair of GEOM and ATTR tables from templates*
+| Column | Meaning |
+| :----- | :------ |
+| `geom_record_id` | Identifier of the geometry (the raw table's primary key) |
+| `geom_name` | Human-readable name (for example a county name) |
+| `geom_source_coding`, `geom_source_value` | How the source identifies the geometry (for example FIPS) |
+| `geom_wgs84` | The geometry in WGS 84 (EPSG:4326) |
+| `geom_local_epsg`, `geom_local_value` | The geometry in a local projection, used for measurement |
+| `properties` | Remaining source columns |
 
-<br>
+*Hierarchies between geometries (for example tract within county) and validity periods for boundaries that change over time are not implemented yet; they are on the working group's list.*
 
-### GEOM_TEMPLATE
+### Attribute table
 
-![](images/geom_template.png)
-
-**Structure**:
-- **geom_id**: Unique identifier for geometry
-- **geom**: PostGIS geometry object (polygon, point, line)
-- **geom_name**: Human-readable name
-- **parent_geom_id**: For hierarchical geometries (e.g., census tract within county)
-- **valid_from / valid_to**: Temporal validity of geometry
-
-**Usage**:
-- Template creates GEOM_* tables for each data source
-- Spatial indexes automatically created on geom column
-- Supports hierarchical spatial relationships
-- Temporal versioning for changing boundaries
-
-<br>
-
-### ATTR_TEMPLATE
-
-![](images/attr_template.png)
-
-**Structure**:
-- **attr_id**: Unique identifier for attribute record
-- **geom_id**: Links to GEOM table
-- **variable_source_id**: Links to VARIABLE_SOURCE
-- **attr_start_date / attr_end_date**: Temporal coverage of attribute value
-- **attr_value_as_number**: Numeric attribute values
-- **attr_value_as_string**: Text attribute values
-- **attr_value_as_concept_id**: OMOP vocabulary concepts
-
-**Usage**:
-- Template creates ATTR_* tables for each data source
-- EAV structure stores all attributes in standard format
-- Supports temporal attribute values (e.g., annual census estimates)
-- Links attributes to OMOP vocabularies for standardization
+| Column | Meaning |
+| :----- | :------ |
+| `attr_record_id` | Identifier of the attribute row |
+| `geom_record_id` | The geometry the fact is about |
+| `variable_source_id` | The variable (links to `variable_source`) |
+| `attr_concept_id` | The variable's concept |
+| `attr_start_date`, `attr_end_date` | The time window the value applies to |
+| `value_as_number`, `value_as_string`, `value_as_concept_id` | The value |
+| `unit_concept_id`, `unit_source_value` | The unit, as declared in the catalog |
+| `attr_source_value`, `value_source_value` | What the source file called the variable and the value |
 
 <br>
 
 ---
 
-# **Functional Metadata**
+# **Catalog Entries and Functional Metadata**
 
 <br>
 
-Functional metadata refers to machine-actionable instructions embedded in metadata records that enable automated data processing. Gaia uses functional metadata "recipes" to automate retrieval, transformation, and loading of external datasets.
+A catalog entry holds everything needed to retrieve and load one dataset. Besides the descriptive metadata that makes a dataset findable, it carries **functional metadata**: machine-actionable instructions that gaiaDB acts on.
 
-## Purpose
+## What a catalog entry contains
 
-**Without functional metadata**:
-- Manual download of each dataset
-- Custom transformation code for each source
-- Undocumented, non-reproducible ETL processes
-- Duplication of effort across sites
-
-**With functional metadata**:
-- Automated retrieval from source URLs
-- Standardized transformation via recipes
-- Documented, reproducible pipelines
-- Shared ETL logic across community
-
-<br>
-
-## Centralized Repository
-
-Functional metadata is hosted centrally in **gaiaCatalog** rather than storing actual datasets:
-
-**Benefits**:
-- Lightweight storage (metadata only, not data)
-- Single source of truth for transformation recipes
-- Community contributions to shared catalog
-- Version control for metadata updates
-- Reduces duplication of ETL development
-
-**Workflow**:
-1. Dataset owner/curator creates metadata record in gaiaCatalog
-2. Includes geom_spec and attr_spec transformation recipes
-3. Record published to central catalog
-4. Any Gaia instance can ingest dataset using metadata
-5. Community improves/validates transformation recipes over time
-
-<br>
-
-## geom_spec
-
-**Purpose**: JSON specification defining how to transform source geometries into GEOM_* table structure
-
-**Contains**:
-- File format (shapefile, GeoJSON, geopackage, etc.)
-- Geometry column name in source data
-- Geometry type expected (polygon, point, line)
-- Coordinate reference system (CRS) transformation
-- Geometry name field mapping
-- Hierarchical relationship mapping (if applicable)
-- Validity period extraction (if temporal)
-
-**Example structure** (simplified):
-```json
-{
-  "source_format": "shapefile",
-  "geometry_column": "geometry",
-  "geometry_type": "POLYGON",
-  "source_crs": "EPSG:4269",
-  "target_crs": "EPSG:4326",
-  "name_field": "NAME",
-  "parent_field": "STATEFP",
-  "valid_from_field": "YEAR"
-}
+```
+datastore/data/<table_id>/
+  meta_json-ld_<table_id>.json     JSON-LD metadata (dataset and variables)
+  meta_etl_<table_id>.json         ETL configuration (geometry, EPSG, fields)
+  meta_dcat_<table_id>.json        DCAT catalog metadata
+  etl/
+    <table_id>_osgeo.sh            download the source and load it with ogr2ogr
+    <table_id>_postgis.sh          clean the geometry, add a local projection, index
 ```
 
-**Execution**: gaiaDb SQL functions parse geom_spec and execute transformation to populate GEOM_* tables.
+The JSON-LD file drives the metadata load:
 
-<br>
+| JSON-LD field | gaiaDB column |
+| :------------ | :------------ |
+| `@id` | `data_source.dataset_id` |
+| `name` | `data_source.dataset_name` |
+| `measurementTechnique` (vector geometry) | `data_source.geom_type` |
+| `additionalProperty` (spatial reference system) | `data_source.srid` |
+| `about` | `data_source.etl_metadata` |
+| `variableMeasured[].propertyID` | `variable_source.property_id` and `attr_concept_id` |
+| `variableMeasured[].startDate`, `endDate` | `variable_source.start_date`, `end_date` and the time window in `attr_index` |
 
-## attr_spec
+The two shell scripts are the retrieval and transformation logic for that source. They are generated from the entry's metadata, not written by hand for each dataset.
 
-**Purpose**: JSON specification defining how to extract and transform source attributes into ATTR_* table structure
+## Why a central catalog
 
-**Contains**:
-- Source column name(s)
-- Data type (numeric, string, concept)
-- Temporal field mapping
-- Value transformations (e.g., unit conversions)
-- OMOP vocabulary mappings (if applicable)
-- Default values for missing data
-- Validation rules
+**Without functional metadata**: manual download of each dataset, custom transformation code for each source, undocumented ETL, duplicated effort across sites.
 
-**Example structure** (simplified):
-```json
-{
-  "source_column": "RPL_THEMES",
-  "data_type": "numeric",
-  "temporal_field": "YEAR",
-  "value_transformation": "multiply_by_100",
-  "omop_concept_id": 2000000001,
-  "valid_range": [0, 1]
-}
-```
+**With functional metadata**: retrieval from the source URL, a standard transformation, a documented and reproducible pipeline, and ETL logic shared across the community.
 
-**Execution**: gaiaDb SQL functions parse attr_spec to extract, transform, and load attributes into ATTR_* tables.
+Functional metadata is hosted centrally in **gaiaCatalog**, not the datasets themselves, so storage is light, there is a single source of truth for each source, and any Gaia instance can ingest a dataset from its entry.
 
-<br>
+## How an entry is created
 
-## Creating Functional Metadata
+1. **Identify** a publicly hosted geospatial dataset and judge its fitness for the question ([Exercise 1](tutorial-exercise-1.html))
+2. **Describe** it in the Kobo authoring form; the crosswalk turns the form into the JSON-LD record and the ETL scripts
+3. **Test** it in a local stack with `backbone.ingest_datasource('<table_id>')`
+4. **Submit** the entry to gaiaCatalog by pull request
+5. **Review** by the working group, then merge
 
-Researchers can contribute new datasets by creating metadata records:
+See [gaiaCatalog](gaiaCatalog.html) and [Get Started](get-started.html#propose-a-use-case) for more.
 
-1. **Identify dataset**: Find publicly-hosted geospatial dataset
-2. **Create DATA_SOURCE record**: Descriptive metadata + geom_spec
-3. **Create VARIABLE_SOURCE records**: One per variable + attr_spec for each
-4. **Test transformation**: Validate recipes work correctly
-5. **Submit to catalog**: Share via GitHub pull request
-6. **Community review**: Working group validates and merges
+## Status of declarative recipes
 
-See [Contributing Data Sources](get-started.html#propose-a-use-case) for detailed instructions.
+The original design called for **recipes**: declarative metadata (`geom_spec` for geometries, `attr_spec` for attributes) that gaiaDB would read and execute directly. That is **not implemented**. Today, retrieval and loading run as source-specific ETL scripts, as above. How recipes should be expressed, and where they should be interpreted, is an open question the working group is evaluating before committing to an approach.
 
 <br>
 
@@ -529,24 +308,24 @@ See [Contributing Data Sources](get-started.html#propose-a-use-case) for detaile
 
 ## Reproducibility
 
-- **Version-controlled recipes**: Transformation logic tracked in git
-- **Documented provenance**: Source URLs, versions, transformation steps
-- **Containerized deployment**: Identical environments via gaiaDocker
+- **Version-controlled catalog entries**: metadata and ETL scripts tracked in git
+- **Documented provenance**: source URLs, versions, and the variable behind every exposure row
+- **Containerized deployment**: identical environments via gaiaDocker (a convenience, not a requirement)
 - **Standardized vocabularies**: OMOP concepts for semantic interoperability
 
 ## Scalability
 
-- **Efficient storage**: EAV structure with indexing
-- **Parallel processing**: Independent data source ingestion
-- **Cloud-ready**: Deployable on any infrastructure
-- **Scaling**: Spatial processing stays in gaiaDb; R sessions connect to it as needed
+- **Efficient storage**: tall structure with indexing
+- **Independent sources**: each source has its own tables
+- **Portable**: gaiaDB is a standard PostgreSQL/PostGIS database that runs on any native Postgres server
+- **Scaling**: spatial processing stays in gaiaDB; R sessions connect to it as needed
 
 ## Community Growth
 
-- **Shared metadata**: Reduces duplication of effort
-- **Collaborative validation**: Community reviews transformation recipes
-- **Extensible architecture**: New data sources fit existing structure
-- **Open source**: All tools and metadata freely available
+- **Shared metadata**: reduces duplication of effort
+- **Collaborative validation**: the community reviews catalog entries
+- **Extensible architecture**: new data sources fit the existing structure
+- **Open source**: all tools and metadata are freely available
 
 <br>
 
@@ -554,7 +333,7 @@ See [Contributing Data Sources](get-started.html#propose-a-use-case) for detaile
 
 # **Learn More**
 
-- **[Gaia Overview](gaia-intro.html)**: Introduction to Gaia toolchain
+- **[Gaia Overview](gaia-intro.html)**: Introduction to the Gaia toolchain
 - **[Architecture](developer-architecture.html)**: Technical architecture and data flows
 - **[Vocabulary](vocabulary.html)**: OMOP GIS vocabulary package
 - **[Get Started](get-started.html)**: Deploy Gaia and join the working group

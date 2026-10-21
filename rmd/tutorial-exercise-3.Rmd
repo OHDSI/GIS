@@ -18,6 +18,10 @@ OMOP is person/event-centric; geospatial sources are place/time/attribute-centri
 
 You continue with the `omopgis.external_exposure` table you populated in Exercise 2 (or the fallback file). All SQL runs in the gaia-db container (`docker compose exec gaia-db psql -U postgres -d gaiacore`).
 
+The person-place-time bridge: standard concepts carry the meaning of each exposure row, and Gaia's catalog carries its provenance.
+
+![PERSON, LOCATION_HISTORY, LOCATION and EXTERNAL_EXPOSURE](images/slides/person_place_time_bridge.png)
+
 ## **Steps**
 
 ### Part A: vocabulary roles
@@ -43,6 +47,10 @@ You continue with the `omopgis.external_exposure` table you populated in Exercis
    The query returns two rows, one per exposure variable: monthly PM2.5, and the county SES index (Socioeconomic Status, with the SDOH Database as its type; one row per residence interval because it is static). Which vocabulary does each of the three concepts come from, and why? The type concept describes the *kind of data source* (here an "Exposure Type Concept", Air Quality Database); the geometry type of the source (MultiPolygon) is recorded in Gaia's `backbone.geom_index`, not on the exposure row. `exposure_source_value` holds the Gaia `variable_source_id` of the variable and `exposure_relationship_source_value` the verbatim spatial operator (`ST_Within`); compare it with the relationship *concept* (Within). Two things should bother you. The exposure concept is named "Annual Mean" of PM2.5, but each row is a *monthly* value: what does that mean for how you can use it? And `unit_concept_id` is empty: where is the unit declared, and what would you map it to?
 
 ### Part B: mean PM2.5 during pregnancy
+
+Weight each monthly value by the days it overlaps the episode. The months at the edges overlap only partly (orange), so an unweighted mean of the rows is wrong:
+
+![Day-weighted versus naive mean PM2.5 during pregnancy](images/slides/day_weighted_pregnancy.png)
 
 3. **Find the pregnancy episodes.** Pregnancy is modeled in the OMOP `EPISODE` table. Two persons have one, and the answer key is in `demo.expected_result`:
    ```sql

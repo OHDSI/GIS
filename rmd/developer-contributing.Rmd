@@ -64,7 +64,7 @@ git remote add upstream https://github.com/OHDSI/REPOSITORY-NAME.git
 
 #### **Install Dependencies**
 
-For **gaiaDb** and full stack (via gaiaDocker):
+For **gaiaDB** and full stack (via gaiaDocker):
 ```bash
 git clone https://github.com/OHDSI/gaiaDocker.git
 cd gaiaDocker
@@ -97,12 +97,12 @@ git checkout -b fix/your-bug-fix
 - Include unit tests for new functions
 - Run `devtools::check()` before committing
 
-**SQL (gaiaDb - core processing logic)**:
+**SQL (gaiaDB - core processing logic)**:
 - Use lowercase for keywords
 - Indent for readability
 - Comment complex queries
 - Include transformation documentation
-- All geospatial processing stays in gaiaDb
+- All geospatial processing stays in gaiaDB
 
 **Documentation**:
 - Update relevant .Rmd files
@@ -198,7 +198,7 @@ Once approved:
 
 ## **Pull Requests**
 
-**Title**: `[Component] Brief description` (e.g., `[gaiaDb] Fix spatial indexing bug`)
+**Title**: `[Component] Brief description` (e.g., `[gaiaDB] Fix spatial indexing bug`)
 
 **PR checklist**: Describe changes, link issues, specify type (bug/feature/docs), include tests, update docs
 

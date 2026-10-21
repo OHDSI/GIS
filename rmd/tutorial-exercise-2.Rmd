@@ -18,6 +18,10 @@ The artifact you are tracing is: **raw dataset → source geometry/attribute tab
 
 You start with the synthetic persons and their residence history but **no exposure data**. The `EXTERNAL_EXPOSURE` table is empty; producing it is this exercise.
 
+The join assigns each value in two moves: **where** (the residence point falls within a county polygon, `ST_Within`) and **when** (each monthly value is clipped to the residence interval, so a move month is split into two partial rows).
+
+![How the join assigns a value: where, then when](images/slides/join_where_when.png)
+
 ## **Steps**
 
 All SQL runs in the gaia-db container: `docker compose exec gaia-db psql -U postgres -d gaiacore` (or use PGAdmin).

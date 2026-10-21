@@ -25,17 +25,20 @@ Improve the health of populations by generating reliable evidence from integrate
 Gaia currently supports:
 
 - **Geographic data sources**: Environmental exposures, social determinants of health, demographic data, infrastructure
-- **Spatial data types**: Polygons (census tracts, counties), points (facilities, monitoring stations), rasters (climate, pollution)
+- **Spatial data types**: Vector geometries are registered in the geometry-attribute index and joined to persons: polygons (census tracts, counties, grids), lines (roads) and points (facilities, monitoring stations). Raster sources (climate, pollution) can be staged, but registering them in the index is planned
 - **Temporal coverage**: Historical and current datasets with versioning support
+- **Catalog**: More than 100 curated datasets, described with schema.org JSON-LD
 - **Geographic coverage**: Primarily US-focused with expanding international support
 - **OMOP integration**: External_Exposure and Location_History extension tables
-- **Privacy preservation**: Geocoding at site, aggregated geographies, exposure values only
+- **Privacy preservation**: Gaia runs beside the CDM, inside the data holder's site. Addresses and patient-level location histories stay there; only aggregate study results leave, and only if the site chooses
 
 ### Limitations
 
 Current limitations being addressed:
 
 - **Real-time data**: Limited support for streaming/real-time geospatial data (planned enhancement)
+- **Rasters**: Raster sources are not yet registered in the geometry-attribute index (planned)
+- **Recipes**: Retrieval and loading run as source-specific ETL scripts generated from each catalog entry; declarative recipes are being evaluated
 - **Global coverage**: Majority of cataloged datasets focus on United States (expanding)
 - **Vocabulary coverage**: Ongoing development of OMOP GIS, Exposome, and SDoH vocabularies
 - **Federated analytics**: Multi-site federation architecture in development
@@ -49,24 +52,24 @@ Gaia consists of multiple interconnected components:
 
 ### **Core Infrastructure**
 
-**[gaiaDb](gaiaDb.html)** - PostgreSQL/PostGIS database
+**[gaiaDB](gaiaDB.html)** - PostgreSQL/PostGIS database
 - Core data repository with all geospatial processing logic
 - SQL routines and PostGIS functions for spatial operations
+- Geometry-attribute index: every source registered the same way
 - OMOP CDM integration and exposure calculations
-- LinkML/JSON-LD metadata support
-- Transformation recipe library
+- JSON-LD metadata ingestion from the catalog
 
 **[gaiaCore](gaiaCore.html)** - R package for the Gaia pipeline and exposure analytics
 - Direct database connection with DatabaseConnector
 - Runs ingestion, location loading and the spatial-temporal join from R
 - Quality checks on derived exposure and copy into the OMOP CDM
 - Exposure analytics (day-weighted windows, cluster-robust effect estimates)
-- Calls functions defined in gaiaDb; no processing logic of its own
+- Calls functions defined in gaiaDB; no processing logic of its own
 
 **[gaiaCatalog](gaiaCatalog.html)** - Metadata catalog
 - Functional metadata for publicly-hosted geospatial datasets
 - Schema.org-compliant dataset descriptions
-- Automated retrieval, extraction, transformation, loading (ETL) instructions
+- ETL instructions (generated scripts) for automated retrieval and loading
 - Federated metadata sharing
 - Version tracking for data sources
 
@@ -122,16 +125,19 @@ They can now:
 
 A researcher with an OMOP CDM database integrates geospatial exposures:
 
-1. **Geocode patient addresses locally** using DeGauss (containerized, privacy-preserving)
-2. **Spatial joins** via gaiaDb SQL functions link locations to exposures
+1. **Geocode patient addresses locally** using DeGAUSS or the PostGIS TIGER geocoder (both optional components, run locally; see the [geocoding guidance](geocoding.html))
+2. **Spatial joins** via gaiaDB SQL functions link residence locations and dates to exposures
 3. **Calculate exposures** for residence periods (e.g., average PM2.5 during pregnancy)
 4. **Populate OMOP tables**: External_Exposure and Location_History
 5. **Analytics** using standard HADES tools (cohort definitions, patient-level prediction, population-level estimation)
 
-All processing happens in gaiaDb with privacy preservation:
-- Only aggregated geographic identifiers (census block, ZIP) leave site
-- Exposure values contain no reverse-geocoding information
+All processing happens inside your site, in gaiaDB, next to your CDM:
+- Locations and dates go from the CDM to Gaia, and exposures come back to the CDM
+- Addresses and location histories are never sent anywhere
+- In a network study, code goes out and only aggregate results come back
 - Standard OMOP privacy protections apply
+
+![Gaia runs beside your CDM, inside your site](images/slides/gaia_beside_cdm.png)
 
 **Example**: Calculate neighborhood deprivation index exposure during critical developmental windows for pediatric asthma cohort.
 
@@ -145,7 +151,9 @@ Gaia enables reproducible workflows across OHDSI data networks:
 4. **Execute** - Sites run standardized workflow locally
 5. **Aggregate** - Combine summary statistics without sharing PHI
 
-All steps include detailed provenance metadata and transformation documentation.
+Every exposure row carries the identifier of the variable it came from, so each result can be traced to its source in the catalog.
+
+![What travels across a network and what stays local](images/slides/travels_vs_stays.png)
 
 **Example**: Multi-site study examining association between greenspace exposure and mental health outcomes across diverse urban environments.
 
@@ -153,7 +161,11 @@ All steps include detailed provenance metadata and transformation documentation.
 
 # **Gaia Framework**
 
-<div><img src="images/framework_overview.png"></img></div>
+OMOP models people; Gaia models places. Each side has one anchor, and the patient's location history links them.
+
+![OMOP models people, Gaia models places](images/slides/person_place_model.png)
+
+![The OMOP GIS extension: two new tables](images/slides/omop_gis_extension_tables.png)
 
 The Gaia Framework consists of three main components working together:
 
@@ -171,15 +183,15 @@ The Gaia Framework consists of three main components working together:
 
 ## **2. Core Layer**
 
-**[gaiaDb](gaiaDb.html)** provides storage and processing:
+**[gaiaDB](gaiaDB.html)** provides storage and processing:
 
-- **Staging database**: PostgreSQL/PostGIS with LinkML-based backbone schema
+- **Database**: PostgreSQL/PostGIS with a `backbone` schema (metadata and index) and a `working` schema (data and exposures)
 - **Processing engine**: All SQL routines and PostGIS functions for spatial operations
-- **Standardized format**: Entity-Attribute-Value (EAV) structure for harmonized data
+- **Standardized format**: every source is stored as geometries and their attributes, registered in the geometry-attribute index
 - **OMOP integration**: Direct integration with CDM extension tables
 - **Optional API**: gaiaDocker can expose the database through a PostgREST service
 
-**[gaiaCore](gaiaCore.html)** is the R interface to gaiaDb:
+**[gaiaCore](gaiaCore.html)** is the R interface to gaiaDB:
 
 - **Pipeline**: ingests catalog datasets, loads locations and runs the spatial-temporal join from R
 - **Direct connection**: DatabaseConnector opens a JDBC connection; there is no REST layer in between
@@ -187,7 +199,7 @@ The Gaia Framework consists of three main components working together:
 - **Analytics**: day-weighted exposure windows and cluster-robust effect estimates
 - **Docker image**: `ohdsi/gaia-core`, HADES with gaiaCore and the extension packages
 
-**Data flow**: Raw geospatial data → gaiaDb processing → gaiaCore (R) → OMOP CDM → HADES analytics
+**Data flow**: Raw geospatial data → gaiaDB processing → gaiaCore (R) → OMOP CDM → HADES analytics
 
 ## **3. Extension Layer**
 
@@ -206,14 +218,14 @@ Extensions build on the exposure that gaiaCore derives and copies into the OMOP 
 
 ### **Separation of Concerns**
 - **gaiaCatalog**: Discovery and metadata
-- **gaiaDb**: Storage and processing
+- **gaiaDB**: Storage and processing
 - **gaiaCore**: R interface, quality checks and exposure analytics
 - **gaiaDocker**: Deployment
 
 ### **Privacy by Design**
-- Geocoding happens at originating institution
-- Only aggregated geographic identifiers shared
-- Exposure values contain no location information
+- Gaia runs beside the CDM, at the data holder's site
+- Geocoding happens locally; addresses and location histories stay in the site's enclave
+- Only aggregate results are shared, and only if the site chooses
 - OMOP privacy protections maintained
 
 ### **Standards Compliance**
@@ -223,7 +235,7 @@ Extensions build on the exposure that gaiaCore derives and copies into the OMOP 
 - OHDSI vocabulary conventions
 
 ### **Reproducibility**
-- Version-controlled transformation recipes
+- Version-controlled catalog entries (metadata and ETL scripts)
 - Documented data provenance
 - Containerized deployments
 - Open source tooling
@@ -231,12 +243,18 @@ Extensions build on the exposure that gaiaCore derives and copies into the OMOP 
 ### **Extensibility**
 - Common data model enables stable tooling
 - Pluggable data sources
-- Language-agnostic API access
+- Database and optional API access from any language
 - Modular component architecture
 
 <br>
 
 ## **Getting Started**
+
+### **What you need**
+
+Location history (start with what you already have: ZIP code, census tract or address, each with dates), your OMOP CDM, and Gaia deployed at your site. No PHI leaves your site, geocoding is not required first, and you do not need a GIS team.
+
+![All it takes](images/slides/all_it_takes.png)
 
 ### **Quick Deploy**
 

@@ -94,9 +94,17 @@ All exercises run against a synthetic cohort designed for this tutorial: 10,000 
 3. [Exercise 3: OMOP integration](tutorial-exercise-3.html) - Query the person-place-time model, validate vocabulary roles, calculate temporally aligned exposure metrics, and build exposure-stratified cohorts.
 4. [Exercise 4: Analytical applications](tutorial-exercise-4.html) - Draft an analysis-ready feature specification and its validity/QA checklist, then fit and critique a crude vs adjusted exposure model.
 
-**Choose your track.** Exercises 2 to 4 are written in SQL (the reference path for the workshop). An R version that uses the [gaiaCore](gaiaCore.html) package is available as a beta: start with the [R setup](tutorial-r-setup.html), then [R Exercise 2](tutorial-r-exercise-2.html), [3](tutorial-r-exercise-3.html) and [4](tutorial-r-exercise-4.html). Both tracks use the same data, the same answer key and the same `ohdsi/gaia-core:main` image.
+**Choose your track.** Exercises 2 to 4 are written in SQL (the reference path for the workshop). An R version that uses the [gaiaCore](gaiaCore.html) package is available as a beta: start with the [R setup](tutorial-r-setup.html), then [R Exercise 2](tutorial-r-exercise-2.html), [3](tutorial-r-exercise-3.html) and [4](tutorial-r-exercise-4.html). Both tracks use the same data, the same answer key and the same pinned `ohdsi/gaia-core` image.
 
 <br>
+
+## **About these materials**
+
+The tutorial was first presented as a half-day session at the 2026 OHDSI Global Symposium (20 October 2026) by members of the OHDSI GIS Working Group. The exercises are the reference; the slides give context. The Gaia toolchain and the synthetic dataset used here are described in the [evaluation](evaluation.html) page, and the data generator is archived on [Zenodo](https://doi.org/10.5281/zenodo.23296292).
+
+**Don't quote the effects.** The simulated PM2.5 effects are deliberately exaggerated: they are a teaching device, not real-world estimates.
+
+**Tell us how it went.** If you used these materials, please fill in the short [feedback survey](https://forms.gle/8oJnH1GmDVi43cPN8). To go further, see [Get Started](get-started.html#join-the-working-group) and come to a working group call.
 
 ## **Getting Help**
 

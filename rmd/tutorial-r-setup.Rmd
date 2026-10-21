@@ -12,7 +12,7 @@ output:
 
 ## **What changes in the R track**
 
-The pipeline and the data are the same as in the SQL exercises. You run each step with a gaiaCore function from RStudio, which calls the same gaiaDb SQL functions underneath, and you keep the SQL only where it is the clearest way to look at the data (the answer key and the lineage trace).
+The pipeline and the data are the same as in the SQL exercises. You run each step with a gaiaCore function from RStudio, which calls the same gaiaDB SQL functions underneath, and you keep the SQL only where it is the clearest way to look at the data (the answer key and the lineage trace).
 
 | SQL track | R track |
 |---|---|

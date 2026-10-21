@@ -99,7 +99,7 @@ $$;
 
 ### PostGIS Alternative
 
-When PostGIS is available (default gaiaDb deployment), `ST_DistanceSphere` provides equivalent accuracy with better performance on large datasets via spatial indexing:
+When PostGIS is available (default gaiaDB deployment), `ST_DistanceSphere` provides equivalent accuracy with better performance on large datasets via spatial indexing:
 
 ```sql
 -- PostGIS equivalent — requires geography cast

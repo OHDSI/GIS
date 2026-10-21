@@ -86,7 +86,7 @@ Code written and tested → Tests pass → Documentation updated → Code review
 | Repository | Purpose | Status |
 |------------|---------|--------|
 | [OHDSI/GIS](https://github.com/OHDSI/GIS) | Central hub, docs, coordination | Active |
-| [OHDSI/gaiaDb](https://github.com/OHDSI/gaiaDb) | Core data repository | Beta |
+| [OHDSI/gaiaDB](https://github.com/OHDSI/gaiaDB) | Core data repository | Beta |
 | [OHDSI/gaiaCore](https://github.com/OHDSI/gaiaCore) | R package: Gaia pipeline, quality checks, exposure analytics | Development |
 | [OHDSI/gaiaCatalog](https://github.com/OHDSI/gaiaCatalog) | Data catalog | Beta |
 | [OHDSI/gaiaDocker](https://github.com/OHDSI/gaiaDocker) | Deployment orchestration | Active |
@@ -191,7 +191,7 @@ The working group regularly reflects on processes through quarterly retrospectiv
 
 - **Teams**: GIS Working Group channel
 - **Meetings**: Thursdays 10 AM US Eastern
-- **Email**: zollovenecek[at]ohdsi[dot]org
+- **Email**: houghtaling@ohdsi.org
 - **GitHub**: Tag @OHDSI/GIS-leaders
 
 <br>

@@ -31,6 +31,10 @@ Official deployment method with coordinated image builds and versioned releases.
 
 **Prerequisites**: Docker Engine 20.10+, Docker Compose 2.0+, 8GB+ RAM, 50GB+ disk
 
+**Tested on**: Linux and macOS, and Windows 11 (the default deployment ran the tutorial pipeline end to end with the answer key matching). Docker is a convenience, not a requirement: gaiaDB is a standard PostgreSQL/PostGIS database that runs on any native Postgres server, and gaiaCore can be pointed at any gaiaDB instance.
+
+**Tutorial**: use the pinned images (`docker-compose.tutorial.yaml`, described on [Get Started](get-started.html)) so that everyone runs the same versions.
+
 ### **Quick Start**
 
 ```bash
@@ -60,9 +64,9 @@ Customize `.env` file for database credentials, service ports, and resource limi
 
 ### **Services**
 
-- **gaia-db**: PostgreSQL/PostGIS (core data repository)
+- **gaia-db**: PostgreSQL/PostGIS (core data repository, gaiaDB)
 - **gaia-core**: RStudio with HADES and the gaiaCore R package
-- **gaia-postgrest**: PostgREST API (optional; exposes gaiaDb functions)
+- **gaia-postgrest**: PostgREST API (optional; exposes gaiaDB functions)
 - **gaia-catalog**: Flask catalog interface (data discovery)
 - **gaia-solr**: Search engine (catalog indexing)
 - **gaia-osgeo**: GDAL/OGR ETL tools
@@ -123,7 +127,7 @@ ansible-vault create group_vars/production/vault.yml
 ansible-playbook playbook.yml --ask-vault-pass
 ```
 
-See gaiaDb repository for example playbooks and roles.
+See gaiaDB repository for example playbooks and roles.
 
 <br>
 
@@ -145,12 +149,29 @@ GRANT ALL PRIVILEGES ON DATABASE gaiadb TO gaia;
 \c gaiadb
 CREATE EXTENSION postgis;
 
-# 3. Clone gaiaDb
-git clone https://github.com/OHDSI/gaiaDb.git && cd gaiaDb
-psql -U gaia -d gaiadb -f schema/create_schema.sql
+# 3. Clone gaiaDB
+git clone https://github.com/OHDSI/gaiaDB.git && cd gaiaDB
+# Load the SQL files in sql/ in order (01_init_schema.sql ... 06_gdsc_catalog_functions.sql);
+# see the README and init/00_init_gaiaDB.sh for what the container does at first start.
+# Data retrieval also needs the PL/sh extension (see Platform constraints below).
 ```
 
-See the gaiaDb and gaiaCore repositories for detailed setup instructions; gaiaCore connects to the database with `createGaiaConnectionDetails()`.
+See the gaiaDB and gaiaCore repositories for detailed setup instructions; gaiaCore connects to the database with `createGaiaConnectionDetails()`.
+
+<br>
+
+## **Platform constraints (PL/sh)**
+
+gaiaDB's data retrieval step runs each dataset's ETL scripts from inside PostgreSQL using the PL/sh extension, which is built into the gaiaDB image. This shapes where gaiaDB can run:
+
+| Platform | PL/sh (retrieval and ingestion) | PostGIS (the spatial-temporal join) |
+|----------|--------------------------------|-------------------------------------|
+| Self-managed Linux (on premises or a cloud VM), containers, Kubernetes, WSL2 | Yes | Yes |
+| macOS, native | Build from source | Yes |
+| Windows, native PostgreSQL | No | Yes |
+| Managed PostgreSQL (AWS RDS and Aurora, Azure Database for PostgreSQL, Google Cloud SQL) | No: not in the providers' supported extensions | Yes |
+
+The join itself needs only PostGIS and plain SQL, so it runs on every platform above. Retrieval of public data can run elsewhere (for example in a container or on a laptop) and the harmonized tables can be moved to the database that holds patient locations. Whether and how Gaia should separate retrieval from the protected database is an open design question in the working group; see issue #522 for the Windows native case. Check your provider's current extension list, since these change.
 
 <br>
 
@@ -158,10 +179,10 @@ See the gaiaDb and gaiaCore repositories for detailed setup instructions; gaiaCo
 
 **Status**: In development
 
-- **Kubernetes**: Helm charts, horizontal autoscaling, multi-site federation (planned Q2 2026)
-- **AWS**: Terraform modules, RDS PostgreSQL, ECS/Fargate (in development)
-- **Azure**: ARM templates, Azure Database for PostgreSQL, AKS (planned)
-- **GCP**: Cloud SQL, Cloud Run/GKE (planned)
+- **Kubernetes**: Helm charts, horizontal autoscaling, multi-site federation (planned; the original Q2 2026 target has passed and the timeline is being reset)
+- **AWS**: Terraform modules, ECS/Fargate (in development); managed RDS PostgreSQL does not support PL/sh, see above
+- **Azure**: ARM templates, AKS (planned); Azure Database for PostgreSQL does not support PL/sh
+- **GCP**: Cloud Run/GKE (planned); Cloud SQL does not support PL/sh
 
 Community contributions welcome.
 

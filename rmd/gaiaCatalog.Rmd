@@ -9,39 +9,63 @@ output:
 
 ## Description
 
-gaiaCatalog is a **metadata catalog** for discovering and managing geospatial data sources. It provides a searchable, Schema.org-compliant interface for finding datasets relevant to OHDSI GIS research.
+gaiaCatalog is a **metadata catalog** for discovering and managing geospatial data sources. It describes each dataset as schema.org JSON-LD (following the Science on Schema.org guidance) and keeps, in the same folder, the ETL scripts that retrieve and load it. The catalog currently holds more than 100 curated datasets, with variables that can be mapped to OMOP GIS vocabulary concepts.
+
+Because every entry is machine-readable, entries can be searched and filtered by external tools without custom metadata parsing, and gaiaDB can use an entry to retrieve and load the dataset.
 
 ## Key Features
 
-- **Schema.org compliant metadata** for standardized data description
-- **Federated data source discovery** across multiple catalogs
-- **Variable-level documentation** for understanding dataset contents
-- **Integration with external catalogs** for broader data discovery
-- **Solr-powered search** for fast, flexible querying
+- **Schema.org compliant metadata** (JSON-LD) for standardized, FAIR dataset description
+- **Three kinds of metadata**: descriptive (identity, version, provider, coverage), administrative (license, URL, retrieval method, update cadence) and technical (geometry, CRS, file format and structure)
+- **Variable-level documentation**: definition, unit, time window and concept mappings, kept separate from dataset-level properties
+- **KoboToolbox authoring form**, with SSSOM (Simple Standard for Sharing Ontological Mappings) used to map the form's answers to the JSON-LD profile
+- **SHACL validation** of selected rules between dataset and variable properties
+- **ETL scripts** generated from the metadata, using GDAL/OGR, for each dataset
+- **Catalog browsers** with keyword and data-structure filters and free-text search
+- **Federation**: JSON-LD export has been federated with the University of Miami's Geospatial Digital Special Collections
+
+## A catalog entry
+
+```
+<table_id>/
+  meta_json-ld_<table_id>.json     JSON-LD metadata (dataset and variables)
+  meta_etl_<table_id>.json         ETL configuration
+  meta_dcat_<table_id>.json        DCAT metadata
+  etl/                             ETL shell scripts (download and load, then clean up)
+  download/                        source files (created when the dataset is loaded)
+```
 
 ## Use Cases
 
-- Discover available geospatial datasets for research
+- Discover available geospatial datasets for research and judge their fitness for a question
 - Understand dataset variables and temporal coverage
 - Find data sources matching specific geographic regions
 - Document and share institutional datasets
-- Link data sources to gaiaDb transformation recipes
+- Provide the metadata and ETL scripts that gaiaDB uses to ingest a dataset
 
 ## Integration
 
 gaiaCatalog integrates with the Gaia toolchain by:
-- Providing dataset metadata that informs gaiaDb ingestion
-- Linking to transformation recipes in gaiaDb
-- Enabling researchers to identify relevant exposures
+- Providing the metadata and ETL scripts that gaiaDB ingestion runs (`backbone.ingest_datasource`)
+- Supplying the variable and concept information that ends up on every exposure row
+- Letting researchers identify relevant exposures
 - Supporting reproducible research through data provenance
 
 ## Access
 
-- **Web Interface**: Flask-based catalog browser (port 5000 in gaiaDocker)
-- **API**: Solr REST API for programmatic access
+- **Web interface**: Flask-based catalog browser (port 5001 in the tutorial stack, `http://localhost:5001`), or the hosted browser at [ohdsi.github.io/gaiaCatalog/browser](https://ohdsi.github.io/gaiaCatalog/browser)
+- **From the browser**: load a dataset into a staging table, load one variable for analysis, and download citations and JSON-LD
+- **Search**: an optional Solr index over the JSON-LD for full-text, concept and spatial search
 - **Database**: PostgreSQL backend for metadata storage
+
+Some entries may fail to load: a source may need an API key, its metadata may be incomplete, or part of the ETL stack may be missing.
+
+## Authoring
+
+Adding a dataset starts from a research question, not from the data. The [tutorial's first exercise](tutorial-exercise-1.html) walks through it: judge a candidate dataset against a fitness rubric (scientific relevance, spatial fit, temporal fit, semantic clarity, access, reproducibility), enter its metadata in the Kobo form, and watch the crosswalk turn the form into a JSON-LD record plus ETL scripts.
 
 ## Documentation
 
 - [Repository](https://github.com/OHDSI/gaiaCatalog)
+- [Design Principles](gaia-principles.html)
 - [Deployment via gaiaDocker](developer-deployment.html)

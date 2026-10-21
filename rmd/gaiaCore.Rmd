@@ -9,13 +9,13 @@ output:
 
 ## Description
 
-gaiaCore is an **R package** for working with a Gaia database. It connects to gaiaDb directly with [DatabaseConnector](https://ohdsi.github.io/DatabaseConnector/), runs the Gaia pipeline from R, and provides the quality checks and exposure analytics that turn the result into evidence for OHDSI studies. All spatial processing happens inside gaiaDb: gaiaCore calls its SQL functions, so every derived value stays traceable to the catalog entry, the geometry and the residence interval that produced it.
+gaiaCore is an **R package** for working with a Gaia database. It connects to gaiaDB directly with [DatabaseConnector](https://ohdsi.github.io/DatabaseConnector/), runs the Gaia pipeline from R, and provides the quality checks and exposure analytics that turn the result into evidence for OHDSI studies. All spatial processing happens inside gaiaDB: gaiaCore calls its SQL functions, so every derived value stays traceable to the catalog entry, the geometry and the residence interval that produced it.
 
 ## Key Features
 
 - **Ingest** datasets registered in the Gaia catalog and build their geometry and attribute tables
 - **Load person locations** and residence histories from data frames or from an OMOP CDM with the Gaia extension
-- **Derive exposure** with gaiaDb's spatial-temporal join, one variable at a time, into `EXTERNAL_EXPOSURE`
+- **Derive exposure** with gaiaDB's spatial-temporal join, one variable at a time, into `EXTERNAL_EXPOSURE`
 - **Check** the derived rows: duplicates, values outside the residence interval, missing or implausible values, unit mismatches
 - **Copy** the result into the CDM, where HADES tools such as CohortMethod and FeatureExtraction can use it
 - **Analyse**: day-weighted exposure over windows such as a pregnancy, and effect estimates whose confidence intervals stay valid with few, unbalanced geographic clusters
@@ -23,10 +23,10 @@ gaiaCore is an **R package** for working with a Gaia database. It connects to ga
 
 ## Architecture
 
-gaiaCore sits between gaiaDb and the HADES analytics:
+gaiaCore sits between gaiaDB and the HADES analytics:
 
 - It opens a direct database connection (JDBC); there is no REST layer in between
-- It wraps gaiaDb's SQL functions and does not duplicate processing logic
+- It wraps gaiaDB's SQL functions and does not duplicate processing logic
 - Its output is the OMOP `EXTERNAL_EXPOSURE` table, which the rest of the OHDSI tools consume
 
 The Python, Java, Julia, Bash and PostgREST-based R clients that used to live in the gaiaCore repository are on its [`connectors`](https://github.com/OHDSI/gaiaCore/tree/connectors) branch, until they find their own home. The PostgREST API service is deployed by [gaiaDocker](gaiaDocker.html).

@@ -69,7 +69,7 @@ docker compose ps
 **What's deployed**:
 - **gaia-db**: PostgreSQL/PostGIS (core data repository)  
 - **gaia-core**: RStudio with HADES and the gaiaCore R package (http://localhost:8787)  
-- **gaia-postgrest**: optional PostgREST API (exposes gaiaDb functions)  
+- **gaia-postgrest**: optional PostgREST API (exposes gaiaDB functions)  
 - **gaia-catalog**: Data source discovery interface  
 - **gaia-solr**: Search engine for catalog  
 
@@ -227,7 +227,7 @@ See [Project Management](project-management.html) for complete process details.
 
 ### **Repositories**
 - [OHDSI/GIS](https://github.com/OHDSI/GIS) - Central hub (this repo)
-- [OHDSI/gaiaDb](https://github.com/OHDSI/gaiaDb) - Core data repository
+- [OHDSI/gaiaDB](https://github.com/OHDSI/gaiaDB) - Core data repository
 - [OHDSI/gaiaCore](https://github.com/OHDSI/gaiaCore) - R package: Gaia pipeline, quality checks and exposure analytics
 - [OHDSI/gaiaCatalog](https://github.com/OHDSI/gaiaCatalog) - Data catalog
 - [OHDSI/gaiaDocker](https://github.com/OHDSI/gaiaDocker) - Deployment orchestration

@@ -14,7 +14,7 @@ output:
 
 Run the Gaia ingestion and spatial-temporal linkage from R, check the result against the answer key, then trace one derived exposure row back to its source and explain it. The artifact you are tracing is the same: **raw dataset → source geometry/attribute tables → location interval → derived exposure row.**
 
-Each [gaiaCore](gaiaCore.html) function calls the gaiaDb SQL routine you ran in the SQL track, so the tables you inspect are identical. You start with the synthetic persons and their residence history but **no exposure data**: `omopgis.external_exposure` is empty.
+Each [gaiaCore](gaiaCore.html) function calls the gaiaDB SQL routine you ran in the SQL track, so the tables you inspect are identical. You start with the synthetic persons and their residence history but **no exposure data**: `omopgis.external_exposure` is empty.
 
 ## **Steps**
 

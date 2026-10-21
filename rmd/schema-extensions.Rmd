@@ -40,12 +40,40 @@ script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
 
 # **OMOP GIS Schema Extensions**
 
-![OMOP GIS Schema Extensions - [Click here to download](https://github.com/OHDSI/GIS/raw/main/rmd/images/cdm_extension_erd.png)](images/cdm_extension_erd.png){width=150%}
+![OMOP GIS Schema Extensions - [Click here to download](https://github.com/OHDSI/GIS/raw/main/rmd/images/slides/omop_gis_extension_tables.png)](images/slides/omop_gis_extension_tables.png){width=150%}
+<br>
+
+*Both tables hang off the person, like any other OMOP clinical table. `entity_id` is the `person_id` when the domain is Person. Bold fields are required; blue fields hold standard concepts (GIS, Exposome, SDoH).*
+
 <br>
 
 ## **Overview**
 
 The OMOP GIS Vocabulary Package extends the OMOP Common Data Model (CDM) to support geospatially-linked health determinants and environmental exposures. This extension is anchored by the **external_exposure** table, which serves as the foundational structure enabling integration of spatial, environmental, and sociodemographic data into observational health research workflows.
+
+## **The person-place-time bridge**
+
+![PERSON, LOCATION_HISTORY, LOCATION and EXTERNAL_EXPOSURE](images/slides/person_place_time_bridge.png)
+
+Standard concepts carry the meaning of each exposure row; Gaia's catalog carries its provenance (`exposure_source_value` holds the `variable_source_id` of the variable the row came from).
+
+<br>
+
+## **Source-to-concept navigation map**
+
+| Component | Question answered | Standard | Destination field |
+|---|---|---|---|
+| Exposure variable | What contextual attribute was assigned? | OMOP SDoH, OMOP Exposome, or an existing standard concept in OHDSI Athena | `exposure_concept_id` |
+| Exposure derivation/type | How was the record generated, or what source class produced it? | Type Concept / GIS Exposure Type concept | `exposure_type_concept_id` |
+| Spatial relationship | How did the person-location geometry relate to the source geometry? | OMOP GIS geometry relationship | `exposure_relationship_concept_id` |
+| Source provenance | Which named dataset or source supplied the variable? | Source concept identifier when available, plus source value | `exposure_source_concept_id`, `exposure_source_value` |
+| Numeric result | What number was assigned? | No concept; numeric value | `value_as_number` |
+| Categorical result | What standardized category was assigned? | Standard value concept from GIS vocabularies or Athena | `value_as_concept_id` |
+| Unit | In what unit is the value expressed? | Standard unit concept | `unit_concept_id` |
+| Location interval | Where and during what period was the entity located? | GIS relationship/type concepts plus OMOP location linkage | `LOCATION_HISTORY` |
+| Source variable code | What did the original file call the variable? | Retained for traceability, not assumed to be standard | `exposure_source_value` |
+
+*A worked example for PM2.5: `exposure_concept_id` 2052499839 (what was measured), `exposure_type_concept_id` 2052499878 (Air Quality Database, the kind of data source), `exposure_relationship_concept_id` 2052496943 (Within, how person and place were linked), `exposure_source_value` the variable's `variable_source_id`, and the unit micrograms per cubic meter (concept 32964) as declared in the catalog. Gaia-derived rows currently leave `unit_concept_id` empty.*
 
 <br>
 
