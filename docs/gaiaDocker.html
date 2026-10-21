@@ -338,6 +338,12 @@ $(document).ready(function () {
       <a href="algorithms.html">Algorithms</a>
     </li>
     <li>
+      <a href="evaluation.html">Evaluation</a>
+    </li>
+    <li>
+      <a href="geocoding.html">Geocoding</a>
+    </li>
+    <li>
       <a href="gaiaDB.html">gaiaDB</a>
     </li>
     <li>
@@ -442,7 +448,7 @@ compatibility</li>
 <div id="services-managed" class="section level2">
 <h2>Services Managed</h2>
 <p>gaiaDocker orchestrates the following services: -
-<strong>gaia-db</strong>: PostgreSQL/PostGIS database (gaiaDb) -
+<strong>gaia-db</strong>: PostgreSQL/PostGIS database (gaiaDB) -
 <strong>gaia-core</strong>: RStudio with HADES and the gaiaCore R
 package (image <code>ohdsi/gaia-core</code>) -
 <strong>gaia-postgrest</strong>: optional PostgREST API service -
@@ -452,11 +458,30 @@ package (image <code>ohdsi/gaia-core</code>) -
 <strong>gaia-postgis</strong>: PostGIS-specific ETL tools -
 <strong>gaia-degauss</strong> (optional): Geocoding service</p>
 </div>
+<div id="platforms" class="section level2">
+<h2>Platforms</h2>
+<p>The reference deployment uses Docker Compose. It has been deployed on
+Linux and macOS, and a default Windows 11 deployment ran the tutorial
+pipeline end to end. It needs Docker, Docker Compose and about 50 GB of
+free storage (more if you add geocoding reference data). Docker is a
+convenience, not a requirement: gaiaDB is a standard PostgreSQL/PostGIS
+database that runs on any native Postgres server, and gaiaCore can be
+pointed at any gaiaDB instance.</p>
+</div>
 <div id="quick-start" class="section level2">
 <h2>Quick Start</h2>
 <pre class="bash"><code>git clone https://github.com/OHDSI/gaiaDocker.git
 cd gaiaDocker
 docker compose --profile gaia up -d</code></pre>
+</div>
+<div id="pinned-images-for-the-tutorial" class="section level2">
+<h2>Pinned images for the tutorial</h2>
+<p>For the tutorial, a Compose override file pins the services of the
+<code>gaia</code> profile (database, PostgREST, catalog, Solr and
+pgAdmin) to specific image versions so everyone runs exactly the same
+stack. See <a href="get-started.html">Get Started</a> for the command
+and the <a href="tutorial.html">tutorial checklist</a> for the pinned R
+image.</p>
 </div>
 <div id="documentation" class="section level2">
 <h2>Documentation</h2>

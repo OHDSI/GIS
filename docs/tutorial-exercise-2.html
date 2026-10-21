@@ -420,6 +420,12 @@ div.tocify {
       <a href="algorithms.html">Algorithms</a>
     </li>
     <li>
+      <a href="evaluation.html">Evaluation</a>
+    </li>
+    <li>
+      <a href="geocoding.html">Geocoding</a>
+    </li>
+    <li>
       <a href="gaiaDB.html">gaiaDB</a>
     </li>
     <li>
@@ -515,6 +521,16 @@ so you can follow the whole chain.</p>
 <p>You start with the synthetic persons and their residence history but
 <strong>no exposure data</strong>. The <code>EXTERNAL_EXPOSURE</code>
 table is empty; producing it is this exercise.</p>
+<p>The join assigns each value in two moves: <strong>where</strong> (the
+residence point falls within a county polygon, <code>ST_Within</code>)
+and <strong>when</strong> (each monthly value is clipped to the
+residence interval, so a move month is split into two partial rows).</p>
+<div class="float">
+<img src="images/slides/join_where_when.png"
+alt="How the join assigns a value: where, then when" />
+<div class="figcaption">How the join assigns a value: where, then
+when</div>
+</div>
 </div>
 <div id="steps" class="section level2">
 <h2><strong>Steps</strong></h2>

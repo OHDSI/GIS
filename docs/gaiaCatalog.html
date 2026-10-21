@@ -338,6 +338,12 @@ $(document).ready(function () {
       <a href="algorithms.html">Algorithms</a>
     </li>
     <li>
+      <a href="evaluation.html">Evaluation</a>
+    </li>
+    <li>
+      <a href="geocoding.html">Geocoding</a>
+    </li>
+    <li>
       <a href="gaiaDB.html">gaiaDB</a>
     </li>
     <li>
@@ -419,57 +425,102 @@ WG</h1>
 <div id="description" class="section level2">
 <h2>Description</h2>
 <p>gaiaCatalog is a <strong>metadata catalog</strong> for discovering
-and managing geospatial data sources. It provides a searchable,
-Schema.org-compliant interface for finding datasets relevant to OHDSI
-GIS research.</p>
+and managing geospatial data sources. It describes each dataset as
+schema.org JSON-LD (following the Science on Schema.org guidance) and
+keeps, in the same folder, the ETL scripts that retrieve and load it.
+The catalog currently holds more than 100 curated datasets, with
+variables that can be mapped to OMOP GIS vocabulary concepts.</p>
+<p>Because every entry is machine-readable, entries can be searched and
+filtered by external tools without custom metadata parsing, and gaiaDB
+can use an entry to retrieve and load the dataset.</p>
 </div>
 <div id="key-features" class="section level2">
 <h2>Key Features</h2>
 <ul>
-<li><strong>Schema.org compliant metadata</strong> for standardized data
-description</li>
-<li><strong>Federated data source discovery</strong> across multiple
-catalogs</li>
-<li><strong>Variable-level documentation</strong> for understanding
-dataset contents</li>
-<li><strong>Integration with external catalogs</strong> for broader data
-discovery</li>
-<li><strong>Solr-powered search</strong> for fast, flexible
-querying</li>
+<li><strong>Schema.org compliant metadata</strong> (JSON-LD) for
+standardized, FAIR dataset description</li>
+<li><strong>Three kinds of metadata</strong>: descriptive (identity,
+version, provider, coverage), administrative (license, URL, retrieval
+method, update cadence) and technical (geometry, CRS, file format and
+structure)</li>
+<li><strong>Variable-level documentation</strong>: definition, unit,
+time window and concept mappings, kept separate from dataset-level
+properties</li>
+<li><strong>KoboToolbox authoring form</strong>, with SSSOM (Simple
+Standard for Sharing Ontological Mappings) used to map the form’s
+answers to the JSON-LD profile</li>
+<li><strong>SHACL validation</strong> of selected rules between dataset
+and variable properties</li>
+<li><strong>ETL scripts</strong> generated from the metadata, using
+GDAL/OGR, for each dataset</li>
+<li><strong>Catalog browsers</strong> with keyword and data-structure
+filters and free-text search</li>
+<li><strong>Federation</strong>: JSON-LD export has been federated with
+the University of Miami’s Geospatial Digital Special Collections</li>
 </ul>
+</div>
+<div id="a-catalog-entry" class="section level2">
+<h2>A catalog entry</h2>
+<pre><code>&lt;table_id&gt;/
+  meta_json-ld_&lt;table_id&gt;.json     JSON-LD metadata (dataset and variables)
+  meta_etl_&lt;table_id&gt;.json         ETL configuration
+  meta_dcat_&lt;table_id&gt;.json        DCAT metadata
+  etl/                             ETL shell scripts (download and load, then clean up)
+  download/                        source files (created when the dataset is loaded)</code></pre>
 </div>
 <div id="use-cases" class="section level2">
 <h2>Use Cases</h2>
 <ul>
-<li>Discover available geospatial datasets for research</li>
+<li>Discover available geospatial datasets for research and judge their
+fitness for a question</li>
 <li>Understand dataset variables and temporal coverage</li>
 <li>Find data sources matching specific geographic regions</li>
 <li>Document and share institutional datasets</li>
-<li>Link data sources to gaiaDb transformation recipes</li>
+<li>Provide the metadata and ETL scripts that gaiaDB uses to ingest a
+dataset</li>
 </ul>
 </div>
 <div id="integration" class="section level2">
 <h2>Integration</h2>
-<p>gaiaCatalog integrates with the Gaia toolchain by: - Providing
-dataset metadata that informs gaiaDb ingestion - Linking to
-transformation recipes in gaiaDb - Enabling researchers to identify
-relevant exposures - Supporting reproducible research through data
-provenance</p>
+<p>gaiaCatalog integrates with the Gaia toolchain by: - Providing the
+metadata and ETL scripts that gaiaDB ingestion runs
+(<code>backbone.ingest_datasource</code>) - Supplying the variable and
+concept information that ends up on every exposure row - Letting
+researchers identify relevant exposures - Supporting reproducible
+research through data provenance</p>
 </div>
 <div id="access" class="section level2">
 <h2>Access</h2>
 <ul>
-<li><strong>Web Interface</strong>: Flask-based catalog browser (port
-5000 in gaiaDocker)</li>
-<li><strong>API</strong>: Solr REST API for programmatic access</li>
+<li><strong>Web interface</strong>: Flask-based catalog browser (port
+5001 in the tutorial stack, <code>http://localhost:5001</code>), or the
+hosted browser at <a
+href="https://ohdsi.github.io/gaiaCatalog/browser">ohdsi.github.io/gaiaCatalog/browser</a></li>
+<li><strong>From the browser</strong>: load a dataset into a staging
+table, load one variable for analysis, and download citations and
+JSON-LD</li>
+<li><strong>Search</strong>: an optional Solr index over the JSON-LD for
+full-text, concept and spatial search</li>
 <li><strong>Database</strong>: PostgreSQL backend for metadata
 storage</li>
 </ul>
+<p>Some entries may fail to load: a source may need an API key, its
+metadata may be incomplete, or part of the ETL stack may be missing.</p>
+</div>
+<div id="authoring" class="section level2">
+<h2>Authoring</h2>
+<p>Adding a dataset starts from a research question, not from the data.
+The <a href="tutorial-exercise-1.html">tutorial’s first exercise</a>
+walks through it: judge a candidate dataset against a fitness rubric
+(scientific relevance, spatial fit, temporal fit, semantic clarity,
+access, reproducibility), enter its metadata in the Kobo form, and watch
+the crosswalk turn the form into a JSON-LD record plus ETL scripts.</p>
 </div>
 <div id="documentation" class="section level2">
 <h2>Documentation</h2>
 <ul>
 <li><a href="https://github.com/OHDSI/gaiaCatalog">Repository</a></li>
+<li><a href="gaia-principles.html">Design Principles</a></li>
 <li><a href="developer-deployment.html">Deployment via
 gaiaDocker</a></li>
 </ul>

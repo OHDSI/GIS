@@ -420,6 +420,12 @@ div.tocify {
       <a href="algorithms.html">Algorithms</a>
     </li>
     <li>
+      <a href="evaluation.html">Evaluation</a>
+    </li>
+    <li>
+      <a href="geocoding.html">Geocoding</a>
+    </li>
+    <li>
       <a href="gaiaDB.html">gaiaDB</a>
     </li>
     <li>
@@ -568,7 +574,7 @@ git remote add upstream https://github.com/OHDSI/REPOSITORY-NAME.git</code></pre
 </div>
 <div id="install-dependencies" class="section level4">
 <h4><strong>Install Dependencies</strong></h4>
-<p>For <strong>gaiaDb</strong> and full stack (via gaiaDocker):</p>
+<p>For <strong>gaiaDB</strong> and full stack (via gaiaDocker):</p>
 <pre class="bash"><code>git clone https://github.com/OHDSI/gaiaDocker.git
 cd gaiaDocker
 docker compose --profile gaia up -d</code></pre>
@@ -595,10 +601,10 @@ refactoring</p>
 href="https://style.tidyverse.org/">tidyverse style guide</a> - Use
 roxygen2 for documentation - Include unit tests for new functions - Run
 <code>devtools::check()</code> before committing</p>
-<p><strong>SQL (gaiaDb - core processing logic)</strong>: - Use
+<p><strong>SQL (gaiaDB - core processing logic)</strong>: - Use
 lowercase for keywords - Indent for readability - Comment complex
 queries - Include transformation documentation - All geospatial
-processing stays in gaiaDb</p>
+processing stays in gaiaDB</p>
 <p><strong>Documentation</strong>: - Update relevant .Rmd files -
 Include examples where appropriate - Update function documentation</p>
 </div>
@@ -677,7 +683,7 @@ branch - Pull latest changes from upstream</p>
 <div id="pull-requests" class="section level2">
 <h2><strong>Pull Requests</strong></h2>
 <p><strong>Title</strong>: <code>[Component] Brief description</code>
-(e.g., <code>[gaiaDb] Fix spatial indexing bug</code>)</p>
+(e.g., <code>[gaiaDB] Fix spatial indexing bug</code>)</p>
 <p><strong>PR checklist</strong>: Describe changes, link issues, specify
 type (bug/feature/docs), include tests, update docs</p>
 <p>See GitHub PR template for full checklist.</p>

@@ -420,6 +420,12 @@ div.tocify {
       <a href="algorithms.html">Algorithms</a>
     </li>
     <li>
+      <a href="evaluation.html">Evaluation</a>
+    </li>
+    <li>
+      <a href="geocoding.html">Geocoding</a>
+    </li>
+    <li>
       <a href="gaiaDB.html">gaiaDB</a>
     </li>
     <li>
@@ -531,12 +537,12 @@ Projects</a></li>
 </div>
 <div id="core-packages" class="section level3">
 <h3><strong>Core Packages</strong></h3>
-<p><strong><a href="https://github.com/OHDSI/gaiaDb">gaiaDb</a></strong>
+<p><strong><a href="https://github.com/OHDSI/gaiaDB">gaiaDB</a></strong>
 <img src="https://img.shields.io/badge/status-beta-yellow"
 alt="Status: Beta" /> - <strong>Technology</strong>: PostgreSQL/PostGIS
 - <strong>Purpose</strong>: Core data repository with geospatial
 processing capabilities - <strong>Maintainers</strong>: <a
-href="https://github.com/OHDSI/gaiaDb">See repository</a> - <strong>Key
+href="https://github.com/OHDSI/gaiaDB">See repository</a> - <strong>Key
 Features</strong>: - Geospatial data ingestion, management, and analysis
 - SQL routines and PostGIS functionality - OMOP CDM integration -
 LinkML/JSON-LD metadata support - Spatial indexing and optimization</p>
@@ -596,7 +602,7 @@ href="https://github.com/TuftsCTSI/CVB/tree/main/GIS/Ontology">CVB/GIS/Ontology<
 <h3><strong>Data Flow</strong></h3>
 <pre><code>External Geospatial Data → gaiaCatalog (Discovery)
                                 ↓
-                           gaiaDb (Backend Repository)
+                           gaiaDB (Backend Repository)
                            ├── Data Ingestion
                            ├── SQL Routines &amp; PostGIS Functions
                            ├── OMOP Integration
@@ -619,7 +625,7 @@ href="https://github.com/TuftsCTSI/CVB/tree/main/GIS/Ontology">CVB/GIS/Ontology<
 <li>Input: External data source metadata</li>
 <li>Output: Cataloged, discoverable datasets</li>
 </ul></li>
-<li><strong>Backend Engine</strong> (gaiaDb)
+<li><strong>Backend Engine</strong> (gaiaDB)
 <ul>
 <li>Input: Raw geospatial datasets, patient locations</li>
 <li>Processing: SQL routines, PostGIS functions, spatial operations</li>
@@ -655,7 +661,7 @@ and analysis-ready summaries</li>
 <div id="prerequisites" class="section level3">
 <h3><strong>Prerequisites</strong></h3>
 <ul>
-<li>PostgreSQL/PostGIS (&gt;= 12/3.0) for gaiaDb</li>
+<li>PostgreSQL/PostGIS (&gt;= 12/3.0) for gaiaDB</li>
 <li>Docker and Docker Compose (recommended for coordinated
 deployment)</li>
 <li>Git and GitHub account</li>
@@ -683,7 +689,7 @@ docker compose ps</code></pre>
 <div id="option-2-local-development" class="section level4">
 <h4><strong>Option 2: Local Development</strong></h4>
 <ol style="list-style-type: decimal">
-<li>Clone the gaiaDb repository and set up PostgreSQL/PostGIS</li>
+<li>Clone the gaiaDB repository and set up PostgreSQL/PostGIS</li>
 <li>Install the gaiaCore R package
 (<code>remotes::install_github("OHDSI/gaiaCore")</code>)</li>
 <li>Configure the database connection with
@@ -760,7 +766,7 @@ dates reflect the most recent build of the site.</p>
 <td align="left"><a
 href="https://hub.docker.com/r/ohdsi/gaia-db">ohdsi/gaia-db</a></td>
 <td align="left">main</td>
-<td align="left">PostgreSQL/PostGIS database (gaiaDb)</td>
+<td align="left">PostgreSQL/PostGIS database (gaiaDB)</td>
 <td align="left">Published</td>
 <td align="left">2026-10-06</td>
 </tr>
@@ -787,7 +793,7 @@ href="https://hub.docker.com/r/ohdsi/gaia-catalog">ohdsi/gaia-catalog</a></td>
 <td align="left">main</td>
 <td align="left">Catalog interface</td>
 <td align="left">Published</td>
-<td align="left">2026-10-19</td>
+<td align="left">2026-10-21</td>
 </tr>
 <tr class="odd">
 <td align="left"><a
@@ -795,7 +801,7 @@ href="https://hub.docker.com/r/ohdsi/gaia-solr">ohdsi/gaia-solr</a></td>
 <td align="left">main</td>
 <td align="left">Catalog search index</td>
 <td align="left">Published</td>
-<td align="left">2026-10-19</td>
+<td align="left">2026-10-21</td>
 </tr>
 </tbody>
 </table>
@@ -839,7 +845,8 @@ Link</a>)</li>
 cases</li>
 <li><strong>OHDSI Forums</strong>: <a
 href="http://forums.ohdsi.org/c/developers">Developers section</a></li>
-<li><strong>Email</strong>: zollovenecek[at]ohdsi[dot]org</li>
+<li><strong>Email</strong>: <a href="mailto:houghtaling@ohdsi.org"
+class="email">houghtaling@ohdsi.org</a></li>
 </ul>
 <p><br></p>
 </div>

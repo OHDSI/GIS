@@ -338,6 +338,12 @@ $(document).ready(function () {
       <a href="algorithms.html">Algorithms</a>
     </li>
     <li>
+      <a href="evaluation.html">Evaluation</a>
+    </li>
+    <li>
+      <a href="geocoding.html">Geocoding</a>
+    </li>
+    <li>
       <a href="gaiaDB.html">gaiaDB</a>
     </li>
     <li>
@@ -419,11 +425,11 @@ WG</h1>
 <div id="description" class="section level2">
 <h2>Description</h2>
 <p>gaiaCore is an <strong>R package</strong> for working with a Gaia
-database. It connects to gaiaDb directly with <a
+database. It connects to gaiaDB directly with <a
 href="https://ohdsi.github.io/DatabaseConnector/">DatabaseConnector</a>,
 runs the Gaia pipeline from R, and provides the quality checks and
 exposure analytics that turn the result into evidence for OHDSI studies.
-All spatial processing happens inside gaiaDb: gaiaCore calls its SQL
+All spatial processing happens inside gaiaDB: gaiaCore calls its SQL
 functions, so every derived value stays traceable to the catalog entry,
 the geometry and the residence interval that produced it.</p>
 </div>
@@ -434,7 +440,7 @@ the geometry and the residence interval that produced it.</p>
 build their geometry and attribute tables</li>
 <li><strong>Load person locations</strong> and residence histories from
 data frames or from an OMOP CDM with the Gaia extension</li>
-<li><strong>Derive exposure</strong> with gaiaDb’s spatial-temporal
+<li><strong>Derive exposure</strong> with gaiaDB’s spatial-temporal
 join, one variable at a time, into <code>EXTERNAL_EXPOSURE</code></li>
 <li><strong>Check</strong> the derived rows: duplicates, values outside
 the residence interval, missing or implausible values, unit
@@ -451,11 +457,11 @@ FeatureExtractionForExtensions) installed</li>
 </div>
 <div id="architecture" class="section level2">
 <h2>Architecture</h2>
-<p>gaiaCore sits between gaiaDb and the HADES analytics:</p>
+<p>gaiaCore sits between gaiaDB and the HADES analytics:</p>
 <ul>
 <li>It opens a direct database connection (JDBC); there is no REST layer
 in between</li>
-<li>It wraps gaiaDb’s SQL functions and does not duplicate processing
+<li>It wraps gaiaDB’s SQL functions and does not duplicate processing
 logic</li>
 <li>Its output is the OMOP <code>EXTERNAL_EXPOSURE</code> table, which
 the rest of the OHDSI tools consume</li>

@@ -420,6 +420,12 @@ div.tocify {
       <a href="algorithms.html">Algorithms</a>
     </li>
     <li>
+      <a href="evaluation.html">Evaluation</a>
+    </li>
+    <li>
+      <a href="geocoding.html">Geocoding</a>
+    </li>
+    <li>
       <a href="gaiaDB.html">gaiaDB</a>
     </li>
     <li>
@@ -523,11 +529,11 @@ cases and advancing technical infrastructure gets done.</p>
 fundamental contributions to the group’s decisions, strategies, and
 products.</p>
 <p>All are welcome. We’d love to work with you. Please see our page on
-<a href="getting-involved.html#Proposing_a_new_Use_Case">proposing new
-use cases</a>. If you are new and are considering using the GIS
-toolchain to do research or contibuting to the group’s work, we will
-schedule a separate meeting with you to help you figure out what manner
-of participation makes sense for you.</p>
+<a href="get-started.html#propose-a-use-case">proposing new use
+cases</a>. If you are new and are considering using the GIS toolchain to
+do research or contibuting to the group’s work, we will schedule a
+separate meeting with you to help you figure out what manner of
+participation makes sense for you.</p>
 <p>New to OHDSI? First sign up for an OHDSI MS Teams account <a
 href="https://forms.office.com/Pages/ResponsePage.aspx?id=lAAPoyCRq0q6TOVQkCOy1ZyG6Ud_r2tKuS0HcGnqiQZUQ05MOU9BSzEwOThZVjNQVVFGTDNZRENONiQlQCN0PWcu">here</a>.
 It’s easy peasy. Already have an OHDSI Teams account? Great. Just sign
@@ -576,15 +582,16 @@ href="schema-extensions.html#OMOP_GIS_Schema_Extensions">here</a>.</p>
 <p>The GIS extensions to the OMOP Vocabulary cover geometries,
 toxicants, and social determinants. They are used to represent a very
 large set of entities that can affect health and their relationships.
-The draft versions of these vocabularies are available <a
-href="https://github.com/OHDSI/GIS/tree/main/vocabularies">here</a>.
-They are based on mature existing ontologies and were developed by GIS
-workgroup members who are part of the OHDSI Core Vocabulary team in
-accordance with the guiding principles for OMOP vocabulary development,
-quality assurance, and integration. Current work on their validation in
-real use cases is expected to support their eventual acceptance as
-versioned community-maintained extensions of the core OMOP
-Vocabulary.</p>
+The vocabularies are built and released from the <a
+href="https://github.com/TuftsCTSI/CVB/tree/main/GIS/Ontology">Custom
+Vocabulary Builder repository</a> (see the <a
+href="vocabulary.html">vocabulary documentation</a>). They are based on
+mature existing ontologies and were developed by GIS workgroup members
+who are part of the OHDSI Core Vocabulary team in accordance with the
+guiding principles for OMOP vocabulary development, quality assurance,
+and integration. Current work on their validation in real use cases is
+expected to support their eventual acceptance as versioned
+community-maintained extensions of the core OMOP Vocabulary.</p>
 </div>
 <div id="gaiacore" class="section level4">
 <h4><strong>gaiaCore</strong></h4>
@@ -603,42 +610,58 @@ href="https://github.com/OHDSI/gaiaCore">here</a>.</p>
 representations that GIS software expects; for example, the latitude and
 longitude coordinates of street addresses or the coordinates of the
 lines that define a postal region. The OHDSI GIS workgroup does not
-provide or maintain software that does this geocoding. The GIS Workgroup
-does provide guidance about privacy-preserving options for geocoding
-address information and considerations for using available open-source
-and comercial geocoding approaches. The workgroup is also developing
-guidance to aid researchers in making informed decisions about selecting
-and working with alternative geospatial data sources that are relevant
-to addressing a research question.</p>
+develop geocoding software. Two open-source geocoders, DeGAUSS and the
+PostGIS TIGER geocoder, are available as optional components of the Gaia
+Docker deployment and run locally, so no address data leaves the
+institution. The GIS Workgroup provides <a
+href="geocoding.html">guidance</a> about privacy-preserving options for
+geocoding address information, a benchmark of four geocoders, and
+considerations for using available open-source and commercial geocoding
+approaches. The workgroup is also developing guidance to aid researchers
+in making informed decisions about selecting and working with
+alternative geospatial data sources that are relevant to addressing a
+research question.</p>
 </div>
 <div id="support-for-integration-with-ohdsis-technical-ecosytem"
 class="section level4">
 <h4><strong>Support for integration with OHDSI’s technical
 ecosytem</strong></h4>
-<p>The GIS Workgroup provides modified versions of the BroadSea
-container that inlcudes versions of the OHDSI Vocabulary that include
-draft the GIS vocabularies and the other components of the toolchain.
-Modified versions of the Tufts Synthetic Data and associated for
-demonstrating the use of the HADES PLP package to predict incident
-respiratory conditions using regional air quality data are included in
-the container. The workgroup is developing a robust approach to working
-with available geospatial data sources via catalogs. The approach uses
-schema.org-compliant standards and federated metadata sharing methods
-widely used in the GIS community to share information about available
-datasets.</p>
+<p>The GIS Workgroup provides a containerized deployment of the
+toolchain (gaiaDocker, following the OHDSI Broadsea approach) and an
+<code>ohdsi/gaia-core</code> image with HADES, gaiaCore and the
+extension packages (CaprForExtensions and
+FeatureExtractionForExtensions) installed. A <a
+href="tutorial.html">hands-on tutorial</a>, first run at the 2026 OHDSI
+Global Symposium, carries one example study end to end on a synthetic
+10,000-person OMOP dataset with real county PM2.5. A larger synthetic
+benchmark cohort and the benchmark scripts are archived on <a
+href="https://doi.org/10.5281/zenodo.23296292">Zenodo</a>; see the <a
+href="evaluation.html">evaluation</a> page. The workgroup is developing
+a robust approach to working with available geospatial data sources via
+catalogs. The approach uses schema.org-compliant standards and federated
+metadata sharing methods widely used in the GIS community to share
+information about available datasets.</p>
 <p><br></p>
-<p><img src="images/ohdsi_gis_overview.png" style="width:150.0%" /></p>
-<p>The green and black elements at the top of the figure above show the
-production of reliable evidence by applying standardized analytics to
-standardized person-level clinical data. The extension of this approach
-by the GIS toolchain is shown below that. Geocoded patient addresses are
-linked to geospatial datasets and standardized in the OMOP GIS
-extension. The GIS toolchain uses the same modeling approach as the main
-OMOP CDM and vocabulary. This allows the same best practice analytics to
-be applied simultaneously to both person-level clinical data and
-geospatial data on exposures outside the clinic. As with OHDSI’s use of
-clinical data, analyses of external exposures are done without sharing
-patient address information.</p>
+<div class="float">
+<img src="images/slides/toolchain_workflow.png" style="width:150.0%"
+alt="The OHDSI GIS toolchain workflow" />
+<div class="figcaption">The OHDSI GIS toolchain workflow</div>
+</div>
+<p>The figure shows the toolchain in three steps. (1) <strong>Describe
+place</strong>: regional measurements, defined by geography and
+measurement dates, are described in gaiaCatalog and mapped to GIS
+vocabulary concepts, which makes them discoverable and
+machine-actionable. (2) <strong>Link within the data holder</strong>:
+inside the data holder’s private environment, residence histories are
+geocoded locally and stored in LOCATION_HISTORY beside the OMOP CDM
+clinical data; gaiaDB and gaiaCore join place and time and produce
+person-level EXTERNAL_EXPOSURE records. (3) <strong>Generate
+evidence</strong>: OHDSI tools analyze the exposures together with the
+clinical data. Addresses and individual records stay at the data holder,
+and only appropriate aggregate results are shared. The toolchain uses
+the same modeling approach as the main OMOP CDM and vocabulary, so the
+same best-practice analytics apply to person-level clinical data and to
+exposures outside the clinic.</p>
 <p><br></p>
 </div>
 </div>
@@ -671,6 +694,9 @@ href="https://github.com/OHDSI/GIS/issues/369">Vocabulary</a></li>
 </div>
 <div id="publicationspresentations" class="section level2">
 <h2><strong>Publications/Presentations</strong></h2>
+<p>Integrating geospatial data into the OMOP CDM: a hands-on tutorial
+with the OHDSI GIS toolchain (2026 OHDSI Global Symposium, October 20,
+2026; materials on the <a href="tutorial.html">tutorial</a> pages)</p>
 <p>OHDSI GIS Toolchain Live Demonstration (2024 OHDSI Symposium <a
 href="https://www.youtube.com/watch?v=NLfWvuZJVK4">Video</a>)</p>
 <p>OHDSI GIS Infrastructure (2023 OHDSI Symposium <a

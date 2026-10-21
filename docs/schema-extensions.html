@@ -414,6 +414,12 @@ div.tocify {
       <a href="algorithms.html">Algorithms</a>
     </li>
     <li>
+      <a href="evaluation.html">Evaluation</a>
+    </li>
+    <li>
+      <a href="geocoding.html">Geocoding</a>
+    </li>
+    <li>
       <a href="gaiaDB.html">gaiaDB</a>
     </li>
     <li>
@@ -509,8 +515,14 @@ script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"
 </script>
 <div id="omop-gis-schema-extensions" class="section level1">
 <h1><strong>OMOP GIS Schema Extensions</strong></h1>
-<p><img src="images/cdm_extension_erd.png" style="width:150.0%"
+<p><img src="images/slides/omop_gis_extension_tables.png"
+style="width:150.0%"
 alt="OMOP GIS Schema Extensions - Click here to download" /> <br></p>
+<p><em>Both tables hang off the person, like any other OMOP clinical
+table. <code>entity_id</code> is the <code>person_id</code> when the
+domain is Person. Bold fields are required; blue fields hold standard
+concepts (GIS, Exposome, SDoH).</em></p>
+<p><br></p>
 <div id="overview" class="section level2">
 <h2><strong>Overview</strong></h2>
 <p>The OMOP GIS Vocabulary Package extends the OMOP Common Data Model
@@ -520,6 +532,106 @@ environmental exposures. This extension is anchored by the
 foundational structure enabling integration of spatial, environmental,
 and sociodemographic data into observational health research
 workflows.</p>
+</div>
+<div id="the-person-place-time-bridge" class="section level2">
+<h2><strong>The person-place-time bridge</strong></h2>
+<div class="float">
+<img src="images/slides/person_place_time_bridge.png"
+alt="PERSON, LOCATION_HISTORY, LOCATION and EXTERNAL_EXPOSURE" />
+<div class="figcaption">PERSON, LOCATION_HISTORY, LOCATION and
+EXTERNAL_EXPOSURE</div>
+</div>
+<p>Standard concepts carry the meaning of each exposure row; Gaia’s
+catalog carries its provenance (<code>exposure_source_value</code> holds
+the <code>variable_source_id</code> of the variable the row came
+from).</p>
+<p><br></p>
+</div>
+<div id="source-to-concept-navigation-map" class="section level2">
+<h2><strong>Source-to-concept navigation map</strong></h2>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Question answered</th>
+<th>Standard</th>
+<th>Destination field</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Exposure variable</td>
+<td>What contextual attribute was assigned?</td>
+<td>OMOP SDoH, OMOP Exposome, or an existing standard concept in OHDSI
+Athena</td>
+<td><code>exposure_concept_id</code></td>
+</tr>
+<tr class="even">
+<td>Exposure derivation/type</td>
+<td>How was the record generated, or what source class produced it?</td>
+<td>Type Concept / GIS Exposure Type concept</td>
+<td><code>exposure_type_concept_id</code></td>
+</tr>
+<tr class="odd">
+<td>Spatial relationship</td>
+<td>How did the person-location geometry relate to the source
+geometry?</td>
+<td>OMOP GIS geometry relationship</td>
+<td><code>exposure_relationship_concept_id</code></td>
+</tr>
+<tr class="even">
+<td>Source provenance</td>
+<td>Which named dataset or source supplied the variable?</td>
+<td>Source concept identifier when available, plus source value</td>
+<td><code>exposure_source_concept_id</code>,
+<code>exposure_source_value</code></td>
+</tr>
+<tr class="odd">
+<td>Numeric result</td>
+<td>What number was assigned?</td>
+<td>No concept; numeric value</td>
+<td><code>value_as_number</code></td>
+</tr>
+<tr class="even">
+<td>Categorical result</td>
+<td>What standardized category was assigned?</td>
+<td>Standard value concept from GIS vocabularies or Athena</td>
+<td><code>value_as_concept_id</code></td>
+</tr>
+<tr class="odd">
+<td>Unit</td>
+<td>In what unit is the value expressed?</td>
+<td>Standard unit concept</td>
+<td><code>unit_concept_id</code></td>
+</tr>
+<tr class="even">
+<td>Location interval</td>
+<td>Where and during what period was the entity located?</td>
+<td>GIS relationship/type concepts plus OMOP location linkage</td>
+<td><code>LOCATION_HISTORY</code></td>
+</tr>
+<tr class="odd">
+<td>Source variable code</td>
+<td>What did the original file call the variable?</td>
+<td>Retained for traceability, not assumed to be standard</td>
+<td><code>exposure_source_value</code></td>
+</tr>
+</tbody>
+</table>
+<p><em>A worked example for PM2.5: <code>exposure_concept_id</code>
+2052499839 (what was measured), <code>exposure_type_concept_id</code>
+2052499878 (Air Quality Database, the kind of data source),
+<code>exposure_relationship_concept_id</code> 2052496943 (Within, how
+person and place were linked), <code>exposure_source_value</code> the
+variable’s <code>variable_source_id</code>, and the unit micrograms per
+cubic meter (concept 32964) as declared in the catalog. Gaia-derived
+rows currently leave <code>unit_concept_id</code> empty.</em></p>
 <p><br></p>
 </div>
 <div id="location_history" class="section level2 tabset tabset-pills">

@@ -420,6 +420,12 @@ div.tocify {
       <a href="algorithms.html">Algorithms</a>
     </li>
     <li>
+      <a href="evaluation.html">Evaluation</a>
+    </li>
+    <li>
+      <a href="geocoding.html">Geocoding</a>
+    </li>
+    <li>
       <a href="gaiaDB.html">gaiaDB</a>
     </li>
     <li>
@@ -522,6 +528,15 @@ metal/VMs</li>
 versioned releases.</p>
 <p><strong>Prerequisites</strong>: Docker Engine 20.10+, Docker Compose
 2.0+, 8GB+ RAM, 50GB+ disk</p>
+<p><strong>Tested on</strong>: Linux and macOS, and Windows 11 (the
+default deployment ran the tutorial pipeline end to end with the answer
+key matching). Docker is a convenience, not a requirement: gaiaDB is a
+standard PostgreSQL/PostGIS database that runs on any native Postgres
+server, and gaiaCore can be pointed at any gaiaDB instance.</p>
+<p><strong>Tutorial</strong>: use the pinned images
+(<code>docker-compose.tutorial.yaml</code>, described on <a
+href="get-started.html">Get Started</a>) so that everyone runs the same
+versions.</p>
 <div id="quick-start" class="section level3">
 <h3><strong>Quick Start</strong></h3>
 <pre class="bash"><code># Clone gaiaDocker repository
@@ -552,12 +567,12 @@ example.</p>
 <div id="services" class="section level3">
 <h3><strong>Services</strong></h3>
 <ul>
-<li><strong>gaia-db</strong>: PostgreSQL/PostGIS (core data
-repository)</li>
+<li><strong>gaia-db</strong>: PostgreSQL/PostGIS (core data repository,
+gaiaDB)</li>
 <li><strong>gaia-core</strong>: RStudio with HADES and the gaiaCore R
 package</li>
 <li><strong>gaia-postgrest</strong>: PostgREST API (optional; exposes
-gaiaDb functions)</li>
+gaiaDB functions)</li>
 <li><strong>gaia-catalog</strong>: Flask catalog interface (data
 discovery)</li>
 <li><strong>gaia-solr</strong>: Search engine (catalog indexing)</li>
@@ -613,7 +628,7 @@ ansible-playbook -i inventory/production playbooks/deploy-full-stack.yml
 # Use vault for secrets
 ansible-vault create group_vars/production/vault.yml
 ansible-playbook playbook.yml --ask-vault-pass</code></pre>
-<p>See gaiaDb repository for example playbooks and roles.</p>
+<p>See gaiaDB repository for example playbooks and roles.</p>
 <p><br></p>
 </div>
 <div id="manual-installation" class="section level2">
@@ -632,12 +647,67 @@ GRANT ALL PRIVILEGES ON DATABASE gaiadb TO gaia;
 \c gaiadb
 CREATE EXTENSION postgis;
 
-# 3. Clone gaiaDb
-git clone https://github.com/OHDSI/gaiaDb.git &amp;&amp; cd gaiaDb
-psql -U gaia -d gaiadb -f schema/create_schema.sql</code></pre>
-<p>See the gaiaDb and gaiaCore repositories for detailed setup
+# 3. Clone gaiaDB
+git clone https://github.com/OHDSI/gaiaDB.git &amp;&amp; cd gaiaDB
+# Load the SQL files in sql/ in order (01_init_schema.sql ... 06_gdsc_catalog_functions.sql);
+# see the README and init/00_init_gaiaDB.sh for what the container does at first start.
+# Data retrieval also needs the PL/sh extension (see Platform constraints below).</code></pre>
+<p>See the gaiaDB and gaiaCore repositories for detailed setup
 instructions; gaiaCore connects to the database with
 <code>createGaiaConnectionDetails()</code>.</p>
+<p><br></p>
+</div>
+<div id="platform-constraints-plsh" class="section level2">
+<h2><strong>Platform constraints (PL/sh)</strong></h2>
+<p>gaiaDB’s data retrieval step runs each dataset’s ETL scripts from
+inside PostgreSQL using the PL/sh extension, which is built into the
+gaiaDB image. This shapes where gaiaDB can run:</p>
+<table>
+<colgroup>
+<col width="12%" />
+<col width="40%" />
+<col width="46%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Platform</th>
+<th>PL/sh (retrieval and ingestion)</th>
+<th>PostGIS (the spatial-temporal join)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Self-managed Linux (on premises or a cloud VM), containers,
+Kubernetes, WSL2</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>macOS, native</td>
+<td>Build from source</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td>Windows, native PostgreSQL</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>Managed PostgreSQL (AWS RDS and Aurora, Azure Database for
+PostgreSQL, Google Cloud SQL)</td>
+<td>No: not in the providers’ supported extensions</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>The join itself needs only PostGIS and plain SQL, so it runs on every
+platform above. Retrieval of public data can run elsewhere (for example
+in a container or on a laptop) and the harmonized tables can be moved to
+the database that holds patient locations. Whether and how Gaia should
+separate retrieval from the protected database is an open design
+question in the working group; see issue #522 for the Windows native
+case. Check your provider’s current extension list, since these
+change.</p>
 <p><br></p>
 </div>
 <div id="kubernetes-cloud" class="section level2">
@@ -645,12 +715,15 @@ instructions; gaiaCore connects to the database with
 <p><strong>Status</strong>: In development</p>
 <ul>
 <li><strong>Kubernetes</strong>: Helm charts, horizontal autoscaling,
-multi-site federation (planned Q2 2026)</li>
-<li><strong>AWS</strong>: Terraform modules, RDS PostgreSQL, ECS/Fargate
-(in development)</li>
-<li><strong>Azure</strong>: ARM templates, Azure Database for
-PostgreSQL, AKS (planned)</li>
-<li><strong>GCP</strong>: Cloud SQL, Cloud Run/GKE (planned)</li>
+multi-site federation (planned; the original Q2 2026 target has passed
+and the timeline is being reset)</li>
+<li><strong>AWS</strong>: Terraform modules, ECS/Fargate (in
+development); managed RDS PostgreSQL does not support PL/sh, see
+above</li>
+<li><strong>Azure</strong>: ARM templates, AKS (planned); Azure Database
+for PostgreSQL does not support PL/sh</li>
+<li><strong>GCP</strong>: Cloud Run/GKE (planned); Cloud SQL does not
+support PL/sh</li>
 </ul>
 <p>Community contributions welcome.</p>
 <p><br></p>

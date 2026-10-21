@@ -338,6 +338,12 @@ $(document).ready(function () {
       <a href="algorithms.html">Algorithms</a>
     </li>
     <li>
+      <a href="evaluation.html">Evaluation</a>
+    </li>
+    <li>
+      <a href="geocoding.html">Geocoding</a>
+    </li>
+    <li>
       <a href="gaiaDB.html">gaiaDB</a>
     </li>
     <li>
@@ -415,51 +421,169 @@ WG</h1>
 
 
 <div id="gaiadb" class="section level1">
-<h1><strong>gaiaDb</strong></h1>
+<h1><strong>gaiaDB</strong></h1>
 <div id="description" class="section level2">
 <h2>Description</h2>
-<p>gaiaDb is the <strong>core data repository</strong> for the Gaia
-toolchain, implemented as a PostgreSQL/PostGIS database. It contains all
-geospatial data processing logic, SQL routines, and OMOP CDM integration
-functionality.</p>
+<p>gaiaDB is the <strong>core data repository</strong> for the Gaia
+toolchain, implemented as a PostgreSQL/PostGIS database (a Docker image
+built on <code>postgis/postgis</code>). It holds the schema and the SQL
+function library that ingest catalogued datasets, register them in a
+common index, and join them to person locations to produce exposure rows
+for the OMOP <code>EXTERNAL_EXPOSURE</code> table.</p>
 </div>
 <div id="key-features" class="section level2">
 <h2>Key Features</h2>
 <ul>
 <li><strong>PostgreSQL/PostGIS backend</strong> for spatial data storage
 and operations</li>
-<li><strong>SQL routines and PostGIS functions</strong> for geospatial
-analysis and exposure calculations</li>
-<li><strong>OMOP CDM integration</strong> via External_Exposure and
+<li><strong>Geometry-attribute index</strong>: every source, whatever
+its native format, resolution or time coverage, is registered the same
+way (<code>geom_index</code> for geometries, <code>attr_index</code> for
+attributes), so one join serves all of them and a new source is added by
+cataloging it</li>
+<li><strong>Catalog-driven ingestion</strong>:
+<code>backbone.ingest_datasource('&lt;table_id&gt;')</code> loads a
+catalog entry’s JSON-LD metadata, runs its ETL scripts and cleans the
+geometry</li>
+<li><strong>Spatial-temporal join</strong> with
+<code>working.spatial_join_from_catalog</code>: point in polygon for
+where, interval overlap for when, with each value clipped to the
+residence interval</li>
+<li><strong>OMOP CDM integration</strong> via the External_Exposure and
 Location_History tables</li>
-<li><strong>LinkML/JSON-LD metadata</strong> support for standardized
-data representation</li>
 <li><strong>Direct connections</strong> from R through gaiaCore, and an
 optional PostgREST API deployed by gaiaDocker</li>
 </ul>
 </div>
 <div id="architecture" class="section level2">
 <h2>Architecture</h2>
-<p>gaiaDb uses a dual-schema approach: - <strong>backbone
-schema</strong>: Core LinkML-based metadata and data catalog -
-<strong>working schema</strong>: OMOP integration tables
-(external_exposure, location_history, location)</p>
-<p>All data transformation, spatial operations, and exposure
-calculations are performed within the database using SQL and PostGIS
-functions.</p>
+<table>
+<colgroup>
+<col width="47%" />
+<col width="52%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Schema</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>backbone</code></td>
+<td>Metadata and index tables (<code>data_source</code>,
+<code>variable_source</code>, <code>geom_index</code>,
+<code>attr_index</code>), the two templates, and the ingestion and
+catalog functions</td>
+</tr>
+<tr class="even">
+<td><code>working</code></td>
+<td><code>location</code> and <code>location_history</code>, the
+per-dataset <code>geom_&lt;table_id&gt;</code> and
+<code>attr_&lt;table_id&gt;</code> tables, and the
+<code>external_exposure</code> output table</td>
+</tr>
+<tr class="odd">
+<td><code>vocabulary</code></td>
+<td>OMOP vocabulary tables</td>
+</tr>
+<tr class="even">
+<td><code>public</code></td>
+<td>Raw source tables loaded by each dataset’s ETL scripts</td>
+</tr>
+</tbody>
+</table>
+<p>All data transformation, spatial operations and exposure calculations
+are performed inside the database with SQL and PostGIS functions. See <a
+href="gaia-principles.html">Design Principles</a> for the schema in
+detail.</p>
+<div class="float">
+<img src="images/slides/geometry_attribute_tables.png"
+alt="Geometries and attributes" />
+<div class="figcaption">Geometries and attributes</div>
+</div>
+</div>
+<div id="main-functions" class="section level2">
+<h2>Main functions</h2>
+<table>
+<colgroup>
+<col width="37%" />
+<col width="62%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ingest a dataset</td>
+<td><code>backbone.ingest_datasource(table_id)</code> (metadata load,
+ETL scripts, geometry clean-up)</td>
+</tr>
+<tr class="even">
+<td>Build per-variable tables</td>
+<td><code>backbone.gdsc_load_all_variables(table_id, geom_label, ...)</code></td>
+</tr>
+<tr class="odd">
+<td>Load locations</td>
+<td><code>working.load_location_csv</code>,
+<code>working.load_location_history_csv</code> (or gaiaCore’s
+<code>loadLocations()</code> /
+<code>loadLocationsFromOmop()</code>)</td>
+</tr>
+<tr class="even">
+<td>Check locations</td>
+<td><code>working.validate_location_data()</code>,
+<code>working.location_statistics()</code></td>
+</tr>
+<tr class="odd">
+<td>Join</td>
+<td><code>working.spatial_join_from_catalog(variable, table_id, ...)</code>,
+<code>working.spatial_join_all_from_catalog(table_id)</code></td>
+</tr>
+<tr class="even">
+<td>Inspect or reset</td>
+<td><code>working.exposure_statistics()</code>,
+<code>working.clear_exposure_data(variable)</code></td>
+</tr>
+</tbody>
+</table>
+<p>The full function reference is in the <a
+href="https://github.com/OHDSI/gaiaDB">repository README</a>.</p>
+</div>
+<div id="scope-and-performance" class="section level2">
+<h2>Scope and performance</h2>
+<ul>
+<li>The geometry-attribute index covers <strong>vector</strong>
+geometries today. Raster sources can be staged, but registering them in
+the index is planned.</li>
+<li>Ingestion currently runs as source-specific ETL scripts generated
+from each catalog entry. A declarative recipe layer is being evaluated
+by the working group.</li>
+<li>On the tract benchmark (about 2.9 million exposure rows), the Gaia
+join took about 28 s against 16-17 s for an equivalent hand-written
+PostGIS query, with identical rows. Its value is catalog-driven
+provenance, standardization and reuse, not speed.</li>
+</ul>
 </div>
 <div id="access" class="section level2">
 <h2>Access</h2>
-<p>gaiaDb is accessed through: - <strong>gaiaCore</strong>: R package
+<p>gaiaDB is accessed through: - <strong>gaiaCore</strong>: R package
 that connects directly and calls the database’s functions -
-<strong>Direct database connections</strong>: Standard PostgreSQL client
-connections - <strong>PostgREST API</strong> (optional): RESTful
-interface to database functions and tables, deployed by gaiaDocker</p>
+<strong>Direct database connections</strong>: standard PostgreSQL
+clients - <strong>PostgREST API</strong> (optional): RESTful interface
+to database functions and tables, deployed by gaiaDocker</p>
+<p>gaiaDB is a standard PostgreSQL/PostGIS database, so it also runs on
+any native Postgres server; Docker is a convenience, not a
+requirement.</p>
 </div>
 <div id="documentation" class="section level2">
 <h2>Documentation</h2>
 <ul>
-<li><a href="https://github.com/OHDSI/gaiaDb">Repository</a></li>
+<li><a href="https://github.com/OHDSI/gaiaDB">Repository</a></li>
+<li><a href="gaia-principles.html">Design Principles</a></li>
 <li><a href="developer-deployment.html">Deployment via
 gaiaDocker</a></li>
 </ul>

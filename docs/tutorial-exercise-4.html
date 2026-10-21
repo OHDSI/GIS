@@ -420,6 +420,12 @@ div.tocify {
       <a href="algorithms.html">Algorithms</a>
     </li>
     <li>
+      <a href="evaluation.html">Evaluation</a>
+    </li>
+    <li>
+      <a href="geocoding.html">Geocoding</a>
+    </li>
+    <li>
       <a href="gaiaDB.html">gaiaDB</a>
     </li>
     <li>
@@ -548,6 +554,12 @@ index date (prevalent cases are excluded).</li>
 <li><strong>Covariates:</strong> age at index, sex, and county SES (the
 SDOH or <code>county_reference</code> value at the index date).</li>
 </ul>
+<div class="float">
+<img src="images/slides/exposure_window.png"
+alt="The exposure window: day -730 to day -1 before the index date" />
+<div class="figcaption">The exposure window: day -730 to day -1 before
+the index date</div>
+</div>
 <p>The feature table below implements exactly that. It builds on the
 exposure from Exercise 3 and keeps eligibility (pre-index) separate from
 the outcome (post-index):</p>
@@ -868,6 +880,18 @@ itself from the covariates, and reports balance and the negative
 control</label></li>
 </ul>
 <p><br></p>
+</div>
+<div id="what-travels-across-a-network-and-what-stays-home"
+class="section level2">
+<h2><strong>What travels across a network, and what stays
+home</strong></h2>
+<div class="float">
+<img src="images/slides/travels_vs_stays.png"
+alt="What travels and what stays local" />
+<div class="figcaption">What travels and what stays local</div>
+</div>
+<p>Each site runs Gaia beside its own CDM; only the left column crosses
+the network.</p>
 </div>
 <div id="closing-synthesis" class="section level2">
 <h2><strong>Closing synthesis</strong></h2>

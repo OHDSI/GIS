@@ -420,6 +420,12 @@ div.tocify {
       <a href="algorithms.html">Algorithms</a>
     </li>
     <li>
+      <a href="evaluation.html">Evaluation</a>
+    </li>
+    <li>
+      <a href="geocoding.html">Geocoding</a>
+    </li>
+    <li>
       <a href="gaiaDB.html">gaiaDB</a>
     </li>
     <li>
@@ -517,17 +523,17 @@ Data Model.</p>
 ┌─────────────────────────────────────────────────────────────────┐
 │                       gaiaCatalog                                │
 │  • Data source discovery                                         │
-│  • Metadata management                                           │
+│  • Metadata (JSON-LD) and ETL scripts per dataset                │
 │  • Schema.org compliance                                         │
 └────────────────────────────┬────────────────────────────────────┘
                              │
                              ▼
 ┌─────────────────────────────────────────────────────────────────┐
-│                        gaiaDb                                    │
-│  • PostgreSQL/PostGIS staging database                           │
-│  • Transformation recipes                                        │
-│  • Spatial indexing                                              │
-│  • Raw geospatial data storage                                   │
+│                        gaiaDB                                    │
+│  • PostgreSQL/PostGIS database                                   │
+│  • Catalog-driven ingestion (ETL scripts)                        │
+│  • Geometry-attribute index                                      │
+│  • Per-source geometry and attribute tables                      │
 └────────────────────────────┬────────────────────────────────────┘
                              │
                              ▼
@@ -564,38 +570,47 @@ Data Model.</p>
 <h3><strong>1. gaiaCatalog</strong></h3>
 <p><strong>Purpose</strong>: Data source discovery and metadata
 management</p>
-<p><strong>Technology</strong>: Schema.org, JSON-LD</p>
-<p><strong>I/O</strong>: External data URLs/metadata → Searchable
-catalog with standardized metadata</p>
+<p><strong>Technology</strong>: Schema.org JSON-LD (Science on
+Schema.org profile), KoboToolbox authoring with SSSOM mapping, SHACL
+validation, optional Solr search index</p>
+<p><strong>I/O</strong>: External data URLs/metadata → Catalog entry
+(JSON-LD metadata plus the ETL scripts that retrieve and load the
+dataset)</p>
 <p><br></p>
 </div>
 <div id="gaiadb" class="section level3">
-<h3><strong>2. gaiaDb</strong></h3>
+<h3><strong>2. gaiaDB</strong></h3>
 <p><strong>Purpose</strong>: Core data repository with all geospatial
 processing logic and OMOP integration</p>
-<p><strong>Technology</strong>: PostgreSQL 12+, PostGIS 3.0+, PostgREST,
-LinkML</p>
+<p><strong>Technology</strong>: PostgreSQL/PostGIS (the reference image
+uses PostgreSQL 16 with PostGIS 3.5); PostgREST optional</p>
 <p><strong>Processing</strong>: SQL routines, PostGIS functions,
-exposure calculations, privacy-preserving aggregation, temporal
-alignment</p>
-<p><strong>I/O</strong>: Raw geospatial data + patient locations → OMOP
-External_Exposure and Location_History tables</p>
-<p><strong>Schema</strong>: backbone/ (core), working/ (OMOP tables),
-data_sources/, transformations/, functions/, api/</p>
+spatial-temporal joins and temporal alignment. Every source is
+registered in the geometry-attribute index (<code>geom_index</code>,
+<code>attr_index</code>) so the same join serves all of them. The index
+covers vector geometries today.</p>
+<p><strong>I/O</strong>: Catalog entries + person locations and
+residence histories → <code>working.external_exposure</code> (copied
+into the CDM’s EXTERNAL_EXPOSURE by gaiaCore)</p>
+<p><strong>Schemas</strong>: <code>backbone</code> (metadata, indexes,
+ingestion and catalog functions), <code>working</code> (locations,
+per-source geometry and attribute tables, exposures),
+<code>vocabulary</code> (OMOP vocabulary tables), <code>public</code>
+(raw source tables loaded by each dataset’s ETL scripts)</p>
 <p><br></p>
 </div>
 <div id="gaiacore" class="section level3">
 <h3><strong>3. gaiaCore</strong></h3>
-<p><strong>Purpose</strong>: R interface to gaiaDb: runs the pipeline,
+<p><strong>Purpose</strong>: R interface to gaiaDB: runs the pipeline,
 checks the derived exposure and provides exposure analytics (no spatial
 processing logic of its own)</p>
 <p><strong>Technology</strong>: R package using DatabaseConnector
 (JDBC); Docker image <code>ohdsi/gaia-core</code> (HADES + gaiaCore)</p>
-<p><strong>I/O</strong>: Catalog dataset ids, person locations → gaiaDb
+<p><strong>I/O</strong>: Catalog dataset ids, person locations → gaiaDB
 functions → exposure rows → OMOP <code>EXTERNAL_EXPOSURE</code>,
 summaries and estimates in R</p>
-<p><strong>Key</strong>: gaiaCore calls gaiaDb’s SQL functions. All
-spatial processing happens in gaiaDb. The Python, Java, Julia and Bash
+<p><strong>Key</strong>: gaiaCore calls gaiaDB’s SQL functions. All
+spatial processing happens in gaiaDB. The Python, Java, Julia and Bash
 clients and the PostgREST-based R client live on the gaiaCore
 <code>connectors</code> branch.</p>
 <p><br></p>
@@ -614,30 +629,30 @@ clients and the PostgREST-based R client live on the gaiaCore
 </div>
 <div id="phase-2-data-ingestion" class="section level4">
 <h4><strong>Phase 2: Data Ingestion</strong></h4>
-<pre><code>Cataloged Source → gaiaDb
-    Input: Raw geospatial files
-    Process: Data loading, spatial indexing, transformation
-    Output: Staged spatial tables in PostGIS</code></pre>
+<pre><code>Cataloged Source → gaiaDB
+    Input: Raw geospatial files (retrieved by the entry&#39;s ETL scripts)
+    Process: Metadata load, download and load into PostGIS, geometry clean-up, registration in the index
+    Output: Per-source geometry and attribute tables (vector sources)</code></pre>
 </div>
 <div id="phase-3-exposure-calculation" class="section level4">
 <h4><strong>Phase 3: Exposure Calculation</strong></h4>
-<pre><code>Patient Locations → gaiaDb (loaded and joined from R with gaiaCore)
+<pre><code>Patient Locations → gaiaDB (loaded and joined from R with gaiaCore)
     Input:
         - Patient geocoded addresses
         - Residence time periods
         - Variable specifications
         - Location_History records
-    Process (in gaiaDb):
+    Process (in gaiaDB):
         - Spatial joins (PostGIS)
         - Temporal alignment (SQL)
-        - Aggregation (e.g., average exposure during residence)
-        - Privacy preservation (no raw addresses exported)
+        - Each value clipped to the residence interval
+        - No addresses leave the site
     Output:
         - External_Exposure records</code></pre>
 </div>
 <div id="phase-4-omop-integration" class="section level4">
 <h4><strong>Phase 4: OMOP Integration</strong></h4>
-<pre><code>gaiaDb Output → OMOP CDM
+<pre><code>gaiaDB Output → OMOP CDM
     Input: Processed exposure data
     Process:
         - Map to OMOP vocabulary concepts
@@ -659,34 +674,50 @@ clients and the PostgREST-based R client live on the gaiaCore
 <div id="privacy-architecture" class="section level2">
 <h2><strong>Privacy Architecture</strong></h2>
 <p>Gaia enables geospatial analysis <strong>without sharing sensitive
-patient addresses</strong>:</p>
+patient addresses</strong>. It runs beside the CDM, inside the data
+holder’s site:</p>
 <ol style="list-style-type: decimal">
-<li><strong>Geocoding at site</strong> - Patient addresses geocoded
-locally, only geographic IDs (e.g., Census block) leave site</li>
-<li><strong>Aggregated units</strong> - Link to census blocks/ZIP codes,
-sufficient for exposure calculation</li>
-<li><strong>Exposure values only</strong> - Numeric values (e.g.,
-PM2.5), no reverse geocoding possible</li>
-<li><strong>OMOP integration</strong> - Location table contains
-aggregated geography only</li>
+<li><strong>Geocoding at site</strong> - Addresses are geocoded locally
+(or the site starts from ZIP codes or tracts it already holds)</li>
+<li><strong>Locations and dates in, exposures back</strong> - Gaia joins
+public place data to where and when patients lived, inside the site; new
+rows land in EXTERNAL_EXPOSURE</li>
+<li><strong>Nothing identifying leaves</strong> - Addresses, coordinates
+and location histories stay in the site’s enclave. In a network study,
+code goes out and only aggregate results come back, and only if the site
+chooses</li>
+<li><strong>Locations stay protected</strong> - A home location is
+identifying even without a name, so the location tables stay inside the
+protected environment</li>
 </ol>
-<p><strong>Workflow</strong>: Raw Address (protected) → Geographic ID
-(can leave site) → Exposure Values → OMOP External_Exposure</p>
+<div class="float">
+<img src="images/slides/gaia_beside_cdm.png"
+alt="Gaia runs beside your CDM, inside your site" />
+<div class="figcaption">Gaia runs beside your CDM, inside your
+site</div>
+</div>
+<p><strong>Workflow</strong>: Raw address (protected) → Geocode locally
+→ Locations and dates to Gaia → Exposures back to the CDM → Aggregate
+results (optional)</p>
+<p>Containerization helps keep geospatial processing separate from
+protected clinical systems, but it is not sufficient on its own:
+institutional governance, data-flow controls and local review remain
+required.</p>
 <p><br></p>
 </div>
 <div id="design-principles" class="section level2">
 <h2><strong>Design Principles</strong></h2>
 <ol style="list-style-type: decimal">
 <li><strong>Separation of Concerns</strong>: gaiaCatalog (discovery),
-gaiaDb (processing), gaiaCore (access), gaiaDocker (deployment)</li>
+gaiaDB (processing), gaiaCore (access), gaiaDocker (deployment)</li>
 <li><strong>Standards</strong>: OMOP CDM, Schema.org, OGC geospatial,
 OHDSI vocabulary</li>
-<li><strong>Privacy</strong>: No PHI sharing, aggregated geographies,
-local geocoding, exposure values only</li>
+<li><strong>Privacy</strong>: No PHI sharing, local geocoding, patient
+locations stay in the site’s enclave</li>
 <li><strong>Modularity</strong>: Independent components, clear
 interfaces, pluggable sources</li>
-<li><strong>Reproducibility</strong>: Version-controlled recipes,
-documented provenance, open source</li>
+<li><strong>Reproducibility</strong>: Version-controlled catalog
+entries, documented provenance, open source</li>
 </ol>
 <p><br></p>
 </div>
@@ -726,7 +757,7 @@ documented provenance, open source</li>
 </table>
 </div>
 <div id="gaiadb-1" class="section level3">
-<h3><strong>gaiaDb</strong></h3>
+<h3><strong>gaiaDB</strong></h3>
 <table>
 <colgroup>
 <col width="22%" />
@@ -758,7 +789,7 @@ documented provenance, open source</li>
 <tr class="odd">
 <td>Raster</td>
 <td>.tif, .nc</td>
-<td>Raster tables</td>
+<td>Staging tables (registration in the index is planned)</td>
 <td>PostGIS</td>
 </tr>
 <tr class="even">
@@ -768,9 +799,9 @@ documented provenance, open source</li>
 <td>PostGIS</td>
 </tr>
 <tr class="odd">
-<td>Transformation recipe</td>
-<td>SQL</td>
-<td>Transformed data</td>
+<td>Catalog entry (ETL scripts)</td>
+<td>JSON-LD, shell</td>
+<td>Registered per-source tables</td>
 <td>PostGIS</td>
 </tr>
 <tr class="even">
@@ -816,13 +847,13 @@ documented provenance, open source</li>
 <td>Catalog dataset ids</td>
 <td>Character</td>
 <td>Ingested datasets, variable tables</td>
-<td>gaiaDb tables</td>
+<td>gaiaDB tables</td>
 </tr>
 <tr class="even">
 <td>Locations and residence histories</td>
 <td>Data frames / OMOP tables</td>
 <td>Loaded <code>working</code> tables</td>
-<td>gaiaDb tables</td>
+<td>gaiaDB tables</td>
 </tr>
 <tr class="odd">
 <td>Variable name, spatial operator</td>
@@ -910,7 +941,12 @@ views</li>
 <li><strong>Caching</strong>: Datasets, transformations, API
 responses</li>
 <li><strong>Scaling</strong>: Connection pooling, batch processing;
-heavy work stays in gaiaDb</li>
+heavy work stays in gaiaDB</li>
+<li><strong>Join cost</strong>: On the 40,000-person tract benchmark
+(2.9 million rows) the Gaia join took about 28 s, against 16-17 s for
+the equivalent hand-written PostGIS query (about 1.7 times as long),
+with identical rows. Its value is catalog-driven provenance,
+standardization and reuse, not speed.</li>
 </ul>
 <p>See <a href="developer-deployment.html">Deployment Strategies</a> for
 deployment options.</p>
@@ -918,8 +954,10 @@ deployment options.</p>
 </div>
 <div id="future-enhancements" class="section level2">
 <h2><strong>Future Enhancements</strong></h2>
-<p><strong>Planned</strong>: Real-time data streams, ML integration,
-multi-site federation, enhanced catalog, unified API gateway</p>
+<p><strong>Planned</strong>: Raster support in the index, geometry
+hierarchies and boundary validity periods, a declarative recipe layer
+(under evaluation), real-time data streams, ML integration, multi-site
+federation, enhanced catalog, unified API gateway</p>
 <p><strong>Research</strong>: Differential privacy, federated learning,
 spatiotemporal modeling</p>
 <p><br></p>

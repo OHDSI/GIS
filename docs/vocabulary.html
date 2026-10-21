@@ -415,6 +415,12 @@ div.tocify {
       <a href="algorithms.html">Algorithms</a>
     </li>
     <li>
+      <a href="evaluation.html">Evaluation</a>
+    </li>
+    <li>
+      <a href="geocoding.html">Geocoding</a>
+    </li>
+    <li>
       <a href="gaiaDB.html">gaiaDB</a>
     </li>
     <li>
@@ -570,6 +576,16 @@ environment.</li>
 * Element Relevant To Physical Environment
 * Element Relevant To Population
 * Element Relevant To Social And Community Context</code></pre>
+<p><strong>Package size.</strong> Release GIS_2025-04-18 (commit
+f7d78f9) comprises 9,923 unique concepts across the three layers: 159
+OMOP GIS concepts, 6,872 OMOP Exposome concepts (from the Toxin and
+Toxin Target Database) and 2,892 OMOP SDOH concepts (from SVI, ADI, EJI,
+AHRQ SDOH, COI, SDGI, SDOHO and SEDH). The concepts span nine domain
+assignments, including seven newly introduced semantic domains (below).
+Structural quality-control checks found no duplicate concept
+identifiers, duplicate vocabulary-code combinations, unrecognized domain
+identifiers, invalid date intervals or duplicate relationship
+records.</p>
 </div>
 <div id="sources" class="section level2">
 <h2>1.2. Sources</h2>
@@ -796,6 +812,77 @@ income, education, or employment status.</td>
 <td>A categorization used to define where the record comes from.</td>
 <td><code>Air Quality Database</code></td>
 <td><strong>YES</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Domains at a glance</strong></p>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Domain</th>
+<th>Concept example</th>
+<th>Why it matters for research</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Behavioral Feature</td>
+<td>2052499650 Condomless Sex</td>
+<td>Captures lifestyle-related exposures and behaviors that may affect
+disease risk, prevention and outcomes</td>
+</tr>
+<tr class="even">
+<td>Demographic Feature</td>
+<td>2052497822 Refugee Population</td>
+<td>Supports subgroup analyses, stratification and assessment of
+demographic disparities</td>
+</tr>
+<tr class="odd">
+<td>Environmental Feature</td>
+<td>2052499398 Extreme Heat Exposure</td>
+<td>Enables evaluation of environmental exposures and their associations
+with health outcomes</td>
+</tr>
+<tr class="even">
+<td>Geographic Feature</td>
+<td>2052497727 State-County FIPS Code (5-digit)</td>
+<td>Allows linkage of individuals or populations to place-based
+exposures, resources and context</td>
+</tr>
+<tr class="odd">
+<td>Healthcare Feature</td>
+<td>2052499945 Access To Health Service</td>
+<td>Supports analyses of healthcare access, service use and system-level
+influences on outcomes</td>
+</tr>
+<tr class="even">
+<td>Phenotypic Feature</td>
+<td>2052497707 Suicidal Ideation And Behaviors</td>
+<td>Supports characterization of health-related traits and intermediate
+phenotypes</td>
+</tr>
+<tr class="odd">
+<td>Socioeconomic Feature</td>
+<td>2052499351 Food Access</td>
+<td>Enables study of social determinants of health and their impact on
+risk, care and outcomes</td>
+</tr>
+<tr class="even">
+<td>Type Concept</td>
+<td>2052496977 Satellite Imagery</td>
+<td>Preserves source provenance, which is essential for interpretation,
+reproducibility and quality assessment</td>
+</tr>
+<tr class="odd">
+<td>Observation</td>
+<td>2052497440 Total Number Of Households</td>
+<td>A flexible structure for contextual or descriptive variables
+relevant to analysis</td>
 </tr>
 </tbody>
 </table>
@@ -1063,6 +1150,23 @@ Item)</em><br />
 that the item can take.<br />
 The item values might include <strong>“employed,” “unemployed,”
 “self-employed,” “retired”</strong>, etc.</p></li>
+</ul>
+<p><strong>Semantic roles.</strong> Each candidate term was assigned a
+role so that source-specific variables are not promoted to broad
+standard concepts and categorical values are not treated as exposure
+variables:</p>
+<ul>
+<li><strong>Construct</strong>: an abstract or behavioral element
+measured indirectly or subjectively, often through surveys or proxies
+(for example Neighborhood Safety, an SDOH Construct)</li>
+<li><strong>Determinant</strong>: a specific, measurable factor with a
+direct impact on health outcomes (for example Income, an AHRQ
+Determinant)</li>
+<li><strong>Item</strong>: a specific, measurable data point used to
+evaluate a larger construct or determinant (for example % Households
+Without A Motor Vehicle, an ADI Item)</li>
+<li><strong>Item value</strong>: a specific value or state an item can
+take (for example employed, unemployed, retired)</li>
 </ul>
 </div>
 </div>

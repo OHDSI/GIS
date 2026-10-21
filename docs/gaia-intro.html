@@ -420,6 +420,12 @@ div.tocify {
       <a href="algorithms.html">Algorithms</a>
     </li>
     <li>
+      <a href="evaluation.html">Evaluation</a>
+    </li>
+    <li>
+      <a href="geocoding.html">Geocoding</a>
+    </li>
+    <li>
       <a href="gaiaDB.html">gaiaDB</a>
     </li>
     <li>
@@ -520,17 +526,23 @@ from integrated geospatial and person-level health data.</p>
 <ul>
 <li><strong>Geographic data sources</strong>: Environmental exposures,
 social determinants of health, demographic data, infrastructure</li>
-<li><strong>Spatial data types</strong>: Polygons (census tracts,
-counties), points (facilities, monitoring stations), rasters (climate,
-pollution)</li>
+<li><strong>Spatial data types</strong>: Vector geometries are
+registered in the geometry-attribute index and joined to persons:
+polygons (census tracts, counties, grids), lines (roads) and points
+(facilities, monitoring stations). Raster sources (climate, pollution)
+can be staged, but registering them in the index is planned</li>
 <li><strong>Temporal coverage</strong>: Historical and current datasets
 with versioning support</li>
+<li><strong>Catalog</strong>: More than 100 curated datasets, described
+with schema.org JSON-LD</li>
 <li><strong>Geographic coverage</strong>: Primarily US-focused with
 expanding international support</li>
 <li><strong>OMOP integration</strong>: External_Exposure and
 Location_History extension tables</li>
-<li><strong>Privacy preservation</strong>: Geocoding at site, aggregated
-geographies, exposure values only</li>
+<li><strong>Privacy preservation</strong>: Gaia runs beside the CDM,
+inside the data holder’s site. Addresses and patient-level location
+histories stay there; only aggregate study results leave, and only if
+the site chooses</li>
 </ul>
 </div>
 <div id="limitations" class="section level3">
@@ -539,6 +551,11 @@ geographies, exposure values only</li>
 <ul>
 <li><strong>Real-time data</strong>: Limited support for
 streaming/real-time geospatial data (planned enhancement)</li>
+<li><strong>Rasters</strong>: Raster sources are not yet registered in
+the geometry-attribute index (planned)</li>
+<li><strong>Recipes</strong>: Retrieval and loading run as
+source-specific ETL scripts generated from each catalog entry;
+declarative recipes are being evaluated</li>
 <li><strong>Global coverage</strong>: Majority of cataloged datasets
 focus on United States (expanding)</li>
 <li><strong>Vocabulary coverage</strong>: Ongoing development of OMOP
@@ -556,23 +573,24 @@ architecture in development</li>
 <p>Gaia consists of multiple interconnected components:</p>
 <div id="core-infrastructure" class="section level3">
 <h3><strong>Core Infrastructure</strong></h3>
-<p><strong><a href="gaiaDb.html">gaiaDb</a></strong> -
+<p><strong><a href="gaiaDB.html">gaiaDB</a></strong> -
 PostgreSQL/PostGIS database - Core data repository with all geospatial
 processing logic - SQL routines and PostGIS functions for spatial
-operations - OMOP CDM integration and exposure calculations -
-LinkML/JSON-LD metadata support - Transformation recipe library</p>
+operations - Geometry-attribute index: every source registered the same
+way - OMOP CDM integration and exposure calculations - JSON-LD metadata
+ingestion from the catalog</p>
 <p><strong><a href="gaiaCore.html">gaiaCore</a></strong> - R package for
 the Gaia pipeline and exposure analytics - Direct database connection
 with DatabaseConnector - Runs ingestion, location loading and the
 spatial-temporal join from R - Quality checks on derived exposure and
 copy into the OMOP CDM - Exposure analytics (day-weighted windows,
-cluster-robust effect estimates) - Calls functions defined in gaiaDb; no
+cluster-robust effect estimates) - Calls functions defined in gaiaDB; no
 processing logic of its own</p>
 <p><strong><a href="gaiaCatalog.html">gaiaCatalog</a></strong> -
 Metadata catalog - Functional metadata for publicly-hosted geospatial
-datasets - Schema.org-compliant dataset descriptions - Automated
-retrieval, extraction, transformation, loading (ETL) instructions -
-Federated metadata sharing - Version tracking for data sources</p>
+datasets - Schema.org-compliant dataset descriptions - ETL instructions
+(generated scripts) for automated retrieval and loading - Federated
+metadata sharing - Version tracking for data sources</p>
 <p><strong><a href="gaiaDocker.html">gaiaDocker</a></strong> -
 Deployment orchestration - Coordinated image builds for entire Gaia
 stack - Versioned releases with docker-compose profiles - Integration
@@ -623,10 +641,11 @@ social vulnerability index (CDC) to study environmental justice.</p>
 <p>A researcher with an OMOP CDM database integrates geospatial
 exposures:</p>
 <ol style="list-style-type: decimal">
-<li><strong>Geocode patient addresses locally</strong> using DeGauss
-(containerized, privacy-preserving)</li>
-<li><strong>Spatial joins</strong> via gaiaDb SQL functions link
-locations to exposures</li>
+<li><strong>Geocode patient addresses locally</strong> using DeGAUSS or
+the PostGIS TIGER geocoder (both optional components, run locally; see
+the <a href="geocoding.html">geocoding guidance</a>)</li>
+<li><strong>Spatial joins</strong> via gaiaDB SQL functions link
+residence locations and dates to exposures</li>
 <li><strong>Calculate exposures</strong> for residence periods (e.g.,
 average PM2.5 during pregnancy)</li>
 <li><strong>Populate OMOP tables</strong>: External_Exposure and
@@ -634,10 +653,17 @@ Location_History</li>
 <li><strong>Analytics</strong> using standard HADES tools (cohort
 definitions, patient-level prediction, population-level estimation)</li>
 </ol>
-<p>All processing happens in gaiaDb with privacy preservation: - Only
-aggregated geographic identifiers (census block, ZIP) leave site -
-Exposure values contain no reverse-geocoding information - Standard OMOP
-privacy protections apply</p>
+<p>All processing happens inside your site, in gaiaDB, next to your CDM:
+- Locations and dates go from the CDM to Gaia, and exposures come back
+to the CDM - Addresses and location histories are never sent anywhere -
+In a network study, code goes out and only aggregate results come back -
+Standard OMOP privacy protections apply</p>
+<div class="float">
+<img src="images/slides/gaia_beside_cdm.png"
+alt="Gaia runs beside your CDM, inside your site" />
+<div class="figcaption">Gaia runs beside your CDM, inside your
+site</div>
+</div>
 <p><strong>Example</strong>: Calculate neighborhood deprivation index
 exposure during critical developmental windows for pediatric asthma
 cohort.</p>
@@ -657,8 +683,14 @@ locally</li>
 <li><strong>Aggregate</strong> - Combine summary statistics without
 sharing PHI</li>
 </ol>
-<p>All steps include detailed provenance metadata and transformation
-documentation.</p>
+<p>Every exposure row carries the identifier of the variable it came
+from, so each result can be traced to its source in the catalog.</p>
+<div class="float">
+<img src="images/slides/travels_vs_stays.png"
+alt="What travels across a network and what stays local" />
+<div class="figcaption">What travels across a network and what stays
+local</div>
+</div>
 <p><strong>Example</strong>: Multi-site study examining association
 between greenspace exposure and mental health outcomes across diverse
 urban environments.</p>
@@ -668,8 +700,17 @@ urban environments.</p>
 </div>
 <div id="gaia-framework" class="section level1">
 <h1><strong>Gaia Framework</strong></h1>
-<div>
-<img src="images/framework_overview.png"></img>
+<p>OMOP models people; Gaia models places. Each side has one anchor, and
+the patient’s location history links them.</p>
+<div class="float">
+<img src="images/slides/person_place_model.png"
+alt="OMOP models people, Gaia models places" />
+<div class="figcaption">OMOP models people, Gaia models places</div>
+</div>
+<div class="float">
+<img src="images/slides/omop_gis_extension_tables.png"
+alt="The OMOP GIS extension: two new tables" />
+<div class="figcaption">The OMOP GIS extension: two new tables</div>
 </div>
 <p>The Gaia Framework consists of three main components working
 together:</p>
@@ -694,22 +735,24 @@ transformation recipes</li>
 </div>
 <div id="core-layer" class="section level2">
 <h2><strong>2. Core Layer</strong></h2>
-<p><strong><a href="gaiaDb.html">gaiaDb</a></strong> provides storage
+<p><strong><a href="gaiaDB.html">gaiaDB</a></strong> provides storage
 and processing:</p>
 <ul>
-<li><strong>Staging database</strong>: PostgreSQL/PostGIS with
-LinkML-based backbone schema</li>
+<li><strong>Database</strong>: PostgreSQL/PostGIS with a
+<code>backbone</code> schema (metadata and index) and a
+<code>working</code> schema (data and exposures)</li>
 <li><strong>Processing engine</strong>: All SQL routines and PostGIS
 functions for spatial operations</li>
-<li><strong>Standardized format</strong>: Entity-Attribute-Value (EAV)
-structure for harmonized data</li>
+<li><strong>Standardized format</strong>: every source is stored as
+geometries and their attributes, registered in the geometry-attribute
+index</li>
 <li><strong>OMOP integration</strong>: Direct integration with CDM
 extension tables</li>
 <li><strong>Optional API</strong>: gaiaDocker can expose the database
 through a PostgREST service</li>
 </ul>
 <p><strong><a href="gaiaCore.html">gaiaCore</a></strong> is the R
-interface to gaiaDb:</p>
+interface to gaiaDB:</p>
 <ul>
 <li><strong>Pipeline</strong>: ingests catalog datasets, loads locations
 and runs the spatial-temporal join from R</li>
@@ -722,7 +765,7 @@ cluster-robust effect estimates</li>
 <li><strong>Docker image</strong>: <code>ohdsi/gaia-core</code>, HADES
 with gaiaCore and the extension packages</li>
 </ul>
-<p><strong>Data flow</strong>: Raw geospatial data → gaiaDb processing →
+<p><strong>Data flow</strong>: Raw geospatial data → gaiaDB processing →
 gaiaCore (R) → OMOP CDM → HADES analytics</p>
 </div>
 <div id="extension-layer" class="section level2">
@@ -747,7 +790,7 @@ into the OMOP CDM.</p>
 <h3><strong>Separation of Concerns</strong></h3>
 <ul>
 <li><strong>gaiaCatalog</strong>: Discovery and metadata</li>
-<li><strong>gaiaDb</strong>: Storage and processing</li>
+<li><strong>gaiaDB</strong>: Storage and processing</li>
 <li><strong>gaiaCore</strong>: R interface, quality checks and exposure
 analytics</li>
 <li><strong>gaiaDocker</strong>: Deployment</li>
@@ -756,9 +799,10 @@ analytics</li>
 <div id="privacy-by-design" class="section level3">
 <h3><strong>Privacy by Design</strong></h3>
 <ul>
-<li>Geocoding happens at originating institution</li>
-<li>Only aggregated geographic identifiers shared</li>
-<li>Exposure values contain no location information</li>
+<li>Gaia runs beside the CDM, at the data holder’s site</li>
+<li>Geocoding happens locally; addresses and location histories stay in
+the site’s enclave</li>
+<li>Only aggregate results are shared, and only if the site chooses</li>
 <li>OMOP privacy protections maintained</li>
 </ul>
 </div>
@@ -774,7 +818,7 @@ analytics</li>
 <div id="reproducibility" class="section level3">
 <h3><strong>Reproducibility</strong></h3>
 <ul>
-<li>Version-controlled transformation recipes</li>
+<li>Version-controlled catalog entries (metadata and ETL scripts)</li>
 <li>Documented data provenance</li>
 <li>Containerized deployments</li>
 <li>Open source tooling</li>
@@ -785,7 +829,7 @@ analytics</li>
 <ul>
 <li>Common data model enables stable tooling</li>
 <li>Pluggable data sources</li>
-<li>Language-agnostic API access</li>
+<li>Database and optional API access from any language</li>
 <li>Modular component architecture</li>
 </ul>
 <p><br></p>
@@ -793,6 +837,17 @@ analytics</li>
 </div>
 <div id="getting-started" class="section level2">
 <h2><strong>Getting Started</strong></h2>
+<div id="what-you-need" class="section level3">
+<h3><strong>What you need</strong></h3>
+<p>Location history (start with what you already have: ZIP code, census
+tract or address, each with dates), your OMOP CDM, and Gaia deployed at
+your site. No PHI leaves your site, geocoding is not required first, and
+you do not need a GIS team.</p>
+<div class="float">
+<img src="images/slides/all_it_takes.png" alt="All it takes" />
+<div class="figcaption">All it takes</div>
+</div>
+</div>
 <div id="quick-deploy" class="section level3">
 <h3><strong>Quick Deploy</strong></h3>
 <pre class="bash"><code>git clone https://github.com/OHDSI/gaiaDocker.git &amp;&amp; cd gaiaDocker

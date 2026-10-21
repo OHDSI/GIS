@@ -420,6 +420,12 @@ div.tocify {
       <a href="algorithms.html">Algorithms</a>
     </li>
     <li>
+      <a href="evaluation.html">Evaluation</a>
+    </li>
+    <li>
+      <a href="geocoding.html">Geocoding</a>
+    </li>
+    <li>
       <a href="gaiaDB.html">gaiaDB</a>
     </li>
     <li>
@@ -520,6 +526,14 @@ than invented.</p>
 you populated in Exercise 2 (or the fallback file). All SQL runs in the
 gaia-db container
 (<code>docker compose exec gaia-db psql -U postgres -d gaiacore</code>).</p>
+<p>The person-place-time bridge: standard concepts carry the meaning of
+each exposure row, and Gaia’s catalog carries its provenance.</p>
+<div class="float">
+<img src="images/slides/person_place_time_bridge.png"
+alt="PERSON, LOCATION_HISTORY, LOCATION and EXTERNAL_EXPOSURE" />
+<div class="figcaption">PERSON, LOCATION_HISTORY, LOCATION and
+EXTERNAL_EXPOSURE</div>
+</div>
 </div>
 <div id="steps" class="section level2">
 <h2><strong>Steps</strong></h2>
@@ -568,6 +582,15 @@ what would you map it to?</p></li>
 </div>
 <div id="part-b-mean-pm2.5-during-pregnancy" class="section level3">
 <h3>Part B: mean PM2.5 during pregnancy</h3>
+<p>Weight each monthly value by the days it overlaps the episode. The
+months at the edges overlap only partly (orange), so an unweighted mean
+of the rows is wrong:</p>
+<div class="float">
+<img src="images/slides/day_weighted_pregnancy.png"
+alt="Day-weighted versus naive mean PM2.5 during pregnancy" />
+<div class="figcaption">Day-weighted versus naive mean PM2.5 during
+pregnancy</div>
+</div>
 <ol start="3" style="list-style-type: decimal">
 <li><p><strong>Find the pregnancy episodes.</strong> Pregnancy is
 modeled in the OMOP <code>EPISODE</code> table. Two persons have one,
