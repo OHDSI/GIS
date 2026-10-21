@@ -100,7 +100,7 @@ All exercises run against a synthetic cohort designed for this tutorial: 10,000 
 
 ## **About these materials**
 
-The tutorial was first presented as a half-day session at the 2026 OHDSI Global Symposium (20 October 2026) by members of the OHDSI GIS Working Group. The exercises are the reference; the slides give context. The Gaia toolchain and the synthetic dataset used here are described in the [evaluation](evaluation.html) page, and the data generator is archived on [Zenodo](https://doi.org/10.5281/zenodo.23296292).
+The tutorial was first presented as a half-day session at the 2026 OHDSI Global Symposium (20 October 2026) by members of the OHDSI GIS Working Group. The exercises are the reference; the slides give context. The data generator is archived on [Zenodo](https://doi.org/10.5281/zenodo.23296292).
 
 **Don't quote the effects.** The simulated PM2.5 effects are deliberately exaggerated: they are a teaching device, not real-world estimates.
 

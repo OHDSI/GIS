@@ -22,7 +22,7 @@ Because every entry is machine-readable, entries can be searched and filtered by
 - **SHACL validation** of selected rules between dataset and variable properties
 - **ETL scripts** generated from the metadata, using GDAL/OGR, for each dataset
 - **Catalog browsers** with keyword and data-structure filters and free-text search
-- **Federation**: JSON-LD export has been federated with the University of Miami's Geospatial Digital Special Collections
+- **Federation**: the JSON-LD export can be shared with external repositories
 
 ## A catalog entry
 

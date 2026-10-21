@@ -255,7 +255,7 @@ See [Schema Extensions](schema-extensions.html) for complete DDL.
 - **Indexing**: GIST spatial indexes, materialized views
 - **Caching**: Datasets, transformations, API responses
 - **Scaling**: Connection pooling, batch processing; heavy work stays in gaiaDB
-- **Join cost**: On the 40,000-person tract benchmark (2.9 million rows) the Gaia join took about 28 s, against 16-17 s for the equivalent hand-written PostGIS query (about 1.7 times as long), with identical rows. Its value is catalog-driven provenance, standardization and reuse, not speed.
+- **Join cost**: The catalog-driven join is somewhat slower than an equivalent hand-written PostGIS query and returns identical rows; its value is provenance, standardization and reuse, not speed.
 
 See [Deployment Strategies](developer-deployment.html) for deployment options.
 

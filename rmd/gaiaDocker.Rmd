@@ -34,7 +34,7 @@ gaiaDocker orchestrates the following services:
 
 ## Platforms
 
-The reference deployment uses Docker Compose. It has been deployed on Linux and macOS, and a default Windows 11 deployment ran the tutorial pipeline end to end. It needs Docker, Docker Compose and about 50 GB of free storage (more if you add geocoding reference data). Docker is a convenience, not a requirement: gaiaDB is a standard PostgreSQL/PostGIS database that runs on any native Postgres server, and gaiaCore can be pointed at any gaiaDB instance.
+The reference deployment uses Docker Compose. It has been deployed on Linux and macOS, and a default Windows 11 deployment has run the tutorial pipeline. It needs Docker, Docker Compose and about 50 GB of free storage (more if you add geocoding reference data). Docker is a convenience, not a requirement: gaiaDB is a standard PostgreSQL/PostGIS database that runs on any native Postgres server, and gaiaCore can be pointed at any gaiaDB instance.
 
 ## Quick Start
 

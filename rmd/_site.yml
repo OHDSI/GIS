@@ -66,8 +66,6 @@ navbar:
           href: analysis.html
         - text: "Algorithms"
           href: algorithms.html
-        - text: "Evaluation"
-          href: evaluation.html
         - text: "Geocoding"
           href: geocoding.html
         - text: "gaiaDB"
