@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-25T10:29:55Z",
+  "generatedAt": "2026-10-25T11:07:28Z",
   "levels": [
     "county",
     "state"
@@ -12,7 +12,7 @@
   "periodGranularity": "year",
   "periodMin": 2014,
   "periodMax": 2019,
-  "minCellCount": 3,
+  "minCellCount": 1,
   "nExposures": 2,
   "hasResidency": true,
   "boundaries": {

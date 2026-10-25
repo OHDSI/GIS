@@ -14,7 +14,7 @@ This page lets you explore the public PM2.5 datasets described in [Geo Data Desc
 
 _NOTE: both of these datasets are derived from the same [raw sensor data](https://www.epa.gov/outdoor-air-quality-data) published by the US Environmental Protection Agency (EPA) as pre-generated aggregates and hourly observations._
 
-**Explore the tutorial cohort in ARES.** The synthetic OMOP dataset itself, with the PM2.5 and county SES exposures assigned to each person's residences, can be browsed in the [ARES demo](ares-demo/#/cdm/SYNTH-GIS/20261005/geographic_exposures). Its Geographic Exposures report maps county and state averages over 2014-2019, and the other reports show the characterization and data quality results for the same data. County cells are shown down to 3 persons because the data are synthetic.
+**Explore the tutorial cohort in ARES.** The synthetic OMOP dataset itself, with the PM2.5 and county SES exposures assigned to each person's residences, can be browsed in the [ARES demo](ares-demo/#/cdm/SYNTH-GIS/20261005/geographic_exposures). Its Geographic Exposures report maps county and state averages over 2014-2019, and the other reports show the characterization and data quality results for the same data. No small-cell suppression is applied, so every county with residents is shown, because the data are synthetic.
 
 <style>
 .pm25-slider { max-width: 960px; margin: 1em 0 2em 0; }
