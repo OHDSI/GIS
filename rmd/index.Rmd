@@ -24,6 +24,8 @@ Like most of OHDSI, we use Github and MS Teams for collaboration, version contro
 
 We review progress and get input from the broader group at weekly meetings on Thursdays. Leaders of specific projects within the GIS workgroup schedule and hold meetings with subgroups outside the main Thursday meeting. Those other meetings are where most of the work on use cases and advancing technical infrastructure gets done.
 
+To see what the group is working on, check the [use case and dataset status page](status.html), which tracks the status of use cases and dataset requests.
+
 Apart from the groups' offical leadership, many members make fundamental contributions to the group's decisions, strategies, and products.
 
 All are welcome. We'd love to work with you. Please see our page on [proposing new use cases](get-started.html#propose-a-use-case). If you are new and are considering using the GIS toolchain to do research or contibuting to the group's work, we will schedule a separate meeting with you to help you figure out what manner of participation makes sense for you.

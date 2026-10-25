@@ -1,0 +1,50 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG </div>'
+output:
+   html_document:
+        toc: TRUE
+        toc_depth: 2
+        toc_float:
+          collapsed: false
+---
+
+# **Use Case and Dataset Status**
+
+Where the working group's use cases and dataset requests stand. Use cases come from issues labeled `Use Case` in [OHDSI/GIS](https://github.com/OHDSI/GIS/issues?q=label%3A%22Use+Case%22); dataset requests come from [OHDSI/gaiaCatalog](https://github.com/OHDSI/gaiaCatalog/issues?q=label%3A%22data+source+request%22) (plus a few older ones in OHDSI/GIS). Status, dates and dependencies are read from GitHub each time the site is built. Status and rank come from the [GIS project board](https://github.com/orgs/OHDSI/projects/26), which the working group updates at the weekly meeting. External owners and links GitHub does not record are kept in [`status-config.json`](https://github.com/OHDSI/GIS/blob/main/rmd/data/status-config.json).
+
+<p id="status-updated" class="status-updated"></p>
+
+<div id="status-summary" class="status-summary"></div>
+
+To propose a use case, see [Get Started](get-started.html#propose-a-use-case). To request a dataset, open a [data source request](https://github.com/OHDSI/gaiaCatalog/issues/new?labels=data+source+request&title=%5BData+Source+Request%5D%3A+).
+
+<br>
+
+## **Use cases**
+
+<label class="status-filter"><input type="checkbox" id="uc-closed"> Show complete and superseded</label>
+
+<div id="status-use-cases" class="status-table-wrap"></div>
+
+<br>
+
+## **Dataset requests**
+
+<label class="status-filter"><input type="checkbox" id="ds-closed"> Show complete</label>
+
+<div id="status-datasets" class="status-table-wrap"></div>
+
+<br>
+
+## **How to read this page**
+
+- **Status.** The Status of the item on the project board: *Idea*, *Proposed*, *To do*, *In progress*, *Blocked* or *Complete*. Exceptions: *On hold* (issue labeled `On Hold`), *Superseded* (replaced by another use case) and *Complete* (issue closed) take precedence.
+- **Dependencies.** Issues listed under "Depends On" or in a task list on the use case (or dataset request) issue, with open or closed state. Progress is the number of those that are closed. A dataset request lists the use cases that depend on it under "Needed by".
+- **Requested.** The date the issue was opened.
+- **External owner.** The person or organization outside the working group that asked for it.
+- **WG owner.** The working group member assigned to the issue.
+- **Rank.** Priority order set by the working group (1 is highest). The column appears once ranks are set on the board.
+
+<noscript>This page needs JavaScript to display the tables. The same information is in the GitHub issues linked above.</noscript>
+
+<script src="assets/status.js"></script>

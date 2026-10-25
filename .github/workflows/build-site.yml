@@ -7,6 +7,7 @@ on:
     paths:
       - 'rmd/**'
       - 'build-site.R'
+      - 'scripts/build_status.py'
       - '.github/workflows/build-site.yml'
   pull_request:
     branches:
@@ -14,6 +15,8 @@ on:
     paths:
       - 'rmd/**'
       - 'build-site.R'
+  schedule:
+    - cron: '0 11 * * 1'  # weekly refresh of the use case / dataset status data
   workflow_dispatch:
 
 jobs:
@@ -71,6 +74,15 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pandoc-
 
+    - name: Refresh use case and dataset status data
+      continue-on-error: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # Reading an org project board needs a token with read:project; without
+        # the secret the script keeps the board values from the last run.
+        GH_TOKEN: ${{ secrets.PROJECT_READ_TOKEN || secrets.GITHUB_TOKEN }}
+      run: python3 scripts/build_status.py
+
     - name: Build site
       run: |
         Rscript build-site.R
@@ -79,11 +91,11 @@ jobs:
       run: touch docs/.nojekyll
 
     - name: Commit and push if changes
-      if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
+      if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'schedule') && github.ref == 'refs/heads/main'
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add docs/
+        git add docs/ rmd/data/status.json
         if git diff --staged --quiet; then
           echo "No site changes to commit"
           exit 0

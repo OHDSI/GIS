@@ -1,0 +1,1176 @@
+{
+ "generated_at": "2026-10-25T11:58:35Z",
+ "sources": [
+  "https://github.com/OHDSI/GIS/issues?q=label%3A%22Use+Case%22",
+  "https://github.com/OHDSI/gaiaCatalog/issues?q=label%3A%22data+source+request%22"
+ ],
+ "use_cases": [
+  {
+   "key": "GIS#247",
+   "repo": "GIS",
+   "number": 247,
+   "kind": "use_case",
+   "title": "Point location of 911 calls",
+   "url": "https://github.com/OHDSI/GIS/issues/247",
+   "state": "open",
+   "status": "Idea",
+   "status_note": null,
+   "requested": "2023-09-06",
+   "updated": "2025-11-14",
+   "closed": null,
+   "requester": {
+    "login": "kzollove",
+    "url": "https://github.com/kzollove"
+   },
+   "external_owner": null,
+   "internal_owners": [],
+   "board_status": "Idea",
+   "rank": null,
+   "labels": [
+    "data request",
+    "enhancement",
+    "exploratory",
+    "question"
+   ],
+   "depends_on": [],
+   "needed_by": [],
+   "deps_closed": 0,
+   "deps_total": 0
+  },
+  {
+   "key": "GIS#288",
+   "repo": "GIS",
+   "number": 288,
+   "kind": "use_case",
+   "title": "Support the BMC Population Health Explorer",
+   "url": "https://github.com/OHDSI/GIS/issues/288",
+   "state": "open",
+   "status": "In progress",
+   "status_note": null,
+   "requested": "2023-11-23",
+   "updated": "2025-03-14",
+   "closed": null,
+   "requester": {
+    "login": "kzollove",
+    "url": "https://github.com/kzollove"
+   },
+   "external_owner": "Boston Medical Center (Population Health Explorer)",
+   "internal_owners": [
+    {
+     "login": "kzollove",
+     "url": "https://github.com/kzollove"
+    }
+   ],
+   "board_status": "In progress",
+   "rank": null,
+   "labels": [
+    "Use Case"
+   ],
+   "depends_on": [
+    {
+     "key": "gaiaCatalog#30",
+     "repo": "gaiaCatalog",
+     "number": 30,
+     "title": "Child Opportunity Index",
+     "state": "open",
+     "url": "https://github.com/OHDSI/gaiaCatalog/issues/30",
+     "tracked_as": "dataset"
+    },
+    {
+     "key": "gaiaCatalog#29",
+     "repo": "gaiaCatalog",
+     "number": 29,
+     "title": "Environmental Justice Index",
+     "state": "open",
+     "url": "https://github.com/OHDSI/gaiaCatalog/issues/29",
+     "tracked_as": "dataset"
+    },
+    {
+     "key": "gaiaCatalog#37",
+     "repo": "gaiaCatalog",
+     "number": 37,
+     "title": "Interested in adding ACS (5 year) to our place-based data repository",
+     "state": "open",
+     "url": "https://github.com/OHDSI/gaiaCatalog/issues/37",
+     "tracked_as": "dataset"
+    }
+   ],
+   "needed_by": [],
+   "deps_closed": 0,
+   "deps_total": 3
+  },
+  {
+   "key": "GIS#290",
+   "repo": "GIS",
+   "number": 290,
+   "kind": "use_case",
+   "title": "C-Path/ CURE ID want sites to start submitting SVI and ADI data for their patients in a standardized way",
+   "url": "https://github.com/OHDSI/GIS/issues/290",
+   "state": "open",
+   "status": "Idea",
+   "status_note": null,
+   "requested": "2023-11-24",
+   "updated": "2025-11-14",
+   "closed": null,
+   "requester": {
+    "login": "kzollove",
+    "url": "https://github.com/kzollove"
+   },
+   "external_owner": "C-Path / CURE ID",
+   "internal_owners": [
+    {
+     "login": "jshoughtaling",
+     "url": "https://github.com/jshoughtaling"
+    }
+   ],
+   "board_status": "Idea",
+   "rank": null,
+   "labels": [
+    "Use Case",
+    "help wanted"
+   ],
+   "depends_on": [],
+   "needed_by": [],
+   "deps_closed": 0,
+   "deps_total": 0
+  },
+  {
+   "key": "GIS#289",
+   "repo": "GIS",
+   "number": 289,
+   "kind": "use_case",
+   "title": "Support the INSPIRE project's effort to link population health data to geospatial data",
+   "url": "https://github.com/OHDSI/GIS/issues/289",
+   "state": "open",
+   "status": "Superseded",
+   "status_note": "Replaced by #367 (see that issue)",
+   "requested": "2023-11-24",
+   "updated": "2024-05-03",
+   "closed": null,
+   "requester": {
+    "login": "kzollove",
+    "url": "https://github.com/kzollove"
+   },
+   "external_owner": "INSPIRE project (HDSS sites)",
+   "internal_owners": [
+    {
+     "login": "jaygee-on-github",
+     "url": "https://github.com/jaygee-on-github"
+    }
+   ],
+   "board_status": "Proposed",
+   "rank": null,
+   "labels": [
+    "Use Case"
+   ],
+   "depends_on": [
+    {
+     "key": "gaiaCatalog#34",
+     "repo": "gaiaCatalog",
+     "number": 34,
+     "title": "Scope out SDG indicator database ingestion workload",
+     "state": "open",
+     "url": "https://github.com/OHDSI/gaiaCatalog/issues/34",
+     "tracked_as": "dataset"
+    },
+    {
+     "key": "gaiaCatalog#31",
+     "repo": "gaiaCatalog",
+     "number": 31,
+     "title": "DIVA-GIS (country- and global-level geometry data)",
+     "state": "open",
+     "url": "https://github.com/OHDSI/gaiaCatalog/issues/31",
+     "tracked_as": "dataset"
+    }
+   ],
+   "needed_by": [],
+   "deps_closed": 0,
+   "deps_total": 2
+  },
+  {
+   "key": "GIS#311",
+   "repo": "GIS",
+   "number": 311,
+   "kind": "use_case",
+   "title": "Geocoding, then linkage with a spatial indicator dataset based on temporal linkage criteria",
+   "url": "https://github.com/OHDSI/GIS/issues/311",
+   "state": "open",
+   "status": "Proposed",
+   "status_note": null,
+   "requested": "2024-01-26",
+   "updated": "2024-09-13",
+   "closed": null,
+   "requester": {
+    "login": "jphuong",
+    "url": "https://github.com/jphuong"
+   },
+   "external_owner": "@jphuong",
+   "internal_owners": [],
+   "board_status": "Proposed",
+   "rank": null,
+   "labels": [
+    "Use Case"
+   ],
+   "depends_on": [
+    {
+     "key": "gaiaCatalog#24",
+     "repo": "gaiaCatalog",
+     "number": 24,
+     "title": "Get test data set suitable for social justice index component of SDOHO",
+     "state": "open",
+     "url": "https://github.com/OHDSI/gaiaCatalog/issues/24",
+     "tracked_as": "dataset"
+    },
+    {
+     "key": "GIS#330",
+     "repo": "GIS",
+     "number": 330,
+     "title": "Identify input requirements for initial geocoders for address push - UW, PostGIS, Degauss, Nominatim",
+     "state": "closed",
+     "url": "https://github.com/OHDSI/GIS/issues/330",
+     "tracked_as": null
+    },
+    {
+     "key": "gaiaCatalog#29",
+     "repo": "gaiaCatalog",
+     "number": 29,
+     "title": "Environmental Justice Index",
+     "state": "open",
+     "url": "https://github.com/OHDSI/gaiaCatalog/issues/29",
+     "tracked_as": "dataset"
+    }
+   ],
+   "needed_by": [],
+   "deps_closed": 1,
+   "deps_total": 3
+  },
+  {
+   "key": "GIS#324",
+   "repo": "GIS",
+   "number": 324,
+   "kind": "use_case",
+   "title": "Evaluating fitness of WorldFAIR for OHDSI/GIS",
+   "url": "https://github.com/OHDSI/GIS/issues/324",
+   "state": "open",
+   "status": "In progress",
+   "status_note": null,
+   "requested": "2024-02-23",
+   "updated": "2024-06-13",
+   "closed": null,
+   "requester": {
+    "login": "kzollove",
+    "url": "https://github.com/kzollove"
+   },
+   "external_owner": "Internal WG initiative",
+   "internal_owners": [
+    {
+     "login": "jaygee-on-github",
+     "url": "https://github.com/jaygee-on-github"
+    }
+   ],
+   "board_status": "In progress",
+   "rank": null,
+   "labels": [
+    "Use Case"
+   ],
+   "depends_on": [
+    {
+     "key": "GIS#325",
+     "repo": "GIS",
+     "number": 325,
+     "title": "Form-based Entry for JSON-LD",
+     "state": "closed",
+     "url": "https://github.com/OHDSI/GIS/issues/325",
+     "tracked_as": null
+    },
+    {
+     "key": "GIS#326",
+     "repo": "GIS",
+     "number": 326,
+     "title": "Create a proof of concept knowledge graph for a catalog that includes both SDoHs and climate data",
+     "state": "closed",
+     "url": "https://github.com/OHDSI/GIS/issues/326",
+     "tracked_as": null
+    },
+    {
+     "key": "GIS#327",
+     "repo": "GIS",
+     "number": 327,
+     "title": "Put together and demonstrate a toolset that can search the JSON-LD catalog knowledge graph",
+     "state": "closed",
+     "url": "https://github.com/OHDSI/GIS/issues/327",
+     "tracked_as": null
+    },
+    {
+     "key": "gaiaCatalog#25",
+     "repo": "gaiaCatalog",
+     "number": 25,
+     "title": "Infuse Gaia with metadata from the knowledge graph at both the dataset and variable levels",
+     "state": "open",
+     "url": "https://github.com/OHDSI/gaiaCatalog/issues/25",
+     "tracked_as": null
+    }
+   ],
+   "needed_by": [],
+   "deps_closed": 3,
+   "deps_total": 4
+  },
+  {
+   "key": "GIS#331",
+   "repo": "GIS",
+   "number": 331,
+   "kind": "use_case",
+   "title": "SDoH and Environmental database and related toolkits",
+   "url": "https://github.com/OHDSI/GIS/issues/331",
+   "state": "open",
+   "status": "In progress",
+   "status_note": null,
+   "requested": "2024-03-14",
+   "updated": "2024-05-03",
+   "closed": null,
+   "requester": {
+    "login": "Chesterguan",
+    "url": "https://github.com/Chesterguan"
+   },
+   "external_owner": "@Chesterguan",
+   "internal_owners": [],
+   "board_status": "In progress",
+   "rank": null,
+   "labels": [
+    "Use Case"
+   ],
+   "depends_on": [],
+   "needed_by": [],
+   "deps_closed": 0,
+   "deps_total": 0
+  },
+  {
+   "key": "GIS#334",
+   "repo": "GIS",
+   "number": 334,
+   "kind": "use_case",
+   "title": "Geocode EHR database: Application to anaphylaxis cohort",
+   "url": "https://github.com/OHDSI/GIS/issues/334",
+   "state": "open",
+   "status": "On hold",
+   "status_note": null,
+   "requested": "2024-06-03",
+   "updated": "2025-03-14",
+   "closed": null,
+   "requester": {
+    "login": "zhangly811",
+    "url": "https://github.com/zhangly811"
+   },
+   "external_owner": "@zhangly811",
+   "internal_owners": [],
+   "board_status": "To do",
+   "rank": null,
+   "labels": [
+    "On Hold",
+    "Use Case"
+   ],
+   "depends_on": [],
+   "needed_by": [],
+   "deps_closed": 0,
+   "deps_total": 0
+  },
+  {
+   "key": "GIS#338",
+   "repo": "GIS",
+   "number": 338,
+   "kind": "use_case",
+   "title": "Opioid use disorder",
+   "url": "https://github.com/OHDSI/GIS/issues/338",
+   "state": "open",
+   "status": "On hold",
+   "status_note": null,
+   "requested": "2024-06-24",
+   "updated": "2025-11-14",
+   "closed": null,
+   "requester": {
+    "login": "causailab",
+    "url": "https://github.com/causailab"
+   },
+   "external_owner": "@causailab",
+   "internal_owners": [
+    {
+     "login": "jshoughtaling",
+     "url": "https://github.com/jshoughtaling"
+    }
+   ],
+   "board_status": "Idea",
+   "rank": null,
+   "labels": [
+    "On Hold",
+    "Use Case"
+   ],
+   "depends_on": [],
+   "needed_by": [],
+   "deps_closed": 0,
+   "deps_total": 0
+  },
+  {
+   "key": "GIS#339",
+   "repo": "GIS",
+   "number": 339,
+   "kind": "use_case",
+   "title": "Common data model extension tables for `COST` and `PRICE` to assess spatial autocorrelation",
+   "url": "https://github.com/OHDSI/GIS/issues/339",
+   "state": "open",
+   "status": "On hold",
+   "status_note": null,
+   "requested": "2024-06-26",
+   "updated": "2025-11-14",
+   "closed": null,
+   "requester": {
+    "login": "altosaar",
+    "url": "https://github.com/altosaar"
+   },
+   "external_owner": "@altosaar",
+   "internal_owners": [],
+   "board_status": "Proposed",
+   "rank": null,
+   "labels": [
+    "On Hold",
+    "Use Case"
+   ],
+   "depends_on": [],
+   "needed_by": [],
+   "deps_closed": 0,
+   "deps_total": 0
+  },
+  {
+   "key": "GIS#367",
+   "repo": "GIS",
+   "number": 367,
+   "kind": "use_case",
+   "title": "An analysis of climate change and HIV",
+   "url": "https://github.com/OHDSI/GIS/issues/367",
+   "state": "open",
+   "status": "In progress",
+   "status_note": "Partnership with APHRC; tracked on the APHRC DSWB project board",
+   "requested": "2024-12-05",
+   "updated": "2025-11-14",
+   "closed": null,
+   "requester": {
+    "login": "jaygee-on-github",
+    "url": "https://github.com/jaygee-on-github"
+   },
+   "external_owner": "APHRC (Data Science Without Borders)",
+   "internal_owners": [
+    {
+     "login": "jaygee-on-github",
+     "url": "https://github.com/jaygee-on-github"
+    }
+   ],
+   "board_status": "In progress",
+   "rank": null,
+   "labels": [
+    "Use Case"
+   ],
+   "depends_on": [],
+   "needed_by": [],
+   "deps_closed": 0,
+   "deps_total": 0
+  },
+  {
+   "key": "GIS#389",
+   "repo": "GIS",
+   "number": 389,
+   "kind": "use_case",
+   "title": "GIS Toolchain Fully Automated ETL Spec",
+   "url": "https://github.com/OHDSI/GIS/issues/389",
+   "state": "closed",
+   "status": "Complete",
+   "status_note": null,
+   "requested": "2025-03-14",
+   "updated": "2026-10-21",
+   "closed": "2026-10-21",
+   "requester": {
+    "login": "AEW0330",
+    "url": "https://github.com/AEW0330"
+   },
+   "external_owner": "Internal WG initiative",
+   "internal_owners": [
+    {
+     "login": "rtmill",
+     "url": "https://github.com/rtmill"
+    },
+    {
+     "login": "jshoughtaling",
+     "url": "https://github.com/jshoughtaling"
+    }
+   ],
+   "board_status": "Complete",
+   "rank": null,
+   "labels": [
+    "Use Case"
+   ],
+   "depends_on": [
+    {
+     "key": "gaiaDB#38",
+     "repo": "gaiaDB",
+     "number": 38,
+     "title": "Specify the requirements for a publicly available dataset's metadata that are sufficient for automation",
+     "state": "closed",
+     "url": "https://github.com/OHDSI/gaiaDB/issues/38",
+     "tracked_as": null
+    }
+   ],
+   "needed_by": [],
+   "deps_closed": 1,
+   "deps_total": 1
+  },
+  {
+   "key": "GIS#446",
+   "repo": "GIS",
+   "number": 446,
+   "kind": "use_case",
+   "title": "Guidance Needed on Modeling Geographic and Environmental Variables in the OMOP external_exposure Table",
+   "url": "https://github.com/OHDSI/GIS/issues/446",
+   "state": "closed",
+   "status": "Complete",
+   "status_note": null,
+   "requested": "2025-11-18",
+   "updated": "2026-10-21",
+   "closed": "2026-10-21",
+   "requester": {
+    "login": "evgeorgaras",
+    "url": "https://github.com/evgeorgaras"
+   },
+   "external_owner": "@evgeorgaras",
+   "internal_owners": [
+    {
+     "login": "jshoughtaling",
+     "url": "https://github.com/jshoughtaling"
+    }
+   ],
+   "board_status": "Complete",
+   "rank": null,
+   "labels": [
+    "Use Case"
+   ],
+   "depends_on": [],
+   "needed_by": [],
+   "deps_closed": 0,
+   "deps_total": 0
+  }
+ ],
+ "datasets": [
+  {
+   "key": "gaiaCatalog#37",
+   "repo": "gaiaCatalog",
+   "number": 37,
+   "kind": "dataset",
+   "title": "Interested in adding ACS (5 year) to our place-based data repository",
+   "url": "https://github.com/OHDSI/gaiaCatalog/issues/37",
+   "state": "open",
+   "status": "Idea",
+   "status_note": null,
+   "requested": "2022-09-16",
+   "updated": "2026-10-21",
+   "closed": null,
+   "requester": {
+    "login": "WoodridgeBill",
+    "url": "https://github.com/WoodridgeBill"
+   },
+   "external_owner": "Boston Medical Center / Boston University (@WoodridgeBill)",
+   "internal_owners": [],
+   "board_status": "Idea",
+   "rank": null,
+   "labels": [
+    "data source request"
+   ],
+   "depends_on": [],
+   "needed_by": [
+    {
+     "key": "GIS#288",
+     "title": "Support the BMC Population Health Explorer",
+     "url": "https://github.com/OHDSI/GIS/issues/288",
+     "state": "open",
+     "kind": "use_case"
+    }
+   ],
+   "deps_closed": 0,
+   "deps_total": 0
+  },
+  {
+   "key": "gaiaCatalog#36",
+   "repo": "gaiaCatalog",
+   "number": 36,
+   "kind": "dataset",
+   "title": "Agency of Healthcare Research Quality (AHRQ)",
+   "url": "https://github.com/OHDSI/gaiaCatalog/issues/36",
+   "state": "open",
+   "status": "Idea",
+   "status_note": null,
+   "requested": "2023-04-25",
+   "updated": "2026-10-21",
+   "closed": null,
+   "requester": {
+    "login": "kzollove",
+    "url": "https://github.com/kzollove"
+   },
+   "external_owner": null,
+   "internal_owners": [],
+   "board_status": "Idea",
+   "rank": null,
+   "labels": [
+    "data source request"
+   ],
+   "depends_on": [],
+   "needed_by": [],
+   "deps_closed": 0,
+   "deps_total": 0
+  },
+  {
+   "key": "gaiaCatalog#35",
+   "repo": "gaiaCatalog",
+   "number": 35,
+   "kind": "dataset",
+   "title": "Toxic Releases Inventory (TRI) Basic Data files",
+   "url": "https://github.com/OHDSI/gaiaCatalog/issues/35",
+   "state": "open",
+   "status": "Idea",
+   "status_note": null,
+   "requested": "2023-06-09",
+   "updated": "2026-10-21",
+   "closed": null,
+   "requester": {
+    "login": "kzollove",
+    "url": "https://github.com/kzollove"
+   },
+   "external_owner": null,
+   "internal_owners": [],
+   "board_status": "Idea",
+   "rank": null,
+   "labels": [
+    "data source request"
+   ],
+   "depends_on": [],
+   "needed_by": [],
+   "deps_closed": 0,
+   "deps_total": 0
+  },
+  {
+   "key": "gaiaCatalog#34",
+   "repo": "gaiaCatalog",
+   "number": 34,
+   "kind": "dataset",
+   "title": "Scope out SDG indicator database ingestion workload",
+   "url": "https://github.com/OHDSI/gaiaCatalog/issues/34",
+   "state": "open",
+   "status": "To do",
+   "status_note": null,
+   "requested": "2023-06-20",
+   "updated": "2026-10-21",
+   "closed": null,
+   "requester": {
+    "login": "kzollove",
+    "url": "https://github.com/kzollove"
+   },
+   "external_owner": null,
+   "internal_owners": [],
+   "board_status": "To do",
+   "rank": null,
+   "labels": [
+    "data source request"
+   ],
+   "depends_on": [
+    {
+     "key": "gaiaCatalog#31",
+     "repo": "gaiaCatalog",
+     "number": 31,
+     "title": "DIVA-GIS (country- and global-level geometry data)",
+     "state": "open",
+     "url": "https://github.com/OHDSI/gaiaCatalog/issues/31",
+     "tracked_as": "dataset"
+    }
+   ],
+   "needed_by": [
+    {
+     "key": "GIS#289",
+     "title": "Support the INSPIRE project's effort to link population health data to geospatial data",
+     "url": "https://github.com/OHDSI/GIS/issues/289",
+     "state": "open",
+     "kind": "use_case"
+    }
+   ],
+   "deps_closed": 0,
+   "deps_total": 1
+  },
+  {
+   "key": "gaiaCatalog#38",
+   "repo": "gaiaCatalog",
+   "number": 38,
+   "kind": "dataset",
+   "title": "Unregulated Contaminant Monitoring Rule 3 (2013-2015)",
+   "url": "https://github.com/OHDSI/gaiaCatalog/issues/38",
+   "state": "open",
+   "status": "Idea",
+   "status_note": null,
+   "requested": "2023-07-20",
+   "updated": "2026-10-21",
+   "closed": null,
+   "requester": {
+    "login": "kzollove",
+    "url": "https://github.com/kzollove"
+   },
+   "external_owner": null,
+   "internal_owners": [],
+   "board_status": "Idea",
+   "rank": null,
+   "labels": [
+    "data source request"
+   ],
+   "depends_on": [],
+   "needed_by": [],
+   "deps_closed": 0,
+   "deps_total": 0
+  },
+  {
+   "key": "gaiaCatalog#32",
+   "repo": "gaiaCatalog",
+   "number": 32,
+   "kind": "dataset",
+   "title": "Create EPA aqs_sites data_source in main catalog",
+   "url": "https://github.com/OHDSI/gaiaCatalog/issues/32",
+   "state": "open",
+   "status": "Proposed",
+   "status_note": null,
+   "requested": "2023-09-22",
+   "updated": "2026-10-21",
+   "closed": null,
+   "requester": {
+    "login": "kzollove",
+    "url": "https://github.com/kzollove"
+   },
+   "external_owner": null,
+   "internal_owners": [
+    {
+     "login": "rtmill",
+     "url": "https://github.com/rtmill"
+    },
+    {
+     "login": "kzollove",
+     "url": "https://github.com/kzollove"
+    }
+   ],
+   "board_status": "Proposed",
+   "rank": null,
+   "labels": [
+    "data source request"
+   ],
+   "depends_on": [],
+   "needed_by": [],
+   "deps_closed": 0,
+   "deps_total": 0
+  },
+  {
+   "key": "gaiaCatalog#31",
+   "repo": "gaiaCatalog",
+   "number": 31,
+   "kind": "dataset",
+   "title": "DIVA-GIS (country- and global-level geometry data)",
+   "url": "https://github.com/OHDSI/gaiaCatalog/issues/31",
+   "state": "open",
+   "status": "Proposed",
+   "status_note": null,
+   "requested": "2023-10-26",
+   "updated": "2026-10-21",
+   "closed": null,
+   "requester": {
+    "login": "kzollove",
+    "url": "https://github.com/kzollove"
+   },
+   "external_owner": null,
+   "internal_owners": [],
+   "board_status": "Proposed",
+   "rank": null,
+   "labels": [
+    "data source request"
+   ],
+   "depends_on": [],
+   "needed_by": [
+    {
+     "key": "GIS#289",
+     "title": "Support the INSPIRE project's effort to link population health data to geospatial data",
+     "url": "https://github.com/OHDSI/GIS/issues/289",
+     "state": "open",
+     "kind": "use_case"
+    },
+    {
+     "key": "gaiaCatalog#34",
+     "title": "Scope out SDG indicator database ingestion workload",
+     "url": "https://github.com/OHDSI/gaiaCatalog/issues/34",
+     "state": "open",
+     "kind": "dataset"
+    }
+   ],
+   "deps_closed": 0,
+   "deps_total": 0
+  },
+  {
+   "key": "gaiaCatalog#29",
+   "repo": "gaiaCatalog",
+   "number": 29,
+   "kind": "dataset",
+   "title": "Environmental Justice Index",
+   "url": "https://github.com/OHDSI/gaiaCatalog/issues/29",
+   "state": "open",
+   "status": "Proposed",
+   "status_note": null,
+   "requested": "2023-11-17",
+   "updated": "2026-10-21",
+   "closed": null,
+   "requester": {
+    "login": "kzollove",
+    "url": "https://github.com/kzollove"
+   },
+   "external_owner": "Bill Adams (Health Equity Explorer); Jim Phuong (AOU integration)",
+   "internal_owners": [],
+   "board_status": "Proposed",
+   "rank": null,
+   "labels": [
+    "data source request"
+   ],
+   "depends_on": [],
+   "needed_by": [
+    {
+     "key": "GIS#311",
+     "title": "Geocoding, then linkage with a spatial indicator dataset based on temporal linkage criteria",
+     "url": "https://github.com/OHDSI/GIS/issues/311",
+     "state": "open",
+     "kind": "use_case"
+    },
+    {
+     "key": "GIS#288",
+     "title": "Support the BMC Population Health Explorer",
+     "url": "https://github.com/OHDSI/GIS/issues/288",
+     "state": "open",
+     "kind": "use_case"
+    }
+   ],
+   "deps_closed": 0,
+   "deps_total": 0
+  },
+  {
+   "key": "gaiaCatalog#30",
+   "repo": "gaiaCatalog",
+   "number": 30,
+   "kind": "dataset",
+   "title": "Child Opportunity Index",
+   "url": "https://github.com/OHDSI/gaiaCatalog/issues/30",
+   "state": "open",
+   "status": "Proposed",
+   "status_note": null,
+   "requested": "2023-11-17",
+   "updated": "2026-10-21",
+   "closed": null,
+   "requester": {
+    "login": "kzollove",
+    "url": "https://github.com/kzollove"
+   },
+   "external_owner": null,
+   "internal_owners": [],
+   "board_status": "Proposed",
+   "rank": null,
+   "labels": [
+    "data source request"
+   ],
+   "depends_on": [],
+   "needed_by": [
+    {
+     "key": "GIS#288",
+     "title": "Support the BMC Population Health Explorer",
+     "url": "https://github.com/OHDSI/GIS/issues/288",
+     "state": "open",
+     "kind": "use_case"
+    }
+   ],
+   "deps_closed": 0,
+   "deps_total": 0
+  },
+  {
+   "key": "gaiaCatalog#28",
+   "repo": "gaiaCatalog",
+   "number": 28,
+   "kind": "dataset",
+   "title": "Multidimensional Deprivation Index",
+   "url": "https://github.com/OHDSI/gaiaCatalog/issues/28",
+   "state": "open",
+   "status": "Idea",
+   "status_note": null,
+   "requested": "2023-11-24",
+   "updated": "2026-10-21",
+   "closed": null,
+   "requester": {
+    "login": "kzollove",
+    "url": "https://github.com/kzollove"
+   },
+   "external_owner": null,
+   "internal_owners": [],
+   "board_status": "Idea",
+   "rank": null,
+   "labels": [
+    "data source request"
+   ],
+   "depends_on": [],
+   "needed_by": [],
+   "deps_closed": 0,
+   "deps_total": 0
+  },
+  {
+   "key": "gaiaCatalog#27",
+   "repo": "gaiaCatalog",
+   "number": 27,
+   "kind": "dataset",
+   "title": "CRED distaster database",
+   "url": "https://github.com/OHDSI/gaiaCatalog/issues/27",
+   "state": "open",
+   "status": "Proposed",
+   "status_note": null,
+   "requested": "2023-12-01",
+   "updated": "2026-10-21",
+   "closed": null,
+   "requester": {
+    "login": "kzollove",
+    "url": "https://github.com/kzollove"
+   },
+   "external_owner": null,
+   "internal_owners": [],
+   "board_status": "Proposed",
+   "rank": null,
+   "labels": [
+    "data source request"
+   ],
+   "depends_on": [],
+   "needed_by": [],
+   "deps_closed": 0,
+   "deps_total": 0
+  },
+  {
+   "key": "gaiaCatalog#26",
+   "repo": "gaiaCatalog",
+   "number": 26,
+   "kind": "dataset",
+   "title": "Dataset Repository for Suicide Risk",
+   "url": "https://github.com/OHDSI/gaiaCatalog/issues/26",
+   "state": "open",
+   "status": "In progress",
+   "status_note": null,
+   "requested": "2023-12-15",
+   "updated": "2026-10-21",
+   "closed": null,
+   "requester": {
+    "login": "kzollove",
+    "url": "https://github.com/kzollove"
+   },
+   "external_owner": null,
+   "internal_owners": [],
+   "board_status": "In progress",
+   "rank": null,
+   "labels": [
+    "data source request"
+   ],
+   "depends_on": [],
+   "needed_by": [],
+   "deps_closed": 0,
+   "deps_total": 0
+  },
+  {
+   "key": "gaiaCatalog#24",
+   "repo": "gaiaCatalog",
+   "number": 24,
+   "kind": "dataset",
+   "title": "Get test data set suitable for social justice index component of SDOHO",
+   "url": "https://github.com/OHDSI/gaiaCatalog/issues/24",
+   "state": "open",
+   "status": "Proposed",
+   "status_note": null,
+   "requested": "2024-03-08",
+   "updated": "2026-10-21",
+   "closed": null,
+   "requester": {
+    "login": "rtmill",
+    "url": "https://github.com/rtmill"
+   },
+   "external_owner": null,
+   "internal_owners": [
+    {
+     "login": "tibbben",
+     "url": "https://github.com/tibbben"
+    }
+   ],
+   "board_status": "Proposed",
+   "rank": null,
+   "labels": [
+    "data source request"
+   ],
+   "depends_on": [],
+   "needed_by": [
+    {
+     "key": "GIS#311",
+     "title": "Geocoding, then linkage with a spatial indicator dataset based on temporal linkage criteria",
+     "url": "https://github.com/OHDSI/GIS/issues/311",
+     "state": "open",
+     "kind": "use_case"
+    }
+   ],
+   "deps_closed": 0,
+   "deps_total": 0
+  },
+  {
+   "key": "gaiaCatalog#23",
+   "repo": "gaiaCatalog",
+   "number": 23,
+   "kind": "dataset",
+   "title": "CyAN",
+   "url": "https://github.com/OHDSI/gaiaCatalog/issues/23",
+   "state": "open",
+   "status": "Requested",
+   "status_note": null,
+   "requested": "2024-11-11",
+   "updated": "2026-10-21",
+   "closed": null,
+   "requester": {
+    "login": "diatomsRcool",
+    "url": "https://github.com/diatomsRcool"
+   },
+   "external_owner": "@diatomsRcool",
+   "internal_owners": [],
+   "board_status": null,
+   "rank": null,
+   "labels": [
+    "data source request"
+   ],
+   "depends_on": [],
+   "needed_by": [],
+   "deps_closed": 0,
+   "deps_total": 0
+  },
+  {
+   "key": "gaiaCatalog#41",
+   "repo": "gaiaCatalog",
+   "number": 41,
+   "kind": "dataset",
+   "title": "Air quality data for Europe country",
+   "url": "https://github.com/OHDSI/gaiaCatalog/issues/41",
+   "state": "open",
+   "status": "To do",
+   "status_note": null,
+   "requested": "2026-02-13",
+   "updated": "2026-10-21",
+   "closed": null,
+   "requester": {
+    "login": "tibbben",
+    "url": "https://github.com/tibbben"
+   },
+   "external_owner": null,
+   "internal_owners": [
+    {
+     "login": "tibbben",
+     "url": "https://github.com/tibbben"
+    }
+   ],
+   "board_status": "To do",
+   "rank": null,
+   "labels": [],
+   "depends_on": [],
+   "needed_by": [],
+   "deps_closed": 0,
+   "deps_total": 0
+  },
+  {
+   "key": "GIS#66",
+   "repo": "GIS",
+   "number": 66,
+   "kind": "dataset",
+   "title": "Interested in adding Air Quality data",
+   "url": "https://github.com/OHDSI/GIS/issues/66",
+   "state": "closed",
+   "status": "Complete",
+   "status_note": null,
+   "requested": "2022-09-16",
+   "updated": "2023-04-20",
+   "closed": "2023-04-20",
+   "requester": {
+    "login": "WoodridgeBill",
+    "url": "https://github.com/WoodridgeBill"
+   },
+   "external_owner": "Boston Medical Center (@WoodridgeBill)",
+   "internal_owners": [],
+   "board_status": "Complete",
+   "rank": null,
+   "labels": [
+    "data request"
+   ],
+   "depends_on": [],
+   "needed_by": [],
+   "deps_closed": 0,
+   "deps_total": 0
+  },
+  {
+   "key": "GIS#267",
+   "repo": "GIS",
+   "number": 267,
+   "kind": "dataset",
+   "title": "Area Deprivation Index",
+   "url": "https://github.com/OHDSI/GIS/issues/267",
+   "state": "closed",
+   "status": "Complete",
+   "status_note": null,
+   "requested": "2023-10-26",
+   "updated": "2026-09-18",
+   "closed": "2023-11-11",
+   "requester": {
+    "login": "kzollove",
+    "url": "https://github.com/kzollove"
+   },
+   "external_owner": null,
+   "internal_owners": [
+    {
+     "login": "kzollove",
+     "url": "https://github.com/kzollove"
+    }
+   ],
+   "board_status": "Complete",
+   "rank": null,
+   "labels": [
+    "data request"
+   ],
+   "depends_on": [
+    {
+     "key": "GIS#263",
+     "repo": "GIS",
+     "number": 263,
+     "title": "Link geom_dependency_uuid to variable_source",
+     "state": "closed",
+     "url": "https://github.com/OHDSI/GIS/issues/263",
+     "tracked_as": null
+    },
+    {
+     "key": "GIS#269",
+     "repo": "GIS",
+     "number": 269,
+     "title": "Users should be able to specify offline storage location",
+     "state": "closed",
+     "url": "https://github.com/OHDSI/GIS/issues/269",
+     "tracked_as": null
+    },
+    {
+     "key": "GIS#270",
+     "repo": "GIS",
+     "number": 270,
+     "title": "Load functions from gaiaR should first check offline storage location",
+     "state": "closed",
+     "url": "https://github.com/OHDSI/GIS/issues/270",
+     "tracked_as": null
+    }
+   ],
+   "needed_by": [],
+   "deps_closed": 3,
+   "deps_total": 3
+  }
+ ]
+}

@@ -13,12 +13,17 @@ navbar:
     - icon: fa-github
       href: https://github.com/OHDSI/GIS
   left:
-    - text: "Home"
-      icon: fa-home
-      href: index.html
-    - text: "Get Started"
-      icon: fa-play
-      href: get-started.html
+    - text: "Working Group"
+      icon: fa-users
+      menu:
+        - text: "Home"
+          href: index.html
+        - text: "Get Started"
+          href: get-started.html
+        - text: "Use Case & Dataset Status"
+          href: status.html
+        - text: "Project Management"
+          href: project-management.html
     - text: "Tutorial"
       icon: fa-graduation-cap
       menu:
@@ -48,9 +53,6 @@ navbar:
           href: tutorial-r-exercise-3.html
         - text: "R track: Exercise 4 (beta)"
           href: tutorial-r-exercise-4.html
-    - text: "Examples"
-      icon: fa-lightbulb
-      href: examples.html
     - text: "ARES demo"
       icon: fa-map
       href: ares-demo/
@@ -59,6 +61,8 @@ navbar:
       menu:
         - text: "Overview"
           href: gaia-intro.html
+        - text: "Examples"
+          href: examples.html
         - text: "Design"
           href: gaia-principles.html
         - text: "Schema Extensions"
@@ -95,6 +99,3 @@ navbar:
           href: developer-architecture.html
         - text: "Deployment"
           href: developer-deployment.html
-    - text: "Project Management"
-      icon: fa-tasks
-      href: project-management.html
