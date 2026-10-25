@@ -246,19 +246,28 @@ $(document).ready(function () {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li>
-  <a href="index.html">
-    <span class="fa fa-home"></span>
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-users"></span>
      
-    Home
-  </a>
-</li>
-<li>
-  <a href="get-started.html">
-    <span class="fa fa-play"></span>
+    Working Group
      
-    Get Started
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="index.html">Home</a>
+    </li>
+    <li>
+      <a href="get-started.html">Get Started</a>
+    </li>
+    <li>
+      <a href="status.html">Use Case &amp; Dataset Status</a>
+    </li>
+    <li>
+      <a href="project-management.html">Project Management</a>
+    </li>
+  </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -311,13 +320,6 @@ $(document).ready(function () {
   </ul>
 </li>
 <li>
-  <a href="examples.html">
-    <span class="fa fa-lightbulb"></span>
-     
-    Examples
-  </a>
-</li>
-<li>
   <a href="ares-demo/">
     <span class="fa fa-map"></span>
      
@@ -335,6 +337,9 @@ $(document).ready(function () {
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="gaia-intro.html">Overview</a>
+    </li>
+    <li>
+      <a href="examples.html">Examples</a>
     </li>
     <li>
       <a href="gaia-principles.html">Design</a>
@@ -400,13 +405,6 @@ $(document).ready(function () {
       <a href="developer-deployment.html">Deployment</a>
     </li>
   </ul>
-</li>
-<li>
-  <a href="project-management.html">
-    <span class="fa fa-tasks"></span>
-     
-    Project Management
-  </a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">

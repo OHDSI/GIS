@@ -23,3 +23,27 @@
   border-radius: 4px;
   padding: 0.75em 1em;
 }
+
+/* Use case and dataset status page */
+.status-updated { color: #666; font-size: 0.9em; }
+.status-summary { display: flex; flex-wrap: wrap; gap: 1em; margin: 1em 0; }
+.status-summary-card { border: 1px solid #ddd; border-radius: 4px; padding: 0.6em 1em; min-width: 14em; }
+.status-filter { font-weight: normal; margin: 0.5em 0; }
+.status-table-wrap { overflow-x: auto; }
+.status-table { font-size: 0.9em; }
+.status-table td { vertical-align: top; }
+.status-sub { color: #666; font-size: 0.85em; }
+.status-none { color: #888; font-style: italic; }
+.status-deps { list-style: none; padding-left: 0; margin: 0; }
+.status-dep-open .status-dep-mark { color: #8a6d3b; }
+.status-dep-closed .status-dep-mark { color: #3c763d; }
+.status-chip { display: inline-block; padding: 0.1em 0.6em; border-radius: 1em; font-size: 0.85em; border: 1px solid #ccc; background: #f5f5f5; color: #333; }
+.status-complete { background: #dff0d8; border-color: #c3e0b5; }
+.status-in-progress { background: #d9edf7; border-color: #b9dcee; }
+.status-assigned { background: #e8f1fa; border-color: #cddff0; }
+.status-on-hold { background: #fcf8e3; border-color: #efe3a8; }
+.status-superseded { background: #eee; color: #666; }
+.status-idea { background: #f5f5f5; }
+.status-proposed { background: #f0eaf7; border-color: #ddd0ee; }
+.status-to-do { background: #e8f1fa; border-color: #cddff0; }
+.status-blocked { background: #f2dede; border-color: #e4b9b9; }

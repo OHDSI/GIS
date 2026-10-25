@@ -1,0 +1,27 @@
+{
+  "_readme": "Hand-maintained inputs for scripts/build_status.py. Keys look like 'GIS#311' or 'gaiaCatalog#29'. Status and rank come from the GIS project board (OHDSI/projects/26: Status field, optional numeric Rank field). Fields GitHub does not record live here: external_owner, status overrides, and links between items.",
+  "internal_members": [
+    "kzollove", "jshoughtaling", "rtmill", "jaygee-on-github", "tibbben",
+    "fils", "AEW0330", "martyalvarez", "p-talapova"
+  ],
+  "exclude": {
+    "GIS#356": "2024 Symposium workshop definition (category/epic, not a use case)",
+    "GIS#323": "Vocabulary work order, not a use case",
+    "GIS#272": "Sprint category issue"
+  },
+  "project_number": 26,
+  "include_datasets": ["gaiaCatalog#24", "gaiaCatalog#41"],
+  "overrides": {
+    "GIS#247": {"kind": "use_case"},
+    "GIS#367": {"status_note": "Partnership with APHRC; tracked on the APHRC DSWB project board", "external_owner": "APHRC (Data Science Without Borders)"},
+    "GIS#290": {"external_owner": "C-Path / CURE ID"},
+    "GIS#289": {"status": "Superseded", "status_note": "Replaced by #367 (see that issue)", "external_owner": "INSPIRE project (HDSS sites)"},
+    "GIS#288": {"external_owner": "Boston Medical Center (Population Health Explorer)"},
+    "GIS#324": {"external_owner": "Internal WG initiative"},
+    "GIS#389": {"external_owner": "Internal WG initiative"},
+    "GIS#66": {"external_owner": "Boston Medical Center (@WoodridgeBill)"},
+    "gaiaCatalog#37": {"external_owner": "Boston Medical Center / Boston University (@WoodridgeBill)"},
+    "gaiaCatalog#29": {"external_owner": "Bill Adams (Health Equity Explorer); Jim Phuong (AOU integration)"},
+    "GIS#311": {"depends_on": ["gaiaCatalog#29"]}
+  }
+}
