@@ -345,9 +345,6 @@ $(document).ready(function () {
       <a href="algorithms.html">Algorithms</a>
     </li>
     <li>
-      <a href="evaluation.html">Evaluation</a>
-    </li>
-    <li>
       <a href="geocoding.html">Geocoding</a>
     </li>
     <li>
@@ -569,9 +566,8 @@ the index is planned.</li>
 <li>Ingestion currently runs as source-specific ETL scripts generated
 from each catalog entry. A declarative recipe layer is being evaluated
 by the working group.</li>
-<li>On the tract benchmark (about 2.9 million exposure rows), the Gaia
-join took about 28 s against 16-17 s for an equivalent hand-written
-PostGIS query, with identical rows. Its value is catalog-driven
+<li>The catalog-driven join is somewhat slower than an equivalent
+hand-written PostGIS query and returns identical rows; its value is
 provenance, standardization and reuse, not speed.</li>
 </ul>
 </div>

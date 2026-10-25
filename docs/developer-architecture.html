@@ -427,9 +427,6 @@ div.tocify {
       <a href="algorithms.html">Algorithms</a>
     </li>
     <li>
-      <a href="evaluation.html">Evaluation</a>
-    </li>
-    <li>
       <a href="geocoding.html">Geocoding</a>
     </li>
     <li>
@@ -949,11 +946,10 @@ views</li>
 responses</li>
 <li><strong>Scaling</strong>: Connection pooling, batch processing;
 heavy work stays in gaiaDB</li>
-<li><strong>Join cost</strong>: On the 40,000-person tract benchmark
-(2.9 million rows) the Gaia join took about 28 s, against 16-17 s for
-the equivalent hand-written PostGIS query (about 1.7 times as long),
-with identical rows. Its value is catalog-driven provenance,
-standardization and reuse, not speed.</li>
+<li><strong>Join cost</strong>: The catalog-driven join is somewhat
+slower than an equivalent hand-written PostGIS query and returns
+identical rows; its value is provenance, standardization and reuse, not
+speed.</li>
 </ul>
 <p>See <a href="developer-deployment.html">Deployment Strategies</a> for
 deployment options.</p>
