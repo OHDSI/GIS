@@ -1,0 +1,3 @@
+CDM_TABLE_NAME,CDM_FIELD_NAME,SOURCE_VALUE,RECORD_COUNT
+person,race_source_value,,10000
+person,ethnicity_source_value,,10000

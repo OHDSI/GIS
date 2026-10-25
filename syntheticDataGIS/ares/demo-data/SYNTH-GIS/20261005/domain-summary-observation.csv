@@ -1,0 +1,10 @@
+CONCEPT_ID,CONCEPT_NAME,NUM_PERSONS,PERCENT_PERSONS,RECORDS_PER_PERSON,PERCENT_PERSONS_NTILE,RECORDS_PER_PERSON_NTILE
+2052497092,Years Of Education,10000,1.0000,1.0,1,1
+2052497310,"Total Number Of Reported Violent Crime Offenses Per 100,000 Population",10000,1.0000,1.0,2,2
+2052497364,"Total Number Of Non-Federal Primary Care Physicians Per 1,000 Population",10000,1.0000,1.0,3,3
+2052498073,"Prevalence of moderate or severe food insecurity in the population, based on the Food Insecurity Experience Scale (FIES)",10000,1.0000,1.0,4,4
+2052498200,Percentage Uninsured In The Total Civilian Noninstitutionalized Population Estimate,10000,1.0000,1.0,5,5
+2052498464,"Percentage Of Housing Cost- Burdened Occupied Housing Units With Annual Income Less Than $75,000 (30%+ Of Income Spent On Housing Costs) Estimate",10000,1.0000,1.0,6,6
+2052498483,Percentage Of Households With Broadband Of Any Type,10000,1.0000,1.0,7,7
+2052499437,EPA Air Quality Index,10000,1.0000,1.0,8,8
+2052499459,Estimated Percentage Of People Of All Ages In Poverty,10000,1.0000,1.0,9,9

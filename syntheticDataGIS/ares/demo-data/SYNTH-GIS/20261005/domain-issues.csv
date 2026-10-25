@@ -1,0 +1,7 @@
+cdm_table_name,count_failed
+condition_era,2
+drug_era,1
+observation,1
+person,2
+procedure_occurrence,1
+visit_occurrence,1

@@ -1,0 +1,15 @@
+CONCEPT_ID,CONCEPT_NAME,NUM_PERSONS,PERCENT_PERSONS,RECORDS_PER_PERSON,PERCENT_PERSONS_NTILE,RECORDS_PER_PERSON_NTILE
+320128,Essential hypertension,2397,0.2400,1.0,1,1
+432867,Hyperlipidemia,1989,0.1990,1.0,1,1
+433736,Obesity,1778,0.1780,1.0,2,2
+201826,Type 2 diabetes mellitus,1458,0.1460,1.0,2,2
+46271022,Chronic kidney disease,1384,0.1380,1.0,3,3
+257007,Allergic rhinitis,1335,0.1340,1.0,3,3
+319835,Congestive heart failure,1249,0.1250,1.0,4,4
+317576,Coronary arteriosclerosis,1169,0.1170,1.0,4,4
+317009,Asthma,1090,0.1090,1.0,5,5
+255573,Chronic obstructive pulmonary disease,1086,0.1090,1.0,6,6
+381316,Cerebrovascular accident,952,0.0950,1.0,7,7
+255848,Pneumonia,806,0.0810,1.0,8,8
+4329847,Myocardial infarction,790,0.0790,1.0,9,9
+255841,Chronic bronchitis,688,0.0690,1.0,10,10

@@ -1,0 +1,9 @@
+checkName,checkLevel,cdmTableName,category,subcategory,context,cdmFieldName,conceptId,unitConceptId,CDM_SOURCE_NAME,CDM_SOURCE_ABBREVIATION,CDM_SOURCE_KEY,RELEASE_NAME,RELEASE_ID
+measurePersonCompleteness,TABLE,VISIT_OCCURRENCE,Completeness,,Validation,,,,Synthetic GIS/SDOH Dataset,SYNTH-GIS,SYNTH-GIS,2026-10-05,20261005
+measurePersonCompleteness,TABLE,DRUG_ERA,Completeness,,Validation,,,,Synthetic GIS/SDOH Dataset,SYNTH-GIS,SYNTH-GIS,2026-10-05,20261005
+measurePersonCompleteness,TABLE,CONDITION_ERA,Completeness,,Validation,,,,Synthetic GIS/SDOH Dataset,SYNTH-GIS,SYNTH-GIS,2026-10-05,20261005
+measureConditionEraCompleteness,TABLE,CONDITION_ERA,Completeness,,Validation,,,,Synthetic GIS/SDOH Dataset,SYNTH-GIS,SYNTH-GIS,2026-10-05,20261005
+isForeignKey,FIELD,PERSON,Conformance,Relational,Verification,ETHNICITY_CONCEPT_ID,,,Synthetic GIS/SDOH Dataset,SYNTH-GIS,SYNTH-GIS,2026-10-05,20261005
+isForeignKey,FIELD,PERSON,Conformance,Relational,Verification,RACE_CONCEPT_ID,,,Synthetic GIS/SDOH Dataset,SYNTH-GIS,SYNTH-GIS,2026-10-05,20261005
+fkDomain,FIELD,PROCEDURE_OCCURRENCE,Conformance,Value,Verification,PROCEDURE_CONCEPT_ID,,,Synthetic GIS/SDOH Dataset,SYNTH-GIS,SYNTH-GIS,2026-10-05,20261005
+standardConceptRecordCompleteness,FIELD,OBSERVATION,Completeness,,Verification,UNIT_CONCEPT_ID,,,Synthetic GIS/SDOH Dataset,SYNTH-GIS,SYNTH-GIS,2026-10-05,20261005

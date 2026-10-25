@@ -1,0 +1,17 @@
+CONCEPT_ID,CONCEPT_NAME,NUM_PERSONS,PERCENT_PERSONS,RECORDS_PER_PERSON,PERCENT_MISSING_VALUES,PERCENT_PERSONS_NTILE,RECORDS_PER_PERSON_NTILE
+3004249,Systolic blood pressure,1979,0.1980,1.0,,1,1
+3012888,Diastolic blood pressure,1955,0.1960,1.0,,1,2
+3028437,Cholesterol in LDL [Mass/volume] in Serum or Plasma,1558,0.1560,1.0,,2,2
+3022192,Triglyceride [Mass/volume] in Serum or Plasma,1553,0.1550,1.0,,2,3
+3038553,Body mass index (BMI) [Ratio],1463,0.1460,1.0,,3,3
+3016258,Waist Circumference at umbilicus by Tape measure,1395,0.1400,1.0,,3,4
+40762499,Oxygen saturation in Arterial blood by Pulse oximetry,1185,0.1190,1.1,,4,1
+3028615,Eosinophils [#/volume] in Blood by Automated count,1172,0.1170,1.0,,4,4
+3016723,Creatinine [Mass/volume] in Serum or Plasma,1159,0.1160,1.0,,5,5
+4087260,Peak expiratory flow rate,1151,0.1150,1.0,,5,5
+1619025,"Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum, Plasma or Blood by Creatinine-based formula (CKD-EPI 2021)",1149,0.1150,1.0,,6,6
+3004410,Hemoglobin A1c/Hemoglobin.total in Blood,1146,0.1150,1.0,,6,6
+3011960,Natriuretic peptide B [Mass/volume] in Serum or Plasma,892,0.0890,1.0,,7,7
+3027172,Left ventricular Ejection fraction,848,0.0850,1.0,,8,8
+3019800,Troponin T.cardiac [Mass/volume] in Serum or Plasma,762,0.0760,1.0,,9,9
+3000905,Leukocytes [#/volume] in Blood by Automated count,691,0.0690,1.0,,10,10

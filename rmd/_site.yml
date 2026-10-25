@@ -51,6 +51,9 @@ navbar:
     - text: "Examples"
       icon: fa-lightbulb
       href: examples.html
+    - text: "ARES demo"
+      icon: fa-map
+      href: ares-demo/
     - text: "Gaia"
       icon: fa-earth
       menu:

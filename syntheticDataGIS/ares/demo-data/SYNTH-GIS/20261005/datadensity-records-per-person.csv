@@ -1,0 +1,291 @@
+domain,date,records
+Condition occurrence,2014-01-01T00:00:00Z,0.02
+Condition occurrence,2014-02-01T00:00:00Z,0.02
+Condition occurrence,2014-03-01T00:00:00Z,0.03
+Condition occurrence,2014-04-01T00:00:00Z,0.03
+Condition occurrence,2014-05-01T00:00:00Z,0.03
+Condition occurrence,2014-06-01T00:00:00Z,0.02
+Condition occurrence,2014-07-01T00:00:00Z,0.02
+Condition occurrence,2014-08-01T00:00:00Z,0.03
+Condition occurrence,2014-09-01T00:00:00Z,0.03
+Condition occurrence,2014-10-01T00:00:00Z,0.03
+Condition occurrence,2014-11-01T00:00:00Z,0.03
+Condition occurrence,2014-12-01T00:00:00Z,0.03
+Condition occurrence,2015-01-01T00:00:00Z,0.03
+Condition occurrence,2015-02-01T00:00:00Z,0.02
+Condition occurrence,2015-03-01T00:00:00Z,0.02
+Condition occurrence,2015-04-01T00:00:00Z,0.03
+Condition occurrence,2015-05-01T00:00:00Z,0.02
+Condition occurrence,2015-06-01T00:00:00Z,0.03
+Condition occurrence,2015-07-01T00:00:00Z,0.03
+Condition occurrence,2015-08-01T00:00:00Z,0.03
+Condition occurrence,2015-09-01T00:00:00Z,0.02
+Condition occurrence,2015-10-01T00:00:00Z,0.03
+Condition occurrence,2015-11-01T00:00:00Z,0.02
+Condition occurrence,2015-12-01T00:00:00Z,0.03
+Condition occurrence,2016-01-01T00:00:00Z,0.02
+Condition occurrence,2016-02-01T00:00:00Z,0.02
+Condition occurrence,2016-03-01T00:00:00Z,0.02
+Condition occurrence,2016-04-01T00:00:00Z,0.02
+Condition occurrence,2016-05-01T00:00:00Z,0.03
+Condition occurrence,2016-06-01T00:00:00Z,0.03
+Condition occurrence,2016-07-01T00:00:00Z,0.02
+Condition occurrence,2016-08-01T00:00:00Z,0.03
+Condition occurrence,2016-09-01T00:00:00Z,0.02
+Condition occurrence,2016-10-01T00:00:00Z,0.03
+Condition occurrence,2016-11-01T00:00:00Z,0.03
+Condition occurrence,2016-12-01T00:00:00Z,0.03
+Condition occurrence,2017-01-01T00:00:00Z,0.03
+Condition occurrence,2017-02-01T00:00:00Z,0.02
+Condition occurrence,2017-03-01T00:00:00Z,0.03
+Condition occurrence,2017-04-01T00:00:00Z,0.03
+Condition occurrence,2017-05-01T00:00:00Z,0.03
+Condition occurrence,2017-06-01T00:00:00Z,0.03
+Condition occurrence,2017-07-01T00:00:00Z,0.03
+Condition occurrence,2017-08-01T00:00:00Z,0.03
+Condition occurrence,2017-09-01T00:00:00Z,0.02
+Condition occurrence,2017-10-01T00:00:00Z,0.03
+Condition occurrence,2017-11-01T00:00:00Z,0.02
+Condition occurrence,2017-12-01T00:00:00Z,0.03
+Condition occurrence,2018-01-01T00:00:00Z,0.03
+Condition occurrence,2018-02-01T00:00:00Z,0.03
+Condition occurrence,2018-03-01T00:00:00Z,0.03
+Condition occurrence,2018-04-01T00:00:00Z,0.03
+Condition occurrence,2018-05-01T00:00:00Z,0.03
+Condition occurrence,2018-06-01T00:00:00Z,0.03
+Condition occurrence,2018-07-01T00:00:00Z,0.03
+Condition occurrence,2018-08-01T00:00:00Z,0.02
+Condition occurrence,2018-09-01T00:00:00Z,0.03
+Condition occurrence,2018-10-01T00:00:00Z,0.02
+Condition occurrence,2018-11-01T00:00:00Z,0.02
+Condition occurrence,2018-12-01T00:00:00Z,0.03
+Condition occurrence,2019-01-01T00:00:00Z,0.03
+Condition occurrence,2019-02-01T00:00:00Z,0.02
+Condition occurrence,2019-03-01T00:00:00Z,0.03
+Condition occurrence,2019-04-01T00:00:00Z,0.03
+Condition occurrence,2019-05-01T00:00:00Z,0.03
+Condition occurrence,2019-06-01T00:00:00Z,0.03
+Condition occurrence,2019-07-01T00:00:00Z,0.03
+Condition occurrence,2019-08-01T00:00:00Z,0.03
+Condition occurrence,2019-09-01T00:00:00Z,0.02
+Condition occurrence,2019-10-01T00:00:00Z,0.03
+Condition occurrence,2019-11-01T00:00:00Z,0.02
+Condition occurrence,2019-12-01T00:00:00Z,0.03
+Drug exposure,2014-01-01T00:00:00Z,0.01
+Drug exposure,2014-02-01T00:00:00Z,0.02
+Drug exposure,2014-03-01T00:00:00Z,0.02
+Drug exposure,2014-04-01T00:00:00Z,0.02
+Drug exposure,2014-05-01T00:00:00Z,0.02
+Drug exposure,2014-06-01T00:00:00Z,0.01
+Drug exposure,2014-07-01T00:00:00Z,0.02
+Drug exposure,2014-08-01T00:00:00Z,0.02
+Drug exposure,2014-09-01T00:00:00Z,0.02
+Drug exposure,2014-10-01T00:00:00Z,0.02
+Drug exposure,2014-11-01T00:00:00Z,0.02
+Drug exposure,2014-12-01T00:00:00Z,0.02
+Drug exposure,2015-01-01T00:00:00Z,0.02
+Drug exposure,2015-02-01T00:00:00Z,0.02
+Drug exposure,2015-03-01T00:00:00Z,0.02
+Drug exposure,2015-04-01T00:00:00Z,0.02
+Drug exposure,2015-05-01T00:00:00Z,0.02
+Drug exposure,2015-06-01T00:00:00Z,0.02
+Drug exposure,2015-07-01T00:00:00Z,0.02
+Drug exposure,2015-08-01T00:00:00Z,0.02
+Drug exposure,2015-09-01T00:00:00Z,0.02
+Drug exposure,2015-10-01T00:00:00Z,0.02
+Drug exposure,2015-11-01T00:00:00Z,0.02
+Drug exposure,2015-12-01T00:00:00Z,0.02
+Drug exposure,2016-01-01T00:00:00Z,0.02
+Drug exposure,2016-02-01T00:00:00Z,0.02
+Drug exposure,2016-03-01T00:00:00Z,0.02
+Drug exposure,2016-04-01T00:00:00Z,0.02
+Drug exposure,2016-05-01T00:00:00Z,0.02
+Drug exposure,2016-06-01T00:00:00Z,0.02
+Drug exposure,2016-07-01T00:00:00Z,0.02
+Drug exposure,2016-08-01T00:00:00Z,0.02
+Drug exposure,2016-09-01T00:00:00Z,0.02
+Drug exposure,2016-10-01T00:00:00Z,0.02
+Drug exposure,2016-11-01T00:00:00Z,0.02
+Drug exposure,2016-12-01T00:00:00Z,0.02
+Drug exposure,2017-01-01T00:00:00Z,0.02
+Drug exposure,2017-02-01T00:00:00Z,0.02
+Drug exposure,2017-03-01T00:00:00Z,0.02
+Drug exposure,2017-04-01T00:00:00Z,0.02
+Drug exposure,2017-05-01T00:00:00Z,0.02
+Drug exposure,2017-06-01T00:00:00Z,0.02
+Drug exposure,2017-07-01T00:00:00Z,0.02
+Drug exposure,2017-08-01T00:00:00Z,0.02
+Drug exposure,2017-09-01T00:00:00Z,0.02
+Drug exposure,2017-10-01T00:00:00Z,0.02
+Drug exposure,2017-11-01T00:00:00Z,0.02
+Drug exposure,2017-12-01T00:00:00Z,0.02
+Drug exposure,2018-01-01T00:00:00Z,0.02
+Drug exposure,2018-02-01T00:00:00Z,0.02
+Drug exposure,2018-03-01T00:00:00Z,0.02
+Drug exposure,2018-04-01T00:00:00Z,0.02
+Drug exposure,2018-05-01T00:00:00Z,0.02
+Drug exposure,2018-06-01T00:00:00Z,0.02
+Drug exposure,2018-07-01T00:00:00Z,0.02
+Drug exposure,2018-08-01T00:00:00Z,0.02
+Drug exposure,2018-09-01T00:00:00Z,0.02
+Drug exposure,2018-10-01T00:00:00Z,0.02
+Drug exposure,2018-11-01T00:00:00Z,0.02
+Drug exposure,2018-12-01T00:00:00Z,0.02
+Drug exposure,2019-01-01T00:00:00Z,0.02
+Drug exposure,2019-02-01T00:00:00Z,0.02
+Drug exposure,2019-03-01T00:00:00Z,0.02
+Drug exposure,2019-04-01T00:00:00Z,0.02
+Drug exposure,2019-05-01T00:00:00Z,0.02
+Drug exposure,2019-06-01T00:00:00Z,0.02
+Drug exposure,2019-07-01T00:00:00Z,0.02
+Drug exposure,2019-08-01T00:00:00Z,0.02
+Drug exposure,2019-09-01T00:00:00Z,0.02
+Drug exposure,2019-10-01T00:00:00Z,0.02
+Drug exposure,2019-11-01T00:00:00Z,0.02
+Drug exposure,2019-12-01T00:00:00Z,0.02
+Measurement,2014-01-01T00:00:00Z,0
+Measurement,2014-02-01T00:00:00Z,0
+Measurement,2014-03-01T00:00:00Z,0.01
+Measurement,2014-04-01T00:00:00Z,0.01
+Measurement,2014-05-01T00:00:00Z,0.01
+Measurement,2014-06-01T00:00:00Z,0.01
+Measurement,2014-07-01T00:00:00Z,0.02
+Measurement,2014-08-01T00:00:00Z,0.02
+Measurement,2014-09-01T00:00:00Z,0.02
+Measurement,2014-10-01T00:00:00Z,0.02
+Measurement,2014-11-01T00:00:00Z,0.03
+Measurement,2014-12-01T00:00:00Z,0.03
+Measurement,2015-01-01T00:00:00Z,0.03
+Measurement,2015-02-01T00:00:00Z,0.03
+Measurement,2015-03-01T00:00:00Z,0.03
+Measurement,2015-04-01T00:00:00Z,0.03
+Measurement,2015-05-01T00:00:00Z,0.03
+Measurement,2015-06-01T00:00:00Z,0.03
+Measurement,2015-07-01T00:00:00Z,0.03
+Measurement,2015-08-01T00:00:00Z,0.03
+Measurement,2015-09-01T00:00:00Z,0.03
+Measurement,2015-10-01T00:00:00Z,0.03
+Measurement,2015-11-01T00:00:00Z,0.03
+Measurement,2015-12-01T00:00:00Z,0.03
+Measurement,2016-01-01T00:00:00Z,0.03
+Measurement,2016-02-01T00:00:00Z,0.03
+Measurement,2016-03-01T00:00:00Z,0.03
+Measurement,2016-04-01T00:00:00Z,0.03
+Measurement,2016-05-01T00:00:00Z,0.03
+Measurement,2016-06-01T00:00:00Z,0.03
+Measurement,2016-07-01T00:00:00Z,0.03
+Measurement,2016-08-01T00:00:00Z,0.03
+Measurement,2016-09-01T00:00:00Z,0.03
+Measurement,2016-10-01T00:00:00Z,0.03
+Measurement,2016-11-01T00:00:00Z,0.03
+Measurement,2016-12-01T00:00:00Z,0.03
+Measurement,2017-01-01T00:00:00Z,0.04
+Measurement,2017-02-01T00:00:00Z,0.03
+Measurement,2017-03-01T00:00:00Z,0.03
+Measurement,2017-04-01T00:00:00Z,0.03
+Measurement,2017-05-01T00:00:00Z,0.03
+Measurement,2017-06-01T00:00:00Z,0.03
+Measurement,2017-07-01T00:00:00Z,0.03
+Measurement,2017-08-01T00:00:00Z,0.03
+Measurement,2017-09-01T00:00:00Z,0.03
+Measurement,2017-10-01T00:00:00Z,0.03
+Measurement,2017-11-01T00:00:00Z,0.03
+Measurement,2017-12-01T00:00:00Z,0.03
+Measurement,2018-01-01T00:00:00Z,0.03
+Measurement,2018-02-01T00:00:00Z,0.03
+Measurement,2018-03-01T00:00:00Z,0.03
+Measurement,2018-04-01T00:00:00Z,0.03
+Measurement,2018-05-01T00:00:00Z,0.03
+Measurement,2018-06-01T00:00:00Z,0.03
+Measurement,2018-07-01T00:00:00Z,0.03
+Measurement,2018-08-01T00:00:00Z,0.03
+Measurement,2018-09-01T00:00:00Z,0.03
+Measurement,2018-10-01T00:00:00Z,0.03
+Measurement,2018-11-01T00:00:00Z,0.03
+Measurement,2018-12-01T00:00:00Z,0.03
+Measurement,2019-01-01T00:00:00Z,0.03
+Measurement,2019-02-01T00:00:00Z,0.03
+Measurement,2019-03-01T00:00:00Z,0.03
+Measurement,2019-04-01T00:00:00Z,0.03
+Measurement,2019-05-01T00:00:00Z,0.03
+Measurement,2019-06-01T00:00:00Z,0.03
+Measurement,2019-07-01T00:00:00Z,0.03
+Measurement,2019-08-01T00:00:00Z,0.03
+Measurement,2019-09-01T00:00:00Z,0.03
+Measurement,2019-10-01T00:00:00Z,0.03
+Measurement,2019-11-01T00:00:00Z,0.03
+Measurement,2019-12-01T00:00:00Z,0.03
+Observation,2016-07-01T00:00:00Z,12
+Observation period,2014-01-01T00:00:00Z,1
+Procedure occurrence,2014-01-01T00:00:00Z,0
+Procedure occurrence,2014-02-01T00:00:00Z,0.01
+Procedure occurrence,2014-03-01T00:00:00Z,0.01
+Procedure occurrence,2014-04-01T00:00:00Z,0.01
+Procedure occurrence,2014-05-01T00:00:00Z,0.01
+Procedure occurrence,2014-06-01T00:00:00Z,0.01
+Procedure occurrence,2014-07-01T00:00:00Z,0.01
+Procedure occurrence,2014-08-01T00:00:00Z,0.01
+Procedure occurrence,2014-09-01T00:00:00Z,0.01
+Procedure occurrence,2014-10-01T00:00:00Z,0.01
+Procedure occurrence,2014-11-01T00:00:00Z,0.01
+Procedure occurrence,2014-12-01T00:00:00Z,0.01
+Procedure occurrence,2015-01-01T00:00:00Z,0.01
+Procedure occurrence,2015-02-01T00:00:00Z,0.01
+Procedure occurrence,2015-03-01T00:00:00Z,0.01
+Procedure occurrence,2015-04-01T00:00:00Z,0.01
+Procedure occurrence,2015-05-01T00:00:00Z,0.01
+Procedure occurrence,2015-06-01T00:00:00Z,0.01
+Procedure occurrence,2015-07-01T00:00:00Z,0.01
+Procedure occurrence,2015-08-01T00:00:00Z,0.01
+Procedure occurrence,2015-09-01T00:00:00Z,0.01
+Procedure occurrence,2015-10-01T00:00:00Z,0.01
+Procedure occurrence,2015-11-01T00:00:00Z,0.01
+Procedure occurrence,2015-12-01T00:00:00Z,0.01
+Procedure occurrence,2016-01-01T00:00:00Z,0.01
+Procedure occurrence,2016-02-01T00:00:00Z,0.01
+Procedure occurrence,2016-03-01T00:00:00Z,0.01
+Procedure occurrence,2016-04-01T00:00:00Z,0.01
+Procedure occurrence,2016-05-01T00:00:00Z,0.01
+Procedure occurrence,2016-06-01T00:00:00Z,0.01
+Procedure occurrence,2016-07-01T00:00:00Z,0.01
+Procedure occurrence,2016-08-01T00:00:00Z,0.01
+Procedure occurrence,2016-09-01T00:00:00Z,0.01
+Procedure occurrence,2016-10-01T00:00:00Z,0.01
+Procedure occurrence,2016-11-01T00:00:00Z,0.01
+Procedure occurrence,2016-12-01T00:00:00Z,0.01
+Procedure occurrence,2017-01-01T00:00:00Z,0.01
+Procedure occurrence,2017-02-01T00:00:00Z,0.01
+Procedure occurrence,2017-03-01T00:00:00Z,0.01
+Procedure occurrence,2017-04-01T00:00:00Z,0.01
+Procedure occurrence,2017-05-01T00:00:00Z,0.01
+Procedure occurrence,2017-06-01T00:00:00Z,0.01
+Procedure occurrence,2017-07-01T00:00:00Z,0.01
+Procedure occurrence,2017-08-01T00:00:00Z,0.01
+Procedure occurrence,2017-09-01T00:00:00Z,0.01
+Procedure occurrence,2017-10-01T00:00:00Z,0.01
+Procedure occurrence,2017-11-01T00:00:00Z,0.01
+Procedure occurrence,2017-12-01T00:00:00Z,0.01
+Procedure occurrence,2018-01-01T00:00:00Z,0.01
+Procedure occurrence,2018-02-01T00:00:00Z,0.01
+Procedure occurrence,2018-03-01T00:00:00Z,0.01
+Procedure occurrence,2018-04-01T00:00:00Z,0.01
+Procedure occurrence,2018-05-01T00:00:00Z,0.01
+Procedure occurrence,2018-06-01T00:00:00Z,0.01
+Procedure occurrence,2018-07-01T00:00:00Z,0.01
+Procedure occurrence,2018-08-01T00:00:00Z,0.01
+Procedure occurrence,2018-09-01T00:00:00Z,0.01
+Procedure occurrence,2018-10-01T00:00:00Z,0.01
+Procedure occurrence,2018-11-01T00:00:00Z,0.01
+Procedure occurrence,2018-12-01T00:00:00Z,0.01
+Procedure occurrence,2019-01-01T00:00:00Z,0.01
+Procedure occurrence,2019-02-01T00:00:00Z,0.01
+Procedure occurrence,2019-03-01T00:00:00Z,0.01
+Procedure occurrence,2019-04-01T00:00:00Z,0.01
+Procedure occurrence,2019-05-01T00:00:00Z,0.01
+Procedure occurrence,2019-06-01T00:00:00Z,0.01
+Procedure occurrence,2019-07-01T00:00:00Z,0.01
+Procedure occurrence,2019-08-01T00:00:00Z,0.01
+Procedure occurrence,2019-09-01T00:00:00Z,0.01
+Procedure occurrence,2019-10-01T00:00:00Z,0.01
+Procedure occurrence,2019-11-01T00:00:00Z,0.01
+Procedure occurrence,2019-12-01T00:00:00Z,0.01

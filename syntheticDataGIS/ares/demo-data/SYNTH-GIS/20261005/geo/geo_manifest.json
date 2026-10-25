@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-25T10:29:55Z",
+  "levels": [
+    "county",
+    "state"
+  ],
+  "regionIdScheme": {
+    "county": "us_fips",
+    "state": "us_state_abbr"
+  },
+  "periodGranularity": "year",
+  "periodMin": 2014,
+  "periodMax": 2019,
+  "minCellCount": 3,
+  "nExposures": 2,
+  "hasResidency": true,
+  "boundaries": {
+    "county": null,
+    "state": null
+  },
+  "files": {
+    "region": "geo_region.parquet",
+    "exposureConcept": "geo_exposure_concept.parquet",
+    "exposureSummary": "geo_exposure_summary.parquet",
+    "residency": "geo_residency.parquet"
+  }
+}

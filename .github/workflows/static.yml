@@ -9,6 +9,13 @@ on:
       - completed
     branches: ["main"]
 
+  # Redeploy when the ARES demo inputs change
+  push:
+    branches: ["main"]
+    paths:
+      - 'syntheticDataGIS/ares/demo-data/**'
+      - '.github/workflows/static.yml'
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -24,11 +31,16 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
+env:
+  # ARES source used to build the demo published at <site>/ares-demo/
+  ARES_REPOSITORY: TuftsCTSI/Ares
+  ARES_REF: development
+
 jobs:
   # Single deploy job since we're just deploying
   deploy:
-    # Only run if the build workflow succeeded
-    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+    # Only run if the build workflow succeeded (or for manual / demo-input pushes)
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' || github.event_name == 'push' }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -36,12 +48,58 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      # ---- ARES demo: browsable Geographic Exposures report on the tutorial data ----
+      - name: Checkout ARES
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.ARES_REPOSITORY }}
+          ref: ${{ env.ARES_REF }}
+          path: ares
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build ARES demo
+        run: |
+          corepack enable
+          corepack prepare "$(node -p "require('./ares/package.json').packageManager")" --activate
+          cd ares
+
+          # ARES sample release (Synthea) with its multi-country geo sample
+          sample/geo/install_sample.sh
+
+          # OHDSI GIS tutorial dataset as a second source. Its data was produced by
+          # syntheticDataGIS/ares/run_pipeline.sh (Achilles, DQD, exportToAres, AresIndexer).
+          python3 sample/geo/merge_ares_source.py --data frontend/public/data --add ../syntheticDataGIS/ares/demo-data
+
+          # static demo: no annotations or characterization backend
+          cat > frontend/public/env/env.json <<'JSON'
+          {
+            "WEB_API_URL": "./",
+            "ARES_API_URL": "",
+            "USE_ANNOTATIONS_API": false,
+            "WEB_API_ENABLED": false,
+            "DUCKDB_ENABLED": false,
+            "CDM_NETWORK_NAME": "OHDSI GIS demo",
+            "CHARACTERIZATION": false
+          }
+          JSON
+
+          pnpm install --frozen-lockfile --ignore-scripts
+          pnpm --filter=./frontend exec vite build --base="/${{ github.event.repository.name }}/ares-demo/" --outDir ../dist
+          rm -rf ../docs/ares-demo
+          cp -r dist ../docs/ares-demo
+          touch ../docs/.nojekyll
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload docs folder (generated HTML)
+          # Upload docs folder (generated HTML plus the ARES demo)
           path: 'docs'
       - name: Deploy to GitHub Pages
         id: deployment

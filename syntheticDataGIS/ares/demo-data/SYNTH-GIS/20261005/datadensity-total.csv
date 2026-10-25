@@ -1,0 +1,291 @@
+domain,date,records
+Condition occurrence,2014-01-01T00:00:00Z,222
+Condition occurrence,2014-02-01T00:00:00Z,242
+Condition occurrence,2014-03-01T00:00:00Z,269
+Condition occurrence,2014-04-01T00:00:00Z,264
+Condition occurrence,2014-05-01T00:00:00Z,250
+Condition occurrence,2014-06-01T00:00:00Z,207
+Condition occurrence,2014-07-01T00:00:00Z,240
+Condition occurrence,2014-08-01T00:00:00Z,278
+Condition occurrence,2014-09-01T00:00:00Z,252
+Condition occurrence,2014-10-01T00:00:00Z,275
+Condition occurrence,2014-11-01T00:00:00Z,259
+Condition occurrence,2014-12-01T00:00:00Z,257
+Condition occurrence,2015-01-01T00:00:00Z,262
+Condition occurrence,2015-02-01T00:00:00Z,228
+Condition occurrence,2015-03-01T00:00:00Z,238
+Condition occurrence,2015-04-01T00:00:00Z,257
+Condition occurrence,2015-05-01T00:00:00Z,241
+Condition occurrence,2015-06-01T00:00:00Z,246
+Condition occurrence,2015-07-01T00:00:00Z,261
+Condition occurrence,2015-08-01T00:00:00Z,264
+Condition occurrence,2015-09-01T00:00:00Z,234
+Condition occurrence,2015-10-01T00:00:00Z,251
+Condition occurrence,2015-11-01T00:00:00Z,236
+Condition occurrence,2015-12-01T00:00:00Z,271
+Condition occurrence,2016-01-01T00:00:00Z,237
+Condition occurrence,2016-02-01T00:00:00Z,239
+Condition occurrence,2016-03-01T00:00:00Z,227
+Condition occurrence,2016-04-01T00:00:00Z,233
+Condition occurrence,2016-05-01T00:00:00Z,264
+Condition occurrence,2016-06-01T00:00:00Z,267
+Condition occurrence,2016-07-01T00:00:00Z,243
+Condition occurrence,2016-08-01T00:00:00Z,274
+Condition occurrence,2016-09-01T00:00:00Z,228
+Condition occurrence,2016-10-01T00:00:00Z,262
+Condition occurrence,2016-11-01T00:00:00Z,249
+Condition occurrence,2016-12-01T00:00:00Z,252
+Condition occurrence,2017-01-01T00:00:00Z,285
+Condition occurrence,2017-02-01T00:00:00Z,227
+Condition occurrence,2017-03-01T00:00:00Z,262
+Condition occurrence,2017-04-01T00:00:00Z,260
+Condition occurrence,2017-05-01T00:00:00Z,267
+Condition occurrence,2017-06-01T00:00:00Z,273
+Condition occurrence,2017-07-01T00:00:00Z,271
+Condition occurrence,2017-08-01T00:00:00Z,291
+Condition occurrence,2017-09-01T00:00:00Z,230
+Condition occurrence,2017-10-01T00:00:00Z,250
+Condition occurrence,2017-11-01T00:00:00Z,240
+Condition occurrence,2017-12-01T00:00:00Z,251
+Condition occurrence,2018-01-01T00:00:00Z,248
+Condition occurrence,2018-02-01T00:00:00Z,260
+Condition occurrence,2018-03-01T00:00:00Z,259
+Condition occurrence,2018-04-01T00:00:00Z,262
+Condition occurrence,2018-05-01T00:00:00Z,262
+Condition occurrence,2018-06-01T00:00:00Z,278
+Condition occurrence,2018-07-01T00:00:00Z,281
+Condition occurrence,2018-08-01T00:00:00Z,244
+Condition occurrence,2018-09-01T00:00:00Z,249
+Condition occurrence,2018-10-01T00:00:00Z,230
+Condition occurrence,2018-11-01T00:00:00Z,239
+Condition occurrence,2018-12-01T00:00:00Z,249
+Condition occurrence,2019-01-01T00:00:00Z,251
+Condition occurrence,2019-02-01T00:00:00Z,204
+Condition occurrence,2019-03-01T00:00:00Z,246
+Condition occurrence,2019-04-01T00:00:00Z,269
+Condition occurrence,2019-05-01T00:00:00Z,259
+Condition occurrence,2019-06-01T00:00:00Z,261
+Condition occurrence,2019-07-01T00:00:00Z,257
+Condition occurrence,2019-08-01T00:00:00Z,280
+Condition occurrence,2019-09-01T00:00:00Z,230
+Condition occurrence,2019-10-01T00:00:00Z,249
+Condition occurrence,2019-11-01T00:00:00Z,238
+Condition occurrence,2019-12-01T00:00:00Z,280
+Drug exposure,2014-01-01T00:00:00Z,93
+Drug exposure,2014-02-01T00:00:00Z,171
+Drug exposure,2014-03-01T00:00:00Z,203
+Drug exposure,2014-04-01T00:00:00Z,215
+Drug exposure,2014-05-01T00:00:00Z,186
+Drug exposure,2014-06-01T00:00:00Z,152
+Drug exposure,2014-07-01T00:00:00Z,205
+Drug exposure,2014-08-01T00:00:00Z,190
+Drug exposure,2014-09-01T00:00:00Z,196
+Drug exposure,2014-10-01T00:00:00Z,220
+Drug exposure,2014-11-01T00:00:00Z,190
+Drug exposure,2014-12-01T00:00:00Z,195
+Drug exposure,2015-01-01T00:00:00Z,183
+Drug exposure,2015-02-01T00:00:00Z,172
+Drug exposure,2015-03-01T00:00:00Z,170
+Drug exposure,2015-04-01T00:00:00Z,161
+Drug exposure,2015-05-01T00:00:00Z,208
+Drug exposure,2015-06-01T00:00:00Z,193
+Drug exposure,2015-07-01T00:00:00Z,182
+Drug exposure,2015-08-01T00:00:00Z,195
+Drug exposure,2015-09-01T00:00:00Z,184
+Drug exposure,2015-10-01T00:00:00Z,173
+Drug exposure,2015-11-01T00:00:00Z,180
+Drug exposure,2015-12-01T00:00:00Z,204
+Drug exposure,2016-01-01T00:00:00Z,205
+Drug exposure,2016-02-01T00:00:00Z,204
+Drug exposure,2016-03-01T00:00:00Z,194
+Drug exposure,2016-04-01T00:00:00Z,190
+Drug exposure,2016-05-01T00:00:00Z,203
+Drug exposure,2016-06-01T00:00:00Z,171
+Drug exposure,2016-07-01T00:00:00Z,182
+Drug exposure,2016-08-01T00:00:00Z,214
+Drug exposure,2016-09-01T00:00:00Z,175
+Drug exposure,2016-10-01T00:00:00Z,199
+Drug exposure,2016-11-01T00:00:00Z,176
+Drug exposure,2016-12-01T00:00:00Z,208
+Drug exposure,2017-01-01T00:00:00Z,224
+Drug exposure,2017-02-01T00:00:00Z,194
+Drug exposure,2017-03-01T00:00:00Z,194
+Drug exposure,2017-04-01T00:00:00Z,197
+Drug exposure,2017-05-01T00:00:00Z,216
+Drug exposure,2017-06-01T00:00:00Z,207
+Drug exposure,2017-07-01T00:00:00Z,191
+Drug exposure,2017-08-01T00:00:00Z,225
+Drug exposure,2017-09-01T00:00:00Z,191
+Drug exposure,2017-10-01T00:00:00Z,199
+Drug exposure,2017-11-01T00:00:00Z,182
+Drug exposure,2017-12-01T00:00:00Z,212
+Drug exposure,2018-01-01T00:00:00Z,201
+Drug exposure,2018-02-01T00:00:00Z,162
+Drug exposure,2018-03-01T00:00:00Z,194
+Drug exposure,2018-04-01T00:00:00Z,196
+Drug exposure,2018-05-01T00:00:00Z,206
+Drug exposure,2018-06-01T00:00:00Z,181
+Drug exposure,2018-07-01T00:00:00Z,197
+Drug exposure,2018-08-01T00:00:00Z,212
+Drug exposure,2018-09-01T00:00:00Z,189
+Drug exposure,2018-10-01T00:00:00Z,196
+Drug exposure,2018-11-01T00:00:00Z,167
+Drug exposure,2018-12-01T00:00:00Z,211
+Drug exposure,2019-01-01T00:00:00Z,179
+Drug exposure,2019-02-01T00:00:00Z,169
+Drug exposure,2019-03-01T00:00:00Z,164
+Drug exposure,2019-04-01T00:00:00Z,207
+Drug exposure,2019-05-01T00:00:00Z,214
+Drug exposure,2019-06-01T00:00:00Z,198
+Drug exposure,2019-07-01T00:00:00Z,190
+Drug exposure,2019-08-01T00:00:00Z,205
+Drug exposure,2019-09-01T00:00:00Z,189
+Drug exposure,2019-10-01T00:00:00Z,197
+Drug exposure,2019-11-01T00:00:00Z,209
+Drug exposure,2019-12-01T00:00:00Z,185
+Measurement,2014-01-01T00:00:00Z,31
+Measurement,2014-02-01T00:00:00Z,51
+Measurement,2014-03-01T00:00:00Z,80
+Measurement,2014-04-01T00:00:00Z,88
+Measurement,2014-05-01T00:00:00Z,126
+Measurement,2014-06-01T00:00:00Z,125
+Measurement,2014-07-01T00:00:00Z,169
+Measurement,2014-08-01T00:00:00Z,209
+Measurement,2014-09-01T00:00:00Z,215
+Measurement,2014-10-01T00:00:00Z,232
+Measurement,2014-11-01T00:00:00Z,258
+Measurement,2014-12-01T00:00:00Z,307
+Measurement,2015-01-01T00:00:00Z,334
+Measurement,2015-02-01T00:00:00Z,262
+Measurement,2015-03-01T00:00:00Z,323
+Measurement,2015-04-01T00:00:00Z,276
+Measurement,2015-05-01T00:00:00Z,327
+Measurement,2015-06-01T00:00:00Z,314
+Measurement,2015-07-01T00:00:00Z,327
+Measurement,2015-08-01T00:00:00Z,303
+Measurement,2015-09-01T00:00:00Z,289
+Measurement,2015-10-01T00:00:00Z,313
+Measurement,2015-11-01T00:00:00Z,321
+Measurement,2015-12-01T00:00:00Z,300
+Measurement,2016-01-01T00:00:00Z,299
+Measurement,2016-02-01T00:00:00Z,307
+Measurement,2016-03-01T00:00:00Z,287
+Measurement,2016-04-01T00:00:00Z,298
+Measurement,2016-05-01T00:00:00Z,314
+Measurement,2016-06-01T00:00:00Z,312
+Measurement,2016-07-01T00:00:00Z,293
+Measurement,2016-08-01T00:00:00Z,298
+Measurement,2016-09-01T00:00:00Z,295
+Measurement,2016-10-01T00:00:00Z,311
+Measurement,2016-11-01T00:00:00Z,280
+Measurement,2016-12-01T00:00:00Z,291
+Measurement,2017-01-01T00:00:00Z,360
+Measurement,2017-02-01T00:00:00Z,248
+Measurement,2017-03-01T00:00:00Z,302
+Measurement,2017-04-01T00:00:00Z,280
+Measurement,2017-05-01T00:00:00Z,305
+Measurement,2017-06-01T00:00:00Z,331
+Measurement,2017-07-01T00:00:00Z,321
+Measurement,2017-08-01T00:00:00Z,306
+Measurement,2017-09-01T00:00:00Z,333
+Measurement,2017-10-01T00:00:00Z,296
+Measurement,2017-11-01T00:00:00Z,328
+Measurement,2017-12-01T00:00:00Z,318
+Measurement,2018-01-01T00:00:00Z,291
+Measurement,2018-02-01T00:00:00Z,277
+Measurement,2018-03-01T00:00:00Z,311
+Measurement,2018-04-01T00:00:00Z,306
+Measurement,2018-05-01T00:00:00Z,318
+Measurement,2018-06-01T00:00:00Z,308
+Measurement,2018-07-01T00:00:00Z,319
+Measurement,2018-08-01T00:00:00Z,307
+Measurement,2018-09-01T00:00:00Z,294
+Measurement,2018-10-01T00:00:00Z,313
+Measurement,2018-11-01T00:00:00Z,314
+Measurement,2018-12-01T00:00:00Z,339
+Measurement,2019-01-01T00:00:00Z,300
+Measurement,2019-02-01T00:00:00Z,283
+Measurement,2019-03-01T00:00:00Z,316
+Measurement,2019-04-01T00:00:00Z,297
+Measurement,2019-05-01T00:00:00Z,315
+Measurement,2019-06-01T00:00:00Z,340
+Measurement,2019-07-01T00:00:00Z,282
+Measurement,2019-08-01T00:00:00Z,283
+Measurement,2019-09-01T00:00:00Z,302
+Measurement,2019-10-01T00:00:00Z,288
+Measurement,2019-11-01T00:00:00Z,299
+Measurement,2019-12-01T00:00:00Z,297
+Observation,2016-07-01T00:00:00Z,119999
+Person,2014-01-01T00:00:00Z,10000
+Procedure occurrence,2014-01-01T00:00:00Z,37
+Procedure occurrence,2014-02-01T00:00:00Z,57
+Procedure occurrence,2014-03-01T00:00:00Z,84
+Procedure occurrence,2014-04-01T00:00:00Z,92
+Procedure occurrence,2014-05-01T00:00:00Z,62
+Procedure occurrence,2014-06-01T00:00:00Z,64
+Procedure occurrence,2014-07-01T00:00:00Z,63
+Procedure occurrence,2014-08-01T00:00:00Z,81
+Procedure occurrence,2014-09-01T00:00:00Z,55
+Procedure occurrence,2014-10-01T00:00:00Z,78
+Procedure occurrence,2014-11-01T00:00:00Z,72
+Procedure occurrence,2014-12-01T00:00:00Z,79
+Procedure occurrence,2015-01-01T00:00:00Z,74
+Procedure occurrence,2015-02-01T00:00:00Z,86
+Procedure occurrence,2015-03-01T00:00:00Z,85
+Procedure occurrence,2015-04-01T00:00:00Z,86
+Procedure occurrence,2015-05-01T00:00:00Z,104
+Procedure occurrence,2015-06-01T00:00:00Z,92
+Procedure occurrence,2015-07-01T00:00:00Z,70
+Procedure occurrence,2015-08-01T00:00:00Z,89
+Procedure occurrence,2015-09-01T00:00:00Z,84
+Procedure occurrence,2015-10-01T00:00:00Z,106
+Procedure occurrence,2015-11-01T00:00:00Z,84
+Procedure occurrence,2015-12-01T00:00:00Z,87
+Procedure occurrence,2016-01-01T00:00:00Z,84
+Procedure occurrence,2016-02-01T00:00:00Z,76
+Procedure occurrence,2016-03-01T00:00:00Z,84
+Procedure occurrence,2016-04-01T00:00:00Z,69
+Procedure occurrence,2016-05-01T00:00:00Z,79
+Procedure occurrence,2016-06-01T00:00:00Z,81
+Procedure occurrence,2016-07-01T00:00:00Z,72
+Procedure occurrence,2016-08-01T00:00:00Z,76
+Procedure occurrence,2016-09-01T00:00:00Z,95
+Procedure occurrence,2016-10-01T00:00:00Z,89
+Procedure occurrence,2016-11-01T00:00:00Z,91
+Procedure occurrence,2016-12-01T00:00:00Z,86
+Procedure occurrence,2017-01-01T00:00:00Z,89
+Procedure occurrence,2017-02-01T00:00:00Z,75
+Procedure occurrence,2017-03-01T00:00:00Z,94
+Procedure occurrence,2017-04-01T00:00:00Z,88
+Procedure occurrence,2017-05-01T00:00:00Z,89
+Procedure occurrence,2017-06-01T00:00:00Z,85
+Procedure occurrence,2017-07-01T00:00:00Z,87
+Procedure occurrence,2017-08-01T00:00:00Z,99
+Procedure occurrence,2017-09-01T00:00:00Z,79
+Procedure occurrence,2017-10-01T00:00:00Z,88
+Procedure occurrence,2017-11-01T00:00:00Z,84
+Procedure occurrence,2017-12-01T00:00:00Z,97
+Procedure occurrence,2018-01-01T00:00:00Z,99
+Procedure occurrence,2018-02-01T00:00:00Z,77
+Procedure occurrence,2018-03-01T00:00:00Z,87
+Procedure occurrence,2018-04-01T00:00:00Z,80
+Procedure occurrence,2018-05-01T00:00:00Z,98
+Procedure occurrence,2018-06-01T00:00:00Z,70
+Procedure occurrence,2018-07-01T00:00:00Z,92
+Procedure occurrence,2018-08-01T00:00:00Z,72
+Procedure occurrence,2018-09-01T00:00:00Z,95
+Procedure occurrence,2018-10-01T00:00:00Z,102
+Procedure occurrence,2018-11-01T00:00:00Z,72
+Procedure occurrence,2018-12-01T00:00:00Z,107
+Procedure occurrence,2019-01-01T00:00:00Z,68
+Procedure occurrence,2019-02-01T00:00:00Z,78
+Procedure occurrence,2019-03-01T00:00:00Z,74
+Procedure occurrence,2019-04-01T00:00:00Z,88
+Procedure occurrence,2019-05-01T00:00:00Z,84
+Procedure occurrence,2019-06-01T00:00:00Z,79
+Procedure occurrence,2019-07-01T00:00:00Z,83
+Procedure occurrence,2019-08-01T00:00:00Z,97
+Procedure occurrence,2019-09-01T00:00:00Z,108
+Procedure occurrence,2019-10-01T00:00:00Z,72
+Procedure occurrence,2019-11-01T00:00:00Z,73
+Procedure occurrence,2019-12-01T00:00:00Z,101
