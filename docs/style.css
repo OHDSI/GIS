@@ -47,3 +47,10 @@
 .status-proposed { background: #f0eaf7; border-color: #ddd0ee; }
 .status-to-do { background: #e8f1fa; border-color: #cddff0; }
 .status-blocked { background: #f2dede; border-color: #e4b9b9; }
+
+/* Updates feed */
+.update-entry { border-left: 3px solid #ddd; padding: 0.1em 0 0.1em 1em; margin: 0 0 1.2em; }
+.update-date { color: #666; font-size: 0.85em; }
+.update-title { font-weight: bold; }
+.update-body { margin: 0.3em 0; }
+.update-links { margin: 0; padding-left: 1.2em; }

@@ -1,0 +1,46 @@
+{
+ "_readme": "Add one object per update. 'date' (YYYY-MM-DD) is required; the site sorts newest first and the home page shows the three most recent. 'body' is plain text. 'links' is a list of {label, url}; urls are absolute https:// or relative site paths.",
+ "updates": [
+  {
+   "date": "2026-10-26",
+   "title": "ARES updated for geospatial data",
+   "body": "The published ARES demo now includes geospatial data from the Gaia toolchain.",
+   "links": [
+    {
+     "label": "Geospatial Exposures in ARES",
+     "url": "https://ohdsi.github.io/GIS/ares-demo/#/cdm/SYNTH-GIS/20261005/geographic_exposures"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-22",
+   "title": "Working group meeting at the Symposium was a success",
+   "body": "The OHDSI GIS Workgroup activity at the 2026 Global Symposium took place on 22 October.",
+   "links": [
+    {
+     "label": "Recording and recap",
+     "url": "https://teams.microsoft.com/l/meetingrecap?driveId=b%21ccIgoWuTDEK6DDYeUyjRGlhjBI70qzhDlv7gj_yj5VQZ7sE5GTpaQaSqMC_jGVIh&driveItemId=01RGIKH53YYPARKUPDANHZFAKZIK674R4R&sitePath=https%3A%2F%2Fohdsiorg-my.sharepoint.com%2F%3Av%3A%2Fg%2Fpersonal%2Falvarez_ohdsi_org%2FIQB4w8EVUeMDT5KBWUK9_keRAVXjDn2BnC8x9MFIYSrLIM0&fileUrl=https%3A%2F%2Fohdsiorg-my.sharepoint.com%2Fpersonal%2Falvarez_ohdsi_org%2FDocuments%2FRecordings%2FOHDSI+GIS+Workgroup+Activity+at+2026+Global+Symposium-20261022_075822-Meeting+Recording.mp4%3Fweb%3D1&iCalUid=040000008200E00074C5B7101A82E00800000000F9EF465FE94CDD01000000000000000010000000E73237FC1B809E4889AFDA0220B2F873&threadId=19%3Ameeting_YTFiNWQ4ZDktNjIxZi00MTRkLWI5NjItMTg0Yjk4OWJmYTI0%40thread.v2&organizerId=457ee911-94c1-4da2-8287-8d8a5a749931&tenantId=a30f0094-9120-4aab-ba4c-e5509023b2d5&callId=7ff1bbf0-a093-45c4-a444-b64c7004738c&threadType=meeting&meetingType=Scheduled&subType=RecapSharingLink_RecapCore&recapType=RecordingAndTranscript"
+    }
+   ]
+  },
+  {
+   "date": "2026-10-20",
+   "title": "GIS tutorial at the 2026 OHDSI Symposium was a success",
+   "body": "The hands-on tutorial, Integrating Geospatial Data into OMOP CDM with the OHDSI GIS and Gaia Toolchain, took place on 20 October. If you attended and have not yet completed the feedback survey, please do. If you could not attend, you can still follow along with the tutorial resources.",
+   "links": [
+    {
+     "label": "Recording and recap",
+     "url": "https://teams.microsoft.com/l/meetingrecap?driveId=b%21ccIgoWuTDEK6DDYeUyjRGlhjBI70qzhDlv7gj_yj5VQZ7sE5GTpaQaSqMC_jGVIh&driveItemId=01RGIKH5ZGQOHI2WKZOFHIAF6UKYOXHC3N&sitePath=https%3A%2F%2Fohdsiorg-my.sharepoint.com%2F%3Av%3A%2Fg%2Fpersonal%2Falvarez_ohdsi_org%2FIQAmg46NWVlxToAX1FYdc4ttAcYfEhfASiaoPqxOLu3QO-I&fileUrl=https%3A%2F%2Fohdsiorg-my.sharepoint.com%2Fpersonal%2Falvarez_ohdsi_org%2FDocuments%2FRecordings%2FIntegrating+Geospatial+Data+into+OMOP+CDM+A+Hands-On+Tutorial+with+the+OHDSI+GIS+and+GAIA+Toolchain-20261020_130826-Meeting+Recording.mp4%3Fweb%3D1&iCalUid=040000008200E00074C5B7101A82E0080000000019B9B8E05351DD0100000000000000001000000075F42C848841084D981C4C5EAF70134F&threadId=19%3Ameeting_MTk1ZmU2ZjgtYzI4Yi00ZjcxLWFkMzMtOTNiOGJlODEwNGEw%40thread.v2&organizerId=457ee911-94c1-4da2-8287-8d8a5a749931&tenantId=a30f0094-9120-4aab-ba4c-e5509023b2d5&callId=94b4b8c0-23f1-4dae-b073-adcc041f864b&threadType=meeting&meetingType=Scheduled&subType=RecapSharingLink_RecapCore&recapType=RecordingAndTranscript"
+    },
+    {
+     "label": "Feedback survey",
+     "url": "https://docs.google.com/forms/d/e/1FAIpQLSeuB10J_KDaun_HA6JPO3r__4khTLvoNoRlEoscSqxZeo_Pfg/viewform?usp=sharing"
+    },
+    {
+     "label": "Tutorial resources",
+     "url": "tutorial.html"
+    }
+   ]
+  }
+ ]
+}
