@@ -18,6 +18,8 @@ navbar:
       menu:
         - text: "Home"
           href: index.html
+        - text: "Updates"
+          href: updates.html
         - text: "Get Started"
           href: get-started.html
         - text: "Use Case & Dataset Status"

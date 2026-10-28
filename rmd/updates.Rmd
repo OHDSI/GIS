@@ -1,0 +1,14 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG </div>'
+output:
+   html_document:
+        toc: FALSE
+---
+
+# **Updates**
+
+News from the OHDSI GIS Working Group, newest first.
+
+<div data-updates="0"></div>
+
+<script src="assets/updates.js"></script>

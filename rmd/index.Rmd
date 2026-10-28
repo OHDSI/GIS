@@ -18,6 +18,16 @@ Improve the health of populations by generating reliable evidence from integrate
 
 <br>
 
+## **Updates**
+
+<div data-updates="3"></div>
+
+[All updates](updates.html)
+
+<script src="assets/updates.js"></script>
+
+<br>
+
 ## **Collaboration Approach**
 
 Like most of OHDSI, we use Github and MS Teams for collaboration, version control, etc. There are no perfect options for supporting collaboration. We'll help you accomodate to ours as best we can. In particular, we use Github for managing tasks like defining and monitoring progress on OHDSI studies, infrastructure roadmaps, technical issues, etc.
