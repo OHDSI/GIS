@@ -10,7 +10,7 @@
 - **Iteration numbers** (#n) point to the table in `iterations/README.md`, which lists each run's approach, results and lessons.
 - **Size:** S is under 1 hour, M is 1-3 hours, L is a day or more, as a scripted run on Sonnet.
 
-**State as of 2026-10-29 (late):** 690 rows; 345 verified (Gold 84, Silver 261), 15 file-verified. Categories retagged (14, anchor-aligned); thin categories backfilled (1.8); policy sources spiked (2.1). 9 of the 13 working-group dataset requests have a file-verified source. 1,087 `likely_relevant` DataCite candidates (precision about 0.59) are in `landscape/candidates-2026-10-29.csv`.
+**State as of 2026-10-30 (late):** 691 rows (667 without the pilot); 494 verified (Gold 105, Silver 389) after the validation sweep (#17) and the browser pass (#18; `browser-pass/browser-pass-report-2026-10-30.md`); 20 Browser needed left; 15 file-verified. Master: `inventory-combined-2026-10-30-bp.csv`. Caution: 111 Silver rows have two or fewer of licence/unit/years/access settled (see 4.10). Categories retagged (14, anchor-aligned); thin categories backfilled (1.8); policy sources spiked (2.1). 9 of the 13 working-group dataset requests have a file-verified source. 1,087 `likely_relevant` DataCite candidates (precision about 0.59) are in `landscape/candidates-2026-10-29.csv`.
 
 ## How to run anything here (lessons from #1-#14)
 
@@ -39,11 +39,14 @@
 
 | # | Item | Why | Inputs and references | Size |
 |---|---|---|---|---|
-| 2.1 | **Browser pass over the queue, grouped by domain** (care sites done 2026-10-29: 25 rows; 130 left) | 150 rows on 79 domains are script-blocked; about 4 in 5 open in a real browser (#7) | `browser-queue-2026-10-28.csv`; one visit per domain settles many rows | M |
-| 2.2 | **Find water-system service-area boundaries** | One geometry unlocks every EPA drinking-water row (UCMR 3, UCMR 5, UCMR, SDWIS) | `landscape/geometry-unlocks-*.csv` (#12, phase A); EPA's service-area dataset is unverified | S |
-| 2.3 | **The ZIP-to-ZCTA crosswalk** | Gates 20 ZIP-keyed rows (CMS, HRSA, HUD) | `us_hud_usps_zip_crosswalk` is Browser needed | S |
+| 2.1 | ~~**Browser pass over the queue, grouped by domain**~~ (done 2026-10-30, #18: 145 of 167 opened; 20 left, all security checks, 403s or unreachable hosts; retry the unreachable ones from another network) | 150 rows on 79 domains are script-blocked; about 4 in 5 open in a real browser (#7) | `browser-queue-2026-10-28.csv`; one visit per domain settles many rows | M |
+| 2.2 | ~~Find water-system service-area boundaries~~ **Found 2026-10-30 (#17):** EPA Public Water System Service Areas v3 (March 2026), PWSID key; row `us_epa_pws_service_areas` is in the inventory. Next: open the download and check polygon counts | Unlocks UCMR 3, UCMR 5, UCMR, SDWIS | `validation/v5-answers.md` | S |
+| 2.3 | **ZIP-to-ZCTA crosswalk: partly answered (#17).** No official source: Census publishes ZCTA relationship files only; UDS Mapper was sunset in early 2024; HUD-USPS maps ZIP to tract/county/CBSA (not ZCTA) and its API needs a key. Decide the route (HUD ZIP-to-tract + ZCTA-to-tract, or archived UDS) | Gates 20 ZIP-keyed rows (CMS, HRSA, HUD) | `validation/v5-answers.md`; `us_hud_usps_zip_crosswalk` is Browser needed | S |
 | 2.4 | **Round 2 gap sweeps 2-5**, one at a time, 15 each | Transport, hazard time series, non-US food access, non-US sub-national health | `round2/SWEEP-BRIEF.md`; partial files for sweeps 2 and 3 already exist (#8) | M |
 | 2.5 | **DataCite for the remaining anchors**, worldwide | Priority 1 and Australia are done (#11) | The query pattern in `iterations/datacite-quiver-2026-10-29.md`; use the precision found in phase B | S |
+| 2.13 | ~~**Browser pass for the rows the validation sweep could not read**~~ (done in #18) (22 of the 46 never-read Bronze rows: Miami-Dade Hub pages, ICPSR/NaNDA, HDX, IAEA; plus 10 V1 rows) | Scripts get JS shells or challenge pages (#17) | `validation/v2-results.csv`, `validation/v1-results.csv` | M |
+| 2.14 | **Resolve the 28 Failed rows left `unresolved`** (searches were capped; 9 are confirmed stale, 7 have a live successor to check against the row) | `validation/v4-results.csv` (#17) | M |
+| 2.15 | **Successor URLs for pages that moved** (#18): EFAS about page, OECD regional statistics, Otago NZDep (all 'not found'); AHRQ SDOH URL now opens the CLH Database (rename the row?); `us_hifld_hospitals` points at 'HIFLD OPEN Trauma Levels'; data.un.org is now UN Data Commons; BFS English pages gone | Keeps Failed and Silver rows honest | `browser-pass/browser-pass-report-2026-10-30.md` | S |
 | 2.6 | **Australian government portals** | The best Australian DataCite hits were copies of portal data | data.gov.au (CKAN) and the state portals; anchors in `landscape/anchors.csv` | M |
 | 2.7 | **Scale the landscape spikes** | Only if the phase D and E verdicts say so | `landscape/landscape-report-*.md` (#12) | M-L |
 | 2.8 | **Act on the metadata-enrichment result** | If metadata matches the page reads, cheaper verification at scale | Phase F of #12 | S-M |
@@ -70,6 +73,9 @@
 |---|---|---|
 | 4.1 | Define the vague requests: gaiaCatalog#26 (suicide risk: which datasets?), #34 (SDG: which indicators and countries?), #28 (which MDI?) | Requesters / WG |
 | 4.2 | Confirm the anchor priorities. Many WG requests are 1-3 years old; which still matter? | WG meeting |
+| 4.8 | Do site-wide terms pages count as a dataset licence? The sweep set 6 rows to pass on that basis (ABS, ONS, Welsh Government, Statistics Canada, World Bank; `license_basis = site_terms`) | Robert, WG |
+| 4.9 | Should warn-only Silver rows (registration, non-commercial, unit differs from the listed one) count toward Gold? The sweep left them as warn | Robert, WG |
+| 4.10 | Tighten Silver? Today it needs only a live link, any one page read and no fail among licence, unit, years and recency, so 111 of 389 Silver rows have two or fewer of licence/unit/years/access settled (#18). Option: Silver needs licence plus at least one more core check settled | Robert, WG |
 | 4.3 | A policy on person-level public records (the offender-registry entry was removed) | WG |
 | 4.4 | Whether to name the sensitive entries in shared docs (thread open in the retrospective) | Robert |
 | 4.5 | Whether non-commercial sources are acceptable (IHME, Global Data Lab, EM-DAT) | WG |

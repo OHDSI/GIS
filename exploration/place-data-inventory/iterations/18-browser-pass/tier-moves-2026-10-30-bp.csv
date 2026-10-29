@@ -1,0 +1,168 @@
+id,name,category,queue,tier_before,tier_after,reason
+us_um_gdsc_mdc_derived_layers,"Miami-Dade derived raster layers (surface temperature, average LST 2013-2022, NDVI, distance to water, distance to parks)",Heat and temperature,V1,Silver,Gold,browser pass read
+us_usgs_3dep,3D Elevation Program (3DEP) elevation products,Reference geography,V1,Silver,Silver,browser pass read
+global_sedac_pm25_countries_urban_1998_2016,"Annual PM2.5 Concentrations for Countries and Urban Areas, v1 (1998 - 2016)",Air pollution,V1,Silver,Gold,browser pass read
+us_ahrq_sdoh_database,AHRQ Community-Level Health (CLH) Database (formerly the SDOH Database),Census and socioeconomic,V1,Silver,Silver,browser pass read
+us_hifld_hospitals,HIFLD Open: Hospitals,Care sites and health services,V1,Silver,Bronze,browser pass read
+us_cms_hospital_general_information,Hospital General Information (Care Compare / Provider Data Catalog),Care sites and health services,V1,Silver,Gold,browser pass read
+us_cms_nursing_home_provider_info,Nursing Home Provider Information (Care Compare),Care sites and health services,V1,Silver,Gold,browser pass read
+us_usgs_lcmap,"LCMAP (Land Change Monitoring, Assessment, and Projection) - legacy",Built environment,V1,Silver,Silver,browser pass read
+us_mdc_bus_stops,Miami-Dade Bus Stops,Built environment,V2,Bronze,Silver,browser pass read
+us_mdc_county_library,Miami-Dade County Libraries,Built environment,V2,Bronze,Silver,browser pass read
+us_mdc_fire_stations,Miami-Dade Fire Stations,"Floods, drought, wildfire and hazards",V2,Bronze,Silver,browser pass read
+us_mdc_metrorail_stations,Miami-Dade Metrorail Stations,Built environment,V2,Bronze,Silver,browser pass read
+us_mdc_parcels,"Miami-Dade Parcels, Property Boundary and Property Point views",Reference geography,V2,Bronze,Silver,browser pass read
+us_mdc_police_stations,Miami-Dade Police Stations,Built environment,V2,Bronze,Silver,browser pass read
+gaia_mdc_streets,Miami-Dade Streets,Built environment,V2,Bronze,Silver,browser pass read
+pe_minam_red_vial,"Red Vial Nacional, Departamental y Vecinal (MINAM geoservidor; IGN source)",Built environment,V2,Bronze,Bronze,not read (blocked)
+us_mdc_fema_flood_zone,Miami-Dade Flood Hazard (FEMA flood zone),"Floods, drought, wildfire and hazards",V2,Bronze,Silver,browser pass read
+us_noaa_storm_events,Storm Events Database,"Floods, drought, wildfire and hazards",V1,Silver,Silver,browser pass read
+global_un_undata,UNdata,Census and socioeconomic,V2,Bronze,Silver,browser pass read
+us_mdc_2024_dormir_study,Miami-Dade 2025 DORMIR Study,Health outcomes and surveys,V2,Bronze,Bronze,not read (no)
+global_ihme_ghdx,Global Health Data Exchange (GHDx),Health outcomes and surveys,V2,Bronze,Silver,browser pass read
+it_istat_basi_territoriali,Basi territoriali e variabili censuarie (sezioni di censimento),Reference geography,BN,Browser needed,Silver,browser pass read
+pe_idep_centros_poblados,"Centros Poblados (capital distrital, capital provincial, centros poblados, dispersos) (IDEP/IGN/INEI)",Reference geography,BN,Browser needed,Silver,browser pass read
+us_com_comission_districts,City of Miami Comission Districts,Reference geography,BN,Browser needed,Silver,browser pass read
+us_hud_usps_zip_crosswalk,HUD-USPS ZIP Code Crosswalk Files,Reference geography,BN,Browser needed,Silver,browser pass read
+pe_minam_limites_administrativos,"Limites Departamental, Provincial y Distrital (MINAM geoservidor)",Reference geography,BN,Browser needed,Browser needed,not read (blocked)
+br_ibge_malhas_territoriais,"Malhas territoriais (malha de setores censitarios, municipios, UF)",Reference geography,BN,Browser needed,Silver,browser pass read
+mx_inegi_marco_geoestadistico,Marco Geoestadistico,Reference geography,BN,Browser needed,Silver,browser pass read
+co_dane_mgn,Marco Geoestadistico Nacional (MGN) 2018,Reference geography,BN,Browser needed,Browser needed,not read (no)
+us_mdc_comission_districts,Miami-Dade County Comission Districts,Reference geography,BN,Browser needed,Silver,browser pass read
+us_mdc_unincorporated_zone_desc,Miami-Dade County Unincorporated Zone District Specifications,Reference geography,BN,Browser needed,Silver,browser pass read
+us_hud_qct_dda,Qualified Census Tracts (QCT) and Difficult Development Areas (DDA),Census and socioeconomic,BN,Browser needed,Gold,browser pass read
+be_statbel_statistical_sectors,Statistical sectors (secteurs statistiques / statistische sectoren),Reference geography,BN,Browser needed,Gold,browser pass read
+us_fcc_broadband_data_collection,FCC Broadband Data Collection / National Broadband Map,Built environment,BN,Browser needed,Gold,browser pass read
+us_mdc_municipal_park_boundaries,Miami-Dade County Municipal Park Boundaries,Built environment,BN,Browser needed,Silver,browser pass read
+us_mdc_county_park_boundaries,Miami-Dade County Park Boundaries,Built environment,BN,Browser needed,Silver,browser pass read
+us_tpl_parkserve,ParkServe (Complete U.S. ParkServe Dataset) and ParkScore,Built environment,BN,Browser needed,Silver,browser pass read
+global_worldbank_aicd_spatial,Africa Infrastructure Country Diagnostic (AICD) spatial database,Built environment,BN,Browser needed,Silver,browser pass read
+pe_catastrominero_ingemmet,Catastro Minero Huayhuash (INGEMMET),Built environment,BN,Browser needed,Browser needed,not read (no)
+pe_midagri_catastro_rural,Catastro Rural and Comunidades Campesinas (MIDAGRI),Built environment,BN,Browser needed,Silver,browser pass read
+us_umich_nanda_recreation,NaNDA: Recreation and Arts Establishments by Census Tract and ZCTA,Census and socioeconomic,BN,Browser needed,Silver,browser pass read
+us_umich_nanda_traffic,NaNDA: Traffic Volume by Census Tract and ZCTA,Built environment,BN,Browser needed,Silver,browser pass read
+us_fta_national_transit_database,National Transit Database (NTD),Built environment,BN,Browser needed,Silver,browser pass read
+us_bts_ntad,National Transportation Atlas Database (NTAD),Built environment,BN,Browser needed,Silver,browser pass read
+us_naturequant_naturescore,NatureScore,Built environment,BN,Browser needed,Bronze,browser pass read
+id_bps_podes_2024,Potensi Desa (Podes) 2024 - village potential statistics,Census and socioeconomic,BN,Browser needed,Browser needed,not read (blocked)
+us_eia_energy_atlas,U.S. Energy Atlas (EIA energy infrastructure map layers),Built environment,BN,Browser needed,Silver,browser pass read
+eu_copernicus_urban_atlas,Urban Atlas (Functional Urban Areas land use/land cover),Built environment,BN,Browser needed,Silver,browser pass read
+us_firststreet_risk_factors,"First Street climate risk models (Flood Factor, Fire Factor, Heat Factor, Wind Factor, Air Factor)","Floods, drought, wildfire and hazards",BN,Browser needed,Bronze,browser pass read
+us_noaa_nihhis_heat_gov,NIHHIS heat.gov,Heat and temperature,BN,Browser needed,Silver,browser pass read
+hdx_venezuela_earthquake_hazardous_facilities,Venezuela - Earthquake Hazardous Facilities,"Floods, drought, wildfire and hazards",BN,Browser needed,Gold,browser pass read
+eu_copernicus_efas,European Flood Awareness System (EFAS) river discharge forecasts and historical simulations,"Floods, drought, wildfire and hazards",BN,Browser needed,Failed,browser pass read
+global_copernicus_glofas,Global Flood Awareness System (GloFAS) river discharge forecasts and historical reanalysis,"Floods, drought, wildfire and hazards",BN,Browser needed,Bronze,browser pass read
+global_cloudtostreet_global_flood_database,"Global Flood Database (Cloud to Street / Tellman et al. 2021): satellite-observed flood extents for 913 events, 2000-2018","Floods, drought, wildfire and hazards",BN,Browser needed,Silver,browser pass read
+global_dwd_gpcc,"GPCC Global Precipitation Climatology Centre gridded precipitation (Full Data Monthly/Daily, Monitoring, First Guess, Climatology, Drought Index)","Floods, drought, wildfire and hazards",BN,Browser needed,Silver,browser pass read
+global_jrc_global_flood_hazard_maps,JRC Global River Flood Hazard Maps (return periods 10-500 yr),"Floods, drought, wildfire and hazards",BN,Browser needed,Silver,browser pass read
+us_prism_climate,PRISM Climate Data,"Floods, drought, wildfire and hazards",BN,Browser needed,Browser needed,not read (no)
+global_smithsonian_global_volcanism,Smithsonian Global Volcanism Program Volcanoes of the World database (v5.x): Holocene volcanoes and eruptions,"Floods, drought, wildfire and hazards",BN,Browser needed,Silver,browser pass read
+us_nifc_wfigs_fire_perimeters,WFIGS Interagency Fire Perimeters (current and full history),"Floods, drought, wildfire and hazards",BN,Browser needed,Silver,browser pass read
+global_un_wpp,World Population Prospects (WPP),Census and socioeconomic,BN,Browser needed,Silver,browser pass read
+global_worldpop_population_100m,"WorldPop Population Counts, individual countries 2015-2030, 100 m (R2025A v1, constrained and unconstrained)",Census and socioeconomic,BN,Browser needed,Silver,browser pass read
+ke_knbs_census_2019,2019 Kenya Population and Housing Census (KPHC) results,Census and socioeconomic,BN,Browser needed,Silver,browser pass read
+ph_psa_cph_2020,2020 Census of Population and Housing (2020 CPH) - population counts,Census and socioeconomic,BN,Browser needed,Browser needed,not read (blocked)
+tz_nbs_census_2022,2022 Population and Housing Census (Tanzania) results and profiles,Census and socioeconomic,BN,Browser needed,Silver,browser pass read
+nz_statsnz_census_2023,2023 Census,Census and socioeconomic,BN,Browser needed,Silver,browser pass read
+tr_tuik_adnks,Address Based Population Registration System (ADNKS) results,Census and socioeconomic,BN,Browser needed,Silver,browser pass read
+mx_inegi_censo_2020_ageb_manzana,Censo de Poblacion y Vivienda 2020 - Principales resultados por AGEB y manzana urbana,Census and socioeconomic,BN,Browser needed,Silver,browser pass read
+br_ibge_censo_2022_setores,Censo Demografico 2022 - Agregados por setores censitarios,Census and socioeconomic,BN,Browser needed,Silver,browser pass read
+za_statssa_census_2022,Census 2022 (South Africa),Census and socioeconomic,BN,Browser needed,Silver,browser pass read
+in_orgi_census_2011_pca,Census of India 2011 - Primary Census Abstract (village/town-wise),Census and socioeconomic,BN,Browser needed,Silver,browser pass read
+ca_statcan_census_profile_2021,"Census Profile, 2021 Census of Population",Census and socioeconomic,BN,Browser needed,Browser needed,not read (blocked)
+global_unhabitat_global_urban_indicators,Global Urban Indicators Database (Urban Indicators / data.unhabitat.org),Built environment,BN,Browser needed,Browser needed,not read (blocked)
+global_meta_hrsl_population,"High Resolution Population Density Maps and Demographic Estimates (HRSL), Meta Data for Good with CIESIN",Census and socioeconomic,BN,Browser needed,Gold,browser pass read
+ug_ubos_nphc_2024,National Population and Housing Census 2024 (NPHC 2024),Census and socioeconomic,BN,Browser needed,Silver,browser pass read
+bd_bbs_census_2022,Population and Housing Census 2022 (Bangladesh),Census and socioeconomic,BN,Browser needed,Bronze,browser pass read
+global_unhcr_refugee_data_finder,Refugee Data Finder (Refugee Population Statistics Database),Census and socioeconomic,BN,Browser needed,Silver,browser pass read
+cn_nbs_census_2020_county,Seventh National Population Census (2020) - county-level tabulations,Census and socioeconomic,BN,Browser needed,Silver,browser pass read
+ch_bfs_statpop_hectare,"STATPOP - Population and households, hectare grid (GEOSTAT)",Census and socioeconomic,BN,Browser needed,Bronze,browser pass read
+global_worldpop_population_1km,"WorldPop Population Counts, global mosaics 2015-2030, 1 km (R2025A v1)",Census and socioeconomic,BN,Browser needed,Silver,browser pass read
+us_umich_g2aging_environmental_exposome_gateway,"Environmental Exposome Gateway (Gateway to Global Aging Data, HRS International Network of Studies)",Air pollution,BN,Browser needed,Silver,browser pass read
+global_ihme_gbd_air_pollution_exposure,"GBD 2021 Air Pollution Exposure Estimates 1990-2021 (ambient PM2.5, ozone, household air pollution)",Air pollution,BN,Browser needed,Silver,browser pass read
+global_fao_gaez,Global Agro-Ecological Zones (GAEZ v4),Other,BN,Browser needed,Silver,browser pass read
+global_sedac_human_modification,"Global Human Modification of Terrestrial Systems (Kennedy et al.), v1",Built environment,BN,Browser needed,Browser needed,not read (no)
+global_global_mangrove_watch,"Global Mangrove Watch (GMW) mangrove extent and change v3/v4, 1996-2020",Other,BN,Browser needed,Silver,browser pass read
+global_worldbank_global_solar_atlas,Global Solar Atlas,Other,BN,Browser needed,Silver,browser pass read
+global_anenberg_surface_no2,"Global surface NO2 concentrations 1990-2020 (Anenberg, Mohegh, Larkin et al.)",Air pollution,BN,Browser needed,Gold,browser pass read
+global_dtu_global_wind_solar_atlas,Global Wind Atlas (DTU / World Bank ESMAP) and Global Solar Atlas (Solargis / World Bank ESMAP),Heat and temperature,BN,Browser needed,Silver,browser pass read
+global_nasa_merra2_m2t1nxaer,"MERRA-2 tavg1_2d_aer_Nx: 2d, 1-Hourly, Time-averaged, Single-Level, Assimilation, Aerosol Diagnostics V5.12.4 (M2T1NXAER)",Air pollution,BN,Browser needed,Silver,browser pass read
+us_umich_nanda_land_cover,NaNDA: Land Cover by Census Tract and ZCTA,Census and socioeconomic,BN,Browser needed,Silver,browser pass read
+global_nasa_omi_omno2d,OMI/Aura NO2 Cloud-Screened Total and Tropospheric Column L3 Global Gridded 0.25 degree (OMNO2d v003),Air pollution,BN,Browser needed,Silver,browser pass read
+us_purpleair_sensor_network,PurpleAir low-cost sensor network API,Air pollution,BN,Browser needed,Silver,browser pass read
+in_iitd_saans_pm25,SAANS satellite-derived 1 km ambient PM2.5 for India (2000-2019),Air pollution,BN,Browser needed,Silver,browser pass read
+global_nasa_tropomi_s5p_no2,Sentinel-5P TROPOMI Tropospheric NO2 1-Orbit L2 (S5P_L2__NO2____HiR) via NASA GES DISC,Air pollution,BN,Browser needed,Silver,browser pass read
+cn_tsinghua_tap_pm25,Tracking Air Pollution in China (TAP) 1 km daily PM2.5,Air pollution,BN,Browser needed,Silver,browser pass read
+global_fao_wapor,WaPOR (Water Productivity through Open access of Remotely sensed derived data),"Floods, drought, wildfire and hazards",BN,Browser needed,Bronze,browser pass read
+us_wqp_water_quality_portal,"Water Quality Portal (WQP) - USGS NWIS, EPA WQX/STORET and 400+ agencies",Water quality,BN,Browser needed,Silver,browser pass read
+global_jrc_world_atlas_desertification,"World Atlas of Desertification (WAD) third edition and geoportal datasets (land degradation, SDG 15.3.1)",Sub-national development,BN,Browser needed,Silver,browser pass read
+hdx_cox_s_bazar_district_teknaf_and_ukhia_upazila_para_and,COX'S Bazar District - Teknaf and Ukhia Upazila Para and Ward Locations,Built environment,BN,Browser needed,Silver,browser pass read
+hdx_ethiopia_market_centers,Ethiopia - Market Centers,Built environment,BN,Browser needed,Gold,browser pass read
+global_fao_faostat,FAOSTAT,Built environment,BN,Browser needed,Silver,browser pass read
+hdx_food_market_locations,Food Market Locations,Built environment,BN,Browser needed,Silver,browser pass read
+global_wfp_hungermap_live,HungerMap LIVE,Built environment,BN,Browser needed,Silver,browser pass read
+us_umich_nanda_grocery_stores,NaNDA: Grocery Stores by Census Tract and ZCTA,Built environment,BN,Browser needed,Silver,browser pass read
+us_usda_fns_snap_retailers,SNAP Retailer Locator data (current and historical authorized retailers),Built environment,BN,Browser needed,Gold,browser pass read
+hdx_tanzania_market_price_survey_for_essential_commodities,Tanzania: Market Price Survey for Essential Commodities,Built environment,BN,Browser needed,Silver,browser pass read
+eu_ecdc_surveillance_atlas,ECDC Surveillance Atlas of Infectious Diseases,Health outcomes and surveys,BN,Browser needed,Silver,browser pass read
+global_who_euro_health_information_gateway,European Health Information Gateway,Health outcomes and surveys,BN,Browser needed,Silver,browser pass read
+global_unicef_mics,Multiple Indicator Cluster Surveys (MICS),Health outcomes and surveys,BN,Browser needed,Browser needed,not read (blocked)
+us_icpsr_open_data,ICPSR / openICPSR data archive (listing),Other,BN,Browser needed,Browser needed,not read (blocked)
+us_ncats_n3c,National COVID Cohort Collaborative (N3C) Data Enclave,Health outcomes and surveys,BN,Browser needed,Bronze,browser pass read
+global_start_gtd,Global Terrorism Database (GTD),Other,BN,Browser needed,Browser needed,not read (no)
+us_mdc_2015_dem,"2015 Miami-Dade County DEM (10ft, 30ft, 100ft)",Reference geography,BN,Browser needed,Silver,browser pass read
+pe_glaciares_ana,Glaciares Huayhuash (ANA),Other,BN,Browser needed,Browser needed,not read (no)
+global_fao_hih_geospatial_platform,Hand-in-Hand Geospatial Platform,Built environment,BN,Browser needed,Bronze,browser pass read
+pe_2023_bofedales_inaigem,Inventario Bofedales Huayhuash 2023 (INAIGEM),Other,BN,Browser needed,Browser needed,not read (blocked)
+pe_lagunas_ana,Lagos y Lagunas Huayhuash (ANA),Other,BN,Browser needed,Browser needed,not read (no)
+us_mdc_water_polygons,Miami-Dade Bodies of Water,Other,BN,Browser needed,Silver,browser pass read
+gb_nhs_ods_gp_practices,ODS GP and GP practice related data (epraccur),Other,BN,Browser needed,Browser needed,not read (blocked)
+gaia_hh_rios_ana,Ríos Huayhuash,Other,BN,Browser needed,Browser needed,not read (no)
+global_ciesin_harvard_dataverse_sedac_collection,"CIESIN subcollection (rescued SEDAC datasets) on Harvard Dataverse, CAFE collection",Other,BN,Browser needed,Silver,browser pass read
+us_harvard_dataverse,Harvard Dataverse (listing),Census and socioeconomic,BN,Browser needed,Silver,browser pass read
+us_niehs_hhear,"Human Health Exposure Analysis Resource (HHEAR, formerly CHEAR)",Other,BN,Browser needed,Browser needed,not read (no)
+gaia_bogota_2019_estratos_manzana_dane,Estratos Socioeconómicos de Bogotá Según Manzanas,Census and socioeconomic,BN,Browser needed,Silver,browser pass read
+us_hud_usps_vacancy,HUD Aggregated USPS Administrative Data on Address Vacancies,Reference geography,BN,Browser needed,Bronze,browser pass read
+us_hud_egis_open_data,HUD eGIS Open Data (HUD-eGIS Storefront),Census and socioeconomic,BN,Browser needed,Silver,browser pass read
+it_istat_ivsm,Indice di vulnerabilita sociale e materiale (IVSM),Deprivation and vulnerability indices,BN,Browser needed,Silver,browser pass read
+hdx_kenya_household_income_statistics_in_bomet_county,Kenya - Household income statistics in Bomet county,Census and socioeconomic,BN,Browser needed,Silver,browser pass read
+us_hud_lihtc,Low-Income Housing Tax Credit (LIHTC) Database,Census and socioeconomic,BN,Browser needed,Silver,browser pass read
+ca_inspq_msdi,Material and Social Deprivation Index (MSDI),Deprivation and vulnerability indices,BN,Browser needed,Silver,browser pass read
+us_mdc_community_redevelopment_agency,Miami-Dade Community Redevelopment Areas,Census and socioeconomic,BN,Browser needed,Silver,browser pass read
+us_mdc_qualified_opportunity_zones,Miami-Dade Qualified Opportunity Zones,Census and socioeconomic,BN,Browser needed,Silver,browser pass read
+us_umich_nanda_broadband,"NaNDA: Broadband Internet Availability, Speed, and Adoption",Built environment,BN,Browser needed,Silver,browser pass read
+us_umich_nanda_socioeconomic,NaNDA: Socioeconomic and Demographic Characteristics of Census Tracts and ZCTAs,Census and socioeconomic,BN,Browser needed,Silver,browser pass read
+nz_otago_nzdep,NZDep Index of Socioeconomic Deprivation,Census and socioeconomic,BN,Browser needed,Failed,browser pass read
+global_oecd_regions_and_cities,OECD Regional Statistics (Regions and Cities database),Census and socioeconomic,BN,Browser needed,Failed,browser pass read
+us_hud_picture_of_subsidized_households,Picture of Subsidized Households,Census and socioeconomic,BN,Browser needed,Silver,browser pass read
+ie_pobal_hp_deprivation_index,Pobal HP Deprivation Index,Deprivation and vulnerability indices,BN,Browser needed,Browser needed,not read (no)
+us_hud_public_housing_developments,Public Housing Developments,Built environment,BN,Browser needed,Silver,browser pass read
+gb_scotgov_simd,Scottish Index of Multiple Deprivation 2020,Deprivation and vulnerability indices,BN,Browser needed,Gold,browser pass read
+global_un_sdg_global_database,SDG Global Database (SDG Indicators Database),Sub-national development,BN,Browser needed,Silver,browser pass read
+us_zillow_research_data,"Zillow Research Data (ZHVI, ZORI, inventory, sales)",Census and socioeconomic,BN,Browser needed,Silver,browser pass read
+gaia_fl_superfund_waste_cleanup_sites,Florida Superfund Waste Cleanup Sites,Toxic releases and industrial sites,BN,Browser needed,Silver,browser pass read
+us_nrdc_lead_service_lines,Lead Pipes Are Widespread and Used in Every State (lead service line estimates),Water quality,BN,Browser needed,Silver,browser pass read
+gaia_mdc_brownfield_site,Miami-Dade Brownfield Sites,Toxic releases and industrial sites,BN,Browser needed,Silver,browser pass read
+us_mdc_superfund_site,Miami-Dade Superfund Sites,Toxic releases and industrial sites,BN,Browser needed,Silver,browser pass read
+us_epa_rcrainfo_public_export,"RCRAInfo Public Data Export (hazardous waste handlers, Biennial Report)",Toxic releases and industrial sites,BN,Browser needed,Gold,browser pass read
+us_usda_pdp_pesticide_residues,USDA Pesticide Data Program (PDP) residue database,Toxic releases and industrial sites,BN,Browser needed,Silver,browser pass read
+global_dhs_spatial_data_repository,DHS Program Spatial Data Repository (sub-national indicator estimates and boundaries),Health outcomes and surveys,BN,Browser needed,Bronze,browser pass read
+us_icpsr_state_firearm_law_database,"State Firearm Law Database: State Firearm Laws, 1991-2019",Health policy,BN,Browser needed,Silver,browser pass read
+us_icpsr_population_weighted_tobacco_policies,"Population-Weighted Standardized Tobacco Policies (e-cigarette taxes, indoor air laws, flavored tobacco sales restrictions, cigar taxes) and Tobacco Specialty Retailers in the USA, by state/county and time",Health policy,BN,Browser needed,Silver,browser pass read
+global_usaid_dhs_spatial_data_repository,USAID DHS Spatial Data Repository,Sub-national development,BN,Browser needed,Silver,browser pass read
+us_edi_ny_lakes_hab_reports,"Harmful Algal Bloom Reports for 405 lakes in New York State (USA), with antecedent weather conditions and trophic status for each lake.",Water quality,BN,Browser needed,Browser needed,not read (blocked)
+us_iastate_pfas_iowa_drinking_water_sources,PFAS in Iowa Drinking Water Sources,Water quality,BN,Browser needed,Silver,browser pass read
+global_figshare_urban_heat_island_intensity,Global Urban Heat Island Intensity Dataset,Heat and temperature,BN,Browser needed,Silver,browser pass read
+au_csiro_lst_uhi_capital_cities_2018_19,"Land surface temperature and urban heat island estimates for Australian capital cities, summer 2018-19",Heat and temperature,BN,Browser needed,Gold,browser pass read
+us_nanda_adi_block_group,"National Neighborhood Data Archive (NaNDA): Standardized Area Deprivation Index (ADI) by Census Block Group, United States, 2015, 2020 and 2022",Deprivation and vulnerability indices,BN,Browser needed,Silver,browser pass read
+us_harvard_svi_percentiles_block_group,2022 Social Vulnerability by US Census Block Group,Deprivation and vulnerability indices,V1,Silver,Gold,browser pass read
+us_uic_ndi_2018_tract,Neighborhood Deprivation Index for Year 2018 at Census Tract level for All US States,Deprivation and vulnerability indices,BN,Browser needed,Silver,browser pass read
+eu_eurostat_severe_material_deprivation_nuts2,Severe material deprivation rate by NUTS 2 region,Deprivation and vulnerability indices,BN,Browser needed,Silver,browser pass read
+us_nanda_icpsr38580,NaNDA: Street Connectivity by Census Tract and ZCTA,Built environment,V2,Bronze,Silver,browser pass read
+us_nanda_icpsr38586,NaNDA: Parks by Census Tract and ZCTA,Built environment,V2,Bronze,Silver,browser pass read
+us_nanda_icpsr38585,NaNDA: Primary and Secondary Roads by Census Tract and ZCTA,Built environment,V2,Bronze,Silver,browser pass read
+us_nanda_icpsr38597,NaNDA: Polluting Sites by Census Tract and ZCTA,Toxic releases and industrial sites,V2,Bronze,Silver,browser pass read
+us_nanda_icpsr38605,NaNDA: Public Transit Stops by Census Tract and ZCTA,Built environment,V2,Bronze,Silver,browser pass read
+us_nanda_icpsr200038,NaNDA: Libraries by Census Tract and ZCTA,Built environment,V2,Bronze,Silver,browser pass read
+us_nanda_e208684,NaNDA: Law Enforcement by Census Tract and ZCTA,Census and socioeconomic,V2,Bronze,Silver,browser pass read
+us_nanda_e208207,NaNDA: Social Services by Census Tract and ZCTA,Census and socioeconomic,V2,Bronze,Silver,browser pass read
