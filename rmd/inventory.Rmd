@@ -91,27 +91,27 @@ output:
 <p>US federal datasets pass the licence check by the working group's rule (public domain unless a page says otherwise).</p>
 </details>
 <div class="gi-layout">
-  <aside aria-label="Filters">
-    <input type="search" id="gi-q" placeholder="Search name, publisher, id" aria-label="Search">
-    <div id="gi-facets"></div>
-  </aside>
-  <div class="gi-main">
-    <div class="gi-filterbar" id="gi-bar"></div>
-    <section class="gi-panel">
-      <h3>Breakdown</h3>
-      <div class="gi-ctl"><label for="gi-axr">Rows</label><select id="gi-axr"></select><label for="gi-axc">by</label><select id="gi-axc"></select><span>· click a cell to filter</span></div>
-      <div class="gi-scroll"><table class="gi-pivot" id="gi-pivot"></table></div>
-    </section>
-    <section class="gi-panel gi-res">
-      <div class="gi-ctl" style="justify-content:space-between"><h3>Datasets</h3>
-        <div class="gi-legend">Checks: <span class="gi-strip"><i class="p"></i></span>pass <span class="gi-strip"><i class="w"></i></span>warn <span class="gi-strip"><i class="f"></i></span>fail <span class="gi-strip"><i></i></span>not checked <span id="gi-chk"></span></div></div>
-      <div class="gi-scroll"><table id="gi-tbl"><thead><tr>
-        <th data-k="n">Dataset</th><th data-k="t">Tier</th><th data-k="lv">Verified</th><th>Checks</th><th data-k="u">Unit</th><th data-k="ly">Latest</th><th data-k="gs">Geometry</th><th data-k="rg">Region</th>
-      </tr></thead><tbody><tr><td colspan="8">Loading the inventory…</td></tr></tbody></table></div>
-      <div class="gi-pager"><span id="gi-pg"></span><button id="gi-prev" type="button">Previous</button><button id="gi-next" type="button">Next</button></div>
-      <p class="gi-note">Click a row for its evidence, file findings and what is blocking it. Data: <a href="https://github.com/OHDSI/GIS/blob/main/exploration/place-data-inventory/inventory-all.csv">inventory-all.csv</a>.</p>
-    </section>
-  </div>
+<aside aria-label="Filters">
+<input type="search" id="gi-q" placeholder="Search name, publisher, id" aria-label="Search">
+<div id="gi-facets"></div>
+</aside>
+<div class="gi-main">
+<div class="gi-filterbar" id="gi-bar"></div>
+<section class="gi-panel">
+<h3>Breakdown</h3>
+<div class="gi-ctl"><label for="gi-axr">Rows</label><select id="gi-axr"></select><label for="gi-axc">by</label><select id="gi-axc"></select><span>· click a cell to filter</span></div>
+<div class="gi-scroll"><table class="gi-pivot" id="gi-pivot"></table></div>
+</section>
+<section class="gi-panel gi-res">
+<div class="gi-ctl" style="justify-content:space-between"><h3>Datasets</h3>
+<div class="gi-legend">Checks: <span class="gi-strip"><i class="p"></i></span>pass <span class="gi-strip"><i class="w"></i></span>warn <span class="gi-strip"><i class="f"></i></span>fail <span class="gi-strip"><i></i></span>not checked <span id="gi-chk"></span></div></div>
+<div class="gi-scroll"><table id="gi-tbl"><thead><tr>
+<th data-k="n">Dataset</th><th data-k="t">Tier</th><th data-k="lv">Verified</th><th>Checks</th><th data-k="u">Unit</th><th data-k="ly">Latest</th><th data-k="gs">Geometry</th><th data-k="rg">Region</th>
+</tr></thead><tbody><tr><td colspan="8">Loading the inventory…</td></tr></tbody></table></div>
+<div class="gi-pager"><span id="gi-pg"></span><button id="gi-prev" type="button">Previous</button><button id="gi-next" type="button">Next</button></div>
+<p class="gi-note">Click a row for its evidence, file findings and what is blocking it. Data: <a href="https://github.com/OHDSI/GIS/blob/main/exploration/place-data-inventory/inventory-all.csv">inventory-all.csv</a>.</p>
+</section>
+</div>
 </div>
 </div>
 
