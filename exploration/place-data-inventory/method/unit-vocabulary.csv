@@ -1,0 +1,61 @@
+﻿term,kind,level_or_resolution,region,example,notes
+point,unit,point,any,hospital location; monitor,from partB/BRIEF.md
+line,unit,line,any,road; stream,from partB/BRIEF.md
+address,unit,point (geocoded),any,street address,from partB/BRIEF.md
+block,unit,finest US census,US,Census block,from partB/BRIEF.md
+block_group,unit,US census,US,ACS block group,from partB/BRIEF.md
+tract,unit,US census,US,census tract,from partB/BRIEF.md
+zcta,unit,US ZIP-like area,US,ZCTA 5-digit,from partB/BRIEF.md
+zip,unit,US postal,US,ZIP code,not the same as a ZCTA; needs a crosswalk
+county,unit,US admin,US,county,from partB/BRIEF.md
+state,unit,US admin,US,state,from partB/BRIEF.md
+country,unit,national,global,country,from partB/BRIEF.md
+admin1,unit,first-level admin,global,province; state,from partB/BRIEF.md
+admin2,unit,second-level admin,global,district,from partB/BRIEF.md
+admin3,unit,third-level admin,global,commune,from partB/BRIEF.md
+lsoa,unit,UK small area,UK,LSOA,from partB/BRIEF.md
+msoa,unit,UK middle area,UK,MSOA,from partB/BRIEF.md
+grid_<res>,unit,regular grid at <res>,any,grid_1km; grid_0.25deg,from partB/BRIEF.md
+polygon,unit,custom polygons,any,park boundary,from partB/BRIEF.md
+raster,unit,pixel grid,any,GeoTIFF,from partB/BRIEF.md
+water_system,unit,service area (PWSID),US,public water system,no standard geometry; each system's service-area boundary is separate
+service_area,unit,hospital service area; school district; other service area,any,HSA; school district,
+h3_<res>,unit,H3 hexagon at <res>,any,h3 res 8,computed from the index; no geometry download needed
+sa1,unit,Australia statistical area 1,Australia,SA1,ASGS
+sa2,unit,Australia statistical area 2,Australia,SA2,ASGS
+sa3,unit,Australia statistical area 3,Australia,SA3,ASGS
+sa4,unit,Australia statistical area 4,Australia,SA4,ASGS
+lga,unit,Australia local government area,Australia,LGA,ASGS
+postcode,unit,postal area,Australia; UK,POA; postcode sector,
+nuts0,unit,NUTS level 0,EU,country,
+nuts1,unit,NUTS level 1,EU,major region,
+nuts2,unit,NUTS level 2,EU,basic region,
+nuts3,unit,NUTS level 3,EU,small region,
+lau,unit,local administrative unit,EU,municipality,
+da,unit,Canada dissemination area,Canada,DA,
+csd,unit,Canada census subdivision,Canada,CSD,
+pcode_admin<n>,unit,OCHA P-code admin level n,humanitarian,P-code admin2,
+small_area,unit,generic small statistical area,any,UK output area; section censal; IRIS,added in phase A to hold the old 'postcode_small_area' listing value
+coordinates,place_key,lat/lon columns,any,latitude; longitude,
+embedded geometry,place_key,geometry shipped with the data,any,shapefile; GeoPackage; raster,
+GEOID/FIPS,place_key,US census code,US,11-digit tract GEOID,
+ZCTA,place_key,US ZCTA code,US,ZCTA5,
+ZIP code,place_key,US postal code,US,ZIP,added in phase A; a ZIP is not a ZCTA
+NUTS,place_key,EU NUTS code,EU,DE212,
+LAU,place_key,EU LAU code,EU,,
+ONS GSS,place_key,UK ONS GSS code,UK,E01000001,
+StatCan SGC/DGUID,place_key,Canada SGC or DGUID,Canada,,
+ASGS,place_key,Australian ASGS code,Australia,SA2_CODE_2021,
+OCHA P-code,place_key,humanitarian place code,humanitarian,,
+ISO 3166,place_key,ISO country or subdivision code,global,KEN; KE-30,
+GADM,place_key,GADM unit id,global,,
+geoBoundaries,place_key,geoBoundaries boundaryID,global,,
+H3 index,place_key,H3 cell id,any,,added in phase A
+HUC,place_key,USGS watershed code,US,HUC12,added in phase A
+non-geographic ID,place_key,an identifier that is not a place code,any,PWSID; facility ID; station ID,needs a separate geometry dataset
+none,place_key,no key found,any,,
+embedded,geometry_source,the dataset ships its own points; lines; polygons or raster,any,,
+reference_standard,geometry_source,keyed to a standard geography whose geometry is easy to get,any,GEOID to TIGER; NUTS to GISCO; LSOA to ONS,
+reference_specific,geometry_source,keyed to one particular geometry dataset,any,water-system service areas; EPA monitoring sites,
+none,geometry_source,no usable geometry or key,any,,
+national statistical code,place_key,national statistics office area code,non-US/EU/UK/Canada/Australia,IBGE setor censitario; INEGI AGEB,added in phase A; geometry usually from the same office (inferred)
