@@ -2,15 +2,10 @@
 title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG</div>'
 output:
   html_document:
-    toc: true
-    toc_depth: 3
-    toc_float:
-      collapsed: true
     includes:
-      in_header: assets/include-header.html
+      in_header: assets/redirect-status.html
 ---
 
-# **Use Cases Inventory**
+# **Use Cases**
 
-```{r child="sections/7_use_cases.Rmd"}
-```
+The use case inventory has moved to [Use Case and Dataset Status](status.html), which tracks every use case and dataset request from the working group's GitHub issues.

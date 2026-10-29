@@ -26,6 +26,39 @@ navbar:
           href: status.html
         - text: "Project Management"
           href: project-management.html
+    - text: "Gaia"
+      icon: fa-earth
+      menu:
+        - text: "Overview"
+          href: gaia-intro.html
+        - text: "Examples"
+          href: examples.html
+        - text: "Design"
+          href: gaia-principles.html
+        - text: "Schema Extensions"
+          href: schema-extensions.html
+        - text: "Vocabulary"
+          href: vocabulary.html
+        - text: "Analysis"
+          href: analysis.html
+        - text: "Algorithms"
+          href: algorithms.html
+        - text: "Geocoding"
+          href: geocoding.html
+        - text: "gaiaDB"
+          href: gaiaDB.html
+        - text: "gaiaCore"
+          href: gaiaCore.html
+        - text: "gaiaCatalog"
+          href: gaiaCatalog.html
+        - text: "gaiaDocker"
+          href: gaiaDocker.html
+    - text: "Data Inventory"
+      icon: fa-database
+      href: inventory.html
+    - text: "ARES Demo"
+      icon: fa-map
+      href: ares-demo/#/cdm/SYNTH-GIS/20261005/geographic_exposures
     - text: "Tutorial"
       icon: fa-graduation-cap
       menu:
@@ -55,42 +88,6 @@ navbar:
           href: tutorial-r-exercise-3.html
         - text: "R track: Exercise 4 (beta)"
           href: tutorial-r-exercise-4.html
-    - text: "ARES demo"
-      icon: fa-map
-      href: ares-demo/
-    - text: "Data Inventory"
-      icon: fa-database
-      href: inventory.html
-    - text: "Gaia"
-      icon: fa-earth
-      menu:
-        - text: "Overview"
-          href: gaia-intro.html
-        - text: "Examples"
-          href: examples.html
-        - text: "Design"
-          href: gaia-principles.html
-        - text: "Schema Extensions"
-          href: schema-extensions.html
-        - text: "Use Cases"
-          href: use-cases.html
-        - text: "Analysis"
-          href: analysis.html
-        - text: "Algorithms"
-          href: algorithms.html
-        - text: "Geocoding"
-          href: geocoding.html
-        - text: "gaiaDB"
-          href: gaiaDB.html
-        - text: "gaiaCore"
-          href: gaiaCore.html
-        - text: "gaiaCatalog"
-          href: gaiaCatalog.html
-        - text: "gaiaDocker"
-          href: gaiaDocker.html
-    - text: "Vocabulary"
-      icon: fa-book
-      href: vocabulary.html
     - text: "Developer"
       icon: fa-code
       menu:

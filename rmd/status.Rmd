@@ -36,6 +36,28 @@ To propose a use case, see [Get Started](get-started.html#propose-a-use-case). T
 
 <br>
 
+## **How use cases shape the toolchain**
+
+Development is use-case driven. Each use case feeds one or more parts of the toolchain.
+
+| Area | What use cases identify |
+|---|---|
+| **Vocabulary** | Missing concepts, mapping gaps, hierarchy needs and synonyms for geospatial and environmental variables |
+| **CDM extensions** | Auxiliary table designs, fields for `external_exposure` and related tables, indexing and performance needs, linkage patterns between clinical data and geospatial sources |
+| **Analysis** | HADES enhancements, custom libraries for geospatial processing, federated analysis protocols, exposure quality validation (see [Analysis](analysis.html)) |
+
+To propose one, see [Get Started](get-started.html#propose-a-use-case). Proposals are reviewed against:
+
+| Criterion | Question |
+|---|---|
+| Scientific rigor | Is there a clear hypothesis and study design? |
+| Generalizability | Does it apply beyond a single institution or dataset? |
+| Technical feasibility | Are the required geospatial data sources available? |
+| Community benefit | Does it contribute to shared toolchain components? |
+| OHDSI principles | Does it support open science, reproducibility and collaboration? |
+
+<br>
+
 ## **How to read this page**
 
 - **Status.** The Status of the item on the project board: *Idea*, *Proposed*, *To do*, *In progress*, *Blocked* or *Complete*. Exceptions: *On hold* (issue labeled `On Hold`), *Superseded* (replaced by another use case) and *Complete* (issue closed) take precedence.

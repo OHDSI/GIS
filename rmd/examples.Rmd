@@ -61,6 +61,6 @@ Logistic regression of COPD on the 24-month day-weighted PM2.5 recovers a slope 
 
 ## **More examples**
 
-More examples will be added here as they are ready. To propose one, or to bring a question of your own, see [Get Started](get-started.html#propose-a-use-case); the [use case inventory](use-cases.html) lists what the working group is working on.
+More examples will be added here as they are ready. To propose one, or to bring a question of your own, see [Get Started](get-started.html#propose-a-use-case); the [use case and dataset status](status.html) page lists what the working group is working on.
 
 <br>
