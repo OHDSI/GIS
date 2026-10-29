@@ -37,8 +37,7 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="assets/accordion-toc.css">
-<script src="assets/accordion-toc.js"></script>
+<link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -351,6 +350,67 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-earth"></span>
+     
+    Gaia
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="gaia-intro.html">Overview</a>
+    </li>
+    <li>
+      <a href="examples.html">Examples</a>
+    </li>
+    <li>
+      <a href="gaia-principles.html">Design</a>
+    </li>
+    <li>
+      <a href="schema-extensions.html">Schema Extensions</a>
+    </li>
+    <li>
+      <a href="vocabulary.html">Vocabulary</a>
+    </li>
+    <li>
+      <a href="analysis.html">Analysis</a>
+    </li>
+    <li>
+      <a href="algorithms.html">Algorithms</a>
+    </li>
+    <li>
+      <a href="geocoding.html">Geocoding</a>
+    </li>
+    <li>
+      <a href="gaiaDB.html">gaiaDB</a>
+    </li>
+    <li>
+      <a href="gaiaCore.html">gaiaCore</a>
+    </li>
+    <li>
+      <a href="gaiaCatalog.html">gaiaCatalog</a>
+    </li>
+    <li>
+      <a href="gaiaDocker.html">gaiaDocker</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="inventory.html">
+    <span class="fa fa-database"></span>
+     
+    Data Inventory
+  </a>
+</li>
+<li>
+  <a href="ares-demo/#/cdm/SYNTH-GIS/20261005/geographic_exposures">
+    <span class="fa fa-map"></span>
+     
+    ARES Demo
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-graduation-cap"></span>
      
     Tutorial
@@ -398,74 +458,6 @@ div.tocify {
       <a href="tutorial-r-exercise-4.html">R track: Exercise 4 (beta)</a>
     </li>
   </ul>
-</li>
-<li>
-  <a href="ares-demo/">
-    <span class="fa fa-map"></span>
-     
-    ARES demo
-  </a>
-</li>
-<li>
-  <a href="inventory.html">
-    <span class="fa fa-database"></span>
-     
-    Data Inventory
-  </a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <span class="fa fa-earth"></span>
-     
-    Gaia
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="gaia-intro.html">Overview</a>
-    </li>
-    <li>
-      <a href="examples.html">Examples</a>
-    </li>
-    <li>
-      <a href="gaia-principles.html">Design</a>
-    </li>
-    <li>
-      <a href="schema-extensions.html">Schema Extensions</a>
-    </li>
-    <li>
-      <a href="use-cases.html">Use Cases</a>
-    </li>
-    <li>
-      <a href="analysis.html">Analysis</a>
-    </li>
-    <li>
-      <a href="algorithms.html">Algorithms</a>
-    </li>
-    <li>
-      <a href="geocoding.html">Geocoding</a>
-    </li>
-    <li>
-      <a href="gaiaDB.html">gaiaDB</a>
-    </li>
-    <li>
-      <a href="gaiaCore.html">gaiaCore</a>
-    </li>
-    <li>
-      <a href="gaiaCatalog.html">gaiaCatalog</a>
-    </li>
-    <li>
-      <a href="gaiaDocker.html">gaiaDocker</a>
-    </li>
-  </ul>
-</li>
-<li>
-  <a href="vocabulary.html">
-    <span class="fa fa-book"></span>
-     
-    Vocabulary
-  </a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -519,400 +511,383 @@ WG</h1>
 <div id="analysis-capabilities-and-future-directions"
 class="section level1">
 <h1><strong>Analysis Capabilities and Future Directions</strong></h1>
-<p>The OMOP GIS extension enables new analytical capabilities that go
-beyond traditional clinical observational research. This section
-outlines current analysis infrastructure, future development directions,
-and emerging needs for transparency and ethical analysis in
-geospatially-informed health research.</p>
-<hr />
+<p>The OMOP GIS extension supports analyses beyond traditional clinical
+observational research. This page summarizes the analysis tools
+available now, the extensions the working group has proposed, and the
+methodological and ethical needs of geospatially informed health
+research. The proposed items are plans, not released software.</p>
+<p><br></p>
 <div id="current-analysis-infrastructure" class="section level2">
-<h2>8.1. Current Analysis Infrastructure</h2>
-<div id="limitations-of-atlas-for-gis-use-cases" class="section level3">
-<h3>8.1.1. Limitations of ATLAS for GIS Use Cases</h3>
-<p><a href="https://atlas.ohdsi.org/">ATLAS</a> is the primary user
-interface for OMOP CDM analytics, providing cohort construction,
-characterization, and prediction capabilities. However, ATLAS currently
-has limited support for:</p>
-<ul>
-<li><strong>Spatial exposure variables</strong> from the
-<code>external_exposure</code> table</li>
-<li><strong>Geographic visualization</strong> of exposure patterns and
-health outcomes</li>
-<li><strong>Multi-level modeling</strong> incorporating area-level
-social determinants</li>
-<li><strong>Temporal exposure sequences</strong> and longitudinal
-environmental data</li>
-<li><strong>Spatial statistics</strong> (clustering, autocorrelation,
-interpolation)</li>
-</ul>
-<p>While ATLAS development may eventually incorporate these
-capabilities, GIS use cases currently require direct interaction with
-the OHDSI Methods Library (HADES) and custom analytical scripts.</p>
+<h2><strong>Current analysis infrastructure</strong></h2>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tool</th>
+<th>Role</th>
+<th>Limits for GIS use cases</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://atlas.ohdsi.org/">ATLAS</a></td>
+<td>Primary user interface for OMOP analytics: cohort construction,
+characterization, prediction</td>
+<td>Limited support for spatial exposure variables from
+<code>external_exposure</code>, geographic visualization, multi-level
+modeling, temporal exposure sequences and spatial statistics</td>
+</tr>
+<tr class="even">
+<td><a href="https://ohdsi.github.io/Hades/">HADES</a></td>
+<td>Open-source R packages that form the analytical foundation of
+OHDSI</td>
+<td>Used directly for GIS work today: SQL access to
+<code>external_exposure</code>, flexible feature engineering from
+spatial and environmental variables, causal inference and prediction,
+network studies across sites</td>
+</tr>
+</tbody>
+</table>
+<p>GIS use cases currently work through HADES and custom scripts. The <a
+href="tutorial.html">tutorial</a> shows this end to end with
+<code>CaprForExtensions</code> and
+<code>FeatureExtractionForExtensions</code>, and <a
+href="gaiaCore.html">gaiaCore</a> provides exposure analytics from
+R.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Analysis step</th>
+<th>HADES packages</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Cohort construction</td>
+<td>CohortGenerator, Capr</td>
+</tr>
+<tr class="even">
+<td>Descriptive statistics</td>
+<td>CohortDiagnostics, FeatureExtraction</td>
+</tr>
+<tr class="odd">
+<td>Population-level estimation</td>
+<td>CohortMethod, SelfControlledCaseSeries</td>
+</tr>
+<tr class="even">
+<td>Patient-level prediction</td>
+<td>PatientLevelPrediction</td>
+</tr>
+<tr class="odd">
+<td>Data quality</td>
+<td>DataQualityDashboard</td>
+</tr>
+<tr class="even">
+<td>Federated analytics</td>
+<td>Strategus</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
 </div>
-<div id="hades-as-primary-analysis-framework" class="section level3">
-<h3>8.1.2. HADES as Primary Analysis Framework</h3>
-<p><a href="https://ohdsi.github.io/Hades/">HADES (Health Analytics
-Data-to-Evidence Suite)</a> is a collection of open-source R packages
-that provide the analytical foundation for OHDSI research. HADES
-packages support:</p>
-<ul>
-<li><strong>Cohort construction</strong> (CohortGenerator, Capr)</li>
-<li><strong>Descriptive statistics</strong> (CohortDiagnostics,
-FeatureExtraction)</li>
-<li><strong>Population-level estimation</strong> (CohortMethod,
-SelfControlledCaseSeries)</li>
-<li><strong>Patient-level prediction</strong>
-(PatientLevelPrediction)</li>
-<li><strong>Data quality assessment</strong> (DataQualityDashboard)</li>
-<li><strong>Federated analytics</strong> (Strategus)</li>
-</ul>
-<p>For GIS use cases, HADES provides: - Direct access to
-<code>external_exposure</code> data via SQL queries - Flexible feature
-engineering from spatial and environmental variables - Robust
-statistical methods for causal inference and prediction - Network study
-execution across distributed OMOP sites</p>
-<hr />
+<div id="proposed-hades-extensions" class="section level2">
+<h2><strong>Proposed HADES extensions</strong></h2>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Package</th>
+<th>Purpose</th>
+<th>Proposed functions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>GeoFeatureExtraction</td>
+<td>Extract and engineer features from <code>external_exposure</code>
+and spatial data</td>
+<td><code>extractSpatialExposures()</code>: link person-level data to
+exposures<br><code>aggregateTemporalExposures()</code>: moving-window
+and cumulative exposures<br><code>calculateSpatialLags()</code>:
+neighborhood-effect metrics<br><code>imputeMissingExposures()</code>:
+kriging or nearest neighbor</td>
+</tr>
+<tr class="even">
+<td>SpatialCohortMethod</td>
+<td>Causal inference that accounts for spatial confounding and
+clustering</td>
+<td><code>fitSpatialPropensityModel()</code><br><code>adjustSpatialConfounding()</code>:
+restricted spatial regression,
+spatial+<br><code>assessSpatialUnmeasuredConfounding()</code><br><code>estimateSpatialEffects()</code>:
+spillover and interaction</td>
+</tr>
+<tr class="odd">
+<td>MultiLevelEstimation</td>
+<td>Multilevel models for individuals nested in neighborhoods</td>
+<td><code>fitMultilevelModel()</code>: area-level random
+effects<br><code>partitionVariance()</code>: intra-class
+correlation<br><code>crossLevelInteractions()</code><br><code>spatialMediation()</code></td>
+</tr>
+<tr class="even">
+<td>GeoVisualization</td>
+<td>Privacy-preserving visualization of spatial patterns</td>
+<td><code>createChoroplethMap()</code>: with small-number
+suppression<br><code>plotSpatialClusters()</code>: SaTScan,
+DBSCAN<br><code>visualizeExposureGradients()</code><br><code>animateTemporalMaps()</code></td>
+</tr>
+</tbody>
+</table>
+<p>Extensions would follow the OHDSI contribution path: prototype,
+community review at working group meetings and symposia, validation
+across use cases and datasets, documentation (vignettes, function
+reference, validation reports), testing to HADES standards, submission
+through OHDSI governance, and long-term maintenance.</p>
+<p><br></p>
 </div>
-</div>
-<div id="extending-hades-for-geospatial-analysis"
-class="section level2">
-<h2>8.2. Extending HADES for Geospatial Analysis</h2>
-<p>Current and proposed use cases (Section 7) are driving the
-development of HADES extensions to support geospatially-informed health
-research.</p>
-<div id="proposed-hades-packages" class="section level3">
-<h3>8.2.1. Proposed HADES Packages</h3>
-<div id="geofeatureextraction" class="section level4">
-<h4>GeoFeatureExtraction</h4>
-<p><strong>Purpose:</strong> Extract and engineer features from
-<code>external_exposure</code> and spatial data</p>
-<p><strong>Key Functions:</strong> -
-<code>extractSpatialExposures()</code>: Link person-level clinical data
-to geospatial exposures - <code>aggregateTemporalExposures()</code>:
-Create moving window averages, cumulative exposures -
-<code>calculateSpatialLags()</code>: Compute spatially-lagged exposure
-metrics for neighborhood effects -
-<code>imputeMissingExposures()</code>: Handle missing spatial data using
-kriging or nearest-neighbor methods</p>
-<p><strong>Use Cases Driving Development:</strong> UC-001 (Air Quality),
-UC-005 (Residential History)</p>
-</div>
-<div id="spatialcohortmethod" class="section level4">
-<h4>SpatialCohortMethod</h4>
-<p><strong>Purpose:</strong> Causal inference methods accounting for
-spatial confounding and clustering</p>
-<p><strong>Key Functions:</strong> -
-<code>fitSpatialPropensityModel()</code>: Propensity score matching with
-spatial covariates - <code>adjustSpatialConfounding()</code>: Restricted
-spatial regression, spatial+ methods -
-<code>assessSpatialUnmeasuredConfounding()</code>: Sensitivity analyses
-for unmeasured spatial factors - <code>estimateSpatialEffects()</code>:
-Spatial spillover and interaction effects</p>
-<p><strong>Use Cases Driving Development:</strong> UC-002 (Social
-Vulnerability), UC-004 (Environmental Justice)</p>
-</div>
-<div id="multilevelestimation" class="section level4">
-<h4>MultiLevelEstimation</h4>
-<p><strong>Purpose:</strong> Multilevel modeling for nested data
-structures (individuals within neighborhoods)</p>
-<p><strong>Key Functions:</strong> - <code>fitMultilevelModel()</code>:
-Mixed effects regression with area-level random effects -
-<code>partitionVariance()</code>: Intra-class correlation and variance
-decomposition - <code>crossLevelInteractions()</code>: Test individual ×
-area-level interaction effects - <code>spatialMediation()</code>:
-Mediation analysis for place-based exposures</p>
-<p><strong>Use Cases Driving Development:</strong> UC-002 (Social
-Vulnerability), UC-007 (Food Deserts)</p>
-</div>
-<div id="geovisualization" class="section level4">
-<h4>GeoVisualization</h4>
-<p><strong>Purpose:</strong> Privacy-preserving visualization of spatial
-patterns in health data</p>
-<p><strong>Key Functions:</strong> - <code>createChoroplethMap()</code>:
-Thematic maps with small-number suppression -
-<code>plotSpatialClusters()</code>: Identify and display spatial
-clusters (SaTScan, DBSCAN) - <code>visualizeExposureGradients()</code>:
-Continuous surface maps of environmental exposures -
-<code>animateTemporalMaps()</code>: Time-series visualization of
-changing spatial patterns</p>
-<p><strong>Use Cases Driving Development:</strong> UC-004 (Environmental
-Justice), UC-008 (Climate Change)</p>
-</div>
-</div>
-<div id="integration-pathway-into-hades" class="section level3">
-<h3>8.2.2. Integration Pathway into HADES</h3>
-<p>Proposed HADES packages developed through GIS use cases will follow
-the OHDSI contribution process:</p>
-<ol style="list-style-type: decimal">
-<li><strong>Prototype Development</strong>: Initial package created in
-use case-specific repositories</li>
-<li><strong>Community Review</strong>: Present at OHDSI Working Group
-meetings and symposia</li>
-<li><strong>Validation</strong>: Apply to multiple use cases and
-datasets to demonstrate generalizability</li>
-<li><strong>Documentation</strong>: Comprehensive vignettes, function
-reference, validation reports</li>
-<li><strong>Testing</strong>: Unit tests, integration tests, compliance
-with HADES standards</li>
-<li><strong>Submission</strong>: Propose inclusion in HADES suite
-through OHDSI governance process</li>
-<li><strong>Maintenance</strong>: Long-term support through OHDSI
-developer community</li>
-</ol>
-<p><strong>Current Status:</strong> - GeoFeatureExtraction: Prototype
-phase (UC-001, UC-002 pilots) - SpatialCohortMethod: Design phase
-(community feedback solicited) - MultiLevelEstimation: Concept phase
-(literature review ongoing) - GeoVisualization: Prototype phase (privacy
-assessment required)</p>
-<hr />
-</div>
-</div>
-<div id="analytical-methods-for-new-research-domains"
-class="section level2">
-<h2>8.3. Analytical Methods for New Research Domains</h2>
-<p>The GIS extension places three new (or expanded) research domains
-before OHDSI:</p>
-<div id="environmental-epidemiology" class="section level3">
-<h3>8.3.1. Environmental Epidemiology</h3>
-<p><strong>Analytical Needs:</strong> - Spatiotemporal exposure
-assessment (linking monitoring data to individual locations over time) -
-Exposure measurement error modeling (accounting for spatial
-interpolation uncertainty) - Distributed lag models (delayed and
-cumulative effects of environmental exposures) - Extreme value analysis
-(health impacts of rare environmental events like heat waves)</p>
-<p><strong>Proposed Analyses:</strong> - Case-crossover designs for
-acute exposure effects (air pollution and MI, heat and ED visits) -
-Spatial survival analysis for long-term exposure and chronic disease -
-Bayesian hierarchical models for multi-pollutant exposures -
-Environmental mixture analysis (quantile g-computation, weighted
-quantile sum regression)</p>
-<p><strong>HADES Gaps:</strong> - No current support for distributed lag
-models - Limited time-series analysis capabilities - No spatial survival
-analysis methods - Limited mixture analysis tools</p>
-</div>
-<div id="sociodemographic-epidemiology" class="section level3">
-<h3>8.3.2. Sociodemographic Epidemiology</h3>
-<p><strong>Analytical Needs:</strong> - Multilevel modeling (individuals
-nested in neighborhoods, neighborhoods in regions) - Structural
-confounding adjustment (unmeasured community-level factors) -
-Intersectionality analysis (joint effects of multiple social identities
-and area characteristics) - Longitudinal neighborhood effects (impact of
-residential mobility and changing contexts)</p>
-<p><strong>Proposed Analyses:</strong> - Multilevel propensity score
-methods for neighborhood interventions - Spatial mediation analysis (how
-place shapes health through intermediate factors) - G-methods for
-time-varying area-level confounders - Decomposition methods for
-disparity analysis (spatial Oaxaca-Blinder)</p>
-<p><strong>HADES Gaps:</strong> - Limited multilevel modeling support -
-No spatial mediation tools - No dedicated disparity analysis methods -
-Limited support for time-varying area-level exposures</p>
-</div>
-<div id="spatial-epidemiology" class="section level3">
-<h3>8.3.3. Spatial Epidemiology</h3>
-<p><strong>Analytical Needs:</strong> - Spatial cluster detection
-(identifying geographic areas with elevated disease rates) - Spatial
-regression (accounting for spatial autocorrelation and boundary effects)
-- Disease mapping (smoothing rates while preserving privacy) - Spatial
-interaction modeling (understanding geographic access and utilization
-patterns)</p>
-<p><strong>Proposed Analyses:</strong> - Bayesian disease mapping (BYM
-models, spatial smoothing) - Spatial scan statistics (SaTScan
-integration) - Geographically weighted regression (local spatial
-relationships) - Spatial accessibility analysis (two-step floating
-catchment area methods)</p>
-<p><strong>HADES Gaps:</strong> - No spatial autocorrelation diagnostics
-- No spatial regression models - Limited small-area estimation tools -
-No accessibility analysis methods</p>
-<hr />
-</div>
+<div id="methods-by-research-domain" class="section level2">
+<h2><strong>Methods by research domain</strong></h2>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Domain</th>
+<th>Analytical needs</th>
+<th>Proposed analyses</th>
+<th>HADES gaps</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Environmental epidemiology</strong></td>
+<td>Spatiotemporal exposure assessment (linking monitoring data to
+locations over time)<br>Exposure measurement error<br>Distributed lag
+models<br>Extreme value analysis (such as heat waves)</td>
+<td>Case-crossover designs for acute exposures<br>Spatial survival
+analysis<br>Bayesian hierarchical models for multi-pollutant
+exposures<br>Mixture analysis (quantile g-computation, weighted quantile
+sum)</td>
+<td>Distributed lag models<br>Time-series analysis<br>Spatial survival
+analysis<br>Mixture analysis</td>
+</tr>
+<tr class="even">
+<td><strong>Sociodemographic epidemiology</strong></td>
+<td>Multilevel modeling<br>Structural confounding
+adjustment<br>Intersectionality analysis<br>Longitudinal neighborhood
+effects</td>
+<td>Multilevel propensity score methods<br>Spatial mediation
+analysis<br>G-methods for time-varying area-level
+confounders<br>Disparity decomposition (spatial Oaxaca-Blinder)</td>
+<td>Multilevel modeling<br>Spatial mediation<br>Disparity
+analysis<br>Time-varying area-level exposures</td>
+</tr>
+<tr class="odd">
+<td><strong>Spatial epidemiology</strong></td>
+<td>Spatial cluster detection<br>Spatial regression (autocorrelation,
+boundary effects)<br>Disease mapping that preserves privacy<br>Spatial
+interaction and access modeling</td>
+<td>Bayesian disease mapping (BYM)<br>Spatial scan statistics
+(SaTScan)<br>Geographically weighted regression<br>Spatial accessibility
+(two-step floating catchment area)</td>
+<td>Spatial autocorrelation diagnostics<br>Spatial
+regression<br>Small-area estimation<br>Accessibility analysis</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
 </div>
 <div id="transparency-and-ethical-analysis" class="section level2">
-<h2>8.4. Transparency and Ethical Analysis</h2>
-<p>Geospatial health research raises unique ethical challenges that
-require enhanced transparency across the analytical toolchain.</p>
-<div id="privacy-and-re-identification-risk" class="section level3">
-<h3>8.4.1. Privacy and Re-identification Risk</h3>
-<p><strong>Challenges:</strong> - Small geographic areas (Census tracts)
-may enable re-identification of rare conditions - Spatial patterns may
-reveal protected health information even with aggregation - Federated
-analysis must protect sensitive location data while enabling spatial
-statistics</p>
-<p><strong>Current Toolchain Transparency:</strong> - OMOP CDM provides
-data structure documentation - HADES packages document statistical
-methods - However, <strong>privacy risk assessment</strong> is typically
-left to individual researchers</p>
-<p><strong>Proposed Enhancements:</strong> - Automated small-number
-suppression in geospatial outputs - Differential privacy mechanisms for
-spatial aggregation - Re-identification risk assessment tools for
-geographic data - Spatial k-anonymity and l-diversity metrics</p>
-</div>
-<div id="environmental-justice-and-equity" class="section level3">
-<h3>8.4.2. Environmental Justice and Equity</h3>
-<p><strong>Challenges:</strong> - Spatial analyses may inadvertently
-reinforce environmental injustice narratives - Unequal data quality
-across communities (more monitoring in affluent areas) - Analytical
-choices (e.g., boundary definitions) can affect equity assessments</p>
-<p><strong>Current Toolchain Transparency:</strong> - Limited guidance
-on equity-focused analysis - No standard metrics for environmental
-justice assessment - Insufficient documentation of potential biases in
-geospatial data sources</p>
-<p><strong>Proposed Enhancements:</strong> - Environmental justice
-impact checklists for spatial analyses - Standardized EJ metrics
-(cumulative burden, disparate impact ratios) - Data quality
-stratification reporting by neighborhood characteristics -
-Community-engaged validation of spatial analyses</p>
-</div>
-<div id="structural-racism-and-social-determinants"
-class="section level3">
-<h3>8.4.3. Structural Racism and Social Determinants</h3>
-<p><strong>Challenges:</strong> - Area-level social determinants are
-consequences of historical and structural racism - Analyses must avoid
-causal language that blames communities for health disparities -
-Confounding by unmeasured structural factors is pervasive</p>
-<p><strong>Current Toolchain Transparency:</strong> - OMOP vocabularies
-document SDOH concepts but not their structural origins - HADES methods
-assume exchangeability that may not hold for structural exposures -
-Limited guidance on interpreting area-level effect estimates</p>
-<p><strong>Proposed Enhancements:</strong> - Structural causal models
-for social determinants - Sensitivity analyses for unmeasured structural
-confounding - Explicit documentation of causal assumptions in spatial
-analyses - Anti-racist data science frameworks integrated into
-analytical workflows</p>
-<hr />
-</div>
+<h2><strong>Transparency and ethical analysis</strong></h2>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Topic</th>
+<th>Challenges</th>
+<th>Transparency today</th>
+<th>Proposed enhancements</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Privacy and re-identification</strong></td>
+<td>Small areas (Census tracts) can identify people with rare
+conditions<br>Spatial patterns can reveal protected information even
+when aggregated<br>Federated analysis must protect locations while
+allowing spatial statistics</td>
+<td>The CDM documents data structure and HADES documents methods, but
+privacy risk assessment is left to each researcher</td>
+<td>Automated small-number suppression<br>Differential privacy for
+spatial aggregation<br>Re-identification risk tools<br>Spatial
+k-anonymity and l-diversity metrics</td>
+</tr>
+<tr class="even">
+<td><strong>Environmental justice and equity</strong></td>
+<td>Analyses can reinforce injustice narratives<br>Data quality is
+unequal across communities (more monitoring in affluent
+areas)<br>Boundary choices affect equity results</td>
+<td>Limited guidance on equity-focused analysis, no standard EJ metrics,
+little documentation of bias in geospatial sources</td>
+<td>EJ impact checklists<br>Standard metrics (cumulative burden,
+disparate impact ratios)<br>Data quality reporting stratified by
+neighborhood<br>Community-engaged validation</td>
+</tr>
+<tr class="odd">
+<td><strong>Structural racism and social determinants</strong></td>
+<td>Area-level determinants reflect historical and structural
+racism<br>Causal language must not blame communities<br>Confounding by
+structural factors is pervasive</td>
+<td>Vocabularies document SDOH concepts but not their structural
+origins; HADES assumes exchangeability that may not hold; little
+guidance on interpreting area-level effects</td>
+<td>Structural causal models<br>Sensitivity analyses for structural
+confounding<br>Explicit causal assumptions in every spatial
+analysis<br>Anti-racist data science frameworks</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
 </div>
 <div id="role-of-ai-and-llms-in-transparency" class="section level2">
-<h2>8.5. Role of AI and LLMs in Transparency</h2>
-<p>Large Language Models (LLMs) and AI tools may facilitate transparency
-and ethical analysis through:</p>
-<div id="automated-documentation" class="section level3">
-<h3>8.5.1. Automated Documentation</h3>
-<ul>
-<li><strong>Analysis provenance tracking</strong>: LLMs generate
-human-readable summaries of analytical pipelines</li>
-<li><strong>Assumption documentation</strong>: Extract and document
-causal assumptions from code and comments</li>
-<li><strong>Methods translation</strong>: Convert technical HADES code
-into plain-language descriptions for community stakeholders</li>
-</ul>
-</div>
-<div id="bias-detection-and-mitigation" class="section level3">
-<h3>8.5.2. Bias Detection and Mitigation</h3>
-<ul>
-<li><strong>Data quality assessment</strong>: LLMs identify patterns of
-missing or poor-quality data across communities</li>
-<li><strong>Equity auditing</strong>: Automated review of analytical
-choices for potential bias introduction</li>
-<li><strong>Sensitivity analysis generation</strong>: LLM-assisted
-creation of robustness checks for equity-critical analyses</li>
-</ul>
-</div>
-<div id="stakeholder-communication" class="section level3">
-<h3>8.5.3. Stakeholder Communication</h3>
-<ul>
-<li><strong>Accessible reporting</strong>: Generate community-facing
-summaries of complex geospatial analyses</li>
-<li><strong>Interactive Q&amp;A</strong>: LLM interfaces allow
-non-technical stakeholders to query analytical findings</li>
-<li><strong>Visualizations</strong>: LLM-assisted creation of
-privacy-preserving, equity-focused visualizations</li>
-</ul>
-</div>
-<div id="responsible-ai-considerations" class="section level3">
-<h3>8.5.4. Responsible AI Considerations</h3>
-<p><strong>Risks:</strong> - LLM hallucinations may introduce errors in
-analytical documentation - Automated bias detection may miss
-context-specific equity issues - Over-reliance on AI may reduce human
-engagement in ethical deliberation</p>
-<p><strong>Safeguards:</strong> - Human review of all LLM-generated
-documentation - Community validation of AI-assisted equity assessments -
-Transparency about LLM use in analytical workflows - Regular auditing of
-AI tools for algorithmic bias</p>
-<hr />
-</div>
+<h2><strong>Role of AI and LLMs in transparency</strong></h2>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Area</th>
+<th>Possible uses</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Automated documentation</strong></td>
+<td>Human-readable summaries of analysis pipelines
+(provenance)<br>Extracting causal assumptions from code and
+comments<br>Translating HADES code into plain language for
+stakeholders</td>
+</tr>
+<tr class="even">
+<td><strong>Bias detection and mitigation</strong></td>
+<td>Finding patterns of missing or poor data across
+communities<br>Reviewing analytical choices for bias<br>Drafting
+robustness checks for equity-critical analyses</td>
+</tr>
+<tr class="odd">
+<td><strong>Stakeholder communication</strong></td>
+<td>Community-facing summaries of complex
+analyses<br>Question-and-answer interfaces to
+findings<br>Privacy-preserving, equity-focused visualizations</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Risk</th>
+<th>Safeguard</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Hallucinations introduce errors into documentation</td>
+<td>Human review of all LLM-generated documentation</td>
+</tr>
+<tr class="even">
+<td>Automated bias detection misses context-specific equity issues</td>
+<td>Community validation of AI-assisted equity assessments</td>
+</tr>
+<tr class="odd">
+<td>Over-reliance reduces human engagement in ethical deliberation</td>
+<td>Transparency about LLM use in analysis workflows</td>
+</tr>
+<tr class="even">
+<td>Tools carry algorithmic bias</td>
+<td>Regular auditing of AI tools</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
 </div>
 <div id="future-directions" class="section level2">
-<h2>8.6. Future Directions</h2>
-<p>The analytical capabilities of the OMOP GIS extension will continue
-to evolve through:</p>
-<div id="community-driven-development" class="section level3">
-<h3>8.6.1. Community-Driven Development</h3>
-<ul>
-<li>Use cases (Section 7) identify analytical needs</li>
-<li>HADES package proposals emerge from validated use cases</li>
-<li>Community review ensures methods meet scientific and ethical
-standards</li>
-</ul>
-</div>
-<div id="integration-with-emerging-methods" class="section level3">
-<h3>8.6.2. Integration with Emerging Methods</h3>
-<ul>
-<li>Causal inference for spatial exposures (spatial instrumental
-variables, regression discontinuity)</li>
-<li>Machine learning for exposure prediction (satellite imagery, land
-use data)</li>
-<li>Agent-based modeling for neighborhood effects</li>
-<li>Precision environmental health (personalized exposure
-assessment)</li>
-</ul>
-</div>
-<div id="cross-disciplinary-collaboration" class="section level3">
-<h3>8.6.3. Cross-Disciplinary Collaboration</h3>
-<ul>
-<li>Environmental science (exposure modeling, measurement science)</li>
-<li>Geography and GIS (spatial statistics, cartography)</li>
-<li>Urban planning (built environment, accessibility analysis)</li>
-<li>Social epidemiology (structural determinants,
-intersectionality)</li>
-<li>Ethics and philosophy (environmental justice, data justice)</li>
-</ul>
-</div>
-<div id="open-science-and-reproducibility" class="section level3">
-<h3>8.6.4. Open Science and Reproducibility</h3>
-<ul>
-<li>All HADES extensions will be open source (Apache 2.0 license)</li>
-<li>Example analyses documented in vignettes with public data</li>
-<li>Validation studies published in peer-reviewed literature</li>
-<li>Community feedback loops through GitHub, forums, and working group
-meetings</li>
-</ul>
-<hr />
-</div>
+<h2><strong>Future directions</strong></h2>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Direction</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Community-driven development</strong></td>
+<td>Use cases identify analytical needs; HADES package proposals come
+from validated use cases; community review checks scientific and ethical
+standards (see <a href="status.html">use case status</a>)</td>
+</tr>
+<tr class="even">
+<td><strong>Emerging methods</strong></td>
+<td>Causal inference for spatial exposures (spatial instrumental
+variables, regression discontinuity)<br>Machine learning for exposure
+prediction (satellite imagery, land use)<br>Agent-based modeling of
+neighborhood effects<br>Precision environmental health</td>
+</tr>
+<tr class="odd">
+<td><strong>Cross-disciplinary collaboration</strong></td>
+<td>Environmental science, geography and GIS, urban planning, social
+epidemiology, ethics and philosophy</td>
+</tr>
+<tr class="even">
+<td><strong>Open science</strong></td>
+<td>Apache 2.0 licensed extensions, vignettes on public data, published
+validation studies, feedback through GitHub, forums and working group
+meetings</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
 </div>
 <div id="resources" class="section level2">
-<h2>8.7. Resources</h2>
-<div id="current-hades-documentation" class="section level3">
-<h3>Current HADES Documentation</h3>
+<h2><strong>Resources</strong></h2>
 <ul>
-<li><a href="https://ohdsi.github.io/Hades/">HADES Overview</a></li>
-<li><a href="https://ohdsi.github.io/Hades/packages.html">HADES Package
-List</a></li>
+<li><a href="https://ohdsi.github.io/Hades/">HADES overview</a> and <a
+href="https://ohdsi.github.io/Hades/packages.html">package list</a></li>
 <li><a href="https://ohdsi.github.io/TheBookOfOhdsi/">The Book of
 OHDSI</a></li>
-</ul>
-</div>
-<div id="proposed-gis-analysis-extensions" class="section level3">
-<h3>Proposed GIS Analysis Extensions</h3>
-<ul>
-<li><a href="https://github.com/OHDSI/GIS">GIS Working Group
+<li><a href="https://github.com/OHDSI/GIS">GIS Working Group on
 GitHub</a></li>
-<li>Use case-specific repositories (linked from Section 7)</li>
-<li>Method development discussions in WG meetings</li>
+<li>Ethical frameworks: <a
+href="https://ohdsi.org/code-of-conduct/">OHDSI Code of Conduct</a>,
+FAIR principles for research data, NIH NOT-OD-23-053 (structural racism
+and discrimination), EPA EJ 2020 Action Agenda</li>
 </ul>
-</div>
-<div id="ethical-frameworks" class="section level3">
-<h3>Ethical Frameworks</h3>
-<ul>
-<li><a href="https://ohdsi.org/code-of-conduct/">OHDSI Code of
-Conduct</a></li>
-<li>FAIR Principles for research data</li>
-<li>NIH NOT-OD-23-053: Structural Racism and Discrimination</li>
-<li>EPA EJ 2020 Action Agenda</li>
-</ul>
-<p>The GIS Working Group is committed to developing analytical
-infrastructure that is not only scientifically rigorous but also
-ethically grounded, transparent, and responsive to community needs.</p>
-</div>
 </div>
 </div>
 
@@ -965,7 +940,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2,h3",
+      selectors: "h1,h2",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {

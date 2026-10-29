@@ -356,6 +356,67 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-earth"></span>
+     
+    Gaia
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="gaia-intro.html">Overview</a>
+    </li>
+    <li>
+      <a href="examples.html">Examples</a>
+    </li>
+    <li>
+      <a href="gaia-principles.html">Design</a>
+    </li>
+    <li>
+      <a href="schema-extensions.html">Schema Extensions</a>
+    </li>
+    <li>
+      <a href="vocabulary.html">Vocabulary</a>
+    </li>
+    <li>
+      <a href="analysis.html">Analysis</a>
+    </li>
+    <li>
+      <a href="algorithms.html">Algorithms</a>
+    </li>
+    <li>
+      <a href="geocoding.html">Geocoding</a>
+    </li>
+    <li>
+      <a href="gaiaDB.html">gaiaDB</a>
+    </li>
+    <li>
+      <a href="gaiaCore.html">gaiaCore</a>
+    </li>
+    <li>
+      <a href="gaiaCatalog.html">gaiaCatalog</a>
+    </li>
+    <li>
+      <a href="gaiaDocker.html">gaiaDocker</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="inventory.html">
+    <span class="fa fa-database"></span>
+     
+    Data Inventory
+  </a>
+</li>
+<li>
+  <a href="ares-demo/#/cdm/SYNTH-GIS/20261005/geographic_exposures">
+    <span class="fa fa-map"></span>
+     
+    ARES Demo
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-graduation-cap"></span>
      
     Tutorial
@@ -403,74 +464,6 @@ div.tocify {
       <a href="tutorial-r-exercise-4.html">R track: Exercise 4 (beta)</a>
     </li>
   </ul>
-</li>
-<li>
-  <a href="ares-demo/">
-    <span class="fa fa-map"></span>
-     
-    ARES demo
-  </a>
-</li>
-<li>
-  <a href="inventory.html">
-    <span class="fa fa-database"></span>
-     
-    Data Inventory
-  </a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <span class="fa fa-earth"></span>
-     
-    Gaia
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="gaia-intro.html">Overview</a>
-    </li>
-    <li>
-      <a href="examples.html">Examples</a>
-    </li>
-    <li>
-      <a href="gaia-principles.html">Design</a>
-    </li>
-    <li>
-      <a href="schema-extensions.html">Schema Extensions</a>
-    </li>
-    <li>
-      <a href="use-cases.html">Use Cases</a>
-    </li>
-    <li>
-      <a href="analysis.html">Analysis</a>
-    </li>
-    <li>
-      <a href="algorithms.html">Algorithms</a>
-    </li>
-    <li>
-      <a href="geocoding.html">Geocoding</a>
-    </li>
-    <li>
-      <a href="gaiaDB.html">gaiaDB</a>
-    </li>
-    <li>
-      <a href="gaiaCore.html">gaiaCore</a>
-    </li>
-    <li>
-      <a href="gaiaCatalog.html">gaiaCatalog</a>
-    </li>
-    <li>
-      <a href="gaiaDocker.html">gaiaDocker</a>
-    </li>
-  </ul>
-</li>
-<li>
-  <a href="vocabulary.html">
-    <span class="fa fa-book"></span>
-     
-    Vocabulary
-  </a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -561,6 +554,80 @@ Show complete</label></p>
 <div id="status-datasets" class="status-table-wrap">
 
 </div>
+<p><br></p>
+</div>
+<div id="how-use-cases-shape-the-toolchain" class="section level2">
+<h2><strong>How use cases shape the toolchain</strong></h2>
+<p>Development is use-case driven. Each use case feeds one or more parts
+of the toolchain.</p>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Area</th>
+<th>What use cases identify</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Vocabulary</strong></td>
+<td>Missing concepts, mapping gaps, hierarchy needs and synonyms for
+geospatial and environmental variables</td>
+</tr>
+<tr class="even">
+<td><strong>CDM extensions</strong></td>
+<td>Auxiliary table designs, fields for <code>external_exposure</code>
+and related tables, indexing and performance needs, linkage patterns
+between clinical data and geospatial sources</td>
+</tr>
+<tr class="odd">
+<td><strong>Analysis</strong></td>
+<td>HADES enhancements, custom libraries for geospatial processing,
+federated analysis protocols, exposure quality validation (see <a
+href="analysis.html">Analysis</a>)</td>
+</tr>
+</tbody>
+</table>
+<p>To propose one, see <a href="get-started.html#propose-a-use-case">Get
+Started</a>. Proposals are reviewed against:</p>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Criterion</th>
+<th>Question</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Scientific rigor</td>
+<td>Is there a clear hypothesis and study design?</td>
+</tr>
+<tr class="even">
+<td>Generalizability</td>
+<td>Does it apply beyond a single institution or dataset?</td>
+</tr>
+<tr class="odd">
+<td>Technical feasibility</td>
+<td>Are the required geospatial data sources available?</td>
+</tr>
+<tr class="even">
+<td>Community benefit</td>
+<td>Does it contribute to shared toolchain components?</td>
+</tr>
+<tr class="odd">
+<td>OHDSI principles</td>
+<td>Does it support open science, reproducibility and
+collaboration?</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
 </div>
 <div id="how-to-read-this-page" class="section level2">
