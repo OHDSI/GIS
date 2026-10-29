@@ -578,21 +578,83 @@ US federal datasets pass the licence check by the working group’s rule
 </div>
 </aside>
 <div class="gi-main">
-<pre><code>&lt;div class=&quot;gi-filterbar&quot; id=&quot;gi-bar&quot;&gt;&lt;/div&gt;
-&lt;section class=&quot;gi-panel&quot;&gt;
-  &lt;h3&gt;Breakdown&lt;/h3&gt;
-  &lt;div class=&quot;gi-ctl&quot;&gt;&lt;label for=&quot;gi-axr&quot;&gt;Rows&lt;/label&gt;&lt;select id=&quot;gi-axr&quot;&gt;&lt;/select&gt;&lt;label for=&quot;gi-axc&quot;&gt;by&lt;/label&gt;&lt;select id=&quot;gi-axc&quot;&gt;&lt;/select&gt;&lt;span&gt;· click a cell to filter&lt;/span&gt;&lt;/div&gt;
-  &lt;div class=&quot;gi-scroll&quot;&gt;&lt;table class=&quot;gi-pivot&quot; id=&quot;gi-pivot&quot;&gt;&lt;/table&gt;&lt;/div&gt;
-&lt;/section&gt;
-&lt;section class=&quot;gi-panel gi-res&quot;&gt;
-  &lt;div class=&quot;gi-ctl&quot; style=&quot;justify-content:space-between&quot;&gt;&lt;h3&gt;Datasets&lt;/h3&gt;
-    &lt;div class=&quot;gi-legend&quot;&gt;Checks: &lt;span class=&quot;gi-strip&quot;&gt;&lt;i class=&quot;p&quot;&gt;&lt;/i&gt;&lt;/span&gt;pass &lt;span class=&quot;gi-strip&quot;&gt;&lt;i class=&quot;w&quot;&gt;&lt;/i&gt;&lt;/span&gt;warn &lt;span class=&quot;gi-strip&quot;&gt;&lt;i class=&quot;f&quot;&gt;&lt;/i&gt;&lt;/span&gt;fail &lt;span class=&quot;gi-strip&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;/span&gt;not checked &lt;span id=&quot;gi-chk&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
-  &lt;div class=&quot;gi-scroll&quot;&gt;&lt;table id=&quot;gi-tbl&quot;&gt;&lt;thead&gt;&lt;tr&gt;
-    &lt;th data-k=&quot;n&quot;&gt;Dataset&lt;/th&gt;&lt;th data-k=&quot;t&quot;&gt;Tier&lt;/th&gt;&lt;th data-k=&quot;lv&quot;&gt;Verified&lt;/th&gt;&lt;th&gt;Checks&lt;/th&gt;&lt;th data-k=&quot;u&quot;&gt;Unit&lt;/th&gt;&lt;th data-k=&quot;ly&quot;&gt;Latest&lt;/th&gt;&lt;th data-k=&quot;gs&quot;&gt;Geometry&lt;/th&gt;&lt;th data-k=&quot;rg&quot;&gt;Region&lt;/th&gt;
-  &lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td colspan=&quot;8&quot;&gt;Loading the inventory…&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
-  &lt;div class=&quot;gi-pager&quot;&gt;&lt;span id=&quot;gi-pg&quot;&gt;&lt;/span&gt;&lt;button id=&quot;gi-prev&quot; type=&quot;button&quot;&gt;Previous&lt;/button&gt;&lt;button id=&quot;gi-next&quot; type=&quot;button&quot;&gt;Next&lt;/button&gt;&lt;/div&gt;
-  &lt;p class=&quot;gi-note&quot;&gt;Click a row for its evidence, file findings and what is blocking it. Data: &lt;a href=&quot;https://github.com/OHDSI/GIS/blob/main/exploration/place-data-inventory/inventory-all.csv&quot;&gt;inventory-all.csv&lt;/a&gt;.&lt;/p&gt;
-&lt;/section&gt;</code></pre>
+<div id="gi-bar" class="gi-filterbar">
+
+</div>
+<section class="gi-panel">
+<h3>
+Breakdown
+</h3>
+<div class="gi-ctl">
+<label for="gi-axr">Rows</label><select id="gi-axr"></select><label for="gi-axc">by</label><select id="gi-axc"></select><span>·
+click a cell to filter</span>
+</div>
+<div class="gi-scroll">
+<table class="gi-pivot" id="gi-pivot">
+</table>
+</div>
+</section>
+<section class="gi-panel gi-res">
+<div class="gi-ctl" style="justify-content:space-between">
+<h3>
+Datasets
+</h3>
+<div class="gi-legend">
+Checks: <span class="gi-strip"><i class="p"></i></span>pass <span
+class="gi-strip"><i class="w"></i></span>warn <span
+class="gi-strip"><i class="f"></i></span>fail <span
+class="gi-strip"><i></i></span>not checked <span id="gi-chk"></span>
+</div>
+</div>
+<div class="gi-scroll">
+<table id="gi-tbl">
+<thead>
+<tr>
+<th data-k="n">
+Dataset
+</th>
+<th data-k="t">
+Tier
+</th>
+<th data-k="lv">
+Verified
+</th>
+<th>
+Checks
+</th>
+<th data-k="u">
+Unit
+</th>
+<th data-k="ly">
+Latest
+</th>
+<th data-k="gs">
+Geometry
+</th>
+<th data-k="rg">
+Region
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="8">
+Loading the inventory…
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="gi-pager">
+<span
+id="gi-pg"></span><button id="gi-prev" type="button">Previous</button><button id="gi-next" type="button">Next</button>
+</div>
+<p class="gi-note">
+Click a row for its evidence, file findings and what is blocking it.
+Data:
+<a href="https://github.com/OHDSI/GIS/blob/main/exploration/place-data-inventory/inventory-all.csv">inventory-all.csv</a>.
+</p>
+</section>
 </div>
 </div>
 </div>
