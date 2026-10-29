@@ -2,6 +2,21 @@
  "_readme": "Add one object per update. 'date' (YYYY-MM-DD) is required; the site sorts newest first and the home page shows the three most recent. 'body' is plain text. 'links' is a list of {label, url}; urls are absolute https:// or relative site paths.",
  "updates": [
   {
+   "date": "2026-10-29",
+   "title": "Exploratory place-based data inventory",
+   "body": "A first evidence-backed inventory of public place-based datasets for linking to where patients live: 690 assessed, 345 verified, 15 checked down to the file. Each working-group dataset request now shows what was found. Methods, iterations and next steps are in the repository.",
+   "links": [
+    {
+     "label": "Data Inventory",
+     "url": "inventory.html"
+    },
+    {
+     "label": "Details and roadmap",
+     "url": "https://github.com/OHDSI/GIS/tree/main/exploration/place-data-inventory"
+    }
+   ]
+  },
+  {
    "date": "2026-10-26",
    "title": "ARES updated for geospatial data",
    "body": "The published ARES demo now includes geospatial data from the Gaia toolchain.",

@@ -1,0 +1,118 @@
+---
+title: '<div><img src="ohdsi40x40.png"></img> OHDSI GIS WG </div>'
+output:
+   html_document:
+        toc: FALSE
+---
+
+<style>
+/* Data Inventory explorer. All rules are scoped to #gis-inv so the site theme (cosmo) is untouched. */
+#gis-inv{
+  --gi-surface:#fff; --gi-fg:#2b3a45; --gi-muted:#62717d; --gi-line:#dde3e8; --gi-hover:#f1f4f7; --gi-soft:#f7f9fa;
+  --gi-accent:#2780e3; --gi-sel:#20425a; --gi-p:#2e7d4f; --gi-w:#c08a12; --gi-f:#b23b3b; --gi-n:#cfd7de; --gi-heat:32,66,90;
+  --gi-gold:#8a6508; --gi-gold-bg:#f8edcc; --gi-silver:#4f6172; --gi-silver-bg:#e5ebf0; --gi-bronze:#8a4f25; --gi-bronze-bg:#f2e3d7;
+  --gi-browser:#5b4d98; --gi-browser-bg:#e9e5f5; --gi-failed:#a33b3b; --gi-failed-bg:#f5dddd;
+  color:var(--gi-fg); font-size:14px; line-height:1.45;
+}
+#gis-inv .gi-intro{color:var(--gi-muted);max-width:90ch;margin:0 0 14px}
+#gis-inv .gi-layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:860px){#gis-inv .gi-layout{grid-template-columns:minmax(0,1fr)}}
+#gis-inv aside{background:var(--gi-surface);border:1px solid var(--gi-line);border-radius:4px;padding:10px 12px;display:flex;flex-direction:column;gap:12px}
+#gis-inv aside input[type=search]{font:inherit;width:100%;box-sizing:border-box;padding:6px 8px;border:1px solid var(--gi-line);border-radius:3px}
+#gis-inv .gi-facet h4{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--gi-muted);margin:0 0 4px;font-weight:600}
+#gis-inv .gi-facet label{display:flex;gap:6px;align-items:center;padding:1px 0;margin:0;font-weight:400;cursor:pointer}
+#gis-inv .gi-facet label input{margin:0}
+#gis-inv .gi-facet .gi-c{margin-left:auto;color:var(--gi-muted);font-variant-numeric:tabular-nums;font-size:12px}
+#gis-inv .gi-facet label.gi-zero{opacity:.45}
+#gis-inv .gi-more{font:inherit;font-size:12px;background:none;border:0;color:var(--gi-accent);cursor:pointer;padding:2px 0}
+#gis-inv .gi-main{min-width:0;display:flex;flex-direction:column;gap:16px}
+#gis-inv .gi-filterbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px}
+#gis-inv .gi-chip{background:var(--gi-surface);border:1px solid var(--gi-line);border-radius:99px;padding:1px 4px 1px 9px;display:inline-flex;gap:4px;align-items:center}
+#gis-inv .gi-chip button,#gis-inv .gi-clear{font:inherit;border:0;background:none;color:var(--gi-muted);cursor:pointer;padding:0 4px}
+#gis-inv .gi-clear{color:var(--gi-accent)}
+#gis-inv .gi-total{font-weight:600;margin-right:6px}
+#gis-inv .gi-panel{background:var(--gi-surface);border:1px solid var(--gi-line);border-radius:4px;padding:12px}
+#gis-inv .gi-panel h3{font-size:15px;margin:0;font-weight:600}
+#gis-inv .gi-ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:4px 0 10px;color:var(--gi-muted);font-size:13px}
+#gis-inv .gi-ctl label{margin:0;font-weight:400}
+#gis-inv .gi-ctl select{font:inherit;font-size:13px;padding:2px 6px;border:1px solid var(--gi-line);border-radius:3px;background:#fff}
+#gis-inv .gi-scroll{overflow-x:auto}
+#gis-inv table{border-collapse:collapse;font-size:13px;width:100%;margin:0}
+#gis-inv th,#gis-inv td{padding:5px 7px;border-bottom:1px solid var(--gi-line);text-align:left;vertical-align:top}
+#gis-inv th{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--gi-muted);font-weight:600;white-space:nowrap}
+#gis-inv .gi-pivot td.gi-cell{text-align:right;font-family:Menlo,Consolas,monospace;font-size:12px;cursor:pointer;min-width:44px}
+#gis-inv .gi-pivot td.gi-cell:hover{outline:2px solid var(--gi-sel);outline-offset:-2px}
+#gis-inv .gi-pivot td.gi-cell.gi-zero{color:var(--gi-muted);cursor:default}
+#gis-inv .gi-pivot th.gi-ch,#gis-inv .gi-pivot .gi-tot{text-align:right}
+#gis-inv .gi-pivot .gi-tot{font-weight:600}
+#gis-inv .gi-pivot td.gi-rh{white-space:nowrap}
+#gis-inv .gi-res th[data-k]{cursor:pointer}
+#gis-inv .gi-res tbody tr.gi-row{cursor:pointer}
+#gis-inv .gi-res tbody tr.gi-row:hover{background:var(--gi-hover)}
+#gis-inv .gi-res td.gi-nm{min-width:220px}
+#gis-inv .gi-res td:not(.gi-nm){white-space:nowrap}
+#gis-inv .gi-res td.gi-nm small{display:block;color:var(--gi-muted)}
+#gis-inv .gi-mono{font-family:Menlo,Consolas,monospace;font-size:11.5px}
+#gis-inv .gi-tier{display:inline-block;font-size:11.5px;font-weight:600;padding:0 6px;border-radius:3px;white-space:nowrap}
+#gis-inv .gi-t-Gold{background:var(--gi-gold-bg);color:var(--gi-gold)} #gis-inv .gi-t-Silver{background:var(--gi-silver-bg);color:var(--gi-silver)}
+#gis-inv .gi-t-Bronze{background:var(--gi-bronze-bg);color:var(--gi-bronze)} #gis-inv .gi-t-Browser{background:var(--gi-browser-bg);color:var(--gi-browser)}
+#gis-inv .gi-t-Failed{background:var(--gi-failed-bg);color:var(--gi-failed)}
+#gis-inv .gi-strip{display:inline-flex;gap:2px;vertical-align:middle}
+#gis-inv .gi-strip i{width:9px;height:9px;border-radius:2px;background:var(--gi-n)}
+#gis-inv .gi-strip i.p{background:var(--gi-p)} #gis-inv .gi-strip i.w{background:var(--gi-w)} #gis-inv .gi-strip i.f{background:var(--gi-f)}
+#gis-inv .gi-legend{display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:var(--gi-muted);align-items:center}
+#gis-inv tr.gi-det td{background:var(--gi-soft);font-size:13px}
+#gis-inv dl{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:3px 14px;margin:4px 0}
+#gis-inv dt{color:var(--gi-muted);font-weight:400} #gis-inv dd{margin:0;overflow-wrap:anywhere}
+#gis-inv .gi-pager{display:flex;gap:8px;align-items:center;justify-content:flex-end;margin-top:8px;color:var(--gi-muted);font-size:13px}
+#gis-inv .gi-pager button{font:inherit;font-size:13px;padding:2px 9px;border:1px solid var(--gi-line);border-radius:3px;background:#fff;cursor:pointer}
+#gis-inv .gi-pager button:disabled{opacity:.4;cursor:default}
+#gis-inv .gi-note{color:var(--gi-muted);font-size:12px;margin:6px 0 0}
+#gis-inv .gi-howto{margin:0 0 14px;font-size:13px}
+#gis-inv .gi-howto summary{cursor:pointer;color:var(--gi-accent)}
+#gis-inv .gi-howto dl{margin:8px 0 4px}
+#gis-inv .gi-howto p{margin:4px 0 0;color:var(--gi-muted)}
+#gis-inv :focus-visible{outline:2px solid var(--gi-sel);outline-offset:2px}
+</style>
+
+# **Data Inventory**
+
+<div id="gis-inv">
+<p class="gi-intro">The working state of place-based data discovery: every dataset assessed so far, what has been checked, and what is still open. <span id="gi-asof"></span> <a href="https://github.com/OHDSI/GIS/tree/main/exploration/place-data-inventory">Details and roadmap on GitHub</a></p>
+<details class="gi-howto"><summary>How to read the tiers</summary>
+<dl>
+<dt><span class="gi-tier gi-t-Gold">Gold</span></dt><dd>Link, page, licence, spatial unit, years and access all pass, read from the publisher's pages with evidence.</dd>
+<dt><span class="gi-tier gi-t-Silver">Silver</span></dt><dd>The link works and no check fails, but at least one is only partly confirmed (a warning).</dd>
+<dt><span class="gi-tier gi-t-Bronze">Bronze</span></dt><dd>The link works, but the content has not been read yet, or a check failed (often a licence the page does not state).</dd>
+<dt><span class="gi-tier gi-t-Browser">Browser needed</span></dt><dd>The site blocks automated checks; a person needs to open it. Usually not a dead link.</dd>
+<dt><span class="gi-tier gi-t-Failed">Failed</span></dt><dd>Dead, withdrawn, archived, or data that ends before 2000.</dd>
+<dt>Verified: page / file</dt><dd>"page" means the facts come from the publisher's pages; "file" means a real file was opened and its columns, place key and years read.</dd>
+</dl>
+<p>US federal datasets pass the licence check by the working group's rule (public domain unless a page says otherwise).</p>
+</details>
+<div class="gi-layout">
+  <aside aria-label="Filters">
+    <input type="search" id="gi-q" placeholder="Search name, publisher, id" aria-label="Search">
+    <div id="gi-facets"></div>
+  </aside>
+  <div class="gi-main">
+    <div class="gi-filterbar" id="gi-bar"></div>
+    <section class="gi-panel">
+      <h3>Breakdown</h3>
+      <div class="gi-ctl"><label for="gi-axr">Rows</label><select id="gi-axr"></select><label for="gi-axc">by</label><select id="gi-axc"></select><span>· click a cell to filter</span></div>
+      <div class="gi-scroll"><table class="gi-pivot" id="gi-pivot"></table></div>
+    </section>
+    <section class="gi-panel gi-res">
+      <div class="gi-ctl" style="justify-content:space-between"><h3>Datasets</h3>
+        <div class="gi-legend">Checks: <span class="gi-strip"><i class="p"></i></span>pass <span class="gi-strip"><i class="w"></i></span>warn <span class="gi-strip"><i class="f"></i></span>fail <span class="gi-strip"><i></i></span>not checked <span id="gi-chk"></span></div></div>
+      <div class="gi-scroll"><table id="gi-tbl"><thead><tr>
+        <th data-k="n">Dataset</th><th data-k="t">Tier</th><th data-k="lv">Verified</th><th>Checks</th><th data-k="u">Unit</th><th data-k="ly">Latest</th><th data-k="gs">Geometry</th><th data-k="rg">Region</th>
+      </tr></thead><tbody><tr><td colspan="8">Loading the inventory…</td></tr></tbody></table></div>
+      <div class="gi-pager"><span id="gi-pg"></span><button id="gi-prev" type="button">Previous</button><button id="gi-next" type="button">Next</button></div>
+      <p class="gi-note">Click a row for its evidence, file findings and what is blocking it. Data: <a href="https://github.com/OHDSI/GIS/blob/main/exploration/place-data-inventory/inventory-all.csv">inventory-all.csv</a>.</p>
+    </section>
+  </div>
+</div>
+</div>
+
+<script src="assets/inventory.js"></script>

@@ -58,6 +58,9 @@ navbar:
     - text: "ARES demo"
       icon: fa-map
       href: ares-demo/
+    - text: "Data Inventory"
+      icon: fa-database
+      href: inventory.html
     - text: "Gaia"
       icon: fa-earth
       menu:
