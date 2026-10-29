@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title> OHDSI GIS WG</title>
+
+<script src="site_libs/header-attrs-2.32/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+<link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"><div><img src="ohdsi16x16.png"></img> OHDSI GIS </div></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-users"></span>
+     
+    Working Group
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="index.html">Home</a>
+    </li>
+    <li>
+      <a href="updates.html">Updates</a>
+    </li>
+    <li>
+      <a href="get-started.html">Get Started</a>
+    </li>
+    <li>
+      <a href="status.html">Use Case &amp; Dataset Status</a>
+    </li>
+    <li>
+      <a href="project-management.html">Project Management</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-graduation-cap"></span>
+     
+    Tutorial
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="tutorial.html">Overview</a>
+    </li>
+    <li>
+      <a href="tutorial-data-description.html">OMOP Data Description</a>
+    </li>
+    <li>
+      <a href="tutorial-data-visualization.html">OMOP Data Visualization</a>
+    </li>
+    <li>
+      <a href="tutorial-geo-data-description.html">Geo Data Description</a>
+    </li>
+    <li>
+      <a href="tutorial-geo-data-visualization.html">Geo Data Visualization</a>
+    </li>
+    <li>
+      <a href="tutorial-exercise-1.html">Exercise 1</a>
+    </li>
+    <li>
+      <a href="tutorial-exercise-2.html">Exercise 2</a>
+    </li>
+    <li>
+      <a href="tutorial-exercise-3.html">Exercise 3</a>
+    </li>
+    <li>
+      <a href="tutorial-exercise-4.html">Exercise 4</a>
+    </li>
+    <li>
+      <a href="tutorial-r-setup.html">R track: Setup (beta)</a>
+    </li>
+    <li>
+      <a href="tutorial-r-exercise-2.html">R track: Exercise 2 (beta)</a>
+    </li>
+    <li>
+      <a href="tutorial-r-exercise-3.html">R track: Exercise 3 (beta)</a>
+    </li>
+    <li>
+      <a href="tutorial-r-exercise-4.html">R track: Exercise 4 (beta)</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="ares-demo/">
+    <span class="fa fa-map"></span>
+     
+    ARES demo
+  </a>
+</li>
+<li>
+  <a href="inventory.html">
+    <span class="fa fa-database"></span>
+     
+    Data Inventory
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-earth"></span>
+     
+    Gaia
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="gaia-intro.html">Overview</a>
+    </li>
+    <li>
+      <a href="examples.html">Examples</a>
+    </li>
+    <li>
+      <a href="gaia-principles.html">Design</a>
+    </li>
+    <li>
+      <a href="schema-extensions.html">Schema Extensions</a>
+    </li>
+    <li>
+      <a href="use-cases.html">Use Cases</a>
+    </li>
+    <li>
+      <a href="analysis.html">Analysis</a>
+    </li>
+    <li>
+      <a href="algorithms.html">Algorithms</a>
+    </li>
+    <li>
+      <a href="geocoding.html">Geocoding</a>
+    </li>
+    <li>
+      <a href="gaiaDB.html">gaiaDB</a>
+    </li>
+    <li>
+      <a href="gaiaCore.html">gaiaCore</a>
+    </li>
+    <li>
+      <a href="gaiaCatalog.html">gaiaCatalog</a>
+    </li>
+    <li>
+      <a href="gaiaDocker.html">gaiaDocker</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="vocabulary.html">
+    <span class="fa fa-book"></span>
+     
+    Vocabulary
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-code"></span>
+     
+    Developer
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="developer.html">Overview</a>
+    </li>
+    <li>
+      <a href="developer-packages.html">Package Status</a>
+    </li>
+    <li>
+      <a href="developer-contributing.html">Contributing</a>
+    </li>
+    <li>
+      <a href="developer-architecture.html">Architecture</a>
+    </li>
+    <li>
+      <a href="developer-deployment.html">Deployment</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/OHDSI/GIS">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore"><img src="ohdsi40x40.png"></img> OHDSI GIS
+WG</h1>
+
+</div>
+
+
+<style>
+/* Data Inventory explorer. All rules are scoped to #gis-inv so the site theme (cosmo) is untouched. */
+#gis-inv{
+  --gi-surface:#fff; --gi-fg:#2b3a45; --gi-muted:#62717d; --gi-line:#dde3e8; --gi-hover:#f1f4f7; --gi-soft:#f7f9fa;
+  --gi-accent:#2780e3; --gi-sel:#20425a; --gi-p:#2e7d4f; --gi-w:#c08a12; --gi-f:#b23b3b; --gi-n:#cfd7de; --gi-heat:32,66,90;
+  --gi-gold:#8a6508; --gi-gold-bg:#f8edcc; --gi-silver:#4f6172; --gi-silver-bg:#e5ebf0; --gi-bronze:#8a4f25; --gi-bronze-bg:#f2e3d7;
+  --gi-browser:#5b4d98; --gi-browser-bg:#e9e5f5; --gi-failed:#a33b3b; --gi-failed-bg:#f5dddd;
+  color:var(--gi-fg); font-size:14px; line-height:1.45;
+}
+#gis-inv .gi-intro{color:var(--gi-muted);max-width:90ch;margin:0 0 14px}
+#gis-inv .gi-layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:860px){#gis-inv .gi-layout{grid-template-columns:minmax(0,1fr)}}
+#gis-inv aside{background:var(--gi-surface);border:1px solid var(--gi-line);border-radius:4px;padding:10px 12px;display:flex;flex-direction:column;gap:12px}
+#gis-inv aside input[type=search]{font:inherit;width:100%;box-sizing:border-box;padding:6px 8px;border:1px solid var(--gi-line);border-radius:3px}
+#gis-inv .gi-facet h4{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--gi-muted);margin:0 0 4px;font-weight:600}
+#gis-inv .gi-facet label{display:flex;gap:6px;align-items:center;padding:1px 0;margin:0;font-weight:400;cursor:pointer}
+#gis-inv .gi-facet label input{margin:0}
+#gis-inv .gi-facet .gi-c{margin-left:auto;color:var(--gi-muted);font-variant-numeric:tabular-nums;font-size:12px}
+#gis-inv .gi-facet label.gi-zero{opacity:.45}
+#gis-inv .gi-more{font:inherit;font-size:12px;background:none;border:0;color:var(--gi-accent);cursor:pointer;padding:2px 0}
+#gis-inv .gi-main{min-width:0;display:flex;flex-direction:column;gap:16px}
+#gis-inv .gi-filterbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px}
+#gis-inv .gi-chip{background:var(--gi-surface);border:1px solid var(--gi-line);border-radius:99px;padding:1px 4px 1px 9px;display:inline-flex;gap:4px;align-items:center}
+#gis-inv .gi-chip button,#gis-inv .gi-clear{font:inherit;border:0;background:none;color:var(--gi-muted);cursor:pointer;padding:0 4px}
+#gis-inv .gi-clear{color:var(--gi-accent)}
+#gis-inv .gi-total{font-weight:600;margin-right:6px}
+#gis-inv .gi-panel{background:var(--gi-surface);border:1px solid var(--gi-line);border-radius:4px;padding:12px}
+#gis-inv .gi-panel h3{font-size:15px;margin:0;font-weight:600}
+#gis-inv .gi-ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:4px 0 10px;color:var(--gi-muted);font-size:13px}
+#gis-inv .gi-ctl label{margin:0;font-weight:400}
+#gis-inv .gi-ctl select{font:inherit;font-size:13px;padding:2px 6px;border:1px solid var(--gi-line);border-radius:3px;background:#fff}
+#gis-inv .gi-scroll{overflow-x:auto}
+#gis-inv table{border-collapse:collapse;font-size:13px;width:100%;margin:0}
+#gis-inv th,#gis-inv td{padding:5px 7px;border-bottom:1px solid var(--gi-line);text-align:left;vertical-align:top}
+#gis-inv th{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--gi-muted);font-weight:600;white-space:nowrap}
+#gis-inv .gi-pivot td.gi-cell{text-align:right;font-family:Menlo,Consolas,monospace;font-size:12px;cursor:pointer;min-width:44px}
+#gis-inv .gi-pivot td.gi-cell:hover{outline:2px solid var(--gi-sel);outline-offset:-2px}
+#gis-inv .gi-pivot td.gi-cell.gi-zero{color:var(--gi-muted);cursor:default}
+#gis-inv .gi-pivot th.gi-ch,#gis-inv .gi-pivot .gi-tot{text-align:right}
+#gis-inv .gi-pivot .gi-tot{font-weight:600}
+#gis-inv .gi-pivot td.gi-rh{white-space:nowrap}
+#gis-inv .gi-res th[data-k]{cursor:pointer}
+#gis-inv .gi-res tbody tr.gi-row{cursor:pointer}
+#gis-inv .gi-res tbody tr.gi-row:hover{background:var(--gi-hover)}
+#gis-inv .gi-res td.gi-nm{min-width:220px}
+#gis-inv .gi-res td:not(.gi-nm){white-space:nowrap}
+#gis-inv .gi-res td.gi-nm small{display:block;color:var(--gi-muted)}
+#gis-inv .gi-mono{font-family:Menlo,Consolas,monospace;font-size:11.5px}
+#gis-inv .gi-tier{display:inline-block;font-size:11.5px;font-weight:600;padding:0 6px;border-radius:3px;white-space:nowrap}
+#gis-inv .gi-t-Gold{background:var(--gi-gold-bg);color:var(--gi-gold)} #gis-inv .gi-t-Silver{background:var(--gi-silver-bg);color:var(--gi-silver)}
+#gis-inv .gi-t-Bronze{background:var(--gi-bronze-bg);color:var(--gi-bronze)} #gis-inv .gi-t-Browser{background:var(--gi-browser-bg);color:var(--gi-browser)}
+#gis-inv .gi-t-Failed{background:var(--gi-failed-bg);color:var(--gi-failed)}
+#gis-inv .gi-strip{display:inline-flex;gap:2px;vertical-align:middle}
+#gis-inv .gi-strip i{width:9px;height:9px;border-radius:2px;background:var(--gi-n)}
+#gis-inv .gi-strip i.p{background:var(--gi-p)} #gis-inv .gi-strip i.w{background:var(--gi-w)} #gis-inv .gi-strip i.f{background:var(--gi-f)}
+#gis-inv .gi-legend{display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:var(--gi-muted);align-items:center}
+#gis-inv tr.gi-det td{background:var(--gi-soft);font-size:13px}
+#gis-inv dl{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:3px 14px;margin:4px 0}
+#gis-inv dt{color:var(--gi-muted);font-weight:400} #gis-inv dd{margin:0;overflow-wrap:anywhere}
+#gis-inv .gi-pager{display:flex;gap:8px;align-items:center;justify-content:flex-end;margin-top:8px;color:var(--gi-muted);font-size:13px}
+#gis-inv .gi-pager button{font:inherit;font-size:13px;padding:2px 9px;border:1px solid var(--gi-line);border-radius:3px;background:#fff;cursor:pointer}
+#gis-inv .gi-pager button:disabled{opacity:.4;cursor:default}
+#gis-inv .gi-note{color:var(--gi-muted);font-size:12px;margin:6px 0 0}
+#gis-inv .gi-howto{margin:0 0 14px;font-size:13px}
+#gis-inv .gi-howto summary{cursor:pointer;color:var(--gi-accent)}
+#gis-inv .gi-howto dl{margin:8px 0 4px}
+#gis-inv .gi-howto p{margin:4px 0 0;color:var(--gi-muted)}
+#gis-inv :focus-visible{outline:2px solid var(--gi-sel);outline-offset:2px}
+</style>
+<div id="data-inventory" class="section level1">
+<h1><strong>Data Inventory</strong></h1>
+<div id="gis-inv">
+<p class="gi-intro">
+The working state of place-based data discovery: every dataset assessed
+so far, what has been checked, and what is still open. <span
+id="gi-asof"></span>
+<a href="https://github.com/OHDSI/GIS/tree/main/exploration/place-data-inventory">Details
+and roadmap on GitHub</a>
+</p>
+<details class="gi-howto">
+<summary>
+How to read the tiers
+</summary>
+<dl>
+<dt>
+<span class="gi-tier gi-t-Gold">Gold</span>
+</dt>
+<dd>
+Link, page, licence, spatial unit, years and access all pass, read from
+the publisher’s pages with evidence.
+</dd>
+<dt>
+<span class="gi-tier gi-t-Silver">Silver</span>
+</dt>
+<dd>
+The link works and no check fails, but at least one is only partly
+confirmed (a warning).
+</dd>
+<dt>
+<span class="gi-tier gi-t-Bronze">Bronze</span>
+</dt>
+<dd>
+The link works, but the content has not been read yet, or a check failed
+(often a licence the page does not state).
+</dd>
+<dt>
+<span class="gi-tier gi-t-Browser">Browser needed</span>
+</dt>
+<dd>
+The site blocks automated checks; a person needs to open it. Usually not
+a dead link.
+</dd>
+<dt>
+<span class="gi-tier gi-t-Failed">Failed</span>
+</dt>
+<dd>
+Dead, withdrawn, archived, or data that ends before 2000.
+</dd>
+<dt>
+Verified: page / file
+</dt>
+<dd>
+“page” means the facts come from the publisher’s pages; “file” means a
+real file was opened and its columns, place key and years read.
+</dd>
+</dl>
+<p>
+US federal datasets pass the licence check by the working group’s rule
+(public domain unless a page says otherwise).
+</p>
+</details>
+<div class="gi-layout">
+<aside aria-label="Filters">
+<input type="search" id="gi-q" placeholder="Search name, publisher, id" aria-label="Search">
+<div id="gi-facets">
+
+</div>
+</aside>
+<div class="gi-main">
+<pre><code>&lt;div class=&quot;gi-filterbar&quot; id=&quot;gi-bar&quot;&gt;&lt;/div&gt;
+&lt;section class=&quot;gi-panel&quot;&gt;
+  &lt;h3&gt;Breakdown&lt;/h3&gt;
+  &lt;div class=&quot;gi-ctl&quot;&gt;&lt;label for=&quot;gi-axr&quot;&gt;Rows&lt;/label&gt;&lt;select id=&quot;gi-axr&quot;&gt;&lt;/select&gt;&lt;label for=&quot;gi-axc&quot;&gt;by&lt;/label&gt;&lt;select id=&quot;gi-axc&quot;&gt;&lt;/select&gt;&lt;span&gt;· click a cell to filter&lt;/span&gt;&lt;/div&gt;
+  &lt;div class=&quot;gi-scroll&quot;&gt;&lt;table class=&quot;gi-pivot&quot; id=&quot;gi-pivot&quot;&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;/section&gt;
+&lt;section class=&quot;gi-panel gi-res&quot;&gt;
+  &lt;div class=&quot;gi-ctl&quot; style=&quot;justify-content:space-between&quot;&gt;&lt;h3&gt;Datasets&lt;/h3&gt;
+    &lt;div class=&quot;gi-legend&quot;&gt;Checks: &lt;span class=&quot;gi-strip&quot;&gt;&lt;i class=&quot;p&quot;&gt;&lt;/i&gt;&lt;/span&gt;pass &lt;span class=&quot;gi-strip&quot;&gt;&lt;i class=&quot;w&quot;&gt;&lt;/i&gt;&lt;/span&gt;warn &lt;span class=&quot;gi-strip&quot;&gt;&lt;i class=&quot;f&quot;&gt;&lt;/i&gt;&lt;/span&gt;fail &lt;span class=&quot;gi-strip&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;/span&gt;not checked &lt;span id=&quot;gi-chk&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div class=&quot;gi-scroll&quot;&gt;&lt;table id=&quot;gi-tbl&quot;&gt;&lt;thead&gt;&lt;tr&gt;
+    &lt;th data-k=&quot;n&quot;&gt;Dataset&lt;/th&gt;&lt;th data-k=&quot;t&quot;&gt;Tier&lt;/th&gt;&lt;th data-k=&quot;lv&quot;&gt;Verified&lt;/th&gt;&lt;th&gt;Checks&lt;/th&gt;&lt;th data-k=&quot;u&quot;&gt;Unit&lt;/th&gt;&lt;th data-k=&quot;ly&quot;&gt;Latest&lt;/th&gt;&lt;th data-k=&quot;gs&quot;&gt;Geometry&lt;/th&gt;&lt;th data-k=&quot;rg&quot;&gt;Region&lt;/th&gt;
+  &lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td colspan=&quot;8&quot;&gt;Loading the inventory…&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
+  &lt;div class=&quot;gi-pager&quot;&gt;&lt;span id=&quot;gi-pg&quot;&gt;&lt;/span&gt;&lt;button id=&quot;gi-prev&quot; type=&quot;button&quot;&gt;Previous&lt;/button&gt;&lt;button id=&quot;gi-next&quot; type=&quot;button&quot;&gt;Next&lt;/button&gt;&lt;/div&gt;
+  &lt;p class=&quot;gi-note&quot;&gt;Click a row for its evidence, file findings and what is blocking it. Data: &lt;a href=&quot;https://github.com/OHDSI/GIS/blob/main/exploration/place-data-inventory/inventory-all.csv&quot;&gt;inventory-all.csv&lt;/a&gt;.&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+</div>
+</div>
+</div>
+<script src="assets/inventory.js"></script>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
