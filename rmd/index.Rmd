@@ -97,7 +97,19 @@ The OHDSI GIS Workgroup carries out work in support of its mission by pursuing t
 <br>
 
 ## **Publications/Presentations**
+Agentic AI-Assisted Harmonization of CHoRUS/PostGIS Exposure Variables for OHDSI GIS Observational Research (2026 OHDSI Global Symposium [Poster](https://www.ohdsi.org/2026showcase-66/), [Brief report](https://www.ohdsi.org/wp-content/uploads/2026/10/66-Talapova-Agentic_AI_for_GIS_research-BriefReport-Polina-Talapova.pdf))
+
+Development of Multi-Language Connectors Using GaiaDB (2026 OHDSI Global Symposium [Poster](https://www.ohdsi.org/2026showcase-32/), [Brief report](https://www.ohdsi.org/wp-content/uploads/2026/10/31-Bhirud_Ritesh_Development-of-Multi-Language-Connectors-Using-GaiaDB_2026symposium-Ritesh-Bhirud.pdf))
+
+Metadata standards in OMOP to increase reproducibility in exposomics studies (2026 OHDSI Global Symposium [Poster](https://www.ohdsi.org/2026showcase-76/))
+
 Integrating geospatial data into the OMOP CDM: a hands-on tutorial with the OHDSI GIS toolchain (2026 OHDSI Global Symposium, October 20, 2026; materials on the [tutorial](tutorial.html) pages)
+
+OHDSI GIS Workgroup 2026 Objectives and Key Results ([slides](https://www.ohdsi.org/wp-content/uploads/2026/03/GIS-2026.pdf))
+
+OHDSI GIS Workgroup 2024 Accomplishments and 2025 Goals ([slides](https://www.ohdsi.org/wp-content/uploads/2025/02/GIS-2025.pdf))
+
+OMOP GIS Vocabulary Package for Observational Studies in Health Care and Public Health (2024 OHDSI Symposium [Poster](https://www.ohdsi.org/2024showcase-14/), [Abstract](https://www.ohdsi.org/wp-content/uploads/2024/10/14-talapova-polina_gis_vocabulary_package_2024symposium-Polina-Talapova.pdf))
 
 OHDSI GIS Toolchain Live Demonstration (2024 OHDSI Symposium [Video](https://www.youtube.com/watch?v=NLfWvuZJVK4))
 
@@ -105,11 +117,25 @@ OHDSI GIS Infrastructure (2023 OHDSI Symposium [Poster](https://www.ohdsi.org/20
 
 Toxins Vocabulary (2023 OHDSI Symposium [Poster](https://www.ohdsi.org/2023showcase-11/), [Abstract](https://www.ohdsi.org/wp-content/uploads/2023/10/Talapova-Polina_A_Toxin_Vocabulary_for_the_OMOP_CDM_2023symposium-Polina-Talapova.pdf)) 
 
+Leveraging the OMOP Common Data Model to Support Distributed Health Equity Research (2023 OHDSI Symposium [Poster](https://www.ohdsi.org/2023showcase-403/))
+
 OHDSI GIS Workgroup October 10, 2023 Update ([Video](https://youtu.be/QZY-slWdsMs?si=UxMT39rqWTAW_AMx&t=2178))
 
 OHDSI GIS Workgroup 2023 Objectives and Key Results ([Video](https://www.youtube.com/watch?v=bd0htzO1hx4&t=1103s), [slides](https://www.ohdsi.org/wp-content/uploads/2023/02/GIS-OKRs2023Q1.pdf))
 
+Leveraging Location Data in OMOP to Incorporate Area Deprivation Index (2022 OHDSI Symposium [Poster](https://www.ohdsi.org/2022showcase-29/), [Abstract](https://www.ohdsi.org/wp-content/uploads/2022/10/29-beaton_jiang_maura_xinzhuo_Leveraging-Location-Data-in-OMOP-to-Incorporate-ADI_2022symposium-Maura-Beaton.pdf))
+
 OHDSI GIS Workgroup August 23, 2022 Update ([Video](https://youtu.be/d8jIAm9cssM))
+
+OHDSI GIS (2016 OHDSI Symposium [Poster abstract](https://www.ohdsi.org/web/wiki/lib/exe/fetch.php?media=symposium_2016%3Aohdsi_gis.pdf))
+
+**Related OHDSI geospatial work from the wider community**
+
+Spatial Analysis Tool Based on OMOP CDM: Geospatial functionality support in OHDSI ATLAS (2020 OHDSI Global Symposium [Poster](https://www.ohdsi.org/2020-global-symposium-showcase-76/), [Video](https://youtu.be/VeOJAnb-mOQ))
+
+Application for Epidemiological Geographic Information System (AEGIS): an open source spatial analysis tool based on CDM (2018 OHDSI Symposium [Software demonstration](https://www.ohdsi.org/wp-content/uploads/2018/10/2018-Demo-Session-FINAL-200-black-and-white-copies-double-sided-stapled-1.pdf), [Code](https://github.com/ohdsi/aegis))
+
+AEGIS: Tool for semi-automatic creating medical map based on GUI (2017 OHDSI Symposium [Software demonstration](https://www.ohdsi.org/wp-content/uploads/2017/10/2017-Software-Demonstrations-Handout-470-black-and-white-copies-double-sided-stapled.pdf))
 
 <br>
 
