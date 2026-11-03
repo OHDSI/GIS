@@ -2,7 +2,7 @@
 
 One step at a time, each a records file in this folder applied by `scripts/apply_records_2026_11_02.py` to a new master (old masters kept). Decisions by Robert, 2026-11-02: federal edge cases by page read only (TODO 1.7); ZIP-to-ZCTA by the archived UDS crosswalk (2.3); Silver rule to the WG (4.10); GIS#553 solved here, reply drafted for Robert to post.
 
-**Result (steps a-i):** 699 rows (675 without the pilot): Gold 105 → 111, Silver 389 → 408, Bronze 106 → 106, Browser needed 20, Failed 47 → 30. Gold + Silver 494 → 519 (`inventory.csv`). Final master `inventory-combined-2026-11-02i.csv`.
+**Result (steps a-j):** 699 rows (676 counted; 23 still in the pilot): Gold 105 → 111, Silver 389 → 409, Bronze 106 → 106, Browser needed 20, Failed 47 → 30. Gold + Silver 494 → 520, the same in the package, `inventory.csv` and the workbook. Of the 409 Silver rows, 225 have all four core checks settled. Final master `inventory-combined-2026-11-02j.csv`. PR text: `publish/pr/PR-update-2026-11-02.md`.
 
 | Step | Records | Master | Rows | Tier moves |
 |---|---|---|---|---|
@@ -17,10 +17,12 @@ One step at a time, each a records file in this folder applied by `scripts/apply
 | h | `h-care-sites.jsonl` | `-11-02h` | TODO 2.12: GRID3 NGA Health Facilities v4.0 (70,235 points, NHFR codes) and GRID3 COD Health Facilities v9.0 (38,957 points, DHIS2 and health-zone ids), both free use with attribution; CNES monthly base to 2026-09; PO (oncology panel) as a Bronze lead | 2 new Gold; CNES (pilot row) Bronze → Silver; PO new Bronze |
 | i | `i-failed-2-14.jsonl` | `-11-02i` | TODO 2.14, the 28 unresolved Failed rows: 7 successors (GISCO Urban Audit, EA RoFRS, YCEO SUHI via NASA SEDAC, OpenDataPhilly heat vulnerability, EPA NPL boundaries, 2 SEDAC PM2.5 products on NASA Earthdata); 5 live pages scripts could not read (Walk Score, Africapolis, NOAA billion-dollar, DEFRA PCM, HDX Brazil); 2 HDX rows archived; GDL Area Database retired (March 2025, split by theme); INE Portugal in maintenance; 12 with no verified successor (notes record the leads) | 13 Failed → Silver, 1 → Bronze; 14 stay Failed |
 
+| j | `j-checks-from-notes.jsonl` | `-11-02j` | 21 Gold/Silver rows (P2.1 spike: CMS, PDAPS, LawAtlas; plus UCMR 5) had blank `chk_*`; check values derived from their recorded `*_confirmed` findings (no new reads; withdrawn left unchecked). CNES promoted from the pilot (`round = 2-pilot-promoted`, Robert) | none; all 21 now hold Silver under `tier_of()` |
+
 **Also changed:** `landscape/anchors.csv` (heat: UTCI, universal thermal climate index, WBGT, wet bulb globe temperature, thermal comfort, heat stress; water_hazards_fire: standardized precipitation evapotranspiration index, SPI, standardized precipitation index); `TODO.md` and `README.md` (1.6 done; decisions; prompt numbers written P1.8, P2.1). Backups in `_to_delete/`.
 
 **Caveats (read these before sharing):**
-- Re-tiering bug found and fixed in step g: re-tiering a row with blank checks sends it to Failed, and 21 Gold/Silver rows have no `chk_link_live` (20 from the P2.1 spike: PDAPS, LawAtlas, CMS). The apply script now re-tiers only when a check changes. Those 21 rows are Silver by the spike's merge logic, not by `tier_of()`. This is for the WG with 4.10.
+- (Resolved in step j.) Re-tiering bug found and fixed in step g: re-tiering a row with blank checks sends it to Failed, and 21 Gold/Silver rows have no `chk_link_live` (20 from the P2.1 spike: PDAPS, LawAtlas, CMS). The apply script now re-tiers only when a check changes. Those 21 rows are Silver by the spike's merge logic, not by `tier_of()`. This is for the WG with 4.10.
 - Silver by "no fail" (4.10) also covers Walk Score (commercial, pricing on request; licence not read) and the two archived HDX rows (Sudan, Uganda; 2018 data, withdrawn = warn).
 - UCMR PWSID coverage of the service areas: not done. epa.gov returns 403 to both shells, and the README rules out browser downloads. Robert to save the UCMR 3/4/5 zips into `run-2026-11-02/ucmr/`.
 - OECD regions reached Silver on a single read check (unit). Its licence and years were not read. This is the loose Silver rule (4.10).
