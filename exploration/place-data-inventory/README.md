@@ -2,7 +2,7 @@
 
 A working inventory of public, place-based datasets that could be linked to where patients live, built by the OHDSI GIS working group's discovery effort. **Explore it on the site: [Data Inventory](https://ohdsi.github.io/GIS/inventory.html).** Nothing here is a gaiaCatalog entry yet.
 
-**As of 2026-10-30:** 691 datasets assessed. **494 verified** (Gold 105, Silver 389): licence, years, spatial unit and access read from the publisher's pages, with the page kept as evidence. **15 file-verified**: a real file opened and its columns, place key, geometry and years read. Bronze 127, Browser needed 23, Failed 47. About 1,087 more unvalidated candidates (rule-triaged, precision about 0.59) are in `candidates-unvalidated.csv`.
+**As of 2026-11-02:** 699 datasets assessed. **520 verified** (Gold 111, Silver 409): licence, years, spatial unit and access read from the publisher's pages, with the page kept as evidence. **15 file-verified**: a real file opened and its columns, place key, geometry and years read. Bronze 126, Browser needed 23, Failed 30. About 1,087 more unvalidated candidates (rule-triaged, precision about 0.59) are in `candidates-unvalidated.csv`.
 
 ## Files
 

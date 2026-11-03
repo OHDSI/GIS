@@ -59,3 +59,10 @@ reference_standard,geometry_source,keyed to a standard geography whose geometry 
 reference_specific,geometry_source,keyed to one particular geometry dataset,any,water-system service areas; EPA monitoring sites,
 none,geometry_source,no usable geometry or key,any,,
 national statistical code,place_key,national statistics office area code,non-US/EU/UK/Canada/Australia,IBGE setor censitario; INEGI AGEB,added in phase A; geometry usually from the same office (inferred)
+admin4,unit,fourth-level admin,global,ward; village,added 2026-11-02 (#19)
+admin5,unit,fifth-level admin,global,geoBoundaries ADM5,added 2026-11-02 (#19)
+meshblock,unit,New Zealand meshblock,New Zealand,NZDep meshblock,added 2026-11-02 (#19)
+tl2,unit,OECD territorial level 2 (large region),OECD,TL2,added 2026-11-02 (#19)
+tl3,unit,OECD territorial level 3 (small region),OECD,TL3,added 2026-11-02 (#19)
+cbsa,unit,US core-based statistical area,US,MMSA; metro area,added 2026-11-02 (#19)
+place,unit,city; town or census place,any,Census place; city average,added 2026-11-02 (#19)
