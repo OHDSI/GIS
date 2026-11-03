@@ -58,13 +58,13 @@ jobs:
       uses: actions/cache@v3
       with:
         path: ${{ env.R_LIBS_USER }}
-        key: ${{ runner.os }}-r-${{ hashFiles('**/DESCRIPTION') }}-${{ hashFiles('.github/workflows/build-site.yml') }}
+        key: ${{ runner.os }}-${{ env.ImageOS }}-r-${{ hashFiles('**/DESCRIPTION') }}-${{ hashFiles('.github/workflows/build-site.yml') }}
         restore-keys: |
-          ${{ runner.os }}-r-
+          ${{ runner.os }}-${{ env.ImageOS }}-r-
 
     - name: Install R packages
       run: |
-        Rscript -e 'install.packages(c("rmarkdown", "textshaping", "systemfonts",  "svglite", "kableExtra", "xml2", "dplyr", "readr", "jsonlite", "rmarkdown"), repos="https://cloud.r-project.org")'
+          Rscript -e 'install.packages(c("stringi", "rmarkdown", "textshaping", "systemfonts", "svglite", "kableExtra", "xml2", "dplyr", "readr", "jsonlite"), repos="https://cloud.r-project.org")'
 
     - name: Cache Pandoc
       uses: actions/cache@v3
