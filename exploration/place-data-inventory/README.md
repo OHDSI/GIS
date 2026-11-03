@@ -2,7 +2,7 @@
 
 A working inventory of public, place-based datasets that could be linked to where patients live, built by the OHDSI GIS working group's discovery effort. **Explore it on the site: [Data Inventory](https://ohdsi.github.io/GIS/inventory.html).** Nothing here is a gaiaCatalog entry yet.
 
-**As of 2026-11-02:** 699 datasets assessed. **520 verified** (Gold 111, Silver 409): licence, years, spatial unit and access read from the publisher's pages, with the page kept as evidence. **15 file-verified**: a real file opened and its columns, place key, geometry and years read. Bronze 126, Browser needed 23, Failed 30. About 1,087 more unvalidated candidates (rule-triaged, precision about 0.59) are in `candidates-unvalidated.csv`.
+**As of 2026-11-03:** 805 datasets assessed. **628 verified** (Gold 157, Silver 471): licence, years, spatial unit and access read from the publisher's pages, with the page kept as evidence. **15 file-verified**: a real file opened and its columns, place key, geometry and years read. Bronze 125, Browser needed 23, Failed 29. About 1,087 more unvalidated candidates (rule-triaged, precision about 0.59) are in `candidates-unvalidated.csv`.
 
 ## Files
 
@@ -12,7 +12,7 @@ A working inventory of public, place-based datasets that could be linked to wher
 | `inventory-all.csv` | Every assessed dataset with every check, its detail and evidence URL, geometry classification and file-check findings |
 | `place-data-inventory.xlsx` | The same, as a workbook with a summary and a colour-coded check grid |
 | `candidates-unvalidated.csv` | DataCite references found by title search, triaged by rules; to be checked later |
-| `iterations/` | How it was built: 17 iterations, each with its approach (prompt or brief) and results |
+| `iterations/` | How it was built: 25 iterations, each with its approach (prompt or brief) and results |
 | `TODO.md` | What's next, from ready-to-run to needs-the-working-group |
 | `method/` | The anchors (what we measure against), the unit and place-key vocabulary, the place-identifiers backlog and the scripts |
 

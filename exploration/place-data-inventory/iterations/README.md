@@ -27,13 +27,52 @@ One row per execution: what it set out to do, the approach (the prompt or brief)
 | 17 | 10-30 | Validation sweep ["3"] | Settle open checks: Silver gaps, never-read Bronze, site-wide terms for licence fails, Failed successors, geometry gaps | [approach](17-validation-sweep/) | [results](17-validation-sweep/) | Gold+Silver 345 → 373 (Gold 89, Silver 284); most gaps were real warns, not unread facts. Site-wide terms settled 6 licence fails (ABS, ONS, Welsh Gov, StatCan, World Bank). Scripted fetches cannot read JS or challenge pages (22 of 46 never-read rows). EPA water service areas found |
 | 18 | 10-30 | Browser pass: everything left | Open all 167 rows scripts could not read (137 Browser needed, 30 blocked in #17) in the built-in browser; use each site's own API where it has one (ArcGIS Hub, HDX/CKAN, CMS, Dataverse, NASA CMR) and DataCite for DOI-only rows | [approach](18-browser-pass/) | [results](18-browser-pass/) | 145 opened: Gold+Silver 373 → 494 (Gold 105, Silver 389); Browser needed 137 → 20. Same-origin API calls settle a whole portal in one step. The Silver rule is loose: a third of the new Silver rows have two or fewer core checks settled. Found several moved or renamed products (AHRQ CLH, UN Data Commons, HWIP) |
 | 19 | 11-02 | Evidence fixes, edge cases, successors, GIS#553 | Re-read memory-based variable lists (EDO, GPCC); settle federal edge cases by page read; successor URLs; UCMR 4; SPEI and UTCI rows; service-area polygon count; unit-label cleanup; care sites (GRID3, CNES); the 28 unresolved Failed rows | [approach](19-run-2026-11-02/) | [results](19-run-2026-11-02/) | Gold+Silver 494 → 519 (Gold 111); 16 Failed rows back; 126 unit labels mapped to the vocabulary. A dataset-level inventory can't answer "is index X covered?": SPEI was a variable inside three rows, and two of those lists came from memory. Anchor terms decide what sweeps can find (UTCI was never searched for). |
+| 20 | 11-03 | Candidate pool, worked ["easy wins"] | Turn untouched DataCite candidates into verified rows cheaply | [approach](20-candidate-pool/) | [results](20-candidate-pool/) | 27 rows (9 Gold) in about an hour. Repository APIs settle licence, unit, years and access in one call; DataCite alone does not. Exact-DOI matching understated coverage (44 vs 115 of 1,087). NaNDA hosts are bot-checked. |
+| 21 | 11-03 | Publisher-family fan-out ["P4"] | List each Gold/Silver publisher's sibling datasets through catalog APIs (DataCite publisher query, ArcGIS Hub, HDX/CKAN), dedupe against the master, read the shortlist | [approach](21-publisher-fanout/) | [results](21-publisher-fanout/) | 302 siblings listed from 23 publishers, 80 shortlisted, 26 rows added (6 Gold, 20 Silver; Gold 120 → 126, Silver 427 → 447); 3 of 302 were already in the master. Hub, HDX and CKAN APIs settle licence, unit and formats in one call; DataCite publisher listing is noisy (non-place items) and federal catalog.data.gov CKAN returns 404. ICPSR and ciesin.columbia.edu are 403. Verdict: scale with changes (enumerate hub publishers first; place filter before listing on DataCite). |
+| 22 | 11-03 | Candidate pool, round 2 ["P5"] | Continue #20's method on the next DataCite families, reading Zenodo, figshare, Dataverse, PANGAEA and EIDC records | [approach](22-candidate-pool-2/) | [results](22-candidate-pool-2/) | Queue 480 families (of 734); 200 enriched, 53 shortlisted, 32 rows added (20 Gold, 12 Silver; Gold 126 → 146, Silver 447 → 459). Many records are gridded climate products (1 km temperature, rainfall), few are health-linked. Verdict: scale with changes (rank by anchor, not by title unit; 280 queued families not yet enriched). |
+| 23 | 11-03 | Place-key-first discovery spike ["P6"] | Search by the identifiers datasets join on (GEOID, ZCTA, NUTS, LSOA, ASGS SA2) instead of by topic; measure which key systems, levels and vintages the Gold/Silver rows use (TODO 3.8 and the measuring part of 3.1) | [approach](23-place-key-spike/) | [results](23-place-key-spike/) | 20 searches over 7 collections gave 210 hits (168 unique, 61 keyed, precision 0.36); 26 read, 20 rows added (10 Gold, 10 Silver; Gold 146 → 156, Silver 458 → 468); about 3 API requests per row. 15 of the 16 rows with DOIs were in no earlier candidate list; care sites and housing gave 6 of 20 rows (from a hand-ordered queue). Only column/variable search proves the key exists, but 70% of Dataverse variable hits are paper replication packages and bare code tokens fail on Zenodo and CKAN. Only 4% of Gold/Silver rows record a key vintage. Verdict: scale with changes (field search where supported, health/SDOH filter before ranking, drop supplements, add `place_key_vintage`). |
+| 24 | 11-03 | Fixes, tier drift and Miami-Dade pass | Apply the NaNDA licence reads and catalog-draft fixes; explain the 11-row tier drift P6 found; settle the Miami-Dade rows from the existing catalog | [approach](24-fixes-miami-dade/) | [results](24-fixes-miami-dade/) | Gold+Silver 624 → 628 (UCMR to Gold; FQHC, zoning and community health centers up; new Cooling Centers row). The drift was all deliberate holds stored only as values: a `tier_cap` column is needed. A 10-29 'wrong link' verdict was a derived layer (parcels filtered to health care): check the catalog's own ETL before failing a catalog row. The county Hub's terms are a disclaimer only, so licence stays warn (WG 4.8/4.9). |
 
-## Cross-cutting lessons
+## Techniques compared (as of #24, 2026-11-03)
 
-- **Order of work:** cheap scripted checks first; agent page reads only where scripts can't decide; targeted sweeps over broad harvests.
-- **Cost:** parallel agents are what caused the usage spikes. Run one job at a time, on Sonnet, in fresh sessions, with explicit resume prompts.
-- **Trust:** every value carries an evidence URL. Assumptions are labelled (for example `public_domain_us_federal`), and generated reports get a numbers check.
-- **Scope:** decide anchors and rules before collecting. The working group's own requests and use cases are the best yardstick.
+Gold + Silver over time: 189 → 275 (#10) → 345 (#16) → 373 (#17) → 494 (#18) → 519 (#19) → 547 (#20) → 573 (#21) → 605 (#22) → 624 (#23) → 628 (#24).
+
+| Technique | Runs | Outcome | Keep? |
+|---|---|---|---|
+| Broad keyword harvest | #1-2 | 3,337 rows, mostly noise | No. Settle scope and anchors first |
+| Scripted link check | #3 | Free, re-runnable; finds withdrawn tools | Yes, monthly (TODO 1.8; last run 10-22) |
+| Agent page reads | #5-6 | About 15k tokens per row; parallel agents hit the usage limit | Only where nothing cheaper settles a row |
+| Browser pass with same-origin site APIs | #7, #15, #18 | Largest single gain (+121 Gold/Silver in #18); one portal API call settles dozens of rows | Yes: the tool for blocked rows |
+| Targeted gap sweeps | #8, #16 | 24 of 25 new in #8; reaches WG anchors | Yes, for WG anchors |
+| DataCite search ("quiver", triage) | #11-12 | About 2,900 leads; precision about 0.59; never settles a licence | As a lead source only |
+| Candidate pool read through repository APIs | #20, #22 | 27-32 rows per run, Gold-rich, but #22 was mostly gridded climate products | Lower priority unless ranked by anchor first |
+| Publisher-family fan-out | #21 | 302 siblings, only 3 already in the master; 26 rows | Yes, from publishers with a catalog API |
+| File verify (download one small file) | #14 | Corrected what pages said (UCMR years, SDG country-only) | For WG requests |
+| Validation sweep | #17 | Most gaps were real warns, not unread facts | Occasionally |
+| Place-key-first search | #23 (P6) | 20 rows (10 Gold) from 26 reads; reached care sites, housing, ZCTA and LSOA products that topic pools missed; precision 0.36 and 70% paper supplements among Dataverse variable hits | Yes as a complement, with field search only where supported and a health/SDOH filter |
+
+## Practices that held
+
+- **Read through APIs before pages.** Repository and catalog records (Zenodo, figshare, Dataverse, CKAN, ArcGIS Hub, Socrata) count as reads and settle licence, unit, years and access in one call. DataCite alone does not settle a licence.
+- **Dedupe with normalized matching:** DOI roots without version suffixes, ICPSR numbers, title similarity. Exact-DOI matching understated coverage (#20).
+- **One job at a time**, on Sonnet, in a fresh session, with caps per phase, checkpoints and a resume prompt. Parallel agents caused the usage spikes (#6).
+- **Evidence URL for every value**; assumptions labelled (`public_domain_us_federal`, sibling-inferred licences); a numbers check on every generated report.
+- **Scope before collecting.** Anchors and rules first; the WG's own requests are the yardstick.
+- **Rank by anchor, not by a unit word in the title** (#22: "census" matched ecology records). One row per product family; siblings in `notes`.
+- **Change records, not masters.** Records (`.jsonl`) → apply script → new master; re-tier only rows whose checks changed (a label-only edit once demoted 14 rows).
+- **Bot-checked hosts** (ICPSR, openICPSR, NaNDA) are read by a person, not worked around. Check Zenodo `access_right` before shortlisting.
+- **Batch publishing.** Several runs per PR, comments posted after the merge, to keep notifications down.
+- **Check the catalog's own ETL before failing a catalog row.** gaiaCatalog's `meta_json-ld` and ETL scripts name the exact service and filter (#24: a "wrong link" was a filtered parcel layer).
+- **Holds belong in a column.** Hand caps stored only as tier values get silently undone by a re-tier (#24: 11 rows); add `tier_cap`.
+
+## What to prioritize next
+
+1. **WG anchors are under-served by topic pools.** #22 gave 3 of 32 rows for care sites or deprivation; key search (#23) gave 6 of 20. Run key search with #23's changes, plus fan-out from the publishers it surfaced.
+2. **Recipe-ready packets (the file-verified rung).** 127 rows have licence, access, format and join key settled, but only 15 rows have ever had a file opened. Schema from APIs first, a partial read second, full downloads last; record `place_key_system` and `place_key_vintage` (only 4% of Gold/Silver rows state a vintage).
+3. **Tighten Silver (TODO 4.10).** A WG decision; until then Gold + Silver totals overstate how settled rows are.
+4. **Monthly link check (TODO 1.8)**, overdue since 10-22.
+5. **Australian portals (TODO 2.6).** #23 found data.gov.au's search returned no keyed datasets for SA1/SA2 (precision 0); frame around CKAN organisation listings and publicdata.au on Zenodo instead.
+6. **Older NaNDA studies (icpsr38xxx):** no licence on the study page; one read of the original openICPSR deposit (project 110641) should settle the family.
 
 ## Related
 
