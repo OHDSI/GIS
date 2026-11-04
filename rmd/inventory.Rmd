@@ -14,6 +14,8 @@ output:
   --gi-browser:#5b4d98; --gi-browser-bg:#e9e5f5; --gi-failed:#a33b3b; --gi-failed-bg:#f5dddd;
   color:var(--gi-fg); font-size:14px; line-height:1.45;
 }
+/* rmarkdown's navbar anchor offset (.section h3/h4 {padding-top:165px; margin-top:-165px}) would pad our headings; our own margins cancel the negative half */
+#gis-inv h3,#gis-inv h4{padding-top:0}
 #gis-inv .gi-intro{color:var(--gi-muted);max-width:90ch;margin:0 0 14px}
 #gis-inv .gi-layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:20px;align-items:start}
 @media (max-width:860px){#gis-inv .gi-layout{grid-template-columns:minmax(0,1fr)}}
@@ -24,6 +26,14 @@ output:
 #gis-inv .gi-facet label input{margin:0}
 #gis-inv .gi-facet .gi-c{margin-left:auto;color:var(--gi-muted);font-variant-numeric:tabular-nums;font-size:12px}
 #gis-inv .gi-facet label.gi-zero{opacity:.45}
+#gis-inv #gi-facets{display:flex;flex-direction:column;gap:14px}
+#gis-inv .gi-group{display:flex;flex-direction:column;gap:12px}
+#gis-inv .gi-gh{font-size:13px;font-weight:700;color:var(--gi-fg);display:flex;flex-direction:column;gap:1px;padding-bottom:4px;border-bottom:2px solid var(--gi-accent)}
+#gis-inv .gi-gh small{font-size:11.5px;font-weight:400;color:var(--gi-muted)}
+#gis-inv .gi-group-r{background:var(--gi-soft);border:1px dashed var(--gi-n);border-radius:4px;padding:10px;margin:0 -4px}
+#gis-inv .gi-group-r .gi-gh{border-bottom-color:var(--gi-muted)}
+#gis-inv .gi-dot{width:9px;height:9px;border-radius:2px;flex:none;display:inline-block}
+#gis-inv i.gi-t-Gold{background:var(--gi-gold)} #gis-inv i.gi-t-Silver{background:var(--gi-silver)} #gis-inv i.gi-t-Bronze{background:var(--gi-bronze)} #gis-inv i.gi-t-Browser{background:var(--gi-browser)} #gis-inv i.gi-t-Failed{background:var(--gi-failed)}
 #gis-inv .gi-more{font:inherit;font-size:12px;background:none;border:0;color:var(--gi-accent);cursor:pointer;padding:2px 0}
 #gis-inv .gi-main{min-width:0;display:flex;flex-direction:column;gap:16px}
 #gis-inv .gi-filterbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px}
@@ -68,28 +78,107 @@ output:
 #gis-inv .gi-pager button{font:inherit;font-size:13px;padding:2px 9px;border:1px solid var(--gi-line);border-radius:3px;background:#fff;cursor:pointer}
 #gis-inv .gi-pager button:disabled{opacity:.4;cursor:default}
 #gis-inv .gi-note{color:var(--gi-muted);font-size:12px;margin:6px 0 0}
-#gis-inv .gi-howto{margin:0 0 14px;font-size:13px}
-#gis-inv .gi-howto summary{cursor:pointer;color:var(--gi-accent)}
-#gis-inv .gi-howto dl{margin:8px 0 4px}
-#gis-inv .gi-howto p{margin:4px 0 0;color:var(--gi-muted)}
 #gis-inv :focus-visible{outline:2px solid var(--gi-sel);outline-offset:2px}
+
+
+#gis-inv h3,#gis-inv h4{padding-top:0}
+#gis-inv .gi-main{gap:10px}
+#gis-inv aside{position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto}
+#gis-inv .gi-tabs{display:flex;gap:2px;margin-bottom:-11px;position:relative;z-index:1}
+#gis-inv .gi-tab{font:inherit;font-size:14px;font-weight:600;color:var(--gi-muted);background:var(--gi-soft);border:1px solid var(--gi-line);border-bottom-color:var(--gi-line);border-radius:4px 4px 0 0;padding:7px 14px;cursor:pointer;display:inline-flex;gap:7px;align-items:center}
+#gis-inv .gi-tab:hover{color:var(--gi-fg)}
+#gis-inv .gi-tab[aria-selected="true"]{background:var(--gi-surface);color:var(--gi-fg);border-bottom-color:var(--gi-surface)}
+#gis-inv .gi-badge{font-size:11.5px;font-weight:600;font-variant-numeric:tabular-nums;background:var(--gi-hover);color:var(--gi-muted);border-radius:99px;padding:0 7px}
+#gis-inv .gi-tab[aria-selected="true"] .gi-badge{background:var(--gi-sel);color:#fff}
+#gis-inv .gi-tabpanel{border-top-left-radius:0}
+#gis-inv{--gi-done:#0b9e94;--gi-catc:#20425a}
+#gis-inv #gi-gsvg path.gi-catline{fill:none;stroke:var(--gi-catc);stroke-width:2}
+#gis-inv #gi-gsvg circle.gi-catpt{fill:var(--gi-catc);stroke:var(--gi-surface);stroke-width:2}
+#gis-inv #gi-gsvg .gi-start{stroke:var(--gi-muted);stroke-dasharray:2 3}
+#gis-inv #gi-gsvg text.gi-start-l{fill:var(--gi-muted);font-style:italic}
+#gis-inv #gi-gsvg .gi-vt{stroke:var(--gi-muted)}
+#gis-inv .gi-sw-cat{background:var(--gi-catc);height:3px;vertical-align:3px;border-radius:0}
+#gis-inv .gi-hero-l{display:flex;flex-direction:column;gap:8px;min-width:0}
+#gis-inv .gi-updated{margin:0;display:inline-flex;flex-wrap:wrap;gap:8px;align-items:baseline;font-size:15px}
+#gis-inv .gi-updated span{font-size:11px;text-transform:uppercase;letter-spacing:.07em;font-weight:700;color:var(--gi-surface);background:var(--gi-sel);border-radius:3px;padding:2px 7px}
+#gis-inv .gi-updated time{font-weight:700;color:var(--gi-fg)}
+#gis-inv .gi-st-done b{color:var(--gi-done)}
+#gis-inv .gi-done{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;border:1.5px dashed var(--gi-n);margin-left:5px;vertical-align:middle;font-size:10px;font-weight:700;line-height:1;color:#fff;box-sizing:border-box}
+#gis-inv .gi-done.on{background:var(--gi-done);border:0}
+#gis-inv .gi-legend .gi-done{margin:0 3px 0 6px}
+#gis-inv .gi-gby{font-size:13px;color:var(--gi-muted);display:inline-flex;gap:6px;align-items:center}
+#gis-inv .gi-gby select{font:inherit;font-size:13px;padding:2px 6px;border:1px solid var(--gi-line);border-radius:3px;background:#fff}
+#gis-inv .gi-hero{border:1px solid var(--gi-line);border-radius:4px;padding:16px 18px;margin:0 0 18px;display:flex;flex-direction:column;gap:12px;background:linear-gradient(180deg,var(--gi-soft),var(--gi-surface) 70%)}
+#gis-inv .gi-hero-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px 28px;align-items:start}
+@media (max-width:860px){#gis-inv .gi-hero-top{grid-template-columns:minmax(0,1fr)}}
+#gis-inv .gi-hero .gi-intro{margin:0;color:var(--gi-fg);font-size:15px;max-width:62ch}
+#gis-inv .gi-stats{display:grid;grid-template-columns:repeat(4,auto);gap:4px 26px}
+@media (max-width:560px){#gis-inv .gi-stats{grid-template-columns:repeat(2,auto)}}
+#gis-inv .gi-stats div{display:flex;flex-direction:column}
+#gis-inv .gi-stats b{font-size:30px;line-height:1.1;font-weight:700;font-variant-numeric:tabular-nums;color:var(--gi-sel)}
+#gis-inv .gi-stats span{font-size:12px;color:var(--gi-muted);max-width:14ch}
+#gis-inv .gi-tierbar{display:flex;gap:2px;height:12px}
+#gis-inv .gi-tierbar i{display:block;height:100%;min-width:3px}
+#gis-inv .gi-tierbar i:first-child{border-radius:3px 0 0 3px} #gis-inv .gi-tierbar i:last-child{border-radius:0 3px 3px 0}
+#gis-inv .gi-tierkey{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+@media (max-width:860px){#gis-inv .gi-tierkey{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}}
+#gis-inv .gi-tk{font:inherit;text-align:left;background:var(--gi-surface);border:1px solid var(--gi-line);border-radius:4px;padding:8px 10px;cursor:pointer;display:flex;flex-direction:column;gap:3px;color:var(--gi-fg)}
+#gis-inv .gi-tk:hover{border-color:var(--gi-muted)}
+#gis-inv .gi-tk[aria-pressed="true"]{border-color:var(--gi-sel);box-shadow:inset 0 0 0 1px var(--gi-sel)}
+#gis-inv .gi-tk .gi-tk-h{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
+#gis-inv .gi-tk .gi-tk-h b{font-size:18px;font-variant-numeric:tabular-nums}
+#gis-inv .gi-tk small{font-size:12px;color:var(--gi-muted);line-height:1.35}
+#gis-inv .gi-hero-note{margin:0;font-size:12.5px;color:var(--gi-muted);max-width:110ch}
+#gis-inv .gi-filterbar:empty{display:none}
+#gis-inv #gi-gsvg path.gi-area{stroke:var(--gi-surface);stroke-width:1.5}
+#gis-inv #gi-gsvg .gi-xh{stroke:var(--gi-fg);stroke-width:1;stroke-dasharray:3 3}
+#gis-inv #gi-gsvg circle.gi-pt{stroke:var(--gi-surface);stroke-width:2}
+@media (max-width:560px){#gis-inv #gi-nb{display:none} #gis-inv .gi-tab{padding:7px 10px}}
+#gis-inv{--gi-c-G:#b8860b;--gi-c-S:#3d7cc9;--gi-c-B:#a0522d;--gi-c-N:#7a5fd0;--gi-c-F:#c0392b}
+#gis-inv .gi-gsum{margin:0;font-size:14px;color:var(--gi-fg);max-width:70ch}
+#gis-inv .gi-gsum b{font-variant-numeric:tabular-nums}
+#gis-inv .gi-seg{display:inline-flex;border:1px solid var(--gi-line);border-radius:4px;overflow:hidden}
+#gis-inv .gi-seg button{font:inherit;font-size:13px;border:0;background:var(--gi-surface);color:var(--gi-muted);padding:3px 11px;cursor:pointer}
+#gis-inv .gi-seg button[aria-pressed="true"]{background:var(--gi-sel);color:#fff}
+#gis-inv .gi-sw{width:10px;height:10px;border-radius:2px;display:inline-block;vertical-align:-1px;margin-right:4px}
+#gis-inv .gi-gwrap{position:relative;margin-top:6px}
+#gis-inv #gi-gsvg{width:100%;height:auto;display:block;overflow:visible}
+#gis-inv #gi-gsvg text{fill:var(--gi-muted);font-size:11px;font-family:inherit}
+#gis-inv #gi-gsvg .gi-ax line{stroke:var(--gi-line)}
+#gis-inv #gi-gsvg .gi-col{cursor:default}
+#gis-inv #gi-gsvg .gi-col:hover rect.gi-seg-r,#gis-inv #gi-gsvg .gi-col.on rect.gi-seg-r{filter:brightness(1.08)}
+#gis-inv #gi-gsvg .gi-hit{fill:transparent}
+#gis-inv #gi-gsvg .gi-col.on .gi-hit{fill:var(--gi-hover)}
+#gis-inv #gi-gsvg text.gi-tot{fill:var(--gi-fg);font-weight:600;font-variant-numeric:tabular-nums}
+#gis-inv .gi-tip{position:absolute;pointer-events:none;background:var(--gi-surface);border:1px solid var(--gi-line);border-radius:4px;box-shadow:0 2px 8px rgba(32,66,90,.15);padding:7px 9px;font-size:12.5px;min-width:180px;z-index:2}
+#gis-inv .gi-tip b{display:block;margin-bottom:3px}
+#gis-inv .gi-tip div{display:flex;gap:8px;justify-content:space-between;font-variant-numeric:tabular-nums}
+#gis-inv .gi-gtable{margin-top:8px;font-size:13px} #gis-inv .gi-gtable summary{cursor:pointer;color:var(--gi-accent)}
+#gis-inv #gi-gtbl td{font-variant-numeric:tabular-nums}
+@media (max-width:860px){#gis-inv aside{position:static;max-height:none}}
+#gis-inv a{color:var(--gi-accent)}
 </style>
 
 # **Data Inventory**
 
 <div id="gis-inv">
-<p class="gi-intro">The working state of place-based data discovery: every dataset assessed so far, what has been checked, and what is still open. <span id="gi-asof"></span> <a href="https://github.com/OHDSI/GIS/tree/main/exploration/place-data-inventory">Details and roadmap on GitHub</a></p>
-<details class="gi-howto"><summary>How to read the tiers</summary>
-<dl>
-<dt><span class="gi-tier gi-t-Gold">Gold</span></dt><dd>Link, page, licence, spatial unit, years and access all pass, read from the publisher's pages with evidence.</dd>
-<dt><span class="gi-tier gi-t-Silver">Silver</span></dt><dd>The link works and no check fails, but at least one is only partly confirmed (a warning).</dd>
-<dt><span class="gi-tier gi-t-Bronze">Bronze</span></dt><dd>The link works, but the content has not been read yet, or a check failed (often a licence the page does not state).</dd>
-<dt><span class="gi-tier gi-t-Browser">Browser needed</span></dt><dd>The site blocks automated checks; a person needs to open it. Usually not a dead link.</dd>
-<dt><span class="gi-tier gi-t-Failed">Failed</span></dt><dd>Dead, withdrawn, archived, or data that ends before 2000.</dd>
-<dt>Verified: page / file</dt><dd>"page" means the facts come from the publisher's pages; "file" means a real file was opened and its columns, place key and years read.</dd>
-</dl>
-<p>US federal datasets pass the licence check by the working group's rule (public domain unless a page says otherwise).</p>
-</details>
+<header class="gi-hero">
+<div class="gi-hero-top">
+<div class="gi-hero-l">
+<p class="gi-updated"><span>Last updated</span> <time id="gi-asof"></time></p>
+<p class="gi-intro">The working state of place-based data discovery: every public dataset assessed so far for linking to where patients live, what has been checked, and what is still open. <a href="https://github.com/OHDSI/GIS/tree/main/exploration/place-data-inventory">Details and roadmap on GitHub</a></p>
+</div>
+<div class="gi-stats">
+<div><b id="gi-s-n"></b><span>datasets assessed</span></div>
+<div><b id="gi-s-v"></b><span>verified (Gold or Silver)</span></div>
+<div class="gi-st-done"><b id="gi-s-f"></b><span>in the Gaia catalog (metadata and recipe written)</span></div>
+<div><b id="gi-s-it"></b><span id="gi-s-itl">iterations</span></div>
+</div>
+</div>
+<div class="gi-tierbar" id="gi-tierbar" aria-hidden="true"></div>
+<div class="gi-tierkey" id="gi-tierkey" role="group" aria-label="Tiers: click to filter"></div>
+<p class="gi-hero-note">Tiers come from the checks in each row (link, page, licence, unit, years, access). "Page" verified means the facts were read on the publisher's pages; "file" means a real file was opened and its columns, place key and years read. US federal datasets pass the licence check by the working group's rule (public domain unless a page says otherwise).</p>
+</header>
 <div class="gi-layout">
 <aside aria-label="Filters">
 <input type="search" id="gi-q" placeholder="Search name, publisher, id" aria-label="Search">
@@ -97,14 +186,29 @@ output:
 </aside>
 <div class="gi-main">
 <div class="gi-filterbar" id="gi-bar"></div>
-<section class="gi-panel">
-<h3>Breakdown</h3>
-<div class="gi-ctl"><label for="gi-axr">Rows</label><select id="gi-axr"></select><label for="gi-axc">by</label><select id="gi-axc"></select><span>· click a cell to filter</span></div>
+<div class="gi-tabs" role="tablist" aria-label="View">
+<button type="button" role="tab" class="gi-tab" id="gi-tab-breakdown" data-view="breakdown" aria-controls="gi-p-breakdown" aria-selected="true">Breakdown <span class="gi-badge" id="gi-nb"></span></button>
+<button type="button" role="tab" class="gi-tab" id="gi-tab-datasets" data-view="datasets" aria-controls="gi-p-datasets" aria-selected="false" tabindex="-1">Datasets <span class="gi-badge" id="gi-nd"></span></button>
+<button type="button" role="tab" class="gi-tab" id="gi-tab-growth" data-view="growth" aria-controls="gi-p-growth" aria-selected="false" tabindex="-1">Growth <span class="gi-badge" id="gi-ng"></span></button>
+</div>
+<section class="gi-panel gi-tabpanel" id="gi-p-growth" role="tabpanel" aria-labelledby="gi-tab-growth" hidden>
+<div class="gi-ctl" style="justify-content:space-between">
+<p class="gi-gsum" id="gi-gsum"></p>
+<span class="gi-gby"><label for="gi-gspan">Time</label> <select id="gi-gspan"><option value="all">Last 3 months</option><option value="runs">Inventory runs</option></select></span>
+<span class="gi-gby"><label for="gi-gby">Stack by</label> <select id="gi-gby"><option value="cat">Category</option><option value="tier">Tier at the time</option></select></span>
+<div class="gi-seg" role="group" aria-label="Show"><button type="button" id="gi-gm-n" aria-pressed="true">Count</button><button type="button" id="gi-gm-p" aria-pressed="false">Share</button></div>
+</div>
+<div class="gi-legend" id="gi-glegend"></div>
+<div class="gi-gwrap" id="gi-gwrap"><svg id="gi-gsvg" role="img" aria-labelledby="gi-gsum"></svg><div class="gi-tip" id="gi-tip" hidden></div></div>
+<details class="gi-gtable"><summary>Show as a table</summary><div class="gi-scroll"><table id="gi-gtbl"></table></div></details>
+<p class="gi-note">The coloured areas are the inventory: each point is one saved run (the master file after that iteration; numbers point to the iterations table on GitHub). Counts are today's datasets present at that run (stacked by their category, or by the tier they had then), so filters on the left apply here too. 3 rows trimmed on 28 Oct are not shown. Under Last 3 months, the dark line before October is the gaiaCatalog itself (dataset folders in its repository, from its git history); it covers the whole catalog, so it shows only while no filter is on.</p>
+</section>
+<section class="gi-panel gi-tabpanel" id="gi-p-breakdown" role="tabpanel" aria-labelledby="gi-tab-breakdown">
+<div class="gi-ctl"><label for="gi-axr">Rows</label><select id="gi-axr"></select><label for="gi-axc">by</label><select id="gi-axc"></select><span>· click a cell to see those datasets</span></div>
 <div class="gi-scroll"><table class="gi-pivot" id="gi-pivot"></table></div>
 </section>
-<section class="gi-panel gi-res">
-<div class="gi-ctl" style="justify-content:space-between"><h3>Datasets</h3>
-<div class="gi-legend">Checks: <span class="gi-strip"><i class="p"></i></span>pass <span class="gi-strip"><i class="w"></i></span>warn <span class="gi-strip"><i class="f"></i></span>fail <span class="gi-strip"><i></i></span>not checked <span id="gi-chk"></span></div></div>
+<section class="gi-panel gi-tabpanel gi-res" id="gi-p-datasets" role="tabpanel" aria-labelledby="gi-tab-datasets" hidden>
+<div class="gi-ctl"><div class="gi-legend">Checks: <span class="gi-strip"><i class="p"></i></span>pass <span class="gi-strip"><i class="w"></i></span>warn <span class="gi-strip"><i class="f"></i></span>fail <span class="gi-strip"><i></i></span>not checked <span id="gi-chk"></span> <span class="gi-done on" aria-hidden="true">✓</span>in the Gaia catalog</div></div>
 <div class="gi-scroll"><table id="gi-tbl"><thead><tr>
 <th data-k="n">Dataset</th><th data-k="t">Tier</th><th data-k="lv">Verified</th><th>Checks</th><th data-k="u">Unit</th><th data-k="ly">Latest</th><th data-k="gs">Geometry</th><th data-k="rg">Region</th>
 </tr></thead><tbody><tr><td colspan="8">Loading the inventory…</td></tr></tbody></table></div>
