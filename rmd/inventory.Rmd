@@ -14,6 +14,8 @@ output:
   --gi-browser:#5b4d98; --gi-browser-bg:#e9e5f5; --gi-failed:#a33b3b; --gi-failed-bg:#f5dddd;
   color:var(--gi-fg); font-size:14px; line-height:1.45;
 }
+/* rmarkdown's navbar anchor offset (.section h3/h4 {padding-top:165px; margin-top:-165px}) would pad our headings; our own margins cancel the negative half */
+#gis-inv h3,#gis-inv h4{padding-top:0}
 #gis-inv .gi-intro{color:var(--gi-muted);max-width:90ch;margin:0 0 14px}
 #gis-inv .gi-layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:20px;align-items:start}
 @media (max-width:860px){#gis-inv .gi-layout{grid-template-columns:minmax(0,1fr)}}
