@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-03T06:09:17Z",
+ "generated_at": "2026-11-06T14:04:59Z",
  "sources": [
   "https://github.com/OHDSI/GIS/issues?q=label%3A%22Use+Case%22",
   "https://github.com/OHDSI/gaiaCatalog/issues?q=label%3A%22data+source+request%22"
@@ -464,6 +464,35 @@
     }
    ],
    "board_status": "In progress",
+   "rank": null,
+   "labels": [
+    "Use Case"
+   ],
+   "depends_on": [],
+   "needed_by": [],
+   "deps_closed": 0,
+   "deps_total": 0
+  },
+  {
+   "key": "GIS#557",
+   "repo": "GIS",
+   "number": 557,
+   "kind": "use_case",
+   "title": "MASS CPR - Tracking Infection in Mass.",
+   "url": "https://github.com/OHDSI/GIS/issues/557",
+   "state": "open",
+   "status": "Proposed",
+   "status_note": null,
+   "requested": "2026-11-05",
+   "updated": "2026-11-05",
+   "closed": null,
+   "requester": {
+    "login": "jshoughtaling",
+    "url": "https://github.com/jshoughtaling"
+   },
+   "external_owner": null,
+   "internal_owners": [],
+   "board_status": null,
    "rank": null,
    "labels": [
     "Use Case"

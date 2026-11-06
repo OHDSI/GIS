@@ -2,9 +2,9 @@
  "_readme": "Add one object per update. 'date' (YYYY-MM-DD) is required; the site sorts newest first and the home page shows the three most recent. 'body' is plain text. 'links' is a list of {label, url}; urls are absolute https:// or relative site paths.",
  "updates": [
   {
-   "date": "2026-10-29",
-   "title": "Exploratory place-based data inventory",
-   "body": "A first evidence-backed inventory of public place-based datasets for linking to where patients live: 690 assessed, 345 verified, 15 checked down to the file. Each working-group dataset request now shows what was found. Methods, iterations and next steps are in the repository.",
+   "date": "2026-11-06",
+   "title": "Data Inventory actively updated this week",
+   "body": "The evidence-backed inventory of public place-based datasets for linking to where patients live has been updated several times this week: new iterations added more candidate datasets and publisher coverage, strengthened the verification evidence, and refreshed the page with a header, tabs and a growth chart. Check back often, as the dataset and verification counts are growing. Methods, iterations and next steps are in the repository.",
    "links": [
     {
      "label": "Data Inventory",
