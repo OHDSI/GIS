@@ -8,6 +8,7 @@ on:
       - 'rmd/**'
       - 'build-site.R'
       - 'scripts/build_status.py'
+      - 'scripts/link_use_cases.py'
       - '.github/workflows/build-site.yml'
   pull_request:
     branches:
@@ -22,6 +23,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write   # candidate-data comments on use case issues
 
     steps:
     - name: Checkout repository
@@ -83,6 +87,20 @@ jobs:
         GH_TOKEN: ${{ secrets.PROJECT_READ_TOKEN || secrets.GITHUB_TOKEN }}
       run: python3 scripts/build_status.py
 
+    - name: Suggest candidate data for use cases
+      continue-on-error: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BOARD_TOKEN: ${{ secrets.PROJECT_WRITE_TOKEN }}
+      run: |
+        if [ "${{ github.event_name }}" = "pull_request" ]; then
+          python3 scripts/link_use_cases.py --dry-run
+        elif [ "${{ github.event_name }}" = "push" ]; then
+          python3 scripts/link_use_cases.py
+        else
+          python3 scripts/link_use_cases.py --post
+        fi
+
     - name: Build site
       run: |
         Rscript build-site.R
@@ -95,7 +113,7 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add docs/ rmd/data/status.json
+        git add docs/ rmd/data/status.json rmd/data/use-case-links.json
         if git diff --staged --quiet; then
           echo "No site changes to commit"
           exit 0

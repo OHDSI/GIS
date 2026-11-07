@@ -65,6 +65,7 @@ To propose one, see [Get Started](get-started.html#propose-a-use-case). Proposal
 - **Requested.** The date the issue was opened.
 - **External owner.** The person or organization outside the working group that asked for it.
 - **WG owner.** The working group member assigned to the issue.
+- **Candidate data.** Datasets from the [Data Inventory](inventory.html) that fit the use case's data needs (themes, geography, region), refreshed weekly. They are suggestions until a maintainer replies `/confirm <id>` on the use case issue; confirmed datasets show with a check mark. Rejected suggestions (`/reject <id>`) disappear, and `/no-data-needed` marks a use case that needs no external dataset. The board's *Data match* field shows the same state: *Suggested*, *Confirmed*, *None found* or *Not needed*. Use cases whose data needs have not been filled in yet are not matched.
 - **Rank.** Priority order set by the working group (1 is highest). The column appears once ranks are set on the board.
 
 <noscript>This page needs JavaScript to display the tables. The same information is in the GitHub issues linked above.</noscript>
