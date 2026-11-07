@@ -1,0 +1,151 @@
+{
+ "_readme": "Per open use case: the data needs the weekly matcher (scripts/link_use_cases.py) reads. themes and geography use the use-case template's options. keywords are optional named datasets or terms from the issue. DRAFT: review and correct. confidence is informational.",
+ "needs": {
+  "GIS#247": {
+   "themes": [
+    "Crime / violence",
+    "Health services / care access"
+   ],
+   "geography": "Point / address",
+   "years": "",
+   "region": "",
+   "confidence": "low",
+   "keywords": [
+    "911",
+    "emergency"
+   ]
+  },
+  "GIS#288": {
+   "themes": [
+    "Deprivation / socioeconomic indices",
+    "Demographics / population",
+    "Hazards / disasters"
+   ],
+   "geography": "Census block group or tract",
+   "years": "latest releases",
+   "region": "United States (Boston / New England)",
+   "confidence": "high",
+   "keywords": [
+    "social vulnerability",
+    "child opportunity",
+    "environmental justice",
+    "american community survey"
+   ]
+  },
+  "GIS#290": {
+   "themes": [
+    "Deprivation / socioeconomic indices"
+   ],
+   "geography": "Census block group or tract",
+   "years": "",
+   "region": "United States",
+   "confidence": "medium",
+   "keywords": [
+    "social vulnerability",
+    "area deprivation"
+   ]
+  },
+  "GIS#311": {
+   "themes": [
+    "Deprivation / socioeconomic indices",
+    "Hazards / disasters",
+    "Demographics / population"
+   ],
+   "geography": "Census block group or tract",
+   "years": "2010 onward",
+   "region": "United States",
+   "confidence": "high",
+   "keywords": [
+    "environmental justice",
+    "rural-urban commuting",
+    "area deprivation"
+   ]
+  },
+  "GIS#324": {
+   "themes": [],
+   "geography": "",
+   "years": "",
+   "region": "",
+   "confidence": "n/a (metadata specification, no exposure data needed)"
+  },
+  "GIS#331": {
+   "themes": [
+    "Deprivation / socioeconomic indices",
+    "Air quality",
+    "Heat / temperature / climate",
+    "Green space / built environment"
+   ],
+   "geography": "Other / not sure",
+   "years": "",
+   "region": "",
+   "confidence": "low"
+  },
+  "GIS#334": {
+   "themes": [
+    "Air quality"
+   ],
+   "geography": "Point / address",
+   "years": "",
+   "region": "United States (Missouri)",
+   "confidence": "low",
+   "keywords": [
+    "pollen",
+    "allergen"
+   ]
+  },
+  "GIS#338": {
+   "themes": [
+    "Deprivation / socioeconomic indices",
+    "Health services / care access"
+   ],
+   "geography": "Other / not sure",
+   "years": "",
+   "region": "",
+   "confidence": "low"
+  },
+  "GIS#339": {
+   "themes": [
+    "Demographics / population",
+    "Deprivation / socioeconomic indices",
+    "Green space / built environment"
+   ],
+   "geography": "Census block group or tract",
+   "years": "",
+   "region": "United States",
+   "confidence": "medium",
+   "keywords": [
+    "real estate",
+    "price",
+    "income"
+   ]
+  },
+  "GIS#367": {
+   "themes": [
+    "Heat / temperature / climate",
+    "Water"
+   ],
+   "geography": "Point / address",
+   "years": "",
+   "region": "Sub-Saharan Africa",
+   "confidence": "medium",
+   "keywords": [
+    "drought",
+    "rainfall",
+    "precipitation",
+    "temperature"
+   ]
+  },
+  "GIS#557": {
+   "themes": [],
+   "geography": "",
+   "years": "",
+   "region": "United States (Massachusetts)",
+   "confidence": "low (issue has no detail)"
+  }
+ },
+ "skipped": {
+  "GIS#289": "superseded by #367",
+  "GIS#389": "closed",
+  "GIS#446": "closed"
+ }
+}
