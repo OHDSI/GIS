@@ -4,6 +4,13 @@
   "GIS#288": {
    "title": "Support the BMC Population Health Explorer",
    "url": "https://github.com/OHDSI/GIS/issues/288",
+   "state": "Suggested",
+   "decisions": {
+    "confirmed": [],
+    "rejected": [],
+    "no_data_needed": false
+   },
+   "confirmed": [],
    "candidates": [
     {
      "id": "us_cdc_eji",
@@ -104,6 +111,13 @@
   "GIS#290": {
    "title": "C-Path/ CURE ID want sites to start submitting SVI and ADI data for their patients in a standardized way",
    "url": "https://github.com/OHDSI/GIS/issues/290",
+   "state": "Suggested",
+   "decisions": {
+    "confirmed": [],
+    "rejected": [],
+    "no_data_needed": false
+   },
+   "confirmed": [],
    "candidates": [
     {
      "id": "us_harvard_svi_percentiles_block_group",
@@ -204,6 +218,13 @@
   "GIS#311": {
    "title": "Geocoding, then linkage with a spatial indicator dataset based on temporal linkage criteria",
    "url": "https://github.com/OHDSI/GIS/issues/311",
+   "state": "Suggested",
+   "decisions": {
+    "confirmed": [],
+    "rejected": [],
+    "no_data_needed": false
+   },
+   "confirmed": [],
    "candidates": [
     {
      "id": "us_cdc_eji",
@@ -303,6 +324,13 @@
   "GIS#339": {
    "title": "Common data model extension tables for `COST` and `PRICE` to assess spatial autocorrelation",
    "url": "https://github.com/OHDSI/GIS/issues/339",
+   "state": "Suggested",
+   "decisions": {
+    "confirmed": [],
+    "rejected": [],
+    "no_data_needed": false
+   },
+   "confirmed": [],
    "candidates": [
     {
      "id": "us_hud_lihtc",
@@ -399,6 +427,13 @@
   "GIS#367": {
    "title": "An analysis of climate change and HIV",
    "url": "https://github.com/OHDSI/GIS/issues/367",
+   "state": "Suggested",
+   "decisions": {
+    "confirmed": [],
+    "rejected": [],
+    "no_data_needed": false
+   },
+   "confirmed": [],
    "candidates": [
     {
      "id": "global_dwd_gpcc",
