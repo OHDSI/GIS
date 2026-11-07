@@ -1,0 +1,496 @@
+{
+ "asof": "2026-11-03",
+ "links": {
+  "GIS#288": {
+   "title": "Support the BMC Population Health Explorer",
+   "url": "https://github.com/OHDSI/GIS/issues/288",
+   "candidates": [
+    {
+     "id": "us_cdc_eji",
+     "name": "Environmental Justice Index (EJI)",
+     "owner": "CDC/ATSDR",
+     "tier": "Silver",
+     "region": "United States",
+     "unit": "tract",
+     "latest": "2024",
+     "in_catalog_request": "gaiaCatalog#29",
+     "already_dependency": true,
+     "score": 14.0,
+     "why": [
+      "theme: Census and socioeconomic, Deprivation and vulnerability indices",
+      "named: environmental justice",
+      "unit: tract",
+      "region: United States"
+     ],
+     "url": "https://www.atsdr.cdc.gov/place-health/php/eji/index.html"
+    },
+    {
+     "id": "us_census_acs_5year",
+     "name": "American Community Survey 5-Year Data",
+     "owner": "U.S. Census Bureau",
+     "tier": "Gold",
+     "region": "United States",
+     "unit": "block_group",
+     "latest": "2024",
+     "in_catalog_request": "gaiaCatalog#37",
+     "already_dependency": true,
+     "score": 13.7,
+     "why": [
+      "theme: Census and socioeconomic",
+      "named: american community survey",
+      "unit: block_group",
+      "region: United States"
+     ],
+     "url": "https://www.census.gov/data/developers/data-sets/acs-5year.html"
+    },
+    {
+     "id": "us_harvard_svi_percentiles_block_group",
+     "name": "2022 Social Vulnerability by US Census Block Group",
+     "owner": "Harvard Dataverse deposit (derived from CDC/ATSDR SVI)",
+     "tier": "Gold",
+     "region": "United States",
+     "unit": "block_group",
+     "latest": "2022",
+     "in_catalog_request": null,
+     "already_dependency": false,
+     "score": 13.5,
+     "why": [
+      "theme: Deprivation and vulnerability indices",
+      "named: social vulnerability",
+      "unit: block_group",
+      "region: United States"
+     ],
+     "url": "https://doi.org/10.7910/dvn/arbhpk"
+    },
+    {
+     "id": "us_cdc_svi",
+     "name": "CDC/ATSDR Social Vulnerability Index (SVI)",
+     "owner": "CDC/ATSDR",
+     "tier": "Silver",
+     "region": "United States",
+     "unit": "tract",
+     "latest": "2022",
+     "in_catalog_request": null,
+     "already_dependency": false,
+     "score": 13.5,
+     "why": [
+      "theme: Census and socioeconomic, Deprivation and vulnerability indices",
+      "named: social vulnerability",
+      "unit: tract",
+      "region: United States"
+     ],
+     "url": "https://www.atsdr.cdc.gov/place-health/php/svi/svi-data-documentation-download.html"
+    },
+    {
+     "id": "us_hhs_omh_minority_health_index",
+     "name": "Minority Health Index (MHI; formerly Minority Health Social Vulnerability Index)",
+     "owner": "U.S. Department of Health and Human Services",
+     "tier": "Gold",
+     "region": "United States",
+     "unit": "county",
+     "latest": "2022",
+     "in_catalog_request": null,
+     "already_dependency": false,
+     "score": 12.5,
+     "why": [
+      "theme: Census and socioeconomic, Deprivation and vulnerability indices",
+      "named: social vulnerability",
+      "region: United States"
+     ],
+     "url": "https://minorityhealth.hhs.gov/minority-health-svi"
+    }
+   ]
+  },
+  "GIS#290": {
+   "title": "C-Path/ CURE ID want sites to start submitting SVI and ADI data for their patients in a standardized way",
+   "url": "https://github.com/OHDSI/GIS/issues/290",
+   "candidates": [
+    {
+     "id": "us_harvard_svi_percentiles_block_group",
+     "name": "2022 Social Vulnerability by US Census Block Group",
+     "owner": "Harvard Dataverse deposit (derived from CDC/ATSDR SVI)",
+     "tier": "Gold",
+     "region": "United States",
+     "unit": "block_group",
+     "latest": "2022",
+     "in_catalog_request": null,
+     "already_dependency": false,
+     "score": 13.5,
+     "why": [
+      "theme: Deprivation and vulnerability indices",
+      "named: social vulnerability",
+      "unit: block_group",
+      "region: United States"
+     ],
+     "url": "https://doi.org/10.7910/dvn/arbhpk"
+    },
+    {
+     "id": "us_uwisc_adi",
+     "name": "Area Deprivation Index (Neighborhood Atlas)",
+     "owner": "University of Wisconsin-Madison",
+     "tier": "Silver",
+     "region": "United States",
+     "unit": "block_group",
+     "latest": "2024",
+     "in_catalog_request": null,
+     "already_dependency": false,
+     "score": 13.5,
+     "why": [
+      "theme: Census and socioeconomic, Deprivation and vulnerability indices",
+      "named: area deprivation",
+      "unit: block_group",
+      "region: United States"
+     ],
+     "url": "https://www.neighborhoodatlas.medicine.wisc.edu/"
+    },
+    {
+     "id": "us_cdc_svi",
+     "name": "CDC/ATSDR Social Vulnerability Index (SVI)",
+     "owner": "CDC/ATSDR",
+     "tier": "Silver",
+     "region": "United States",
+     "unit": "tract",
+     "latest": "2022",
+     "in_catalog_request": null,
+     "already_dependency": false,
+     "score": 13.5,
+     "why": [
+      "theme: Census and socioeconomic, Deprivation and vulnerability indices",
+      "named: social vulnerability",
+      "unit: tract",
+      "region: United States"
+     ],
+     "url": "https://www.atsdr.cdc.gov/place-health/php/svi/svi-data-documentation-download.html"
+    },
+    {
+     "id": "us_hhs_omh_minority_health_index",
+     "name": "Minority Health Index (MHI; formerly Minority Health Social Vulnerability Index)",
+     "owner": "U.S. Department of Health and Human Services",
+     "tier": "Gold",
+     "region": "United States",
+     "unit": "county",
+     "latest": "2022",
+     "in_catalog_request": null,
+     "already_dependency": false,
+     "score": 12.5,
+     "why": [
+      "theme: Census and socioeconomic, Deprivation and vulnerability indices",
+      "named: social vulnerability",
+      "region: United States"
+     ],
+     "url": "https://minorityhealth.hhs.gov/minority-health-svi"
+    },
+    {
+     "id": "us_nanda_adi_block_group",
+     "name": "National Neighborhood Data Archive (NaNDA): Standardized Area Deprivation Index (ADI) by Census Block Group, United States, 2015, 2020 and 2022",
+     "owner": "ICPSR (NaNDA, University of Michigan)",
+     "tier": "Silver",
+     "region": "United States",
+     "unit": "block_group",
+     "latest": "2022",
+     "in_catalog_request": null,
+     "already_dependency": false,
+     "score": 12.5,
+     "why": [
+      "theme: Deprivation and vulnerability indices",
+      "named: area deprivation",
+      "unit: block_group",
+      "region: United States"
+     ],
+     "url": "https://doi.org/10.3886/e210581"
+    }
+   ]
+  },
+  "GIS#311": {
+   "title": "Geocoding, then linkage with a spatial indicator dataset based on temporal linkage criteria",
+   "url": "https://github.com/OHDSI/GIS/issues/311",
+   "candidates": [
+    {
+     "id": "us_cdc_eji",
+     "name": "Environmental Justice Index (EJI)",
+     "owner": "CDC/ATSDR",
+     "tier": "Silver",
+     "region": "United States",
+     "unit": "tract",
+     "latest": "2024",
+     "in_catalog_request": "gaiaCatalog#29",
+     "already_dependency": true,
+     "score": 14.0,
+     "why": [
+      "theme: Census and socioeconomic, Deprivation and vulnerability indices",
+      "named: environmental justice",
+      "unit: tract",
+      "region: United States"
+     ],
+     "url": "https://www.atsdr.cdc.gov/place-health/php/eji/index.html"
+    },
+    {
+     "id": "us_uwisc_adi",
+     "name": "Area Deprivation Index (Neighborhood Atlas)",
+     "owner": "University of Wisconsin-Madison",
+     "tier": "Silver",
+     "region": "United States",
+     "unit": "block_group",
+     "latest": "2024",
+     "in_catalog_request": null,
+     "already_dependency": false,
+     "score": 13.5,
+     "why": [
+      "theme: Census and socioeconomic, Deprivation and vulnerability indices",
+      "named: area deprivation",
+      "unit: block_group",
+      "region: United States"
+     ],
+     "url": "https://www.neighborhoodatlas.medicine.wisc.edu/"
+    },
+    {
+     "id": "us_nanda_adi_block_group",
+     "name": "National Neighborhood Data Archive (NaNDA): Standardized Area Deprivation Index (ADI) by Census Block Group, United States, 2015, 2020 and 2022",
+     "owner": "ICPSR (NaNDA, University of Michigan)",
+     "tier": "Silver",
+     "region": "United States",
+     "unit": "block_group",
+     "latest": "2022",
+     "in_catalog_request": null,
+     "already_dependency": false,
+     "score": 12.5,
+     "why": [
+      "theme: Deprivation and vulnerability indices",
+      "named: area deprivation",
+      "unit: block_group",
+      "region: United States"
+     ],
+     "url": "https://doi.org/10.3886/e210581"
+    },
+    {
+     "id": "us_census_community_resilience_estimates",
+     "name": "Community Resilience Estimates (CRE)",
+     "owner": "U.S. Census Bureau",
+     "tier": "Gold",
+     "region": "United States",
+     "unit": "tract",
+     "latest": "2024",
+     "in_catalog_request": null,
+     "already_dependency": false,
+     "score": 10.5,
+     "why": [
+      "theme: Census and socioeconomic, Deprivation and vulnerability indices",
+      "unit: tract",
+      "region: United States"
+     ],
+     "url": "https://www.census.gov/programs-surveys/community-resilience-estimates.html"
+    },
+    {
+     "id": "us_usda_ers_ruca",
+     "name": "Rural-Urban Commuting Area Codes (RUCA)",
+     "owner": "U.S. Department of Agriculture",
+     "tier": "Gold",
+     "region": "United States",
+     "unit": "tract",
+     "latest": "2020",
+     "in_catalog_request": null,
+     "already_dependency": false,
+     "score": 10.5,
+     "why": [
+      "named: rural-urban commuting",
+      "unit: tract",
+      "region: United States"
+     ],
+     "url": "http://www.ers.usda.gov/data-products/rural-urban-commuting-area-codes"
+    }
+   ]
+  },
+  "GIS#339": {
+   "title": "Common data model extension tables for `COST` and `PRICE` to assess spatial autocorrelation",
+   "url": "https://github.com/OHDSI/GIS/issues/339",
+   "candidates": [
+    {
+     "id": "us_hud_lihtc",
+     "name": "Low-Income Housing Tax Credit (LIHTC) Database",
+     "owner": "HUD",
+     "tier": "Silver",
+     "region": "United States",
+     "unit": "address",
+     "latest": "2025",
+     "in_catalog_request": null,
+     "already_dependency": false,
+     "score": 11.5,
+     "why": [
+      "theme: Built environment, Census and socioeconomic",
+      "named: income",
+      "region: United States"
+     ],
+     "url": "https://www.huduser.gov/portal/datasets/lihtc.html"
+    },
+    {
+     "id": "us_census_saipe",
+     "name": "Small Area Income and Poverty Estimates (SAIPE)",
+     "owner": "U.S. Census Bureau",
+     "tier": "Gold",
+     "region": "United States",
+     "unit": "county",
+     "latest": "2024",
+     "in_catalog_request": null,
+     "already_dependency": false,
+     "score": 11.5,
+     "why": [
+      "theme: Census and socioeconomic",
+      "named: income",
+      "region: United States"
+     ],
+     "url": "https://www.census.gov/programs-surveys/saipe.html"
+    },
+    {
+     "id": "us_zenodo_tampa_bay_zcta_housing_rent_burden_2020_2024",
+     "name": "Tampa Bay ZIP code (ZCTA) housing costs, rent burden, income and tenure, ACS 2020-2024",
+     "owner": "Richard Cieplechowicz (Zenodo)",
+     "tier": "Gold",
+     "region": "United States",
+     "unit": "zcta",
+     "latest": "2024",
+     "in_catalog_request": null,
+     "already_dependency": false,
+     "score": 11.5,
+     "why": [
+      "theme: Census and socioeconomic",
+      "named: income",
+      "region: United States"
+     ],
+     "url": "https://zenodo.org/records/22940611"
+    },
+    {
+     "id": "us_census_decennial_dhc",
+     "name": "2020 Census Demographic and Housing Characteristics File (DHC)",
+     "owner": "U.S. Census Bureau",
+     "tier": "Gold",
+     "region": "United States",
+     "unit": "block",
+     "latest": "2020",
+     "in_catalog_request": null,
+     "already_dependency": false,
+     "score": 10.5,
+     "why": [
+      "theme: Built environment, Census and socioeconomic",
+      "unit: block",
+      "region: United States"
+     ],
+     "url": "https://www.census.gov/data/tables/2023/dec/2020-census-dhc.html"
+    },
+    {
+     "id": "us_census_community_resilience_estimates",
+     "name": "Community Resilience Estimates (CRE)",
+     "owner": "U.S. Census Bureau",
+     "tier": "Gold",
+     "region": "United States",
+     "unit": "tract",
+     "latest": "2024",
+     "in_catalog_request": null,
+     "already_dependency": false,
+     "score": 10.5,
+     "why": [
+      "theme: Census and socioeconomic, Deprivation and vulnerability indices",
+      "unit: tract",
+      "region: United States"
+     ],
+     "url": "https://www.census.gov/programs-surveys/community-resilience-estimates.html"
+    }
+   ]
+  },
+  "GIS#367": {
+   "title": "An analysis of climate change and HIV",
+   "url": "https://github.com/OHDSI/GIS/issues/367",
+   "candidates": [
+    {
+     "id": "global_dwd_gpcc",
+     "name": "GPCC Global Precipitation Climatology Centre gridded precipitation (Full Data Monthly/Daily, Monitoring, First Guess, Climatology, Drought Index)",
+     "owner": "Deutscher Wetterdienst (DWD)",
+     "tier": "Silver",
+     "region": "Global",
+     "unit": "grid_0.25deg",
+     "latest": "2026",
+     "in_catalog_request": null,
+     "already_dependency": false,
+     "score": 13.5,
+     "why": [
+      "theme: Floods, drought, wildfire and hazards",
+      "named: drought, precipitation",
+      "region: global"
+     ],
+     "url": "https://www.dwd.de/EN/ourservices/gpcc/gpcc.html"
+    },
+    {
+     "id": "global_zenodo_aamr_monthly_precip_1km",
+     "name": "AAMR: monthly precipitation at 1 km and 5 km for the Afro-Asian Monsoon Region, 2000-2025",
+     "owner": "Zenodo deposit (independent authors)",
+     "tier": "Gold",
+     "region": "Global",
+     "unit": "grid_1km",
+     "latest": "2025",
+     "in_catalog_request": null,
+     "already_dependency": false,
+     "score": 10.5,
+     "why": [
+      "theme: Floods, drought, wildfire and hazards",
+      "named: precipitation",
+      "region: global"
+     ],
+     "url": "https://zenodo.org/doi/10.5281/zenodo.22013874"
+    },
+    {
+     "id": "global_zenodo_allweather_lst_1km",
+     "name": "All-weather 1 km land surface temperature, global, 2000-2020 (MODIS-based)",
+     "owner": "Zenodo deposit (independent authors)",
+     "tier": "Gold",
+     "region": "Global",
+     "unit": "1 km global GeoTIFF by year",
+     "latest": "2020",
+     "in_catalog_request": null,
+     "already_dependency": false,
+     "score": 10.5,
+     "why": [
+      "theme: Heat and temperature",
+      "named: temperature",
+      "region: global"
+     ],
+     "url": "https://zenodo.org/records/4292068"
+    },
+    {
+     "id": "global_jrc_gdo_cold_spell_tmin_merra",
+     "name": "GDO Cold Spell Daily Minimum Temperature Exceedance MERRA (version 1.0.0)",
+     "owner": "European Commission Joint Research Centre (GDO)",
+     "tier": "Gold",
+     "region": "Global",
+     "unit": "grid_0.625x0.5deg",
+     "latest": "2026",
+     "in_catalog_request": null,
+     "already_dependency": false,
+     "score": 10.5,
+     "why": [
+      "theme: Heat and temperature",
+      "named: temperature",
+      "region: global"
+     ],
+     "url": "https://data.jrc.ec.europa.eu/dataset/63fe25fc-5429-476f-b43a-e2b163c36432"
+    },
+    {
+     "id": "global_jrc_gdo_warm_spell_tmax_merra",
+     "name": "GDO Warm Spell Daily Maximum Temperature Exceedance MERRA (version 1.0.0)",
+     "owner": "European Commission Joint Research Centre (GDO)",
+     "tier": "Gold",
+     "region": "Global",
+     "unit": "grid_0.625x0.5deg",
+     "latest": "2026",
+     "in_catalog_request": null,
+     "already_dependency": false,
+     "score": 10.5,
+     "why": [
+      "theme: Heat and temperature",
+      "named: temperature",
+      "region: global"
+     ],
+     "url": "https://data.jrc.ec.europa.eu/dataset/643dd5c2-42ba-409b-9819-82e7fb0125b6"
+    }
+   ]
+  }
+ }
+}
