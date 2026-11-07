@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-06T14:04:59Z",
+ "generated_at": "2026-11-07T10:08:49Z",
  "sources": [
   "https://github.com/OHDSI/GIS/issues?q=label%3A%22Use+Case%22",
   "https://github.com/OHDSI/gaiaCatalog/issues?q=label%3A%22data+source+request%22"
@@ -25,7 +25,7 @@
    "external_owner": null,
    "internal_owners": [],
    "board_status": "Idea",
-   "rank": null,
+   "priority": null,
    "labels": [
     "data request",
     "enhancement",
@@ -62,7 +62,7 @@
     }
    ],
    "board_status": "In progress",
-   "rank": null,
+   "priority": null,
    "labels": [
     "Use Case"
    ],
@@ -124,7 +124,7 @@
     }
    ],
    "board_status": "Idea",
-   "rank": null,
+   "priority": null,
    "labels": [
     "Use Case",
     "help wanted"
@@ -159,7 +159,7 @@
     }
    ],
    "board_status": "Proposed",
-   "rank": null,
+   "priority": null,
    "labels": [
     "Use Case"
    ],
@@ -207,7 +207,7 @@
    "external_owner": "@jphuong",
    "internal_owners": [],
    "board_status": "Proposed",
-   "rank": null,
+   "priority": null,
    "labels": [
     "Use Case"
    ],
@@ -269,7 +269,7 @@
     }
    ],
    "board_status": "In progress",
-   "rank": null,
+   "priority": null,
    "labels": [
     "Use Case"
    ],
@@ -335,7 +335,7 @@
    "external_owner": "@Chesterguan",
    "internal_owners": [],
    "board_status": "In progress",
-   "rank": null,
+   "priority": null,
    "labels": [
     "Use Case"
    ],
@@ -364,7 +364,7 @@
    "external_owner": "@zhangly811",
    "internal_owners": [],
    "board_status": "To do",
-   "rank": null,
+   "priority": null,
    "labels": [
     "On Hold",
     "Use Case"
@@ -399,7 +399,7 @@
     }
    ],
    "board_status": "Idea",
-   "rank": null,
+   "priority": null,
    "labels": [
     "On Hold",
     "Use Case"
@@ -429,7 +429,7 @@
    "external_owner": "@altosaar",
    "internal_owners": [],
    "board_status": "Proposed",
-   "rank": null,
+   "priority": null,
    "labels": [
     "On Hold",
     "Use Case"
@@ -464,7 +464,7 @@
     }
    ],
    "board_status": "In progress",
-   "rank": null,
+   "priority": null,
    "labels": [
     "Use Case"
    ],
@@ -493,7 +493,7 @@
    "external_owner": null,
    "internal_owners": [],
    "board_status": null,
-   "rank": null,
+   "priority": null,
    "labels": [
     "Use Case"
    ],
@@ -531,7 +531,7 @@
     }
    ],
    "board_status": "Complete",
-   "rank": null,
+   "priority": null,
    "labels": [
     "Use Case"
    ],
@@ -575,7 +575,7 @@
     }
    ],
    "board_status": "Complete",
-   "rank": null,
+   "priority": null,
    "labels": [
     "Use Case"
    ],
@@ -606,7 +606,7 @@
    "external_owner": "Boston Medical Center / Boston University (@WoodridgeBill)",
    "internal_owners": [],
    "board_status": "Idea",
-   "rank": null,
+   "priority": null,
    "labels": [
     "data source request"
    ],
@@ -643,7 +643,7 @@
    "external_owner": null,
    "internal_owners": [],
    "board_status": "Idea",
-   "rank": null,
+   "priority": null,
    "labels": [
     "data source request"
    ],
@@ -672,7 +672,7 @@
    "external_owner": null,
    "internal_owners": [],
    "board_status": "Idea",
-   "rank": null,
+   "priority": null,
    "labels": [
     "data source request"
    ],
@@ -701,7 +701,7 @@
    "external_owner": null,
    "internal_owners": [],
    "board_status": "To do",
-   "rank": null,
+   "priority": null,
    "labels": [
     "data source request"
    ],
@@ -748,7 +748,7 @@
    "external_owner": null,
    "internal_owners": [],
    "board_status": "Idea",
-   "rank": null,
+   "priority": null,
    "labels": [
     "data source request"
    ],
@@ -786,7 +786,7 @@
     }
    ],
    "board_status": "Proposed",
-   "rank": null,
+   "priority": null,
    "labels": [
     "data source request"
    ],
@@ -815,7 +815,7 @@
    "external_owner": null,
    "internal_owners": [],
    "board_status": "Proposed",
-   "rank": null,
+   "priority": null,
    "labels": [
     "data source request"
    ],
@@ -859,7 +859,7 @@
    "external_owner": "Bill Adams (Health Equity Explorer); Jim Phuong (AOU integration)",
    "internal_owners": [],
    "board_status": "Proposed",
-   "rank": null,
+   "priority": null,
    "labels": [
     "data source request"
    ],
@@ -903,7 +903,7 @@
    "external_owner": null,
    "internal_owners": [],
    "board_status": "Proposed",
-   "rank": null,
+   "priority": null,
    "labels": [
     "data source request"
    ],
@@ -940,7 +940,7 @@
    "external_owner": null,
    "internal_owners": [],
    "board_status": "Idea",
-   "rank": null,
+   "priority": null,
    "labels": [
     "data source request"
    ],
@@ -969,7 +969,7 @@
    "external_owner": null,
    "internal_owners": [],
    "board_status": "Proposed",
-   "rank": null,
+   "priority": null,
    "labels": [
     "data source request"
    ],
@@ -998,7 +998,7 @@
    "external_owner": null,
    "internal_owners": [],
    "board_status": "In progress",
-   "rank": null,
+   "priority": null,
    "labels": [
     "data source request"
    ],
@@ -1032,7 +1032,7 @@
     }
    ],
    "board_status": "Proposed",
-   "rank": null,
+   "priority": null,
    "labels": [
     "data source request"
    ],
@@ -1069,7 +1069,7 @@
    "external_owner": "@diatomsRcool",
    "internal_owners": [],
    "board_status": null,
-   "rank": null,
+   "priority": null,
    "labels": [
     "data source request"
    ],
@@ -1103,7 +1103,7 @@
     }
    ],
    "board_status": "To do",
-   "rank": null,
+   "priority": null,
    "labels": [],
    "depends_on": [],
    "needed_by": [],
@@ -1130,7 +1130,7 @@
    "external_owner": "Boston Medical Center (@WoodridgeBill)",
    "internal_owners": [],
    "board_status": "Complete",
-   "rank": null,
+   "priority": null,
    "labels": [
     "data request"
    ],
@@ -1164,7 +1164,7 @@
     }
    ],
    "board_status": "Complete",
-   "rank": null,
+   "priority": null,
    "labels": [
     "data request"
    ],

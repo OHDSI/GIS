@@ -350,6 +350,9 @@ div.tocify {
       <a href="status.html">Use Case &amp; Dataset Status</a>
     </li>
     <li>
+      <a href="https://github.com/OHDSI/GIS/discussions">Discussions</a>
+    </li>
+    <li>
       <a href="project-management.html">Project Management</a>
     </li>
   </ul>
@@ -540,6 +543,10 @@ items</li>
 <div id="issue-types" class="section level3">
 <h3><strong>Issue Types</strong></h3>
 <ul>
+<li><strong>Dataset requests</strong> (<code>data source request</code>
+label, in <a
+href="https://github.com/OHDSI/gaiaCatalog/issues/new?template=data-request.yaml">gaiaCatalog</a>):
+requests to add a dataset to the catalog</li>
 <li><strong>Use Cases</strong> (<code>Use Case</code> label):
 Research-driven proposals via <a
 href="https://github.com/OHDSI/GIS/issues/new?assignees=&amp;labels=Use+Case&amp;projects=&amp;template=use-case.yaml&amp;title=%5BUse+Case%5D%3A+">template</a></li>
@@ -604,11 +611,18 @@ reviewed → Merged to main → Verified in deployment</p>
 <li><a
 href="https://github.com/OHDSI/GIS/issues/new?assignees=&amp;labels=Use+Case&amp;projects=&amp;template=use-case.yaml&amp;title=%5BUse+Case%5D%3A+">Submit
 Use Case</a> (Description, Infrastructure needs, Timeline, Credit,
-Support, Datasets)</li>
+Support, and Data needs: themes, geography, years, region)</li>
 <li>Leaders review and schedule discussion</li>
 <li>Present in Thursday meeting</li>
 <li>Decompose into work orders</li>
 <li>Prioritize and assign</li>
+<li>Review candidate data: each week a bot comment on the use case issue
+suggests datasets from the <a href="inventory.html">Data Inventory</a>
+and the catalog requests. Reply <code>/confirm &lt;id&gt;</code>,
+<code>/reject &lt;id&gt;</code> or <code>/no-data-needed</code>; the
+board’s <em>Data match</em> field and the <a href="status.html">status
+page</a> follow. Confirmed datasets that have a catalog request become
+dependencies of the use case.</li>
 <li>Execute development sprint</li>
 <li>Deliver results</li>
 </ol>
@@ -684,6 +698,11 @@ href="https://github.com/OHDSI/GIS/issues/366">Geocoding Guidance</a> -
 <ul>
 <li><strong>GitHub Issues/PRs</strong>: Technical discussion, tracking
 (primary)</li>
+<li><strong><a href="https://github.com/OHDSI/GIS/discussions">GitHub
+Discussions</a></strong>: Open-ended questions, ideas and announcements
+that do not need a tracked issue (for example <a
+href="https://github.com/OHDSI/GIS/discussions/558">raster
+capability</a>); promote to an issue when work is agreed</li>
 <li><strong>MS Teams GIS Channel</strong>: Quick questions,
 announcements</li>
 <li><strong>Weekly Meetings</strong>: Collaborative decision-making</li>

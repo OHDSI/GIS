@@ -1,5 +1,5 @@
 {
-  "_readme": "Hand-maintained inputs for scripts/build_status.py. Keys look like 'GIS#311' or 'gaiaCatalog#29'. Status and rank come from the GIS project board (OHDSI/projects/26: Status field, optional numeric Rank field). Fields GitHub does not record live here: external_owner, status overrides, and links between items.",
+  "_readme": "Hand-maintained inputs for scripts/build_status.py. Keys look like 'GIS#311' or 'gaiaCatalog#29'. Status and priority come from the GIS project board (OHDSI/projects/26: Status field and Priority field with Now, Next, Later). Fields GitHub does not record live here: external_owner, status overrides, and links between items.",
   "internal_members": [
     "kzollove", "jshoughtaling", "rtmill", "jaygee-on-github", "tibbben",
     "fils", "AEW0330", "martyalvarez", "p-talapova"

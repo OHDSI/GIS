@@ -350,6 +350,9 @@ div.tocify {
       <a href="status.html">Use Case &amp; Dataset Status</a>
     </li>
     <li>
+      <a href="https://github.com/OHDSI/GIS/discussions">Discussions</a>
+    </li>
+    <li>
       <a href="project-management.html">Project Management</a>
     </li>
   </ul>
@@ -522,8 +525,8 @@ href="https://github.com/OHDSI/GIS/issues?q=label%3A%22Use+Case%22">OHDSI/GIS</a
 dataset requests come from <a
 href="https://github.com/OHDSI/gaiaCatalog/issues?q=label%3A%22data+source+request%22">OHDSI/gaiaCatalog</a>
 (plus a few older ones in OHDSI/GIS). Status, dates and dependencies are
-read from GitHub each time the site is built. Status and rank come from
-the <a href="https://github.com/orgs/OHDSI/projects/26">GIS project
+read from GitHub each time the site is built. Status and priority come
+from the <a href="https://github.com/orgs/OHDSI/projects/26">GIS project
 board</a>, which the working group updates at the weekly meeting.
 External owners and links GitHub does not record are kept in <a
 href="https://github.com/OHDSI/GIS/blob/main/rmd/data/status-config.json"><code>status-config.json</code></a>.</p>
@@ -532,7 +535,10 @@ href="https://github.com/OHDSI/GIS/blob/main/rmd/data/status-config.json"><code>
 <div id="status-summary" class="status-summary">
 
 </div>
-<p>To propose a use case, see <a
+<p>Questions about a use case or dataset that do not need a tracked
+issue belong in <a
+href="https://github.com/OHDSI/GIS/discussions">GitHub Discussions</a>.
+To propose a use case, see <a
 href="get-started.html#propose-a-use-case">Get Started</a>. To request a
 dataset, open a <a
 href="https://github.com/OHDSI/gaiaCatalog/issues/new?template=data-request.yaml">data
@@ -659,8 +665,10 @@ dataset. The board’s <em>Data match</em> field shows the same state:
 <em>Suggested</em>, <em>Confirmed</em>, <em>None found</em> or <em>Not
 needed</em>. Use cases whose data needs have not been filled in yet are
 not matched.</li>
-<li><strong>Rank.</strong> Priority order set by the working group (1 is
-highest). The column appears once ranks are set on the board.</li>
+<li><strong>Priority.</strong> <em>Now</em>, <em>Next</em> or
+<em>Later</em>, set by the working group at the weekly meeting (the
+board’s Priority field). Rows are listed with <em>Now</em> first. The
+column appears once priorities are set on the board.</li>
 </ul>
 <noscript>
 This page needs JavaScript to display the tables. The same information

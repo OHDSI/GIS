@@ -79,8 +79,9 @@
   }
 
   var common = {
-    rank: { label: "Rank", cell: function (i) {
-      return i.rank == null ? el("span", { class: "status-none", text: "—" }) : document.createTextNode(String(i.rank));
+    priority: { label: "Priority", cell: function (i) {
+      return i.priority == null ? el("span", { class: "status-none", text: "—" })
+        : el("span", { class: "status-chip status-priority-" + i.priority.toLowerCase(), text: i.priority });
     } },
     title: { label: "Request", cell: function (i) {
       return el("div", {}, [link(i.title, i.url), el("div", { class: "status-sub", text: i.repo + "#" + i.number })]);
@@ -115,13 +116,13 @@
   }
 
   var useCaseColumns = [
-    common.rank, common.title, common.progress, common.requested, common.external, common.internal,
+    common.priority, common.title, common.progress, common.requested, common.external, common.internal,
     { label: "Depends on", cell: function (i) { return depList(i.depends_on); } },
     { label: "Candidate data", cell: candidateData }
   ];
 
   var datasetColumns = [
-    common.rank, common.title, common.progress, common.requested, common.external, common.internal,
+    common.priority, common.title, common.progress, common.requested, common.external, common.internal,
     { label: "Needed by", cell: function (i) {
       return depList(i.needed_by.map(function (u) {
         var m = /github\.com\/OHDSI\/([^/]+)\/issues\/(\d+)/.exec(u.url);
@@ -135,8 +136,8 @@
 
   function render(target, columns, items, showDone, emptyText) {
     var host = document.getElementById(target);
-    if (!items.some(function (i) { return i.rank != null; })) {
-      columns = columns.filter(function (c) { return c !== common.rank; });  // no ranks on the board yet
+    if (!items.some(function (i) { return i.priority != null; })) {
+      columns = columns.filter(function (c) { return c !== common.priority; });  // no priorities on the board yet
     }
     var rows = items.filter(function (i) { return showDone || !isDone(i); });
     host.textContent = "";
