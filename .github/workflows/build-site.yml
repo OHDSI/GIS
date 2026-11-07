@@ -96,9 +96,9 @@ jobs:
       continue-on-error: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # Reading an org project board needs a token with read:project; without
+        # Reading an org project board needs a token with project access; without
         # the secret the script keeps the board values from the last run.
-        GH_TOKEN: ${{ secrets.PROJECT_READ_TOKEN || secrets.GITHUB_TOKEN }}
+        GH_TOKEN: ${{ secrets.PROJECT_WRITE_TOKEN || secrets.GITHUB_TOKEN }}
       run: python3 scripts/build_status.py
 
     - name: Build site

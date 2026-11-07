@@ -105,8 +105,9 @@ def fetch_board(project):
             capture_output=True, text=True, timeout=120, check=True)
         items = json.loads(res.stdout)["items"]
     except (OSError, subprocess.SubprocessError, ValueError, KeyError) as e:
-        print(f"warning: could not read project board ({e}); keeping previous board values",
-              file=sys.stderr)
+        detail = (getattr(e, "stderr", "") or "").strip()
+        print(f"warning: could not read project board ({e}){': ' + detail if detail else ''}; "
+              "keeping previous board values", file=sys.stderr)
         return None
     board = {}
     for it in items:
