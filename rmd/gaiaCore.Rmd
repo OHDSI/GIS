@@ -21,6 +21,10 @@ gaiaCore is an **R package** for working with a Gaia database. It connects to ga
 - **Analyse**: day-weighted exposure over windows such as a pregnancy, and effect estimates whose confidence intervals stay valid with few, unbalanced geographic clusters
 - **Docker image** `ohdsi/gaia-core`: HADES (RStudio) with gaiaCore and the extension packages (CaprForExtensions, FeatureExtractionForExtensions) installed
 
+## Questions and feedback
+
+Setting up gaiaCore for the first time? Read and add to [Experiences with Setting Up gaiaCore](https://github.com/OHDSI/GIS/discussions/322), or ask in [GitHub Discussions Q&A](https://github.com/OHDSI/GIS/discussions/categories/q-a).
+
 ## Architecture
 
 gaiaCore sits between gaiaDB and the HADES analytics:

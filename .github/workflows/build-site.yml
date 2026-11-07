@@ -78,15 +78,6 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pandoc-
 
-    - name: Refresh use case and dataset status data
-      continue-on-error: true
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # Reading an org project board needs a token with read:project; without
-        # the secret the script keeps the board values from the last run.
-        GH_TOKEN: ${{ secrets.PROJECT_READ_TOKEN || secrets.GITHUB_TOKEN }}
-      run: python3 scripts/build_status.py
-
     - name: Suggest candidate data for use cases
       continue-on-error: true
       env:
@@ -100,6 +91,15 @@ jobs:
         else
           python3 scripts/link_use_cases.py --post
         fi
+
+    - name: Refresh use case and dataset status data
+      continue-on-error: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # Reading an org project board needs a token with read:project; without
+        # the secret the script keeps the board values from the last run.
+        GH_TOKEN: ${{ secrets.PROJECT_READ_TOKEN || secrets.GITHUB_TOKEN }}
+      run: python3 scripts/build_status.py
 
     - name: Build site
       run: |

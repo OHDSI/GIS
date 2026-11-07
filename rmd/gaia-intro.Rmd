@@ -37,7 +37,7 @@ Gaia currently supports:
 Current limitations being addressed:
 
 - **Real-time data**: Limited support for streaming/real-time geospatial data (planned enhancement)
-- **Rasters**: Raster sources are not yet registered in the geometry-attribute index (planned)
+- **Rasters**: Raster sources are not yet registered in the geometry-attribute index (planned; join the [discussion on raster capability](https://github.com/OHDSI/GIS/discussions/558))
 - **Recipes**: Retrieval and loading run as source-specific ETL scripts generated from each catalog entry; declarative recipes are being evaluated
 - **Global coverage**: Majority of cataloged datasets focus on United States (expanding)
 - **Vocabulary coverage**: Ongoing development of OMOP GIS, Exposome, and SDoH vocabularies

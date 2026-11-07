@@ -13,6 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CONFIG = ROOT / "rmd" / "data" / "status-config.json"
 OUT = ROOT / "rmd" / "data" / "status.json"
+LINKS = ROOT / "rmd" / "data" / "use-case-links.json"
 ORG = "OHDSI"
 TOKEN = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
 
@@ -82,6 +83,8 @@ def dependency_refs(body, repo, self_number):
     return refs
 
 
+PRIORITIES = ["Now", "Next", "Later"]  # options of the board's Priority field, highest first
+
 BOARD_STATUS = {
     "idea": "Idea", "proposed": "Proposed", "todo": "To do",
     "in progress": "In progress", "blocked": "Blocked", "done": "Complete",
@@ -110,10 +113,10 @@ def fetch_board(project):
         m = re.search(r"OHDSI/([^/]+)/issues/(\d+)", (it.get("content") or {}).get("url", ""))
         if not m:
             continue
-        rank = it.get("rank")
+        priority = it.get("priority")
         board[(m.group(1), int(m.group(2)))] = {
             "status": board_status(it.get("status")),
-            "rank": rank if isinstance(rank, (int, float)) else None,
+            "priority": priority if priority in PRIORITIES else None,
         }
     return board
 
@@ -138,6 +141,9 @@ def main():
     if OUT.exists():
         old_out = json.loads(OUT.read_text())
         previous = {x["key"]: x for x in old_out["use_cases"] + old_out["datasets"]}
+    links = {}
+    if LINKS.exists():  # datasets maintainers confirmed on use case issues (scripts/link_use_cases.py)
+        links = json.loads(LINKS.read_text()).get("links", {})
     board = fetch_board(cfg.get("project_number", 26))
 
     gis = all_issues("GIS")
@@ -199,7 +205,9 @@ def main():
                 "key": dk, "repo": r, "number": num, "title": clean_title(d["title"]),
                 "state": d["state"], "url": d["html_url"], "tracked_as": tracked.get(dk),
             })
-        for dk in o.get("depends_on", []):
+        confirmed = [c["in_catalog_request"] for c in links.get(k, {}).get("confirmed", [])
+                     if c.get("in_catalog_request")]
+        for dk in o.get("depends_on", []) + confirmed:
             r, num = dk.split("#")
             d = by_key.get(dk) or get_issue(r, int(num))
             if d and all(x["key"] != dk for x in deps):
@@ -210,9 +218,9 @@ def main():
 
         if board is not None:
             on_board = board.get((repo, n), {})
-            b_status, rank = on_board.get("status"), on_board.get("rank")
+            b_status, priority = on_board.get("status"), on_board.get("priority")
         else:
-            b_status, rank = previous.get(k, {}).get("board_status"), previous.get(k, {}).get("rank")
+            b_status, priority = previous.get(k, {}).get("board_status"), previous.get(k, {}).get("priority")
 
         if "status" in o:
             status = o["status"]
@@ -240,7 +248,7 @@ def main():
             "external_owner": ext,
             "internal_owners": [person(u) for u in internal_owners],
             "board_status": b_status,
-            "rank": rank,
+            "priority": priority,
             "labels": sorted(L),
             "depends_on": deps,
             "needed_by": [],
@@ -260,7 +268,8 @@ def main():
                                          "state": x["state"], "kind": x["kind"]})
 
     def sort_key(x):
-        return (x["rank"] is None, x["rank"] or 0, x["state"] == "closed", x["requested"])
+        order = PRIORITIES.index(x["priority"]) if x["priority"] else len(PRIORITIES)
+        return (order, x["state"] == "closed", x["requested"])
 
     ucs.sort(key=sort_key)
     dss.sort(key=sort_key)

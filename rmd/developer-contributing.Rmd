@@ -261,7 +261,7 @@ See GitHub PR template for full checklist.
 ### **Technical Questions**
 - Ask in weekly meetings
 - Post in Teams GIS channel
-- Create GitHub discussion
+- Start a [GitHub Discussion](https://github.com/OHDSI/GIS/discussions/categories/q-a) (use an issue instead for bugs and tracked tasks)
 - Tag relevant maintainers
 
 ### **Stuck on Something?**

@@ -171,7 +171,7 @@ gaiaDB's data retrieval step runs each dataset's ETL scripts from inside Postgre
 | Windows, native PostgreSQL | No | Yes |
 | Managed PostgreSQL (AWS RDS and Aurora, Azure Database for PostgreSQL, Google Cloud SQL) | No: not in the providers' supported extensions | Yes |
 
-The join itself needs only PostGIS and plain SQL, so it runs on every platform above. Retrieval of public data can run elsewhere (for example in a container or on a laptop) and the harmonized tables can be moved to the database that holds patient locations. Whether and how Gaia should separate retrieval from the protected database is an open design question in the working group; see issue #522 for the Windows native case. Check your provider's current extension list, since these change.
+The join itself needs only PostGIS and plain SQL, so it runs on every platform above. Retrieval of public data can run elsewhere (for example in a container or on a laptop) and the harmonized tables can be moved to the database that holds patient locations. Whether and how Gaia should separate retrieval from the protected database is an open design question in the working group; see [issue #531](https://github.com/OHDSI/GIS/issues/531). Check your provider's current extension list, since these change.
 
 <br>
 

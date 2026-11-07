@@ -26,6 +26,7 @@ The OHDSI GIS Working Group follows an **agile, use-case-driven** development me
 
 ### **Issue Types**
 
+- **Dataset requests** (`data source request` label, in [gaiaCatalog](https://github.com/OHDSI/gaiaCatalog/issues/new?template=data-request.yaml)): requests to add a dataset to the catalog
 - **Use Cases** (`Use Case` label): Research-driven proposals via [template](https://github.com/OHDSI/GIS/issues/new?assignees=&labels=Use+Case&projects=&template=use-case.yaml&title=%5BUse+Case%5D%3A+)
 - **Work Orders** (`task` label): Specific development tasks
 - **Bugs** (`bug` label): Software defects
@@ -71,13 +72,14 @@ Code written and tested → Tests pass → Documentation updated → Code review
 
 ## **Use Case Management**
 
-1. [Submit Use Case](https://github.com/OHDSI/GIS/issues/new?assignees=&labels=Use+Case&projects=&template=use-case.yaml&title=%5BUse+Case%5D%3A+) (Description, Infrastructure needs, Timeline, Credit, Support, Datasets)
+1. [Submit Use Case](https://github.com/OHDSI/GIS/issues/new?assignees=&labels=Use+Case&projects=&template=use-case.yaml&title=%5BUse+Case%5D%3A+) (Description, Infrastructure needs, Timeline, Credit, Support, and Data needs: themes, geography, years, region)
 2. Leaders review and schedule discussion
 3. Present in Thursday meeting
 4. Decompose into work orders
 5. Prioritize and assign
-6. Execute development sprint
-7. Deliver results
+6. Review candidate data: each week a bot comment on the use case issue suggests datasets from the [Data Inventory](inventory.html) and the catalog requests. Reply `/confirm <id>`, `/reject <id>` or `/no-data-needed`; the board's *Data match* field and the [status page](status.html) follow. Confirmed datasets that have a catalog request become dependencies of the use case.
+7. Execute development sprint
+8. Deliver results
 
 <br>
 
@@ -111,6 +113,7 @@ Key component roadmaps maintained as GitHub issues:
 ### **Channels**
 
 - **GitHub Issues/PRs**: Technical discussion, tracking (primary)
+- **[GitHub Discussions](https://github.com/OHDSI/GIS/discussions)**: Open-ended questions, ideas and announcements that do not need a tracked issue (for example [raster capability](https://github.com/OHDSI/GIS/discussions/558)); promote to an issue when work is agreed
 - **MS Teams GIS Channel**: Quick questions, announcements
 - **Weekly Meetings**: Collaborative decision-making
 - **Email**: Meeting agendas, summaries

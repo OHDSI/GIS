@@ -24,6 +24,8 @@ navbar:
           href: get-started.html
         - text: "Use Case & Dataset Status"
           href: status.html
+        - text: "Discussions"
+          href: https://github.com/OHDSI/GIS/discussions
         - text: "Project Management"
           href: project-management.html
     - text: "Gaia"

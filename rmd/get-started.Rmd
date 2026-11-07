@@ -130,7 +130,8 @@ See [Deployment Strategies](developer-deployment.html) for alternative deploymen
 - Join subgroup meetings for specific projects
 
 **For Everyone**:
-- Join discussions on Teams GIS channel
+- Join discussions on Teams GIS channel and in [GitHub Discussions](https://github.com/OHDSI/GIS/discussions)
+- Share what you have built, or ask how others set things up, in [Show and tell](https://github.com/OHDSI/GIS/discussions/categories/show-and-tell) and [Q&A](https://github.com/OHDSI/GIS/discussions/categories/q-a)
 - Help improve documentation
 - Answer questions on [OHDSI Forums](http://forums.ohdsi.org/c/developers)
 - Attend presentations at meetings
@@ -246,7 +247,8 @@ See [Project Management](project-management.html) for complete process details.
 ### **Questions?**
 
 - **Teams**: Post in GIS Working Group channel
-- **GitHub**: [Open an issue](https://github.com/OHDSI/GIS/issues) or discussion
+- **GitHub Discussions**: [Ask a question](https://github.com/OHDSI/GIS/discussions/categories/q-a), [suggest an idea](https://github.com/OHDSI/GIS/discussions/categories/ideas), or read [announcements](https://github.com/OHDSI/GIS/discussions/categories/announcements). Setting up gaiaCore? See [Experiences with Setting Up gaiaCore](https://github.com/OHDSI/GIS/discussions/322)
+- **GitHub Issues**: [Open an issue](https://github.com/OHDSI/GIS/issues) for a bug, task or use case that needs tracking
 - **Meetings**: Attend Thursday meetings (10 AM ET)
 - **Email**: houghtaling@ohdsi.org
 
