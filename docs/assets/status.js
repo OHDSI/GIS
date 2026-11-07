@@ -91,9 +91,33 @@
     internal: { label: "WG owner", cell: function (i) { return people(i.internal_owners); } }
   };
 
+  var links = {};  // use case key -> suggestions from data/use-case-links.json
+
+  function candidateData(i) {
+    var l = links[i.key];
+    if (!l) return el("span", { class: "status-none", text: "Not matched" });
+    if (l.state === "Not needed") return el("span", { class: "status-none", text: "No external dataset needed" });
+    var shown = l.confirmed.map(function (c) { return { c: c, done: true }; })
+      .concat(l.candidates.map(function (c) { return { c: c, done: false }; }));
+    if (!shown.length) return el("span", { class: "status-none", text: "None found" });
+    var ul = el("ul", { class: "status-deps" });
+    shown.slice(0, 3).forEach(function (x) {
+      ul.appendChild(el("li", { class: x.done ? "status-dep-closed" : "status-dep-open" }, [
+        el("span", { class: "status-dep-mark", text: x.done ? "✓ " : "? " }),
+        link(x.c.name, x.c.url)
+      ]));
+    });
+    var more = shown.length - 3;
+    if (more > 0) ul.appendChild(el("li", { class: "status-sub", text: "+" + more + " more in the issue comment" }));
+    ul.appendChild(el("li", { class: "status-sub",
+      text: l.confirmed.length ? "✓ confirmed, ? suggested" : "Suggested, not yet reviewed" }));
+    return ul;
+  }
+
   var useCaseColumns = [
     common.rank, common.title, common.progress, common.requested, common.external, common.internal,
-    { label: "Depends on", cell: function (i) { return depList(i.depends_on); } }
+    { label: "Depends on", cell: function (i) { return depList(i.depends_on); } },
+    { label: "Candidate data", cell: candidateData }
   ];
 
   var datasetColumns = [
@@ -136,7 +160,10 @@
     });
   }
 
-  fetch("data/status.json")
+  fetch("data/use-case-links.json")
+    .then(function (r) { return r.ok ? r.json() : { links: {} }; })
+    .catch(function () { return { links: {} }; })  // suggestions are optional
+    .then(function (l) { links = l.links || {}; return fetch("data/status.json"); })
     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(function (d) {
       document.getElementById("status-updated").textContent =
