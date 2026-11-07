@@ -32,27 +32,66 @@ body:
     id: credit
     attributes:
       label: Credit - How would you and your team like to receive credit for this work?
-      description: "How would you and your team like to receive credit for this work?"        
-      placeholder: "Can this be delivered with existing infrastructure?"
+      description: "How would you and your team like to receive credit for this work?"
+      placeholder: "Example: co-authorship, acknowledgement, or a citation of the toolchain"
   - type: textarea
     id: support
     attributes:
       label: Support - What kind of support does your team need from the workgroup?
       description: "What kind of support does your team need from the workgroup?"        
       placeholder: "Describe the type of support you will need"
+  - type: markdown
+    attributes:
+      value: |
+        ## Data needs
+        These fields let the working group match your use case to datasets in the gaiaCatalog and the Data Inventory.
+  - type: checkboxes
+    id: themes
+    attributes:
+      label: Exposure themes
+      description: "Select every kind of place-based data the project needs."
+      options:
+        - label: Air quality
+        - label: Heat / temperature / climate
+        - label: Water
+        - label: Green space / built environment
+        - label: Food access
+        - label: Deprivation / socioeconomic indices
+        - label: Demographics / population
+        - label: Health services / care access
+        - label: Hazards / disasters
+        - label: Crime / violence
+        - label: Other (describe below)
+  - type: dropdown
+    id: geography
+    attributes:
+      label: Geography needed
+      description: "The finest geographic unit the analysis requires."
+      options:
+        - Point / address
+        - Census block group or tract
+        - ZIP / postal code
+        - County
+        - State or country
+        - Other / not sure
+  - type: input
+    id: years
+    attributes:
+      label: Years needed
+      placeholder: "Example: 2015-2022"
+  - type: input
+    id: region
+    attributes:
+      label: Region
+      placeholder: "Example: United States, Europe, Korea"
   - type: textarea
     id: datasets
     attributes:
       label: Datasets of Interest
-      description: "Provide a list of datasets (titles, links, descriptions, etc.) that your project is interested in using."
+      description: "Optional. List any datasets (titles, links, descriptions) you already have in mind."
       placeholder: "List the datasets your project is interested in using"
   - type: markdown
     attributes:
       value: |
-        # Use Case Work Orders
-  - type: textarea
-    id: depends
-    attributes:
-      label: Depends On
-      description: "Work orders that are associated with this Use Case."
-      placeholder: "Issue task list goes here. This can be filled out after "
+        ## Work orders
+        The working group links related issues here after review.

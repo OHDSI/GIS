@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Request a dataset
+    url: https://github.com/OHDSI/gaiaCatalog/issues/new?template=data-request.yaml
+    about: Dataset requests are tracked in the gaiaCatalog repository.

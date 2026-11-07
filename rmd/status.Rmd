@@ -16,7 +16,7 @@ Where the working group's use cases and dataset requests stand. Use cases come f
 
 <div id="status-summary" class="status-summary"></div>
 
-To propose a use case, see [Get Started](get-started.html#propose-a-use-case). To request a dataset, open a [data source request](https://github.com/OHDSI/gaiaCatalog/issues/new?labels=data+source+request&title=%5BData+Source+Request%5D%3A+).
+To propose a use case, see [Get Started](get-started.html#propose-a-use-case). To request a dataset, open a [data source request](https://github.com/OHDSI/gaiaCatalog/issues/new?template=data-request.yaml).
 
 <br>
 
