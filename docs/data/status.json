@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-09T11:08:22Z",
+ "generated_at": "2026-11-09T22:51:46Z",
  "sources": [
   "https://github.com/OHDSI/GIS/issues?q=label%3A%22Use+Case%22",
   "https://github.com/OHDSI/gaiaCatalog/issues?q=label%3A%22data+source+request%22"
@@ -16,7 +16,7 @@
    "status": "Idea",
    "status_note": null,
    "requested": "2023-09-06",
-   "updated": "2025-11-14",
+   "updated": "2026-11-09",
    "closed": null,
    "requester": {
     "login": "kzollove",
@@ -135,59 +135,6 @@
    "deps_total": 0
   },
   {
-   "key": "GIS#289",
-   "repo": "GIS",
-   "number": 289,
-   "kind": "use_case",
-   "title": "Support the INSPIRE project's effort to link population health data to geospatial data",
-   "url": "https://github.com/OHDSI/GIS/issues/289",
-   "state": "open",
-   "status": "Superseded",
-   "status_note": "Replaced by #367 (see that issue)",
-   "requested": "2023-11-24",
-   "updated": "2024-05-03",
-   "closed": null,
-   "requester": {
-    "login": "kzollove",
-    "url": "https://github.com/kzollove"
-   },
-   "external_owner": "INSPIRE project (HDSS sites)",
-   "internal_owners": [
-    {
-     "login": "jaygee-on-github",
-     "url": "https://github.com/jaygee-on-github"
-    }
-   ],
-   "board_status": "Proposed",
-   "priority": null,
-   "labels": [
-    "Use Case"
-   ],
-   "depends_on": [
-    {
-     "key": "gaiaCatalog#34",
-     "repo": "gaiaCatalog",
-     "number": 34,
-     "title": "Scope out SDG indicator database ingestion workload",
-     "state": "open",
-     "url": "https://github.com/OHDSI/gaiaCatalog/issues/34",
-     "tracked_as": "dataset"
-    },
-    {
-     "key": "gaiaCatalog#31",
-     "repo": "gaiaCatalog",
-     "number": 31,
-     "title": "DIVA-GIS (country- and global-level geometry data)",
-     "state": "open",
-     "url": "https://github.com/OHDSI/gaiaCatalog/issues/31",
-     "tracked_as": "dataset"
-    }
-   ],
-   "needed_by": [],
-   "deps_closed": 0,
-   "deps_total": 2
-  },
-  {
    "key": "GIS#311",
    "repo": "GIS",
    "number": 311,
@@ -245,77 +192,6 @@
    "deps_total": 3
   },
   {
-   "key": "GIS#324",
-   "repo": "GIS",
-   "number": 324,
-   "kind": "use_case",
-   "title": "Evaluating fitness of WorldFAIR for OHDSI/GIS",
-   "url": "https://github.com/OHDSI/GIS/issues/324",
-   "state": "open",
-   "status": "In progress",
-   "status_note": null,
-   "requested": "2024-02-23",
-   "updated": "2024-06-13",
-   "closed": null,
-   "requester": {
-    "login": "kzollove",
-    "url": "https://github.com/kzollove"
-   },
-   "external_owner": "Internal WG initiative",
-   "internal_owners": [
-    {
-     "login": "jaygee-on-github",
-     "url": "https://github.com/jaygee-on-github"
-    }
-   ],
-   "board_status": "In progress",
-   "priority": null,
-   "labels": [
-    "Use Case"
-   ],
-   "depends_on": [
-    {
-     "key": "GIS#325",
-     "repo": "GIS",
-     "number": 325,
-     "title": "Form-based Entry for JSON-LD",
-     "state": "closed",
-     "url": "https://github.com/OHDSI/GIS/issues/325",
-     "tracked_as": null
-    },
-    {
-     "key": "GIS#326",
-     "repo": "GIS",
-     "number": 326,
-     "title": "Create a proof of concept knowledge graph for a catalog that includes both SDoHs and climate data",
-     "state": "closed",
-     "url": "https://github.com/OHDSI/GIS/issues/326",
-     "tracked_as": null
-    },
-    {
-     "key": "GIS#327",
-     "repo": "GIS",
-     "number": 327,
-     "title": "Put together and demonstrate a toolset that can search the JSON-LD catalog knowledge graph",
-     "state": "closed",
-     "url": "https://github.com/OHDSI/GIS/issues/327",
-     "tracked_as": null
-    },
-    {
-     "key": "gaiaCatalog#25",
-     "repo": "gaiaCatalog",
-     "number": 25,
-     "title": "Infuse Gaia with metadata from the knowledge graph at both the dataset and variable levels",
-     "state": "open",
-     "url": "https://github.com/OHDSI/gaiaCatalog/issues/25",
-     "tracked_as": null
-    }
-   ],
-   "needed_by": [],
-   "deps_closed": 3,
-   "deps_total": 4
-  },
-  {
    "key": "GIS#331",
    "repo": "GIS",
    "number": 331,
@@ -326,7 +202,7 @@
    "status": "In progress",
    "status_note": null,
    "requested": "2024-03-14",
-   "updated": "2024-05-03",
+   "updated": "2026-11-09",
    "closed": null,
    "requester": {
     "login": "Chesterguan",
@@ -355,7 +231,7 @@
    "status": "On hold",
    "status_note": null,
    "requested": "2024-06-03",
-   "updated": "2025-03-14",
+   "updated": "2026-11-09",
    "closed": null,
    "requester": {
     "login": "zhangly811",
@@ -364,71 +240,6 @@
    "external_owner": "@zhangly811",
    "internal_owners": [],
    "board_status": "To do",
-   "priority": null,
-   "labels": [
-    "On Hold",
-    "Use Case"
-   ],
-   "depends_on": [],
-   "needed_by": [],
-   "deps_closed": 0,
-   "deps_total": 0
-  },
-  {
-   "key": "GIS#338",
-   "repo": "GIS",
-   "number": 338,
-   "kind": "use_case",
-   "title": "Opioid use disorder",
-   "url": "https://github.com/OHDSI/GIS/issues/338",
-   "state": "open",
-   "status": "On hold",
-   "status_note": null,
-   "requested": "2024-06-24",
-   "updated": "2025-11-14",
-   "closed": null,
-   "requester": {
-    "login": "causailab",
-    "url": "https://github.com/causailab"
-   },
-   "external_owner": "@causailab",
-   "internal_owners": [
-    {
-     "login": "jshoughtaling",
-     "url": "https://github.com/jshoughtaling"
-    }
-   ],
-   "board_status": "Idea",
-   "priority": null,
-   "labels": [
-    "On Hold",
-    "Use Case"
-   ],
-   "depends_on": [],
-   "needed_by": [],
-   "deps_closed": 0,
-   "deps_total": 0
-  },
-  {
-   "key": "GIS#339",
-   "repo": "GIS",
-   "number": 339,
-   "kind": "use_case",
-   "title": "Common data model extension tables for `COST` and `PRICE` to assess spatial autocorrelation",
-   "url": "https://github.com/OHDSI/GIS/issues/339",
-   "state": "open",
-   "status": "On hold",
-   "status_note": null,
-   "requested": "2024-06-26",
-   "updated": "2026-11-07",
-   "closed": null,
-   "requester": {
-    "login": "altosaar",
-    "url": "https://github.com/altosaar"
-   },
-   "external_owner": "@altosaar",
-   "internal_owners": [],
-   "board_status": "Proposed",
    "priority": null,
    "labels": [
     "On Hold",
@@ -495,6 +306,195 @@
    "board_status": null,
    "priority": null,
    "labels": [
+    "Use Case"
+   ],
+   "depends_on": [],
+   "needed_by": [],
+   "deps_closed": 0,
+   "deps_total": 0
+  },
+  {
+   "key": "GIS#289",
+   "repo": "GIS",
+   "number": 289,
+   "kind": "use_case",
+   "title": "Support the INSPIRE project's effort to link population health data to geospatial data",
+   "url": "https://github.com/OHDSI/GIS/issues/289",
+   "state": "closed",
+   "status": "Superseded",
+   "status_note": "Replaced by #367 (see that issue)",
+   "requested": "2023-11-24",
+   "updated": "2026-11-09",
+   "closed": "2026-11-09",
+   "requester": {
+    "login": "kzollove",
+    "url": "https://github.com/kzollove"
+   },
+   "external_owner": "INSPIRE project (HDSS sites)",
+   "internal_owners": [
+    {
+     "login": "jaygee-on-github",
+     "url": "https://github.com/jaygee-on-github"
+    }
+   ],
+   "board_status": "Complete",
+   "priority": null,
+   "labels": [
+    "Use Case"
+   ],
+   "depends_on": [
+    {
+     "key": "gaiaCatalog#34",
+     "repo": "gaiaCatalog",
+     "number": 34,
+     "title": "Scope out SDG indicator database ingestion workload",
+     "state": "open",
+     "url": "https://github.com/OHDSI/gaiaCatalog/issues/34",
+     "tracked_as": "dataset"
+    },
+    {
+     "key": "gaiaCatalog#31",
+     "repo": "gaiaCatalog",
+     "number": 31,
+     "title": "DIVA-GIS (country- and global-level geometry data)",
+     "state": "open",
+     "url": "https://github.com/OHDSI/gaiaCatalog/issues/31",
+     "tracked_as": "dataset"
+    }
+   ],
+   "needed_by": [],
+   "deps_closed": 0,
+   "deps_total": 2
+  },
+  {
+   "key": "GIS#324",
+   "repo": "GIS",
+   "number": 324,
+   "kind": "use_case",
+   "title": "Evaluating fitness of WorldFAIR for OHDSI/GIS",
+   "url": "https://github.com/OHDSI/GIS/issues/324",
+   "state": "closed",
+   "status": "Complete",
+   "status_note": null,
+   "requested": "2024-02-23",
+   "updated": "2026-11-09",
+   "closed": "2026-11-09",
+   "requester": {
+    "login": "kzollove",
+    "url": "https://github.com/kzollove"
+   },
+   "external_owner": "Internal WG initiative",
+   "internal_owners": [
+    {
+     "login": "jaygee-on-github",
+     "url": "https://github.com/jaygee-on-github"
+    }
+   ],
+   "board_status": "Complete",
+   "priority": null,
+   "labels": [
+    "Use Case"
+   ],
+   "depends_on": [
+    {
+     "key": "GIS#325",
+     "repo": "GIS",
+     "number": 325,
+     "title": "Form-based Entry for JSON-LD",
+     "state": "closed",
+     "url": "https://github.com/OHDSI/GIS/issues/325",
+     "tracked_as": null
+    },
+    {
+     "key": "GIS#326",
+     "repo": "GIS",
+     "number": 326,
+     "title": "Create a proof of concept knowledge graph for a catalog that includes both SDoHs and climate data",
+     "state": "closed",
+     "url": "https://github.com/OHDSI/GIS/issues/326",
+     "tracked_as": null
+    },
+    {
+     "key": "GIS#327",
+     "repo": "GIS",
+     "number": 327,
+     "title": "Put together and demonstrate a toolset that can search the JSON-LD catalog knowledge graph",
+     "state": "closed",
+     "url": "https://github.com/OHDSI/GIS/issues/327",
+     "tracked_as": null
+    },
+    {
+     "key": "gaiaCatalog#25",
+     "repo": "gaiaCatalog",
+     "number": 25,
+     "title": "Infuse Gaia with metadata from the knowledge graph at both the dataset and variable levels",
+     "state": "open",
+     "url": "https://github.com/OHDSI/gaiaCatalog/issues/25",
+     "tracked_as": null
+    }
+   ],
+   "needed_by": [],
+   "deps_closed": 3,
+   "deps_total": 4
+  },
+  {
+   "key": "GIS#338",
+   "repo": "GIS",
+   "number": 338,
+   "kind": "use_case",
+   "title": "Opioid use disorder",
+   "url": "https://github.com/OHDSI/GIS/issues/338",
+   "state": "closed",
+   "status": "Complete",
+   "status_note": null,
+   "requested": "2024-06-24",
+   "updated": "2026-11-09",
+   "closed": "2026-11-09",
+   "requester": {
+    "login": "causailab",
+    "url": "https://github.com/causailab"
+   },
+   "external_owner": "@causailab",
+   "internal_owners": [
+    {
+     "login": "jshoughtaling",
+     "url": "https://github.com/jshoughtaling"
+    }
+   ],
+   "board_status": "Complete",
+   "priority": null,
+   "labels": [
+    "On Hold",
+    "Use Case"
+   ],
+   "depends_on": [],
+   "needed_by": [],
+   "deps_closed": 0,
+   "deps_total": 0
+  },
+  {
+   "key": "GIS#339",
+   "repo": "GIS",
+   "number": 339,
+   "kind": "use_case",
+   "title": "Common data model extension tables for `COST` and `PRICE` to assess spatial autocorrelation",
+   "url": "https://github.com/OHDSI/GIS/issues/339",
+   "state": "closed",
+   "status": "Complete",
+   "status_note": null,
+   "requested": "2024-06-26",
+   "updated": "2026-11-09",
+   "closed": "2026-11-09",
+   "requester": {
+    "login": "altosaar",
+    "url": "https://github.com/altosaar"
+   },
+   "external_owner": "@altosaar",
+   "internal_owners": [],
+   "board_status": "Complete",
+   "priority": null,
+   "labels": [
+    "On Hold",
     "Use Case"
    ],
    "depends_on": [],
@@ -721,7 +721,7 @@
      "key": "GIS#289",
      "title": "Support the INSPIRE project's effort to link population health data to geospatial data",
      "url": "https://github.com/OHDSI/GIS/issues/289",
-     "state": "open",
+     "state": "closed",
      "kind": "use_case"
     }
    ],
@@ -825,7 +825,7 @@
      "key": "GIS#289",
      "title": "Support the INSPIRE project's effort to link population health data to geospatial data",
      "url": "https://github.com/OHDSI/GIS/issues/289",
-     "state": "open",
+     "state": "closed",
      "kind": "use_case"
     },
     {

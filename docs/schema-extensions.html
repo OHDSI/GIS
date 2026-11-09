@@ -560,7 +560,69 @@ EXTERNAL_EXPOSURE</div>
 catalog carries its provenance (<code>exposure_source_value</code> holds
 the <code>variable_source_id</code> of the variable the row came
 from).</p>
+<div
+id="location_history-etl-conventions-draft-for-working-group-review"
+class="section level3">
+<h3><strong>LOCATION_HISTORY ETL conventions (draft for working group
+review)</strong></h3>
+<p><em>Proposed in <a
+href="https://github.com/OHDSI/GIS/issues/395">issue #395</a>; not yet
+agreed. <code>LOCATION_HISTORY</code> was part of CDM v6 and has no ETL
+conventions in CDM v5.4, and patient address history is often incomplete
+in the source data. These conventions say what to assume when filling
+it, since missing history cannot be reliably imputed.</em></p>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Situation in the source data</th>
+<th>Proposed convention</th>
+<th>Open question</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>No address history, but a single current address</td>
+<td>Backfill: add a <code>LOCATION_HISTORY</code> record for the current
+address</td>
+<td>Backfill for a fixed period, or back to the patient’s earliest
+visit?</td>
+</tr>
+<tr class="even">
+<td>Address history that starts after the patient’s record does</td>
+<td>Backfill: add a record for the earliest known address back to the
+patient’s earliest visit (or another agreed date)</td>
+<td>Which start date?</td>
+</tr>
+<tr class="odd">
+<td>A gap between two records with the same address</td>
+<td>Fill the gap with a new record for that address</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td>A gap between two records with different addresses</td>
+<td>Not decided</td>
+<td>Do nothing, fill forward, fill backward, or meet halfway?</td>
+</tr>
+</tbody>
+</table>
+<p>Extending a short address history over a long medical record can
+place a patient near exposures they never experienced, so whether and
+when to backfill depends on the use case. To let analysts trust source
+records and discount extended ones, the proposal asks whether to add a
+field that distinguishes records taken from the source from records
+created by backfilling. These proposals come from the Tufts
+<code>LOCATION_HISTORY</code> work for the BMC Population Health
+Explorer, which is atypical of OHDSI GIS use cases. The <a
+href="algorithms.html">Gaia algorithms</a> page currently describes
+<code>LOCATION_HISTORY</code> as optional, and the proposal says it is a
+prerequisite; the group should settle which.</p>
 <p><br></p>
+</div>
 </div>
 <div id="source-to-concept-navigation-map" class="section level2">
 <h2><strong>Source-to-concept navigation map</strong></h2>
