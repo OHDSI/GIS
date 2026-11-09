@@ -77,6 +77,12 @@ Accuracy considerations: whether the match is interpolated or parcel-based, the 
 
 <br>
 
+## **When you only have state, county or ZIP**
+
+You do not need an address to use the toolchain. If a site holds only a coarser location (a state, county or ZIP code), use the coordinates of that area's centroid as the location, and Gaia will treat each patient or care site as being at that point. A dedicated method for this does not exist, so you populate the geocoded location table yourself (it can be filled by any means, not only by Gaia's geocoding functions). A coarser location can only be joined to datasets at that granularity or coarser: a county centroid is a poor stand-in for a tract-level exposure. The toolchain does not yet record whether a coordinate came from an address or from a centroid, so keep that in your own records. See the [Gaia overview](gaia-intro.html#what-you-need) for the coarser-to-finer options, and the FAQ discussion [How To Geocode on US State Level?](https://github.com/OHDSI/GIS/discussions/560) for the original question and answer.
+
+<br>
+
 ## **Privacy and cybersecurity considerations**
 
 - **Software and middleware**: information security and dependency vulnerabilities

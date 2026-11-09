@@ -57,6 +57,20 @@ The OMOP GIS Vocabulary Package extends the OMOP Common Data Model (CDM) to supp
 
 Standard concepts carry the meaning of each exposure row; Gaia's catalog carries its provenance (`exposure_source_value` holds the `variable_source_id` of the variable the row came from).
 
+### **LOCATION_HISTORY ETL conventions (draft for working group review)**
+
+*Proposed in [issue #395](https://github.com/OHDSI/GIS/issues/395); not yet agreed. `LOCATION_HISTORY` was part of CDM v6 and has no ETL conventions in CDM v5.4, and patient address history is often incomplete in the source data. These conventions say what to assume when filling it, since missing history cannot be reliably imputed.*
+
+| Situation in the source data | Proposed convention | Open question |
+|---|---|---|
+| No address history, but a single current address | Backfill: add a `LOCATION_HISTORY` record for the current address | Backfill for a fixed period, or back to the patient's earliest visit? |
+| Address history that starts after the patient's record does | Backfill: add a record for the earliest known address back to the patient's earliest visit (or another agreed date) | Which start date? |
+| A gap between two records with the same address | Fill the gap with a new record for that address | None |
+| A gap between two records with different addresses | Not decided | Do nothing, fill forward, fill backward, or meet halfway? |
+
+Extending a short address history over a long medical record can place a patient near exposures they never experienced, so whether and when to backfill depends on the use case. To let analysts trust source records and discount extended ones, the proposal asks whether to add a field that distinguishes records taken from the source from records created by backfilling. These proposals come from the Tufts `LOCATION_HISTORY` work for the BMC Population Health Explorer, which is atypical of OHDSI GIS use cases. The [Gaia algorithms](algorithms.html) page currently describes `LOCATION_HISTORY` as optional, and the proposal says it is a prerequisite; the group should settle which.
+
+
 <br>
 
 ## **Source-to-concept navigation map**
