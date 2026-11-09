@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-07T10:47:07Z",
+ "generated_at": "2026-11-09T11:08:22Z",
  "sources": [
   "https://github.com/OHDSI/GIS/issues?q=label%3A%22Use+Case%22",
   "https://github.com/OHDSI/gaiaCatalog/issues?q=label%3A%22data+source+request%22"
@@ -450,7 +450,7 @@
    "status": "In progress",
    "status_note": "Partnership with APHRC; tracked on the APHRC DSWB project board",
    "requested": "2024-12-05",
-   "updated": "2026-11-07",
+   "updated": "2026-11-09",
    "closed": null,
    "requester": {
     "login": "jaygee-on-github",
