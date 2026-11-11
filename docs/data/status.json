@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-09T22:51:46Z",
+ "generated_at": "2026-11-11T11:54:04Z",
  "sources": [
   "https://github.com/OHDSI/GIS/issues?q=label%3A%22Use+Case%22",
   "https://github.com/OHDSI/gaiaCatalog/issues?q=label%3A%22data+source+request%22"
@@ -16,7 +16,7 @@
    "status": "Idea",
    "status_note": null,
    "requested": "2023-09-06",
-   "updated": "2026-11-09",
+   "updated": "2026-11-10",
    "closed": null,
    "requester": {
     "login": "kzollove",
@@ -295,15 +295,20 @@
    "status": "Proposed",
    "status_note": null,
    "requested": "2026-11-05",
-   "updated": "2026-11-05",
+   "updated": "2026-11-09",
    "closed": null,
    "requester": {
     "login": "jshoughtaling",
     "url": "https://github.com/jshoughtaling"
    },
    "external_owner": null,
-   "internal_owners": [],
-   "board_status": null,
+   "internal_owners": [
+    {
+     "login": "jshoughtaling",
+     "url": "https://github.com/jshoughtaling"
+    }
+   ],
+   "board_status": "Proposed",
    "priority": null,
    "labels": [
     "Use Case"

@@ -2,6 +2,21 @@
  "_readme": "Add one object per update. 'date' (YYYY-MM-DD) is required; the site sorts newest first and the home page shows the three most recent. 'body' is plain text. 'links' is a list of {label, url}; urls are absolute https:// or relative site paths.",
  "updates": [
   {
+   "date": "2026-11-10",
+   "title": "Preprint of the OHDSI GIS toolchain manuscript published",
+   "body": "A preprint of the manuscript \"An OMOP-Compatible Exposure Infrastructure for GeoAI-Enabled Environmental Health Research: The OHDSI GIS Toolchain\" is now on Research Square while the manuscript is in review. It describes the open-source toolchain that standardizes place-based data into person-place-time exposure records for federated health research.",
+   "links": [
+    {
+     "label": "Read the preprint on Research Square",
+     "url": "https://www.researchsquare.com/article/rs-11436369/v1"
+    },
+    {
+     "label": "DOI: 10.21203/rs.3.rs-11436369/v1",
+     "url": "https://doi.org/10.21203/rs.3.rs-11436369/v1"
+    }
+   ]
+  },
+  {
    "date": "2026-11-06",
    "title": "Data Inventory actively updated this week",
    "body": "The evidence-backed inventory of public place-based datasets for linking to where patients live has been updated several times this week: new iterations added more candidate datasets and publisher coverage, strengthened the verification evidence, and refreshed the page with a header, tabs and a growth chart. Check back often, as the dataset and verification counts are growing. Methods, iterations and next steps are in the repository.",
