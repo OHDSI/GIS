@@ -59,6 +59,24 @@ Logistic regression of COPD on the 24-month day-weighted PM2.5 recovers a slope 
 
 <br>
 
+## **3. Exposure from raster data: surfaces, annual layers and land cover**
+
+**Question.** When the exposure is a grid of cells rather than polygons or points, how should a person's residence be linked to it: the value of the cell they live in, or a summary of the cells around them? And how do annual layers line up with a person who moves?
+
+**Data.** Simulated rasters over a 10 km window around downtown Los Angeles, with a known answer key and 500 test points. There are three exposure surfaces (25 m, 250 m and 2.5 km cells) that are the **same fields** as the vector `synthetic_surface_*` grids, so raster and vector can be compared cell for cell. There is also a six-year series (2014 to 2019, one file per year, with a trend that grows from west to east and a small nodata hole) and a land cover layer with four classes. None of it measures a real exposure.
+
+![The three simulated surfaces and the land cover, with one test point and its 1 km buffer](images/raster_surfaces_landcover.png)
+
+*The surfaces are one random field at three cell sizes (25 m, 250 m and 2.5 km), shown with the 100 m land cover. The dashed circle is a 1 km buffer around one test point: the join returns the value of the cell under the point, the mean of the cells in the circle, or, for land cover, the share of each class.*
+
+**What Gaia does.** Each raster has a catalog entry (`structure: raster`). `ingest_datasource` downloads the file, loads it with `raster2pgsql` and registers its variables and layers, so each layer knows the period it stands for. A residence is then joined three ways: by the **cell value** at the point, by the **mean of the cells** within a radius, or, for land cover, by the **share of each class** in a radius. As for vector sources, each annual layer is clipped to the residence interval, so a person who moves in the middle of a year gets two rows with the dates split at the move. The results land in `EXTERNAL_EXPOSURE`.
+
+**What you learn.** The cell value at the point matches the answer key exactly (500 rows per static layer and 2,964 for the annual series, with nodata giving no row), and the buffer means and class shares agree with it to within the small difference between a geography buffer in metres and a planar one. The cell value is not the true value at the point: with cells a quarter of the field's correlation length, the two differ by about 0.65 µg/m³ on average at every scale, which is the price of using a raster. Because the exposure of someone who moves is built from the layers of both periods, the annual series shows why dates matter as much as locations. The design questions that remain open (relationship concepts, where class codes go, performance on large rasters) are in the [raster discussion](https://github.com/OHDSI/GIS/discussions/558).
+
+**Run it.** [`syntheticDataGIS/raster`](https://github.com/OHDSI/GIS/tree/main/syntheticDataGIS/raster): generator, answer key, catalog entries and a script that loads everything into a throwaway gaia-db and compares the join with the key. The functions are described under [Raster Sources](https://github.com/OHDSI/gaiaDB#raster-sources) in gaiaDB.
+
+<br>
+
 ## **More examples**
 
 More examples will be added here as they are ready. To propose one, or to bring a question of your own, see [Get Started](get-started.html#propose-a-use-case); the [use case and dataset status](status.html) page lists what the working group is working on.

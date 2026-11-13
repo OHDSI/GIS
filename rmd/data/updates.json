@@ -2,6 +2,33 @@
  "_readme": "Add one object per update. 'date' (YYYY-MM-DD) is required; the site sorts newest first and the home page shows the three most recent. 'body' is plain text. 'links' is a list of {label, url}; urls are absolute https:// or relative site paths.",
  "updates": [
   {
+   "date": "2026-11-13",
+   "title": "Raster data support added to the Gaia toolchain",
+   "body": "gaiaDB can now register raster datasets and join them to where patients live, by the value of the cell at the residence, the mean of the cells in a buffer, or class shares for categorical rasters such as land cover. The results are the same dated exposure rows as for vector sources, including annual layers matched to residence periods. A synthetic raster test set with a known answer key is included, and variable dates can now be inferred (year-only dates, a static marker for datasets that do not change over time). Design questions are open for discussion.",
+   "links": [
+    {
+     "label": "Raster example",
+     "url": "examples.html#exposure-from-raster-data-surfaces-annual-layers-and-land-cover"
+    },
+    {
+     "label": "Raster design discussion",
+     "url": "https://github.com/OHDSI/GIS/discussions/558"
+    },
+    {
+     "label": "Raster join spec (#537)",
+     "url": "https://github.com/OHDSI/GIS/issues/537"
+    },
+    {
+     "label": "Synthetic rasters and answer key",
+     "url": "https://github.com/OHDSI/GIS/tree/main/syntheticDataGIS/raster"
+    },
+    {
+     "label": "gaiaDB: Raster Sources",
+     "url": "https://github.com/OHDSI/gaiaDB#raster-sources"
+    }
+   ]
+  },
+  {
    "date": "2026-11-10",
    "title": "Preprint of the OHDSI GIS toolchain manuscript published",
    "body": "A preprint of the manuscript \"An OMOP-Compatible Exposure Infrastructure for GeoAI-Enabled Environmental Health Research: The OHDSI GIS Toolchain\" is now on Research Square while the manuscript is in review. It describes the open-source toolchain that standardizes place-based data into person-place-time exposure records for federated health research.",

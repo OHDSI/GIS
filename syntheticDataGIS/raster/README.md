@@ -14,6 +14,8 @@ All layers are in EPSG:5070 over the same 10 km window around downtown Los Angel
 | `synthetic_raster_annual_2014` ... `_2019` | 250 m | One file per year: the 1 km field plus a trend of 0.30 ug/m3 per year in the west rising to 0.50 in the east (matching annual layers to residence intervals), and a 3 x 3 cell **nodata hole** (-9999) 1 km east and 1 km south of the centre |
 | `synthetic_raster_landcover` | 100 m | Byte classes with NLCD codes: 11 Open Water, 21 Developed Open Space, 41 Deciduous Forest, 81 Pasture/Hay (nodata 255). Categorical values and class fractions in a buffer |
 
+`raster_figure.py` draws the figure of the [raster example](https://ohdsi.github.io/GIS/examples.html) (`rmd/images/raster_surfaces_landcover.png`; needs numpy and matplotlib).
+
 ## Answer key
 
 `raster_test_points.csv` has 500 seeded points inside the window, at least 1.5 km from the edge so 1 km buffers fit (`x_5070`/`y_5070` are the same points in the raster CRS). `expected_raster_values.csv` has one row per point, layer and method:
