@@ -622,6 +622,70 @@ key, and a loader that puts the floors, sensors and people in a running
 gaia-db so you can look at them in QGIS.</p>
 <p><br></p>
 </div>
+<div
+id="exposure-from-raster-data-surfaces-annual-layers-and-land-cover"
+class="section level2">
+<h2><strong>3. Exposure from raster data: surfaces, annual layers and
+land cover</strong></h2>
+<p><strong>Question.</strong> When the exposure is a grid of cells
+rather than polygons or points, how should a person’s residence be
+linked to it: the value of the cell they live in, or a summary of the
+cells around them? And how do annual layers line up with a person who
+moves?</p>
+<p><strong>Data.</strong> Simulated rasters over a 10 km window around
+downtown Los Angeles, with a known answer key and 500 test points. There
+are three exposure surfaces (25 m, 250 m and 2.5 km cells) that are the
+<strong>same fields</strong> as the vector
+<code>synthetic_surface_*</code> grids, so raster and vector can be
+compared cell for cell. There is also a six-year series (2014 to 2019,
+one file per year, with a trend that grows from west to east and a small
+nodata hole) and a land cover layer with four classes. None of it
+measures a real exposure.</p>
+<div class="float">
+<img src="images/raster_surfaces_landcover.png"
+alt="The three simulated surfaces and the land cover, with one test point and its 1 km buffer" />
+<div class="figcaption">The three simulated surfaces and the land cover,
+with one test point and its 1 km buffer</div>
+</div>
+<p><em>The surfaces are one random field at three cell sizes (25 m, 250
+m and 2.5 km), shown with the 100 m land cover. The dashed circle is a 1
+km buffer around one test point: the join returns the value of the cell
+under the point, the mean of the cells in the circle, or, for land
+cover, the share of each class.</em></p>
+<p><strong>What Gaia does.</strong> Each raster has a catalog entry
+(<code>structure: raster</code>). <code>ingest_datasource</code>
+downloads the file, loads it with <code>raster2pgsql</code> and
+registers its variables and layers, so each layer knows the period it
+stands for. A residence is then joined three ways: by the <strong>cell
+value</strong> at the point, by the <strong>mean of the cells</strong>
+within a radius, or, for land cover, by the <strong>share of each
+class</strong> in a radius. As for vector sources, each annual layer is
+clipped to the residence interval, so a person who moves in the middle
+of a year gets two rows with the dates split at the move. The results
+land in <code>EXTERNAL_EXPOSURE</code>.</p>
+<p><strong>What you learn.</strong> The cell value at the point matches
+the answer key exactly (500 rows per static layer and 2,964 for the
+annual series, with nodata giving no row), and the buffer means and
+class shares agree with it to within the small difference between a
+geography buffer in metres and a planar one. The cell value is not the
+true value at the point: with cells a quarter of the field’s correlation
+length, the two differ by about 0.65 µg/m³ on average at every scale,
+which is the price of using a raster. Because the exposure of someone
+who moves is built from the layers of both periods, the annual series
+shows why dates matter as much as locations. The design questions that
+remain open (relationship concepts, where class codes go, performance on
+large rasters) are in the <a
+href="https://github.com/OHDSI/GIS/discussions/558">raster
+discussion</a>.</p>
+<p><strong>Run it.</strong> <a
+href="https://github.com/OHDSI/GIS/tree/main/syntheticDataGIS/raster"><code>syntheticDataGIS/raster</code></a>:
+generator, answer key, catalog entries and a script that loads
+everything into a throwaway gaia-db and compares the join with the key.
+The functions are described under <a
+href="https://github.com/OHDSI/gaiaDB#raster-sources">Raster Sources</a>
+in gaiaDB.</p>
+<p><br></p>
+</div>
 <div id="more-examples" class="section level2">
 <h2><strong>More examples</strong></h2>
 <p>More examples will be added here as they are ready. To propose one,
