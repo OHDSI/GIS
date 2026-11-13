@@ -3,6 +3,25 @@
  "updates": [
   {
    "date": "2026-11-13",
+   "title": "Voronoi tessellation and nearest-monitor joins for point data",
+   "body": "gaiaDB can now turn a point source such as a monitor network into Voronoi cells and join them to where patients live, so every person gets the value of their nearest monitor, or use a nearest-point join that can also weight the nearest few monitors by distance. A new example compares these with the distance buffer, which gives many persons no monitor or several, using simulated monitor networks of different density and an answer key.",
+   "links": [
+    {
+     "label": "Monitors example",
+     "url": "examples.html#from-monitors-to-people-voronoi-cells"
+    },
+    {
+     "label": "Synthetic monitors and answer key",
+     "url": "https://github.com/OHDSI/GIS/tree/main/syntheticDataGIS/monitors"
+    },
+    {
+     "label": "gaiaDB: Point Sources",
+     "url": "https://github.com/OHDSI/gaiaDB#point-sources-voronoi-cells-and-nearest-point-joins"
+    }
+   ]
+  },
+  {
+   "date": "2026-11-13",
    "title": "Raster data support added to the Gaia toolchain",
    "body": "gaiaDB can now register raster datasets and join them to where patients live, by the value of the cell at the residence, the mean of the cells in a buffer, or class shares for categorical rasters such as land cover. The results are the same dated exposure rows as for vector sources, including annual layers matched to residence periods. A synthetic raster test set with a known answer key is included, and variable dates can now be inferred (year-only dates, a static marker for datasets that do not change over time). Design questions are open for discussion.",
    "links": [
