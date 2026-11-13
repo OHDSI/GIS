@@ -77,6 +77,24 @@ Logistic regression of COPD on the 24-month day-weighted PM2.5 recovers a slope 
 
 <br>
 
+## **4. From monitors to people: Voronoi cells**
+
+**Question.** A network of monitors measures the exposure at a few points. How do you give a person who lives between them an exposure, and how many monitors does that take?
+
+**Data.** Simulated PM2.5 monitors sampling a known exposure field over a 10 km window around downtown Los Angeles (the field of the raster example): nested networks of 20, 60 and 200 monitors, each reading the true field plus noise once a year for 2014 to 2019, and 500 synthetic persons who live at fixed points. Because the true exposure at every person is known, every way of assigning it can be scored. None of it measures a real exposure.
+
+![Voronoi cells of 60 monitors, the error of four ways of assigning exposure by network size, and the monitors within 1 km of a person](images/monitors_voronoi.png)
+
+*Left: the cells of a network of 60 monitors, coloured by the monitor's reading (every location belongs to the cell of its nearest monitor). Middle: the error of four ways of assigning exposure against the true field. Right: what a 1 km buffer gives a person.*
+
+**What Gaia does.** The monitors are a point source in the catalog. A second catalog entry holds their **Voronoi cells**, built from the point source in the ETL step (`backbone.create_voronoi_source`), which makes it a polygon source that carries each monitor's series. The cells then join to the persons like any polygon source: **where** (the residence falls inside a cell) and **when** (each annual value is clipped to the residence interval), and the rows land in `EXTERNAL_EXPOSURE`. For a point source that is not worth tessellating, `spatial_join_nearest_from_catalog` assigns the nearest monitor, or an inverse-distance weighted mean of the nearest few, without building cells.
+
+**What you learn.** The join that existed for points, a distance buffer, gives many persons no monitor or several: at 1 km, 58% of the persons of the sparse network have none and 99% of the dense network have several. A Voronoi cell gives every person exactly one, and it matches the answer key's nearest monitor for all 3,000 person-years of each network. Whether that is a good exposure depends on the network: with a field that varies over about 1 km, 20 monitors about 2 km apart do worse than giving everybody the network mean, and only a network denser than the correlation length (200 monitors) does better, with the weighted mean of the three nearest monitors best. The tessellation is a way to put a point source on the map, not a substitute for monitors where there are none.
+
+**Run it.** [`syntheticDataGIS/monitors`](https://github.com/OHDSI/GIS/tree/main/syntheticDataGIS/monitors): generator, answer key, catalog entries, a script that loads everything into a throwaway gaia-db and compares the joins with the key, and the figure. The functions are described under [Point Sources](https://github.com/OHDSI/gaiaDB#point-sources-voronoi-cells-and-nearest-point-joins) in gaiaDB.
+
+<br>
+
 ## **More examples**
 
 More examples will be added here as they are ready. To propose one, or to bring a question of your own, see [Get Started](get-started.html#propose-a-use-case); the [use case and dataset status](status.html) page lists what the working group is working on.

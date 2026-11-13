@@ -56,7 +56,7 @@ tower/load_for_qgis.sh                        # QGIS: host localhost, port 5433,
 
 `verify_tower_gaia.sh` ingests both catalog entries, loads the 11,000 residences and runs `spatial_join_from_catalog` on the floor series: **3,650,000 exposure rows** (365 for every person, movers included), and for every person the number of rows, the period and the sum of the 365 values agree with the answer key, which is computed without any spatial operation (worst absolute difference of a 365-day sum 0.0002, the rounding of the key). Before that it checks that every residence lies in the polygon of its own floor, every sensor in the polygon of its own floor, every floor has four sensors and neighbouring floors touch.
 
-The v1 join assigns each person the **floor mean** of the sensors. The sensors are ingested as a point source but are not joined to persons: that needs a nearest-sensor (or sensors within a distance) operation, which Gaia does not have yet, and is the natural next use of this dataset.
+The v1 join assigns each person the **floor mean** of the sensors. The sensors are ingested as a point source but are not joined to persons: that needs a nearest-sensor operation. Gaia has one now (`spatial_join_nearest_from_catalog` and Voronoi cells, see the [monitors example](../monitors/README.md)); using it on this dataset is still to do.
 
 ## Floor misclassification
 
