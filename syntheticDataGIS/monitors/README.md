@@ -20,7 +20,7 @@ The field is the 1 km Gaussian random field of the [raster example](../raster/RE
 | Catalog entry | What it is |
 |---|---|
 | `synthetic_monitors_20`, `_60`, `_200` | The monitors as a point source with an annual jsonb series (published CSV, like the tower sensors) |
-| `synthetic_monitors_20_voronoi`, `_60_voronoi`, `_200_voronoi` | The Voronoi cells of each network as a polygon source, built from the point source in the postgis step with `backbone.create_voronoi_source`; the point source has to be ingested first. The ETL metadata has a proposed `derive` entry that says how it is built |
+| `synthetic_monitors_20_voronoi`, `_60_voronoi`, `_200_voronoi` | The Voronoi cells of each network as a polygon source, built from the point source in the postgis step with `backbone.create_voronoi_source`; the point source has to be ingested first. The ETL metadata describes how it is built in a proposed `derivation` key (method, source, parameters), from which the postgis step is written |
 
 ## The answer key
 
@@ -42,6 +42,6 @@ With the field's correlation length of 1 km, a network with monitors 2 km apart 
 
 - The cells of every network cover the 100 km2 window exactly (area 100.0000 km2), are valid and do not overlap; every person is in the cell of the key's nearest monitor, with exactly the key's monitor value: 3,000 rows, none missing, none duplicated, none from another monitor, for all three networks. The cells joined with the existing `spatial_join_from_catalog` need no new join.
 - The buffer join of the point sources (the only point join before): at 1 km, 289, 75 and 0 of 500 persons get no monitor and 81, 227 and 493 get several (up to 13 rows); the number of monitors differs from the key for 1, 5 and 20 persons at 1 km, because gaiaDB buffers a geography in metres and the key measures planar distances.
-- `spatial_join_nearest_from_catalog` (geodesic distances) returns 3,000 rows for each network and a different monitor than the key and the cells in 6, 18 and 24 of them: persons whose two nearest monitors are almost equally far, since distances in EPSG:5070 are off by up to 0.7% depending on direction. The inverse-distance weighted value (k = 3) differs from the key by 0.009 ug/m3 on average; the largest differences (0.8 to 1.1) are, I expect, persons whose third and fourth monitor are almost equally far, which I have not checked.
+- `spatial_join_nearest_from_catalog` (geodesic distances) returns 3,000 rows for each network and a different monitor than the key and the cells in 6, 12 and 18 of them: persons whose two nearest monitors are almost equally far, since distances in EPSG:5070 are off by up to 0.7% depending on direction. The inverse-distance weighted value (k = 3) differs from the key by 0.005 to 0.009 ug/m3 on average; the largest differences (0.3 to 1.0) are, I expect, persons whose third and fourth monitor are almost equally far, which I have not checked.
 
 The unit tests of the functions, on a small hand-checkable fixture (ties aside, since exact ties do not survive the projection), are in `tests/test_point_sources.sql` in gaiaDB.

@@ -1,0 +1,41 @@
+## Environment
+image: ohdsi/gaia-db:main (ohdsi/gaia-db@sha256:bd044e2931b11d98a99e730582ab11788fc5beac1442b5c0ada1871c6398957a)
+host: Darwin arm64, docker platform linux/amd64 (emulated on Apple Silicon); date 2026-11-13
+gaiaCatalog: dcb6d32; gaiaDB: a3c0ca3
+
+## What has to be written (files and lines in the catalog entry)
+mdc_hospitals | files: 9 | script lines: 201 | metadata: 23 KB | scripts stamped 'Created by etl()': 4 | secret-file exports in scripts: 12
+us_2019_prisecroads_tl | files: 4 | script lines: 61 | metadata: 3 KB | scripts stamped 'Created by etl()': 0 | secret-file exports in scripts: 1
+synthetic_road_proximity | files: 4 | script lines: 47 | metadata: 4 KB | scripts stamped 'Created by etl()': 0 | secret-file exports in scripts: 0
+generator of synthetic_road_proximity in this repo: 200 lines (build_road_entries.py)
+
+## gaiaDB code on the path from source to EXTERNAL_EXPOSURE (lines of SQL/PLpgSQL per file)
+02_jsonld_ingestion_functions | 477 lines | 7 functions
+03_location_ingestion_functions | 276 lines | 6 functions
+04_spatial_join_functions | 325 lines | 6 functions
+05_data_source_retrieval_functions | 316 lines | 6 functions
+06_gdsc_catalog_functions | 482 lines | 5 functions
+(counted at gaiaDB commit 570a40b, the state before the raster and point-source additions)
+
+## Running the two cases
+container start and gaiaDB initialisation | 10.9 s
+
+### Case 1: mdc_hospitals
+ingest_datasource('mdc_hospitals') | 2.1 s | exit 0
+    rows: 37
+    registered variables (attr_index): 0  of 12 variables in the metadata
+gdsc_load_all_variables('mdc_hospitals') | 0.2 s | exit 0
+    WARNING:  No backbone.attr_index rows found for table_id "mdc_hospitals". Has ingest_jsonld_variables() registered this data source's variables yet?
+
+### Case 2: synthetic_road_proximity (needs the roads it is derived from)
+ingest_datasource('us_2019_prisecroads_tl') | 6.7 s | exit 0
+    rows: 7403
+ingest_datasource('synthetic_road_proximity') | 455.0 s | exit 0
+    rows: 62401
+gdsc_load_all_variables('synthetic_road_proximity') | 9.9 s | exit 0
+    road_increment|success|{"geom": "geom_synthetic_road_proximity","attr": "attr_synthetic_road_proximity"}
+spatial_join_from_catalog('road_increment') for 10,000 persons | 1.9 s | exit 0
+    exposure rows: 10000
+
+## done
+exit 0

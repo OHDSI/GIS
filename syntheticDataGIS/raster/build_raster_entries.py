@@ -6,12 +6,19 @@
 One entry per raster source: synthetic_raster_surface_{100m,1km,10km}, synthetic_raster_annual (one table, one file per
 year, told apart by the `filename` column) and synthetic_raster_landcover. The files come from build_synthetic_rasters.py.
 """
-import argparse, json, os, textwrap
+import argparse, hashlib, json, os, textwrap
 
 YEARS = range(2014, 2020)
 PM25_CONCEPT = "2052499839"
 ORG = "OHDSI GIS Working Group"
-URL_BASE = "https://raw.githubusercontent.com/OHDSI/GIS/main/syntheticDataGIS/raster/data"
+HERE = os.path.dirname(os.path.abspath(__file__))
+URL_BASE = "https://raw.githubusercontent.com/OHDSI/GIS/main/syntheticDataGIS/raster/data"   # use --url-base .../<tag or commit>/... to pin
+
+
+def sha256(f):
+    """sha256 of a data file written by build_synthetic_rasters.py (what the osgeo step checks after the download)"""
+    return hashlib.sha256(open(os.path.join(HERE, "data", f), "rb").read()).hexdigest()
+
 LC_CLASSES = {11: "Open Water", 21: "Developed, Open Space", 41: "Deciduous Forest", 81: "Pasture/Hay"}
 
 ENTRIES = [
@@ -42,6 +49,7 @@ ENTRIES = [
 def osgeo_sh(e, base):
     tid = e["tid"]
     gets = "\n".join(f"  wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 10 -O download/{f} '{base}/{f}' 2>&1" for f in e["files"])
+    sums = "\n".join(f"  echo '{sha256(f)}  download/{f}' | sha256sum -c - || exit 1" for f in e["files"])
     return textwrap.dedent('''\
     #!/bin/bash
 
@@ -66,9 +74,10 @@ def osgeo_sh(e, base):
         ((attempts++))
         if (( attempts > 3 )); then echo $?; exit 1; fi
       done
+    {sums}
       echo $(date '+%F %T') > datestamp
     fi
-    ''').format(tid=tid, base=base, gets=gets)
+    ''').format(tid=tid, base=base, gets=gets, sums=sums)
 
 
 def postgis_sh(e):
@@ -94,7 +103,7 @@ def meta_etl(e, base):
         "nodata": [e["dtype"] if e["dtype"] == "integer" else "float", e["nodata"]], "local_epsg": "EPSG:5070",
         "service": ["file"], "source": base, "file": [f[:-4] for f in e["files"]], "extension": "tif", "download": "wget",
         "table": e["tid"], "format": "tif", "dependency": [], "etl_parameters": "-t 64x64", "custom_etl": "", "custom_parameters": "",
-        "up": "true", "podID": "gaia-db", "update_frequency": "Never", "checksum": "TBD"}
+        "up": "true", "podID": "gaia-db", "update_frequency": "Never", "checksum": {f: "sha256:" + sha256(f) for f in e["files"]}}
     if e["tid"].endswith("annual"):
         # proposed field: the period each layer of a multi-file raster table stands for
         out["raster_layers"] = [{"filename": f, "start_date": f"{y}-01-01", "end_date": f"{y}-12-31"} for f, y in zip(e["files"], YEARS)]

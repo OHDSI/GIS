@@ -6,20 +6,33 @@
 For each network (20, 60 and 200 monitors) two entries:
   synthetic_monitors_<n>           the monitors as a point source with an annual jsonb series (published CSV, like the tower sensors)
   synthetic_monitors_<n>_voronoi   the Voronoi (Thiessen) cells of the monitors as a polygon source, built from the point source
-                                   in the postgis step (it has to be ingested first); each cell carries its monitor's series
+                                   in the postgis step (it has to be ingested first); each cell carries its monitor's series.
+                                   The ETL metadata describes the derivation in its own "derivation" key (not "derive", which lists
+                                   export formats in the other entries); its parameters are the ones the postgis step is written from.
 """
-import argparse, json, os, textwrap
+import argparse, hashlib, json, os, textwrap
 
 NETWORKS = [20, 60, 200]
 START, END = "2014-01-01", "2019-12-31"
 PM25_CONCEPT, UG_M3 = "2052499839", "32964"
 ORG = "OHDSI GIS Working Group"
-URL_BASE = "https://raw.githubusercontent.com/OHDSI/GIS/main/syntheticDataGIS/monitors/data"
+HERE = os.path.dirname(os.path.abspath(__file__))
+URL_BASE = "https://raw.githubusercontent.com/OHDSI/GIS/main/syntheticDataGIS/monitors/data"   # use --url-base .../<tag or commit>/... to pin
+
+
+def sha256(f):
+    """sha256 of a data file written by build_monitors.py (what the osgeo step checks after the download)"""
+    return hashlib.sha256(open(os.path.join(HERE, "data", f), "rb").read()).hexdigest()
+
 CENTER, HALF_WINDOW = (-118.25, 34.05), 5000
+# how the cells are derived: the one place the parameters live; the ETL metadata states them and the postgis step is written from them
+VORONOI_PARAMS = {"clip": {"type": "bbox", "center_lon_lat": list(CENTER), "half_width_m": HALF_WINDOW, "crs": "EPSG:5070"},
+                  "working_srid": 5070, "segment_m": 100}
 SERIES_DESC = "Annual mean PM2.5 reading of the monitor, stored as a jsonb object keyed by startDate/endDate"
 
 
 def osgeo_points_sh(tid, url):
+    sha = sha256(os.path.basename(url))
     return textwrap.dedent(f'''\
     #!/bin/bash
 
@@ -45,6 +58,7 @@ def osgeo_points_sh(tid, url):
         ((attempts++))
         if (( attempts > 3 )); then echo $?; break; fi
       done
+      echo '{sha}  download/{tid}.csv' | sha256sum -c - || exit 1
       echo $(date '+%F %T') > datestamp
     fi
 
@@ -94,18 +108,19 @@ def osgeo_voronoi_sh(tid, src):
 
 
 def postgis_voronoi_sh(tid, src):
-    cx, cy = CENTER
+    cx, cy = VORONOI_PARAMS["clip"]["center_lon_lat"]
+    half, crs, seg = VORONOI_PARAMS["clip"]["half_width_m"], VORONOI_PARAMS["working_srid"], VORONOI_PARAMS["segment_m"]
     return textwrap.dedent(f'''\
     #!/bin/bash
 
     # {tid}_postgis.sh
     # Voronoi (Thiessen) cells of the monitors in {src}: every location of the window belongs to the cell of its nearest monitor.
-    # backbone.create_voronoi_source computes the cells in EPSG:5070 (metres), clips them to the 10 km study window and keeps the
+    # backbone.create_voronoi_source computes the cells in EPSG:{crs} (metres), clips them to the 10 km study window and keeps the
     # monitor's attributes (the series).
 
     PGOPTIONS='-c client_min_messages=warning' psql -d $POSTGRES_DB -U $POSTGRES_USER -p $POSTGRES_PORT -h gaia-db -v ON_ERROR_STOP=1 -c "
     SELECT backbone.create_voronoi_source('{src}', '{tid}',
-      ST_Expand(ST_Transform(ST_SetSRID(ST_MakePoint({cx}, {cy}), 4326), 5070), {HALF_WINDOW}), 5070);
+      ST_Expand(ST_Transform(ST_SetSRID(ST_MakePoint({cx}, {cy}), 4326), {crs}), {half}), {crs}, {seg});
     "
     ''')
 
@@ -117,11 +132,11 @@ def meta_etl(tid, geometry, url, src=None):
            "epsg": "EPSG:4269", "fields": ["monitor_id", "pm25_monitor"], "attributes": attrs, "local_epsg": "EPSG:4269",
            "derive": [], "service": ["file"], "source": url, "file": [tid], "extension": "csv", "download": "wget", "table": tid, "format": "csv",
            "dependency": [], "etl_parameters": "", "custom_etl": "", "custom_parameters": "", "up": "true", "podID": "gaia-db",
-           "update_frequency": "Never", "checksum": "TBD"}
+           "update_frequency": "Never", "checksum": {os.path.basename(url): "sha256:" + sha256(os.path.basename(url))}}
     if src:
-        # proposed: how a derived source is built (a tessellation of the monitors of the dependency, clipped to the window)
+        # proposed (#532): how a derived source is built, in its own key ("derive" lists the export formats in the other entries)
         out.update({"source": "derived", "extension": "", "download": "", "format": "derived", "dependency": [src],
-                    "derive": [{"method": "voronoi", "from": src, "clip": f"window of {2 * HALF_WINDOW} m around {CENTER[0]}, {CENTER[1]} (EPSG:5070)"}]})
+                    "derivation": [{"method": "voronoi", "from": src, "parameters": VORONOI_PARAMS}], "checksum": {}})
     return out
 
 
