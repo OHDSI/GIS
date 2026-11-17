@@ -55,7 +55,7 @@ navbar:
           href: gaiaCatalog.html
         - text: "gaiaDocker"
           href: gaiaDocker.html
-    - text: "Prospective Datasets"
+    - text: "Data Inventory"
       icon: fa-database
       href: inventory.html
     - text: "ARES Demo"

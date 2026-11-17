@@ -167,7 +167,7 @@
     $("gi-gsum").innerHTML = first < 0 ? "No datasets match these filters." : (showCat
       ? `From <b>${catFirst[1]}</b> catalog entries three months ago to <b>${last.all}</b> assessed datasets today; <b>${last.ver}</b> verified.`
       : `<b>${last.all}</b> datasets now, up from <b>${cnt[first].all}</b> on ${fmtD(S[first].d)}. Verified (Gold or Silver): <b>${cnt[first].ver}</b> → <b>${last.ver}</b>.`);
-    $("gi-glegend").innerHTML = (showCat ? `<span><i class="gi-sw gi-sw-cat"></i>gaiaCatalog entries (before the discovery work)</span>` : "") + SR.map(s => `<span><i class="gi-sw" style="background:${s.col}"></i>${esc(s.l)}</span>`).join("");
+    $("gi-glegend").innerHTML = (showCat ? `<span><i class="gi-sw gi-sw-cat"></i>gaiaCatalog entries (before the inventory)</span>` : "") + SR.map(s => `<span><i class="gi-sw" style="background:${s.col}"></i>${esc(s.l)}</span>`).join("");
     const W = 760, Ht = 300, m = { l: 40, r: 14, t: 18, b: 46 }, iw = W - m.l - m.r, ih = Ht - m.t - m.b, n = P.length;
     const t0 = tms(P[0].d), t1 = tms(P[n - 1].d);
     const xs = gSpan === "runs" ? (i => m.l + (n > 1 ? i * iw / (n - 1) : iw / 2)) : (i => m.l + (tms(P[i].d) - t0) / Math.max(1, t1 - t0) * iw);
@@ -326,6 +326,6 @@
 
   Promise.all([fetch("data/inventory.json").then(r => r.json()), fetch("data/inventory-history.json").then(r => r.json())])
     .then(([d, h]) => { H = h; init(d); }).catch(() => {
-    $("gi-tbl").tBodies[0].innerHTML = '<tr><td colspan="8">The prospective dataset data could not be loaded.</td></tr>';
+    $("gi-tbl").tBodies[0].innerHTML = '<tr><td colspan="8">The inventory data could not be loaded.</td></tr>';
   });
 })();
