@@ -326,7 +326,7 @@ $(document).ready(function () {
   <a href="inventory.html">
     <span class="fa fa-database"></span>
      
-    Prospective Datasets
+    Data Inventory
   </a>
 </li>
 <li>
@@ -588,8 +588,8 @@ WG</h1>
 @media (max-width:860px){#gis-inv aside{position:static;max-height:none}}
 #gis-inv a{color:var(--gi-accent)}
 </style>
-<div id="prospective-datasets" class="section level1">
-<h1><strong>Prospective Datasets</strong></h1>
+<div id="data-inventory" class="section level1">
+<h1><strong>Data Inventory</strong></h1>
 <div id="gis-inv">
 <header class="gi-hero">
 <div class="gi-hero-top">
@@ -600,9 +600,8 @@ WG</h1>
 <p class="gi-intro">
 The working state of place-based data discovery: every public dataset
 assessed so far for linking to where patients live, what has been
-checked, and what is still open. These are prospective datasets: only
-those marked ✓ (in the Gaia catalog) have made it into the catalog so
-far.
+checked, and what is still open. Not everything here is in the Gaia
+catalog yet: only the datasets marked ✓ have made it in.
 <a href="https://github.com/OHDSI/GIS/tree/main/exploration/place-data-inventory">Details
 and roadmap on GitHub</a>
 </p>
@@ -666,7 +665,7 @@ Growth <span id="gi-ng" class="gi-badge"></span>
 </p>
 <span class="gi-gby"><label for="gi-gspan">Time</label>
 <select id="gi-gspan"><option value="all">Last 3
-months</option><option value="runs">Discovery
+months</option><option value="runs">Inventory
 runs</option></select></span> <span
 class="gi-gby"><label for="gi-gby">Stack by</label>
 <select id="gi-gby"><option value="cat">Category</option><option value="tier">Tier
@@ -700,15 +699,14 @@ Show as a table
 </div>
 </details>
 <p class="gi-note">
-The coloured areas are the prospective datasets: each point is one saved
-run (the master file after that iteration; numbers point to the
-iterations table on GitHub). Counts are today’s datasets present at that
-run (stacked by their category, or by the tier they had then), so
-filters on the left apply here too. 3 rows trimmed on 28 Oct are not
-shown. Under Last 3 months, the dark line before October is the
-gaiaCatalog itself (dataset folders in its repository, from its git
-history); it covers the whole catalog, so it shows only while no filter
-is on.
+The coloured areas are the inventory: each point is one saved run (the
+master file after that iteration; numbers point to the iterations table
+on GitHub). Counts are today’s datasets present at that run (stacked by
+their category, or by the tier they had then), so filters on the left
+apply here too. 3 rows trimmed on 28 Oct are not shown. Under Last 3
+months, the dark line before October is the gaiaCatalog itself (dataset
+folders in its repository, from its git history); it covers the whole
+catalog, so it shows only while no filter is on.
 </p>
 </section>
 <section class="gi-panel gi-tabpanel" id="gi-p-breakdown" role="tabpanel" aria-labelledby="gi-tab-breakdown">
@@ -764,7 +762,7 @@ Region
 <tbody>
 <tr>
 <td colspan="8">
-Loading the prospective datasets…
+Loading the inventory…
 </td>
 </tr>
 </tbody>
