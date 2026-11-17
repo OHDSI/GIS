@@ -77,7 +77,7 @@ Code written and tested → Tests pass → Documentation updated → Code review
 3. Present in Thursday meeting
 4. Decompose into work orders
 5. Prioritize and assign
-6. Review candidate data: each week a bot comment on the use case issue suggests datasets from the [Data Inventory](inventory.html) and the catalog requests. Reply `/confirm <id>`, `/reject <id>` or `/no-data-needed`; the board's *Data match* field and the [status page](status.html) follow. Confirmed datasets that have a catalog request become dependencies of the use case.
+6. Review candidate data: each week a bot comment on the use case issue suggests datasets from the [Prospective Datasets](inventory.html) and the catalog requests. Reply `/confirm <id>`, `/reject <id>` or `/no-data-needed`; the board's *Data match* field and the [status page](status.html) follow. Confirmed datasets that have a catalog request become dependencies of the use case.
 7. Execute development sprint
 8. Deliver results
 
