@@ -2,6 +2,10 @@
 
 Networks of simulated PM2.5 monitors that sample a **known** exposure field, with persons to assign them to and an answer key. It is the test bed for the point-source operations of gaiaDB: the Voronoi (Thiessen) tessellation of the monitors, and the nearest-point join (see Point Sources in the [gaiaDB README](https://github.com/OHDSI/gaiaDB#point-sources-voronoi-cells-and-nearest-point-joins)). Everything is simulated; the values are not measurements of any real exposure.
 
+![Voronoi cells of 60 monitors, the error of four ways of assigning exposure by network size, and the monitors within 1 km of a person](../../rmd/images/monitors_voronoi.png)
+
+*Left: the cells of the 60-monitor network, coloured by the monitor's reading for 2014 (drawn from the nearest monitor of every point of the window, not from the database polygons). Middle: the error of four ways of assigning exposure against the true field, by network size. Right: what a 1 km buffer gives a person. The same figure is on the website's Examples page.*
+
 ```sh
 python3 monitors/build_monitors.py                  # data/ (needs numpy; deterministic)
 python3 monitors/build_monitor_entries.py --catalog ../gaiaCatalog/datastore/data
